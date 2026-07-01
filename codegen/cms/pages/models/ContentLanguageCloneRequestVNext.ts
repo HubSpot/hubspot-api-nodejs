@@ -16,17 +16,21 @@
 */
 export class ContentLanguageCloneRequestVNext {
     /**
-    * Target language of new variant.
-    */
-    'language'?: string;
-    /**
     * ID of content to clone.
     */
     'id': string;
     /**
+    * Target language of new variant.
+    */
+    'language'?: string;
+    /**
     * Language of primary content to clone.
     */
     'primaryLanguage'?: string;
+    /**
+    * If true, clone from the published version of the content. Defaults to false (clones from the current draft).
+    */
+    'usePublished'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -34,14 +38,14 @@ export class ContentLanguageCloneRequestVNext {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "language",
-            "baseName": "language",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "language",
+            "baseName": "language",
             "type": "string",
             "format": ""
         },
@@ -49,6 +53,12 @@ export class ContentLanguageCloneRequestVNext {
             "name": "primaryLanguage",
             "baseName": "primaryLanguage",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "usePublished",
+            "baseName": "usePublished",
+            "type": "boolean",
             "format": ""
         }    ];
 

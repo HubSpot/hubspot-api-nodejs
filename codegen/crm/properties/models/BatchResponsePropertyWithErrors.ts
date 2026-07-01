@@ -15,12 +15,12 @@ import { StandardError } from '../models/StandardError';
 
 export class BatchResponsePropertyWithErrors {
     'completedAt': Date;
+    'errors'?: Array<StandardError>;
+    'links'?: { [key: string]: string; };
     'numErrors'?: number;
     'requestedAt'?: Date;
-    'startedAt': Date;
-    'links'?: { [key: string]: string; };
     'results': Array<Property>;
-    'errors'?: Array<StandardError>;
+    'startedAt': Date;
     'status': BatchResponsePropertyWithErrorsStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -35,6 +35,18 @@ export class BatchResponsePropertyWithErrors {
             "format": "date-time"
         },
         {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
             "name": "numErrors",
             "baseName": "numErrors",
             "type": "number",
@@ -47,28 +59,16 @@ export class BatchResponsePropertyWithErrors {
             "format": "date-time"
         },
         {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
             "name": "results",
             "baseName": "results",
             "type": "Array<Property>",
             "format": ""
         },
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -86,9 +86,9 @@ export class BatchResponsePropertyWithErrors {
 }
 
 export enum BatchResponsePropertyWithErrorsStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

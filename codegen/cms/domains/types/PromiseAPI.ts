@@ -2,20 +2,78 @@ import { HttpInfo } from '../http/http';
 import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from '../configuration'
 import { PromiseMiddlewareWrapper } from '../middleware';
 
-import { CollectionResponseWithTotalDomainForwardPaging } from '../models/CollectionResponseWithTotalDomainForwardPaging';
+import { CollectionResponseWithTotalDomain } from '../models/CollectionResponseWithTotalDomain';
 import { Domain } from '../models/Domain';
-import { ObservableDomainsApi } from './ObservableAPI';
+import { ObservableBasicApi } from './ObservableAPI';
 
-import { DomainsApiRequestFactory, DomainsApiResponseProcessor} from "../apis/DomainsApi";
-export class PromiseDomainsApi {
-    private api: ObservableDomainsApi
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class PromiseBasicApi {
+    private api: ObservableBasicApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DomainsApiRequestFactory,
-        responseProcessor?: DomainsApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
-        this.api = new ObservableDomainsApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param [after]
+     * @param [archived]
+     * @param [createdAfter]
+     * @param [createdAt]
+     * @param [createdBefore]
+     * @param [limit]
+     * @param [sort]
+     * @param [updatedAfter]
+     * @param [updatedAt]
+     * @param [updatedBefore]
+     */
+    public cmsV3DomainsWithHttpInfo(after?: string, archived?: boolean, createdAfter?: Date, createdAt?: Date, createdBefore?: Date, limit?: number, sort?: Array<string>, updatedAfter?: Date, updatedAt?: Date, updatedBefore?: Date, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalDomain>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.cmsV3DomainsWithHttpInfo(after, archived, createdAfter, createdAt, createdBefore, limit, sort, updatedAfter, updatedAt, updatedBefore, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * @param [after]
+     * @param [archived]
+     * @param [createdAfter]
+     * @param [createdAt]
+     * @param [createdBefore]
+     * @param [limit]
+     * @param [sort]
+     * @param [updatedAfter]
+     * @param [updatedAt]
+     * @param [updatedBefore]
+     */
+    public cmsV3Domains(after?: string, archived?: boolean, createdAfter?: Date, createdAt?: Date, createdBefore?: Date, limit?: number, sort?: Array<string>, updatedAfter?: Date, updatedAt?: Date, updatedBefore?: Date, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalDomain> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.cmsV3Domains(after, archived, createdAfter, createdAt, createdBefore, limit, sort, updatedAfter, updatedAt, updatedBefore, observableOptions);
+        return result.toPromise();
     }
 
     /**
@@ -59,68 +117,6 @@ export class PromiseDomainsApi {
 	    }
 	}
         const result = this.api.getById(domainId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Returns all existing domains that have been created. Results can be limited and filtered by creation or updated date.
-     * Get current domains
-     * @param [createdAt] Only return domains created at this date.
-     * @param [createdAfter] Only return domains created after this date.
-     * @param [createdBefore] Only return domains created before this date.
-     * @param [updatedAt] Only return domains updated at this date.
-     * @param [updatedAfter] Only return domains updated after this date.
-     * @param [updatedBefore] Only return domains updated before this date.
-     * @param [sort]
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [limit] Maximum number of results per page.
-     * @param [archived] Whether to return only results that have been archived.
-     */
-    public getPageWithHttpInfo(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalDomainForwardPaging>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getPageWithHttpInfo(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Returns all existing domains that have been created. Results can be limited and filtered by creation or updated date.
-     * Get current domains
-     * @param [createdAt] Only return domains created at this date.
-     * @param [createdAfter] Only return domains created after this date.
-     * @param [createdBefore] Only return domains created before this date.
-     * @param [updatedAt] Only return domains updated at this date.
-     * @param [updatedAfter] Only return domains updated after this date.
-     * @param [updatedBefore] Only return domains updated before this date.
-     * @param [sort]
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [limit] Maximum number of results per page.
-     * @param [archived] Whether to return only results that have been archived.
-     */
-    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalDomainForwardPaging> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, observableOptions);
         return result.toPromise();
     }
 

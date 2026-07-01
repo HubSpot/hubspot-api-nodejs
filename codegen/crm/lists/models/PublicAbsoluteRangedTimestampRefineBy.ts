@@ -12,10 +12,22 @@
 
 
 export class PublicAbsoluteRangedTimestampRefineBy {
-    'rangeType': string;
-    'upperTimestamp': number;
+    /**
+    * Lower range timestamp of refinement criteria
+    */
     'lowerTimestamp': number;
+    /**
+    * Type of range of refinement critaria (BETWEEN, NOT_BETWEEN)
+    */
+    'rangeType': string;
+    /**
+    * type of refine by criteria (ABSOLUTE_RANGED)
+    */
     'type': PublicAbsoluteRangedTimestampRefineByTypeEnum;
+    /**
+    * Upper range timestamp of refinement criteria
+    */
+    'upperTimestamp': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,9 +35,21 @@ export class PublicAbsoluteRangedTimestampRefineBy {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "lowerTimestamp",
+            "baseName": "lowerTimestamp",
+            "type": "number",
+            "format": "int64"
+        },
+        {
             "name": "rangeType",
             "baseName": "rangeType",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "PublicAbsoluteRangedTimestampRefineByTypeEnum",
             "format": ""
         },
         {
@@ -33,18 +57,6 @@ export class PublicAbsoluteRangedTimestampRefineBy {
             "baseName": "upperTimestamp",
             "type": "number",
             "format": "int64"
-        },
-        {
-            "name": "lowerTimestamp",
-            "baseName": "lowerTimestamp",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "PublicAbsoluteRangedTimestampRefineByTypeEnum",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

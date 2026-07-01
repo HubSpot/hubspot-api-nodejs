@@ -13,11 +13,26 @@
 import { Property } from '../models/Property';
 
 export class BatchResponseProperty {
+    /**
+    * The timestamp indicating when the batch operation was completed.
+    */
     'completedAt': Date;
-    'requestedAt'?: Date;
-    'startedAt': Date;
+    /**
+    * A collection of URLs linking to documentation or resources related to the batch operation.
+    */
     'links'?: { [key: string]: string; };
+    /**
+    * The timestamp indicating when the batch operation was requested.
+    */
+    'requestedAt'?: Date;
     'results': Array<Property>;
+    /**
+    * The timestamp indicating when the batch operation began processing.
+    */
+    'startedAt': Date;
+    /**
+    * The current status of the batch operation, with possible values being CANCELED, COMPLETE, PENDING, or PROCESSING.
+    */
     'status': BatchResponsePropertyStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -32,28 +47,28 @@ export class BatchResponseProperty {
             "format": "date-time"
         },
         {
-            "name": "requestedAt",
-            "baseName": "requestedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "results",
             "baseName": "results",
             "type": "Array<Property>",
             "format": ""
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -71,9 +86,9 @@ export class BatchResponseProperty {
 }
 
 export enum BatchResponsePropertyStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

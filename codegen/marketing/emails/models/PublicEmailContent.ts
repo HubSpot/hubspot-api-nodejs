@@ -16,35 +16,14 @@ import { PublicEmailStyleSettings } from '../models/PublicEmailStyleSettings';
 * Data structure representing the content of the email.
 */
 export class PublicEmailContent {
-    /**
-    * 
-    */
-    'smartFields'?: { [key: string]: any; };
-    /**
-    * 
-    */
-    'themeSettingsValues'?: { [key: string]: any; };
-    /**
-    * 
-    */
     'flexAreas'?: { [key: string]: any; };
-    /**
-    * 
-    */
-    'widgets'?: { [key: string]: any; };
-    /**
-    * 
-    */
     'plainTextVersion'?: string;
-    /**
-    * 
-    */
-    'templatePath'?: string;
-    /**
-    * 
-    */
-    'widgetContainers'?: { [key: string]: any; };
+    'smartFields'?: { [key: string]: any; };
     'styleSettings'?: PublicEmailStyleSettings;
+    'templatePath'?: string;
+    'themeSettingsValues'?: { [key: string]: any; };
+    'widgetContainers'?: { [key: string]: any; };
+    'widgets'?: { [key: string]: any; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -52,26 +31,8 @@ export class PublicEmailContent {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "smartFields",
-            "baseName": "smartFields",
-            "type": "{ [key: string]: any; }",
-            "format": ""
-        },
-        {
-            "name": "themeSettingsValues",
-            "baseName": "themeSettingsValues",
-            "type": "{ [key: string]: any; }",
-            "format": ""
-        },
-        {
             "name": "flexAreas",
             "baseName": "flexAreas",
-            "type": "{ [key: string]: any; }",
-            "format": ""
-        },
-        {
-            "name": "widgets",
-            "baseName": "widgets",
             "type": "{ [key: string]: any; }",
             "format": ""
         },
@@ -82,9 +43,27 @@ export class PublicEmailContent {
             "format": ""
         },
         {
+            "name": "smartFields",
+            "baseName": "smartFields",
+            "type": "{ [key: string]: any; }",
+            "format": ""
+        },
+        {
+            "name": "styleSettings",
+            "baseName": "styleSettings",
+            "type": "PublicEmailStyleSettings",
+            "format": ""
+        },
+        {
             "name": "templatePath",
             "baseName": "templatePath",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "themeSettingsValues",
+            "baseName": "themeSettingsValues",
+            "type": "{ [key: string]: any; }",
             "format": ""
         },
         {
@@ -94,9 +73,9 @@ export class PublicEmailContent {
             "format": ""
         },
         {
-            "name": "styleSettings",
-            "baseName": "styleSettings",
-            "type": "PublicEmailStyleSettings",
+            "name": "widgets",
+            "baseName": "widgets",
+            "type": "{ [key: string]: any; }",
             "format": ""
         }    ];
 

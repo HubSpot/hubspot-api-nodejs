@@ -12,11 +12,26 @@
 
 
 export class PublicRangedNumberPropertyOperation {
+    /**
+    * Indicates whether objects with no value set for the property should be included in the operation.
+    */
     'includeObjectsWithNoValueSet': boolean;
-    'upperBound': number;
-    'operationType': PublicRangedNumberPropertyOperationOperationTypeEnum;
+    /**
+    * The lower limit of the number range for the operation.
+    */
     'lowerBound': number;
+    /**
+    * Specifies the type of operation (NUMBER_RANGED).
+    */
+    'operationType': PublicRangedNumberPropertyOperationOperationTypeEnum;
+    /**
+    * Defines the operation to be applied in the ranged number property operation (IS_BETWEEN, IS_NOT_BETWEEN).
+    */
     'operator': string;
+    /**
+    * The upper limit of the number range for the operation.
+    */
+    'upperBound': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,10 +45,10 @@ export class PublicRangedNumberPropertyOperation {
             "format": ""
         },
         {
-            "name": "upperBound",
-            "baseName": "upperBound",
+            "name": "lowerBound",
+            "baseName": "lowerBound",
             "type": "number",
-            "format": "int32"
+            "format": "int64"
         },
         {
             "name": "operationType",
@@ -42,16 +57,16 @@ export class PublicRangedNumberPropertyOperation {
             "format": ""
         },
         {
-            "name": "lowerBound",
-            "baseName": "lowerBound",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "operator",
             "baseName": "operator",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "upperBound",
+            "baseName": "upperBound",
+            "type": "number",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {

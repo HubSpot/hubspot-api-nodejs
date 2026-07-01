@@ -14,10 +14,10 @@ import { PublicAssociation } from '../models/PublicAssociation';
 
 export class BatchResponsePublicAssociation {
     'completedAt': Date;
-    'requestedAt'?: Date;
-    'startedAt': Date;
     'links'?: { [key: string]: string; };
+    'requestedAt'?: Date;
     'results': Array<PublicAssociation>;
+    'startedAt': Date;
     'status': BatchResponsePublicAssociationStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -32,28 +32,28 @@ export class BatchResponsePublicAssociation {
             "format": "date-time"
         },
         {
-            "name": "requestedAt",
-            "baseName": "requestedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "results",
             "baseName": "results",
             "type": "Array<PublicAssociation>",
             "format": ""
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -71,9 +71,9 @@ export class BatchResponsePublicAssociation {
 }
 
 export enum BatchResponsePublicAssociationStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

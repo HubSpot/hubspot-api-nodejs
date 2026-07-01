@@ -1,6 +1,6 @@
 /**
  * Business Units
- * Retrieve Business Unit information.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -12,25 +12,28 @@
 
 import { PublicBusinessUnitLogoMetadata } from '../models/PublicBusinessUnitLogoMetadata';
 
-/**
-* A Business Unit
-*/
 export class PublicBusinessUnit {
+    /**
+    * The Business Unit\'s unique ID
+    */
+    'id': string;
     'logoMetadata'?: PublicBusinessUnitLogoMetadata;
     /**
     * The Business Unit\'s name
     */
     'name': string;
-    /**
-    * The Business Unit\'s unique ID
-    */
-    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "logoMetadata",
             "baseName": "logoMetadata",
@@ -40,12 +43,6 @@ export class PublicBusinessUnit {
         {
             "name": "name",
             "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
             "type": "string",
             "format": ""
         }    ];

@@ -12,10 +12,25 @@
 
 
 export class ActionResponse {
+    /**
+    * The timestamp indicating when the action was completed.
+    */
     'completedAt': Date;
-    'requestedAt'?: Date;
-    'startedAt': Date;
+    /**
+    * A map of link names to associated URIs containing documentation about the error or recommended remediation steps
+    */
     'links'?: { [key: string]: string; };
+    /**
+    * The timestamp indicating when the action was requested.
+    */
+    'requestedAt'?: Date;
+    /**
+    * The timestamp indicating when the action was started.
+    */
+    'startedAt': Date;
+    /**
+    * The current status of the action, with possible values: CANCELED, COMPLETE, PENDING, PROCESSING.
+    */
     'status': ActionResponseStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -30,6 +45,12 @@ export class ActionResponse {
             "format": "date-time"
         },
         {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
             "name": "requestedAt",
             "baseName": "requestedAt",
             "type": "Date",
@@ -40,12 +61,6 @@ export class ActionResponse {
             "baseName": "startedAt",
             "type": "Date",
             "format": "date-time"
-        },
-        {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
-            "format": ""
         },
         {
             "name": "status",
@@ -63,9 +78,9 @@ export class ActionResponse {
 }
 
 export enum ActionResponseStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

@@ -16,13 +16,14 @@
 */
 export class BlogPostLanguageCloneRequestVNext {
     /**
-    * Target language of new variant.
-    */
-    'language'?: string;
-    /**
     * ID of blog post to clone.
     */
     'id': string;
+    /**
+    * Target language of new variant.
+    */
+    'language'?: string;
+    'usePublished'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,15 +31,21 @@ export class BlogPostLanguageCloneRequestVNext {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "language",
             "baseName": "language",
             "type": "string",
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "usePublished",
+            "baseName": "usePublished",
+            "type": "boolean",
             "format": ""
         }    ];
 

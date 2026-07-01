@@ -1,14 +1,12 @@
 export * from '../models/ActionResponse';
 export * from '../models/CollectionResponsePublicImportErrorForwardPaging';
-export * from '../models/CollectionResponsePublicImportResponse';
+export * from '../models/CollectionResponsePublicImportResponseForwardPaging';
 export * from '../models/ErrorDetail';
 export * from '../models/ForwardPaging';
 export * from '../models/ImportRowCore';
 export * from '../models/ImportTemplate';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
-export * from '../models/Paging';
-export * from '../models/PreviousPage';
 export * from '../models/PropertyValue';
 export * from '../models/PublicImportError';
 export * from '../models/PublicImportMetadata';
@@ -17,19 +15,17 @@ export * from '../models/PublicObjectListRecord';
 
 import { ActionResponse       } from '../models/ActionResponse';
 import { CollectionResponsePublicImportErrorForwardPaging } from '../models/CollectionResponsePublicImportErrorForwardPaging';
-import { CollectionResponsePublicImportResponse } from '../models/CollectionResponsePublicImportResponse';
+import { CollectionResponsePublicImportResponseForwardPaging } from '../models/CollectionResponsePublicImportResponseForwardPaging';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { ImportRowCore } from '../models/ImportRowCore';
 import { ImportTemplate    } from '../models/ImportTemplate';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
-import { PreviousPage } from '../models/PreviousPage';
-import { PropertyValue                } from '../models/PropertyValue';
+import { PropertyValue             } from '../models/PropertyValue';
 import { PublicImportError       } from '../models/PublicImportError';
 import { PublicImportMetadata } from '../models/PublicImportMetadata';
-import { PublicImportResponse           } from '../models/PublicImportResponse';
+import { PublicImportResponse        } from '../models/PublicImportResponse';
 import { PublicObjectListRecord } from '../models/PublicObjectListRecord';
 
 /* tslint:disable:no-unused-variable */
@@ -47,8 +43,8 @@ let primitives = [
 let enumsMap: Set<string> = new Set<string>([
     "ActionResponseStatusEnum",
     "ImportTemplateTemplateTypeEnum",
-    "PropertyValueSourceEnum",
     "PropertyValueDataSensitivityEnum",
+    "PropertyValueSourceEnum",
     "PublicImportErrorErrorTypeEnum",
     "PublicImportErrorObjectTypeEnum",
     "PublicImportResponseImportSourceEnum",
@@ -58,15 +54,13 @@ let enumsMap: Set<string> = new Set<string>([
 let typeMap: {[index: string]: any} = {
     "ActionResponse": ActionResponse,
     "CollectionResponsePublicImportErrorForwardPaging": CollectionResponsePublicImportErrorForwardPaging,
-    "CollectionResponsePublicImportResponse": CollectionResponsePublicImportResponse,
+    "CollectionResponsePublicImportResponseForwardPaging": CollectionResponsePublicImportResponseForwardPaging,
     "ErrorDetail": ErrorDetail,
     "ForwardPaging": ForwardPaging,
     "ImportRowCore": ImportRowCore,
     "ImportTemplate": ImportTemplate,
     "ModelError": ModelError,
     "NextPage": NextPage,
-    "Paging": Paging,
-    "PreviousPage": PreviousPage,
     "PropertyValue": PropertyValue,
     "PublicImportError": PublicImportError,
     "PublicImportMetadata": PublicImportMetadata,

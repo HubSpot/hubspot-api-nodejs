@@ -22,7 +22,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Delete a blog post by ID.  Note: This is not the same as the in-app `archive` function. To perform a dashboard `archive` send an normal update with the `archivedInDashboard` field set to `true`.
      * Delete a batch of blog posts
-     * @param batchInputString The JSON array of Blog Post ids.
+     * @param batchInputString 
      */
     public async archive(batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -70,7 +70,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Create a batch of blog posts, specifying their content in the request body.
      * Create a batch of blog posts
-     * @param batchInputBlogPost The JSON array of new Blog Posts to create.
+     * @param batchInputBlogPost 
      */
     public async create(batchInputBlogPost: BatchInputBlogPost, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -118,7 +118,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Retrieve a batch of blog posts by ID. identified in the request body.
      * Retrieve a batch of Blog Posts
-     * @param batchInputString The JSON array of Blog Post ids.
+     * @param batchInputString 
      * @param archived Specifies whether to return deleted blog posts Defaults to &#x60;false&#x60;.
      */
     public async read(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
@@ -173,7 +173,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Update a batch of blog posts.
      * Update a batch of Blog Posts
-     * @param batchInputJsonNode A JSON array of the JSON representations of the updated Blog Posts.
+     * @param batchInputJsonNode 
      * @param archived Specifies whether to update deleted Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public async update(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<RequestContext> {

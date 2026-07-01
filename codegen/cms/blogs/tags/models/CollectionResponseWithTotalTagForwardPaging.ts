@@ -17,27 +17,21 @@ import { Tag } from '../models/Tag';
 * Response object for collections of blog tags with pagination information.
 */
 export class CollectionResponseWithTotalTagForwardPaging {
-    /**
-    * Total number of blog tags.
-    */
-    'total': number;
     'paging'?: ForwardPaging;
     /**
     * Collection of blog tags.
     */
     'results': Array<Tag>;
+    /**
+    * Total number of blog tags.
+    */
+    'total': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "total",
-            "baseName": "total",
-            "type": "number",
-            "format": "int32"
-        },
         {
             "name": "paging",
             "baseName": "paging",
@@ -49,6 +43,12 @@ export class CollectionResponseWithTotalTagForwardPaging {
             "baseName": "results",
             "type": "Array<Tag>",
             "format": ""
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

@@ -4,6 +4,7 @@ export * from '../models/CollectionResponseObjectSchemaNoPaging';
 export * from '../models/ErrorDetail';
 export * from '../models/ModelError';
 export * from '../models/ObjectSchema';
+export * from '../models/ObjectSchemaBatchReadRequest';
 export * from '../models/ObjectSchemaEgg';
 export * from '../models/ObjectTypeDefinition';
 export * from '../models/ObjectTypeDefinitionLabels';
@@ -20,14 +21,15 @@ import { CollectionResponseObjectSchemaNoPaging } from '../models/CollectionResp
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { ObjectSchema } from '../models/ObjectSchema';
+import { ObjectSchemaBatchReadRequest } from '../models/ObjectSchemaBatchReadRequest';
 import { ObjectSchemaEgg } from '../models/ObjectSchemaEgg';
 import { ObjectTypeDefinition } from '../models/ObjectTypeDefinition';
 import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels';
 import { ObjectTypeDefinitionPatch } from '../models/ObjectTypeDefinitionPatch';
-import { ObjectTypePropertyCreate      } from '../models/ObjectTypePropertyCreate';
+import { ObjectTypePropertyCreate             } from '../models/ObjectTypePropertyCreate';
 import { Option } from '../models/Option';
 import { OptionInput } from '../models/OptionInput';
-import { Property                            } from '../models/Property';
+import { Property             } from '../models/Property';
 import { PropertyModificationMetadata } from '../models/PropertyModificationMetadata';
 
 /* tslint:disable:no-unused-variable */
@@ -43,11 +45,14 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
-    "ObjectTypePropertyCreateOptionSortStrategyEnum",
-    "ObjectTypePropertyCreateTypeEnum",
-    "ObjectTypePropertyCreateTextDisplayHintEnum",
     "ObjectTypePropertyCreateNumberDisplayHintEnum",
+    "ObjectTypePropertyCreateOptionSortStrategyEnum",
+    "ObjectTypePropertyCreateTextDisplayHintEnum",
+    "ObjectTypePropertyCreateTypeEnum",
     "PropertyDataSensitivityEnum",
+    "PropertyDateDisplayHintEnum",
+    "PropertyNumberDisplayHintEnum",
+    "PropertyTextDisplayHintEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -57,6 +62,7 @@ let typeMap: {[index: string]: any} = {
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
     "ObjectSchema": ObjectSchema,
+    "ObjectSchemaBatchReadRequest": ObjectSchemaBatchReadRequest,
     "ObjectSchemaEgg": ObjectSchemaEgg,
     "ObjectTypeDefinition": ObjectTypeDefinition,
     "ObjectTypeDefinitionLabels": ObjectTypeDefinitionLabels,

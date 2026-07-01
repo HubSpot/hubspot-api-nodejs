@@ -13,6 +13,9 @@
 import { SubscriptionBatchUpdateRequest } from '../models/SubscriptionBatchUpdateRequest';
 
 export class BatchInputSubscriptionBatchUpdateRequest {
+    /**
+    * An array of SubscriptionBatchUpdateRequest objects, each representing the updated settings for a specific webhook subscription in the batch operation.
+    */
     'inputs': Array<SubscriptionBatchUpdateRequest>;
 
     static readonly discriminator: string | undefined = undefined;

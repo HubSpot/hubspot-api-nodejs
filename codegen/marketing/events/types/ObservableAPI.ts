@@ -17,9 +17,9 @@ import { BatchResponseSubscriberEmailResponse } from '../models/BatchResponseSub
 import { BatchResponseSubscriberVidResponse } from '../models/BatchResponseSubscriberVidResponse';
 import { CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging } from '../models/CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging';
 import { CollectionResponseSearchPublicResponseWrapperNoPaging } from '../models/CollectionResponseSearchPublicResponseWrapperNoPaging';
-import { CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging } from '../models/CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging';
-import { CollectionResponseWithTotalParticipationBreakdownForwardPaging } from '../models/CollectionResponseWithTotalParticipationBreakdownForwardPaging';
-import { CollectionResponseWithTotalPublicListNoPaging } from '../models/CollectionResponseWithTotalPublicListNoPaging';
+import { CollectionResponseWithTotalMarketingEventIdentifiersResponse } from '../models/CollectionResponseWithTotalMarketingEventIdentifiersResponse';
+import { CollectionResponseWithTotalParticipationBreakdown } from '../models/CollectionResponseWithTotalParticipationBreakdown';
+import { CollectionResponseWithTotalPublicList } from '../models/CollectionResponseWithTotalPublicList';
 import { EventDetailSettings } from '../models/EventDetailSettings';
 import { EventDetailSettingsUrl } from '../models/EventDetailSettingsUrl';
 import { MarketingEventCompleteRequestParams } from '../models/MarketingEventCompleteRequestParams';
@@ -31,292 +31,6 @@ import { MarketingEventPublicReadResponse } from '../models/MarketingEventPublic
 import { MarketingEventPublicReadResponseV2 } from '../models/MarketingEventPublicReadResponseV2';
 import { MarketingEventPublicUpdateRequestV2 } from '../models/MarketingEventPublicUpdateRequestV2';
 import { MarketingEventUpdateRequestParams } from '../models/MarketingEventUpdateRequestParams';
-
-import { AddEventAttendeesApiRequestFactory, AddEventAttendeesApiResponseProcessor} from "../apis/AddEventAttendeesApi";
-export class ObservableAddEventAttendeesApi {
-    private requestFactory: AddEventAttendeesApiRequestFactory;
-    private responseProcessor: AddEventAttendeesApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: AddEventAttendeesApiRequestFactory,
-        responseProcessor?: AddEventAttendeesApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new AddEventAttendeesApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new AddEventAttendeesApiResponseProcessor();
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by Email with Marketing Event External Ids
-     * @param externalEventId The id of the marketing event in the external event application
-     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param batchInputMarketingEventEmailSubscriber
-     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
-     */
-    public recordByContactEmailsWithHttpInfo(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseSubscriberEmailResponse>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.recordByContactEmails(externalEventId, subscriberState, batchInputMarketingEventEmailSubscriber, externalAccountId, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.recordByContactEmailsWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by Email with Marketing Event External Ids
-     * @param externalEventId The id of the marketing event in the external event application
-     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param batchInputMarketingEventEmailSubscriber
-     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
-     */
-    public recordByContactEmails(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: ConfigurationOptions): Observable<BatchResponseSubscriberEmailResponse> {
-        return this.recordByContactEmailsWithHttpInfo(externalEventId, subscriberState, batchInputMarketingEventEmailSubscriber, externalAccountId, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSubscriberEmailResponse>) => apiResponse.data));
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by ContactId with Marketing Event Object Id
-     * @param objectId The internal id of the marketing event in HubSpot
-     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
-     * @param batchInputMarketingEventSubscriber
-     */
-    public recordByContactIdWithHttpInfo(objectId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseSubscriberVidResponse>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.recordByContactId(objectId, subscriberState, batchInputMarketingEventSubscriber, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.recordByContactIdWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by ContactId with Marketing Event Object Id
-     * @param objectId The internal id of the marketing event in HubSpot
-     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
-     * @param batchInputMarketingEventSubscriber
-     */
-    public recordByContactId(objectId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: ConfigurationOptions): Observable<BatchResponseSubscriberVidResponse> {
-        return this.recordByContactIdWithHttpInfo(objectId, subscriberState, batchInputMarketingEventSubscriber, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSubscriberVidResponse>) => apiResponse.data));
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by ContactId with Marketing Event External Ids
-     * @param externalEventId The id of the marketing event in the external event application
-     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param batchInputMarketingEventSubscriber
-     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
-     */
-    public recordByContactIdsWithHttpInfo(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseSubscriberVidResponse>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.recordByContactIds(externalEventId, subscriberState, batchInputMarketingEventSubscriber, externalAccountId, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.recordByContactIdsWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by ContactId with Marketing Event External Ids
-     * @param externalEventId The id of the marketing event in the external event application
-     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param batchInputMarketingEventSubscriber
-     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
-     */
-    public recordByContactIds(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: ConfigurationOptions): Observable<BatchResponseSubscriberVidResponse> {
-        return this.recordByContactIdsWithHttpInfo(externalEventId, subscriberState, batchInputMarketingEventSubscriber, externalAccountId, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSubscriberVidResponse>) => apiResponse.data));
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by Email with Marketing Event Object Id
-     * @param objectId The internal ID of the marketing event in HubSpot
-     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
-     * @param batchInputMarketingEventEmailSubscriber
-     */
-    public recordByEmailWithHttpInfo(objectId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseSubscriberEmailResponse>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.recordByEmail(objectId, subscriberState, batchInputMarketingEventEmailSubscriber, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.recordByEmailWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by Email with Marketing Event Object Id
-     * @param objectId The internal ID of the marketing event in HubSpot
-     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
-     * @param batchInputMarketingEventEmailSubscriber
-     */
-    public recordByEmail(objectId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: ConfigurationOptions): Observable<BatchResponseSubscriberEmailResponse> {
-        return this.recordByEmailWithHttpInfo(objectId, subscriberState, batchInputMarketingEventEmailSubscriber, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSubscriberEmailResponse>) => apiResponse.data));
-    }
-
-}
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 export class ObservableBasicApi {
@@ -342,7 +56,7 @@ export class ObservableBasicApi {
      */
     public archiveWithHttpInfo(externalEventId: string, externalAccountId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -356,7 +70,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -367,7 +81,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -401,11 +115,11 @@ export class ObservableBasicApi {
     /**
      * Deletes the existing Marketing Event with the specified objectId, if it exists.
      * Delete Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      */
     public archiveByObjectIdWithHttpInfo(objectId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -419,7 +133,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -430,7 +144,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -454,7 +168,7 @@ export class ObservableBasicApi {
     /**
      * Deletes the existing Marketing Event with the specified objectId, if it exists.
      * Delete Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      */
     public archiveByObjectId(objectId: string, _options?: ConfigurationOptions): Observable<void> {
         return this.archiveByObjectIdWithHttpInfo(objectId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
@@ -467,7 +181,7 @@ export class ObservableBasicApi {
      */
     public createWithHttpInfo(marketingEventCreateRequestParams: MarketingEventCreateRequestParams, _options?: ConfigurationOptions): Observable<HttpInfo<MarketingEventDefaultResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -481,7 +195,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -492,7 +206,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -523,77 +237,13 @@ export class ObservableBasicApi {
     }
 
     /**
-     * Returns all Marketing Events available on the portal, along with their properties, regardless of whether they were created manually or through the application.  The marketing events returned by this endpoint are sorted by objectId.
-     * Get all marketing event
-     * @param [after] The cursor indicating the position of the last retrieved item.
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
-     */
-    public getAllWithHttpInfo(after?: string, limit?: number, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.getAll(after, limit, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAllWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Returns all Marketing Events available on the portal, along with their properties, regardless of whether they were created manually or through the application.  The marketing events returned by this endpoint are sorted by objectId.
-     * Get all marketing event
-     * @param [after] The cursor indicating the position of the last retrieved item.
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
-     */
-    public getAll(after?: string, limit?: number, _options?: ConfigurationOptions): Observable<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging> {
-        return this.getAllWithHttpInfo(after, limit, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging>) => apiResponse.data));
-    }
-
-    /**
      * Returns the details of a Marketing Event with the specified objectId, if it exists.
      * Get Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      */
     public getByObjectIdWithHttpInfo(objectId: string, _options?: ConfigurationOptions): Observable<HttpInfo<MarketingEventPublicReadResponseV2>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -607,7 +257,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -618,7 +268,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -642,7 +292,7 @@ export class ObservableBasicApi {
     /**
      * Returns the details of a Marketing Event with the specified objectId, if it exists.
      * Get Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      */
     public getByObjectId(objectId: string, _options?: ConfigurationOptions): Observable<MarketingEventPublicReadResponseV2> {
         return this.getByObjectIdWithHttpInfo(objectId, _options).pipe(map((apiResponse: HttpInfo<MarketingEventPublicReadResponseV2>) => apiResponse.data));
@@ -656,7 +306,7 @@ export class ObservableBasicApi {
      */
     public getDetailsWithHttpInfo(externalEventId: string, externalAccountId: string, _options?: ConfigurationOptions): Observable<HttpInfo<MarketingEventPublicReadResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -670,7 +320,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -681,7 +331,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -713,15 +363,12 @@ export class ObservableBasicApi {
     }
 
     /**
-     * Updates the details of an existing Marketing Event identified by its externalAccountId, externalEventId if it exists.  Only Marketing Events created by the same app can be updated.
-     * Update Marketing Event by External IDs
-     * @param externalEventId The id of the marketing event in the external event application
-     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
-     * @param marketingEventUpdateRequestParams
+     * @param [after]
+     * @param [limit]
      */
-    public updateWithHttpInfo(externalEventId: string, externalAccountId: string, marketingEventUpdateRequestParams: MarketingEventUpdateRequestParams, _options?: ConfigurationOptions): Observable<HttpInfo<MarketingEventPublicDefaultResponse>> {
+    public marketingMarketingEventsV3WithHttpInfo(after?: string, limit?: number, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -735,7 +382,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -746,7 +393,70 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.marketingMarketingEventsV3(after, limit, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.marketingMarketingEventsV3WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * @param [after]
+     * @param [limit]
+     */
+    public marketingMarketingEventsV3(after?: string, limit?: number, _options?: ConfigurationOptions): Observable<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging> {
+        return this.marketingMarketingEventsV3WithHttpInfo(after, limit, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging>) => apiResponse.data));
+    }
+
+    /**
+     * Updates the details of an existing Marketing Event identified by its externalAccountId, externalEventId if it exists.  Only Marketing Events created by the same app can be updated.
+     * Update Marketing Event by External IDs
+     * @param externalEventId The id of the marketing event in the external event application
+     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
+     * @param marketingEventUpdateRequestParams
+     */
+    public updateWithHttpInfo(externalEventId: string, externalAccountId: string, marketingEventUpdateRequestParams: MarketingEventUpdateRequestParams, _options?: ConfigurationOptions): Observable<HttpInfo<MarketingEventPublicDefaultResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
 		};
 	}
 
@@ -781,12 +491,12 @@ export class ObservableBasicApi {
     /**
      * Updates the details of an existing Marketing Event identified by its objectId, if it exists.
      * Update Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      * @param marketingEventPublicUpdateRequestV2
      */
     public updateByObjectIdWithHttpInfo(objectId: string, marketingEventPublicUpdateRequestV2: MarketingEventPublicUpdateRequestV2, _options?: ConfigurationOptions): Observable<HttpInfo<MarketingEventPublicDefaultResponseV2>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -800,7 +510,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -811,7 +521,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -835,7 +545,7 @@ export class ObservableBasicApi {
     /**
      * Updates the details of an existing Marketing Event identified by its objectId, if it exists.
      * Update Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      * @param marketingEventPublicUpdateRequestV2
      */
     public updateByObjectId(objectId: string, marketingEventPublicUpdateRequestV2: MarketingEventPublicUpdateRequestV2, _options?: ConfigurationOptions): Observable<MarketingEventPublicDefaultResponseV2> {
@@ -850,7 +560,7 @@ export class ObservableBasicApi {
      */
     public upsertWithHttpInfo(externalEventId: string, marketingEventCreateRequestParams: MarketingEventCreateRequestParams, _options?: ConfigurationOptions): Observable<HttpInfo<MarketingEventPublicDefaultResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -864,7 +574,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -875,7 +585,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -931,7 +641,7 @@ export class ObservableBatchApi {
      */
     public archiveWithHttpInfo(batchInputMarketingEventExternalUniqueIdentifier: BatchInputMarketingEventExternalUniqueIdentifier, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -945,7 +655,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -956,7 +666,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -993,7 +703,7 @@ export class ObservableBatchApi {
      */
     public archiveByObjectIdWithHttpInfo(batchInputMarketingEventPublicObjectIdDeleteRequest: BatchInputMarketingEventPublicObjectIdDeleteRequest, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1007,7 +717,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1018,7 +728,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1055,7 +765,7 @@ export class ObservableBatchApi {
      */
     public updateByObjectIdWithHttpInfo(batchInputMarketingEventPublicUpdateRequestFullV2: BatchInputMarketingEventPublicUpdateRequestFullV2, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseMarketingEventPublicDefaultResponseV2WithErrors | BatchResponseMarketingEventPublicDefaultResponseV2>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1069,7 +779,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1080,7 +790,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1117,7 +827,7 @@ export class ObservableBatchApi {
      */
     public upsertWithHttpInfo(batchInputMarketingEventCreateRequestParams: BatchInputMarketingEventCreateRequestParams, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseMarketingEventPublicDefaultResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1131,7 +841,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1142,7 +852,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1174,31 +884,33 @@ export class ObservableBatchApi {
 
 }
 
-import { ChangePropertyApiRequestFactory, ChangePropertyApiResponseProcessor} from "../apis/ChangePropertyApi";
-export class ObservableChangePropertyApi {
-    private requestFactory: ChangePropertyApiRequestFactory;
-    private responseProcessor: ChangePropertyApiResponseProcessor;
+import { EventAttendeesApiRequestFactory, EventAttendeesApiResponseProcessor} from "../apis/EventAttendeesApi";
+export class ObservableEventAttendeesApi {
+    private requestFactory: EventAttendeesApiRequestFactory;
+    private responseProcessor: EventAttendeesApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: ChangePropertyApiRequestFactory,
-        responseProcessor?: ChangePropertyApiResponseProcessor
+        requestFactory?: EventAttendeesApiRequestFactory,
+        responseProcessor?: EventAttendeesApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new ChangePropertyApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new ChangePropertyApiResponseProcessor();
+        this.requestFactory = requestFactory || new EventAttendeesApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new EventAttendeesApiResponseProcessor();
     }
 
     /**
-     * Mark a marketing event as cancelled.
-     * Mark a marketing event as cancelled
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by Email with Marketing Event External Ids
      * @param externalEventId The id of the marketing event in the external event application
-     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
+     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
+     * @param batchInputMarketingEventEmailSubscriber
+     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
      */
-    public cancelWithHttpInfo(externalEventId: string, externalAccountId: string, _options?: ConfigurationOptions): Observable<HttpInfo<MarketingEventDefaultResponse>> {
+    public recordByContactEmailsWithHttpInfo(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseSubscriberEmailResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1212,7 +924,7 @@ export class ObservableChangePropertyApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1223,7 +935,291 @@ export class ObservableChangePropertyApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.recordByContactEmails(externalEventId, subscriberState, batchInputMarketingEventEmailSubscriber, externalAccountId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.recordByContactEmailsWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by Email with Marketing Event External Ids
+     * @param externalEventId The id of the marketing event in the external event application
+     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
+     * @param batchInputMarketingEventEmailSubscriber
+     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
+     */
+    public recordByContactEmails(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: ConfigurationOptions): Observable<BatchResponseSubscriberEmailResponse> {
+        return this.recordByContactEmailsWithHttpInfo(externalEventId, subscriberState, batchInputMarketingEventEmailSubscriber, externalAccountId, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSubscriberEmailResponse>) => apiResponse.data));
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by ContactId with Marketing Event Object Id
+     * @param objectId The internal id of the marketing event in HubSpot.
+     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
+     * @param batchInputMarketingEventSubscriber
+     */
+    public recordByContactIdWithHttpInfo(objectId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseSubscriberVidResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.recordByContactId(objectId, subscriberState, batchInputMarketingEventSubscriber, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.recordByContactIdWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by ContactId with Marketing Event Object Id
+     * @param objectId The internal id of the marketing event in HubSpot.
+     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
+     * @param batchInputMarketingEventSubscriber
+     */
+    public recordByContactId(objectId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: ConfigurationOptions): Observable<BatchResponseSubscriberVidResponse> {
+        return this.recordByContactIdWithHttpInfo(objectId, subscriberState, batchInputMarketingEventSubscriber, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSubscriberVidResponse>) => apiResponse.data));
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by ContactId with Marketing Event External Ids
+     * @param externalEventId The id of the marketing event in the external event application
+     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
+     * @param batchInputMarketingEventSubscriber
+     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
+     */
+    public recordByContactIdsWithHttpInfo(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseSubscriberVidResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.recordByContactIds(externalEventId, subscriberState, batchInputMarketingEventSubscriber, externalAccountId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.recordByContactIdsWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by ContactId with Marketing Event External Ids
+     * @param externalEventId The id of the marketing event in the external event application
+     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
+     * @param batchInputMarketingEventSubscriber
+     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
+     */
+    public recordByContactIds(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: ConfigurationOptions): Observable<BatchResponseSubscriberVidResponse> {
+        return this.recordByContactIdsWithHttpInfo(externalEventId, subscriberState, batchInputMarketingEventSubscriber, externalAccountId, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSubscriberVidResponse>) => apiResponse.data));
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by Email with Marketing Event Object Id
+     * @param objectId The internal id of the marketing event in HubSpot.
+     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
+     * @param batchInputMarketingEventEmailSubscriber
+     */
+    public recordByEmailWithHttpInfo(objectId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseSubscriberEmailResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.recordByEmail(objectId, subscriberState, batchInputMarketingEventEmailSubscriber, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.recordByEmailWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by Email with Marketing Event Object Id
+     * @param objectId The internal id of the marketing event in HubSpot.
+     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
+     * @param batchInputMarketingEventEmailSubscriber
+     */
+    public recordByEmail(objectId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: ConfigurationOptions): Observable<BatchResponseSubscriberEmailResponse> {
+        return this.recordByEmailWithHttpInfo(objectId, subscriberState, batchInputMarketingEventEmailSubscriber, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSubscriberEmailResponse>) => apiResponse.data));
+    }
+
+}
+
+import { EventStatusApiRequestFactory, EventStatusApiResponseProcessor} from "../apis/EventStatusApi";
+export class ObservableEventStatusApi {
+    private requestFactory: EventStatusApiRequestFactory;
+    private responseProcessor: EventStatusApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: EventStatusApiRequestFactory,
+        responseProcessor?: EventStatusApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new EventStatusApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new EventStatusApiResponseProcessor();
+    }
+
+    /**
+     * Mark a marketing event as cancelled.
+     * Mark a marketing event as cancelled
+     * @param externalEventId The id of the marketing event in the external event application
+     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
+     */
+    public cancelWithHttpInfo(externalEventId: string, externalAccountId: string, _options?: ConfigurationOptions): Observable<HttpInfo<MarketingEventDefaultResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
 		};
 	}
 
@@ -1263,7 +1259,7 @@ export class ObservableChangePropertyApi {
      */
     public completeWithHttpInfo(externalEventId: string, externalAccountId: string, marketingEventCompleteRequestParams: MarketingEventCompleteRequestParams, _options?: ConfigurationOptions): Observable<HttpInfo<MarketingEventDefaultResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1277,7 +1273,7 @@ export class ObservableChangePropertyApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1288,7 +1284,7 @@ export class ObservableChangePropertyApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1345,7 +1341,7 @@ export class ObservableIdentifiersApi {
      */
     public doSearchWithHttpInfo(q: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseSearchPublicResponseWrapperNoPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1359,7 +1355,7 @@ export class ObservableIdentifiersApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1370,7 +1366,7 @@ export class ObservableIdentifiersApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1405,9 +1401,9 @@ export class ObservableIdentifiersApi {
      * Find Marketing Events by External Event Id
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public searchPortalEventsWithHttpInfo(externalEventId: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging>> {
+    public searchPortalEventsWithHttpInfo(externalEventId: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalMarketingEventIdentifiersResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1421,7 +1417,7 @@ export class ObservableIdentifiersApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1432,7 +1428,7 @@ export class ObservableIdentifiersApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1458,8 +1454,8 @@ export class ObservableIdentifiersApi {
      * Find Marketing Events by External Event Id
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public searchPortalEvents(externalEventId: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging> {
-        return this.searchPortalEventsWithHttpInfo(externalEventId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging>) => apiResponse.data));
+    public searchPortalEvents(externalEventId: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalMarketingEventIdentifiersResponse> {
+        return this.searchPortalEventsWithHttpInfo(externalEventId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalMarketingEventIdentifiersResponse>) => apiResponse.data));
     }
 
 }
@@ -1489,7 +1485,7 @@ export class ObservableListAssociationsApi {
      */
     public associateByExternalAccountAndEventIdsWithHttpInfo(externalAccountId: string, externalEventId: string, listId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1503,7 +1499,7 @@ export class ObservableListAssociationsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1514,7 +1510,7 @@ export class ObservableListAssociationsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1549,12 +1545,12 @@ export class ObservableListAssociationsApi {
     /**
      * Associates a list with a marketing event by marketing event id and ILS list id
      * Associate a list with a marketing event
-     * @param marketingEventId The internal id of the marketing event in HubSpot.
      * @param listId The ILS ID of the list.
+     * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public associateByMarketingEventIdWithHttpInfo(marketingEventId: string, listId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    public associateByMarketingEventIdWithHttpInfo(listId: string, marketingEventId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1568,7 +1564,7 @@ export class ObservableListAssociationsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1579,11 +1575,11 @@ export class ObservableListAssociationsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.associateByMarketingEventId(marketingEventId, listId, _config);
+        const requestContextPromise = this.requestFactory.associateByMarketingEventId(listId, marketingEventId, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -1603,11 +1599,11 @@ export class ObservableListAssociationsApi {
     /**
      * Associates a list with a marketing event by marketing event id and ILS list id
      * Associate a list with a marketing event
-     * @param marketingEventId The internal id of the marketing event in HubSpot.
      * @param listId The ILS ID of the list.
+     * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public associateByMarketingEventId(marketingEventId: string, listId: string, _options?: ConfigurationOptions): Observable<void> {
-        return this.associateByMarketingEventIdWithHttpInfo(marketingEventId, listId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    public associateByMarketingEventId(listId: string, marketingEventId: string, _options?: ConfigurationOptions): Observable<void> {
+        return this.associateByMarketingEventIdWithHttpInfo(listId, marketingEventId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
@@ -1619,7 +1615,7 @@ export class ObservableListAssociationsApi {
      */
     public disassociateByExternalAccountAndEventIdsWithHttpInfo(externalAccountId: string, externalEventId: string, listId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1633,7 +1629,7 @@ export class ObservableListAssociationsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1644,7 +1640,7 @@ export class ObservableListAssociationsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1679,12 +1675,12 @@ export class ObservableListAssociationsApi {
     /**
      * Disassociates a list from a marketing event by marketing event id and ILS list id
      * Disassociate a list from a marketing event
-     * @param marketingEventId The internal id of the marketing event in HubSpot.
      * @param listId The ILS ID of the list.
+     * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public disassociateByMarketingEventIdWithHttpInfo(marketingEventId: string, listId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    public disassociateByMarketingEventIdWithHttpInfo(listId: string, marketingEventId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1698,7 +1694,7 @@ export class ObservableListAssociationsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1709,11 +1705,11 @@ export class ObservableListAssociationsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.disassociateByMarketingEventId(marketingEventId, listId, _config);
+        const requestContextPromise = this.requestFactory.disassociateByMarketingEventId(listId, marketingEventId, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -1733,22 +1729,22 @@ export class ObservableListAssociationsApi {
     /**
      * Disassociates a list from a marketing event by marketing event id and ILS list id
      * Disassociate a list from a marketing event
-     * @param marketingEventId The internal id of the marketing event in HubSpot.
      * @param listId The ILS ID of the list.
+     * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public disassociateByMarketingEventId(marketingEventId: string, listId: string, _options?: ConfigurationOptions): Observable<void> {
-        return this.disassociateByMarketingEventIdWithHttpInfo(marketingEventId, listId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    public disassociateByMarketingEventId(listId: string, marketingEventId: string, _options?: ConfigurationOptions): Observable<void> {
+        return this.disassociateByMarketingEventIdWithHttpInfo(listId, marketingEventId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
      * Gets lists associated with a marketing event by external account id and external event id
      * Get lists associated with a marketing event
-     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
+     * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public getAllByExternalAccountAndEventIdsWithHttpInfo(externalAccountId: string, externalEventId: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalPublicListNoPaging>> {
+    public getAllByExternalAccountAndEventIdsWithHttpInfo(externalAccountId: string, externalEventId: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalPublicList>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1762,7 +1758,7 @@ export class ObservableListAssociationsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1773,7 +1769,7 @@ export class ObservableListAssociationsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1797,11 +1793,11 @@ export class ObservableListAssociationsApi {
     /**
      * Gets lists associated with a marketing event by external account id and external event id
      * Get lists associated with a marketing event
-     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
+     * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public getAllByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalPublicListNoPaging> {
-        return this.getAllByExternalAccountAndEventIdsWithHttpInfo(externalAccountId, externalEventId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalPublicListNoPaging>) => apiResponse.data));
+    public getAllByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalPublicList> {
+        return this.getAllByExternalAccountAndEventIdsWithHttpInfo(externalAccountId, externalEventId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalPublicList>) => apiResponse.data));
     }
 
     /**
@@ -1809,9 +1805,9 @@ export class ObservableListAssociationsApi {
      * Get lists associated with a marketing event
      * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public getAllByMarketingEventIdWithHttpInfo(marketingEventId: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalPublicListNoPaging>> {
+    public getAllByMarketingEventIdWithHttpInfo(marketingEventId: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalPublicList>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1825,7 +1821,7 @@ export class ObservableListAssociationsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1836,7 +1832,7 @@ export class ObservableListAssociationsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1862,39 +1858,39 @@ export class ObservableListAssociationsApi {
      * Get lists associated with a marketing event
      * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public getAllByMarketingEventId(marketingEventId: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalPublicListNoPaging> {
-        return this.getAllByMarketingEventIdWithHttpInfo(marketingEventId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalPublicListNoPaging>) => apiResponse.data));
+    public getAllByMarketingEventId(marketingEventId: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalPublicList> {
+        return this.getAllByMarketingEventIdWithHttpInfo(marketingEventId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalPublicList>) => apiResponse.data));
     }
 
 }
 
-import { RetrieveParticipantStateApiRequestFactory, RetrieveParticipantStateApiResponseProcessor} from "../apis/RetrieveParticipantStateApi";
-export class ObservableRetrieveParticipantStateApi {
-    private requestFactory: RetrieveParticipantStateApiRequestFactory;
-    private responseProcessor: RetrieveParticipantStateApiResponseProcessor;
+import { ParticipantStateApiRequestFactory, ParticipantStateApiResponseProcessor} from "../apis/ParticipantStateApi";
+export class ObservableParticipantStateApi {
+    private requestFactory: ParticipantStateApiRequestFactory;
+    private responseProcessor: ParticipantStateApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: RetrieveParticipantStateApiRequestFactory,
-        responseProcessor?: RetrieveParticipantStateApiResponseProcessor
+        requestFactory?: ParticipantStateApiRequestFactory,
+        responseProcessor?: ParticipantStateApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new RetrieveParticipantStateApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new RetrieveParticipantStateApiResponseProcessor();
+        this.requestFactory = requestFactory || new ParticipantStateApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new ParticipantStateApiResponseProcessor();
     }
 
     /**
      * Read Contact\'s participations by identifier - email or internal id.
      * Read participations breakdown by Contact identifier
      * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
      */
-    public getParticipationsBreakdownByContactIdWithHttpInfo(contactIdentifier: string, state?: string, limit?: number, after?: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
+    public getParticipationsBreakdownByContactIdWithHttpInfo(contactIdentifier: string, after?: string, limit?: number, state?: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalParticipationBreakdown>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1908,7 +1904,7 @@ export class ObservableRetrieveParticipantStateApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1919,11 +1915,11 @@ export class ObservableRetrieveParticipantStateApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.getParticipationsBreakdownByContactId(contactIdentifier, state, limit, after, _config);
+        const requestContextPromise = this.requestFactory.getParticipationsBreakdownByContactId(contactIdentifier, after, limit, state, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -1944,12 +1940,12 @@ export class ObservableRetrieveParticipantStateApi {
      * Read Contact\'s participations by identifier - email or internal id.
      * Read participations breakdown by Contact identifier
      * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
      */
-    public getParticipationsBreakdownByContactId(contactIdentifier: string, state?: string, limit?: number, after?: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
-        return this.getParticipationsBreakdownByContactIdWithHttpInfo(contactIdentifier, state, limit, after, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>) => apiResponse.data));
+    public getParticipationsBreakdownByContactId(contactIdentifier: string, after?: string, limit?: number, state?: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalParticipationBreakdown> {
+        return this.getParticipationsBreakdownByContactIdWithHttpInfo(contactIdentifier, after, limit, state, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalParticipationBreakdown>) => apiResponse.data));
     }
 
     /**
@@ -1957,14 +1953,14 @@ export class ObservableRetrieveParticipantStateApi {
      * Read participations breakdown by Marketing Event external identifier
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
-     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
-     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
      */
-    public getParticipationsBreakdownByExternalEventIdWithHttpInfo(externalAccountId: string, externalEventId: string, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
+    public getParticipationsBreakdownByExternalEventIdWithHttpInfo(externalAccountId: string, externalEventId: string, after?: string, contactIdentifier?: string, limit?: number, state?: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalParticipationBreakdown>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1978,7 +1974,7 @@ export class ObservableRetrieveParticipantStateApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1989,11 +1985,11 @@ export class ObservableRetrieveParticipantStateApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.getParticipationsBreakdownByExternalEventId(externalAccountId, externalEventId, contactIdentifier, state, limit, after, _config);
+        const requestContextPromise = this.requestFactory.getParticipationsBreakdownByExternalEventId(externalAccountId, externalEventId, after, contactIdentifier, limit, state, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -2015,27 +2011,27 @@ export class ObservableRetrieveParticipantStateApi {
      * Read participations breakdown by Marketing Event external identifier
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
-     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
-     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
      */
-    public getParticipationsBreakdownByExternalEventId(externalAccountId: string, externalEventId: string, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
-        return this.getParticipationsBreakdownByExternalEventIdWithHttpInfo(externalAccountId, externalEventId, contactIdentifier, state, limit, after, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>) => apiResponse.data));
+    public getParticipationsBreakdownByExternalEventId(externalAccountId: string, externalEventId: string, after?: string, contactIdentifier?: string, limit?: number, state?: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalParticipationBreakdown> {
+        return this.getParticipationsBreakdownByExternalEventIdWithHttpInfo(externalAccountId, externalEventId, after, contactIdentifier, limit, state, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalParticipationBreakdown>) => apiResponse.data));
     }
 
     /**
      * Read Marketing event\'s participations breakdown with optional filters by internal identifier marketingEventId.
      * Read participations breakdown by Marketing Event internal identifier
      * @param marketingEventId The internal id of the marketing event in HubSpot.
-     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
-     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
      */
-    public getParticipationsBreakdownByMarketingEventIdWithHttpInfo(marketingEventId: number, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
+    public getParticipationsBreakdownByMarketingEventIdWithHttpInfo(marketingEventId: number, after?: string, contactIdentifier?: string, limit?: number, state?: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalParticipationBreakdown>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -2049,7 +2045,7 @@ export class ObservableRetrieveParticipantStateApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -2060,11 +2056,11 @@ export class ObservableRetrieveParticipantStateApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.getParticipationsBreakdownByMarketingEventId(marketingEventId, contactIdentifier, state, limit, after, _config);
+        const requestContextPromise = this.requestFactory.getParticipationsBreakdownByMarketingEventId(marketingEventId, after, contactIdentifier, limit, state, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -2085,13 +2081,13 @@ export class ObservableRetrieveParticipantStateApi {
      * Read Marketing event\'s participations breakdown with optional filters by internal identifier marketingEventId.
      * Read participations breakdown by Marketing Event internal identifier
      * @param marketingEventId The internal id of the marketing event in HubSpot.
-     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
-     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
      */
-    public getParticipationsBreakdownByMarketingEventId(marketingEventId: number, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
-        return this.getParticipationsBreakdownByMarketingEventIdWithHttpInfo(marketingEventId, contactIdentifier, state, limit, after, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>) => apiResponse.data));
+    public getParticipationsBreakdownByMarketingEventId(marketingEventId: number, after?: string, contactIdentifier?: string, limit?: number, state?: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalParticipationBreakdown> {
+        return this.getParticipationsBreakdownByMarketingEventIdWithHttpInfo(marketingEventId, after, contactIdentifier, limit, state, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalParticipationBreakdown>) => apiResponse.data));
     }
 
     /**
@@ -2102,7 +2098,7 @@ export class ObservableRetrieveParticipantStateApi {
      */
     public getParticipationsCountersByEventExternalIdWithHttpInfo(externalAccountId: string, externalEventId: string, _options?: ConfigurationOptions): Observable<HttpInfo<AttendanceCounters>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -2116,7 +2112,7 @@ export class ObservableRetrieveParticipantStateApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -2127,7 +2123,7 @@ export class ObservableRetrieveParticipantStateApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -2165,7 +2161,7 @@ export class ObservableRetrieveParticipantStateApi {
      */
     public getParticipationsCountersByMarketingEventIdWithHttpInfo(marketingEventId: number, _options?: ConfigurationOptions): Observable<HttpInfo<AttendanceCounters>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -2179,7 +2175,7 @@ export class ObservableRetrieveParticipantStateApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -2190,7 +2186,7 @@ export class ObservableRetrieveParticipantStateApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -2245,7 +2241,7 @@ export class ObservableSettingsApi {
      */
     public getAllWithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<EventDetailSettings>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -2259,7 +2255,7 @@ export class ObservableSettingsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -2270,7 +2266,7 @@ export class ObservableSettingsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -2308,7 +2304,7 @@ export class ObservableSettingsApi {
      */
     public updateWithHttpInfo(appId: number, eventDetailSettingsUrl: EventDetailSettingsUrl, _options?: ConfigurationOptions): Observable<HttpInfo<EventDetailSettings>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -2322,7 +2318,7 @@ export class ObservableSettingsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -2333,7 +2329,7 @@ export class ObservableSettingsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -2392,7 +2388,7 @@ export class ObservableSubscriberStateChangesApi {
      */
     public upsertByContactEmailWithHttpInfo(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -2406,7 +2402,7 @@ export class ObservableSubscriberStateChangesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -2417,7 +2413,7 @@ export class ObservableSubscriberStateChangesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -2460,7 +2456,7 @@ export class ObservableSubscriberStateChangesApi {
      */
     public upsertByContactIdWithHttpInfo(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -2474,7 +2470,7 @@ export class ObservableSubscriberStateChangesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -2485,7 +2481,7 @@ export class ObservableSubscriberStateChangesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 

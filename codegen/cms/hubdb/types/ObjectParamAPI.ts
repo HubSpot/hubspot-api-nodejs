@@ -7,7 +7,7 @@ import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTable
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseHubDbTableRowV3 } from '../models/BatchResponseHubDbTableRowV3';
 import { BatchResponseHubDbTableRowV3WithErrors } from '../models/BatchResponseHubDbTableRowV3WithErrors';
-import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableV3ForwardPaging';
+import { CollectionResponseWithTotalHubDbTableV3 } from '../models/CollectionResponseWithTotalHubDbTableV3';
 import { HubDbTableCloneRequest } from '../models/HubDbTableCloneRequest';
 import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
 import { HubDbTableRowV3Request } from '../models/HubDbTableRowV3Request';
@@ -21,21 +21,21 @@ import { RowsApiRequestFactory, RowsApiResponseProcessor} from "../apis/RowsApi"
 
 export interface RowsApiCloneDraftTableRowRequest {
     /**
-     * The ID or name of the table
-     * Defaults to: undefined
-     * @type string
-     * @memberof RowsApicloneDraftTableRow
-     */
-    tableIdOrName: string
-    /**
-     * The ID of the row
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RowsApicloneDraftTableRow
      */
     rowId: string
     /**
-     *
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof RowsApicloneDraftTableRow
+     */
+    tableIdOrName: string
+    /**
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RowsApicloneDraftTableRow
@@ -43,16 +43,48 @@ export interface RowsApiCloneDraftTableRowRequest {
     name?: string
 }
 
+export interface RowsApiCloneDraftTableRowsRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof RowsApicloneDraftTableRows
+     */
+    tableIdOrName: string
+    /**
+     * 
+     * @type BatchInputHubDbTableRowBatchCloneRequest
+     * @memberof RowsApicloneDraftTableRows
+     */
+    batchInputHubDbTableRowBatchCloneRequest: BatchInputHubDbTableRowBatchCloneRequest
+}
+
+export interface RowsApiCreateDraftTableRowsRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof RowsApicreateDraftTableRows
+     */
+    tableIdOrName: string
+    /**
+     * 
+     * @type BatchInputHubDbTableRowV3Request
+     * @memberof RowsApicreateDraftTableRows
+     */
+    batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request
+}
+
 export interface RowsApiCreateTableRowRequest {
     /**
-     * The ID or name of the target table.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RowsApicreateTableRow
      */
     tableIdOrName: string
     /**
-     *
+     * 
      * @type HubDbTableRowV3Request
      * @memberof RowsApicreateTableRow
      */
@@ -61,21 +93,21 @@ export interface RowsApiCreateTableRowRequest {
 
 export interface RowsApiGetDraftTableRowByIdRequest {
     /**
-     * The ID or name of the table
-     * Defaults to: undefined
-     * @type string
-     * @memberof RowsApigetDraftTableRowById
-     */
-    tableIdOrName: string
-    /**
-     * The ID of the row
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RowsApigetDraftTableRowById
      */
     rowId: string
     /**
-     *
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof RowsApigetDraftTableRowById
+     */
+    tableIdOrName: string
+    /**
+     * Whether to return only results that have been archived.
      * Defaults to: undefined
      * @type boolean
      * @memberof RowsApigetDraftTableRowById
@@ -85,21 +117,21 @@ export interface RowsApiGetDraftTableRowByIdRequest {
 
 export interface RowsApiGetTableRowRequest {
     /**
-     * The ID or name of the table
-     * Defaults to: undefined
-     * @type string
-     * @memberof RowsApigetTableRow
-     */
-    tableIdOrName: string
-    /**
-     * The ID of the row
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RowsApigetTableRow
      */
     rowId: string
     /**
-     *
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof RowsApigetTableRow
+     */
+    tableIdOrName: string
+    /**
+     * Whether to return only results that have been archived.
      * Defaults to: undefined
      * @type boolean
      * @memberof RowsApigetTableRow
@@ -109,169 +141,197 @@ export interface RowsApiGetTableRowRequest {
 
 export interface RowsApiGetTableRowsRequest {
     /**
-     * The ID or name of the table to query.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RowsApigetTableRows
      */
     tableIdOrName: string
     /**
-     * Specifies the column names to sort the results by. See the above description for more details.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
-     * @memberof RowsApigetTableRows
-     */
-    sort?: Array<string>
-    /**
-     * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * Defaults to: undefined
      * @type string
      * @memberof RowsApigetTableRows
      */
     after?: string
     /**
-     * The maximum number of results to return. Default is &#x60;1000&#x60;.
+     * Whether to return only results that have been archived.
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof RowsApigetTableRows
+     */
+    archived?: boolean
+    /**
+     * The maximum number of results to display per page.
      * Defaults to: undefined
      * @type number
      * @memberof RowsApigetTableRows
      */
     limit?: number
     /**
-     * Specify the column names to get results containing only the required columns instead of all column details.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
-     * @memberof RowsApigetTableRows
-     */
-    properties?: Array<string>
-    /**
-     *
+     * 
      * Defaults to: undefined
      * @type number
      * @memberof RowsApigetTableRows
      */
     offset?: number
     /**
-     *
+     * 
      * Defaults to: undefined
-     * @type boolean
+     * @type Array&lt;string&gt;
      * @memberof RowsApigetTableRows
      */
-    archived?: boolean
+    properties?: Array<string>
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof RowsApigetTableRows
+     */
+    sort?: Array<string>
 }
 
 export interface RowsApiPurgeDraftTableRowRequest {
     /**
-     * The ID or name of the table
-     * Defaults to: undefined
-     * @type string
-     * @memberof RowsApipurgeDraftTableRow
-     */
-    tableIdOrName: string
-    /**
-     * The ID of the row
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RowsApipurgeDraftTableRow
      */
     rowId: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof RowsApipurgeDraftTableRow
+     */
+    tableIdOrName: string
+}
+
+export interface RowsApiPurgeDraftTableRowsRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof RowsApipurgeDraftTableRows
+     */
+    tableIdOrName: string
+    /**
+     * 
+     * @type BatchInputString
+     * @memberof RowsApipurgeDraftTableRows
+     */
+    batchInputString: BatchInputString
 }
 
 export interface RowsApiReadDraftTableRowsRequest {
     /**
-     * The ID or name of the table to query.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RowsApireadDraftTableRows
      */
     tableIdOrName: string
     /**
-     * Specifies the column names to sort the results by.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
+     * 
+     * @type BatchInputString
      * @memberof RowsApireadDraftTableRows
      */
-    sort?: Array<string>
+    batchInputString: BatchInputString
+}
+
+export interface RowsApiReadTableRowsRequest {
     /**
-     * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof RowsApireadDraftTableRows
+     * @memberof RowsApireadTableRows
      */
-    after?: string
+    tableIdOrName: string
     /**
-     * The maximum number of results to return. Default is &#x60;1000&#x60;.
-     * Defaults to: undefined
-     * @type number
-     * @memberof RowsApireadDraftTableRows
+     * 
+     * @type BatchInputString
+     * @memberof RowsApireadTableRows
      */
-    limit?: number
-    /**
-     * Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
-     * @memberof RowsApireadDraftTableRows
-     */
-    properties?: Array<string>
-    /**
-     *
-     * Defaults to: undefined
-     * @type number
-     * @memberof RowsApireadDraftTableRows
-     */
-    offset?: number
-    /**
-     *
-     * Defaults to: undefined
-     * @type boolean
-     * @memberof RowsApireadDraftTableRows
-     */
-    archived?: boolean
+    batchInputString: BatchInputString
 }
 
 export interface RowsApiReplaceDraftTableRowRequest {
     /**
-     * The ID or name of the table
-     * Defaults to: undefined
-     * @type string
-     * @memberof RowsApireplaceDraftTableRow
-     */
-    tableIdOrName: string
-    /**
-     * The ID of the row
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RowsApireplaceDraftTableRow
      */
     rowId: string
     /**
-     *
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof RowsApireplaceDraftTableRow
+     */
+    tableIdOrName: string
+    /**
+     * 
      * @type HubDbTableRowV3Request
      * @memberof RowsApireplaceDraftTableRow
      */
     hubDbTableRowV3Request: HubDbTableRowV3Request
 }
 
-export interface RowsApiUpdateDraftTableRowRequest {
+export interface RowsApiReplaceDraftTableRowsRequest {
     /**
-     * The ID or name of the table
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof RowsApiupdateDraftTableRow
+     * @memberof RowsApireplaceDraftTableRows
      */
     tableIdOrName: string
     /**
-     * The ID of the row
+     * 
+     * @type BatchInputHubDbTableRowV3BatchUpdateRequest
+     * @memberof RowsApireplaceDraftTableRows
+     */
+    batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest
+}
+
+export interface RowsApiUpdateDraftTableRowRequest {
+    /**
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RowsApiupdateDraftTableRow
      */
     rowId: string
     /**
-     *
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof RowsApiupdateDraftTableRow
+     */
+    tableIdOrName: string
+    /**
+     * 
      * @type HubDbTableRowV3Request
      * @memberof RowsApiupdateDraftTableRow
      */
     hubDbTableRowV3Request: HubDbTableRowV3Request
+}
+
+export interface RowsApiUpdateDraftTableRowsRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof RowsApiupdateDraftTableRows
+     */
+    tableIdOrName: string
+    /**
+     * 
+     * @type BatchInputHubDbTableRowV3BatchUpdateRequest
+     * @memberof RowsApiupdateDraftTableRows
+     */
+    batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest
 }
 
 export class ObjectRowsApi {
@@ -287,7 +347,7 @@ export class ObjectRowsApi {
      * @param param the request object
      */
     public cloneDraftTableRowWithHttpInfo(param: RowsApiCloneDraftTableRowRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableRowV3>> {
-        return this.api.cloneDraftTableRowWithHttpInfo(param.tableIdOrName, param.rowId, param.name,  options).toPromise();
+        return this.api.cloneDraftTableRowWithHttpInfo(param.rowId, param.tableIdOrName, param.name,  options).toPromise();
     }
 
     /**
@@ -296,12 +356,48 @@ export class ObjectRowsApi {
      * @param param the request object
      */
     public cloneDraftTableRow(param: RowsApiCloneDraftTableRowRequest, options?: ConfigurationOptions): Promise<HubDbTableRowV3> {
-        return this.api.cloneDraftTableRow(param.tableIdOrName, param.rowId, param.name,  options).toPromise();
+        return this.api.cloneDraftTableRow(param.rowId, param.tableIdOrName, param.name,  options).toPromise();
+    }
+
+    /**
+     * Clones rows in the draft version of the specified table, given a set of row ids. Maximum of 100 row ids per call.
+     * Clone rows in batch
+     * @param param the request object
+     */
+    public cloneDraftTableRowsWithHttpInfo(param: RowsApiCloneDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseHubDbTableRowV3>> {
+        return this.api.cloneDraftTableRowsWithHttpInfo(param.tableIdOrName, param.batchInputHubDbTableRowBatchCloneRequest,  options).toPromise();
+    }
+
+    /**
+     * Clones rows in the draft version of the specified table, given a set of row ids. Maximum of 100 row ids per call.
+     * Clone rows in batch
+     * @param param the request object
+     */
+    public cloneDraftTableRows(param: RowsApiCloneDraftTableRowsRequest, options?: ConfigurationOptions): Promise<BatchResponseHubDbTableRowV3> {
+        return this.api.cloneDraftTableRows(param.tableIdOrName, param.batchInputHubDbTableRowBatchCloneRequest,  options).toPromise();
+    }
+
+    /**
+     * Creates rows in the draft version of the specified table, given an array of row objects. Maximum of 100 row object per call. See the overview section for more details with an example.
+     * Create rows in batch
+     * @param param the request object
+     */
+    public createDraftTableRowsWithHttpInfo(param: RowsApiCreateDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
+        return this.api.createDraftTableRowsWithHttpInfo(param.tableIdOrName, param.batchInputHubDbTableRowV3Request,  options).toPromise();
+    }
+
+    /**
+     * Creates rows in the draft version of the specified table, given an array of row objects. Maximum of 100 row object per call. See the overview section for more details with an example.
+     * Create rows in batch
+     * @param param the request object
+     */
+    public createDraftTableRows(param: RowsApiCreateDraftTableRowsRequest, options?: ConfigurationOptions): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        return this.api.createDraftTableRows(param.tableIdOrName, param.batchInputHubDbTableRowV3Request,  options).toPromise();
     }
 
     /**
      * Add a new row to a HubDB table. New rows will be added to the draft version of the table. Use the `/publish` endpoint to push these changes to published version.
-     * Add a new row to a table
+     * Add a row to a table
      * @param param the request object
      */
     public createTableRowWithHttpInfo(param: RowsApiCreateTableRowRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableRowV3>> {
@@ -310,7 +406,7 @@ export class ObjectRowsApi {
 
     /**
      * Add a new row to a HubDB table. New rows will be added to the draft version of the table. Use the `/publish` endpoint to push these changes to published version.
-     * Add a new row to a table
+     * Add a row to a table
      * @param param the request object
      */
     public createTableRow(param: RowsApiCreateTableRowRequest, options?: ConfigurationOptions): Promise<HubDbTableRowV3> {
@@ -323,7 +419,7 @@ export class ObjectRowsApi {
      * @param param the request object
      */
     public getDraftTableRowByIdWithHttpInfo(param: RowsApiGetDraftTableRowByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableRowV3>> {
-        return this.api.getDraftTableRowByIdWithHttpInfo(param.tableIdOrName, param.rowId, param.archived,  options).toPromise();
+        return this.api.getDraftTableRowByIdWithHttpInfo(param.rowId, param.tableIdOrName, param.archived,  options).toPromise();
     }
 
     /**
@@ -332,7 +428,7 @@ export class ObjectRowsApi {
      * @param param the request object
      */
     public getDraftTableRowById(param: RowsApiGetDraftTableRowByIdRequest, options?: ConfigurationOptions): Promise<HubDbTableRowV3> {
-        return this.api.getDraftTableRowById(param.tableIdOrName, param.rowId, param.archived,  options).toPromise();
+        return this.api.getDraftTableRowById(param.rowId, param.tableIdOrName, param.archived,  options).toPromise();
     }
 
     /**
@@ -341,7 +437,7 @@ export class ObjectRowsApi {
      * @param param the request object
      */
     public getTableRowWithHttpInfo(param: RowsApiGetTableRowRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableRowV3>> {
-        return this.api.getTableRowWithHttpInfo(param.tableIdOrName, param.rowId, param.archived,  options).toPromise();
+        return this.api.getTableRowWithHttpInfo(param.rowId, param.tableIdOrName, param.archived,  options).toPromise();
     }
 
     /**
@@ -350,7 +446,7 @@ export class ObjectRowsApi {
      * @param param the request object
      */
     public getTableRow(param: RowsApiGetTableRowRequest, options?: ConfigurationOptions): Promise<HubDbTableRowV3> {
-        return this.api.getTableRow(param.tableIdOrName, param.rowId, param.archived,  options).toPromise();
+        return this.api.getTableRow(param.rowId, param.tableIdOrName, param.archived,  options).toPromise();
     }
 
     /**
@@ -359,7 +455,7 @@ export class ObjectRowsApi {
      * @param param the request object
      */
     public getTableRowsWithHttpInfo(param: RowsApiGetTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3>> {
-        return this.api.getTableRowsWithHttpInfo(param.tableIdOrName, param.sort, param.after, param.limit, param.properties, param.offset, param.archived,  options).toPromise();
+        return this.api.getTableRowsWithHttpInfo(param.tableIdOrName, param.after, param.archived, param.limit, param.offset, param.properties, param.sort,  options).toPromise();
     }
 
     /**
@@ -368,7 +464,7 @@ export class ObjectRowsApi {
      * @param param the request object
      */
     public getTableRows(param: RowsApiGetTableRowsRequest, options?: ConfigurationOptions): Promise<UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3> {
-        return this.api.getTableRows(param.tableIdOrName, param.sort, param.after, param.limit, param.properties, param.offset, param.archived,  options).toPromise();
+        return this.api.getTableRows(param.tableIdOrName, param.after, param.archived, param.limit, param.offset, param.properties, param.sort,  options).toPromise();
     }
 
     /**
@@ -377,7 +473,7 @@ export class ObjectRowsApi {
      * @param param the request object
      */
     public purgeDraftTableRowWithHttpInfo(param: RowsApiPurgeDraftTableRowRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.purgeDraftTableRowWithHttpInfo(param.tableIdOrName, param.rowId,  options).toPromise();
+        return this.api.purgeDraftTableRowWithHttpInfo(param.rowId, param.tableIdOrName,  options).toPromise();
     }
 
     /**
@@ -386,238 +482,24 @@ export class ObjectRowsApi {
      * @param param the request object
      */
     public purgeDraftTableRow(param: RowsApiPurgeDraftTableRowRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.purgeDraftTableRow(param.tableIdOrName, param.rowId,  options).toPromise();
+        return this.api.purgeDraftTableRow(param.rowId, param.tableIdOrName,  options).toPromise();
     }
 
     /**
-     * Returns rows in the draft version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
-     * Get rows from draft table
+     * Permanently delete rows from the draft version of a table, given a set of row IDs. Maximum of 100 row IDs per call.
+     * Delete rows
      * @param param the request object
      */
-    public readDraftTableRowsWithHttpInfo(param: RowsApiReadDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3>> {
-        return this.api.readDraftTableRowsWithHttpInfo(param.tableIdOrName, param.sort, param.after, param.limit, param.properties, param.offset, param.archived,  options).toPromise();
-    }
-
-    /**
-     * Returns rows in the draft version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
-     * Get rows from draft table
-     * @param param the request object
-     */
-    public readDraftTableRows(param: RowsApiReadDraftTableRowsRequest, options?: ConfigurationOptions): Promise<UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3> {
-        return this.api.readDraftTableRows(param.tableIdOrName, param.sort, param.after, param.limit, param.properties, param.offset, param.archived,  options).toPromise();
-    }
-
-    /**
-     * Replace a single row in the draft version of a table. All column values must be specified. If a column has a value in the target table and this request doesn\'t define that value, it will be deleted. See the \"Create a row\" endpoint for instructions on how to format the JSON row definitions.
-     * Replaces an existing row
-     * @param param the request object
-     */
-    public replaceDraftTableRowWithHttpInfo(param: RowsApiReplaceDraftTableRowRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableRowV3>> {
-        return this.api.replaceDraftTableRowWithHttpInfo(param.tableIdOrName, param.rowId, param.hubDbTableRowV3Request,  options).toPromise();
-    }
-
-    /**
-     * Replace a single row in the draft version of a table. All column values must be specified. If a column has a value in the target table and this request doesn\'t define that value, it will be deleted. See the \"Create a row\" endpoint for instructions on how to format the JSON row definitions.
-     * Replaces an existing row
-     * @param param the request object
-     */
-    public replaceDraftTableRow(param: RowsApiReplaceDraftTableRowRequest, options?: ConfigurationOptions): Promise<HubDbTableRowV3> {
-        return this.api.replaceDraftTableRow(param.tableIdOrName, param.rowId, param.hubDbTableRowV3Request,  options).toPromise();
-    }
-
-    /**
-     * Sparse updates a single row in the table\'s draft version. All the column values need not be specified. Only the columns or fields that needs to be modified can be specified. See the \"Create a row\" endpoint for instructions on how to format the JSON row definitions.
-     * Updates an existing row
-     * @param param the request object
-     */
-    public updateDraftTableRowWithHttpInfo(param: RowsApiUpdateDraftTableRowRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableRowV3>> {
-        return this.api.updateDraftTableRowWithHttpInfo(param.tableIdOrName, param.rowId, param.hubDbTableRowV3Request,  options).toPromise();
-    }
-
-    /**
-     * Sparse updates a single row in the table\'s draft version. All the column values need not be specified. Only the columns or fields that needs to be modified can be specified. See the \"Create a row\" endpoint for instructions on how to format the JSON row definitions.
-     * Updates an existing row
-     * @param param the request object
-     */
-    public updateDraftTableRow(param: RowsApiUpdateDraftTableRowRequest, options?: ConfigurationOptions): Promise<HubDbTableRowV3> {
-        return this.api.updateDraftTableRow(param.tableIdOrName, param.rowId, param.hubDbTableRowV3Request,  options).toPromise();
-    }
-
-}
-
-import { ObservableRowsBatchApi } from "./ObservableAPI";
-import { RowsBatchApiRequestFactory, RowsBatchApiResponseProcessor} from "../apis/RowsBatchApi";
-
-export interface RowsBatchApiCloneDraftTableRowsRequest {
-    /**
-     * The ID or name of the table
-     * Defaults to: undefined
-     * @type string
-     * @memberof RowsBatchApicloneDraftTableRows
-     */
-    tableIdOrName: string
-    /**
-     *
-     * @type BatchInputHubDbTableRowBatchCloneRequest
-     * @memberof RowsBatchApicloneDraftTableRows
-     */
-    batchInputHubDbTableRowBatchCloneRequest: BatchInputHubDbTableRowBatchCloneRequest
-}
-
-export interface RowsBatchApiCreateDraftTableRowsRequest {
-    /**
-     * The ID or name of the table
-     * Defaults to: undefined
-     * @type string
-     * @memberof RowsBatchApicreateDraftTableRows
-     */
-    tableIdOrName: string
-    /**
-     *
-     * @type BatchInputHubDbTableRowV3Request
-     * @memberof RowsBatchApicreateDraftTableRows
-     */
-    batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request
-}
-
-export interface RowsBatchApiPurgeDraftTableRowsRequest {
-    /**
-     * The ID or name of the table
-     * Defaults to: undefined
-     * @type string
-     * @memberof RowsBatchApipurgeDraftTableRows
-     */
-    tableIdOrName: string
-    /**
-     *
-     * @type BatchInputString
-     * @memberof RowsBatchApipurgeDraftTableRows
-     */
-    batchInputString: BatchInputString
-}
-
-export interface RowsBatchApiReadDraftTableRowsRequest {
-    /**
-     * The ID or name of the table
-     * Defaults to: undefined
-     * @type string
-     * @memberof RowsBatchApireadDraftTableRows
-     */
-    tableIdOrName: string
-    /**
-     *
-     * @type BatchInputString
-     * @memberof RowsBatchApireadDraftTableRows
-     */
-    batchInputString: BatchInputString
-}
-
-export interface RowsBatchApiReadTableRowsRequest {
-    /**
-     * The ID or name of the table to query.
-     * Defaults to: undefined
-     * @type string
-     * @memberof RowsBatchApireadTableRows
-     */
-    tableIdOrName: string
-    /**
-     *
-     * @type BatchInputString
-     * @memberof RowsBatchApireadTableRows
-     */
-    batchInputString: BatchInputString
-}
-
-export interface RowsBatchApiReplaceDraftTableRowsRequest {
-    /**
-     * The ID or name of the table
-     * Defaults to: undefined
-     * @type string
-     * @memberof RowsBatchApireplaceDraftTableRows
-     */
-    tableIdOrName: string
-    /**
-     *
-     * @type BatchInputHubDbTableRowV3BatchUpdateRequest
-     * @memberof RowsBatchApireplaceDraftTableRows
-     */
-    batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest
-}
-
-export interface RowsBatchApiUpdateDraftTableRowsRequest {
-    /**
-     * The ID or name of the table
-     * Defaults to: undefined
-     * @type string
-     * @memberof RowsBatchApiupdateDraftTableRows
-     */
-    tableIdOrName: string
-    /**
-     *
-     * @type BatchInputHubDbTableRowV3BatchUpdateRequest
-     * @memberof RowsBatchApiupdateDraftTableRows
-     */
-    batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest
-}
-
-export class ObjectRowsBatchApi {
-    private api: ObservableRowsBatchApi
-
-    public constructor(configuration: Configuration, requestFactory?: RowsBatchApiRequestFactory, responseProcessor?: RowsBatchApiResponseProcessor) {
-        this.api = new ObservableRowsBatchApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Clones rows in the draft version of the specified table, given a set of row ids. Maximum of 100 row ids per call.
-     * Clone rows in batch
-     * @param param the request object
-     */
-    public cloneDraftTableRowsWithHttpInfo(param: RowsBatchApiCloneDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseHubDbTableRowV3>> {
-        return this.api.cloneDraftTableRowsWithHttpInfo(param.tableIdOrName, param.batchInputHubDbTableRowBatchCloneRequest,  options).toPromise();
-    }
-
-    /**
-     * Clones rows in the draft version of the specified table, given a set of row ids. Maximum of 100 row ids per call.
-     * Clone rows in batch
-     * @param param the request object
-     */
-    public cloneDraftTableRows(param: RowsBatchApiCloneDraftTableRowsRequest, options?: ConfigurationOptions): Promise<BatchResponseHubDbTableRowV3> {
-        return this.api.cloneDraftTableRows(param.tableIdOrName, param.batchInputHubDbTableRowBatchCloneRequest,  options).toPromise();
-    }
-
-    /**
-     * Creates rows in the draft version of the specified table, given an array of row objects. Maximum of 100 row object per call. See the overview section for more details with an example.
-     * Create rows in batch
-     * @param param the request object
-     */
-    public createDraftTableRowsWithHttpInfo(param: RowsBatchApiCreateDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
-        return this.api.createDraftTableRowsWithHttpInfo(param.tableIdOrName, param.batchInputHubDbTableRowV3Request,  options).toPromise();
-    }
-
-    /**
-     * Creates rows in the draft version of the specified table, given an array of row objects. Maximum of 100 row object per call. See the overview section for more details with an example.
-     * Create rows in batch
-     * @param param the request object
-     */
-    public createDraftTableRows(param: RowsBatchApiCreateDraftTableRowsRequest, options?: ConfigurationOptions): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        return this.api.createDraftTableRows(param.tableIdOrName, param.batchInputHubDbTableRowV3Request,  options).toPromise();
-    }
-
-    /**
-     * Permanently deletes rows from the draft version of the table, given a set of row IDs. Maximum of 100 row IDs per call.
-     * Permanently deletes rows
-     * @param param the request object
-     */
-    public purgeDraftTableRowsWithHttpInfo(param: RowsBatchApiPurgeDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+    public purgeDraftTableRowsWithHttpInfo(param: RowsApiPurgeDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.purgeDraftTableRowsWithHttpInfo(param.tableIdOrName, param.batchInputString,  options).toPromise();
     }
 
     /**
-     * Permanently deletes rows from the draft version of the table, given a set of row IDs. Maximum of 100 row IDs per call.
-     * Permanently deletes rows
+     * Permanently delete rows from the draft version of a table, given a set of row IDs. Maximum of 100 row IDs per call.
+     * Delete rows
      * @param param the request object
      */
-    public purgeDraftTableRows(param: RowsBatchApiPurgeDraftTableRowsRequest, options?: ConfigurationOptions): Promise<void> {
+    public purgeDraftTableRows(param: RowsApiPurgeDraftTableRowsRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.purgeDraftTableRows(param.tableIdOrName, param.batchInputString,  options).toPromise();
     }
 
@@ -626,7 +508,7 @@ export class ObjectRowsBatchApi {
      * Get a set of rows from draft table
      * @param param the request object
      */
-    public readDraftTableRowsWithHttpInfo(param: RowsBatchApiReadDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
+    public readDraftTableRowsWithHttpInfo(param: RowsApiReadDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
         return this.api.readDraftTableRowsWithHttpInfo(param.tableIdOrName, param.batchInputString,  options).toPromise();
     }
 
@@ -635,7 +517,7 @@ export class ObjectRowsBatchApi {
      * Get a set of rows from draft table
      * @param param the request object
      */
-    public readDraftTableRows(param: RowsBatchApiReadDraftTableRowsRequest, options?: ConfigurationOptions): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+    public readDraftTableRows(param: RowsApiReadDraftTableRowsRequest, options?: ConfigurationOptions): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
         return this.api.readDraftTableRows(param.tableIdOrName, param.batchInputString,  options).toPromise();
     }
 
@@ -644,7 +526,7 @@ export class ObjectRowsBatchApi {
      * Get a set of rows
      * @param param the request object
      */
-    public readTableRowsWithHttpInfo(param: RowsBatchApiReadTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
+    public readTableRowsWithHttpInfo(param: RowsApiReadTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
         return this.api.readTableRowsWithHttpInfo(param.tableIdOrName, param.batchInputString,  options).toPromise();
     }
 
@@ -653,8 +535,26 @@ export class ObjectRowsBatchApi {
      * Get a set of rows
      * @param param the request object
      */
-    public readTableRows(param: RowsBatchApiReadTableRowsRequest, options?: ConfigurationOptions): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+    public readTableRows(param: RowsApiReadTableRowsRequest, options?: ConfigurationOptions): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
         return this.api.readTableRows(param.tableIdOrName, param.batchInputString,  options).toPromise();
+    }
+
+    /**
+     * Replace a single row in the draft version of a table. All column values must be specified. If a column has a value in the target table and this request doesn\'t define that value, it will be deleted. See the \"Create a row\" endpoint for instructions on how to format the JSON row definitions.
+     * Replace an existing row
+     * @param param the request object
+     */
+    public replaceDraftTableRowWithHttpInfo(param: RowsApiReplaceDraftTableRowRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableRowV3>> {
+        return this.api.replaceDraftTableRowWithHttpInfo(param.rowId, param.tableIdOrName, param.hubDbTableRowV3Request,  options).toPromise();
+    }
+
+    /**
+     * Replace a single row in the draft version of a table. All column values must be specified. If a column has a value in the target table and this request doesn\'t define that value, it will be deleted. See the \"Create a row\" endpoint for instructions on how to format the JSON row definitions.
+     * Replace an existing row
+     * @param param the request object
+     */
+    public replaceDraftTableRow(param: RowsApiReplaceDraftTableRowRequest, options?: ConfigurationOptions): Promise<HubDbTableRowV3> {
+        return this.api.replaceDraftTableRow(param.rowId, param.tableIdOrName, param.hubDbTableRowV3Request,  options).toPromise();
     }
 
     /**
@@ -662,7 +562,7 @@ export class ObjectRowsBatchApi {
      * Replace rows in batch in draft table
      * @param param the request object
      */
-    public replaceDraftTableRowsWithHttpInfo(param: RowsBatchApiReplaceDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
+    public replaceDraftTableRowsWithHttpInfo(param: RowsApiReplaceDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
         return this.api.replaceDraftTableRowsWithHttpInfo(param.tableIdOrName, param.batchInputHubDbTableRowV3BatchUpdateRequest,  options).toPromise();
     }
 
@@ -671,8 +571,26 @@ export class ObjectRowsBatchApi {
      * Replace rows in batch in draft table
      * @param param the request object
      */
-    public replaceDraftTableRows(param: RowsBatchApiReplaceDraftTableRowsRequest, options?: ConfigurationOptions): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+    public replaceDraftTableRows(param: RowsApiReplaceDraftTableRowsRequest, options?: ConfigurationOptions): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
         return this.api.replaceDraftTableRows(param.tableIdOrName, param.batchInputHubDbTableRowV3BatchUpdateRequest,  options).toPromise();
+    }
+
+    /**
+     * Partially update a single row in the table\'s draft version. All the column values need not be specified. Only the columns or fields that needs to be modified can be specified. See the \"Create a row\" endpoint for instructions on how to format the JSON row definitions.
+     * Update a row
+     * @param param the request object
+     */
+    public updateDraftTableRowWithHttpInfo(param: RowsApiUpdateDraftTableRowRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableRowV3>> {
+        return this.api.updateDraftTableRowWithHttpInfo(param.rowId, param.tableIdOrName, param.hubDbTableRowV3Request,  options).toPromise();
+    }
+
+    /**
+     * Partially update a single row in the table\'s draft version. All the column values need not be specified. Only the columns or fields that needs to be modified can be specified. See the \"Create a row\" endpoint for instructions on how to format the JSON row definitions.
+     * Update a row
+     * @param param the request object
+     */
+    public updateDraftTableRow(param: RowsApiUpdateDraftTableRowRequest, options?: ConfigurationOptions): Promise<HubDbTableRowV3> {
+        return this.api.updateDraftTableRow(param.rowId, param.tableIdOrName, param.hubDbTableRowV3Request,  options).toPromise();
     }
 
     /**
@@ -680,7 +598,7 @@ export class ObjectRowsBatchApi {
      * Update rows in batch in draft table
      * @param param the request object
      */
-    public updateDraftTableRowsWithHttpInfo(param: RowsBatchApiUpdateDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
+    public updateDraftTableRowsWithHttpInfo(param: RowsApiUpdateDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
         return this.api.updateDraftTableRowsWithHttpInfo(param.tableIdOrName, param.batchInputHubDbTableRowV3BatchUpdateRequest,  options).toPromise();
     }
 
@@ -689,7 +607,7 @@ export class ObjectRowsBatchApi {
      * Update rows in batch in draft table
      * @param param the request object
      */
-    public updateDraftTableRows(param: RowsBatchApiUpdateDraftTableRowsRequest, options?: ConfigurationOptions): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+    public updateDraftTableRows(param: RowsApiUpdateDraftTableRowsRequest, options?: ConfigurationOptions): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
         return this.api.updateDraftTableRows(param.tableIdOrName, param.batchInputHubDbTableRowV3BatchUpdateRequest,  options).toPromise();
     }
 
@@ -700,7 +618,7 @@ import { TablesApiRequestFactory, TablesApiResponseProcessor} from "../apis/Tabl
 
 export interface TablesApiArchiveTableRequest {
     /**
-     * The ID or name of the table to archive.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApiarchiveTable
@@ -710,14 +628,14 @@ export interface TablesApiArchiveTableRequest {
 
 export interface TablesApiCloneDraftTableRequest {
     /**
-     * The ID or name of the table to clone.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApicloneDraftTable
      */
     tableIdOrName: string
     /**
-     *
+     * 
      * @type HubDbTableCloneRequest
      * @memberof TablesApicloneDraftTable
      */
@@ -726,7 +644,7 @@ export interface TablesApiCloneDraftTableRequest {
 
 export interface TablesApiCreateTableRequest {
     /**
-     *
+     * 
      * @type HubDbTableV3Request
      * @memberof TablesApicreateTable
      */
@@ -735,14 +653,14 @@ export interface TablesApiCreateTableRequest {
 
 export interface TablesApiExportDraftTableRequest {
     /**
-     * The ID or name of the table to export.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApiexportDraftTable
      */
     tableIdOrName: string
     /**
-     * The file format to export. Possible values include &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;XLS&#x60;.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApiexportDraftTable
@@ -752,14 +670,14 @@ export interface TablesApiExportDraftTableRequest {
 
 export interface TablesApiExportTableRequest {
     /**
-     * The ID or name of the table to export.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApiexportTable
      */
     tableIdOrName: string
     /**
-     * The file format to export. Possible values include &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;XLS&#x60;.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApiexportTable
@@ -769,257 +687,257 @@ export interface TablesApiExportTableRequest {
 
 export interface TablesApiGetAllDraftTablesRequest {
     /**
-     * Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
-     * @memberof TablesApigetAllDraftTables
-     */
-    sort?: Array<string>
-    /**
-     * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * Defaults to: undefined
      * @type string
      * @memberof TablesApigetAllDraftTables
      */
     after?: string
     /**
-     * The maximum number of results to return. Default is 1000.
-     * Defaults to: undefined
-     * @type number
-     * @memberof TablesApigetAllDraftTables
-     */
-    limit?: number
-    /**
-     * Only return tables created at exactly the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof TablesApigetAllDraftTables
-     */
-    createdAt?: Date
-    /**
-     * Only return tables created after the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof TablesApigetAllDraftTables
-     */
-    createdAfter?: Date
-    /**
-     * Only return tables created before the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof TablesApigetAllDraftTables
-     */
-    createdBefore?: Date
-    /**
-     * Only return tables last updated at exactly the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof TablesApigetAllDraftTables
-     */
-    updatedAt?: Date
-    /**
-     * Only return tables last updated after the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof TablesApigetAllDraftTables
-     */
-    updatedAfter?: Date
-    /**
-     * Only return tables last updated before the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof TablesApigetAllDraftTables
-     */
-    updatedBefore?: Date
-    /**
-     *
-     * Defaults to: undefined
-     * @type string
-     * @memberof TablesApigetAllDraftTables
-     */
-    contentType?: string
-    /**
-     * Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
+     * Whether to return only results that have been archived.
      * Defaults to: undefined
      * @type boolean
      * @memberof TablesApigetAllDraftTables
      */
     archived?: boolean
     /**
-     *
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof TablesApigetAllDraftTables
+     */
+    contentType?: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof TablesApigetAllDraftTables
+     */
+    createdAfter?: Date
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof TablesApigetAllDraftTables
+     */
+    createdAt?: Date
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof TablesApigetAllDraftTables
+     */
+    createdBefore?: Date
+    /**
+     * 
      * Defaults to: undefined
      * @type boolean
      * @memberof TablesApigetAllDraftTables
      */
     isGetLocalizedSchema?: boolean
+    /**
+     * The maximum number of results to display per page.
+     * Defaults to: undefined
+     * @type number
+     * @memberof TablesApigetAllDraftTables
+     */
+    limit?: number
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof TablesApigetAllDraftTables
+     */
+    sort?: Array<string>
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof TablesApigetAllDraftTables
+     */
+    updatedAfter?: Date
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof TablesApigetAllDraftTables
+     */
+    updatedAt?: Date
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof TablesApigetAllDraftTables
+     */
+    updatedBefore?: Date
 }
 
 export interface TablesApiGetAllTablesRequest {
     /**
-     * Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
-     * @memberof TablesApigetAllTables
-     */
-    sort?: Array<string>
-    /**
-     * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * Defaults to: undefined
      * @type string
      * @memberof TablesApigetAllTables
      */
     after?: string
     /**
-     * The maximum number of results to return. Default is 1000.
+     * Whether to return only results that have been archived.
      * Defaults to: undefined
-     * @type number
+     * @type boolean
      * @memberof TablesApigetAllTables
      */
-    limit?: number
+    archived?: boolean
     /**
-     * Only return tables created at exactly the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof TablesApigetAllTables
-     */
-    createdAt?: Date
-    /**
-     * Only return tables created after the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof TablesApigetAllTables
-     */
-    createdAfter?: Date
-    /**
-     * Only return tables created before the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof TablesApigetAllTables
-     */
-    createdBefore?: Date
-    /**
-     * Only return tables last updated at exactly the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof TablesApigetAllTables
-     */
-    updatedAt?: Date
-    /**
-     * Only return tables last updated after the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof TablesApigetAllTables
-     */
-    updatedAfter?: Date
-    /**
-     * Only return tables last updated before the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof TablesApigetAllTables
-     */
-    updatedBefore?: Date
-    /**
-     *
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApigetAllTables
      */
     contentType?: string
     /**
-     * Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
+     * 
      * Defaults to: undefined
-     * @type boolean
+     * @type Date
      * @memberof TablesApigetAllTables
      */
-    archived?: boolean
+    createdAfter?: Date
     /**
-     *
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof TablesApigetAllTables
+     */
+    createdAt?: Date
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof TablesApigetAllTables
+     */
+    createdBefore?: Date
+    /**
+     * 
      * Defaults to: undefined
      * @type boolean
      * @memberof TablesApigetAllTables
      */
     isGetLocalizedSchema?: boolean
+    /**
+     * The maximum number of results to display per page.
+     * Defaults to: undefined
+     * @type number
+     * @memberof TablesApigetAllTables
+     */
+    limit?: number
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof TablesApigetAllTables
+     */
+    sort?: Array<string>
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof TablesApigetAllTables
+     */
+    updatedAfter?: Date
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof TablesApigetAllTables
+     */
+    updatedAt?: Date
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof TablesApigetAllTables
+     */
+    updatedBefore?: Date
 }
 
 export interface TablesApiGetDraftTableDetailsByIdRequest {
     /**
-     * The ID or name of the table to return.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApigetDraftTableDetailsById
      */
     tableIdOrName: string
     /**
-     *
-     * Defaults to: undefined
-     * @type boolean
-     * @memberof TablesApigetDraftTableDetailsById
-     */
-    isGetLocalizedSchema?: boolean
-    /**
-     * Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
+     * Whether to return only results that have been archived.
      * Defaults to: undefined
      * @type boolean
      * @memberof TablesApigetDraftTableDetailsById
      */
     archived?: boolean
     /**
-     * Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * 
      * Defaults to: undefined
      * @type boolean
      * @memberof TablesApigetDraftTableDetailsById
      */
     includeForeignIds?: boolean
+    /**
+     * 
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof TablesApigetDraftTableDetailsById
+     */
+    isGetLocalizedSchema?: boolean
 }
 
 export interface TablesApiGetTableDetailsRequest {
     /**
-     * The ID or name of the table to return.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApigetTableDetails
      */
     tableIdOrName: string
     /**
-     *
-     * Defaults to: undefined
-     * @type boolean
-     * @memberof TablesApigetTableDetails
-     */
-    isGetLocalizedSchema?: boolean
-    /**
-     * Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
+     * Whether to return only results that have been archived.
      * Defaults to: undefined
      * @type boolean
      * @memberof TablesApigetTableDetails
      */
     archived?: boolean
     /**
-     * Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * 
      * Defaults to: undefined
      * @type boolean
      * @memberof TablesApigetTableDetails
      */
     includeForeignIds?: boolean
+    /**
+     * 
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof TablesApigetTableDetails
+     */
+    isGetLocalizedSchema?: boolean
 }
 
 export interface TablesApiImportDraftTableRequest {
     /**
-     * The ID of the destination table where data will be imported.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApiimportDraftTable
      */
     tableIdOrName: string
     /**
-     *
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApiimportDraftTable
      */
     config?: string
     /**
-     *
+     * 
      * Defaults to: undefined
      * @type HttpFile
      * @memberof TablesApiimportDraftTable
@@ -1029,14 +947,14 @@ export interface TablesApiImportDraftTableRequest {
 
 export interface TablesApiPublishDraftTableRequest {
     /**
-     * The ID or name of the table to publish.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApipublishDraftTable
      */
     tableIdOrName: string
     /**
-     * Set this to &#x60;true&#x60; to populate foreign ID values in the response.
+     * 
      * Defaults to: undefined
      * @type boolean
      * @memberof TablesApipublishDraftTable
@@ -1044,16 +962,68 @@ export interface TablesApiPublishDraftTableRequest {
     includeForeignIds?: boolean
 }
 
+export interface TablesApiReadDraftTableRowsRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof TablesApireadDraftTableRows
+     */
+    tableIdOrName: string
+    /**
+     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
+     * @type string
+     * @memberof TablesApireadDraftTableRows
+     */
+    after?: string
+    /**
+     * Whether to return only results that have been archived.
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof TablesApireadDraftTableRows
+     */
+    archived?: boolean
+    /**
+     * The maximum number of results to display per page.
+     * Defaults to: undefined
+     * @type number
+     * @memberof TablesApireadDraftTableRows
+     */
+    limit?: number
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof TablesApireadDraftTableRows
+     */
+    offset?: number
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof TablesApireadDraftTableRows
+     */
+    properties?: Array<string>
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof TablesApireadDraftTableRows
+     */
+    sort?: Array<string>
+}
+
 export interface TablesApiRemoveTableVersionRequest {
     /**
-     *
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApiremoveTableVersion
      */
     tableIdOrName: string
     /**
-     *
+     * 
      * Defaults to: undefined
      * @type number
      * @memberof TablesApiremoveTableVersion
@@ -1063,14 +1033,14 @@ export interface TablesApiRemoveTableVersionRequest {
 
 export interface TablesApiResetDraftTableRequest {
     /**
-     * The ID or name of the table to reset.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApiresetDraftTable
      */
     tableIdOrName: string
     /**
-     * Set this to &#x60;true&#x60; to populate foreign ID values in the response.
+     * 
      * Defaults to: undefined
      * @type boolean
      * @memberof TablesApiresetDraftTable
@@ -1080,14 +1050,14 @@ export interface TablesApiResetDraftTableRequest {
 
 export interface TablesApiUnpublishTableRequest {
     /**
-     * The ID or name of the table to publish.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApiunpublishTable
      */
     tableIdOrName: string
     /**
-     * Set this to &#x60;true&#x60; to populate foreign ID values in the response.
+     * 
      * Defaults to: undefined
      * @type boolean
      * @memberof TablesApiunpublishTable
@@ -1097,39 +1067,39 @@ export interface TablesApiUnpublishTableRequest {
 
 export interface TablesApiUpdateDraftTableRequest {
     /**
-     * The ID or name of the table to update.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof TablesApiupdateDraftTable
      */
     tableIdOrName: string
     /**
-     *
+     * 
      * @type HubDbTableV3Request
      * @memberof TablesApiupdateDraftTable
      */
     hubDbTableV3Request: HubDbTableV3Request
     /**
-     *
-     * Defaults to: undefined
-     * @type boolean
-     * @memberof TablesApiupdateDraftTable
-     */
-    isGetLocalizedSchema?: boolean
-    /**
-     * Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
+     * Whether to return only results that have been archived.
      * Defaults to: undefined
      * @type boolean
      * @memberof TablesApiupdateDraftTable
      */
     archived?: boolean
     /**
-     * Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * 
      * Defaults to: undefined
      * @type boolean
      * @memberof TablesApiupdateDraftTable
      */
     includeForeignIds?: boolean
+    /**
+     * 
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof TablesApiupdateDraftTable
+     */
+    isGetLocalizedSchema?: boolean
 }
 
 export class ObjectTablesApi {
@@ -1177,7 +1147,7 @@ export class ObjectTablesApi {
 
     /**
      * Creates a new draft HubDB table given a JSON schema. The table name and label should be unique for each account.
-     * Create a new table
+     * Create a table
      * @param param the request object
      */
     public createTableWithHttpInfo(param: TablesApiCreateTableRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableV3>> {
@@ -1186,7 +1156,7 @@ export class ObjectTablesApi {
 
     /**
      * Creates a new draft HubDB table given a JSON schema. The table name and label should be unique for each account.
-     * Create a new table
+     * Create a table
      * @param param the request object
      */
     public createTable(param: TablesApiCreateTableRequest, options?: ConfigurationOptions): Promise<HubDbTableV3> {
@@ -1234,8 +1204,8 @@ export class ObjectTablesApi {
      * Return all draft tables
      * @param param the request object
      */
-    public getAllDraftTablesWithHttpInfo(param: TablesApiGetAllDraftTablesRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalHubDbTableV3ForwardPaging>> {
-        return this.api.getAllDraftTablesWithHttpInfo(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.contentType, param.archived, param.isGetLocalizedSchema,  options).toPromise();
+    public getAllDraftTablesWithHttpInfo(param: TablesApiGetAllDraftTablesRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalHubDbTableV3>> {
+        return this.api.getAllDraftTablesWithHttpInfo(param.after, param.archived, param.contentType, param.createdAfter, param.createdAt, param.createdBefore, param.isGetLocalizedSchema, param.limit, param.sort, param.updatedAfter, param.updatedAt, param.updatedBefore,  options).toPromise();
     }
 
     /**
@@ -1243,8 +1213,8 @@ export class ObjectTablesApi {
      * Return all draft tables
      * @param param the request object
      */
-    public getAllDraftTables(param: TablesApiGetAllDraftTablesRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
-        return this.api.getAllDraftTables(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.contentType, param.archived, param.isGetLocalizedSchema,  options).toPromise();
+    public getAllDraftTables(param: TablesApiGetAllDraftTablesRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalHubDbTableV3> {
+        return this.api.getAllDraftTables(param.after, param.archived, param.contentType, param.createdAfter, param.createdAt, param.createdBefore, param.isGetLocalizedSchema, param.limit, param.sort, param.updatedAfter, param.updatedAt, param.updatedBefore,  options).toPromise();
     }
 
     /**
@@ -1252,8 +1222,8 @@ export class ObjectTablesApi {
      * Get all published tables
      * @param param the request object
      */
-    public getAllTablesWithHttpInfo(param: TablesApiGetAllTablesRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalHubDbTableV3ForwardPaging>> {
-        return this.api.getAllTablesWithHttpInfo(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.contentType, param.archived, param.isGetLocalizedSchema,  options).toPromise();
+    public getAllTablesWithHttpInfo(param: TablesApiGetAllTablesRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalHubDbTableV3>> {
+        return this.api.getAllTablesWithHttpInfo(param.after, param.archived, param.contentType, param.createdAfter, param.createdAt, param.createdBefore, param.isGetLocalizedSchema, param.limit, param.sort, param.updatedAfter, param.updatedAt, param.updatedBefore,  options).toPromise();
     }
 
     /**
@@ -1261,8 +1231,8 @@ export class ObjectTablesApi {
      * Get all published tables
      * @param param the request object
      */
-    public getAllTables(param: TablesApiGetAllTablesRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
-        return this.api.getAllTables(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.contentType, param.archived, param.isGetLocalizedSchema,  options).toPromise();
+    public getAllTables(param: TablesApiGetAllTablesRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalHubDbTableV3> {
+        return this.api.getAllTables(param.after, param.archived, param.contentType, param.createdAfter, param.createdAt, param.createdBefore, param.isGetLocalizedSchema, param.limit, param.sort, param.updatedAfter, param.updatedAt, param.updatedBefore,  options).toPromise();
     }
 
     /**
@@ -1271,7 +1241,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getDraftTableDetailsByIdWithHttpInfo(param: TablesApiGetDraftTableDetailsByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableV3>> {
-        return this.api.getDraftTableDetailsByIdWithHttpInfo(param.tableIdOrName, param.isGetLocalizedSchema, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.getDraftTableDetailsByIdWithHttpInfo(param.tableIdOrName, param.archived, param.includeForeignIds, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1280,7 +1250,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getDraftTableDetailsById(param: TablesApiGetDraftTableDetailsByIdRequest, options?: ConfigurationOptions): Promise<HubDbTableV3> {
-        return this.api.getDraftTableDetailsById(param.tableIdOrName, param.isGetLocalizedSchema, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.getDraftTableDetailsById(param.tableIdOrName, param.archived, param.includeForeignIds, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1289,7 +1259,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getTableDetailsWithHttpInfo(param: TablesApiGetTableDetailsRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableV3>> {
-        return this.api.getTableDetailsWithHttpInfo(param.tableIdOrName, param.isGetLocalizedSchema, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.getTableDetailsWithHttpInfo(param.tableIdOrName, param.archived, param.includeForeignIds, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1298,7 +1268,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getTableDetails(param: TablesApiGetTableDetailsRequest, options?: ConfigurationOptions): Promise<HubDbTableV3> {
-        return this.api.getTableDetails(param.tableIdOrName, param.isGetLocalizedSchema, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.getTableDetails(param.tableIdOrName, param.archived, param.includeForeignIds, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1338,6 +1308,24 @@ export class ObjectTablesApi {
     }
 
     /**
+     * Returns rows in the draft version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
+     * Get rows from draft table
+     * @param param the request object
+     */
+    public readDraftTableRowsWithHttpInfo(param: TablesApiReadDraftTableRowsRequest, options?: ConfigurationOptions): Promise<HttpInfo<UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3>> {
+        return this.api.readDraftTableRowsWithHttpInfo(param.tableIdOrName, param.after, param.archived, param.limit, param.offset, param.properties, param.sort,  options).toPromise();
+    }
+
+    /**
+     * Returns rows in the draft version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
+     * Get rows from draft table
+     * @param param the request object
+     */
+    public readDraftTableRows(param: TablesApiReadDraftTableRowsRequest, options?: ConfigurationOptions): Promise<UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3> {
+        return this.api.readDraftTableRows(param.tableIdOrName, param.after, param.archived, param.limit, param.offset, param.properties, param.sort,  options).toPromise();
+    }
+
+    /**
      * Delete a specific version of a table
      * Delete a table version
      * @param param the request object
@@ -1357,7 +1345,7 @@ export class ObjectTablesApi {
 
     /**
      * Replaces the data in the draft version of the table with values from the published version. Any unpublished changes in the draft will be lost after this call is made.
-     * Reset a draft table
+     * Reset a table draft
      * @param param the request object
      */
     public resetDraftTableWithHttpInfo(param: TablesApiResetDraftTableRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableV3>> {
@@ -1366,7 +1354,7 @@ export class ObjectTablesApi {
 
     /**
      * Replaces the data in the draft version of the table with values from the published version. Any unpublished changes in the draft will be lost after this call is made.
-     * Reset a draft table
+     * Reset a table draft
      * @param param the request object
      */
     public resetDraftTable(param: TablesApiResetDraftTableRequest, options?: ConfigurationOptions): Promise<HubDbTableV3> {
@@ -1397,7 +1385,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public updateDraftTableWithHttpInfo(param: TablesApiUpdateDraftTableRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableV3>> {
-        return this.api.updateDraftTableWithHttpInfo(param.tableIdOrName, param.hubDbTableV3Request, param.isGetLocalizedSchema, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.updateDraftTableWithHttpInfo(param.tableIdOrName, param.hubDbTableV3Request, param.archived, param.includeForeignIds, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1406,7 +1394,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public updateDraftTable(param: TablesApiUpdateDraftTableRequest, options?: ConfigurationOptions): Promise<HubDbTableV3> {
-        return this.api.updateDraftTable(param.tableIdOrName, param.hubDbTableV3Request, param.isGetLocalizedSchema, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.updateDraftTable(param.tableIdOrName, param.hubDbTableV3Request, param.archived, param.includeForeignIds, param.isGetLocalizedSchema,  options).toPromise();
     }
 
 }

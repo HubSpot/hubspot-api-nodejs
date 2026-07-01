@@ -12,7 +12,7 @@ import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchRespon
 import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
 import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObject } from '../models/CollectionResponseWithTotalSimplePublicObject';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
@@ -33,8 +33,6 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Move an Object identified by `{postalMailId}` to the recycling bin.
-     * Archive
      * @param postalMailId
      */
     public archiveWithHttpInfo(postalMailId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
@@ -55,8 +53,6 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Move an Object identified by `{postalMailId}` to the recycling bin.
-     * Archive
      * @param postalMailId
      */
     public archive(postalMailId: string, _options?: PromiseConfigurationOptions): Promise<void> {
@@ -77,8 +73,6 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Create a postal mail with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard postal mail is provided.
-     * Create
      * @param simplePublicObjectInputForCreate
      */
     public createWithHttpInfo(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObject>> {
@@ -99,8 +93,6 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Create a postal mail with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard postal mail is provided.
-     * Create
      * @param simplePublicObjectInputForCreate
      */
     public create(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: PromiseConfigurationOptions): Promise<SimplePublicObject> {
@@ -121,16 +113,14 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Read an Object identified by `{postalMailId}`. `{postalMailId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
-     * Read
      * @param postalMailId
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param [idProperty] The name of a property whose values are unique for this object type
      * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param [archived] Whether to return only results that have been archived.
-     * @param [idProperty] The name of a property whose values are unique for this object
      */
-    public getByIdWithHttpInfo(postalMailId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
+    public getByIdWithHttpInfo(postalMailId: string, archived?: boolean, associations?: Array<string>, idProperty?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -143,21 +133,19 @@ export class PromiseBasicApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getByIdWithHttpInfo(postalMailId, properties, propertiesWithHistory, associations, archived, idProperty, observableOptions);
+        const result = this.api.getByIdWithHttpInfo(postalMailId, archived, associations, idProperty, properties, propertiesWithHistory, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Read an Object identified by `{postalMailId}`. `{postalMailId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
-     * Read
      * @param postalMailId
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param [idProperty] The name of a property whose values are unique for this object type
      * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param [archived] Whether to return only results that have been archived.
-     * @param [idProperty] The name of a property whose values are unique for this object
      */
-    public getById(postalMailId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<SimplePublicObjectWithAssociations> {
+    public getById(postalMailId: string, archived?: boolean, associations?: Array<string>, idProperty?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, _options?: PromiseConfigurationOptions): Promise<SimplePublicObjectWithAssociations> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -170,21 +158,19 @@ export class PromiseBasicApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getById(postalMailId, properties, propertiesWithHistory, associations, archived, idProperty, observableOptions);
+        const result = this.api.getById(postalMailId, archived, associations, idProperty, properties, propertiesWithHistory, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Read a page of postal mail. Control what is returned via the `properties` query param.
-     * List
-     * @param [limit] The maximum number of results to display per page.
      * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param [limit] The maximum number of results to display per page.
      * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
-     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param [archived] Whether to return only results that have been archived.
      */
-    public getPageWithHttpInfo(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>> {
+    public getPageWithHttpInfo(after?: string, archived?: boolean, associations?: Array<string>, limit?: number, properties?: Array<string>, propertiesWithHistory?: Array<string>, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -197,21 +183,19 @@ export class PromiseBasicApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getPageWithHttpInfo(limit, after, properties, propertiesWithHistory, associations, archived, observableOptions);
+        const result = this.api.getPageWithHttpInfo(after, archived, associations, limit, properties, propertiesWithHistory, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Read a page of postal mail. Control what is returned via the `properties` query param.
-     * List
-     * @param [limit] The maximum number of results to display per page.
      * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param [limit] The maximum number of results to display per page.
      * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
-     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param [archived] Whether to return only results that have been archived.
      */
-    public getPage(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
+    public getPage(after?: string, archived?: boolean, associations?: Array<string>, limit?: number, properties?: Array<string>, propertiesWithHistory?: Array<string>, _options?: PromiseConfigurationOptions): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -224,16 +208,14 @@ export class PromiseBasicApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getPage(limit, after, properties, propertiesWithHistory, associations, archived, observableOptions);
+        const result = this.api.getPage(after, archived, associations, limit, properties, propertiesWithHistory, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Perform a partial update of an Object identified by `{postalMailId}`or optionally a unique property value as specified by the `idProperty` query param. `{postalMailId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
-     * Update
      * @param postalMailId
      * @param simplePublicObjectInput
-     * @param [idProperty] The name of a property whose values are unique for this object
+     * @param [idProperty] The name of a property whose values are unique for this object type
      */
     public updateWithHttpInfo(postalMailId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObject>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -253,11 +235,9 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Perform a partial update of an Object identified by `{postalMailId}`or optionally a unique property value as specified by the `idProperty` query param. `{postalMailId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
-     * Update
      * @param postalMailId
      * @param simplePublicObjectInput
-     * @param [idProperty] The name of a property whose values are unique for this object
+     * @param [idProperty] The name of a property whose values are unique for this object type
      */
     public update(postalMailId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<SimplePublicObject> {
         let observableOptions: undefined | ConfigurationOptions
@@ -296,7 +276,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Archive a batch of postal mail by ID
      * @param batchInputSimplePublicObjectId
      */
     public archiveWithHttpInfo(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
@@ -317,7 +296,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Archive a batch of postal mail by ID
      * @param batchInputSimplePublicObjectId
      */
     public archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: PromiseConfigurationOptions): Promise<void> {
@@ -338,7 +316,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Create a batch of postal mail
      * @param batchInputSimplePublicObjectBatchInputForCreate
      */
     public createWithHttpInfo(batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
@@ -359,7 +336,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Create a batch of postal mail
      * @param batchInputSimplePublicObjectBatchInputForCreate
      */
     public create(batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate, _options?: PromiseConfigurationOptions): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
@@ -380,8 +356,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Retrieve records by record ID or include the `idProperty` parameter to retrieve records by a custom unique value property. 
-     * Read a batch of postal mail by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId
      * @param [archived] Whether to return only results that have been archived.
      */
@@ -403,8 +377,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Retrieve records by record ID or include the `idProperty` parameter to retrieve records by a custom unique value property. 
-     * Read a batch of postal mail by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId
      * @param [archived] Whether to return only results that have been archived.
      */
@@ -426,7 +398,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Update a batch of postal mail by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput
      */
     public updateWithHttpInfo(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
@@ -447,7 +418,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Update a batch of postal mail by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput
      */
     public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: PromiseConfigurationOptions): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
@@ -468,8 +438,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
-     * Create or update a batch of postal mail by unique property values
      * @param batchInputSimplePublicObjectBatchInputUpsert
      */
     public upsertWithHttpInfo(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject>> {
@@ -490,8 +458,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
-     * Create or update a batch of postal mail by unique property values
      * @param batchInputSimplePublicObjectBatchInputUpsert
      */
     public upsert(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: PromiseConfigurationOptions): Promise<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject> {
@@ -533,7 +499,7 @@ export class PromiseSearchApi {
     /**
      * @param publicObjectSearchRequest
      */
-    public doSearchWithHttpInfo(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>> {
+    public doSearchWithHttpInfo(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObject>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -553,7 +519,7 @@ export class PromiseSearchApi {
     /**
      * @param publicObjectSearchRequest
      */
-    public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
+    public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObject> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {

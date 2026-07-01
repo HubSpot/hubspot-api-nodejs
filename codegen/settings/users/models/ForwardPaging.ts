@@ -1,6 +1,6 @@
 /**
  * User Provisioning
- * Add, manage, and remove users from your account
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 

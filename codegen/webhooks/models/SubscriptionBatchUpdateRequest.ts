@@ -11,8 +11,17 @@
  */
 
 
+/**
+* Updated settings for a webhook subscription in a batch update operation.
+*/
 export class SubscriptionBatchUpdateRequest {
+    /**
+    * Whether to activate or pause the webhook subscription. If true, the subscription will send webhook notifications. If false, the subscription is paused and will not send notifications. It is a boolean.
+    */
     'active': boolean;
+    /**
+    * The ID of the webhook subscription to update. It is an integer.
+    */
     'id': number;
 
     static readonly discriminator: string | undefined = undefined;

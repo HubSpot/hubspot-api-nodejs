@@ -16,19 +16,20 @@ import { BlogAuthor } from '../models/BlogAuthor';
 * Request body object for cloning blog authors.
 */
 export class BlogAuthorCloneRequestVNext {
-    /**
-    * Language of newly cloned object.
-    */
-    'language'?: string;
+    'blogAuthor': BlogAuthor;
     /**
     * ID of the object to be cloned.
     */
     'id': string;
     /**
+    * Language of newly cloned object.
+    */
+    'language'?: string;
+    /**
     * Primary language in multi-language group.
     */
     'primaryLanguage'?: string;
-    'blogAuthor': BlogAuthor;
+    'usePublished'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -36,14 +37,20 @@ export class BlogAuthorCloneRequestVNext {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "language",
-            "baseName": "language",
-            "type": "string",
+            "name": "blogAuthor",
+            "baseName": "blogAuthor",
+            "type": "BlogAuthor",
             "format": ""
         },
         {
             "name": "id",
             "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "language",
+            "baseName": "language",
             "type": "string",
             "format": ""
         },
@@ -54,9 +61,9 @@ export class BlogAuthorCloneRequestVNext {
             "format": ""
         },
         {
-            "name": "blogAuthor",
-            "baseName": "blogAuthor",
-            "type": "BlogAuthor",
+            "name": "usePublished",
+            "baseName": "usePublished",
+            "type": "boolean",
             "format": ""
         }    ];
 

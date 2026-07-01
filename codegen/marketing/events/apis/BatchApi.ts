@@ -249,11 +249,8 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to archiveByObjectId
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archiveByObjectIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
+     public async archiveByObjectIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo< void>> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("204", response.httpStatusCode)) {
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
-        }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -264,11 +261,7 @@ export class BatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: void = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "void", ""
-            ) as void;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

@@ -12,15 +12,42 @@
 
 import { ErrorDetail } from '../models/ErrorDetail';
 
+/**
+* Represents a standard error response in the HubSpot API, providing detailed information about an error that occurred during an API request.
+*/
 export class StandardError {
-    'subCategory'?: any;
-    'context': { [key: string]: Array<string>; };
-    'links': { [key: string]: string; };
-    'id'?: string;
+    /**
+    * A string denoting the category of the error.
+    */
     'category': string;
-    'message': string;
+    /**
+    * An object containing context about the error condition, with additional properties as arrays of strings.
+    */
+    'context': { [key: string]: Array<string>; };
+    /**
+    * An array of ErrorDetail objects, each providing further information about individual errors.
+    */
     'errors': Array<ErrorDetail>;
+    /**
+    * A string representing the unique identifier for the error.
+    */
+    'id'?: string;
+    /**
+    * An object mapping link names to associated URIs, which contain documentation about the error or recommended remediation steps.
+    */
+    'links': { [key: string]: string; };
+    /**
+    * A string containing a human-readable message that describes the error.
+    */
+    'message': string;
+    /**
+    * A string indicating the status of the error.
+    */
     'status': string;
+    /**
+    * An object providing additional, more specific categorization of the error.
+    */
+    'subCategory'?: any;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,9 +55,9 @@ export class StandardError {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "subCategory",
-            "baseName": "subCategory",
-            "type": "any",
+            "name": "category",
+            "baseName": "category",
+            "type": "string",
             "format": ""
         },
         {
@@ -40,9 +67,9 @@ export class StandardError {
             "format": ""
         },
         {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<ErrorDetail>",
             "format": ""
         },
         {
@@ -52,9 +79,9 @@ export class StandardError {
             "format": ""
         },
         {
-            "name": "category",
-            "baseName": "category",
-            "type": "string",
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
@@ -64,15 +91,15 @@ export class StandardError {
             "format": ""
         },
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<ErrorDetail>",
-            "format": ""
-        },
-        {
             "name": "status",
             "baseName": "status",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "subCategory",
+            "baseName": "subCategory",
+            "type": "any",
             "format": ""
         }    ];
 

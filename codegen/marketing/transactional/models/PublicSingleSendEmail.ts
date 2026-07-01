@@ -11,30 +11,27 @@
  */
 
 
-/**
-* A JSON object containing anything you want to override.
-*/
 export class PublicSingleSendEmail {
-    /**
-    * List of email addresses to send as Cc.
-    */
-    'cc'?: Array<string>;
-    /**
-    * ID for a particular send. No more than one email will be sent per sendId.
-    */
-    'sendId'?: string;
     /**
     * List of email addresses to send as Bcc.
     */
     'bcc'?: Array<string>;
     /**
-    * List of Reply-To header values for the email.
+    * List of email addresses to send as Cc.
     */
-    'replyTo'?: Array<string>;
+    'cc'?: Array<string>;
     /**
     * The From header for the email.
     */
     '_from'?: string;
+    /**
+    * List of Reply-To header values for the email.
+    */
+    'replyTo'?: Array<string>;
+    /**
+    * ID for a particular send. No more than one email will be sent per sendId.
+    */
+    'sendId'?: string;
     /**
     * The recipient of the email.
     */
@@ -46,21 +43,21 @@ export class PublicSingleSendEmail {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "bcc",
+            "baseName": "bcc",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
             "name": "cc",
             "baseName": "cc",
             "type": "Array<string>",
             "format": ""
         },
         {
-            "name": "sendId",
-            "baseName": "sendId",
+            "name": "_from",
+            "baseName": "from",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "bcc",
-            "baseName": "bcc",
-            "type": "Array<string>",
             "format": ""
         },
         {
@@ -70,8 +67,8 @@ export class PublicSingleSendEmail {
             "format": ""
         },
         {
-            "name": "_from",
-            "baseName": "from",
+            "name": "sendId",
+            "baseName": "sendId",
             "type": "string",
             "format": ""
         },

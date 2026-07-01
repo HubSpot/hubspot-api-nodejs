@@ -10,18 +10,40 @@
  * Do not edit the class manually.
  */
 
-import { PublicTimePointOperationTimePoint } from '../models/PublicTimePointOperationTimePoint';
+import { PublicRangedTimeOperationLowerBoundTimePoint } from '../models/PublicRangedTimeOperationLowerBoundTimePoint';
+import { PublicRangedTimeOperationUpperBoundTimePoint } from '../models/PublicRangedTimeOperationUpperBoundTimePoint';
 
 export class PublicRangedTimeOperation {
-    'upperBoundEndpointBehavior'?: string;
+    /**
+    * Indicates whether objects with no value set for the property should be included in the operation.
+    */
     'includeObjectsWithNoValueSet': boolean;
-    'upperBoundTimePoint': PublicTimePointOperationTimePoint;
-    'propertyParser'?: string;
-    'operationType': string;
-    'type': PublicRangedTimeOperationTypeEnum;
+    /**
+    * Describes the behavior at the lower bound endpoint of the time range.
+    */
     'lowerBoundEndpointBehavior'?: string;
+    'lowerBoundTimePoint': PublicRangedTimeOperationLowerBoundTimePoint;
+    /**
+    * Specifies the type of operation (TIME_RANGED).
+    */
+    'operationType': string;
+    /**
+    * Defines the operation to be applied within the time range (IS_BETWEEN, IS_NOT_BETWEEN).
+    */
     'operator': string;
-    'lowerBoundTimePoint': PublicTimePointOperationTimePoint;
+    /**
+    * Specifies the parser used for the property in the operation.
+    */
+    'propertyParser'?: string;
+    /**
+    * Specifies the type of operation (TIME_RANGED).
+    */
+    'type': PublicRangedTimeOperationTypeEnum;
+    /**
+    * Describes the behavior at the upper bound endpoint of the time range.
+    */
+    'upperBoundEndpointBehavior'?: string;
+    'upperBoundTimePoint': PublicRangedTimeOperationUpperBoundTimePoint;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -29,44 +51,26 @@ export class PublicRangedTimeOperation {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "upperBoundEndpointBehavior",
-            "baseName": "upperBoundEndpointBehavior",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "includeObjectsWithNoValueSet",
             "baseName": "includeObjectsWithNoValueSet",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "upperBoundTimePoint",
-            "baseName": "upperBoundTimePoint",
-            "type": "PublicTimePointOperationTimePoint",
+            "name": "lowerBoundEndpointBehavior",
+            "baseName": "lowerBoundEndpointBehavior",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "propertyParser",
-            "baseName": "propertyParser",
-            "type": "string",
+            "name": "lowerBoundTimePoint",
+            "baseName": "lowerBoundTimePoint",
+            "type": "PublicRangedTimeOperationLowerBoundTimePoint",
             "format": ""
         },
         {
             "name": "operationType",
             "baseName": "operationType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "PublicRangedTimeOperationTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "lowerBoundEndpointBehavior",
-            "baseName": "lowerBoundEndpointBehavior",
             "type": "string",
             "format": ""
         },
@@ -77,9 +81,27 @@ export class PublicRangedTimeOperation {
             "format": ""
         },
         {
-            "name": "lowerBoundTimePoint",
-            "baseName": "lowerBoundTimePoint",
-            "type": "PublicTimePointOperationTimePoint",
+            "name": "propertyParser",
+            "baseName": "propertyParser",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "PublicRangedTimeOperationTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "upperBoundEndpointBehavior",
+            "baseName": "upperBoundEndpointBehavior",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "upperBoundTimePoint",
+            "baseName": "upperBoundTimePoint",
+            "type": "PublicRangedTimeOperationUpperBoundTimePoint",
             "format": ""
         }    ];
 

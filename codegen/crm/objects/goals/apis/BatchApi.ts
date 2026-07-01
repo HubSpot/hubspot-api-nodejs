@@ -24,6 +24,7 @@ import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/Batch
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive multiple goal targets in a single batch operation using their IDs.
      * Archive a batch of goal targets by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -71,6 +72,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Create multiple goal targets in a single batch operation.
      * Create a batch of goal targets
      * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
@@ -173,6 +175,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Update multiple goal targets in a single batch operation using their internal IDs or unique property values.
      * Update a batch of goal targets by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */

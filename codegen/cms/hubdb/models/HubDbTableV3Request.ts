@@ -14,37 +14,37 @@ import { ColumnRequest } from '../models/ColumnRequest';
 
 export class HubDbTableV3Request {
     /**
-    * Specifies the key value pairs of the [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages) with the associated column IDs.
+    * Specifies whether child tables can be created
     */
-    'dynamicMetaTags'?: { [key: string]: number; };
+    'allowChildTables': boolean;
     /**
     * Specifies whether the table can be read by public without authorization
     */
-    'allowPublicApiAccess'?: boolean;
-    /**
-    * Specifies whether the table can be used for creation of dynamic pages
-    */
-    'useForPages'?: boolean;
+    'allowPublicApiAccess': boolean;
     /**
     * List of columns in the table
     */
-    'columns'?: Array<ColumnRequest>;
+    'columns': Array<ColumnRequest>;
     /**
-    * Name of the table
+    * Specifies the key value pairs of the [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages) with the associated column IDs.
     */
-    'name': string;
+    'dynamicMetaTags': { [key: string]: number; };
     /**
     * Specifies creation of multi-level dynamic pages using child tables
     */
-    'enableChildTablePages'?: boolean;
+    'enableChildTablePages': boolean;
     /**
     * Label of the table
     */
     'label': string;
     /**
-    * Specifies whether child tables can be created
+    * Name of the table
     */
-    'allowChildTables'?: boolean;
+    'name': string;
+    /**
+    * Specifies whether the table can be used for creation of dynamic pages
+    */
+    'useForPages': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -52,20 +52,14 @@ export class HubDbTableV3Request {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "dynamicMetaTags",
-            "baseName": "dynamicMetaTags",
-            "type": "{ [key: string]: number; }",
-            "format": "int32"
-        },
-        {
-            "name": "allowPublicApiAccess",
-            "baseName": "allowPublicApiAccess",
+            "name": "allowChildTables",
+            "baseName": "allowChildTables",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "useForPages",
-            "baseName": "useForPages",
+            "name": "allowPublicApiAccess",
+            "baseName": "allowPublicApiAccess",
             "type": "boolean",
             "format": ""
         },
@@ -76,10 +70,10 @@ export class HubDbTableV3Request {
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
+            "name": "dynamicMetaTags",
+            "baseName": "dynamicMetaTags",
+            "type": "{ [key: string]: number; }",
+            "format": "int32"
         },
         {
             "name": "enableChildTablePages",
@@ -94,8 +88,14 @@ export class HubDbTableV3Request {
             "format": ""
         },
         {
-            "name": "allowChildTables",
-            "baseName": "allowChildTables",
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "useForPages",
+            "baseName": "useForPages",
             "type": "boolean",
             "format": ""
         }    ];

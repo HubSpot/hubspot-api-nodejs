@@ -4,6 +4,8 @@ import { Configuration, ConfigurationOptions } from '../configuration'
 import { ChannelConnectionSettingsPatchRequest } from '../models/ChannelConnectionSettingsPatchRequest';
 import { ChannelConnectionSettingsRequest } from '../models/ChannelConnectionSettingsRequest';
 import { ChannelConnectionSettingsResponse } from '../models/ChannelConnectionSettingsResponse';
+import { CompletedThirdPartyCallRequest } from '../models/CompletedThirdPartyCallRequest';
+import { CompletedThirdPartyCallResponse } from '../models/CompletedThirdPartyCallResponse';
 import { MarkRecordingAsReadyRequest } from '../models/MarkRecordingAsReadyRequest';
 import { RecordingSettingsPatchRequest } from '../models/RecordingSettingsPatchRequest';
 import { RecordingSettingsRequest } from '../models/RecordingSettingsRequest';
@@ -12,409 +14,424 @@ import { SettingsPatchRequest } from '../models/SettingsPatchRequest';
 import { SettingsRequest } from '../models/SettingsRequest';
 import { SettingsResponse } from '../models/SettingsResponse';
 
-import { ObservableChannelConnectionSettingsApi } from "./ObservableAPI";
-import { ChannelConnectionSettingsApiRequestFactory, ChannelConnectionSettingsApiResponseProcessor} from "../apis/ChannelConnectionSettingsApi";
+import { ObservableAdvancedApi } from "./ObservableAPI";
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
 
-export interface ChannelConnectionSettingsApiArchiveRequest {
-    /**
-     * The ID of the app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof ChannelConnectionSettingsApiarchive
-     */
-    appId: number
-}
-
-export interface ChannelConnectionSettingsApiCreateRequest {
-    /**
-     * The ID of the app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof ChannelConnectionSettingsApicreate
-     */
-    appId: number
+export interface AdvancedApiCrmV3ExtensionsCallingInboundCallRequest {
     /**
      * 
-     * @type ChannelConnectionSettingsRequest
-     * @memberof ChannelConnectionSettingsApicreate
+     * @type CompletedThirdPartyCallRequest
+     * @memberof AdvancedApicrmV3ExtensionsCallingInboundCall
      */
-    channelConnectionSettingsRequest: ChannelConnectionSettingsRequest
+    completedThirdPartyCallRequest: CompletedThirdPartyCallRequest
 }
 
-export interface ChannelConnectionSettingsApiGetByIdRequest {
-    /**
-     * The ID of the app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof ChannelConnectionSettingsApigetById
-     */
-    appId: number
-}
-
-export interface ChannelConnectionSettingsApiUpdateRequest {
-    /**
-     * The ID of the app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof ChannelConnectionSettingsApiupdate
-     */
-    appId: number
-    /**
-     * 
-     * @type ChannelConnectionSettingsPatchRequest
-     * @memberof ChannelConnectionSettingsApiupdate
-     */
-    channelConnectionSettingsPatchRequest: ChannelConnectionSettingsPatchRequest
-}
-
-export class ObjectChannelConnectionSettingsApi {
-    private api: ObservableChannelConnectionSettingsApi
-
-    public constructor(configuration: Configuration, requestFactory?: ChannelConnectionSettingsApiRequestFactory, responseProcessor?: ChannelConnectionSettingsApiResponseProcessor) {
-        this.api = new ObservableChannelConnectionSettingsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Delete the [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#delete-existing-channel-connection-settings) for the app.
-     * Delete channel connection settings
-     * @param param the request object
-     */
-    public archiveWithHttpInfo(param: ChannelConnectionSettingsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.archiveWithHttpInfo(param.appId,  options).toPromise();
-    }
-
-    /**
-     * Delete the [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#delete-existing-channel-connection-settings) for the app.
-     * Delete channel connection settings
-     * @param param the request object
-     */
-    public archive(param: ChannelConnectionSettingsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.archive(param.appId,  options).toPromise();
-    }
-
-    /**
-     * Configure [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#create-channel-connection-settings) for the app. 
-     * Configure channel connection settings
-     * @param param the request object
-     */
-    public createWithHttpInfo(param: ChannelConnectionSettingsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<ChannelConnectionSettingsResponse>> {
-        return this.api.createWithHttpInfo(param.appId, param.channelConnectionSettingsRequest,  options).toPromise();
-    }
-
-    /**
-     * Configure [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#create-channel-connection-settings) for the app. 
-     * Configure channel connection settings
-     * @param param the request object
-     */
-    public create(param: ChannelConnectionSettingsApiCreateRequest, options?: ConfigurationOptions): Promise<ChannelConnectionSettingsResponse> {
-        return this.api.create(param.appId, param.channelConnectionSettingsRequest,  options).toPromise();
-    }
-
-    /**
-     * Retrieve the settings related to the app\'s [channel connection](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#fetch-existing-channel-connection-settings).
-     * Retrieve channel connection settings
-     * @param param the request object
-     */
-    public getByIdWithHttpInfo(param: ChannelConnectionSettingsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<ChannelConnectionSettingsResponse>> {
-        return this.api.getByIdWithHttpInfo(param.appId,  options).toPromise();
-    }
-
-    /**
-     * Retrieve the settings related to the app\'s [channel connection](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#fetch-existing-channel-connection-settings).
-     * Retrieve channel connection settings
-     * @param param the request object
-     */
-    public getById(param: ChannelConnectionSettingsApiGetByIdRequest, options?: ConfigurationOptions): Promise<ChannelConnectionSettingsResponse> {
-        return this.api.getById(param.appId,  options).toPromise();
-    }
-
-    /**
-     * Update existing [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#manage-the-webhook-settings-for-channel-connection) for your app.
-     * Update channel connection settings
-     * @param param the request object
-     */
-    public updateWithHttpInfo(param: ChannelConnectionSettingsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<ChannelConnectionSettingsResponse>> {
-        return this.api.updateWithHttpInfo(param.appId, param.channelConnectionSettingsPatchRequest,  options).toPromise();
-    }
-
-    /**
-     * Update existing [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#manage-the-webhook-settings-for-channel-connection) for your app.
-     * Update channel connection settings
-     * @param param the request object
-     */
-    public update(param: ChannelConnectionSettingsApiUpdateRequest, options?: ConfigurationOptions): Promise<ChannelConnectionSettingsResponse> {
-        return this.api.update(param.appId, param.channelConnectionSettingsPatchRequest,  options).toPromise();
-    }
-
-}
-
-import { ObservableRecordingSettingsApi } from "./ObservableAPI";
-import { RecordingSettingsApiRequestFactory, RecordingSettingsApiResponseProcessor} from "../apis/RecordingSettingsApi";
-
-export interface RecordingSettingsApiGetUrlFormatRequest {
-    /**
-     * The ID of the app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof RecordingSettingsApigetUrlFormat
-     */
-    appId: number
-}
-
-export interface RecordingSettingsApiMarkAsReadyRequest {
+export interface AdvancedApiMarkAsReadyRequest {
     /**
      * 
      * @type MarkRecordingAsReadyRequest
-     * @memberof RecordingSettingsApimarkAsReady
+     * @memberof AdvancedApimarkAsReady
      */
     markRecordingAsReadyRequest: MarkRecordingAsReadyRequest
 }
 
-export interface RecordingSettingsApiRegisterUrlFormatRequest {
-    /**
-     * The ID of the app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof RecordingSettingsApiregisterUrlFormat
-     */
-    appId: number
-    /**
-     * 
-     * @type RecordingSettingsRequest
-     * @memberof RecordingSettingsApiregisterUrlFormat
-     */
-    recordingSettingsRequest: RecordingSettingsRequest
-}
+export class ObjectAdvancedApi {
+    private api: ObservableAdvancedApi
 
-export interface RecordingSettingsApiUpdateUrlFormatRequest {
-    /**
-     * The ID of the app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof RecordingSettingsApiupdateUrlFormat
-     */
-    appId: number
-    /**
-     * 
-     * @type RecordingSettingsPatchRequest
-     * @memberof RecordingSettingsApiupdateUrlFormat
-     */
-    recordingSettingsPatchRequest: RecordingSettingsPatchRequest
-}
-
-export class ObjectRecordingSettingsApi {
-    private api: ObservableRecordingSettingsApi
-
-    public constructor(configuration: Configuration, requestFactory?: RecordingSettingsApiRequestFactory, responseProcessor?: RecordingSettingsApiResponseProcessor) {
-        this.api = new ObservableRecordingSettingsApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: AdvancedApiRequestFactory, responseProcessor?: AdvancedApiResponseProcessor) {
+        this.api = new ObservableAdvancedApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Retrieve the URL that is registered for [call recording](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Retrieve recording settings
+     * This endpoint allows you to submit information about an inbound call to the CRM system. The request must include details such as the external call ID, call status, and involved phone numbers. This operation helps in logging and managing inbound call data within the CRM.
+     * Submit details of an inbound call to the CRM.
      * @param param the request object
      */
-    public getUrlFormatWithHttpInfo(param: RecordingSettingsApiGetUrlFormatRequest, options?: ConfigurationOptions): Promise<HttpInfo<RecordingSettingsResponse>> {
-        return this.api.getUrlFormatWithHttpInfo(param.appId,  options).toPromise();
+    public crmV3ExtensionsCallingInboundCallWithHttpInfo(param: AdvancedApiCrmV3ExtensionsCallingInboundCallRequest, options?: ConfigurationOptions): Promise<HttpInfo<CompletedThirdPartyCallResponse>> {
+        return this.api.crmV3ExtensionsCallingInboundCallWithHttpInfo(param.completedThirdPartyCallRequest,  options).toPromise();
     }
 
     /**
-     * Retrieve the URL that is registered for [call recording](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Retrieve recording settings
+     * This endpoint allows you to submit information about an inbound call to the CRM system. The request must include details such as the external call ID, call status, and involved phone numbers. This operation helps in logging and managing inbound call data within the CRM.
+     * Submit details of an inbound call to the CRM.
      * @param param the request object
      */
-    public getUrlFormat(param: RecordingSettingsApiGetUrlFormatRequest, options?: ConfigurationOptions): Promise<RecordingSettingsResponse> {
-        return this.api.getUrlFormat(param.appId,  options).toPromise();
+    public crmV3ExtensionsCallingInboundCall(param: AdvancedApiCrmV3ExtensionsCallingInboundCallRequest, options?: ConfigurationOptions): Promise<CompletedThirdPartyCallResponse> {
+        return this.api.crmV3ExtensionsCallingInboundCall(param.completedThirdPartyCallRequest,  options).toPromise();
     }
 
     /**
-     * Mark a call recording as ready for transcription, specifying the call by its ID (`engagementid`).
-     * Mark recording as ready for transcription
+     * This endpoint is used to mark a call recording as ready. It requires the engagementId to identify the specific recording.
+     * Mark a call recording as ready for retrieval.
      * @param param the request object
      */
-    public markAsReadyWithHttpInfo(param: RecordingSettingsApiMarkAsReadyRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+    public markAsReadyWithHttpInfo(param: AdvancedApiMarkAsReadyRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.markAsReadyWithHttpInfo(param.markRecordingAsReadyRequest,  options).toPromise();
     }
 
     /**
-     * Mark a call recording as ready for transcription, specifying the call by its ID (`engagementid`).
-     * Mark recording as ready for transcription
+     * This endpoint is used to mark a call recording as ready. It requires the engagementId to identify the specific recording.
+     * Mark a call recording as ready for retrieval.
      * @param param the request object
      */
-    public markAsReady(param: RecordingSettingsApiMarkAsReadyRequest, options?: ConfigurationOptions): Promise<void> {
+    public markAsReady(param: AdvancedApiMarkAsReadyRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.markAsReady(param.markRecordingAsReadyRequest,  options).toPromise();
     }
 
-    /**
-     * Register an external URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Enable the app for call recording
-     * @param param the request object
-     */
-    public registerUrlFormatWithHttpInfo(param: RecordingSettingsApiRegisterUrlFormatRequest, options?: ConfigurationOptions): Promise<HttpInfo<RecordingSettingsResponse>> {
-        return this.api.registerUrlFormatWithHttpInfo(param.appId, param.recordingSettingsRequest,  options).toPromise();
-    }
-
-    /**
-     * Register an external URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Enable the app for call recording
-     * @param param the request object
-     */
-    public registerUrlFormat(param: RecordingSettingsApiRegisterUrlFormatRequest, options?: ConfigurationOptions): Promise<RecordingSettingsResponse> {
-        return this.api.registerUrlFormat(param.appId, param.recordingSettingsRequest,  options).toPromise();
-    }
-
-    /**
-     * Update the URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Update recording settings
-     * @param param the request object
-     */
-    public updateUrlFormatWithHttpInfo(param: RecordingSettingsApiUpdateUrlFormatRequest, options?: ConfigurationOptions): Promise<HttpInfo<RecordingSettingsResponse>> {
-        return this.api.updateUrlFormatWithHttpInfo(param.appId, param.recordingSettingsPatchRequest,  options).toPromise();
-    }
-
-    /**
-     * Update the URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Update recording settings
-     * @param param the request object
-     */
-    public updateUrlFormat(param: RecordingSettingsApiUpdateUrlFormatRequest, options?: ConfigurationOptions): Promise<RecordingSettingsResponse> {
-        return this.api.updateUrlFormat(param.appId, param.recordingSettingsPatchRequest,  options).toPromise();
-    }
-
 }
 
-import { ObservableSettingsApi } from "./ObservableAPI";
-import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/SettingsApi";
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
-export interface SettingsApiArchiveRequest {
+export interface BasicApiCreateRequest {
     /**
-     * The ID of the app.
+     * The unique identifier for the app for which new calling extension settings are being created.
      * Defaults to: undefined
      * @type number
-     * @memberof SettingsApiarchive
-     */
-    appId: number
-}
-
-export interface SettingsApiCreateRequest {
-    /**
-     * The ID of the app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof SettingsApicreate
+     * @memberof BasicApicreate
      */
     appId: number
     /**
      * 
      * @type SettingsRequest
-     * @memberof SettingsApicreate
+     * @memberof BasicApicreate
      */
     settingsRequest: SettingsRequest
 }
 
-export interface SettingsApiGetByIdRequest {
+export interface BasicApiCreate0Request {
     /**
-     * The ID of the app.
+     * The unique identifier for the app for which new channel connection settings are to be created.
      * Defaults to: undefined
      * @type number
-     * @memberof SettingsApigetById
+     * @memberof BasicApicreate_1
+     */
+    appId: number
+    /**
+     * 
+     * @type ChannelConnectionSettingsRequest
+     * @memberof BasicApicreate_1
+     */
+    channelConnectionSettingsRequest: ChannelConnectionSettingsRequest
+}
+
+export interface BasicApiCreate1Request {
+    /**
+     * The unique identifier for the app for which new recording settings are being created.
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApicreate_2
+     */
+    appId: number
+    /**
+     * 
+     * @type RecordingSettingsRequest
+     * @memberof BasicApicreate_2
+     */
+    recordingSettingsRequest: RecordingSettingsRequest
+}
+
+export interface BasicApiGetRequest {
+    /**
+     * The unique identifier for the app whose calling extension settings are being retrieved.
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApiget
      */
     appId: number
 }
 
-export interface SettingsApiUpdateRequest {
+export interface BasicApiGet0Request {
     /**
-     * The ID of the app.
+     * The unique identifier for the app whose channel connection settings are to be retrieved.
      * Defaults to: undefined
      * @type number
-     * @memberof SettingsApiupdate
+     * @memberof BasicApiget_3
+     */
+    appId: number
+}
+
+export interface BasicApiGet1Request {
+    /**
+     * The unique identifier for the app whose recording settings are being retrieved.
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApiget_4
+     */
+    appId: number
+}
+
+export interface BasicApiRemoveRequest {
+    /**
+     * The unique identifier for the app whose calling extension settings are being deleted.
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApiremove
+     */
+    appId: number
+}
+
+export interface BasicApiRemove0Request {
+    /**
+     * The unique identifier for the app whose channel connection settings are to be deleted.
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApiremove_5
+     */
+    appId: number
+}
+
+export interface BasicApiUpdateRequest {
+    /**
+     * The unique identifier for the app whose calling extension settings are being updated.
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApiupdate
      */
     appId: number
     /**
      * 
      * @type SettingsPatchRequest
-     * @memberof SettingsApiupdate
+     * @memberof BasicApiupdate
      */
     settingsPatchRequest: SettingsPatchRequest
 }
 
-export class ObjectSettingsApi {
-    private api: ObservableSettingsApi
+export interface BasicApiUpdate0Request {
+    /**
+     * The unique identifier for the app whose channel connection settings are to be updated.
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApiupdate_6
+     */
+    appId: number
+    /**
+     * 
+     * @type ChannelConnectionSettingsPatchRequest
+     * @memberof BasicApiupdate_6
+     */
+    channelConnectionSettingsPatchRequest: ChannelConnectionSettingsPatchRequest
+}
 
-    public constructor(configuration: Configuration, requestFactory?: SettingsApiRequestFactory, responseProcessor?: SettingsApiResponseProcessor) {
-        this.api = new ObservableSettingsApi(configuration, requestFactory, responseProcessor);
+export interface BasicApiUpdate1Request {
+    /**
+     * The unique identifier for the app whose recording settings are being updated.
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApiupdate_7
+     */
+    appId: number
+    /**
+     * 
+     * @type RecordingSettingsPatchRequest
+     * @memberof BasicApiupdate_7
+     */
+    recordingSettingsPatchRequest: RecordingSettingsPatchRequest
+}
+
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
+
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Delete a calling extension. This will remove your service as an option for all connected accounts.
-     * Delete calling settings
+     * Create new settings for the calling extension associated with the specified appId.
+     * Create new calling extension settings for a specific app.
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: SettingsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.archiveWithHttpInfo(param.appId,  options).toPromise();
-    }
-
-    /**
-     * Delete a calling extension. This will remove your service as an option for all connected accounts.
-     * Delete calling settings
-     * @param param the request object
-     */
-    public archive(param: SettingsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.archive(param.appId,  options).toPromise();
-    }
-
-    /**
-     * Set the menu label, target iframe URL, and dimensions for your calling extension.
-     * Configure a calling extension
-     * @param param the request object
-     */
-    public createWithHttpInfo(param: SettingsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
+    public createWithHttpInfo(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
         return this.api.createWithHttpInfo(param.appId, param.settingsRequest,  options).toPromise();
     }
 
     /**
-     * Set the menu label, target iframe URL, and dimensions for your calling extension.
-     * Configure a calling extension
+     * Create new settings for the calling extension associated with the specified appId.
+     * Create new calling extension settings for a specific app.
      * @param param the request object
      */
-    public create(param: SettingsApiCreateRequest, options?: ConfigurationOptions): Promise<SettingsResponse> {
+    public create(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<SettingsResponse> {
         return this.api.create(param.appId, param.settingsRequest,  options).toPromise();
     }
 
     /**
-     * Retrieve the settings configured for the app.
-     * Retrieve settings
+     * Establish new channel connection settings for the specified app.
+     * Create new channel connection settings for a specific app.
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: SettingsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
-        return this.api.getByIdWithHttpInfo(param.appId,  options).toPromise();
+    public create_1WithHttpInfo(param: BasicApiCreate0Request, options?: ConfigurationOptions): Promise<HttpInfo<ChannelConnectionSettingsResponse>> {
+        return this.api.create_1WithHttpInfo(param.appId, param.channelConnectionSettingsRequest,  options).toPromise();
     }
 
     /**
-     * Retrieve the settings configured for the app.
-     * Retrieve settings
+     * Establish new channel connection settings for the specified app.
+     * Create new channel connection settings for a specific app.
      * @param param the request object
      */
-    public getById(param: SettingsApiGetByIdRequest, options?: ConfigurationOptions): Promise<SettingsResponse> {
-        return this.api.getById(param.appId,  options).toPromise();
+    public create_1(param: BasicApiCreate0Request, options?: ConfigurationOptions): Promise<ChannelConnectionSettingsResponse> {
+        return this.api.create_1(param.appId, param.channelConnectionSettingsRequest,  options).toPromise();
     }
 
     /**
-     * Update existing calling extension settings.
-     * Update settings
+     * Create new recording settings for a specific app using the provided app ID.
+     * Create recording settings for an app.
      * @param param the request object
      */
-    public updateWithHttpInfo(param: SettingsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
+    public create_2WithHttpInfo(param: BasicApiCreate1Request, options?: ConfigurationOptions): Promise<HttpInfo<RecordingSettingsResponse>> {
+        return this.api.create_2WithHttpInfo(param.appId, param.recordingSettingsRequest,  options).toPromise();
+    }
+
+    /**
+     * Create new recording settings for a specific app using the provided app ID.
+     * Create recording settings for an app.
+     * @param param the request object
+     */
+    public create_2(param: BasicApiCreate1Request, options?: ConfigurationOptions): Promise<RecordingSettingsResponse> {
+        return this.api.create_2(param.appId, param.recordingSettingsRequest,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the current settings of the calling extension for the specified appId. 
+     * Retrieve the calling extension settings for a specific app.
+     * @param param the request object
+     */
+    public getWithHttpInfo(param: BasicApiGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
+        return this.api.getWithHttpInfo(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the current settings of the calling extension for the specified appId. 
+     * Retrieve the calling extension settings for a specific app.
+     * @param param the request object
+     */
+    public get(param: BasicApiGetRequest, options?: ConfigurationOptions): Promise<SettingsResponse> {
+        return this.api.get(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Access the current channel connection settings for the specified app.
+     * Retrieve the channel connection settings for a specific app.
+     * @param param the request object
+     */
+    public get_3WithHttpInfo(param: BasicApiGet0Request, options?: ConfigurationOptions): Promise<HttpInfo<ChannelConnectionSettingsResponse>> {
+        return this.api.get_3WithHttpInfo(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Access the current channel connection settings for the specified app.
+     * Retrieve the channel connection settings for a specific app.
+     * @param param the request object
+     */
+    public get_3(param: BasicApiGet0Request, options?: ConfigurationOptions): Promise<ChannelConnectionSettingsResponse> {
+        return this.api.get_3(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the current recording settings for a specific app using the provided app ID.
+     * Retrieve recording settings for an app.
+     * @param param the request object
+     */
+    public get_4WithHttpInfo(param: BasicApiGet1Request, options?: ConfigurationOptions): Promise<HttpInfo<RecordingSettingsResponse>> {
+        return this.api.get_4WithHttpInfo(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the current recording settings for a specific app using the provided app ID.
+     * Retrieve recording settings for an app.
+     * @param param the request object
+     */
+    public get_4(param: BasicApiGet1Request, options?: ConfigurationOptions): Promise<RecordingSettingsResponse> {
+        return this.api.get_4(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Remove the calling extension settings associated with the specified appId. This action cannot be undone.
+     * Delete the calling extension settings for a specific app.
+     * @param param the request object
+     */
+    public removeWithHttpInfo(param: BasicApiRemoveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.removeWithHttpInfo(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Remove the calling extension settings associated with the specified appId. This action cannot be undone.
+     * Delete the calling extension settings for a specific app.
+     * @param param the request object
+     */
+    public remove(param: BasicApiRemoveRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.remove(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Delete the channel connection settings associated with the specified app.
+     * Remove the channel connection settings for a specific app.
+     * @param param the request object
+     */
+    public remove_5WithHttpInfo(param: BasicApiRemove0Request, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.remove_5WithHttpInfo(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Delete the channel connection settings associated with the specified app.
+     * Remove the channel connection settings for a specific app.
+     * @param param the request object
+     */
+    public remove_5(param: BasicApiRemove0Request, options?: ConfigurationOptions): Promise<void> {
+        return this.api.remove_5(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Modify existing calling extension settings for the specified appId. Only the fields provided in the request will be updated.
+     * Update the calling extension settings for a specific app.
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
         return this.api.updateWithHttpInfo(param.appId, param.settingsPatchRequest,  options).toPromise();
     }
 
     /**
-     * Update existing calling extension settings.
-     * Update settings
+     * Modify existing calling extension settings for the specified appId. Only the fields provided in the request will be updated.
+     * Update the calling extension settings for a specific app.
      * @param param the request object
      */
-    public update(param: SettingsApiUpdateRequest, options?: ConfigurationOptions): Promise<SettingsResponse> {
+    public update(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<SettingsResponse> {
         return this.api.update(param.appId, param.settingsPatchRequest,  options).toPromise();
+    }
+
+    /**
+     * Modify the existing channel connection settings for the specified app.
+     * Update the channel connection settings for a specific app.
+     * @param param the request object
+     */
+    public update_6WithHttpInfo(param: BasicApiUpdate0Request, options?: ConfigurationOptions): Promise<HttpInfo<ChannelConnectionSettingsResponse>> {
+        return this.api.update_6WithHttpInfo(param.appId, param.channelConnectionSettingsPatchRequest,  options).toPromise();
+    }
+
+    /**
+     * Modify the existing channel connection settings for the specified app.
+     * Update the channel connection settings for a specific app.
+     * @param param the request object
+     */
+    public update_6(param: BasicApiUpdate0Request, options?: ConfigurationOptions): Promise<ChannelConnectionSettingsResponse> {
+        return this.api.update_6(param.appId, param.channelConnectionSettingsPatchRequest,  options).toPromise();
+    }
+
+    /**
+     * Update the recording settings for a specific app using the provided app ID.
+     * Update recording settings for an app.
+     * @param param the request object
+     */
+    public update_7WithHttpInfo(param: BasicApiUpdate1Request, options?: ConfigurationOptions): Promise<HttpInfo<RecordingSettingsResponse>> {
+        return this.api.update_7WithHttpInfo(param.appId, param.recordingSettingsPatchRequest,  options).toPromise();
+    }
+
+    /**
+     * Update the recording settings for a specific app using the provided app ID.
+     * Update recording settings for an app.
+     * @param param the request object
+     */
+    public update_7(param: BasicApiUpdate1Request, options?: ConfigurationOptions): Promise<RecordingSettingsResponse> {
+        return this.api.update_7(param.appId, param.recordingSettingsPatchRequest,  options).toPromise();
     }
 
 }

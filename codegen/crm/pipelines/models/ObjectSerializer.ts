@@ -6,9 +6,11 @@ export * from '../models/ModelError';
 export * from '../models/Pipeline';
 export * from '../models/PipelineInput';
 export * from '../models/PipelinePatchInput';
+export * from '../models/PipelineReplaceInput';
 export * from '../models/PipelineStage';
 export * from '../models/PipelineStageInput';
 export * from '../models/PipelineStagePatchInput';
+export * from '../models/PipelineStageReplaceInput';
 export * from '../models/PublicAuditInfo';
 
 import { CollectionResponsePipelineNoPaging } from '../models/CollectionResponsePipelineNoPaging';
@@ -19,9 +21,11 @@ import { ModelError } from '../models/ModelError';
 import { Pipeline } from '../models/Pipeline';
 import { PipelineInput } from '../models/PipelineInput';
 import { PipelinePatchInput } from '../models/PipelinePatchInput';
+import { PipelineReplaceInput } from '../models/PipelineReplaceInput';
 import { PipelineStage           } from '../models/PipelineStage';
 import { PipelineStageInput } from '../models/PipelineStageInput';
 import { PipelineStagePatchInput } from '../models/PipelineStagePatchInput';
+import { PipelineStageReplaceInput } from '../models/PipelineStageReplaceInput';
 import { PublicAuditInfo } from '../models/PublicAuditInfo';
 
 /* tslint:disable:no-unused-variable */
@@ -49,9 +53,11 @@ let typeMap: {[index: string]: any} = {
     "Pipeline": Pipeline,
     "PipelineInput": PipelineInput,
     "PipelinePatchInput": PipelinePatchInput,
+    "PipelineReplaceInput": PipelineReplaceInput,
     "PipelineStage": PipelineStage,
     "PipelineStageInput": PipelineStageInput,
     "PipelineStagePatchInput": PipelineStagePatchInput,
+    "PipelineStageReplaceInput": PipelineStageReplaceInput,
     "PublicAuditInfo": PublicAuditInfo,
 }
 

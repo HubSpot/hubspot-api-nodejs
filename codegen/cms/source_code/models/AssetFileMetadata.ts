@@ -13,30 +13,33 @@
 
 export class AssetFileMetadata {
     /**
-    * Timestamp of when the object was first created.
-    */
-    'createdAt': number;
-    /**
     * Timestamp of when the object was archived (deleted).
     */
     'archivedAt'?: number;
-    /**
-    * Determines whether or not this path points to a folder.
-    */
-    'folder': boolean;
     /**
     * If the object is a folder, contains the filenames of the files within the folder.
     */
     'children'?: Array<string>;
     /**
-    * The name of the file.
+    * Timestamp of when the object was first created.
     */
-    'name': string;
+    'createdAt': number;
+    /**
+    * Determines whether or not this path points to a folder.
+    */
+    'folder': boolean;
+    /**
+    * A unique identifier for the file\'s content, used to verify data integrity.
+    */
+    'hash'?: string;
     /**
     * The path of the file in the CMS Developer File System.
     */
     'id': string;
-    'hash'?: string;
+    /**
+    * The name of the file.
+    */
+    'name': string;
     /**
     * Timestamp of when the object was last updated.
     */
@@ -48,14 +51,20 @@ export class AssetFileMetadata {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
+            "name": "archivedAt",
+            "baseName": "archivedAt",
             "type": "number",
             "format": "int64"
         },
         {
-            "name": "archivedAt",
-            "baseName": "archivedAt",
+            "name": "children",
+            "baseName": "children",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
             "type": "number",
             "format": "int64"
         },
@@ -66,14 +75,8 @@ export class AssetFileMetadata {
             "format": ""
         },
         {
-            "name": "children",
-            "baseName": "children",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
+            "name": "hash",
+            "baseName": "hash",
             "type": "string",
             "format": ""
         },
@@ -84,8 +87,8 @@ export class AssetFileMetadata {
             "format": ""
         },
         {
-            "name": "hash",
-            "baseName": "hash",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },

@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -16,21 +16,25 @@
 */
 export class SignedUrl {
     /**
+    * Timestamp of when the URL will no longer grant access to the file.
+    */
+    'expiresAt': Date;
+    /**
     * Extension of the requested file.
     */
     'extension': string;
     /**
-    * Size in bytes of the requested file.
+    * For image and video files. The height of the file.
     */
-    'size': number;
+    'height'?: number;
     /**
     * Name of the requested file.
     */
     'name': string;
     /**
-    * For image and video files. The width of the file.
+    * Size in bytes of the requested file.
     */
-    'width'?: number;
+    'size': number;
     /**
     * Type of the file. Can be IMG, DOCUMENT, AUDIO, MOVIE, or OTHER.
     */
@@ -40,13 +44,9 @@ export class SignedUrl {
     */
     'url': string;
     /**
-    * Timestamp of when the URL will no longer grant access to the file.
+    * For image and video files. The width of the file.
     */
-    'expiresAt': Date;
-    /**
-    * For image and video files. The height of the file.
-    */
-    'height'?: number;
+    'width'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -54,16 +54,22 @@ export class SignedUrl {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "expiresAt",
+            "baseName": "expiresAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "extension",
             "baseName": "extension",
             "type": "string",
             "format": ""
         },
         {
-            "name": "size",
-            "baseName": "size",
+            "name": "height",
+            "baseName": "height",
             "type": "number",
-            "format": "int64"
+            "format": "int32"
         },
         {
             "name": "name",
@@ -72,10 +78,10 @@ export class SignedUrl {
             "format": ""
         },
         {
-            "name": "width",
-            "baseName": "width",
+            "name": "size",
+            "baseName": "size",
             "type": "number",
-            "format": "int32"
+            "format": "int64"
         },
         {
             "name": "type",
@@ -90,14 +96,8 @@ export class SignedUrl {
             "format": ""
         },
         {
-            "name": "expiresAt",
-            "baseName": "expiresAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "height",
-            "baseName": "height",
+            "name": "width",
+            "baseName": "width",
             "type": "number",
             "format": "int32"
         }    ];

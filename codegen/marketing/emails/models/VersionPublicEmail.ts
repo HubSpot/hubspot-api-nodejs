@@ -21,9 +21,12 @@ export class VersionPublicEmail {
     * ID of this marketing email version.
     */
     'id': string;
-    'user': VersionUser;
     'object': PublicEmail;
+    /**
+    * The date and time of the last update to the email, in ISO8601 representation.
+    */
     'updatedAt': Date;
+    'user': VersionUser;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -37,12 +40,6 @@ export class VersionPublicEmail {
             "format": ""
         },
         {
-            "name": "user",
-            "baseName": "user",
-            "type": "VersionUser",
-            "format": ""
-        },
-        {
             "name": "object",
             "baseName": "object",
             "type": "PublicEmail",
@@ -53,6 +50,12 @@ export class VersionPublicEmail {
             "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "user",
+            "baseName": "user",
+            "type": "VersionUser",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

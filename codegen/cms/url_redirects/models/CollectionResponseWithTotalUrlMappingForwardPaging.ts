@@ -14,21 +14,18 @@ import { ForwardPaging } from '../models/ForwardPaging';
 import { UrlMapping } from '../models/UrlMapping';
 
 export class CollectionResponseWithTotalUrlMappingForwardPaging {
-    'total': number;
     'paging'?: ForwardPaging;
     'results': Array<UrlMapping>;
+    /**
+    * The total number of URL mappings available.
+    */
+    'total': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "total",
-            "baseName": "total",
-            "type": "number",
-            "format": "int32"
-        },
         {
             "name": "paging",
             "baseName": "paging",
@@ -40,6 +37,12 @@ export class CollectionResponseWithTotalUrlMappingForwardPaging {
             "baseName": "results",
             "type": "Array<UrlMapping>",
             "format": ""
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

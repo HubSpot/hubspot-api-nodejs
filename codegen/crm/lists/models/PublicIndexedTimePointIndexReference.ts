@@ -20,6 +20,9 @@ import { PublicWeekReference } from '../models/PublicWeekReference';
 import { PublicYearReference } from '../models/PublicYearReference';
 
 /**
+* Specifies the reference point in time for the indexed time point.
+*/
+/**
  * @type PublicIndexedTimePointIndexReference
  * Type
  * @export
@@ -28,6 +31,7 @@ export type PublicIndexedTimePointIndexReference = PublicFiscalQuarterReference 
 
 /**
 * @type PublicIndexedTimePointIndexReferenceClass
+    * Specifies the reference point in time for the indexed time point.
 * @export
 */
 export class PublicIndexedTimePointIndexReferenceClass {

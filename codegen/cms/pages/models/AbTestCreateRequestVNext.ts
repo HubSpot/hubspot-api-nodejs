@@ -16,13 +16,13 @@
 */
 export class AbTestCreateRequestVNext {
     /**
-    * Name of A/B test variation.
-    */
-    'variationName': string;
-    /**
     * ID of the object to test.
     */
     'contentId': string;
+    /**
+    * Name of A/B test variation.
+    */
+    'variationName': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,14 +30,14 @@ export class AbTestCreateRequestVNext {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "variationName",
-            "baseName": "variationName",
+            "name": "contentId",
+            "baseName": "contentId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "contentId",
-            "baseName": "contentId",
+            "name": "variationName",
+            "baseName": "variationName",
             "type": "string",
             "format": ""
         }    ];

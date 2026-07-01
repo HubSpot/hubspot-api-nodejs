@@ -1,6 +1,6 @@
 /**
  * Timeline
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -12,15 +12,42 @@
 
 import { ErrorDetail } from '../models/ErrorDetail';
 
+/**
+* Represents a standard error response in the HubSpot API, providing detailed information about an error that occurred during an API request.
+*/
 export class StandardError {
-    'subCategory'?: any;
-    'context': { [key: string]: Array<string>; };
-    'links': { [key: string]: string; };
-    'id'?: string;
+    /**
+    * The category of the error.
+    */
     'category': string;
-    'message': string;
+    /**
+    * The context of the error, potentially including occurrence information.
+    */
+    'context': { [key: string]: Array<string>; };
+    /**
+    * The detailed error objects.
+    */
     'errors': Array<ErrorDetail>;
+    /**
+    * The error ID, if any.
+    */
+    'id'?: string;
+    /**
+    * Links to any helpful documentation.
+    */
+    'links': { [key: string]: string; };
+    /**
+    * The error message, if any.
+    */
+    'message': string;
+    /**
+    * The resulting status of the batch operation.
+    */
     'status': string;
+    /**
+    * Sub category of the error, if any.
+    */
+    'subCategory'?: any;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,9 +55,9 @@ export class StandardError {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "subCategory",
-            "baseName": "subCategory",
-            "type": "any",
+            "name": "category",
+            "baseName": "category",
+            "type": "string",
             "format": ""
         },
         {
@@ -40,9 +67,9 @@ export class StandardError {
             "format": ""
         },
         {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<ErrorDetail>",
             "format": ""
         },
         {
@@ -52,9 +79,9 @@ export class StandardError {
             "format": ""
         },
         {
-            "name": "category",
-            "baseName": "category",
-            "type": "string",
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
@@ -64,15 +91,15 @@ export class StandardError {
             "format": ""
         },
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<ErrorDetail>",
-            "format": ""
-        },
-        {
             "name": "status",
             "baseName": "status",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "subCategory",
+            "baseName": "subCategory",
+            "type": "any",
             "format": ""
         }    ];
 

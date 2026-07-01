@@ -12,16 +12,46 @@
 
 
 export class UrlMappingCreateRequestBody {
-    'isTrailingSlashOptional'?: boolean;
-    'isMatchQueryString'?: boolean;
-    'redirectStyle': number;
-    'routePrefix': string;
-    'isMatchFullUrl'?: boolean;
-    'isProtocolAgnostic'?: boolean;
+    /**
+    * The destination URL, where the target URL should be redirected if it matches the `routePrefix`.
+    */
     'destination': string;
+    /**
+    * Whether the `routePrefix` should match on the entire URL, including the domain.
+    */
+    'isMatchFullUrl'?: boolean;
+    /**
+    * Whether the `routePrefix` should match on the entire URL path, including the query string.
+    */
+    'isMatchQueryString'?: boolean;
+    /**
+    * Whether the URL redirect mapping should apply only if a live page on the URL isn\'t found. If False, the URL redirect mapping will take precedence over any existing page.
+    */
     'isOnlyAfterNotFound'?: boolean;
+    /**
+    * Whether the `routePrefix` should match based on pattern.
+    */
     'isPattern'?: boolean;
+    /**
+    * Whether the `routePrefix` should match both HTTP and HTTPS protocols.
+    */
+    'isProtocolAgnostic'?: boolean;
+    /**
+    * Whether a trailing slash will be ignored.
+    */
+    'isTrailingSlashOptional'?: boolean;
+    /**
+    * Used to prioritize URL redirection. If a given URL matches more than one redirect, the one with the **lower** precedence will be used.
+    */
     'precedence'?: number;
+    /**
+    * The type of redirect to create. Options include: 301 (permanent), 302 (temporary), or 305 (proxy). Find more details [here](https://knowledge.hubspot.com/cos-general/how-to-redirect-a-hubspot-page).
+    */
+    'redirectStyle': number;
+    /**
+    * The target incoming URL, path, or pattern to match for redirection.
+    */
+    'routePrefix': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -29,26 +59,8 @@ export class UrlMappingCreateRequestBody {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "isTrailingSlashOptional",
-            "baseName": "isTrailingSlashOptional",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isMatchQueryString",
-            "baseName": "isMatchQueryString",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "redirectStyle",
-            "baseName": "redirectStyle",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "routePrefix",
-            "baseName": "routePrefix",
+            "name": "destination",
+            "baseName": "destination",
             "type": "string",
             "format": ""
         },
@@ -59,15 +71,9 @@ export class UrlMappingCreateRequestBody {
             "format": ""
         },
         {
-            "name": "isProtocolAgnostic",
-            "baseName": "isProtocolAgnostic",
+            "name": "isMatchQueryString",
+            "baseName": "isMatchQueryString",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "destination",
-            "baseName": "destination",
-            "type": "string",
             "format": ""
         },
         {
@@ -83,10 +89,34 @@ export class UrlMappingCreateRequestBody {
             "format": ""
         },
         {
+            "name": "isProtocolAgnostic",
+            "baseName": "isProtocolAgnostic",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "isTrailingSlashOptional",
+            "baseName": "isTrailingSlashOptional",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "precedence",
             "baseName": "precedence",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "redirectStyle",
+            "baseName": "redirectStyle",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "routePrefix",
+            "baseName": "routePrefix",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

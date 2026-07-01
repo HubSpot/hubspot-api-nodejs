@@ -14,6 +14,9 @@ import { PublicListConversionDate } from '../models/PublicListConversionDate';
 import { PublicListConversionInactivity } from '../models/PublicListConversionInactivity';
 
 /**
+* The scheduled time for the list conversion, which can be based on a specific date or inactivity period.
+*/
+/**
  * @type PublicListConversionResponseRequestedConversionTime
  * Type
  * @export
@@ -22,6 +25,7 @@ export type PublicListConversionResponseRequestedConversionTime = PublicListConv
 
 /**
 * @type PublicListConversionResponseRequestedConversionTimeClass
+    * The scheduled time for the list conversion, which can be based on a specific date or inactivity period.
 * @export
 */
 export class PublicListConversionResponseRequestedConversionTimeClass {

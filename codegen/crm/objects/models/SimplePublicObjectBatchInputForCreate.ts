@@ -12,9 +12,18 @@
 
 import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
 
+/**
+* An input object that contains a collection of objects to be created together in a batch.
+*/
 export class SimplePublicObjectBatchInputForCreate {
     'associations'?: Array<PublicAssociationsForObject>;
+    /**
+    * An identifier used for tracing the creation or update request of the object.
+    */
     'objectWriteTraceId'?: string;
+    /**
+    * Key value pairs representing the properties of the object.
+    */
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;

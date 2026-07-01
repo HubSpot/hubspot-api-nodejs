@@ -15,6 +15,9 @@ import { PublicIndexedTimePoint } from '../models/PublicIndexedTimePoint';
 import { PublicPropertyReferencedTime } from '../models/PublicPropertyReferencedTime';
 
 /**
+* Defines the specific point in time for the operation, which can be a date, indexed time, or property-referenced time.
+*/
+/**
  * @type PublicTimePointOperationTimePoint
  * Type
  * @export
@@ -23,6 +26,7 @@ export type PublicTimePointOperationTimePoint = PublicDatePoint | PublicIndexedT
 
 /**
 * @type PublicTimePointOperationTimePointClass
+    * Defines the specific point in time for the operation, which can be a date, indexed time, or property-referenced time.
 * @export
 */
 export class PublicTimePointOperationTimePointClass {

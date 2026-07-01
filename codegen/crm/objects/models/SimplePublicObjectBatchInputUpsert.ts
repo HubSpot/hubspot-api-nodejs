@@ -11,13 +11,25 @@
  */
 
 
+/**
+* Represents an object used in batch upsert operations, containing an object’s unique identifier, its properties, and optionally the unique property name and a write trace ID.
+*/
 export class SimplePublicObjectBatchInputUpsert {
+    /**
+    * The unique ID of the object.
+    */
+    'id': string;
     /**
     * The name of a property whose values are unique for this object
     */
     'idProperty'?: string;
+    /**
+    * An identifier for tracing the creation request.
+    */
     'objectWriteTraceId'?: string;
-    'id': string;
+    /**
+    * Key value pairs representing the properties of the object.
+    */
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
@@ -25,6 +37,12 @@ export class SimplePublicObjectBatchInputUpsert {
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "idProperty",
             "baseName": "idProperty",
@@ -34,12 +52,6 @@ export class SimplePublicObjectBatchInputUpsert {
         {
             "name": "objectWriteTraceId",
             "baseName": "objectWriteTraceId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
             "type": "string",
             "format": ""
         },

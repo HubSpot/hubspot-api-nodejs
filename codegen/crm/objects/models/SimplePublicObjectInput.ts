@@ -11,7 +11,13 @@
  */
 
 
+/**
+* Represents the input required to create or update a CRM object, containing an object with property names and their corresponding values.
+*/
 export class SimplePublicObjectInput {
+    /**
+    * Key value pairs representing the properties of the object.
+    */
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;

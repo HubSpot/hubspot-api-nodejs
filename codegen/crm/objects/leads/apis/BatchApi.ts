@@ -24,6 +24,7 @@ import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/Batch
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive multiple leads by their IDs in a single request, moving them to the recycling bin.
      * Archive a batch of leads by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -71,6 +72,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Create multiple lead records in a single request by providing a batch of lead data. This endpoint allows for efficient creation of leads by processing them together, which can be useful for syncing data from other systems or importing large datasets.
      * Create a batch of leads
      * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
@@ -173,6 +175,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Update multiple lead records using their internal IDs or unique property values. This endpoint allows batch processing of updates, where each lead\'s properties can be modified based on the provided input. Ensure that the properties being updated exist on the lead objects to avoid errors.
      * Update a batch of leads by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */

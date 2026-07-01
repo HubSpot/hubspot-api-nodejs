@@ -17,7 +17,7 @@ export class ReportApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Requests a report of all objects in the portal which have a high usage of associations
-     * Report
+     * Report high usage
      * @param userId 
      */
     public async request(userId: number, _options?: Configuration): Promise<RequestContext> {

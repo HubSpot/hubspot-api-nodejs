@@ -12,13 +12,34 @@
 
 import { FilterGroup } from '../models/FilterGroup';
 
+/**
+* Describes a search request
+*/
 export class PublicObjectSearchRequest {
-    'query'?: string;
-    'limit'?: number;
+    /**
+    * A paging cursor token for retrieving subsequent pages.
+    */
     'after'?: string;
-    'sorts'?: Array<string>;
-    'properties'?: Array<string>;
+    /**
+    * Up to 6 groups of filters defining additional query criteria.
+    */
     'filterGroups'?: Array<FilterGroup>;
+    /**
+    * The maximum results to return, up to 200 objects.
+    */
+    'limit'?: number;
+    /**
+    * A list of property names to include in the response.
+    */
+    'properties'?: Array<string>;
+    /**
+    * The search query string, up to 3000 characters.
+    */
+    'query'?: string;
+    /**
+    * Specifies sorting order based on object properties.
+    */
+    'sorts'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -26,9 +47,15 @@ export class PublicObjectSearchRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "query",
-            "baseName": "query",
+            "name": "after",
+            "baseName": "after",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "filterGroups",
+            "baseName": "filterGroups",
+            "type": "Array<FilterGroup>",
             "format": ""
         },
         {
@@ -38,8 +65,14 @@ export class PublicObjectSearchRequest {
             "format": "int32"
         },
         {
-            "name": "after",
-            "baseName": "after",
+            "name": "properties",
+            "baseName": "properties",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "query",
+            "baseName": "query",
             "type": "string",
             "format": ""
         },
@@ -47,18 +80,6 @@ export class PublicObjectSearchRequest {
             "name": "sorts",
             "baseName": "sorts",
             "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "properties",
-            "baseName": "properties",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "filterGroups",
-            "baseName": "filterGroups",
-            "type": "Array<FilterGroup>",
             "format": ""
         }    ];
 

@@ -12,15 +12,15 @@
 
 
 /**
-* Model definition for a previous page
+* specifies the paging information needed to retrieve the previous set of results in a paginated API response
 */
 export class PreviousPage {
     /**
-    * 
+    * A paging cursor token for retrieving previous pages.
     */
     'before': string;
     /**
-    * 
+    * A URL that can be used to retrieve the previous pages\' results.
     */
     'link'?: string;
 

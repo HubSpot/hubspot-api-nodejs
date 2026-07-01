@@ -12,12 +12,33 @@
 
 
 export class PublicFiscalYearReference {
-    'hour'?: number;
-    'month': number;
-    'millisecond'?: number;
-    'referenceType': PublicFiscalYearReferenceReferenceTypeEnum;
+    /**
+    * The day component of the fiscal year reference.
+    */
     'day': number;
+    /**
+    * The hour component of the fiscal year reference.
+    */
+    'hour'?: number;
+    /**
+    * The millisecond component of the fiscal year reference.
+    */
+    'millisecond'?: number;
+    /**
+    * The minute component of the fiscal year reference.
+    */
     'minute'?: number;
+    /**
+    * The month component of the fiscal year reference.
+    */
+    'month': number;
+    /**
+    * Indicates the type of reference (FISCAL_YEAR).
+    */
+    'referenceType': PublicFiscalYearReferenceReferenceTypeEnum;
+    /**
+    * The second component of the fiscal year reference.
+    */
     'second'?: number;
 
     static readonly discriminator: string | undefined = undefined;
@@ -26,14 +47,14 @@ export class PublicFiscalYearReference {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "hour",
-            "baseName": "hour",
+            "name": "day",
+            "baseName": "day",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "month",
-            "baseName": "month",
+            "name": "hour",
+            "baseName": "hour",
             "type": "number",
             "format": "int32"
         },
@@ -44,22 +65,22 @@ export class PublicFiscalYearReference {
             "format": "int32"
         },
         {
-            "name": "referenceType",
-            "baseName": "referenceType",
-            "type": "PublicFiscalYearReferenceReferenceTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "day",
-            "baseName": "day",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "minute",
             "baseName": "minute",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "month",
+            "baseName": "month",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "referenceType",
+            "baseName": "referenceType",
+            "type": "PublicFiscalYearReferenceReferenceTypeEnum",
+            "format": ""
         },
         {
             "name": "second",

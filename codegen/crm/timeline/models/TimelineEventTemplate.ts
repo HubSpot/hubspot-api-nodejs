@@ -1,6 +1,6 @@
 /**
  * Timeline
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -12,9 +12,6 @@
 
 import { TimelineEventTemplateToken } from '../models/TimelineEventTemplateToken';
 
-/**
-* The current state of the template definition.
-*/
 export class TimelineEventTemplate {
     /**
     * The date and time that the Event Template was created, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
@@ -25,25 +22,25 @@ export class TimelineEventTemplate {
     */
     'detailTemplate'?: string;
     /**
-    * The template name.
+    * This uses Markdown syntax with Handlebars and event-specific data to render HTML on a timeline as a header.
     */
-    'name': string;
-    /**
-    * A collection of tokens that can be used as custom properties on the event and to create fully fledged CRM objects.
-    */
-    'tokens': Array<TimelineEventTemplateToken>;
+    'headerTemplate'?: string;
     /**
     * The template ID.
     */
     'id': string;
     /**
-    * This uses Markdown syntax with Handlebars and event-specific data to render HTML on a timeline as a header.
+    * The template name.
     */
-    'headerTemplate'?: string;
+    'name': string;
     /**
     * The type of CRM object this template is for. [Contacts, companies, tickets, and deals] are supported.
     */
     'objectType': string;
+    /**
+    * A collection of tokens that can be used as custom properties on the event and to create fully fledged CRM objects.
+    */
+    'tokens': Array<TimelineEventTemplateToken>;
     /**
     * The date and time that the Event Template was last updated, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
     */
@@ -67,15 +64,9 @@ export class TimelineEventTemplate {
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "headerTemplate",
+            "baseName": "headerTemplate",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tokens",
-            "baseName": "tokens",
-            "type": "Array<TimelineEventTemplateToken>",
             "format": ""
         },
         {
@@ -85,8 +76,8 @@ export class TimelineEventTemplate {
             "format": ""
         },
         {
-            "name": "headerTemplate",
-            "baseName": "headerTemplate",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -94,6 +85,12 @@ export class TimelineEventTemplate {
             "name": "objectType",
             "baseName": "objectType",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tokens",
+            "baseName": "tokens",
+            "type": "Array<TimelineEventTemplateToken>",
             "format": ""
         },
         {

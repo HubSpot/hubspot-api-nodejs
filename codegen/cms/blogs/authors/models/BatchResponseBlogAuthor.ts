@@ -21,21 +21,21 @@ export class BatchResponseBlogAuthor {
     */
     'completedAt': Date;
     /**
-    * Time of batch operation request.
-    */
-    'requestedAt'?: Date;
-    /**
-    * Time of batch operation start.
-    */
-    'startedAt': Date;
-    /**
     * Links associated with batch operation.
     */
     'links'?: { [key: string]: string; };
     /**
+    * Time of batch operation request.
+    */
+    'requestedAt'?: Date;
+    /**
     * Results of batch operation.
     */
     'results': Array<BlogAuthor>;
+    /**
+    * Time of batch operation start.
+    */
+    'startedAt': Date;
     /**
     * Status of batch operation.
     */
@@ -53,28 +53,28 @@ export class BatchResponseBlogAuthor {
             "format": "date-time"
         },
         {
-            "name": "requestedAt",
-            "baseName": "requestedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "results",
             "baseName": "results",
             "type": "Array<BlogAuthor>",
             "format": ""
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -92,9 +92,9 @@ export class BatchResponseBlogAuthor {
 }
 
 export enum BatchResponseBlogAuthorStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

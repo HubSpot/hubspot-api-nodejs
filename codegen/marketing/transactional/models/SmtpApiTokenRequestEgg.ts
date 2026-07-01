@@ -11,18 +11,15 @@
  */
 
 
-/**
-* A request object to create a SMTP API token
-*/
 export class SmtpApiTokenRequestEgg {
-    /**
-    * Indicates whether a contact should be created for email recipients.
-    */
-    'createContact': boolean;
     /**
     * A name for the campaign tied to the SMTP API token.
     */
     'campaignName': string;
+    /**
+    * Indicates whether a contact should be created for email recipients.
+    */
+    'createContact': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,15 +27,15 @@ export class SmtpApiTokenRequestEgg {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "createContact",
-            "baseName": "createContact",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "campaignName",
             "baseName": "campaignName",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "createContact",
+            "baseName": "createContact",
+            "type": "boolean",
             "format": ""
         }    ];
 

@@ -21,13 +21,14 @@ export class PipelineInput {
     */
     'displayOrder': number;
     /**
-    * Pipeline stage inputs used to create the new or replacement pipeline.
-    */
-    'stages': Array<PipelineStageInput>;
-    /**
     * A unique label used to organize pipelines in HubSpot\'s UI
     */
     'label': string;
+    'pipelineId'?: string;
+    /**
+    * Pipeline stage inputs used to create the new or replacement pipeline.
+    */
+    'stages': Array<PipelineStageInput>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -41,15 +42,21 @@ export class PipelineInput {
             "format": "int32"
         },
         {
-            "name": "stages",
-            "baseName": "stages",
-            "type": "Array<PipelineStageInput>",
-            "format": ""
-        },
-        {
             "name": "label",
             "baseName": "label",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pipelineId",
+            "baseName": "pipelineId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "stages",
+            "baseName": "stages",
+            "type": "Array<PipelineStageInput>",
             "format": ""
         }    ];
 

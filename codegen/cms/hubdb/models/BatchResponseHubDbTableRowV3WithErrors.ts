@@ -14,13 +14,31 @@ import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
 import { StandardError } from '../models/StandardError';
 
 export class BatchResponseHubDbTableRowV3WithErrors {
+    /**
+    * The timestamp indicating when the batch processing was completed.
+    */
     'completedAt': Date;
-    'numErrors'?: number;
-    'requestedAt'?: Date;
-    'startedAt': Date;
-    'links'?: { [key: string]: string; };
-    'results': Array<HubDbTableRowV3>;
     'errors'?: Array<StandardError>;
+    /**
+    * A collection of related links associated with the batch response.
+    */
+    'links'?: { [key: string]: string; };
+    /**
+    * The number of errors encountered during the batch operation.
+    */
+    'numErrors'?: number;
+    /**
+    * The timestamp indicating when the batch request was made.
+    */
+    'requestedAt'?: Date;
+    'results': Array<HubDbTableRowV3>;
+    /**
+    * The timestamp indicating when the batch processing began.
+    */
+    'startedAt': Date;
+    /**
+    * The current status of the batch operation, with possible values: CANCELED, COMPLETE, PENDING, PROCESSING.
+    */
     'status': BatchResponseHubDbTableRowV3WithErrorsStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -35,6 +53,18 @@ export class BatchResponseHubDbTableRowV3WithErrors {
             "format": "date-time"
         },
         {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
             "name": "numErrors",
             "baseName": "numErrors",
             "type": "number",
@@ -47,28 +77,16 @@ export class BatchResponseHubDbTableRowV3WithErrors {
             "format": "date-time"
         },
         {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
             "name": "results",
             "baseName": "results",
             "type": "Array<HubDbTableRowV3>",
             "format": ""
         },
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -86,9 +104,9 @@ export class BatchResponseHubDbTableRowV3WithErrors {
 }
 
 export enum BatchResponseHubDbTableRowV3WithErrorsStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

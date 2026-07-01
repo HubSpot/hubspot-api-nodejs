@@ -11,7 +11,6 @@ import {SecurityAuthentication} from '../auth/auth';
 import { CollectionResponseFolder } from '../models/CollectionResponseFolder';
 import { Folder } from '../models/Folder';
 import { FolderActionResponse } from '../models/FolderActionResponse';
-import { FolderInput } from '../models/FolderInput';
 import { FolderUpdateInput } from '../models/FolderUpdateInput';
 import { FolderUpdateInputWithId } from '../models/FolderUpdateInputWithId';
 import { FolderUpdateTaskLocator } from '../models/FolderUpdateTaskLocator';
@@ -100,7 +99,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Check status of folder update. Folder updates happen asynchronously.
      * Check folder update status
-     * @param taskId The ID of the folder update task.
+     * @param taskId TaskId of folder update
      */
     public async checkUpdateStatus(taskId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -136,75 +135,27 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Creates a folder.
-     * Create folder
-     * @param folderInput Folder creation options
-     */
-    public async create(folderInput: FolderInput, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'folderInput' is not null or undefined
-        if (folderInput === null || folderInput === undefined) {
-            throw new RequiredError("FoldersApi", "create", "folderInput");
-        }
-
-
-        // Path Params
-        const localVarPath = '/files/v3/folders';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(folderInput, "FolderInput", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
      * Search for folders. Does not contain hidden or archived folders.
      * Search folders
-     * @param properties Properties that should be included in the returned folders.
-     * @param after Offset search results by this value. The default offset is 0 and the maximum offset of items for a given search is 10,000. Narrow your search down if you are reaching this limit.
-     * @param before 
-     * @param limit Number of items to return. Default limit is 10, maximum limit is 100.
-     * @param sort Sort results by given property. For example -name sorts by name field descending, name sorts by name field ascending.
-     * @param ids 
-     * @param idLte 
-     * @param idGte 
+     * @param after Offset search results by this value. The default offset is 0 and the maximum offset of items for a given search is 10,000.  Narrow your search down if you are reaching this limit.
+     * @param before Search folders updated before this timestamp. Time must be epoch time in milliseconds.
      * @param createdAt Search folders by exact time of creation. Time must be epoch time in milliseconds.
-     * @param createdAtLte Search folders by less than or equal to time of creation. Can be used with createdAtGte to create a range.
      * @param createdAtGte Search folders by greater than or equal to time of creation. Can be used with createdAtLte to create a range.
-     * @param updatedAt Search folders by exact time of latest updated. Time must be epoch time in milliseconds.
-     * @param updatedAtLte Search folders by less than or equal to time of latest update. Can be used with updatedAtGte to create a range.
-     * @param updatedAtGte Search folders by greater than or equal to time of latest update. Can be used with updatedAtLte to create a range.
+     * @param createdAtLte Search folders by less than or equal to time of creation. Can be used with createdAtGte to create a range.
+     * @param idGte Search folders by greater than or equal to ID. Can be used with idLte to create a range.
+     * @param idLte Search folders by less than or equal to ID. Can be used with idGte to create a range.
+     * @param ids Search folders by multiple IDs. Comma-separated list of folder IDs.
+     * @param limit Number of items to return. Default limit is 10, maximum limit is 100.
      * @param name Search for folders containing the specified name.
+     * @param parentFolderIds 
      * @param path Search folders by path.
-     * @param parentFolderIds Search folders with the given parent folderId.
+     * @param properties Properties that should be included in the returned folders.
+     * @param sort Sort results by given property. For example -name sorts by name field descending, name sorts by name field ascending.
+     * @param updatedAt Search folders by exact time of latest updated. Time must be epoch time in milliseconds.
+     * @param updatedAtGte Search folders by greater than or equal to time of latest update. Can be used with updatedAtLte to create a range.
+     * @param updatedAtLte Search folders by less than or equal to time of latest update. Can be used with updatedAtGte to create a range.
      */
-    public async doSearch(properties?: Array<string>, after?: string, before?: string, limit?: number, sort?: Array<string>, ids?: Array<number>, idLte?: number, idGte?: number, createdAt?: Date, createdAtLte?: Date, createdAtGte?: Date, updatedAt?: Date, updatedAtLte?: Date, updatedAtGte?: Date, name?: string, path?: string, parentFolderIds?: Array<number>, _options?: Configuration): Promise<RequestContext> {
+    public async doSearch(after?: string, before?: string, createdAt?: Date, createdAtGte?: Date, createdAtLte?: Date, idGte?: number, idLte?: number, ids?: Array<number>, limit?: number, name?: string, parentFolderIds?: Array<number>, path?: string, properties?: Array<string>, sort?: Array<string>, updatedAt?: Date, updatedAtGte?: Date, updatedAtLte?: Date, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -232,14 +183,6 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (properties !== undefined) {
-            const serializedParams = ObjectSerializer.serialize(properties, "Array<string>", "");
-            for (const serializedParam of serializedParams) {
-                requestContext.appendQueryParam("properties", serializedParam);
-            }
-        }
-
-        // Query Params
         if (after !== undefined) {
             requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
         }
@@ -250,16 +193,28 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (limit !== undefined) {
-            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
+        if (createdAt !== undefined) {
+            requestContext.setQueryParam("createdAt", ObjectSerializer.serialize(createdAt, "Date", "date-time"));
         }
 
         // Query Params
-        if (sort !== undefined) {
-            const serializedParams = ObjectSerializer.serialize(sort, "Array<string>", "");
-            for (const serializedParam of serializedParams) {
-                requestContext.appendQueryParam("sort", serializedParam);
-            }
+        if (createdAtGte !== undefined) {
+            requestContext.setQueryParam("createdAtGte", ObjectSerializer.serialize(createdAtGte, "Date", "date-time"));
+        }
+
+        // Query Params
+        if (createdAtLte !== undefined) {
+            requestContext.setQueryParam("createdAtLte", ObjectSerializer.serialize(createdAtLte, "Date", "date-time"));
+        }
+
+        // Query Params
+        if (idGte !== undefined) {
+            requestContext.setQueryParam("idGte", ObjectSerializer.serialize(idGte, "number", "int64"));
+        }
+
+        // Query Params
+        if (idLte !== undefined) {
+            requestContext.setQueryParam("idLte", ObjectSerializer.serialize(idLte, "number", "int64"));
         }
 
         // Query Params
@@ -271,43 +226,8 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (idLte !== undefined) {
-            requestContext.setQueryParam("idLte", ObjectSerializer.serialize(idLte, "number", "int64"));
-        }
-
-        // Query Params
-        if (idGte !== undefined) {
-            requestContext.setQueryParam("idGte", ObjectSerializer.serialize(idGte, "number", "int64"));
-        }
-
-        // Query Params
-        if (createdAt !== undefined) {
-            requestContext.setQueryParam("createdAt", ObjectSerializer.serialize(createdAt, "Date", "date-time"));
-        }
-
-        // Query Params
-        if (createdAtLte !== undefined) {
-            requestContext.setQueryParam("createdAtLte", ObjectSerializer.serialize(createdAtLte, "Date", "date-time"));
-        }
-
-        // Query Params
-        if (createdAtGte !== undefined) {
-            requestContext.setQueryParam("createdAtGte", ObjectSerializer.serialize(createdAtGte, "Date", "date-time"));
-        }
-
-        // Query Params
-        if (updatedAt !== undefined) {
-            requestContext.setQueryParam("updatedAt", ObjectSerializer.serialize(updatedAt, "Date", "date-time"));
-        }
-
-        // Query Params
-        if (updatedAtLte !== undefined) {
-            requestContext.setQueryParam("updatedAtLte", ObjectSerializer.serialize(updatedAtLte, "Date", "date-time"));
-        }
-
-        // Query Params
-        if (updatedAtGte !== undefined) {
-            requestContext.setQueryParam("updatedAtGte", ObjectSerializer.serialize(updatedAtGte, "Date", "date-time"));
+        if (limit !== undefined) {
+            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
 
         // Query Params
@@ -316,16 +236,47 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (path !== undefined) {
-            requestContext.setQueryParam("path", ObjectSerializer.serialize(path, "string", ""));
-        }
-
-        // Query Params
         if (parentFolderIds !== undefined) {
             const serializedParams = ObjectSerializer.serialize(parentFolderIds, "Array<number>", "int64");
             for (const serializedParam of serializedParams) {
                 requestContext.appendQueryParam("parentFolderIds", serializedParam);
             }
+        }
+
+        // Query Params
+        if (path !== undefined) {
+            requestContext.setQueryParam("path", ObjectSerializer.serialize(path, "string", ""));
+        }
+
+        // Query Params
+        if (properties !== undefined) {
+            const serializedParams = ObjectSerializer.serialize(properties, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("properties", serializedParam);
+            }
+        }
+
+        // Query Params
+        if (sort !== undefined) {
+            const serializedParams = ObjectSerializer.serialize(sort, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("sort", serializedParam);
+            }
+        }
+
+        // Query Params
+        if (updatedAt !== undefined) {
+            requestContext.setQueryParam("updatedAt", ObjectSerializer.serialize(updatedAt, "Date", "date-time"));
+        }
+
+        // Query Params
+        if (updatedAtGte !== undefined) {
+            requestContext.setQueryParam("updatedAtGte", ObjectSerializer.serialize(updatedAtGte, "Date", "date-time"));
+        }
+
+        // Query Params
+        if (updatedAtLte !== undefined) {
+            requestContext.setQueryParam("updatedAtLte", ObjectSerializer.serialize(updatedAtLte, "Date", "date-time"));
         }
 
 
@@ -642,42 +593,6 @@ export class FoldersApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "FolderActionResponse", ""
             ) as FolderActionResponse;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to create
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Folder >> {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: Folder = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Folder", ""
-            ) as Folder;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: Folder = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Folder", ""
-            ) as Folder;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

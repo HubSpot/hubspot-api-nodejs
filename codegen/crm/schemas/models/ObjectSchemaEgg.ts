@@ -18,9 +18,30 @@ import { ObjectTypePropertyCreate } from '../models/ObjectTypePropertyCreate';
 */
 export class ObjectSchemaEgg {
     /**
-    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+    * Determines if the object type can include properties that are marked as sensitive.
     */
-    'secondaryDisplayProperties'?: Array<string>;
+    'allowsSensitiveProperties'?: boolean;
+    /**
+    * Associations defined for this object type.
+    */
+    'associatedObjects': Array<string>;
+    /**
+    * A brief explanation of the object type.
+    */
+    'description'?: string;
+    'labels': ObjectTypeDefinitionLabels;
+    /**
+    * A unique name for this object. For internal use only.
+    */
+    'name': string;
+    /**
+    * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
+    */
+    'primaryDisplayProperty'?: string;
+    /**
+    * Properties defined for this object type.
+    */
+    'properties': Array<ObjectTypePropertyCreate>;
     /**
     * The names of properties that should be **required** when creating an object of this type.
     */
@@ -30,23 +51,10 @@ export class ObjectSchemaEgg {
     */
     'searchableProperties'?: Array<string>;
     /**
-    * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
+    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
     */
-    'primaryDisplayProperty'?: string;
-    /**
-    * A unique name for this object. For internal use only.
-    */
-    'name': string;
-    'description'?: string;
-    /**
-    * Associations defined for this object type.
-    */
-    'associatedObjects': Array<string>;
-    /**
-    * Properties defined for this object type.
-    */
-    'properties': Array<ObjectTypePropertyCreate>;
-    'labels': ObjectTypeDefinitionLabels;
+    'secondaryDisplayProperties'?: Array<string>;
+    'shouldCreateSameObjectAssociation'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -54,9 +62,45 @@ export class ObjectSchemaEgg {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "secondaryDisplayProperties",
-            "baseName": "secondaryDisplayProperties",
+            "name": "allowsSensitiveProperties",
+            "baseName": "allowsSensitiveProperties",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "associatedObjects",
+            "baseName": "associatedObjects",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "labels",
+            "baseName": "labels",
+            "type": "ObjectTypeDefinitionLabels",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "primaryDisplayProperty",
+            "baseName": "primaryDisplayProperty",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "properties",
+            "baseName": "properties",
+            "type": "Array<ObjectTypePropertyCreate>",
             "format": ""
         },
         {
@@ -72,39 +116,15 @@ export class ObjectSchemaEgg {
             "format": ""
         },
         {
-            "name": "primaryDisplayProperty",
-            "baseName": "primaryDisplayProperty",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "associatedObjects",
-            "baseName": "associatedObjects",
+            "name": "secondaryDisplayProperties",
+            "baseName": "secondaryDisplayProperties",
             "type": "Array<string>",
             "format": ""
         },
         {
-            "name": "properties",
-            "baseName": "properties",
-            "type": "Array<ObjectTypePropertyCreate>",
-            "format": ""
-        },
-        {
-            "name": "labels",
-            "baseName": "labels",
-            "type": "ObjectTypeDefinitionLabels",
+            "name": "shouldCreateSameObjectAssociation",
+            "baseName": "shouldCreateSameObjectAssociation",
+            "type": "boolean",
             "format": ""
         }    ];
 

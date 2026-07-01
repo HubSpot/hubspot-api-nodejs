@@ -3,7 +3,6 @@ export * from '../models/BatchResponseTimelineEventResponse';
 export * from '../models/BatchResponseTimelineEventResponseWithErrors';
 export * from '../models/CollectionResponseTimelineEventTemplateNoPaging';
 export * from '../models/ErrorDetail';
-export * from '../models/EventDetail';
 export * from '../models/ModelError';
 export * from '../models/StandardError';
 export * from '../models/TimelineEvent';
@@ -21,7 +20,6 @@ import { BatchResponseTimelineEventResponse        } from '../models/BatchRespon
 import { BatchResponseTimelineEventResponseWithErrors          } from '../models/BatchResponseTimelineEventResponseWithErrors';
 import { CollectionResponseTimelineEventTemplateNoPaging } from '../models/CollectionResponseTimelineEventTemplateNoPaging';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { EventDetail } from '../models/EventDetail';
 import { ModelError } from '../models/ModelError';
 import { StandardError } from '../models/StandardError';
 import { TimelineEvent } from '../models/TimelineEvent';
@@ -58,7 +56,6 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseTimelineEventResponseWithErrors": BatchResponseTimelineEventResponseWithErrors,
     "CollectionResponseTimelineEventTemplateNoPaging": CollectionResponseTimelineEventTemplateNoPaging,
     "ErrorDetail": ErrorDetail,
-    "EventDetail": EventDetail,
     "ModelError": ModelError,
     "StandardError": StandardError,
     "TimelineEvent": TimelineEvent,

@@ -17,24 +17,27 @@ import { TopLevelActions } from '../models/TopLevelActions';
 * The card details payload, sent to HubSpot by an app in response to a data fetch request when a user visits a CRM record page.
 */
 export class IntegratorCardPayloadResponse {
-    'responseVersion'?: IntegratorCardPayloadResponseResponseVersionEnum;
-    /**
-    * The label to be used for the `allItemsLinkUrl` link (e.g. \'See more tickets\'). If not provided, this falls back to the card\'s title.
-    */
-    'cardLabel'?: string;
     /**
     * URL to a page the integrator has built that displays all details for this card. This URL will be displayed to users under a `See more [x]` link if there are more than five items in your response, where `[x]` is the value of `itemLabel`.
     */
     'allItemsLinkUrl'?: string;
     /**
-    * The total number of card properties that will be sent in this response.
+    * The label to be used for the `allItemsLinkUrl` link (e.g. \'See more tickets\'). If not provided, this falls back to the card\'s title.
     */
-    'totalCount': number;
-    'topLevelActions'?: TopLevelActions;
+    'cardLabel'?: string;
+    /**
+    * The number version of the response.
+    */
+    'responseVersion'?: IntegratorCardPayloadResponseResponseVersionEnum;
     /**
     * A list of up to five valid card sub categories.
     */
     'sections'?: Array<IntegratorObjectResult>;
+    'topLevelActions'?: TopLevelActions;
+    /**
+    * The total number of card properties that will be sent in this response.
+    */
+    'totalCount': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -42,9 +45,9 @@ export class IntegratorCardPayloadResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "responseVersion",
-            "baseName": "responseVersion",
-            "type": "IntegratorCardPayloadResponseResponseVersionEnum",
+            "name": "allItemsLinkUrl",
+            "baseName": "allItemsLinkUrl",
+            "type": "string",
             "format": ""
         },
         {
@@ -54,16 +57,16 @@ export class IntegratorCardPayloadResponse {
             "format": ""
         },
         {
-            "name": "allItemsLinkUrl",
-            "baseName": "allItemsLinkUrl",
-            "type": "string",
+            "name": "responseVersion",
+            "baseName": "responseVersion",
+            "type": "IntegratorCardPayloadResponseResponseVersionEnum",
             "format": ""
         },
         {
-            "name": "totalCount",
-            "baseName": "totalCount",
-            "type": "number",
-            "format": "int32"
+            "name": "sections",
+            "baseName": "sections",
+            "type": "Array<IntegratorObjectResult>",
+            "format": ""
         },
         {
             "name": "topLevelActions",
@@ -72,10 +75,10 @@ export class IntegratorCardPayloadResponse {
             "format": ""
         },
         {
-            "name": "sections",
-            "baseName": "sections",
-            "type": "Array<IntegratorObjectResult>",
-            "format": ""
+            "name": "totalCount",
+            "baseName": "totalCount",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

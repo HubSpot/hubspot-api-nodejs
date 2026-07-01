@@ -1,15 +1,14 @@
 export * from '../models/AbTestCreateRequestVNext';
 export * from '../models/AggregateEmailStatistics';
-export * from '../models/CollectionResponseWithTotalEmailStatisticIntervalNoPaging';
-export * from '../models/CollectionResponseWithTotalPublicEmailForwardPaging';
-export * from '../models/CollectionResponseWithTotalVersionPublicEmail';
-export * from '../models/ContentCloneRequestVNext';
+export * from '../models/CollectionResponseWithTotalEmailStatisticInterval';
+export * from '../models/CollectionResponseWithTotalPublicEmail';
+export * from '../models/CollectionResponseWithTotalPublicEmailVersion';
+export * from '../models/EmailCloneRequestVNext';
 export * from '../models/EmailCreateRequest';
 export * from '../models/EmailStatisticInterval';
 export * from '../models/EmailStatisticsData';
 export * from '../models/EmailUpdateRequest';
 export * from '../models/ErrorDetail';
-export * from '../models/ForwardPaging';
 export * from '../models/Interval';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
@@ -25,6 +24,7 @@ export * from '../models/PublicEmailStyleSettings';
 export * from '../models/PublicEmailSubscriptionDetails';
 export * from '../models/PublicEmailTestingDetails';
 export * from '../models/PublicEmailToDetails';
+export * from '../models/PublicEmailVersion';
 export * from '../models/PublicFontStyle';
 export * from '../models/PublicRssEmailDetails';
 export * from '../models/PublicWebversionDetails';
@@ -33,16 +33,15 @@ export * from '../models/VersionUser';
 
 import { AbTestCreateRequestVNext } from '../models/AbTestCreateRequestVNext';
 import { AggregateEmailStatistics } from '../models/AggregateEmailStatistics';
-import { CollectionResponseWithTotalEmailStatisticIntervalNoPaging } from '../models/CollectionResponseWithTotalEmailStatisticIntervalNoPaging';
-import { CollectionResponseWithTotalPublicEmailForwardPaging } from '../models/CollectionResponseWithTotalPublicEmailForwardPaging';
-import { CollectionResponseWithTotalVersionPublicEmail } from '../models/CollectionResponseWithTotalVersionPublicEmail';
-import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
-import { EmailCreateRequest            } from '../models/EmailCreateRequest';
+import { CollectionResponseWithTotalEmailStatisticInterval } from '../models/CollectionResponseWithTotalEmailStatisticInterval';
+import { CollectionResponseWithTotalPublicEmail } from '../models/CollectionResponseWithTotalPublicEmail';
+import { CollectionResponseWithTotalPublicEmailVersion } from '../models/CollectionResponseWithTotalPublicEmailVersion';
+import { EmailCloneRequestVNext } from '../models/EmailCloneRequestVNext';
+import { EmailCreateRequest                   } from '../models/EmailCreateRequest';
 import { EmailStatisticInterval } from '../models/EmailStatisticInterval';
 import { EmailStatisticsData } from '../models/EmailStatisticsData';
-import { EmailUpdateRequest           } from '../models/EmailUpdateRequest';
+import { EmailUpdateRequest                  } from '../models/EmailUpdateRequest';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { ForwardPaging } from '../models/ForwardPaging';
 import { Interval } from '../models/Interval';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
@@ -50,16 +49,17 @@ import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
 import { PublicButtonStyleSettings } from '../models/PublicButtonStyleSettings';
 import { PublicDividerStyleSettings } from '../models/PublicDividerStyleSettings';
-import { PublicEmail                                      } from '../models/PublicEmail';
+import { PublicEmail                      } from '../models/PublicEmail';
 import { PublicEmailContent } from '../models/PublicEmailContent';
 import { PublicEmailFromDetails } from '../models/PublicEmailFromDetails';
 import { PublicEmailRecipients } from '../models/PublicEmailRecipients';
-import { PublicEmailStyleSettings } from '../models/PublicEmailStyleSettings';
+import { PublicEmailStyleSettings                                } from '../models/PublicEmailStyleSettings';
 import { PublicEmailSubscriptionDetails } from '../models/PublicEmailSubscriptionDetails';
-import { PublicEmailTestingDetails   } from '../models/PublicEmailTestingDetails';
+import { PublicEmailTestingDetails       } from '../models/PublicEmailTestingDetails';
 import { PublicEmailToDetails } from '../models/PublicEmailToDetails';
+import { PublicEmailVersion } from '../models/PublicEmailVersion';
 import { PublicFontStyle } from '../models/PublicFontStyle';
-import { PublicRssEmailDetails } from '../models/PublicRssEmailDetails';
+import { PublicRssEmailDetails           } from '../models/PublicRssEmailDetails';
 import { PublicWebversionDetails } from '../models/PublicWebversionDetails';
 import { VersionPublicEmail } from '../models/VersionPublicEmail';
 import { VersionUser } from '../models/VersionUser';
@@ -83,28 +83,30 @@ let enumsMap: Set<string> = new Set<string>([
     "EmailUpdateRequestLanguageEnum",
     "EmailUpdateRequestStateEnum",
     "EmailUpdateRequestSubcategoryEnum",
+    "PublicEmailEmailTemplateModeEnum",
     "PublicEmailLanguageEnum",
-    "PublicEmailTypeEnum",
     "PublicEmailStateEnum",
-    "PublicEmailTestingDetailsAbSamplingDefaultEnum",
+    "PublicEmailTypeEnum",
+    "PublicEmailStyleSettingsBackgroundImageTypeEnum",
     "PublicEmailTestingDetailsAbSampleSizeDefaultEnum",
+    "PublicEmailTestingDetailsAbSamplingDefaultEnum",
     "PublicEmailTestingDetailsAbStatusEnum",
     "PublicEmailTestingDetailsAbSuccessMetricEnum",
+    "PublicRssEmailDetailsBlogLayoutEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
     "AbTestCreateRequestVNext": AbTestCreateRequestVNext,
     "AggregateEmailStatistics": AggregateEmailStatistics,
-    "CollectionResponseWithTotalEmailStatisticIntervalNoPaging": CollectionResponseWithTotalEmailStatisticIntervalNoPaging,
-    "CollectionResponseWithTotalPublicEmailForwardPaging": CollectionResponseWithTotalPublicEmailForwardPaging,
-    "CollectionResponseWithTotalVersionPublicEmail": CollectionResponseWithTotalVersionPublicEmail,
-    "ContentCloneRequestVNext": ContentCloneRequestVNext,
+    "CollectionResponseWithTotalEmailStatisticInterval": CollectionResponseWithTotalEmailStatisticInterval,
+    "CollectionResponseWithTotalPublicEmail": CollectionResponseWithTotalPublicEmail,
+    "CollectionResponseWithTotalPublicEmailVersion": CollectionResponseWithTotalPublicEmailVersion,
+    "EmailCloneRequestVNext": EmailCloneRequestVNext,
     "EmailCreateRequest": EmailCreateRequest,
     "EmailStatisticInterval": EmailStatisticInterval,
     "EmailStatisticsData": EmailStatisticsData,
     "EmailUpdateRequest": EmailUpdateRequest,
     "ErrorDetail": ErrorDetail,
-    "ForwardPaging": ForwardPaging,
     "Interval": Interval,
     "ModelError": ModelError,
     "NextPage": NextPage,
@@ -120,6 +122,7 @@ let typeMap: {[index: string]: any} = {
     "PublicEmailSubscriptionDetails": PublicEmailSubscriptionDetails,
     "PublicEmailTestingDetails": PublicEmailTestingDetails,
     "PublicEmailToDetails": PublicEmailToDetails,
+    "PublicEmailVersion": PublicEmailVersion,
     "PublicFontStyle": PublicFontStyle,
     "PublicRssEmailDetails": PublicRssEmailDetails,
     "PublicWebversionDetails": PublicWebversionDetails,

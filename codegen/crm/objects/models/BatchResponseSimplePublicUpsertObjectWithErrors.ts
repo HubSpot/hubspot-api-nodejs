@@ -13,14 +13,35 @@
 import { SimplePublicUpsertObject } from '../models/SimplePublicUpsertObject';
 import { StandardError } from '../models/StandardError';
 
+/**
+* Represents the response from a batch upsert operation, including the status, timestamps, successfully processed objects, and any errors that occurred during processing.
+*/
 export class BatchResponseSimplePublicUpsertObjectWithErrors {
+    /**
+    * The timestamp when the batch process was completed, in ISO 8601 format.
+    */
     'completedAt': Date;
-    'numErrors'?: number;
-    'requestedAt'?: Date;
-    'startedAt': Date;
-    'links'?: { [key: string]: string; };
-    'results': Array<SimplePublicUpsertObject>;
     'errors'?: Array<StandardError>;
+    /**
+    * An object containing relevant links related to the batch request.
+    */
+    'links'?: { [key: string]: string; };
+    /**
+    * The number of errors encountered during the batch process.
+    */
+    'numErrors'?: number;
+    /**
+    * The timestamp when the batch process was initiated, in ISO 8601 format.
+    */
+    'requestedAt'?: Date;
+    'results': Array<SimplePublicUpsertObject>;
+    /**
+    * The timestamp when the batch process began execution, in ISO 8601 format.
+    */
+    'startedAt': Date;
+    /**
+    * The status of the batch processing request. Can be: \"PENDING\", \"PROCESSING\", \"CANCELLED\", or \"COMPLETE\".
+    */
     'status': BatchResponseSimplePublicUpsertObjectWithErrorsStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -35,6 +56,18 @@ export class BatchResponseSimplePublicUpsertObjectWithErrors {
             "format": "date-time"
         },
         {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
             "name": "numErrors",
             "baseName": "numErrors",
             "type": "number",
@@ -47,28 +80,16 @@ export class BatchResponseSimplePublicUpsertObjectWithErrors {
             "format": "date-time"
         },
         {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
             "name": "results",
             "baseName": "results",
             "type": "Array<SimplePublicUpsertObject>",
             "format": ""
         },
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -86,9 +107,9 @@ export class BatchResponseSimplePublicUpsertObjectWithErrors {
 }
 
 export enum BatchResponseSimplePublicUpsertObjectWithErrorsStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

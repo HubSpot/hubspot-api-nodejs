@@ -13,14 +13,41 @@
 import { StandardError } from '../models/StandardError';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 
+/**
+* Response for batch operations on webhook subscriptions, containing successful results and any errors that occurred.
+*/
 export class BatchResponseSubscriptionResponseWithErrors {
+    /**
+    * The timestamp when the batch operation completed, in ISO 8601 format (e.g., 2020-02-29T12:30:00Z).
+    */
     'completedAt': Date;
-    'numErrors'?: number;
-    'requestedAt'?: Date;
-    'startedAt': Date;
-    'links'?: { [key: string]: string; };
-    'results': Array<SubscriptionResponse>;
+    /**
+    * An array containing error details for any subscriptions that failed to process during the batch operation.
+    */
     'errors'?: Array<StandardError>;
+    /**
+    * An object containing URLs for related resources or operations.
+    */
+    'links'?: { [key: string]: string; };
+    /**
+    * The number of errors that occurred during the batch operation.
+    */
+    'numErrors'?: number;
+    /**
+    * The timestamp when the batch operation was requested, in ISO 8601 format (e.g., 2020-02-29T12:30:00Z).
+    */
+    'requestedAt'?: Date;
+    /**
+    * An array containing the successfully processed webhook subscriptions from the batch operation.
+    */
+    'results': Array<SubscriptionResponse>;
+    /**
+    * The timestamp when the batch operation started processing, in ISO 8601 format (e.g., 2020-02-29T12:30:00Z).
+    */
+    'startedAt': Date;
+    /**
+    * The status of the batch operation. Accepted values are PENDING, PROCESSING, CANCELED, or COMPLETE.
+    */
     'status': BatchResponseSubscriptionResponseWithErrorsStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -35,6 +62,18 @@ export class BatchResponseSubscriptionResponseWithErrors {
             "format": "date-time"
         },
         {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
             "name": "numErrors",
             "baseName": "numErrors",
             "type": "number",
@@ -47,28 +86,16 @@ export class BatchResponseSubscriptionResponseWithErrors {
             "format": "date-time"
         },
         {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
             "name": "results",
             "baseName": "results",
             "type": "Array<SubscriptionResponse>",
             "format": ""
         },
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -86,9 +113,9 @@ export class BatchResponseSubscriptionResponseWithErrors {
 }
 
 export enum BatchResponseSubscriptionResponseWithErrorsStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

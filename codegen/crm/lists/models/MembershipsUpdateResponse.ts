@@ -16,20 +16,26 @@
 */
 export class MembershipsUpdateResponse {
     /**
+    * The IDs of the records that were `missing` (e.g. did not exist in the portal) and so were not `added` or `removed`.
+    */
+    'recordIdsMissing': Array<string>;
+    /**
     * The IDs of the records that were `removed` from the list.
     */
     'recordIdsRemoved': Array<string>;
     'recordsIdsAdded': Array<string>;
-    /**
-    * The IDs of the records that were `missing` (e.g. did not exist in the portal) and so were not `added` or `removed`.
-    */
-    'recordIdsMissing': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "recordIdsMissing",
+            "baseName": "recordIdsMissing",
+            "type": "Array<string>",
+            "format": ""
+        },
         {
             "name": "recordIdsRemoved",
             "baseName": "recordIdsRemoved",
@@ -39,12 +45,6 @@ export class MembershipsUpdateResponse {
         {
             "name": "recordsIdsAdded",
             "baseName": "recordsIdsAdded",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "recordIdsMissing",
-            "baseName": "recordIdsMissing",
             "type": "Array<string>",
             "format": ""
         }    ];

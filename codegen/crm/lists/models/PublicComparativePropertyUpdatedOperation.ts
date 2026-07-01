@@ -12,10 +12,25 @@
 
 
 export class PublicComparativePropertyUpdatedOperation {
-    'includeObjectsWithNoValueSet': boolean;
-    'defaultComparisonValue'?: string;
-    'operationType': PublicComparativePropertyUpdatedOperationOperationTypeEnum;
+    /**
+    * The name of the property to compare against in the operation.
+    */
     'comparisonPropertyName': string;
+    /**
+    * The default value used for comparison if the actual comparison property value is not set.
+    */
+    'defaultComparisonValue'?: string;
+    /**
+    * Indicates whether objects with no value set for the property should be included in the operation.
+    */
+    'includeObjectsWithNoValueSet': boolean;
+    /**
+    * Specifies the type of operation (COMPARATIVE_PROPERTY_UPDATED).
+    */
+    'operationType': PublicComparativePropertyUpdatedOperationOperationTypeEnum;
+    /**
+    * Defines the operation to be applied, such as comparison operators (IS_BEFORE, IS_AFTER).
+    */
     'operator': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -24,9 +39,9 @@ export class PublicComparativePropertyUpdatedOperation {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "includeObjectsWithNoValueSet",
-            "baseName": "includeObjectsWithNoValueSet",
-            "type": "boolean",
+            "name": "comparisonPropertyName",
+            "baseName": "comparisonPropertyName",
+            "type": "string",
             "format": ""
         },
         {
@@ -36,15 +51,15 @@ export class PublicComparativePropertyUpdatedOperation {
             "format": ""
         },
         {
-            "name": "operationType",
-            "baseName": "operationType",
-            "type": "PublicComparativePropertyUpdatedOperationOperationTypeEnum",
+            "name": "includeObjectsWithNoValueSet",
+            "baseName": "includeObjectsWithNoValueSet",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "comparisonPropertyName",
-            "baseName": "comparisonPropertyName",
-            "type": "string",
+            "name": "operationType",
+            "baseName": "operationType",
+            "type": "PublicComparativePropertyUpdatedOperationOperationTypeEnum",
             "format": ""
         },
         {

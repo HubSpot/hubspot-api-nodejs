@@ -24,6 +24,7 @@ import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/Batch
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive multiple invoices by their IDs in a single request. This operation moves the specified invoices to the archive, making them inactive but retrievable for future reference.
      * Archive a batch of invoices by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -71,6 +72,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Create multiple invoices at once by providing a batch of invoice data, and receive a response with details of the created invoices, including their IDs.
      * Create a batch of invoices
      * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
@@ -173,6 +175,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Update multiple invoices in a single request using either their internal IDs or unique property values. This endpoint allows for efficient batch processing of invoice updates, ensuring that changes are applied consistently across multiple records.
      * Update a batch of invoices by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */

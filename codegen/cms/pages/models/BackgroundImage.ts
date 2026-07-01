@@ -13,17 +13,17 @@
 
 export class BackgroundImage {
     /**
-    * 
+    * Defines the position of the background image.
     */
-    'imageUrl': string;
+    'backgroundPosition': string;
     /**
-    * 
+    * Specifies the size of the background image.
     */
     'backgroundSize': string;
     /**
-    * 
+    * The URL of the background image.
     */
-    'backgroundPosition': string;
+    'imageUrl': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -31,8 +31,8 @@ export class BackgroundImage {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "imageUrl",
-            "baseName": "imageUrl",
+            "name": "backgroundPosition",
+            "baseName": "backgroundPosition",
             "type": "string",
             "format": ""
         },
@@ -43,8 +43,8 @@ export class BackgroundImage {
             "format": ""
         },
         {
-            "name": "backgroundPosition",
-            "baseName": "backgroundPosition",
+            "name": "imageUrl",
+            "baseName": "imageUrl",
             "type": "string",
             "format": ""
         }    ];

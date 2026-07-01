@@ -7,6 +7,8 @@ export * from '../models/CardDisplayBody';
 export * from '../models/CardDisplayProperty';
 export * from '../models/CardFetchBody';
 export * from '../models/CardFetchBodyPatch';
+export * from '../models/CardMigrateViewsRequest';
+export * from '../models/CardMigrateViewsResponse';
 export * from '../models/CardObjectTypeBody';
 export * from '../models/CardPatchRequest';
 export * from '../models/DisplayOption';
@@ -21,9 +23,10 @@ export * from '../models/PublicCardFetchBody';
 export * from '../models/PublicCardListResponse';
 export * from '../models/PublicCardResponse';
 export * from '../models/TopLevelActions';
+export * from '../models/TopLevelActionsPrimary';
 
 import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
-import { ActionHookActionBody       } from '../models/ActionHookActionBody';
+import { ActionHookActionBody     } from '../models/ActionHookActionBody';
 import { CardActions } from '../models/CardActions';
 import { CardAuditResponse      } from '../models/CardAuditResponse';
 import { CardCreateRequest } from '../models/CardCreateRequest';
@@ -31,6 +34,8 @@ import { CardDisplayBody } from '../models/CardDisplayBody';
 import { CardDisplayProperty      } from '../models/CardDisplayProperty';
 import { CardFetchBody      } from '../models/CardFetchBody';
 import { CardFetchBodyPatch      } from '../models/CardFetchBodyPatch';
+import { CardMigrateViewsRequest } from '../models/CardMigrateViewsRequest';
+import { CardMigrateViewsResponse } from '../models/CardMigrateViewsResponse';
 import { CardObjectTypeBody    } from '../models/CardObjectTypeBody';
 import { CardPatchRequest } from '../models/CardPatchRequest';
 import { DisplayOption     } from '../models/DisplayOption';
@@ -45,6 +50,7 @@ import { PublicCardFetchBody } from '../models/PublicCardFetchBody';
 import { PublicCardListResponse } from '../models/PublicCardListResponse';
 import { PublicCardResponse } from '../models/PublicCardResponse';
 import { TopLevelActions } from '../models/TopLevelActions';
+import { TopLevelActionsPrimaryClass } from '../models/TopLevelActionsPrimary';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -59,8 +65,8 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
-    "ActionHookActionBodyTypeEnum",
     "ActionHookActionBodyHttpMethodEnum",
+    "ActionHookActionBodyTypeEnum",
     "CardAuditResponseActionTypeEnum",
     "CardAuditResponseAuthSourceEnum",
     "CardDisplayPropertyDataTypeEnum",
@@ -70,9 +76,11 @@ let enumsMap: Set<string> = new Set<string>([
     "DisplayOptionTypeEnum",
     "IFrameActionBodyTypeEnum",
     "IntegratorCardPayloadResponseResponseVersionEnum",
-    "IntegratorObjectResultActionsInnerTypeEnum",
     "IntegratorObjectResultActionsInnerHttpMethodEnum",
+    "IntegratorObjectResultActionsInnerTypeEnum",
     "ObjectTokenDataTypeEnum",
+    "TopLevelActionsPrimaryHttpMethodEnum",
+    "TopLevelActionsPrimaryTypeEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -85,6 +93,8 @@ let typeMap: {[index: string]: any} = {
     "CardDisplayProperty": CardDisplayProperty,
     "CardFetchBody": CardFetchBody,
     "CardFetchBodyPatch": CardFetchBodyPatch,
+    "CardMigrateViewsRequest": CardMigrateViewsRequest,
+    "CardMigrateViewsResponse": CardMigrateViewsResponse,
     "CardObjectTypeBody": CardObjectTypeBody,
     "CardPatchRequest": CardPatchRequest,
     "DisplayOption": DisplayOption,
@@ -99,6 +109,7 @@ let typeMap: {[index: string]: any} = {
     "PublicCardListResponse": PublicCardListResponse,
     "PublicCardResponse": PublicCardResponse,
     "TopLevelActions": TopLevelActions,
+    "TopLevelActionsPrimary": TopLevelActionsPrimaryClass,
 }
 
 type MimeTypeDescriptor = {

@@ -12,11 +12,29 @@
 
 
 export class PublicWeekReference {
+    /**
+    * The day of the week (SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY).
+    */
     'dayOfWeek': PublicWeekReferenceDayOfWeekEnum;
+    /**
+    * The hour component of the week reference.
+    */
     'hour'?: number;
+    /**
+    * The millisecond component of the week reference.
+    */
     'millisecond'?: number;
-    'referenceType': PublicWeekReferenceReferenceTypeEnum;
+    /**
+    * The minute component of the week reference.
+    */
     'minute'?: number;
+    /**
+    * Indicates the type of reference (WEEK).
+    */
+    'referenceType': PublicWeekReferenceReferenceTypeEnum;
+    /**
+    * The second component of the week reference.
+    */
     'second'?: number;
 
     static readonly discriminator: string | undefined = undefined;
@@ -43,16 +61,16 @@ export class PublicWeekReference {
             "format": "int32"
         },
         {
-            "name": "referenceType",
-            "baseName": "referenceType",
-            "type": "PublicWeekReferenceReferenceTypeEnum",
-            "format": ""
-        },
-        {
             "name": "minute",
             "baseName": "minute",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "referenceType",
+            "baseName": "referenceType",
+            "type": "PublicWeekReferenceReferenceTypeEnum",
+            "format": ""
         },
         {
             "name": "second",
@@ -70,13 +88,13 @@ export class PublicWeekReference {
 }
 
 export enum PublicWeekReferenceDayOfWeekEnum {
-    Monday = 'MONDAY',
-    Tuesday = 'TUESDAY',
-    Wednesday = 'WEDNESDAY',
-    Thursday = 'THURSDAY',
     Friday = 'FRIDAY',
+    Monday = 'MONDAY',
     Saturday = 'SATURDAY',
-    Sunday = 'SUNDAY'
+    Sunday = 'SUNDAY',
+    Thursday = 'THURSDAY',
+    Tuesday = 'TUESDAY',
+    Wednesday = 'WEDNESDAY'
 }
 export enum PublicWeekReferenceReferenceTypeEnum {
     Week = 'WEEK'

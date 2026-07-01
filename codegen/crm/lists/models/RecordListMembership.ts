@@ -15,17 +15,50 @@
 * Lists record is member of
 */
 export class RecordListMembership {
-    'listId': string;
-    'listVersion': number;
-    'lastAddedTimestamp': Date;
+    /**
+    * The timestamp when the record was first added to the list.
+    */
+    'firstAddedTimestamp'?: Date;
+    /**
+    * Indicates whether the list is public.
+    */
     'isPublicList'?: boolean;
-    'firstAddedTimestamp': Date;
+    /**
+    * The timestamp when the record was last added to the list.
+    */
+    'lastAddedTimestamp'?: Date;
+    /**
+    * The unique identifier of the list.
+    */
+    'listId': string;
+    /**
+    * The version number of the list.
+    */
+    'listVersion': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "firstAddedTimestamp",
+            "baseName": "firstAddedTimestamp",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "isPublicList",
+            "baseName": "isPublicList",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "lastAddedTimestamp",
+            "baseName": "lastAddedTimestamp",
+            "type": "Date",
+            "format": "date-time"
+        },
         {
             "name": "listId",
             "baseName": "listId",
@@ -37,24 +70,6 @@ export class RecordListMembership {
             "baseName": "listVersion",
             "type": "number",
             "format": "int32"
-        },
-        {
-            "name": "lastAddedTimestamp",
-            "baseName": "lastAddedTimestamp",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "isPublicList",
-            "baseName": "isPublicList",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "firstAddedTimestamp",
-            "baseName": "firstAddedTimestamp",
-            "type": "Date",
-            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

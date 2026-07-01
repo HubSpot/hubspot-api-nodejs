@@ -4,28 +4,70 @@ import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { ActionResponse } from '../models/ActionResponse';
 import { CollectionResponsePublicImportErrorForwardPaging } from '../models/CollectionResponsePublicImportErrorForwardPaging';
-import { CollectionResponsePublicImportResponse } from '../models/CollectionResponsePublicImportResponse';
+import { CollectionResponsePublicImportResponseForwardPaging } from '../models/CollectionResponsePublicImportResponseForwardPaging';
 import { PublicImportResponse } from '../models/PublicImportResponse';
-import { ObservableCoreApi } from './ObservableAPI';
+import { ObservableAdvancedApi } from './ObservableAPI';
 
-import { CoreApiRequestFactory, CoreApiResponseProcessor} from "../apis/CoreApi";
-export class PromiseCoreApi {
-    private api: ObservableCoreApi
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
+export class PromiseAdvancedApi {
+    private api: ObservableAdvancedApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: CoreApiRequestFactory,
-        responseProcessor?: CoreApiResponseProcessor
+        requestFactory?: AdvancedApiRequestFactory,
+        responseProcessor?: AdvancedApiResponseProcessor
     ) {
-        this.api = new ObservableCoreApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableAdvancedApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param [files]
+     * @param [importRequest]
+     */
+    public crmV3ImportsWithHttpInfo(files?: HttpFile, importRequest?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicImportResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.crmV3ImportsWithHttpInfo(files, importRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * @param [files]
+     * @param [importRequest]
+     */
+    public crmV3Imports(files?: HttpFile, importRequest?: string, _options?: PromiseConfigurationOptions): Promise<PublicImportResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.crmV3Imports(files, importRequest, observableOptions);
+        return result.toPromise();
     }
 
     /**
      * This allows a developer to cancel an active import.
      * Cancel an active import
-     * @param importId
+     * @param importId 
      */
-    public cancelWithHttpInfo(importId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ActionResponse>> {
+    public crmV3ImportsImportIdCancelWithHttpInfo(importId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ActionResponse>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -38,16 +80,16 @@ export class PromiseCoreApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.cancelWithHttpInfo(importId, observableOptions);
+        const result = this.api.crmV3ImportsImportIdCancelWithHttpInfo(importId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * This allows a developer to cancel an active import.
      * Cancel an active import
-     * @param importId
+     * @param importId 
      */
-    public cancel(importId: number, _options?: PromiseConfigurationOptions): Promise<ActionResponse> {
+    public crmV3ImportsImportIdCancel(importId: number, _options?: PromiseConfigurationOptions): Promise<ActionResponse> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -60,145 +102,7 @@ export class PromiseCoreApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.cancel(importId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Begins importing data from the specified file resources. This uploads the corresponding file and uses the import request object to convert rows in the files to objects.
-     * Start a new import
-     * @param [files]
-     * @param [importRequest]
-     */
-    public createWithHttpInfo(files?: HttpFile, importRequest?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicImportResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.createWithHttpInfo(files, importRequest, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Begins importing data from the specified file resources. This uploads the corresponding file and uses the import request object to convert rows in the files to objects.
-     * Start a new import
-     * @param [files]
-     * @param [importRequest]
-     */
-    public create(files?: HttpFile, importRequest?: string, _options?: PromiseConfigurationOptions): Promise<PublicImportResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.create(files, importRequest, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * A complete summary of an import record, including any updates.
-     * Get the information on any import
-     * @param importId
-     */
-    public getByIdWithHttpInfo(importId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicImportResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getByIdWithHttpInfo(importId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * A complete summary of an import record, including any updates.
-     * Get the information on any import
-     * @param importId
-     */
-    public getById(importId: number, _options?: PromiseConfigurationOptions): Promise<PublicImportResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getById(importId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Returns a paged list of active imports for this account.
-     * Get active imports
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [before]
-     * @param [limit] The maximum number of results to display per page.
-     */
-    public getPageWithHttpInfo(after?: string, before?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicImportResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getPageWithHttpInfo(after, before, limit, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Returns a paged list of active imports for this account.
-     * Get active imports
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [before]
-     * @param [limit] The maximum number of results to display per page.
-     */
-    public getPage(after?: string, before?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicImportResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getPage(after, before, limit, observableOptions);
+        const result = this.api.crmV3ImportsImportIdCancel(importId, observableOptions);
         return result.toPromise();
     }
 
@@ -207,28 +111,25 @@ export class PromiseCoreApi {
 
 
 
-import { ObservablePublicImportsApi } from './ObservableAPI';
+import { ObservableBasicApi } from './ObservableAPI';
 
-import { PublicImportsApiRequestFactory, PublicImportsApiResponseProcessor} from "../apis/PublicImportsApi";
-export class PromisePublicImportsApi {
-    private api: ObservablePublicImportsApi
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class PromiseBasicApi {
+    private api: ObservableBasicApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicImportsApiRequestFactory,
-        responseProcessor?: PublicImportsApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
-        this.api = new ObservablePublicImportsApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * @param importId
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [limit] The maximum number of results to display per page.
-     * @param [includeErrorMessage] Set to True to receive a message explaining the error.
-     * @param [includeRowData] Set to True to receive the data values for the errored row.
+     * @param [after]
+     * @param [limit]
      */
-    public getErrorsWithHttpInfo(importId: number, after?: string, limit?: number, includeErrorMessage?: boolean, includeRowData?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicImportErrorForwardPaging>> {
+    public crmV3ImportsWithHttpInfo(after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicImportResponseForwardPaging>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -241,18 +142,15 @@ export class PromisePublicImportsApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getErrorsWithHttpInfo(importId, after, limit, includeErrorMessage, includeRowData, observableOptions);
+        const result = this.api.crmV3ImportsWithHttpInfo(after, limit, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * @param importId
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [limit] The maximum number of results to display per page.
-     * @param [includeErrorMessage] Set to True to receive a message explaining the error.
-     * @param [includeRowData] Set to True to receive the data values for the errored row.
+     * @param [after]
+     * @param [limit]
      */
-    public getErrors(importId: number, after?: string, limit?: number, includeErrorMessage?: boolean, includeRowData?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicImportErrorForwardPaging> {
+    public crmV3Imports(after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicImportResponseForwardPaging> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -265,7 +163,103 @@ export class PromisePublicImportsApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getErrors(importId, after, limit, includeErrorMessage, includeRowData, observableOptions);
+        const result = this.api.crmV3Imports(after, limit, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * A complete summary of an import record, including any updates.
+     * Get the information on any import
+     * @param importId 
+     */
+    public crmV3ImportsImportIdWithHttpInfo(importId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicImportResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.crmV3ImportsImportIdWithHttpInfo(importId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * A complete summary of an import record, including any updates.
+     * Get the information on any import
+     * @param importId 
+     */
+    public crmV3ImportsImportId(importId: number, _options?: PromiseConfigurationOptions): Promise<PublicImportResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.crmV3ImportsImportId(importId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieves detailed error records for a specific import operation, enabling you to identify and troubleshoot records that failed during processing.
+     * Retrieve errors for a specific import
+     * @param importId 
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [includeErrorMessage] 
+     * @param [includeRowData] 
+     * @param [limit] The maximum number of results to display per page.
+     */
+    public crmV3ImportsImportIdErrorsWithHttpInfo(importId: number, after?: string, includeErrorMessage?: boolean, includeRowData?: boolean, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicImportErrorForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.crmV3ImportsImportIdErrorsWithHttpInfo(importId, after, includeErrorMessage, includeRowData, limit, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieves detailed error records for a specific import operation, enabling you to identify and troubleshoot records that failed during processing.
+     * Retrieve errors for a specific import
+     * @param importId 
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [includeErrorMessage] 
+     * @param [includeRowData] 
+     * @param [limit] The maximum number of results to display per page.
+     */
+    public crmV3ImportsImportIdErrors(importId: number, after?: string, includeErrorMessage?: boolean, includeRowData?: boolean, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicImportErrorForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.crmV3ImportsImportIdErrors(importId, after, includeErrorMessage, includeRowData, limit, observableOptions);
         return result.toPromise();
     }
 

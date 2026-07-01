@@ -16,13 +16,13 @@
 */
 export class DisplayOption {
     /**
-    * JSON-friendly unique name for option.
-    */
-    'name': string;
-    /**
     * The text that will be displayed to users for this option.
     */
     'label': string;
+    /**
+    * JSON-friendly unique name for option.
+    */
+    'name': string;
     /**
     * The type of status.
     */
@@ -34,14 +34,14 @@ export class DisplayOption {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "label",
+            "baseName": "label",
             "type": "string",
             "format": ""
         },
         {
-            "name": "label",
-            "baseName": "label",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -61,10 +61,10 @@ export class DisplayOption {
 }
 
 export enum DisplayOptionTypeEnum {
-    Default = 'DEFAULT',
-    Success = 'SUCCESS',
-    Warning = 'WARNING',
     Danger = 'DANGER',
-    Info = 'INFO'
+    Default = 'DEFAULT',
+    Info = 'INFO',
+    Success = 'SUCCESS',
+    Warning = 'WARNING'
 }
 

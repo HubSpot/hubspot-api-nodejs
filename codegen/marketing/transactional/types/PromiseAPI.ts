@@ -7,18 +7,18 @@ import { EmailSendStatusView } from '../models/EmailSendStatusView';
 import { PublicSingleSendRequestEgg } from '../models/PublicSingleSendRequestEgg';
 import { SmtpApiTokenRequestEgg } from '../models/SmtpApiTokenRequestEgg';
 import { SmtpApiTokenView } from '../models/SmtpApiTokenView';
-import { ObservablePublicSMTPTokensApi } from './ObservableAPI';
+import { ObservableSMTPTokensApi } from './ObservableAPI';
 
-import { PublicSMTPTokensApiRequestFactory, PublicSMTPTokensApiResponseProcessor} from "../apis/PublicSMTPTokensApi";
-export class PromisePublicSMTPTokensApi {
-    private api: ObservablePublicSMTPTokensApi
+import { SMTPTokensApiRequestFactory, SMTPTokensApiResponseProcessor} from "../apis/SMTPTokensApi";
+export class PromiseSMTPTokensApi {
+    private api: ObservableSMTPTokensApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicSMTPTokensApiRequestFactory,
-        responseProcessor?: PublicSMTPTokensApiResponseProcessor
+        requestFactory?: SMTPTokensApiRequestFactory,
+        responseProcessor?: SMTPTokensApiResponseProcessor
     ) {
-        this.api = new ObservablePublicSMTPTokensApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableSMTPTokensApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -68,7 +68,7 @@ export class PromisePublicSMTPTokensApi {
     /**
      * Create a SMTP API token.
      * Create a SMTP API token.
-     * @param smtpApiTokenRequestEgg A request object that includes the campaign name tied to the token and whether contacts should be created for email recipients.
+     * @param smtpApiTokenRequestEgg
      */
     public createTokenWithHttpInfo(smtpApiTokenRequestEgg: SmtpApiTokenRequestEgg, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SmtpApiTokenView>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -90,7 +90,7 @@ export class PromisePublicSMTPTokensApi {
     /**
      * Create a SMTP API token.
      * Create a SMTP API token.
-     * @param smtpApiTokenRequestEgg A request object that includes the campaign name tied to the token and whether contacts should be created for email recipients.
+     * @param smtpApiTokenRequestEgg
      */
     public createToken(smtpApiTokenRequestEgg: SmtpApiTokenRequestEgg, _options?: PromiseConfigurationOptions): Promise<SmtpApiTokenView> {
         let observableOptions: undefined | ConfigurationOptions
@@ -156,12 +156,12 @@ export class PromisePublicSMTPTokensApi {
     /**
      * Query multiple SMTP API tokens by campaign name or a single token by emailCampaignId.
      * Query SMTP API tokens by campaign name or an emailCampaignId.
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param [campaignName] A name for the campaign tied to the SMTP API token.
      * @param [emailCampaignId] Identifier assigned to the campaign provided during the token creation.
-     * @param [after] Starting point to get the next set of results.
-     * @param [limit] Maximum number of tokens to return.
+     * @param [limit] The maximum number of results to display per page.
      */
-    public getTokensPageWithHttpInfo(campaignName?: string, emailCampaignId?: string, after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseSmtpApiTokenViewForwardPaging>> {
+    public getTokensPageWithHttpInfo(after?: string, campaignName?: string, emailCampaignId?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseSmtpApiTokenViewForwardPaging>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -174,19 +174,19 @@ export class PromisePublicSMTPTokensApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getTokensPageWithHttpInfo(campaignName, emailCampaignId, after, limit, observableOptions);
+        const result = this.api.getTokensPageWithHttpInfo(after, campaignName, emailCampaignId, limit, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Query multiple SMTP API tokens by campaign name or a single token by emailCampaignId.
      * Query SMTP API tokens by campaign name or an emailCampaignId.
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param [campaignName] A name for the campaign tied to the SMTP API token.
      * @param [emailCampaignId] Identifier assigned to the campaign provided during the token creation.
-     * @param [after] Starting point to get the next set of results.
-     * @param [limit] Maximum number of tokens to return.
+     * @param [limit] The maximum number of results to display per page.
      */
-    public getTokensPage(campaignName?: string, emailCampaignId?: string, after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponseSmtpApiTokenViewForwardPaging> {
+    public getTokensPage(after?: string, campaignName?: string, emailCampaignId?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponseSmtpApiTokenViewForwardPaging> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -199,7 +199,7 @@ export class PromisePublicSMTPTokensApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getTokensPage(campaignName, emailCampaignId, after, limit, observableOptions);
+        const result = this.api.getTokensPage(after, campaignName, emailCampaignId, limit, observableOptions);
         return result.toPromise();
     }
 
@@ -252,24 +252,24 @@ export class PromisePublicSMTPTokensApi {
 
 
 
-import { ObservableSingleSendApi } from './ObservableAPI';
+import { ObservableSendTransactionalEmailApi } from './ObservableAPI';
 
-import { SingleSendApiRequestFactory, SingleSendApiResponseProcessor} from "../apis/SingleSendApi";
-export class PromiseSingleSendApi {
-    private api: ObservableSingleSendApi
+import { SendTransactionalEmailApiRequestFactory, SendTransactionalEmailApiResponseProcessor} from "../apis/SendTransactionalEmailApi";
+export class PromiseSendTransactionalEmailApi {
+    private api: ObservableSendTransactionalEmailApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: SingleSendApiRequestFactory,
-        responseProcessor?: SingleSendApiResponseProcessor
+        requestFactory?: SendTransactionalEmailApiRequestFactory,
+        responseProcessor?: SendTransactionalEmailApiResponseProcessor
     ) {
-        this.api = new ObservableSingleSendApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableSendTransactionalEmailApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
      * Asynchronously send a transactional email. Returns the status of the email send with a statusId that can be used to continuously query for the status using the Email Send Status API.
-     * Send a single transactional email asynchronously.
-     * @param publicSingleSendRequestEgg A request object describing the email to send.
+     * Send a single send transactional email asynchronously.
+     * @param publicSingleSendRequestEgg
      */
     public sendEmailWithHttpInfo(publicSingleSendRequestEgg: PublicSingleSendRequestEgg, _options?: PromiseConfigurationOptions): Promise<HttpInfo<EmailSendStatusView>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -290,8 +290,8 @@ export class PromiseSingleSendApi {
 
     /**
      * Asynchronously send a transactional email. Returns the status of the email send with a statusId that can be used to continuously query for the status using the Email Send Status API.
-     * Send a single transactional email asynchronously.
-     * @param publicSingleSendRequestEgg A request object describing the email to send.
+     * Send a single send transactional email asynchronously.
+     * @param publicSingleSendRequestEgg
      */
     public sendEmail(publicSingleSendRequestEgg: PublicSingleSendRequestEgg, _options?: PromiseConfigurationOptions): Promise<EmailSendStatusView> {
         let observableOptions: undefined | ConfigurationOptions

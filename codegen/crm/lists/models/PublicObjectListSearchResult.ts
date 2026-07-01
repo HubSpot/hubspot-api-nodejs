@@ -13,17 +13,21 @@
 
 export class PublicObjectListSearchResult {
     /**
-    * The processing type of the list.
+    * The name and value of any additional properties that exist for this list and that were included in the search request.
     */
-    'processingType': string;
+    'additionalProperties': { [key: string]: string; };
     /**
-    * The object type of the list.
+    * The time when the list was created.
     */
-    'objectTypeId': string;
+    'createdAt'?: Date;
     /**
-    * The ID of the user that last updated the list.
+    * The ID of the user that created the list.
     */
-    'updatedById'?: string;
+    'createdById'?: string;
+    /**
+    * The time when the list was deleted.
+    */
+    'deletedAt'?: Date;
     /**
     * The time when the filters for this list were last updated.
     */
@@ -33,18 +37,6 @@ export class PublicObjectListSearchResult {
     */
     'listId': string;
     /**
-    * The time when the list was created.
-    */
-    'createdAt'?: Date;
-    /**
-    * The processing status of the list.
-    */
-    'processingStatus': string;
-    /**
-    * The time when the list was deleted.
-    */
-    'deletedAt'?: Date;
-    /**
     * The version of the list.
     */
     'listVersion': number;
@@ -53,17 +45,25 @@ export class PublicObjectListSearchResult {
     */
     'name': string;
     /**
-    * The name and value of any additional properties that exist for this list and that were included in the search request.
+    * The object type of the list.
     */
-    'additionalProperties': { [key: string]: string; };
+    'objectTypeId': string;
     /**
-    * The ID of the user that created the list.
+    * The processing status of the list.
     */
-    'createdById'?: string;
+    'processingStatus': string;
+    /**
+    * The processing type of the list.
+    */
+    'processingType': string;
     /**
     * The time the list was last updated.
     */
     'updatedAt'?: Date;
+    /**
+    * The ID of the user that last updated the list.
+    */
+    'updatedById'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -71,22 +71,28 @@ export class PublicObjectListSearchResult {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "processingType",
-            "baseName": "processingType",
+            "name": "additionalProperties",
+            "baseName": "additionalProperties",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "createdById",
+            "baseName": "createdById",
             "type": "string",
             "format": ""
         },
         {
-            "name": "objectTypeId",
-            "baseName": "objectTypeId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "updatedById",
-            "baseName": "updatedById",
-            "type": "string",
-            "format": ""
+            "name": "deletedAt",
+            "baseName": "deletedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "filtersUpdatedAt",
@@ -101,24 +107,6 @@ export class PublicObjectListSearchResult {
             "format": ""
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "processingStatus",
-            "baseName": "processingStatus",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "deletedAt",
-            "baseName": "deletedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "listVersion",
             "baseName": "listVersion",
             "type": "number",
@@ -131,14 +119,20 @@ export class PublicObjectListSearchResult {
             "format": ""
         },
         {
-            "name": "additionalProperties",
-            "baseName": "additionalProperties",
-            "type": "{ [key: string]: string; }",
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "createdById",
-            "baseName": "createdById",
+            "name": "processingStatus",
+            "baseName": "processingStatus",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "processingType",
+            "baseName": "processingType",
             "type": "string",
             "format": ""
         },
@@ -147,6 +141,12 @@ export class PublicObjectListSearchResult {
             "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "updatedById",
+            "baseName": "updatedById",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

@@ -16,17 +16,14 @@ import { PublicEmailRecipients } from '../models/PublicEmailRecipients';
 * Data structure representing the to fields of the email.
 */
 export class PublicEmailToDetails {
+    'contactIds'?: PublicEmailRecipients;
     'contactIlsLists'?: PublicEmailRecipients;
-    /**
-    * 
-    */
+    'contactLists'?: PublicEmailRecipients;
     'limitSendFrequency'?: boolean;
     /**
-    * 
+    * Whether to send to unengaged contacts (false) or not (true).
     */
     'suppressGraymail'?: boolean;
-    'contactIds'?: PublicEmailRecipients;
-    'contactLists'?: PublicEmailRecipients;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -34,8 +31,20 @@ export class PublicEmailToDetails {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "contactIds",
+            "baseName": "contactIds",
+            "type": "PublicEmailRecipients",
+            "format": ""
+        },
+        {
             "name": "contactIlsLists",
             "baseName": "contactIlsLists",
+            "type": "PublicEmailRecipients",
+            "format": ""
+        },
+        {
+            "name": "contactLists",
+            "baseName": "contactLists",
             "type": "PublicEmailRecipients",
             "format": ""
         },
@@ -49,18 +58,6 @@ export class PublicEmailToDetails {
             "name": "suppressGraymail",
             "baseName": "suppressGraymail",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "contactIds",
-            "baseName": "contactIds",
-            "type": "PublicEmailRecipients",
-            "format": ""
-        },
-        {
-            "name": "contactLists",
-            "baseName": "contactLists",
-            "type": "PublicEmailRecipients",
             "format": ""
         }    ];
 

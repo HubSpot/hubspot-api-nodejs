@@ -12,20 +12,57 @@
 
 
 export class ContentLanguageVariation {
+    /**
+    * Indicates if the page is hidden from the dashboard, though it may still be live.
+    */
     'archivedInDashboard': boolean;
-    'created': Date;
-    'tagIds'?: Array<number>;
-    'publishDate': Date;
-    'publicAccessRules': Array<any>;
-    'password': string;
+    /**
+    * The name of the user that updated this page.
+    */
     'authorName': string;
-    'publicAccessRulesEnabled': boolean;
-    'name': string;
+    /**
+    * The GUID of the marketing campaign this page is a part of.
+    */
     'campaign': string;
+    'campaignName': string;
+    /**
+    * The date and time when the content language variation was created.
+    */
+    'created': Date;
+    /**
+    * ID of object to set as primary in multi-language group.
+    */
     'id': number;
-    'state': string;
-    'updated': Date;
+    /**
+    * The internal name of the page.
+    */
+    'name': string;
+    /**
+    * A password required to view the page, if set.
+    */
+    'password': string;
+    'publicAccessRules': Array<any>;
+    /**
+    * Determines if public access rules should be respected.
+    */
+    'publicAccessRulesEnabled': boolean;
+    /**
+    * The date and time when the page is scheduled to be published.
+    */
+    'publishDate': Date;
+    /**
+    * The path of this page, appended to the domain to construct the URL.
+    */
     'slug': string;
+    /**
+    * An ENUM descibing the current state of this page.
+    */
+    'state': string;
+    'tagIds'?: Array<number>;
+    /**
+    * The date and time when the content language variation was last updated.
+    */
+    'updated': Date;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -39,50 +76,8 @@ export class ContentLanguageVariation {
             "format": ""
         },
         {
-            "name": "created",
-            "baseName": "created",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "tagIds",
-            "baseName": "tagIds",
-            "type": "Array<number>",
-            "format": "int64"
-        },
-        {
-            "name": "publishDate",
-            "baseName": "publishDate",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "publicAccessRules",
-            "baseName": "publicAccessRules",
-            "type": "Array<any>",
-            "format": ""
-        },
-        {
-            "name": "password",
-            "baseName": "password",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "authorName",
             "baseName": "authorName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "publicAccessRulesEnabled",
-            "baseName": "publicAccessRulesEnabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -93,20 +88,50 @@ export class ContentLanguageVariation {
             "format": ""
         },
         {
+            "name": "campaignName",
+            "baseName": "campaignName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "created",
+            "baseName": "created",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "id",
             "baseName": "id",
             "type": "number",
             "format": "int64"
         },
         {
-            "name": "state",
-            "baseName": "state",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "updated",
-            "baseName": "updated",
+            "name": "password",
+            "baseName": "password",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "publicAccessRules",
+            "baseName": "publicAccessRules",
+            "type": "Array<any>",
+            "format": ""
+        },
+        {
+            "name": "publicAccessRulesEnabled",
+            "baseName": "publicAccessRulesEnabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "publishDate",
+            "baseName": "publishDate",
             "type": "Date",
             "format": "date-time"
         },
@@ -115,6 +140,24 @@ export class ContentLanguageVariation {
             "baseName": "slug",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "state",
+            "baseName": "state",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tagIds",
+            "baseName": "tagIds",
+            "type": "Array<number>",
+            "format": "int64"
+        },
+        {
+            "name": "updated",
+            "baseName": "updated",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

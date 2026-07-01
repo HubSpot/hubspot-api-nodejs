@@ -16,11 +16,8 @@ import { SideOrCorner } from '../models/SideOrCorner';
 
 export class Gradient {
     'angle': Angle;
-    'sideOrCorner': SideOrCorner;
-    /**
-    * 
-    */
     'colors': Array<ColorStop>;
+    'sideOrCorner': SideOrCorner;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -34,15 +31,15 @@ export class Gradient {
             "format": ""
         },
         {
-            "name": "sideOrCorner",
-            "baseName": "sideOrCorner",
-            "type": "SideOrCorner",
-            "format": ""
-        },
-        {
             "name": "colors",
             "baseName": "colors",
             "type": "Array<ColorStop>",
+            "format": ""
+        },
+        {
+            "name": "sideOrCorner",
+            "baseName": "sideOrCorner",
+            "type": "SideOrCorner",
             "format": ""
         }    ];
 

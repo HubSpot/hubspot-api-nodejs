@@ -10,17 +10,38 @@
  * Do not edit the class manually.
  */
 
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
+import { PublicAssociationInListFilterCoalescingRefineBy } from '../models/PublicAssociationInListFilterCoalescingRefineBy';
 
 export class PublicAssociationInListFilter {
-    'listId': string;
-    'coalescingRefineBy': PublicFormSubmissionFilterCoalescingRefineBy;
-    'toObjectType'?: string;
-    'associationTypeId': number;
+    /**
+    * Defines the category of the association, such as (HUBSPOT_DEFINED, USER_DEFINED, INTEGRATOR_DEFINED, WORK).
+    */
     'associationCategory': string;
+    /**
+    * The ID representing the type of association being filtered.
+    */
+    'associationTypeId': number;
+    'coalescingRefineBy': PublicAssociationInListFilterCoalescingRefineBy;
+    /**
+    * Indicates the type of filter being applied, which is \'ASSOCIATION\' by default.
+    */
     'filterType': PublicAssociationInListFilterFilterTypeEnum;
-    'toObjectTypeId'?: string;
+    /**
+    * The ID of the list used in the association filter.
+    */
+    'listId': string;
+    /**
+    * Specifies the operation to be performed by the filter, such as \'IN_LIST\' or \'NOT_IN_LIST\'.
+    */
     'operator': string;
+    /**
+    * The type of object that the association filter is targeting.
+    */
+    'toObjectType'?: string;
+    /**
+    * The ID representing the type of object that the association filter is targeting.
+    */
+    'toObjectTypeId'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,20 +49,8 @@ export class PublicAssociationInListFilter {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "listId",
-            "baseName": "listId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "coalescingRefineBy",
-            "baseName": "coalescingRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
-            "name": "toObjectType",
-            "baseName": "toObjectType",
+            "name": "associationCategory",
+            "baseName": "associationCategory",
             "type": "string",
             "format": ""
         },
@@ -52,9 +61,9 @@ export class PublicAssociationInListFilter {
             "format": "int32"
         },
         {
-            "name": "associationCategory",
-            "baseName": "associationCategory",
-            "type": "string",
+            "name": "coalescingRefineBy",
+            "baseName": "coalescingRefineBy",
+            "type": "PublicAssociationInListFilterCoalescingRefineBy",
             "format": ""
         },
         {
@@ -64,14 +73,26 @@ export class PublicAssociationInListFilter {
             "format": ""
         },
         {
-            "name": "toObjectTypeId",
-            "baseName": "toObjectTypeId",
+            "name": "listId",
+            "baseName": "listId",
             "type": "string",
             "format": ""
         },
         {
             "name": "operator",
             "baseName": "operator",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "toObjectType",
+            "baseName": "toObjectType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "toObjectTypeId",
+            "baseName": "toObjectTypeId",
             "type": "string",
             "format": ""
         }    ];

@@ -9,5 +9,5 @@ export { RequiredError } from "./apis/baseapi";
 
 export type { PromiseMiddleware as Middleware, Middleware as ObservableMiddleware } from './middleware';
 export { Observable } from './rxjsStub';
-export { PromiseAddEventAttendeesApi as AddEventAttendeesApi,  PromiseBasicApi as BasicApi,  PromiseBatchApi as BatchApi,  PromiseChangePropertyApi as ChangePropertyApi,  PromiseIdentifiersApi as IdentifiersApi,  PromiseListAssociationsApi as ListAssociationsApi,  PromiseRetrieveParticipantStateApi as RetrieveParticipantStateApi,  PromiseSettingsApi as SettingsApi,  PromiseSubscriberStateChangesApi as SubscriberStateChangesApi } from './types/PromiseAPI';
+export { PromiseBasicApi as BasicApi,  PromiseBatchApi as BatchApi,  PromiseEventAttendeesApi as EventAttendeesApi,  PromiseEventStatusApi as EventStatusApi,  PromiseIdentifiersApi as IdentifiersApi,  PromiseListAssociationsApi as ListAssociationsApi,  PromiseParticipantStateApi as ParticipantStateApi,  PromiseSettingsApi as SettingsApi,  PromiseSubscriberStateChangesApi as SubscriberStateChangesApi } from './types/PromiseAPI';
 

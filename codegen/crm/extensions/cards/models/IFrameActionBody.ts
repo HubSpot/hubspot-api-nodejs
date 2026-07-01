@@ -12,12 +12,30 @@
 
 
 export class IFrameActionBody {
-    'propertyNamesIncluded': Array<string>;
-    'width': number;
-    'label'?: string;
-    'type': IFrameActionBodyTypeEnum;
-    'url': string;
+    /**
+    * The height of the iframe in pixels.
+    */
     'height': number;
+    /**
+    * The label for this property as you\'d like it displayed to users.
+    */
+    'label'?: string;
+    /**
+    * A list of property names that will be included on the url of the iframe.
+    */
+    'propertyNamesIncluded': Array<string>;
+    /**
+    * The type of status.
+    */
+    'type': IFrameActionBodyTypeEnum;
+    /**
+    * The URL endpoint that will be loaded in the iframe when triggered.
+    */
+    'url': string;
+    /**
+    * The width of the iframe in pixels.
+    */
+    'width': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -25,14 +43,8 @@ export class IFrameActionBody {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "propertyNamesIncluded",
-            "baseName": "propertyNamesIncluded",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "width",
-            "baseName": "width",
+            "name": "height",
+            "baseName": "height",
             "type": "number",
             "format": "int32"
         },
@@ -40,6 +52,12 @@ export class IFrameActionBody {
             "name": "label",
             "baseName": "label",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "propertyNamesIncluded",
+            "baseName": "propertyNamesIncluded",
+            "type": "Array<string>",
             "format": ""
         },
         {
@@ -55,8 +73,8 @@ export class IFrameActionBody {
             "format": ""
         },
         {
-            "name": "height",
-            "baseName": "height",
+            "name": "width",
+            "baseName": "width",
             "type": "number",
             "format": "int32"
         }    ];

@@ -13,8 +13,8 @@
 
 export class PublicDividerStyleSettings {
     'color'?: any;
-    'lineType'?: string;
     'height'?: number;
+    'lineType'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,16 +28,16 @@ export class PublicDividerStyleSettings {
             "format": ""
         },
         {
-            "name": "lineType",
-            "baseName": "lineType",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "height",
             "baseName": "height",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "lineType",
+            "baseName": "lineType",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

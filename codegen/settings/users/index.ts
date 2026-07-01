@@ -9,5 +9,5 @@ export { RequiredError } from "./apis/baseapi";
 
 export type { PromiseMiddleware as Middleware, Middleware as ObservableMiddleware } from './middleware';
 export { Observable } from './rxjsStub';
-export { PromiseRolesApi as RolesApi,  PromiseTeamsApi as TeamsApi,  PromiseUsersApi as UsersApi } from './types/PromiseAPI';
+export { PromiseBasicApi as BasicApi,  PromiseRolesApi as RolesApi,  PromiseTeamsApi as TeamsApi,  PromiseUsersApi as UsersApi } from './types/PromiseAPI';
 

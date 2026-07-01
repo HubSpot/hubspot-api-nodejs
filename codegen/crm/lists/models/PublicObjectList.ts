@@ -12,25 +12,25 @@
 
 import { PublicListPermissions } from '../models/PublicListPermissions';
 import { PublicMembershipSettings } from '../models/PublicMembershipSettings';
-import { PublicPropertyAssociationFilterBranchFilterBranchesInner } from '../models/PublicPropertyAssociationFilterBranchFilterBranchesInner';
+import { PublicObjectListFilterBranch } from '../models/PublicObjectListFilterBranch';
 
 /**
 * An object list definition.
 */
 export class PublicObjectList {
-    'membershipSettings'?: PublicMembershipSettings;
     /**
-    * The processing type of the list.
+    * The time when the list was created.
     */
-    'processingType': string;
+    'createdAt'?: Date;
     /**
-    * The object type of the list.
+    * The ID of the user that created the list.
     */
-    'objectTypeId': string;
+    'createdById'?: string;
     /**
-    * The ID of the user that last updated the list.
+    * The time when the list was deleted.
     */
-    'updatedById'?: string;
+    'deletedAt'?: Date;
+    'filterBranch'?: PublicObjectListFilterBranch;
     /**
     * The time when the filters for this list were last updated.
     */
@@ -39,40 +39,40 @@ export class PublicObjectList {
     * The **ILS ID** of the list.
     */
     'listId': string;
+    'listPermissions'?: PublicListPermissions;
     /**
-    * The time when the list was created.
+    * The version of the list.
     */
-    'createdAt'?: Date;
+    'listVersion': number;
+    'membershipSettings'?: PublicMembershipSettings;
+    /**
+    * The name of the list.
+    */
+    'name': string;
+    /**
+    * The object type of the list.
+    */
+    'objectTypeId': string;
     /**
     * The processing status of the list.
     */
     'processingStatus': string;
     /**
-    * The time when the list was deleted.
+    * The processing type of the list.
     */
-    'deletedAt'?: Date;
-    /**
-    * The version of the list.
-    */
-    'listVersion': number;
+    'processingType': string;
     /**
     * Size of the list
     */
     'size'?: number;
     /**
-    * The name of the list.
-    */
-    'name': string;
-    'listPermissions'?: PublicListPermissions;
-    /**
-    * The ID of the user that created the list.
-    */
-    'createdById'?: string;
-    'filterBranch'?: PublicPropertyAssociationFilterBranchFilterBranchesInner;
-    /**
     * The time the list was last updated.
     */
     'updatedAt'?: Date;
+    /**
+    * The ID of the user that last updated the list.
+    */
+    'updatedById'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -80,27 +80,27 @@ export class PublicObjectList {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "membershipSettings",
-            "baseName": "membershipSettings",
-            "type": "PublicMembershipSettings",
-            "format": ""
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
-            "name": "processingType",
-            "baseName": "processingType",
+            "name": "createdById",
+            "baseName": "createdById",
             "type": "string",
             "format": ""
         },
         {
-            "name": "objectTypeId",
-            "baseName": "objectTypeId",
-            "type": "string",
-            "format": ""
+            "name": "deletedAt",
+            "baseName": "deletedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
-            "name": "updatedById",
-            "baseName": "updatedById",
-            "type": "string",
+            "name": "filterBranch",
+            "baseName": "filterBranch",
+            "type": "PublicObjectListFilterBranch",
             "format": ""
         },
         {
@@ -116,22 +116,10 @@ export class PublicObjectList {
             "format": ""
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "processingStatus",
-            "baseName": "processingStatus",
-            "type": "string",
+            "name": "listPermissions",
+            "baseName": "listPermissions",
+            "type": "PublicListPermissions",
             "format": ""
-        },
-        {
-            "name": "deletedAt",
-            "baseName": "deletedAt",
-            "type": "Date",
-            "format": "date-time"
         },
         {
             "name": "listVersion",
@@ -140,10 +128,10 @@ export class PublicObjectList {
             "format": "int32"
         },
         {
-            "name": "size",
-            "baseName": "size",
-            "type": "number",
-            "format": "int64"
+            "name": "membershipSettings",
+            "baseName": "membershipSettings",
+            "type": "PublicMembershipSettings",
+            "format": ""
         },
         {
             "name": "name",
@@ -152,28 +140,40 @@ export class PublicObjectList {
             "format": ""
         },
         {
-            "name": "listPermissions",
-            "baseName": "listPermissions",
-            "type": "PublicListPermissions",
-            "format": ""
-        },
-        {
-            "name": "createdById",
-            "baseName": "createdById",
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "filterBranch",
-            "baseName": "filterBranch",
-            "type": "PublicPropertyAssociationFilterBranchFilterBranchesInner",
+            "name": "processingStatus",
+            "baseName": "processingStatus",
+            "type": "string",
             "format": ""
+        },
+        {
+            "name": "processingType",
+            "baseName": "processingType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "size",
+            "baseName": "size",
+            "type": "number",
+            "format": "int64"
         },
         {
             "name": "updatedAt",
             "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "updatedById",
+            "baseName": "updatedById",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

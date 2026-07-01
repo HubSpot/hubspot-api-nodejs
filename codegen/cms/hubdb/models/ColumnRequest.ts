@@ -14,10 +14,29 @@ import { Option } from '../models/Option';
 
 export class ColumnRequest {
     /**
+    * The id of the column from another table to which the column refers/points to.
+    */
+    'foreignColumnId'?: number;
+    /**
     * The id of another table to which the column refers/points to.
     */
     'foreignTableId'?: number;
+    /**
+    * Column Id
+    */
+    'id': number;
+    /**
+    * Label of the column
+    */
+    'label': string;
+    /**
+    * Defines the maximum number of characters allowed in the column.
+    */
     'maxNumberOfCharacters'?: number;
+    /**
+    * Specifies the maximum number of options that can be set for select and multi-select columns.
+    */
+    'maxNumberOfOptions'?: number;
     /**
     * Name of the column
     */
@@ -27,22 +46,9 @@ export class ColumnRequest {
     */
     'options': Array<Option>;
     /**
-    * Column Id
-    */
-    'id': number;
-    /**
-    * Label of the column
-    */
-    'label': string;
-    'maxNumberOfOptions'?: number;
-    /**
     * Type of the column
     */
     'type': ColumnRequestTypeEnum;
-    /**
-    * The id of the column from another table to which the column refers/points to.
-    */
-    'foreignColumnId'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -50,14 +56,38 @@ export class ColumnRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "foreignColumnId",
+            "baseName": "foreignColumnId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
             "name": "foreignTableId",
             "baseName": "foreignTableId",
             "type": "number",
             "format": "int64"
         },
         {
+            "name": "id",
+            "baseName": "id",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "maxNumberOfCharacters",
             "baseName": "maxNumberOfCharacters",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "maxNumberOfOptions",
+            "baseName": "maxNumberOfOptions",
             "type": "number",
             "format": "int32"
         },
@@ -74,34 +104,10 @@ export class ColumnRequest {
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "maxNumberOfOptions",
-            "baseName": "maxNumberOfOptions",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "type",
             "baseName": "type",
             "type": "ColumnRequestTypeEnum",
             "format": ""
-        },
-        {
-            "name": "foreignColumnId",
-            "baseName": "foreignColumnId",
-            "type": "number",
-            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
@@ -113,27 +119,27 @@ export class ColumnRequest {
 }
 
 export enum ColumnRequestTypeEnum {
-    Null = 'NULL',
-    Text = 'TEXT',
-    Number = 'NUMBER',
-    Url = 'URL',
-    Image = 'IMAGE',
-    Select = 'SELECT',
-    Multiselect = 'MULTISELECT',
     Boolean = 'BOOLEAN',
-    Location = 'LOCATION',
+    Code = 'CODE',
+    Composite = 'COMPOSITE',
+    Cta = 'CTA',
+    Currency = 'CURRENCY',
     Date = 'DATE',
     Datetime = 'DATETIME',
-    Currency = 'CURRENCY',
-    Richtext = 'RICHTEXT',
-    ForeignId = 'FOREIGN_ID',
-    Video = 'VIDEO',
-    Cta = 'CTA',
+    Embed = 'EMBED',
     File = 'FILE',
-    Json = 'JSON',
-    Composite = 'COMPOSITE',
-    Code = 'CODE',
+    ForeignId = 'FOREIGN_ID',
     HubspotVideo = 'HUBSPOT_VIDEO',
-    Embed = 'EMBED'
+    Image = 'IMAGE',
+    Json = 'JSON',
+    Location = 'LOCATION',
+    Multiselect = 'MULTISELECT',
+    Null = 'NULL',
+    Number = 'NUMBER',
+    Richtext = 'RICHTEXT',
+    Select = 'SELECT',
+    Text = 'TEXT',
+    Url = 'URL',
+    Video = 'VIDEO'
 }
 

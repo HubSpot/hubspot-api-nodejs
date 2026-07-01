@@ -15,8 +15,8 @@
 * The IDs of the records to add and/or remove from a list.
 */
 export class MembershipChangeRequest {
-    'recordIdsToRemove': Array<string>;
     'recordIdsToAdd': Array<string>;
+    'recordIdsToRemove': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,14 +24,14 @@ export class MembershipChangeRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "recordIdsToRemove",
-            "baseName": "recordIdsToRemove",
+            "name": "recordIdsToAdd",
+            "baseName": "recordIdsToAdd",
             "type": "Array<string>",
             "format": ""
         },
         {
-            "name": "recordIdsToAdd",
-            "baseName": "recordIdsToAdd",
+            "name": "recordIdsToRemove",
+            "baseName": "recordIdsToRemove",
             "type": "Array<string>",
             "format": ""
         }    ];

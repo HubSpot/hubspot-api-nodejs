@@ -12,21 +12,24 @@
 
 
 export class PublicSurveyMonkeyFilter {
-    'surveyId': string;
+    /**
+    * Indicates the type of filter being applied (SURVEY_MONKEY).
+    */
     'filterType': PublicSurveyMonkeyFilterFilterTypeEnum;
+    /**
+    * Specifies the operation to be performed by the filter (HAS_RESPONDED_TO_SURVEY, HAS_NOT_RESPONDED_TO_SURVEY).
+    */
     'operator': string;
+    /**
+    * The ID of the survey associated with the filter.
+    */
+    'surveyId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "surveyId",
-            "baseName": "surveyId",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "filterType",
             "baseName": "filterType",
@@ -36,6 +39,12 @@ export class PublicSurveyMonkeyFilter {
         {
             "name": "operator",
             "baseName": "operator",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "surveyId",
+            "baseName": "surveyId",
             "type": "string",
             "format": ""
         }    ];

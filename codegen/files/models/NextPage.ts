@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -11,9 +11,18 @@
  */
 
 
+/**
+* Specifies the paging information needed to retrieve the next set of results in a paginated API response
+*/
 export class NextPage {
-    'link'?: string;
+    /**
+    * A paging cursor token for retrieving subsequent pages.
+    */
     'after': string;
+    /**
+    * A URL that can be used to retrieve the next page results.
+    */
+    'link'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,14 +30,14 @@ export class NextPage {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "link",
-            "baseName": "link",
+            "name": "after",
+            "baseName": "after",
             "type": "string",
             "format": ""
         },
         {
-            "name": "after",
-            "baseName": "after",
+            "name": "link",
+            "baseName": "link",
             "type": "string",
             "format": ""
         }    ];

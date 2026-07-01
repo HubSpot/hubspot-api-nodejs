@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -13,33 +13,33 @@
 
 export class Folder {
     /**
-    * Timestamp of folder creation.
+    * Marks whether the folder is deleted or not.
     */
-    'createdAt': Date;
+    'archived': boolean;
     /**
     * Timestamp of folder deletion.
     */
     'archivedAt'?: Date;
     /**
-    * Path of the folder in the file manager.
+    * Timestamp of folder creation.
     */
-    'path'?: string;
+    'createdAt': Date;
     /**
-    * Marks whether the folder is deleted or not.
+    * ID of the folder.
     */
-    'archived': boolean;
-    /**
-    * ID of the parent folder.
-    */
-    'parentFolderId'?: string;
+    'id': string;
     /**
     * Name of the folder.
     */
     'name'?: string;
     /**
-    * ID of the folder.
+    * ID of the parent folder.
     */
-    'id': string;
+    'parentFolderId'?: string;
+    /**
+    * Path of the folder in the file manager.
+    */
+    'path'?: string;
     /**
     * Timestamp of the latest update to the folder.
     */
@@ -51,10 +51,10 @@ export class Folder {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean",
+            "format": ""
         },
         {
             "name": "archivedAt",
@@ -63,20 +63,14 @@ export class Folder {
             "format": "date-time"
         },
         {
-            "name": "path",
-            "baseName": "path",
-            "type": "string",
-            "format": ""
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "parentFolderId",
-            "baseName": "parentFolderId",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
@@ -87,8 +81,14 @@ export class Folder {
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "parentFolderId",
+            "baseName": "parentFolderId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "path",
+            "baseName": "path",
             "type": "string",
             "format": ""
         },

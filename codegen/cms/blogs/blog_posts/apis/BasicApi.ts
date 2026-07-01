@@ -10,10 +10,8 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { BlogPost } from '../models/BlogPost';
 import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
-import { CollectionResponseWithTotalVersionBlogPost } from '../models/CollectionResponseWithTotalVersionBlogPost';
 import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
 import { ContentScheduleRequestVNext } from '../models/ContentScheduleRequestVNext';
-import { VersionBlogPost } from '../models/VersionBlogPost';
 
 /**
  * no description
@@ -24,7 +22,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * Delete a blog post by ID.
      * Delete a blog post
      * @param objectId The ID of the blog post to delete.
-     * @param archived Whether to return only results that have been deleted.
+     * @param archived Whether to return only results that have been archived.
      */
     public async archive(objectId: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -68,7 +66,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Clone a blog post, making a copy of it in a new blog post.
      * Clone a blog post
-     * @param contentCloneRequestVNext The JSON representation of the ContentCloneRequest object.
+     * @param contentCloneRequestVNext 
      */
     public async clone(contentCloneRequestVNext: ContentCloneRequestVNext, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -116,7 +114,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Create a new blog post, specifying its content in the request body.
      * Create a new post
-     * @param blogPost The JSON representation of a new Blog Post.
+     * @param blogPost 
      */
     public async create(blogPost: BlogPost, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -254,19 +252,19 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Retrieve all blog posts, with paging and filtering options. This method would be useful for an integration that ingests posts and suggests edits.
      * Get all posts
-     * @param createdAt Only return blog posts created at exactly the specified time.
-     * @param createdAfter Only return blog posts created after the specified time.
-     * @param createdBefore Only return blog posts created before the specified time.
-     * @param updatedAt Only return blog posts last updated at exactly the specified time.
-     * @param updatedAfter Only return blog posts last updated after the specified time.
-     * @param updatedBefore Only return blog posts last updated before the specified time.
-     * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;createdAt&#x60; (default), &#x60;name&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to return. Default is 20.
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param archived Specifies whether to return deleted blog posts. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param createdAfter Only return blog posts created after the specified time.
+     * @param createdAt Only return blog posts created at exactly the specified time.
+     * @param createdBefore Only return blog posts created before the specified time.
+     * @param limit The maximum number of results to return. Default is 20.
+     * @param property Specific properties to return from the posts
+     * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;createdAt&#x60; (default), &#x60;name&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;.
+     * @param updatedAfter Only return blog posts last updated after the specified time.
+     * @param updatedAt Only return blog posts last updated at exactly the specified time.
+     * @param updatedBefore Only return blog posts last updated before the specified time.
      */
-    public async getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getPage(after?: string, archived?: boolean, createdAfter?: Date, createdAt?: Date, createdBefore?: Date, limit?: number, property?: string, sort?: Array<string>, updatedAfter?: Date, updatedAt?: Date, updatedBefore?: Date, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -288,8 +286,13 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (createdAt !== undefined) {
-            requestContext.setQueryParam("createdAt", ObjectSerializer.serialize(createdAt, "Date", "date-time"));
+        if (after !== undefined) {
+            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
+        }
+
+        // Query Params
+        if (archived !== undefined) {
+            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
 
         // Query Params
@@ -298,23 +301,23 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
+        if (createdAt !== undefined) {
+            requestContext.setQueryParam("createdAt", ObjectSerializer.serialize(createdAt, "Date", "date-time"));
+        }
+
+        // Query Params
         if (createdBefore !== undefined) {
             requestContext.setQueryParam("createdBefore", ObjectSerializer.serialize(createdBefore, "Date", "date-time"));
         }
 
         // Query Params
-        if (updatedAt !== undefined) {
-            requestContext.setQueryParam("updatedAt", ObjectSerializer.serialize(updatedAt, "Date", "date-time"));
+        if (limit !== undefined) {
+            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
 
         // Query Params
-        if (updatedAfter !== undefined) {
-            requestContext.setQueryParam("updatedAfter", ObjectSerializer.serialize(updatedAfter, "Date", "date-time"));
-        }
-
-        // Query Params
-        if (updatedBefore !== undefined) {
-            requestContext.setQueryParam("updatedBefore", ObjectSerializer.serialize(updatedBefore, "Date", "date-time"));
+        if (property !== undefined) {
+            requestContext.setQueryParam("property", ObjectSerializer.serialize(property, "string", ""));
         }
 
         // Query Params
@@ -326,128 +329,18 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (after !== undefined) {
-            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
+        if (updatedAfter !== undefined) {
+            requestContext.setQueryParam("updatedAfter", ObjectSerializer.serialize(updatedAfter, "Date", "date-time"));
         }
 
         // Query Params
-        if (limit !== undefined) {
-            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
+        if (updatedAt !== undefined) {
+            requestContext.setQueryParam("updatedAt", ObjectSerializer.serialize(updatedAt, "Date", "date-time"));
         }
 
         // Query Params
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
-
-        // Query Params
-        if (property !== undefined) {
-            requestContext.setQueryParam("property", ObjectSerializer.serialize(property, "string", ""));
-        }
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Retrieve a previous version of a blog post.
-     * Retrieve a previous version of a blog post
-     * @param objectId The ID of the blog post.
-     * @param revisionId The ID of the version to retrieve.
-     */
-    public async getPreviousVersion(objectId: string, revisionId: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'objectId' is not null or undefined
-        if (objectId === null || objectId === undefined) {
-            throw new RequiredError("BasicApi", "getPreviousVersion", "objectId");
-        }
-
-
-        // verify required parameter 'revisionId' is not null or undefined
-        if (revisionId === null || revisionId === undefined) {
-            throw new RequiredError("BasicApi", "getPreviousVersion", "revisionId");
-        }
-
-
-        // Path Params
-        const localVarPath = '/cms/v3/blogs/posts/{objectId}/revisions/{revisionId}'
-            .replace('{' + 'objectId' + '}', encodeURIComponent(String(objectId)))
-            .replace('{' + 'revisionId' + '}', encodeURIComponent(String(revisionId)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Retrieve all the previous versions of a blog post.
-     * Retrieves all previous versions of a post
-     * @param objectId The ID of the blog post to retrieve previous versions of.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
-     * @param limit The maximum number of results to return. Default is 100.
-     */
-    public async getPreviousVersions(objectId: string, after?: string, before?: string, limit?: number, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'objectId' is not null or undefined
-        if (objectId === null || objectId === undefined) {
-            throw new RequiredError("BasicApi", "getPreviousVersions", "objectId");
-        }
-
-
-
-
-
-        // Path Params
-        const localVarPath = '/cms/v3/blogs/posts/{objectId}/revisions'
-            .replace('{' + 'objectId' + '}', encodeURIComponent(String(objectId)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (after !== undefined) {
-            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
-        }
-
-        // Query Params
-        if (before !== undefined) {
-            requestContext.setQueryParam("before", ObjectSerializer.serialize(before, "string", ""));
-        }
-
-        // Query Params
-        if (limit !== undefined) {
-            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
+        if (updatedBefore !== undefined) {
+            requestContext.setQueryParam("updatedBefore", ObjectSerializer.serialize(updatedBefore, "Date", "date-time"));
         }
 
 
@@ -543,101 +436,9 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Restores a blog post to one of its previous versions.
-     * Restore a previous version
-     * @param objectId The ID of the blog post.
-     * @param revisionId The ID of the version to restore the blog post to.
-     */
-    public async restorePreviousVersion(objectId: string, revisionId: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'objectId' is not null or undefined
-        if (objectId === null || objectId === undefined) {
-            throw new RequiredError("BasicApi", "restorePreviousVersion", "objectId");
-        }
-
-
-        // verify required parameter 'revisionId' is not null or undefined
-        if (revisionId === null || revisionId === undefined) {
-            throw new RequiredError("BasicApi", "restorePreviousVersion", "revisionId");
-        }
-
-
-        // Path Params
-        const localVarPath = '/cms/v3/blogs/posts/{objectId}/revisions/{revisionId}/restore'
-            .replace('{' + 'objectId' + '}', encodeURIComponent(String(objectId)))
-            .replace('{' + 'revisionId' + '}', encodeURIComponent(String(revisionId)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Takes a specified version of a blog post, sets it as the new draft version of the blog post.
-     * Restore a draft to a previous version
-     * @param objectId The ID of the blog post.
-     * @param revisionId The ID of the version to restore the blog post to.
-     */
-    public async restorePreviousVersionToDraft(objectId: string, revisionId: number, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'objectId' is not null or undefined
-        if (objectId === null || objectId === undefined) {
-            throw new RequiredError("BasicApi", "restorePreviousVersionToDraft", "objectId");
-        }
-
-
-        // verify required parameter 'revisionId' is not null or undefined
-        if (revisionId === null || revisionId === undefined) {
-            throw new RequiredError("BasicApi", "restorePreviousVersionToDraft", "revisionId");
-        }
-
-
-        // Path Params
-        const localVarPath = '/cms/v3/blogs/posts/{objectId}/revisions/{revisionId}/restore-to-draft'
-            .replace('{' + 'objectId' + '}', encodeURIComponent(String(objectId)))
-            .replace('{' + 'revisionId' + '}', encodeURIComponent(String(revisionId)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
      * Schedule a blog post to be published at a specified time.
      * Schedule a post to be published
-     * @param contentScheduleRequestVNext The JSON representation of the ContentScheduleRequestVNext object.
+     * @param contentScheduleRequestVNext 
      */
     public async schedule(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -686,7 +487,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * Partially updates a single blog post by ID. You only need to specify the values that you want to update.
      * Update a post
      * @param objectId The ID of the blog post to update.
-     * @param blogPost The JSON representation of the updated Blog Post.
+     * @param blogPost 
      * @param archived Specifies whether to update deleted blog posts. Defaults to &#x60;false&#x60;.
      */
     public async update(objectId: string, blogPost: BlogPost, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
@@ -749,7 +550,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * Partially updates the draft version of a single blog post by ID. You only need to specify the values that you want to update.
      * Update the draft of a post
      * @param objectId The ID of the blog post to update the draft of.
-     * @param blogPost The JSON representation of the updated Blog Post to be applied to the draft.
+     * @param blogPost 
      */
     public async updateDraft(objectId: string, blogPost: BlogPost, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -1021,78 +822,6 @@ export class BasicApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getPreviousVersion
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async getPreviousVersionWithHttpInfo(response: ResponseContext): Promise<HttpInfo<VersionBlogPost >> {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: VersionBlogPost = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "VersionBlogPost", ""
-            ) as VersionBlogPost;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: VersionBlogPost = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "VersionBlogPost", ""
-            ) as VersionBlogPost;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to getPreviousVersions
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async getPreviousVersionsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalVersionBlogPost >> {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseWithTotalVersionBlogPost = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalVersionBlogPost", ""
-            ) as CollectionResponseWithTotalVersionBlogPost;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseWithTotalVersionBlogPost = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalVersionBlogPost", ""
-            ) as CollectionResponseWithTotalVersionBlogPost;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
      * @params response Response returned by the server for a request to pushLive
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -1147,78 +876,6 @@ export class BasicApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to restorePreviousVersion
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async restorePreviousVersionWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BlogPost >> {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: BlogPost = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BlogPost", ""
-            ) as BlogPost;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BlogPost = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BlogPost", ""
-            ) as BlogPost;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to restorePreviousVersionToDraft
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async restorePreviousVersionToDraftWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BlogPost >> {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: BlogPost = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BlogPost", ""
-            ) as BlogPost;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BlogPost = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BlogPost", ""
-            ) as BlogPost;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

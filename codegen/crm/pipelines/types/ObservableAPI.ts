@@ -9,35 +9,38 @@ import { CollectionResponsePublicAuditInfoNoPaging } from '../models/CollectionR
 import { Pipeline } from '../models/Pipeline';
 import { PipelineInput } from '../models/PipelineInput';
 import { PipelinePatchInput } from '../models/PipelinePatchInput';
+import { PipelineReplaceInput } from '../models/PipelineReplaceInput';
 import { PipelineStage } from '../models/PipelineStage';
 import { PipelineStageInput } from '../models/PipelineStageInput';
 import { PipelineStagePatchInput } from '../models/PipelineStagePatchInput';
+import { PipelineStageReplaceInput } from '../models/PipelineStageReplaceInput';
 
-import { PipelineAuditsApiRequestFactory, PipelineAuditsApiResponseProcessor} from "../apis/PipelineAuditsApi";
-export class ObservablePipelineAuditsApi {
-    private requestFactory: PipelineAuditsApiRequestFactory;
-    private responseProcessor: PipelineAuditsApiResponseProcessor;
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class ObservableBasicApi {
+    private requestFactory: BasicApiRequestFactory;
+    private responseProcessor: BasicApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PipelineAuditsApiRequestFactory,
-        responseProcessor?: PipelineAuditsApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new PipelineAuditsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PipelineAuditsApiResponseProcessor();
+        this.requestFactory = requestFactory || new BasicApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BasicApiResponseProcessor();
     }
 
     /**
-     * Return a reverse chronological list of all mutations that have occurred on the pipeline identified by `{pipelineId}`.
-     * Return an audit of all changes to the pipeline
-     * @param objectType
-     * @param pipelineId
+     * Delete a pipeline
+     * @param objectType 
+     * @param pipelineId 
+     * @param [validateDealStageUsagesBeforeDelete] 
+     * @param [validateReferencesBeforeDelete] 
      */
-    public getAuditWithHttpInfo(objectType: string, pipelineId: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePublicAuditInfoNoPaging>> {
+    public archiveWithHttpInfo(objectType: string, pipelineId: string, validateDealStageUsagesBeforeDelete?: boolean, validateReferencesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -51,7 +54,7 @@ export class ObservablePipelineAuditsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -62,176 +65,11 @@ export class ObservablePipelineAuditsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.getAudit(objectType, pipelineId, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAuditWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Return a reverse chronological list of all mutations that have occurred on the pipeline identified by `{pipelineId}`.
-     * Return an audit of all changes to the pipeline
-     * @param objectType
-     * @param pipelineId
-     */
-    public getAudit(objectType: string, pipelineId: string, _options?: ConfigurationOptions): Observable<CollectionResponsePublicAuditInfoNoPaging> {
-        return this.getAuditWithHttpInfo(objectType, pipelineId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicAuditInfoNoPaging>) => apiResponse.data));
-    }
-
-}
-
-import { PipelineStageAuditsApiRequestFactory, PipelineStageAuditsApiResponseProcessor} from "../apis/PipelineStageAuditsApi";
-export class ObservablePipelineStageAuditsApi {
-    private requestFactory: PipelineStageAuditsApiRequestFactory;
-    private responseProcessor: PipelineStageAuditsApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: PipelineStageAuditsApiRequestFactory,
-        responseProcessor?: PipelineStageAuditsApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new PipelineStageAuditsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PipelineStageAuditsApiResponseProcessor();
-    }
-
-    /**
-     * Return a reverse chronological list of all mutations that have occurred on the pipeline stage identified by `{stageId}`.
-     * Return an audit of all changes to the pipeline stage
-     * @param objectType
-     * @param stageId
-     */
-    public getAuditWithHttpInfo(objectType: string, stageId: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePublicAuditInfoNoPaging>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.getAudit(objectType, stageId, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAuditWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Return a reverse chronological list of all mutations that have occurred on the pipeline stage identified by `{stageId}`.
-     * Return an audit of all changes to the pipeline stage
-     * @param objectType
-     * @param stageId
-     */
-    public getAudit(objectType: string, stageId: string, _options?: ConfigurationOptions): Observable<CollectionResponsePublicAuditInfoNoPaging> {
-        return this.getAuditWithHttpInfo(objectType, stageId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicAuditInfoNoPaging>) => apiResponse.data));
-    }
-
-}
-
-import { PipelineStagesApiRequestFactory, PipelineStagesApiResponseProcessor} from "../apis/PipelineStagesApi";
-export class ObservablePipelineStagesApi {
-    private requestFactory: PipelineStagesApiRequestFactory;
-    private responseProcessor: PipelineStagesApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: PipelineStagesApiRequestFactory,
-        responseProcessor?: PipelineStagesApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new PipelineStagesApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PipelineStagesApiResponseProcessor();
-    }
-
-    /**
-     * Delete the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
-     * Delete a pipeline stage
-     * @param objectType
-     * @param pipelineId
-     * @param stageId
-     */
-    public archiveWithHttpInfo(objectType: string, pipelineId: string, stageId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.archive(objectType, pipelineId, stageId, _config);
+        const requestContextPromise = this.requestFactory.archive(objectType, pipelineId, validateDealStageUsagesBeforeDelete, validateReferencesBeforeDelete, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -249,26 +87,26 @@ export class ObservablePipelineStagesApi {
     }
 
     /**
-     * Delete the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
+     * Delete a pipeline
+     * @param objectType 
+     * @param pipelineId 
+     * @param [validateDealStageUsagesBeforeDelete] 
+     * @param [validateReferencesBeforeDelete] 
+     */
+    public archive(objectType: string, pipelineId: string, validateDealStageUsagesBeforeDelete?: boolean, validateReferencesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<void> {
+        return this.archiveWithHttpInfo(objectType, pipelineId, validateDealStageUsagesBeforeDelete, validateReferencesBeforeDelete, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
      * Delete a pipeline stage
-     * @param objectType
-     * @param pipelineId
-     * @param stageId
+     * @param objectType 
+     * @param pipelineId 
+     * @param stageId 
+     * @param [validateReferencesBeforeDelete] 
      */
-    public archive(objectType: string, pipelineId: string, stageId: string, _options?: ConfigurationOptions): Observable<void> {
-        return this.archiveWithHttpInfo(objectType, pipelineId, stageId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
-    }
-
-    /**
-     * Create a new stage associated with the pipeline identified by `{pipelineId}`. The entire stage object, including its unique ID, will be returned in the response.
-     * Create a pipeline stage
-     * @param objectType
-     * @param pipelineId
-     * @param pipelineStageInput
-     */
-    public createWithHttpInfo(objectType: string, pipelineId: string, pipelineStageInput: PipelineStageInput, _options?: ConfigurationOptions): Observable<HttpInfo<PipelineStage>> {
+    public archive_1WithHttpInfo(objectType: string, pipelineId: string, stageId: string, validateReferencesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -282,7 +120,7 @@ export class ObservablePipelineStagesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -293,11 +131,11 @@ export class ObservablePipelineStagesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.create(objectType, pipelineId, pipelineStageInput, _config);
+        const requestContextPromise = this.requestFactory.archive_1(objectType, pipelineId, stageId, validateReferencesBeforeDelete, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -310,382 +148,30 @@ export class ObservablePipelineStagesApi {
                 for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive_1WithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Create a new stage associated with the pipeline identified by `{pipelineId}`. The entire stage object, including its unique ID, will be returned in the response.
-     * Create a pipeline stage
-     * @param objectType
-     * @param pipelineId
-     * @param pipelineStageInput
+     * Delete a pipeline stage
+     * @param objectType 
+     * @param pipelineId 
+     * @param stageId 
+     * @param [validateReferencesBeforeDelete] 
      */
-    public create(objectType: string, pipelineId: string, pipelineStageInput: PipelineStageInput, _options?: ConfigurationOptions): Observable<PipelineStage> {
-        return this.createWithHttpInfo(objectType, pipelineId, pipelineStageInput, _options).pipe(map((apiResponse: HttpInfo<PipelineStage>) => apiResponse.data));
-    }
-
-    /**
-     * Return all the stages associated with the pipeline identified by `{pipelineId}`.
-     * Return all stages of a pipeline
-     * @param objectType
-     * @param pipelineId
-     */
-    public getAllWithHttpInfo(objectType: string, pipelineId: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePipelineStageNoPaging>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.getAll(objectType, pipelineId, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAllWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Return all the stages associated with the pipeline identified by `{pipelineId}`.
-     * Return all stages of a pipeline
-     * @param objectType
-     * @param pipelineId
-     */
-    public getAll(objectType: string, pipelineId: string, _options?: ConfigurationOptions): Observable<CollectionResponsePipelineStageNoPaging> {
-        return this.getAllWithHttpInfo(objectType, pipelineId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePipelineStageNoPaging>) => apiResponse.data));
-    }
-
-    /**
-     * Return the stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
-     * Return a pipeline stage by ID
-     * @param objectType
-     * @param pipelineId
-     * @param stageId
-     */
-    public getByIdWithHttpInfo(objectType: string, pipelineId: string, stageId: string, _options?: ConfigurationOptions): Observable<HttpInfo<PipelineStage>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.getById(objectType, pipelineId, stageId, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Return the stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
-     * Return a pipeline stage by ID
-     * @param objectType
-     * @param pipelineId
-     * @param stageId
-     */
-    public getById(objectType: string, pipelineId: string, stageId: string, _options?: ConfigurationOptions): Observable<PipelineStage> {
-        return this.getByIdWithHttpInfo(objectType, pipelineId, stageId, _options).pipe(map((apiResponse: HttpInfo<PipelineStage>) => apiResponse.data));
-    }
-
-    /**
-     * Replace all the properties of an existing pipeline stage with the values provided. The updated stage will be returned in the response.
-     * Replace a pipeline stage
-     * @param objectType
-     * @param pipelineId
-     * @param stageId
-     * @param pipelineStageInput
-     */
-    public replaceWithHttpInfo(objectType: string, pipelineId: string, stageId: string, pipelineStageInput: PipelineStageInput, _options?: ConfigurationOptions): Observable<HttpInfo<PipelineStage>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.replace(objectType, pipelineId, stageId, pipelineStageInput, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.replaceWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Replace all the properties of an existing pipeline stage with the values provided. The updated stage will be returned in the response.
-     * Replace a pipeline stage
-     * @param objectType
-     * @param pipelineId
-     * @param stageId
-     * @param pipelineStageInput
-     */
-    public replace(objectType: string, pipelineId: string, stageId: string, pipelineStageInput: PipelineStageInput, _options?: ConfigurationOptions): Observable<PipelineStage> {
-        return this.replaceWithHttpInfo(objectType, pipelineId, stageId, pipelineStageInput, _options).pipe(map((apiResponse: HttpInfo<PipelineStage>) => apiResponse.data));
-    }
-
-    /**
-     * Perform a partial update of the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`. Any properties not included in this update will keep their existing values. The updated stage will be returned in the response.
-     * Update a pipeline stage
-     * @param objectType
-     * @param pipelineId
-     * @param stageId
-     * @param pipelineStagePatchInput
-     */
-    public updateWithHttpInfo(objectType: string, pipelineId: string, stageId: string, pipelineStagePatchInput: PipelineStagePatchInput, _options?: ConfigurationOptions): Observable<HttpInfo<PipelineStage>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.update(objectType, pipelineId, stageId, pipelineStagePatchInput, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Perform a partial update of the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`. Any properties not included in this update will keep their existing values. The updated stage will be returned in the response.
-     * Update a pipeline stage
-     * @param objectType
-     * @param pipelineId
-     * @param stageId
-     * @param pipelineStagePatchInput
-     */
-    public update(objectType: string, pipelineId: string, stageId: string, pipelineStagePatchInput: PipelineStagePatchInput, _options?: ConfigurationOptions): Observable<PipelineStage> {
-        return this.updateWithHttpInfo(objectType, pipelineId, stageId, pipelineStagePatchInput, _options).pipe(map((apiResponse: HttpInfo<PipelineStage>) => apiResponse.data));
-    }
-
-}
-
-import { PipelinesApiRequestFactory, PipelinesApiResponseProcessor} from "../apis/PipelinesApi";
-export class ObservablePipelinesApi {
-    private requestFactory: PipelinesApiRequestFactory;
-    private responseProcessor: PipelinesApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: PipelinesApiRequestFactory,
-        responseProcessor?: PipelinesApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new PipelinesApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PipelinesApiResponseProcessor();
-    }
-
-    /**
-     * Delete the pipeline identified by `{pipelineId}`.
-     * Delete a pipeline
-     * @param objectType
-     * @param pipelineId
-     * @param [validateReferencesBeforeDelete]
-     * @param [validateDealStageUsagesBeforeDelete]
-     */
-    public archiveWithHttpInfo(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.archive(objectType, pipelineId, validateReferencesBeforeDelete, validateDealStageUsagesBeforeDelete, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Delete the pipeline identified by `{pipelineId}`.
-     * Delete a pipeline
-     * @param objectType
-     * @param pipelineId
-     * @param [validateReferencesBeforeDelete]
-     * @param [validateDealStageUsagesBeforeDelete]
-     */
-    public archive(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<void> {
-        return this.archiveWithHttpInfo(objectType, pipelineId, validateReferencesBeforeDelete, validateDealStageUsagesBeforeDelete, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    public archive_1(objectType: string, pipelineId: string, stageId: string, validateReferencesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<void> {
+        return this.archive_1WithHttpInfo(objectType, pipelineId, stageId, validateReferencesBeforeDelete, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
      * Create a new pipeline with the provided property values. The entire pipeline object, including its unique ID, will be returned in the response.
      * Create a pipeline
-     * @param objectType
+     * @param objectType 
      * @param pipelineInput
      */
     public createWithHttpInfo(objectType: string, pipelineInput: PipelineInput, _options?: ConfigurationOptions): Observable<HttpInfo<Pipeline>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -699,7 +185,7 @@ export class ObservablePipelinesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -710,7 +196,7 @@ export class ObservablePipelinesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -734,7 +220,7 @@ export class ObservablePipelinesApi {
     /**
      * Create a new pipeline with the provided property values. The entire pipeline object, including its unique ID, will be returned in the response.
      * Create a pipeline
-     * @param objectType
+     * @param objectType 
      * @param pipelineInput
      */
     public create(objectType: string, pipelineInput: PipelineInput, _options?: ConfigurationOptions): Observable<Pipeline> {
@@ -742,13 +228,14 @@ export class ObservablePipelinesApi {
     }
 
     /**
-     * Return all pipelines for the object type specified by `{objectType}`.
-     * Retrieve all pipelines
-     * @param objectType
+     * Create a pipeline stage
+     * @param objectType 
+     * @param pipelineId 
+     * @param pipelineStageInput
      */
-    public getAllWithHttpInfo(objectType: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePipelineNoPaging>> {
+    public create_2WithHttpInfo(objectType: string, pipelineId: string, pipelineStageInput: PipelineStageInput, _options?: ConfigurationOptions): Observable<HttpInfo<PipelineStage>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -762,7 +249,7 @@ export class ObservablePipelinesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -773,7 +260,70 @@ export class ObservablePipelinesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.create_2(objectType, pipelineId, pipelineStageInput, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create_2WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Create a pipeline stage
+     * @param objectType 
+     * @param pipelineId 
+     * @param pipelineStageInput
+     */
+    public create_2(objectType: string, pipelineId: string, pipelineStageInput: PipelineStageInput, _options?: ConfigurationOptions): Observable<PipelineStage> {
+        return this.create_2WithHttpInfo(objectType, pipelineId, pipelineStageInput, _options).pipe(map((apiResponse: HttpInfo<PipelineStage>) => apiResponse.data));
+    }
+
+    /**
+     * Return all pipelines for the object type specified by `{objectType}`.
+     * Retrieve all pipelines
+     * @param objectType 
+     */
+    public getAllWithHttpInfo(objectType: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePipelineNoPaging>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
 		};
 	}
 
@@ -797,21 +347,21 @@ export class ObservablePipelinesApi {
     /**
      * Return all pipelines for the object type specified by `{objectType}`.
      * Retrieve all pipelines
-     * @param objectType
+     * @param objectType 
      */
     public getAll(objectType: string, _options?: ConfigurationOptions): Observable<CollectionResponsePipelineNoPaging> {
         return this.getAllWithHttpInfo(objectType, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePipelineNoPaging>) => apiResponse.data));
     }
 
     /**
-     * Return a single pipeline object identified by its unique `{pipelineId}`.
-     * Return a pipeline by ID
-     * @param objectType
-     * @param pipelineId
+     * Return all the stages associated with the pipeline identified by `{pipelineId}`.
+     * Return all stages of a pipeline
+     * @param objectType 
+     * @param pipelineId 
      */
-    public getByIdWithHttpInfo(objectType: string, pipelineId: string, _options?: ConfigurationOptions): Observable<HttpInfo<Pipeline>> {
+    public getAll_3WithHttpInfo(objectType: string, pipelineId: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePipelineStageNoPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -825,7 +375,7 @@ export class ObservablePipelinesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -836,7 +386,199 @@ export class ObservablePipelinesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getAll_3(objectType, pipelineId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll_3WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Return all the stages associated with the pipeline identified by `{pipelineId}`.
+     * Return all stages of a pipeline
+     * @param objectType 
+     * @param pipelineId 
+     */
+    public getAll_3(objectType: string, pipelineId: string, _options?: ConfigurationOptions): Observable<CollectionResponsePipelineStageNoPaging> {
+        return this.getAll_3WithHttpInfo(objectType, pipelineId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePipelineStageNoPaging>) => apiResponse.data));
+    }
+
+    /**
+     * Return a reverse chronological list of all mutations that have occurred on the pipeline identified by `{pipelineId}`.
+     * Return an audit of all changes to the pipeline
+     * @param objectType 
+     * @param pipelineId 
+     */
+    public getAuditWithHttpInfo(objectType: string, pipelineId: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePublicAuditInfoNoPaging>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getAudit(objectType, pipelineId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAuditWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Return a reverse chronological list of all mutations that have occurred on the pipeline identified by `{pipelineId}`.
+     * Return an audit of all changes to the pipeline
+     * @param objectType 
+     * @param pipelineId 
+     */
+    public getAudit(objectType: string, pipelineId: string, _options?: ConfigurationOptions): Observable<CollectionResponsePublicAuditInfoNoPaging> {
+        return this.getAuditWithHttpInfo(objectType, pipelineId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicAuditInfoNoPaging>) => apiResponse.data));
+    }
+
+    /**
+     * Return a reverse chronological list of all mutations that have occurred on the pipeline stage identified by `{stageId}`.
+     * @param objectType 
+     * @param pipelineId
+     * @param stageId 
+     */
+    public getAudit_4WithHttpInfo(objectType: string, pipelineId: string, stageId: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePublicAuditInfoNoPaging>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getAudit_4(objectType, pipelineId, stageId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAudit_4WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Return a reverse chronological list of all mutations that have occurred on the pipeline stage identified by `{stageId}`.
+     * @param objectType 
+     * @param pipelineId
+     * @param stageId 
+     */
+    public getAudit_4(objectType: string, pipelineId: string, stageId: string, _options?: ConfigurationOptions): Observable<CollectionResponsePublicAuditInfoNoPaging> {
+        return this.getAudit_4WithHttpInfo(objectType, pipelineId, stageId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicAuditInfoNoPaging>) => apiResponse.data));
+    }
+
+    /**
+     * Return a single pipeline object identified by its unique `{pipelineId}`.
+     * Return a pipeline by ID
+     * @param objectType 
+     * @param pipelineId 
+     */
+    public getByIdWithHttpInfo(objectType: string, pipelineId: string, _options?: ConfigurationOptions): Observable<HttpInfo<Pipeline>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
 		};
 	}
 
@@ -860,25 +602,22 @@ export class ObservablePipelinesApi {
     /**
      * Return a single pipeline object identified by its unique `{pipelineId}`.
      * Return a pipeline by ID
-     * @param objectType
-     * @param pipelineId
+     * @param objectType 
+     * @param pipelineId 
      */
     public getById(objectType: string, pipelineId: string, _options?: ConfigurationOptions): Observable<Pipeline> {
         return this.getByIdWithHttpInfo(objectType, pipelineId, _options).pipe(map((apiResponse: HttpInfo<Pipeline>) => apiResponse.data));
     }
 
     /**
-     * Replace all the properties of an existing pipeline with the values provided. This will overwrite any existing pipeline stages. The updated pipeline will be returned in the response.
-     * Replace a pipeline
-     * @param objectType
-     * @param pipelineId
-     * @param pipelineInput
-     * @param [validateReferencesBeforeDelete]
-     * @param [validateDealStageUsagesBeforeDelete]
+     * Return a pipeline stage by ID
+     * @param objectType 
+     * @param pipelineId 
+     * @param stageId 
      */
-    public replaceWithHttpInfo(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<Pipeline>> {
+    public getById_5WithHttpInfo(objectType: string, pipelineId: string, stageId: string, _options?: ConfigurationOptions): Observable<HttpInfo<PipelineStage>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -892,7 +631,7 @@ export class ObservablePipelinesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -903,11 +642,77 @@ export class ObservablePipelinesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.replace(objectType, pipelineId, pipelineInput, validateReferencesBeforeDelete, validateDealStageUsagesBeforeDelete, _config);
+        const requestContextPromise = this.requestFactory.getById_5(objectType, pipelineId, stageId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById_5WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Return a pipeline stage by ID
+     * @param objectType 
+     * @param pipelineId 
+     * @param stageId 
+     */
+    public getById_5(objectType: string, pipelineId: string, stageId: string, _options?: ConfigurationOptions): Observable<PipelineStage> {
+        return this.getById_5WithHttpInfo(objectType, pipelineId, stageId, _options).pipe(map((apiResponse: HttpInfo<PipelineStage>) => apiResponse.data));
+    }
+
+    /**
+     * Replace a pipeline
+     * @param objectType 
+     * @param pipelineId 
+     * @param pipelineReplaceInput
+     * @param [validateDealStageUsagesBeforeDelete] 
+     * @param [validateReferencesBeforeDelete] 
+     */
+    public replaceWithHttpInfo(objectType: string, pipelineId: string, pipelineReplaceInput: PipelineReplaceInput, validateDealStageUsagesBeforeDelete?: boolean, validateReferencesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<Pipeline>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.replace(objectType, pipelineId, pipelineReplaceInput, validateDealStageUsagesBeforeDelete, validateReferencesBeforeDelete, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -925,30 +730,28 @@ export class ObservablePipelinesApi {
     }
 
     /**
-     * Replace all the properties of an existing pipeline with the values provided. This will overwrite any existing pipeline stages. The updated pipeline will be returned in the response.
      * Replace a pipeline
-     * @param objectType
-     * @param pipelineId
-     * @param pipelineInput
-     * @param [validateReferencesBeforeDelete]
-     * @param [validateDealStageUsagesBeforeDelete]
+     * @param objectType 
+     * @param pipelineId 
+     * @param pipelineReplaceInput
+     * @param [validateDealStageUsagesBeforeDelete] 
+     * @param [validateReferencesBeforeDelete] 
      */
-    public replace(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<Pipeline> {
-        return this.replaceWithHttpInfo(objectType, pipelineId, pipelineInput, validateReferencesBeforeDelete, validateDealStageUsagesBeforeDelete, _options).pipe(map((apiResponse: HttpInfo<Pipeline>) => apiResponse.data));
+    public replace(objectType: string, pipelineId: string, pipelineReplaceInput: PipelineReplaceInput, validateDealStageUsagesBeforeDelete?: boolean, validateReferencesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<Pipeline> {
+        return this.replaceWithHttpInfo(objectType, pipelineId, pipelineReplaceInput, validateDealStageUsagesBeforeDelete, validateReferencesBeforeDelete, _options).pipe(map((apiResponse: HttpInfo<Pipeline>) => apiResponse.data));
     }
 
     /**
-     * Perform a partial update of the pipeline identified by `{pipelineId}`. The updated pipeline will be returned in the response.
-     * Update a pipeline
-     * @param objectType
-     * @param pipelineId
-     * @param pipelinePatchInput
-     * @param [validateReferencesBeforeDelete]
-     * @param [validateDealStageUsagesBeforeDelete]
+     * Replace all the properties of an existing pipeline stage with the values provided. The updated stage will be returned in the response.
+     * Replace a pipeline stage
+     * @param objectType 
+     * @param pipelineId 
+     * @param stageId 
+     * @param pipelineStageReplaceInput
      */
-    public updateWithHttpInfo(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<Pipeline>> {
+    public replace_6WithHttpInfo(objectType: string, pipelineId: string, stageId: string, pipelineStageReplaceInput: PipelineStageReplaceInput, _options?: ConfigurationOptions): Observable<HttpInfo<PipelineStage>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -962,7 +765,7 @@ export class ObservablePipelinesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -973,11 +776,79 @@ export class ObservablePipelinesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.update(objectType, pipelineId, pipelinePatchInput, validateReferencesBeforeDelete, validateDealStageUsagesBeforeDelete, _config);
+        const requestContextPromise = this.requestFactory.replace_6(objectType, pipelineId, stageId, pipelineStageReplaceInput, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.replace_6WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Replace all the properties of an existing pipeline stage with the values provided. The updated stage will be returned in the response.
+     * Replace a pipeline stage
+     * @param objectType 
+     * @param pipelineId 
+     * @param stageId 
+     * @param pipelineStageReplaceInput
+     */
+    public replace_6(objectType: string, pipelineId: string, stageId: string, pipelineStageReplaceInput: PipelineStageReplaceInput, _options?: ConfigurationOptions): Observable<PipelineStage> {
+        return this.replace_6WithHttpInfo(objectType, pipelineId, stageId, pipelineStageReplaceInput, _options).pipe(map((apiResponse: HttpInfo<PipelineStage>) => apiResponse.data));
+    }
+
+    /**
+     * Perform a partial update of the pipeline identified by `{pipelineId}`. The updated pipeline will be returned in the response.
+     * @param objectType 
+     * @param pipelineId 
+     * @param pipelinePatchInput
+     * @param [validateDealStageUsagesBeforeDelete] 
+     * @param [validateReferencesBeforeDelete] 
+     */
+    public updateWithHttpInfo(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateDealStageUsagesBeforeDelete?: boolean, validateReferencesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<Pipeline>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.update(objectType, pipelineId, pipelinePatchInput, validateDealStageUsagesBeforeDelete, validateReferencesBeforeDelete, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -996,15 +867,78 @@ export class ObservablePipelinesApi {
 
     /**
      * Perform a partial update of the pipeline identified by `{pipelineId}`. The updated pipeline will be returned in the response.
-     * Update a pipeline
-     * @param objectType
-     * @param pipelineId
+     * @param objectType 
+     * @param pipelineId 
      * @param pipelinePatchInput
-     * @param [validateReferencesBeforeDelete]
-     * @param [validateDealStageUsagesBeforeDelete]
+     * @param [validateDealStageUsagesBeforeDelete] 
+     * @param [validateReferencesBeforeDelete] 
      */
-    public update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<Pipeline> {
-        return this.updateWithHttpInfo(objectType, pipelineId, pipelinePatchInput, validateReferencesBeforeDelete, validateDealStageUsagesBeforeDelete, _options).pipe(map((apiResponse: HttpInfo<Pipeline>) => apiResponse.data));
+    public update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateDealStageUsagesBeforeDelete?: boolean, validateReferencesBeforeDelete?: boolean, _options?: ConfigurationOptions): Observable<Pipeline> {
+        return this.updateWithHttpInfo(objectType, pipelineId, pipelinePatchInput, validateDealStageUsagesBeforeDelete, validateReferencesBeforeDelete, _options).pipe(map((apiResponse: HttpInfo<Pipeline>) => apiResponse.data));
+    }
+
+    /**
+     * @param objectType 
+     * @param pipelineId 
+     * @param stageId 
+     * @param pipelineStagePatchInput
+     */
+    public update_7WithHttpInfo(objectType: string, pipelineId: string, stageId: string, pipelineStagePatchInput: PipelineStagePatchInput, _options?: ConfigurationOptions): Observable<HttpInfo<PipelineStage>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.update_7(objectType, pipelineId, stageId, pipelineStagePatchInput, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update_7WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * @param objectType 
+     * @param pipelineId 
+     * @param stageId 
+     * @param pipelineStagePatchInput
+     */
+    public update_7(objectType: string, pipelineId: string, stageId: string, pipelineStagePatchInput: PipelineStagePatchInput, _options?: ConfigurationOptions): Observable<PipelineStage> {
+        return this.update_7WithHttpInfo(objectType, pipelineId, stageId, pipelineStagePatchInput, _options).pipe(map((apiResponse: HttpInfo<PipelineStage>) => apiResponse.data));
     }
 
 }

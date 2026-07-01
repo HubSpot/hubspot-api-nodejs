@@ -3,48 +3,44 @@ import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
 
-import { ObservableTypesApi } from "./ObservableAPI";
-import { TypesApiRequestFactory, TypesApiResponseProcessor} from "../apis/TypesApi";
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
-export interface TypesApiGetAllRequest {
+export interface BasicApiGetAllRequest {
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof TypesApigetAll
+     * @memberof BasicApigetAll
      */
     fromObjectType: string
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof TypesApigetAll
+     * @memberof BasicApigetAll
      */
     toObjectType: string
 }
 
-export class ObjectTypesApi {
-    private api: ObservableTypesApi
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
 
-    public constructor(configuration: Configuration, requestFactory?: TypesApiRequestFactory, responseProcessor?: TypesApiResponseProcessor) {
-        this.api = new ObservableTypesApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * List all the valid association types available between two object types
-     * List association types
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: TypesApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionNoPaging>> {
+    public getAllWithHttpInfo(param: BasicApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionNoPaging>> {
         return this.api.getAllWithHttpInfo(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
     /**
-     * List all the valid association types available between two object types
-     * List association types
      * @param param the request object
      */
-    public getAll(param: TypesApiGetAllRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicAssociationDefinitionNoPaging> {
+    public getAll(param: BasicApiGetAllRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicAssociationDefinitionNoPaging> {
         return this.api.getAll(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 

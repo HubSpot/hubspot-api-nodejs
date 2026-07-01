@@ -24,6 +24,7 @@ import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/Batch
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive multiple deals using their IDs.
      * Archive a batch of deals by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -37,7 +38,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/batch/archive';
+        const localVarPath = '/crm/v3/objects/0-3/batch/archive';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -71,6 +72,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Create multiple deals in a single request.
      * Create a batch of deals
      * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
@@ -84,7 +86,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/batch/create';
+        const localVarPath = '/crm/v3/objects/0-3/batch/create';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -134,7 +136,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/batch/read';
+        const localVarPath = '/crm/v3/objects/0-3/batch/read';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -173,6 +175,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Update multiple deals using their internal IDs or unique property values.
      * Update a batch of deals by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */
@@ -186,7 +189,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/batch/update';
+        const localVarPath = '/crm/v3/objects/0-3/batch/update';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -234,7 +237,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/batch/upsert';
+        const localVarPath = '/crm/v3/objects/0-3/batch/upsert';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);

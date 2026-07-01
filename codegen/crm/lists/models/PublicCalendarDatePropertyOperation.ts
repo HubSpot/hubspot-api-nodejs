@@ -12,25 +12,40 @@
 
 
 export class PublicCalendarDatePropertyOperation {
-    'useFiscalYear'?: boolean;
+    /**
+    * The month in which the fiscal year starts.
+    */
     'fiscalYearStart'?: PublicCalendarDatePropertyOperationFiscalYearStartEnum;
+    /**
+    * Indicates whether objects with no value set for the property should be included.
+    */
     'includeObjectsWithNoValueSet': boolean;
+    /**
+    * The type of operation, which is (CALENDAR_DATE).
+    */
     'operationType': PublicCalendarDatePropertyOperationOperationTypeEnum;
-    'timeUnitCount'?: number;
+    /**
+    * Defines the operation to be applied to the calendar date property (IN_THIS_TIME_UNIT, IN_THIS_TIME_UNIT_SO_FAR, IN_NEXT_TIME_UNIT, IN_LAST_TIME_UNIT).
+    */
     'operator': string;
+    /**
+    * The unit of time to be used in the operation (DAY, WEEK, MONTH, QUARTER, YEAR).
+    */
     'timeUnit': string;
+    /**
+    * The count of time units to be applied in the operation (1).
+    */
+    'timeUnitCount'?: number;
+    /**
+    * Specifies whether the fiscal year should be used in the operation.
+    */
+    'useFiscalYear'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "useFiscalYear",
-            "baseName": "useFiscalYear",
-            "type": "boolean",
-            "format": ""
-        },
         {
             "name": "fiscalYearStart",
             "baseName": "fiscalYearStart",
@@ -50,12 +65,6 @@ export class PublicCalendarDatePropertyOperation {
             "format": ""
         },
         {
-            "name": "timeUnitCount",
-            "baseName": "timeUnitCount",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "operator",
             "baseName": "operator",
             "type": "string",
@@ -65,6 +74,18 @@ export class PublicCalendarDatePropertyOperation {
             "name": "timeUnit",
             "baseName": "timeUnit",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "timeUnitCount",
+            "baseName": "timeUnitCount",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "useFiscalYear",
+            "baseName": "useFiscalYear",
+            "type": "boolean",
             "format": ""
         }    ];
 
@@ -77,18 +98,18 @@ export class PublicCalendarDatePropertyOperation {
 }
 
 export enum PublicCalendarDatePropertyOperationFiscalYearStartEnum {
-    January = 'JANUARY',
-    February = 'FEBRUARY',
-    March = 'MARCH',
     April = 'APRIL',
-    May = 'MAY',
-    June = 'JUNE',
-    July = 'JULY',
     August = 'AUGUST',
-    September = 'SEPTEMBER',
-    October = 'OCTOBER',
+    December = 'DECEMBER',
+    February = 'FEBRUARY',
+    January = 'JANUARY',
+    July = 'JULY',
+    June = 'JUNE',
+    March = 'MARCH',
+    May = 'MAY',
     November = 'NOVEMBER',
-    December = 'DECEMBER'
+    October = 'OCTOBER',
+    September = 'SEPTEMBER'
 }
 export enum PublicCalendarDatePropertyOperationOperationTypeEnum {
     CalendarDate = 'CALENDAR_DATE'

@@ -1,9 +1,16 @@
 export * from '../models/ChannelConnectionSettingsPatchRequest';
 export * from '../models/ChannelConnectionSettingsRequest';
 export * from '../models/ChannelConnectionSettingsResponse';
+export * from '../models/CompanyCallerId';
+export * from '../models/CompletedThirdPartyCallRequest';
+export * from '../models/CompletedThirdPartyCallResponse';
+export * from '../models/CompletedThirdPartyCallResponseCallerIdMatchesInner';
+export * from '../models/ContactCallerId';
 export * from '../models/ErrorDetail';
+export * from '../models/FormattedPhoneNumber';
 export * from '../models/MarkRecordingAsReadyRequest';
 export * from '../models/ModelError';
+export * from '../models/ObjectCoordinates';
 export * from '../models/RecordingSettingsPatchRequest';
 export * from '../models/RecordingSettingsRequest';
 export * from '../models/RecordingSettingsResponse';
@@ -14,9 +21,16 @@ export * from '../models/SettingsResponse';
 import { ChannelConnectionSettingsPatchRequest } from '../models/ChannelConnectionSettingsPatchRequest';
 import { ChannelConnectionSettingsRequest } from '../models/ChannelConnectionSettingsRequest';
 import { ChannelConnectionSettingsResponse } from '../models/ChannelConnectionSettingsResponse';
+import { CompanyCallerId     } from '../models/CompanyCallerId';
+import { CompletedThirdPartyCallRequest            } from '../models/CompletedThirdPartyCallRequest';
+import { CompletedThirdPartyCallResponse } from '../models/CompletedThirdPartyCallResponse';
+import { CompletedThirdPartyCallResponseCallerIdMatchesInnerClass } from '../models/CompletedThirdPartyCallResponseCallerIdMatchesInner';
+import { ContactCallerId       } from '../models/ContactCallerId';
 import { ErrorDetail } from '../models/ErrorDetail';
+import { FormattedPhoneNumber     } from '../models/FormattedPhoneNumber';
 import { MarkRecordingAsReadyRequest } from '../models/MarkRecordingAsReadyRequest';
 import { ModelError } from '../models/ModelError';
+import { ObjectCoordinates } from '../models/ObjectCoordinates';
 import { RecordingSettingsPatchRequest } from '../models/RecordingSettingsPatchRequest';
 import { RecordingSettingsRequest } from '../models/RecordingSettingsRequest';
 import { RecordingSettingsResponse } from '../models/RecordingSettingsResponse';
@@ -37,15 +51,27 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
+    "CompanyCallerIdCallerIdTypeEnum",
+    "CompletedThirdPartyCallRequestFinalCallStatusEnum",
+    "CompletedThirdPartyCallResponseCallerIdMatchesInnerCallerIdTypeEnum",
+    "ContactCallerIdCallerIdTypeEnum",
+    "FormattedPhoneNumberPhoneNumberTypeEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
     "ChannelConnectionSettingsPatchRequest": ChannelConnectionSettingsPatchRequest,
     "ChannelConnectionSettingsRequest": ChannelConnectionSettingsRequest,
     "ChannelConnectionSettingsResponse": ChannelConnectionSettingsResponse,
+    "CompanyCallerId": CompanyCallerId,
+    "CompletedThirdPartyCallRequest": CompletedThirdPartyCallRequest,
+    "CompletedThirdPartyCallResponse": CompletedThirdPartyCallResponse,
+    "CompletedThirdPartyCallResponseCallerIdMatchesInner": CompletedThirdPartyCallResponseCallerIdMatchesInnerClass,
+    "ContactCallerId": ContactCallerId,
     "ErrorDetail": ErrorDetail,
+    "FormattedPhoneNumber": FormattedPhoneNumber,
     "MarkRecordingAsReadyRequest": MarkRecordingAsReadyRequest,
     "ModelError": ModelError,
+    "ObjectCoordinates": ObjectCoordinates,
     "RecordingSettingsPatchRequest": RecordingSettingsPatchRequest,
     "RecordingSettingsRequest": RecordingSettingsRequest,
     "RecordingSettingsResponse": RecordingSettingsResponse,

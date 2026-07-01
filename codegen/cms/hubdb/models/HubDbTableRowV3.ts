@@ -13,34 +13,37 @@
 
 export class HubDbTableRowV3 {
     /**
-    * Specifies the value for `hs_path` column, which will be used as slug in the dynamic pages
+    * Specifies the value for the column child table id
     */
-    'path'?: string;
+    'childTableId': string;
     /**
     * Timestamp at which the row is created
     */
-    'createdAt'?: Date;
+    'createdAt': Date;
     /**
-    * Specifies the value for the column child table id
+    * The id of the table row
     */
-    'childTableId'?: string;
-    'publishedAt'?: Date;
+    'id': string;
+    /**
+    * Specifies the value for `hs_name` column, which will be used as title in the dynamic pages
+    */
+    'name': string;
+    /**
+    * Specifies the value for `hs_path` column, which will be used as slug in the dynamic pages
+    */
+    'path': string;
+    /**
+    * The timestamp indicating when the row was last published, in date-time format.
+    */
+    'publishedAt': Date;
+    /**
+    * Timestamp at which the row is updated last time
+    */
+    'updatedAt': Date;
     /**
     * List of key value pairs with the column name and column value
     */
     'values': { [key: string]: any; };
-    /**
-    * Specifies the value for `hs_name` column, which will be used as title in the dynamic pages
-    */
-    'name'?: string;
-    /**
-    * The id of the table row
-    */
-    'id'?: string;
-    /**
-    * Timestamp at which the row is updated last time
-    */
-    'updatedAt'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,8 +51,8 @@ export class HubDbTableRowV3 {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "path",
-            "baseName": "path",
+            "name": "childTableId",
+            "baseName": "childTableId",
             "type": "string",
             "format": ""
         },
@@ -60,8 +63,20 @@ export class HubDbTableRowV3 {
             "format": "date-time"
         },
         {
-            "name": "childTableId",
-            "baseName": "childTableId",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "path",
+            "baseName": "path",
             "type": "string",
             "format": ""
         },
@@ -72,28 +87,16 @@ export class HubDbTableRowV3 {
             "format": "date-time"
         },
         {
-            "name": "values",
-            "baseName": "values",
-            "type": "{ [key: string]: any; }",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "updatedAt",
             "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "values",
+            "baseName": "values",
+            "type": "{ [key: string]: any; }",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

@@ -13,10 +13,16 @@
 import { PublicTimeOffset } from '../models/PublicTimeOffset';
 
 export class PublicRelativeRangedTimestampRefineBy {
-    'upperBoundOffset': PublicTimeOffset;
-    'rangeType': string;
     'lowerBoundOffset': PublicTimeOffset;
+    /**
+    * Specifies the type of range for the refinement criteria (BETWEEN, NOT_BETWEEN).
+    */
+    'rangeType': string;
+    /**
+    * Indicates the type of refinement (RELATIVE_RANGED).
+    */
     'type': PublicRelativeRangedTimestampRefineByTypeEnum;
+    'upperBoundOffset': PublicTimeOffset;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,8 +30,8 @@ export class PublicRelativeRangedTimestampRefineBy {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "upperBoundOffset",
-            "baseName": "upperBoundOffset",
+            "name": "lowerBoundOffset",
+            "baseName": "lowerBoundOffset",
             "type": "PublicTimeOffset",
             "format": ""
         },
@@ -36,15 +42,15 @@ export class PublicRelativeRangedTimestampRefineBy {
             "format": ""
         },
         {
-            "name": "lowerBoundOffset",
-            "baseName": "lowerBoundOffset",
-            "type": "PublicTimeOffset",
-            "format": ""
-        },
-        {
             "name": "type",
             "baseName": "type",
             "type": "PublicRelativeRangedTimestampRefineByTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "upperBoundOffset",
+            "baseName": "upperBoundOffset",
+            "type": "PublicTimeOffset",
             "format": ""
         }    ];
 

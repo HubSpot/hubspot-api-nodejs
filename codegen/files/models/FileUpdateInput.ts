@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -16,27 +16,27 @@
 */
 export class FileUpdateInput {
     /**
-    * NONE: Do not run any duplicate validation. REJECT: Reject the upload if a duplicate is found. RETURN_EXISTING: If a duplicate file is found, do not upload a new file and return the found duplicate instead. 
+    * NONE: Do not run any duplicate validation. REJECT: Reject the upload if a duplicate is found. RETURN_EXISTING: If a duplicate file is found, do not upload a new file and return the found duplicate instead.
     */
     'access'?: FileUpdateInputAccessEnum;
+    'clearExpires'?: boolean;
+    'expiresAt'?: Date;
     /**
-    * FolderId where the file should be moved to. folderId and folderPath parameters cannot be set at the same time.
+    * Mark whether the file should be used in new content or not.
     */
-    'parentFolderId'?: string;
+    'isUsableInContent'?: boolean;
     /**
     * New name for the file.
     */
     'name'?: string;
     /**
+    * FolderId where the file should be moved to. folderId and folderPath parameters cannot be set at the same time.
+    */
+    'parentFolderId'?: string;
+    /**
     * Folder path where the file should be moved to. folderId and folderPath parameters cannot be set at the same time.
     */
     'parentFolderPath'?: string;
-    'clearExpires'?: boolean;
-    /**
-    * Mark whether the file should be used in new content or not.
-    */
-    'isUsableInContent'?: boolean;
-    'expiresAt'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -50,9 +50,21 @@ export class FileUpdateInput {
             "format": ""
         },
         {
-            "name": "parentFolderId",
-            "baseName": "parentFolderId",
-            "type": "string",
+            "name": "clearExpires",
+            "baseName": "clearExpires",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "expiresAt",
+            "baseName": "expiresAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "isUsableInContent",
+            "baseName": "isUsableInContent",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -62,28 +74,16 @@ export class FileUpdateInput {
             "format": ""
         },
         {
-            "name": "parentFolderPath",
-            "baseName": "parentFolderPath",
+            "name": "parentFolderId",
+            "baseName": "parentFolderId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "clearExpires",
-            "baseName": "clearExpires",
-            "type": "boolean",
+            "name": "parentFolderPath",
+            "baseName": "parentFolderPath",
+            "type": "string",
             "format": ""
-        },
-        {
-            "name": "isUsableInContent",
-            "baseName": "isUsableInContent",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "expiresAt",
-            "baseName": "expiresAt",
-            "type": "Date",
-            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {
@@ -95,13 +95,13 @@ export class FileUpdateInput {
 }
 
 export enum FileUpdateInputAccessEnum {
-    PublicIndexable = 'PUBLIC_INDEXABLE',
-    PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
     HiddenIndexable = 'HIDDEN_INDEXABLE',
     HiddenNotIndexable = 'HIDDEN_NOT_INDEXABLE',
     HiddenPrivate = 'HIDDEN_PRIVATE',
-    Private = 'PRIVATE',
     HiddenSensitive = 'HIDDEN_SENSITIVE',
+    Private = 'PRIVATE',
+    PublicIndexable = 'PUBLIC_INDEXABLE',
+    PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
     Sensitive = 'SENSITIVE'
 }
 

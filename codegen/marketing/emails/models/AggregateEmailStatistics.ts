@@ -16,15 +16,15 @@ import { EmailStatisticsData } from '../models/EmailStatisticsData';
 * Aggregated statistics for the given interval, plus the IDs of emails that were sent during that interval.
 */
 export class AggregateEmailStatistics {
-    /**
-    * List of email IDs that were sent during the time span.
-    */
-    'emails'?: Array<number>;
+    'aggregate'?: EmailStatisticsData;
     /**
     * The aggregated statistics per campaign.
     */
     'campaignAggregations'?: { [key: string]: EmailStatisticsData; };
-    'aggregate'?: EmailStatisticsData;
+    /**
+    * List of email IDs that were sent during the time span.
+    */
+    'emails'?: Array<number>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -32,10 +32,10 @@ export class AggregateEmailStatistics {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "emails",
-            "baseName": "emails",
-            "type": "Array<number>",
-            "format": "int64"
+            "name": "aggregate",
+            "baseName": "aggregate",
+            "type": "EmailStatisticsData",
+            "format": ""
         },
         {
             "name": "campaignAggregations",
@@ -44,10 +44,10 @@ export class AggregateEmailStatistics {
             "format": ""
         },
         {
-            "name": "aggregate",
-            "baseName": "aggregate",
-            "type": "EmailStatisticsData",
-            "format": ""
+            "name": "emails",
+            "baseName": "emails",
+            "type": "Array<number>",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {

@@ -10,15 +10,29 @@
  * Do not edit the class manually.
  */
 
+import { ListCreateRequestFilterBranch } from '../models/ListCreateRequestFilterBranch';
 import { PublicListPermissions } from '../models/PublicListPermissions';
 import { PublicMembershipSettings } from '../models/PublicMembershipSettings';
-import { PublicPropertyAssociationFilterBranchFilterBranchesInner } from '../models/PublicPropertyAssociationFilterBranchFilterBranchesInner';
 
 /**
 * The request object used when creating a new object list.
 */
 export class ListCreateRequest {
+    /**
+    * The list of custom properties to tie to the list. Custom property name is the key, the value is the value.
+    */
+    'customProperties'?: { [key: string]: string; };
+    'filterBranch'?: ListCreateRequestFilterBranch;
+    /**
+    * The ID of the folder that the list should be created in. If left blank, then the list will be created in the root of the list folder structure.
+    */
+    'listFolderId'?: number;
+    'listPermissions'?: PublicListPermissions;
     'membershipSettings'?: PublicMembershipSettings;
+    /**
+    * The name of the list, which must be globally unique across all public lists in the portal.
+    */
+    'name': string;
     /**
     * The object type ID of the type of objects that the list will store.
     */
@@ -27,20 +41,6 @@ export class ListCreateRequest {
     * The processing type of the list. One of: `SNAPSHOT`, `MANUAL`, or `DYNAMIC`.
     */
     'processingType': string;
-    /**
-    * The list of custom properties to tie to the list. Custom property name is the key, the value is the value.
-    */
-    'customProperties'?: { [key: string]: string; };
-    /**
-    * The ID of the folder that the list should be created in. If left blank, then the list will be created in the root of the list folder structure.
-    */
-    'listFolderId'?: number;
-    /**
-    * The name of the list, which must be globally unique across all public lists in the portal.
-    */
-    'name': string;
-    'listPermissions'?: PublicListPermissions;
-    'filterBranch'?: PublicPropertyAssociationFilterBranchFilterBranchesInner;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,9 +48,39 @@ export class ListCreateRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "customProperties",
+            "baseName": "customProperties",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "filterBranch",
+            "baseName": "filterBranch",
+            "type": "ListCreateRequestFilterBranch",
+            "format": ""
+        },
+        {
+            "name": "listFolderId",
+            "baseName": "listFolderId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "listPermissions",
+            "baseName": "listPermissions",
+            "type": "PublicListPermissions",
+            "format": ""
+        },
+        {
             "name": "membershipSettings",
             "baseName": "membershipSettings",
             "type": "PublicMembershipSettings",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
             "format": ""
         },
         {
@@ -63,36 +93,6 @@ export class ListCreateRequest {
             "name": "processingType",
             "baseName": "processingType",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "customProperties",
-            "baseName": "customProperties",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
-            "name": "listFolderId",
-            "baseName": "listFolderId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "listPermissions",
-            "baseName": "listPermissions",
-            "type": "PublicListPermissions",
-            "format": ""
-        },
-        {
-            "name": "filterBranch",
-            "baseName": "filterBranch",
-            "type": "PublicPropertyAssociationFilterBranchFilterBranchesInner",
             "format": ""
         }    ];
 

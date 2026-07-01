@@ -12,12 +12,30 @@
 
 import { SimplePublicUpsertObject } from '../models/SimplePublicUpsertObject';
 
+/**
+* Represents the result of a batch upsert operation, including the operation’s status, timestamps, and a list of successfully created or updated objects.
+*/
 export class BatchResponseSimplePublicUpsertObject {
+    /**
+    * The timestamp when the batch process was completed, in ISO 8601 format.
+    */
     'completedAt': Date;
-    'requestedAt'?: Date;
-    'startedAt': Date;
+    /**
+    * An object containing relevant links related to the batch request.
+    */
     'links'?: { [key: string]: string; };
+    /**
+    * The timestamp when the batch process was initiated, in ISO 8601 format.
+    */
+    'requestedAt'?: Date;
     'results': Array<SimplePublicUpsertObject>;
+    /**
+    * The timestamp when the batch process began execution, in ISO 8601 format.
+    */
+    'startedAt': Date;
+    /**
+    * The status of the batch processing request. Expected value is \"COMPLETE\".
+    */
     'status': BatchResponseSimplePublicUpsertObjectStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -32,28 +50,28 @@ export class BatchResponseSimplePublicUpsertObject {
             "format": "date-time"
         },
         {
-            "name": "requestedAt",
-            "baseName": "requestedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "results",
             "baseName": "results",
             "type": "Array<SimplePublicUpsertObject>",
             "format": ""
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -71,9 +89,9 @@ export class BatchResponseSimplePublicUpsertObject {
 }
 
 export enum BatchResponseSimplePublicUpsertObjectStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

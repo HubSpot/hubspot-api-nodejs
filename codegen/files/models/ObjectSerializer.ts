@@ -35,7 +35,7 @@ import { FolderUpdateTaskLocator } from '../models/FolderUpdateTaskLocator';
 import { ImportFromUrlInput            } from '../models/ImportFromUrlInput';
 import { ImportFromUrlTaskLocator } from '../models/ImportFromUrlTaskLocator';
 import { ModelError } from '../models/ModelError';
-import { ModelFile                       } from '../models/ModelFile';
+import { ModelFile       } from '../models/ModelFile';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
@@ -62,6 +62,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ImportFromUrlInputDuplicateValidationScopeEnum",
     "ImportFromUrlInputDuplicateValidationStrategyEnum",
     "ModelFileAccessEnum",
+    "ModelFileSourceGroupEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {

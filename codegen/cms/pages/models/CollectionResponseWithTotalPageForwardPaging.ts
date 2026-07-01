@@ -17,27 +17,21 @@ import { Page } from '../models/Page';
 * Response object for collections of pages with pagination information.
 */
 export class CollectionResponseWithTotalPageForwardPaging {
-    /**
-    * Total number of pages.
-    */
-    'total': number;
     'paging'?: ForwardPaging;
     /**
     * Collection of pages.
     */
     'results': Array<Page>;
+    /**
+    * Total number of pages.
+    */
+    'total': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "total",
-            "baseName": "total",
-            "type": "number",
-            "format": "int32"
-        },
         {
             "name": "paging",
             "baseName": "paging",
@@ -49,6 +43,12 @@ export class CollectionResponseWithTotalPageForwardPaging {
             "baseName": "results",
             "type": "Array<Page>",
             "format": ""
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

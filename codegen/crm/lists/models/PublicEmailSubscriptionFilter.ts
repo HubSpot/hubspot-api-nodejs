@@ -12,10 +12,16 @@
 
 
 export class PublicEmailSubscriptionFilter {
-    'subscriptionType'?: string;
-    'subscriptionIds': Array<string>;
-    'filterType': PublicEmailSubscriptionFilterFilterTypeEnum;
     'acceptedStatuses': Array<string>;
+    /**
+    * Indicates the type of filter (EMAIL_SUBSCRIPTION).
+    */
+    'filterType': PublicEmailSubscriptionFilterFilterTypeEnum;
+    'subscriptionIds': Array<string>;
+    /**
+    * The type of subscription related to the filter (PORTAL, BRAND, SUBSCRIPTION, HARDBOUNCE, SPAMREPORT).
+    */
+    'subscriptionType'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,14 +29,8 @@ export class PublicEmailSubscriptionFilter {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "subscriptionType",
-            "baseName": "subscriptionType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "subscriptionIds",
-            "baseName": "subscriptionIds",
+            "name": "acceptedStatuses",
+            "baseName": "acceptedStatuses",
             "type": "Array<string>",
             "format": ""
         },
@@ -41,9 +41,15 @@ export class PublicEmailSubscriptionFilter {
             "format": ""
         },
         {
-            "name": "acceptedStatuses",
-            "baseName": "acceptedStatuses",
+            "name": "subscriptionIds",
+            "baseName": "subscriptionIds",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "subscriptionType",
+            "baseName": "subscriptionType",
+            "type": "string",
             "format": ""
         }    ];
 

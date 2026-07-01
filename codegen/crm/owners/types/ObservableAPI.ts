@@ -6,31 +6,31 @@ import {mergeMap, map} from  '../rxjsStub';
 import { CollectionResponsePublicOwnerForwardPaging } from '../models/CollectionResponsePublicOwnerForwardPaging';
 import { PublicOwner } from '../models/PublicOwner';
 
-import { OwnersApiRequestFactory, OwnersApiResponseProcessor} from "../apis/OwnersApi";
-export class ObservableOwnersApi {
-    private requestFactory: OwnersApiRequestFactory;
-    private responseProcessor: OwnersApiResponseProcessor;
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class ObservableBasicApi {
+    private requestFactory: BasicApiRequestFactory;
+    private responseProcessor: BasicApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: OwnersApiRequestFactory,
-        responseProcessor?: OwnersApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new OwnersApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new OwnersApiResponseProcessor();
+        this.requestFactory = requestFactory || new BasicApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BasicApiResponseProcessor();
     }
 
     /**
-     * Read an owner by given `id` or `userId`
-     * @param ownerId
-     * @param [idProperty]
-     * @param [archived] Whether to return only results that have been archived.
+     * @param [after]
+     * @param [archived]
+     * @param [email]
+     * @param [limit]
      */
-    public getByIdWithHttpInfo(ownerId: number, idProperty?: 'id' | 'userId', archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<PublicOwner>> {
+    public crmV3OwnersWithHttpInfo(after?: string, archived?: boolean, email?: string, limit?: number, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePublicOwnerForwardPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -44,7 +44,7 @@ export class ObservableOwnersApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -55,11 +55,76 @@ export class ObservableOwnersApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.getById(ownerId, idProperty, archived, _config);
+        const requestContextPromise = this.requestFactory.crmV3Owners(after, archived, email, limit, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.crmV3OwnersWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * @param [after]
+     * @param [archived]
+     * @param [email]
+     * @param [limit]
+     */
+    public crmV3Owners(after?: string, archived?: boolean, email?: string, limit?: number, _options?: ConfigurationOptions): Observable<CollectionResponsePublicOwnerForwardPaging> {
+        return this.crmV3OwnersWithHttpInfo(after, archived, email, limit, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicOwnerForwardPaging>) => apiResponse.data));
+    }
+
+    /**
+     * Retrieve details of a specific owner using either their \'id\' or \'userId\'.
+     * Retrieve a specific owner by ID
+     * @param ownerId 
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [idProperty] 
+     */
+    public getByIdWithHttpInfo(ownerId: number, archived?: boolean, idProperty?: 'id' | 'userId', _options?: ConfigurationOptions): Observable<HttpInfo<PublicOwner>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getById(ownerId, archived, idProperty, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -77,79 +142,14 @@ export class ObservableOwnersApi {
     }
 
     /**
-     * Read an owner by given `id` or `userId`
-     * @param ownerId
-     * @param [idProperty]
+     * Retrieve details of a specific owner using either their \'id\' or \'userId\'.
+     * Retrieve a specific owner by ID
+     * @param ownerId 
      * @param [archived] Whether to return only results that have been archived.
+     * @param [idProperty] 
      */
-    public getById(ownerId: number, idProperty?: 'id' | 'userId', archived?: boolean, _options?: ConfigurationOptions): Observable<PublicOwner> {
-        return this.getByIdWithHttpInfo(ownerId, idProperty, archived, _options).pipe(map((apiResponse: HttpInfo<PublicOwner>) => apiResponse.data));
-    }
-
-    /**
-     * Get a page of owners
-     * @param [email] Filter by email address (optional)
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [limit] The maximum number of results to display per page.
-     * @param [archived] Whether to return only results that have been archived.
-     */
-    public getPageWithHttpInfo(email?: string, after?: string, limit?: number, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePublicOwnerForwardPaging>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.getPage(email, after, limit, archived, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPageWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Get a page of owners
-     * @param [email] Filter by email address (optional)
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [limit] The maximum number of results to display per page.
-     * @param [archived] Whether to return only results that have been archived.
-     */
-    public getPage(email?: string, after?: string, limit?: number, archived?: boolean, _options?: ConfigurationOptions): Observable<CollectionResponsePublicOwnerForwardPaging> {
-        return this.getPageWithHttpInfo(email, after, limit, archived, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicOwnerForwardPaging>) => apiResponse.data));
+    public getById(ownerId: number, archived?: boolean, idProperty?: 'id' | 'userId', _options?: ConfigurationOptions): Observable<PublicOwner> {
+        return this.getByIdWithHttpInfo(ownerId, archived, idProperty, _options).pipe(map((apiResponse: HttpInfo<PublicOwner>) => apiResponse.data));
     }
 
 }

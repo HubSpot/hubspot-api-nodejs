@@ -16,21 +16,22 @@
 */
 export class TagCloneRequestVNext {
     /**
-    * Name of newly cloned blog tag.
+    * ID of the object to be cloned.
     */
-    'name': string;
+    'id': string;
     /**
     * Target language of new variant.
     */
     'language'?: string;
     /**
-    * ID of the object to be cloned.
+    * Name of newly cloned blog tag.
     */
-    'id': string;
+    'name': string;
     /**
     * Language of primary blog tag to clone.
     */
     'primaryLanguage'?: string;
+    'usePublished'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -38,8 +39,8 @@ export class TagCloneRequestVNext {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
@@ -50,8 +51,8 @@ export class TagCloneRequestVNext {
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -59,6 +60,12 @@ export class TagCloneRequestVNext {
             "name": "primaryLanguage",
             "baseName": "primaryLanguage",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "usePublished",
+            "baseName": "usePublished",
+            "type": "boolean",
             "format": ""
         }    ];
 

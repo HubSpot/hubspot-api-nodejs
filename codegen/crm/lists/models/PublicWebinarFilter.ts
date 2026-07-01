@@ -12,21 +12,24 @@
 
 
 export class PublicWebinarFilter {
-    'webinarId'?: string;
+    /**
+    * Indicates the type of filter, (WEBINAR).
+    */
     'filterType': PublicWebinarFilterFilterTypeEnum;
+    /**
+    * Specifies the operation to be performed by the filter (HAS_WEBINAR_REGISTRATION, NOT_HAS_WEBINAR_REGISTRATION, HAS_WEBINAR_ATTENDANCE, NOT_HAS_WEBINAR_ATTENDANCE).
+    */
     'operator': string;
+    /**
+    * The ID of the webinar associated with the filter.
+    */
+    'webinarId'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "webinarId",
-            "baseName": "webinarId",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "filterType",
             "baseName": "filterType",
@@ -36,6 +39,12 @@ export class PublicWebinarFilter {
         {
             "name": "operator",
             "baseName": "operator",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "webinarId",
+            "baseName": "webinarId",
             "type": "string",
             "format": ""
         }    ];

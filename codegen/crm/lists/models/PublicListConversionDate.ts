@@ -12,28 +12,28 @@
 
 
 export class PublicListConversionDate {
-    'month': number;
-    'year': number;
+    /**
+    * Specifies the type of conversion (CONVERSION_DATE).
+    */
     'conversionType': PublicListConversionDateConversionTypeEnum;
+    /**
+    * The day component of the conversion date.
+    */
     'day': number;
+    /**
+    * The month component of the conversion date.
+    */
+    'month': number;
+    /**
+    * The year component of the conversion date.
+    */
+    'year': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "month",
-            "baseName": "month",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "year",
-            "baseName": "year",
-            "type": "number",
-            "format": "int32"
-        },
         {
             "name": "conversionType",
             "baseName": "conversionType",
@@ -43,6 +43,18 @@ export class PublicListConversionDate {
         {
             "name": "day",
             "baseName": "day",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "month",
+            "baseName": "month",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "year",
+            "baseName": "year",
             "type": "number",
             "format": "int32"
         }    ];

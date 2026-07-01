@@ -13,9 +13,9 @@ export * from '../models/BatchResponseSubscriberEmailResponse';
 export * from '../models/BatchResponseSubscriberVidResponse';
 export * from '../models/CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging';
 export * from '../models/CollectionResponseSearchPublicResponseWrapperNoPaging';
-export * from '../models/CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging';
-export * from '../models/CollectionResponseWithTotalParticipationBreakdownForwardPaging';
-export * from '../models/CollectionResponseWithTotalPublicListNoPaging';
+export * from '../models/CollectionResponseWithTotalMarketingEventIdentifiersResponse';
+export * from '../models/CollectionResponseWithTotalParticipationBreakdown';
+export * from '../models/CollectionResponseWithTotalPublicList';
 export * from '../models/ContactAssociation';
 export * from '../models/CrmPropertyWrapper';
 export * from '../models/ErrorDetail';
@@ -40,9 +40,11 @@ export * from '../models/MarketingEventSubscriber';
 export * from '../models/MarketingEventUpdateRequestParams';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
+export * from '../models/Paging';
 export * from '../models/ParticipationAssociations';
 export * from '../models/ParticipationBreakdown';
 export * from '../models/ParticipationProperties';
+export * from '../models/PreviousPage';
 export * from '../models/PropertyValue';
 export * from '../models/PublicList';
 export * from '../models/SearchPublicResponseWrapper';
@@ -65,9 +67,9 @@ import { BatchResponseSubscriberEmailResponse          } from '../models/BatchRe
 import { BatchResponseSubscriberVidResponse          } from '../models/BatchResponseSubscriberVidResponse';
 import { CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging } from '../models/CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging';
 import { CollectionResponseSearchPublicResponseWrapperNoPaging } from '../models/CollectionResponseSearchPublicResponseWrapperNoPaging';
-import { CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging } from '../models/CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging';
-import { CollectionResponseWithTotalParticipationBreakdownForwardPaging } from '../models/CollectionResponseWithTotalParticipationBreakdownForwardPaging';
-import { CollectionResponseWithTotalPublicListNoPaging } from '../models/CollectionResponseWithTotalPublicListNoPaging';
+import { CollectionResponseWithTotalMarketingEventIdentifiersResponse } from '../models/CollectionResponseWithTotalMarketingEventIdentifiersResponse';
+import { CollectionResponseWithTotalParticipationBreakdown } from '../models/CollectionResponseWithTotalParticipationBreakdown';
+import { CollectionResponseWithTotalPublicList } from '../models/CollectionResponseWithTotalPublicList';
 import { ContactAssociation } from '../models/ContactAssociation';
 import { CrmPropertyWrapper } from '../models/CrmPropertyWrapper';
 import { ErrorDetail } from '../models/ErrorDetail';
@@ -92,10 +94,12 @@ import { MarketingEventSubscriber } from '../models/MarketingEventSubscriber';
 import { MarketingEventUpdateRequestParams } from '../models/MarketingEventUpdateRequestParams';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
+import { Paging } from '../models/Paging';
 import { ParticipationAssociations } from '../models/ParticipationAssociations';
 import { ParticipationBreakdown } from '../models/ParticipationBreakdown';
 import { ParticipationProperties      } from '../models/ParticipationProperties';
-import { PropertyValue                } from '../models/PropertyValue';
+import { PreviousPage } from '../models/PreviousPage';
+import { PropertyValue             } from '../models/PropertyValue';
 import { PublicList } from '../models/PublicList';
 import { SearchPublicResponseWrapper } from '../models/SearchPublicResponseWrapper';
 import { StandardError } from '../models/StandardError';
@@ -121,8 +125,8 @@ let enumsMap: Set<string> = new Set<string>([
     "BatchResponseSubscriberEmailResponseStatusEnum",
     "BatchResponseSubscriberVidResponseStatusEnum",
     "ParticipationPropertiesAttendanceStateEnum",
-    "PropertyValueSourceEnum",
     "PropertyValueDataSensitivityEnum",
+    "PropertyValueSourceEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -141,9 +145,9 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseSubscriberVidResponse": BatchResponseSubscriberVidResponse,
     "CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging": CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging,
     "CollectionResponseSearchPublicResponseWrapperNoPaging": CollectionResponseSearchPublicResponseWrapperNoPaging,
-    "CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging": CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging,
-    "CollectionResponseWithTotalParticipationBreakdownForwardPaging": CollectionResponseWithTotalParticipationBreakdownForwardPaging,
-    "CollectionResponseWithTotalPublicListNoPaging": CollectionResponseWithTotalPublicListNoPaging,
+    "CollectionResponseWithTotalMarketingEventIdentifiersResponse": CollectionResponseWithTotalMarketingEventIdentifiersResponse,
+    "CollectionResponseWithTotalParticipationBreakdown": CollectionResponseWithTotalParticipationBreakdown,
+    "CollectionResponseWithTotalPublicList": CollectionResponseWithTotalPublicList,
     "ContactAssociation": ContactAssociation,
     "CrmPropertyWrapper": CrmPropertyWrapper,
     "ErrorDetail": ErrorDetail,
@@ -168,9 +172,11 @@ let typeMap: {[index: string]: any} = {
     "MarketingEventUpdateRequestParams": MarketingEventUpdateRequestParams,
     "ModelError": ModelError,
     "NextPage": NextPage,
+    "Paging": Paging,
     "ParticipationAssociations": ParticipationAssociations,
     "ParticipationBreakdown": ParticipationBreakdown,
     "ParticipationProperties": ParticipationProperties,
+    "PreviousPage": PreviousPage,
     "PropertyValue": PropertyValue,
     "PublicList": PublicList,
     "SearchPublicResponseWrapper": SearchPublicResponseWrapper,

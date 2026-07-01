@@ -3,28 +3,28 @@ import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from
 import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { CollectionResponsePublicBusinessUnitNoPaging } from '../models/CollectionResponsePublicBusinessUnitNoPaging';
-import { ObservableBusinessUnitApi } from './ObservableAPI';
+import { ObservableBasicApi } from './ObservableAPI';
 
-import { BusinessUnitApiRequestFactory, BusinessUnitApiResponseProcessor} from "../apis/BusinessUnitApi";
-export class PromiseBusinessUnitApi {
-    private api: ObservableBusinessUnitApi
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class PromiseBasicApi {
+    private api: ObservableBasicApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: BusinessUnitApiRequestFactory,
-        responseProcessor?: BusinessUnitApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
-        this.api = new ObservableBusinessUnitApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Get Business Units identified by `userId`. The `userId` refers to the user’s ID.
-     * Get Business Units for a user
-     * @param userId Identifier of user to retrieve.
-     * @param [properties] The names of properties to optionally include in the response body. The only valid value is &#x60;logoMetadata&#x60;.
-     * @param [name] The names of Business Units to retrieve. If empty or not provided, then all associated Business Units will be returned.
+     * Retrieve the brands that a specific user can access.
+     * Retrieve brands by associated user
+     * @param userId 
+     * @param [name] 
+     * @param [properties] 
      */
-    public getByUserIDWithHttpInfo(userId: string, properties?: Array<string>, name?: Array<string>, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicBusinessUnitNoPaging>> {
+    public getByUserIDWithHttpInfo(userId: string, name?: Array<string>, properties?: Array<string>, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicBusinessUnitNoPaging>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -37,18 +37,18 @@ export class PromiseBusinessUnitApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getByUserIDWithHttpInfo(userId, properties, name, observableOptions);
+        const result = this.api.getByUserIDWithHttpInfo(userId, name, properties, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get Business Units identified by `userId`. The `userId` refers to the user’s ID.
-     * Get Business Units for a user
-     * @param userId Identifier of user to retrieve.
-     * @param [properties] The names of properties to optionally include in the response body. The only valid value is &#x60;logoMetadata&#x60;.
-     * @param [name] The names of Business Units to retrieve. If empty or not provided, then all associated Business Units will be returned.
+     * Retrieve the brands that a specific user can access.
+     * Retrieve brands by associated user
+     * @param userId 
+     * @param [name] 
+     * @param [properties] 
      */
-    public getByUserID(userId: string, properties?: Array<string>, name?: Array<string>, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicBusinessUnitNoPaging> {
+    public getByUserID(userId: string, name?: Array<string>, properties?: Array<string>, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicBusinessUnitNoPaging> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -61,7 +61,7 @@ export class PromiseBusinessUnitApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getByUserID(userId, properties, name, observableOptions);
+        const result = this.api.getByUserID(userId, name, properties, observableOptions);
         return result.toPromise();
     }
 

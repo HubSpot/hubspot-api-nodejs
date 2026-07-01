@@ -1,6 +1,6 @@
 /**
  * Site Search
- * Use these endpoints for searching content on your HubSpot hosted CMS website(s).
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -14,9 +14,9 @@ import { ErrorDetail } from '../models/ErrorDetail';
 
 export class ModelError {
     /**
-    * A specific category that contains more specific detail about the error
+    * The error category
     */
-    'subCategory'?: string;
+    'category': string;
     /**
     * Context about the error condition
     */
@@ -26,6 +26,10 @@ export class ModelError {
     */
     'correlationId': string;
     /**
+    * further information about the error
+    */
+    'errors'?: Array<ErrorDetail>;
+    /**
     * A map of link names to associated URIs containing documentation about the error or recommended remediation steps
     */
     'links'?: { [key: string]: string; };
@@ -34,13 +38,9 @@ export class ModelError {
     */
     'message': string;
     /**
-    * The error category
+    * A specific category that contains more specific detail about the error
     */
-    'category': string;
-    /**
-    * further information about the error
-    */
-    'errors'?: Array<ErrorDetail>;
+    'subCategory'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,8 +48,8 @@ export class ModelError {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "subCategory",
-            "baseName": "subCategory",
+            "name": "category",
+            "baseName": "category",
             "type": "string",
             "format": ""
         },
@@ -66,6 +66,12 @@ export class ModelError {
             "format": "uuid"
         },
         {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<ErrorDetail>",
+            "format": ""
+        },
+        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
@@ -78,15 +84,9 @@ export class ModelError {
             "format": ""
         },
         {
-            "name": "category",
-            "baseName": "category",
+            "name": "subCategory",
+            "baseName": "subCategory",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<ErrorDetail>",
             "format": ""
         }    ];
 

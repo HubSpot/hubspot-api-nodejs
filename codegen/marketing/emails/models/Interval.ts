@@ -12,8 +12,14 @@
 
 
 export class Interval {
-    'start': Date;
+    /**
+    * The end timestamp of the interval, in ISO8601 format.
+    */
     'end': Date;
+    /**
+    * The start timestamp of the interval, in ISO8601 format.
+    */
+    'start': Date;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,14 +27,14 @@ export class Interval {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "start",
-            "baseName": "start",
+            "name": "end",
+            "baseName": "end",
             "type": "Date",
             "format": "date-time"
         },
         {
-            "name": "end",
-            "baseName": "end",
+            "name": "start",
+            "baseName": "start",
             "type": "Date",
             "format": "date-time"
         }    ];

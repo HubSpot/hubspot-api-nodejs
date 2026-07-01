@@ -12,10 +12,22 @@
 
 
 export class PublicBoolPropertyOperation {
+    /**
+    * Indicates whether objects with no value set for the property should be included in the operation.
+    */
     'includeObjectsWithNoValueSet': boolean;
+    /**
+    * Specifies the type of operation (BOOL).
+    */
     'operationType': PublicBoolPropertyOperationOperationTypeEnum;
-    'value': boolean;
+    /**
+    * Defines the operation to be applied in the boolean property operation (IS_EQUAL_TO, IS_NOT_EQUAL_TO, HAS_EVER_BEEN_EQUAL_TO, HAS_NEVER_BEEN_EQUAL_TO).
+    */
     'operator': string;
+    /**
+    * The boolean value to be used in the operation.
+    */
+    'value': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,15 +47,15 @@ export class PublicBoolPropertyOperation {
             "format": ""
         },
         {
-            "name": "value",
-            "baseName": "value",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "operator",
             "baseName": "operator",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "value",
+            "baseName": "value",
+            "type": "boolean",
             "format": ""
         }    ];
 

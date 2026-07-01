@@ -19,14 +19,12 @@ export class PublicEmailSubscriptionDetails {
     * ID of the selected office location.
     */
     'officeLocationId'?: string;
-    /**
-    * 
-    */
     'preferencesGroupId'?: string;
     /**
     * ID of the subscription.
     */
     'subscriptionId'?: string;
+    'subscriptionName'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,6 +46,12 @@ export class PublicEmailSubscriptionDetails {
         {
             "name": "subscriptionId",
             "baseName": "subscriptionId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "subscriptionName",
+            "baseName": "subscriptionName",
             "type": "string",
             "format": ""
         }    ];

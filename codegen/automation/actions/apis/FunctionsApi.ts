@@ -18,24 +18,25 @@ import { PublicActionFunctionIdentifier } from '../models/PublicActionFunctionId
 export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive a function for a specific definition.
      * Archive a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param functionId 
-     * @param appId 
+     * @param appId The ID of the application associated with the custom workflow action.
+     * @param definitionId The ID of the custom workflow action definition.
+     * @param functionId The ID of the specific function within the workflow action definition.
+     * @param functionType The type of function, accepted values are: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
      */
-    public async archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async archive(appId: number, definitionId: string, functionId: string, functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS', _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("FunctionsApi", "archive", "appId");
+        }
+
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
             throw new RequiredError("FunctionsApi", "archive", "definitionId");
-        }
-
-
-        // verify required parameter 'functionType' is not null or undefined
-        if (functionType === null || functionType === undefined) {
-            throw new RequiredError("FunctionsApi", "archive", "functionType");
         }
 
 
@@ -45,18 +46,18 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'appId' is not null or undefined
-        if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "archive", "appId");
+        // verify required parameter 'functionType' is not null or undefined
+        if (functionType === null || functionType === undefined) {
+            throw new RequiredError("FunctionsApi", "archive", "functionType");
         }
 
 
         // Path Params
         const localVarPath = '/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}'
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
             .replace('{' + 'definitionId' + '}', encodeURIComponent(String(definitionId)))
-            .replace('{' + 'functionType' + '}', encodeURIComponent(String(functionType)))
             .replace('{' + 'functionId' + '}', encodeURIComponent(String(functionId)))
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'functionType' + '}', encodeURIComponent(String(functionType)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
@@ -65,7 +66,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["developer_hapikey"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
@@ -81,12 +82,18 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Delete a function within a given definition.
      * Delete a function for a definition
-     * @param definitionId The ID of the definition.
-     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
-     * @param appId The ID of the app.
+     * @param appId The ID of the app from which the function will be deleted.
+     * @param definitionId The ID of the definition from which the function will be deleted.
+     * @param functionType The type of function to delete, with accepted values: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
      */
-    public async archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async archiveByFunctionType(appId: number, definitionId: string, functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS', _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("FunctionsApi", "archiveByFunctionType", "appId");
+        }
+
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
@@ -100,17 +107,11 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'appId' is not null or undefined
-        if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "archiveByFunctionType", "appId");
-        }
-
-
         // Path Params
         const localVarPath = '/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}'
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
             .replace('{' + 'definitionId' + '}', encodeURIComponent(String(definitionId)))
-            .replace('{' + 'functionType' + '}', encodeURIComponent(String(functionType)))
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'functionType' + '}', encodeURIComponent(String(functionType)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
@@ -119,7 +120,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["developer_hapikey"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
@@ -135,24 +136,24 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Update a function for a given definition by ID.
      * Update a function for a definition
-     * @param definitionId The ID of the definition.
-     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
-     * @param functionId The ID of the function.
-     * @param appId The ID of the app.
+     * @param appId The ID of the application associated with the custom workflow action.
+     * @param definitionId The ID of the custom workflow action definition.
+     * @param functionId The ID of the specific function within the workflow action definition.
+     * @param functionType The type of function, accepted values are: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
      * @param body 
      */
-    public async createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Promise<RequestContext> {
+    public async createOrReplace(appId: number, definitionId: string, functionId: string, functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS', body: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("FunctionsApi", "createOrReplace", "appId");
+        }
+
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
             throw new RequiredError("FunctionsApi", "createOrReplace", "definitionId");
-        }
-
-
-        // verify required parameter 'functionType' is not null or undefined
-        if (functionType === null || functionType === undefined) {
-            throw new RequiredError("FunctionsApi", "createOrReplace", "functionType");
         }
 
 
@@ -162,9 +163,9 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'appId' is not null or undefined
-        if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "createOrReplace", "appId");
+        // verify required parameter 'functionType' is not null or undefined
+        if (functionType === null || functionType === undefined) {
+            throw new RequiredError("FunctionsApi", "createOrReplace", "functionType");
         }
 
 
@@ -176,10 +177,10 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Path Params
         const localVarPath = '/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}'
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
             .replace('{' + 'definitionId' + '}', encodeURIComponent(String(definitionId)))
-            .replace('{' + 'functionType' + '}', encodeURIComponent(String(functionType)))
             .replace('{' + 'functionId' + '}', encodeURIComponent(String(functionId)))
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'functionType' + '}', encodeURIComponent(String(functionType)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
@@ -199,7 +200,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["developer_hapikey"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
@@ -215,13 +216,19 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Add a function for a given definition.
      * Insert a function for a definition
-     * @param definitionId The ID of the definition.
-     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
-     * @param appId The ID of the app.
+     * @param appId The ID of the app to which the function will be added.
+     * @param definitionId The ID of the definition to which the function will be added.
+     * @param functionType The type of function to add, with accepted values: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
      * @param body 
      */
-    public async createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Promise<RequestContext> {
+    public async createOrReplaceByFunctionType(appId: number, definitionId: string, functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS', body: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "appId");
+        }
+
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
@@ -235,12 +242,6 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'appId' is not null or undefined
-        if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "appId");
-        }
-
-
         // verify required parameter 'body' is not null or undefined
         if (body === null || body === undefined) {
             throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "body");
@@ -249,9 +250,9 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Path Params
         const localVarPath = '/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}'
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
             .replace('{' + 'definitionId' + '}', encodeURIComponent(String(definitionId)))
-            .replace('{' + 'functionType' + '}', encodeURIComponent(String(functionType)))
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'functionType' + '}', encodeURIComponent(String(functionType)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
@@ -271,7 +272,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["developer_hapikey"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
@@ -285,13 +286,20 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Retrieve functions of a specific type for a given definition.
      * Retrieve functions by a type for a given definition
-     * @param definitionId The ID of the definition.
-     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
-     * @param appId The ID of the app.
+     * @param appId The ID of the app associated with the function.
+     * @param definitionId The ID of the definition associated with the function.
+     * @param functionType The type of function to retrieve, with accepted values: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
      */
-    public async getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async getByFunctionType(appId: number, definitionId: string, functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS', _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("FunctionsApi", "getByFunctionType", "appId");
+        }
+
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
@@ -305,17 +313,11 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'appId' is not null or undefined
-        if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "getByFunctionType", "appId");
-        }
-
-
         // Path Params
         const localVarPath = '/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}'
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
             .replace('{' + 'definitionId' + '}', encodeURIComponent(String(definitionId)))
-            .replace('{' + 'functionType' + '}', encodeURIComponent(String(functionType)))
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'functionType' + '}', encodeURIComponent(String(functionType)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -324,7 +326,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["developer_hapikey"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
@@ -340,23 +342,23 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Retrieve a specific function from a given definition.
      * Retrieve a function from a given definition
-     * @param definitionId The ID of the definition.
-     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
-     * @param functionId The ID of the function.
-     * @param appId The ID of the app.
+     * @param appId The ID of the application associated with the custom workflow action.
+     * @param definitionId The ID of the custom workflow action definition.
+     * @param functionId The ID of the specific function within the workflow action definition.
+     * @param functionType The type of function, accepted values are: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
      */
-    public async getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async getById(appId: number, definitionId: string, functionId: string, functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS', _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("FunctionsApi", "getById", "appId");
+        }
+
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
             throw new RequiredError("FunctionsApi", "getById", "definitionId");
-        }
-
-
-        // verify required parameter 'functionType' is not null or undefined
-        if (functionType === null || functionType === undefined) {
-            throw new RequiredError("FunctionsApi", "getById", "functionType");
         }
 
 
@@ -366,18 +368,18 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'appId' is not null or undefined
-        if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "getById", "appId");
+        // verify required parameter 'functionType' is not null or undefined
+        if (functionType === null || functionType === undefined) {
+            throw new RequiredError("FunctionsApi", "getById", "functionType");
         }
 
 
         // Path Params
         const localVarPath = '/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}'
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
             .replace('{' + 'definitionId' + '}', encodeURIComponent(String(definitionId)))
-            .replace('{' + 'functionType' + '}', encodeURIComponent(String(functionType)))
             .replace('{' + 'functionId' + '}', encodeURIComponent(String(functionId)))
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'functionType' + '}', encodeURIComponent(String(functionType)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -386,7 +388,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["developer_hapikey"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
@@ -402,17 +404,11 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Retrieve all functions included in a definition.
      * Retrieve functions for a given definition
-     * @param definitionId The ID of the definition.
-     * @param appId The ID of the app.
+     * @param appId The unique identifier for the app.
+     * @param definitionId The unique identifier for the action definition.
      */
-    public async getPage(definitionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async getPage(appId: number, definitionId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'definitionId' is not null or undefined
-        if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("FunctionsApi", "getPage", "definitionId");
-        }
-
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
@@ -420,10 +416,16 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'definitionId' is not null or undefined
+        if (definitionId === null || definitionId === undefined) {
+            throw new RequiredError("FunctionsApi", "getPage", "definitionId");
+        }
+
+
         // Path Params
         const localVarPath = '/automation/v4/actions/{appId}/{definitionId}/functions'
-            .replace('{' + 'definitionId' + '}', encodeURIComponent(String(definitionId)))
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'definitionId' + '}', encodeURIComponent(String(definitionId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -432,7 +434,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["developer_hapikey"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }

@@ -26,11 +26,12 @@ export class ObservableBatchApi {
 
     /**
      * Read a batch of deal split objects by their associated deal object internal ID
+     * Read a batch of deal split objects by their associated deal object internal ID
      * @param batchInputPublicObjectId
      */
-    public readWithHttpInfo(batchInputPublicObjectId: BatchInputPublicObjectId, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
+    public crmObjectsV3DealsSplitsBatchReadWithHttpInfo(batchInputPublicObjectId: BatchInputPublicObjectId, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -44,7 +45,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -55,11 +56,11 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.read(batchInputPublicObjectId, _config);
+        const requestContextPromise = this.requestFactory.crmObjectsV3DealsSplitsBatchRead(batchInputPublicObjectId, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -72,25 +73,27 @@ export class ObservableBatchApi {
                 for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.readWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.crmObjectsV3DealsSplitsBatchReadWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * Read a batch of deal split objects by their associated deal object internal ID
+     * Read a batch of deal split objects by their associated deal object internal ID
      * @param batchInputPublicObjectId
      */
-    public read(batchInputPublicObjectId: BatchInputPublicObjectId, _options?: ConfigurationOptions): Observable<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
-        return this.readWithHttpInfo(batchInputPublicObjectId, _options).pipe(map((apiResponse: HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>) => apiResponse.data));
+    public crmObjectsV3DealsSplitsBatchRead(batchInputPublicObjectId: BatchInputPublicObjectId, _options?: ConfigurationOptions): Observable<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
+        return this.crmObjectsV3DealsSplitsBatchReadWithHttpInfo(batchInputPublicObjectId, _options).pipe(map((apiResponse: HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>) => apiResponse.data));
     }
 
     /**
      * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
+     * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
      * @param publicDealSplitsBatchCreateRequest
      */
-    public upsertWithHttpInfo(publicDealSplitsBatchCreateRequest: PublicDealSplitsBatchCreateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
+    public crmObjectsV3DealsSplitsBatchUpsertWithHttpInfo(publicDealSplitsBatchCreateRequest: PublicDealSplitsBatchCreateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -104,7 +107,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -115,11 +118,11 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.upsert(publicDealSplitsBatchCreateRequest, _config);
+        const requestContextPromise = this.requestFactory.crmObjectsV3DealsSplitsBatchUpsert(publicDealSplitsBatchCreateRequest, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -132,16 +135,17 @@ export class ObservableBatchApi {
                 for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.upsertWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.crmObjectsV3DealsSplitsBatchUpsertWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
+     * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
      * @param publicDealSplitsBatchCreateRequest
      */
-    public upsert(publicDealSplitsBatchCreateRequest: PublicDealSplitsBatchCreateRequest, _options?: ConfigurationOptions): Observable<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
-        return this.upsertWithHttpInfo(publicDealSplitsBatchCreateRequest, _options).pipe(map((apiResponse: HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>) => apiResponse.data));
+    public crmObjectsV3DealsSplitsBatchUpsert(publicDealSplitsBatchCreateRequest: PublicDealSplitsBatchCreateRequest, _options?: ConfigurationOptions): Observable<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
+        return this.crmObjectsV3DealsSplitsBatchUpsertWithHttpInfo(publicDealSplitsBatchCreateRequest, _options).pipe(map((apiResponse: HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>) => apiResponse.data));
     }
 
 }

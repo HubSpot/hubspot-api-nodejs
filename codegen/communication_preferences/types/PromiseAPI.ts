@@ -6,128 +6,21 @@ import { PublicSubscriptionStatus } from '../models/PublicSubscriptionStatus';
 import { PublicSubscriptionStatusesResponse } from '../models/PublicSubscriptionStatusesResponse';
 import { PublicUpdateSubscriptionStatusRequest } from '../models/PublicUpdateSubscriptionStatusRequest';
 import { SubscriptionDefinitionsResponse } from '../models/SubscriptionDefinitionsResponse';
-import { ObservableDefinitionApi } from './ObservableAPI';
+import { ObservableAdvancedApi } from './ObservableAPI';
 
-import { DefinitionApiRequestFactory, DefinitionApiResponseProcessor} from "../apis/DefinitionApi";
-export class PromiseDefinitionApi {
-    private api: ObservableDefinitionApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: DefinitionApiRequestFactory,
-        responseProcessor?: DefinitionApiResponseProcessor
-    ) {
-        this.api = new ObservableDefinitionApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Get a list of all subscription definitions for the portal
-     * Get subscription definitions
-     */
-    public getPageWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<SubscriptionDefinitionsResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getPageWithHttpInfo(observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Get a list of all subscription definitions for the portal
-     * Get subscription definitions
-     */
-    public getPage(_options?: PromiseConfigurationOptions): Promise<SubscriptionDefinitionsResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getPage(observableOptions);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservableStatusApi } from './ObservableAPI';
-
-import { StatusApiRequestFactory, StatusApiResponseProcessor} from "../apis/StatusApi";
-export class PromiseStatusApi {
-    private api: ObservableStatusApi
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
+export class PromiseAdvancedApi {
+    private api: ObservableAdvancedApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: StatusApiRequestFactory,
-        responseProcessor?: StatusApiResponseProcessor
+        requestFactory?: AdvancedApiRequestFactory,
+        responseProcessor?: AdvancedApiResponseProcessor
     ) {
-        this.api = new ObservableStatusApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableAdvancedApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Returns a list of subscriptions and their status for a given contact.
-     * Get subscription statuses for a contact
-     * @param emailAddress
-     */
-    public getEmailStatusWithHttpInfo(emailAddress: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicSubscriptionStatusesResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getEmailStatusWithHttpInfo(emailAddress, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Returns a list of subscriptions and their status for a given contact.
-     * Get subscription statuses for a contact
-     * @param emailAddress
-     */
-    public getEmailStatus(emailAddress: string, _options?: PromiseConfigurationOptions): Promise<PublicSubscriptionStatusesResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getEmailStatus(emailAddress, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Subscribes a contact to the given subscription type. This API is not valid to use for subscribing a contact at a brand or portal level and will return an error.
-     * Subscribe a contact
      * @param publicUpdateSubscriptionStatusRequest
      */
     public subscribeWithHttpInfo(publicUpdateSubscriptionStatusRequest: PublicUpdateSubscriptionStatusRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicSubscriptionStatus>> {
@@ -148,8 +41,6 @@ export class PromiseStatusApi {
     }
 
     /**
-     * Subscribes a contact to the given subscription type. This API is not valid to use for subscribing a contact at a brand or portal level and will return an error.
-     * Subscribe a contact
      * @param publicUpdateSubscriptionStatusRequest
      */
     public subscribe(publicUpdateSubscriptionStatusRequest: PublicUpdateSubscriptionStatusRequest, _options?: PromiseConfigurationOptions): Promise<PublicSubscriptionStatus> {
@@ -170,8 +61,6 @@ export class PromiseStatusApi {
     }
 
     /**
-     * Unsubscribes a contact from the given subscription type. This API is not valid to use for unsubscribing a contact at a brand or portal level and will return an error.
-     * Unsubscribe a contact
      * @param publicUpdateSubscriptionStatusRequest
      */
     public unsubscribeWithHttpInfo(publicUpdateSubscriptionStatusRequest: PublicUpdateSubscriptionStatusRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicSubscriptionStatus>> {
@@ -192,8 +81,6 @@ export class PromiseStatusApi {
     }
 
     /**
-     * Unsubscribes a contact from the given subscription type. This API is not valid to use for unsubscribing a contact at a brand or portal level and will return an error.
-     * Unsubscribe a contact
      * @param publicUpdateSubscriptionStatusRequest
      */
     public unsubscribe(publicUpdateSubscriptionStatusRequest: PublicUpdateSubscriptionStatusRequest, _options?: PromiseConfigurationOptions): Promise<PublicSubscriptionStatus> {
@@ -210,6 +97,107 @@ export class PromiseStatusApi {
 	    }
 	}
         const result = this.api.unsubscribe(publicUpdateSubscriptionStatusRequest, observableOptions);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableBasicApi } from './ObservableAPI';
+
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class PromiseBasicApi {
+    private api: ObservableBasicApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
+    ) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param emailAddress
+     */
+    public getEmailStatusWithHttpInfo(emailAddress: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicSubscriptionStatusesResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getEmailStatusWithHttpInfo(emailAddress, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * @param emailAddress
+     */
+    public getEmailStatus(emailAddress: string, _options?: PromiseConfigurationOptions): Promise<PublicSubscriptionStatusesResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getEmailStatus(emailAddress, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Get a list of subscription status definitions from the account.
+     * Retrieve all subscription status definitions
+     */
+    public getPageWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<SubscriptionDefinitionsResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPageWithHttpInfo(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Get a list of subscription status definitions from the account.
+     * Retrieve all subscription status definitions
+     */
+    public getPage(_options?: PromiseConfigurationOptions): Promise<SubscriptionDefinitionsResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPage(observableOptions);
         return result.toPromise();
     }
 

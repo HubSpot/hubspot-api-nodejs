@@ -14,7 +14,7 @@ import { Styles } from '../models/Styles';
 
 export class RowMetaData {
     /**
-    * 
+    * The CSS class applied to the row metadata.
     */
     'cssClass': string;
     'styles': Styles;

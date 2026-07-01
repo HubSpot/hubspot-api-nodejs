@@ -12,8 +12,17 @@
 
 
 export class ForeignId {
-    'name': string;
+    /**
+    * Unique identifier for the foreign ID.
+    */
     'id': string;
+    /**
+    * Name of the foreign ID.
+    */
+    'name': string;
+    /**
+    * Type of the foreign ID.
+    */
     'type': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -22,14 +31,14 @@ export class ForeignId {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },

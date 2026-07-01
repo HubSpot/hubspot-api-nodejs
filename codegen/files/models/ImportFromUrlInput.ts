@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -13,54 +13,51 @@
 
 export class ImportFromUrlInput {
     /**
-    * One of folderPath or folderId is required. Destination folder path for the uploaded file. If the folder path does not exist, there will be an attempt to create the folder path.
-    */
-    'folderPath'?: string;
-    /**
-    * PUBLIC_INDEXABLE: File is publicly accessible by anyone who has the URL. Search engines can index the file. PUBLIC_NOT_INDEXABLE: File is publicly accessible by anyone who has the URL. Search engines *can\'t* index the file. PRIVATE: File is NOT publicly accessible. Requires a signed URL to see content. Search engines *can\'t* index the file. 
+    * PUBLIC_INDEXABLE: File is publicly accessible by anyone who has the URL. Search engines can index the file. PUBLIC_NOT_INDEXABLE: File is publicly accessible by anyone who has the URL. Search engines *can\'t* index the file. PRIVATE: File is NOT publicly accessible. Requires a signed URL to see content. Search engines *can\'t* index the file.
     */
     'access': ImportFromUrlInputAccessEnum;
     /**
-    * ENTIRE_PORTAL: Look for a duplicate file in the entire account. EXACT_FOLDER: Look for a duplicate file in the provided folder. 
+    * ENTIRE_PORTAL: Look for a duplicate file in the entire account. EXACT_FOLDER: Look for a duplicate file in the provided folder.
     */
     'duplicateValidationScope'?: ImportFromUrlInputDuplicateValidationScopeEnum;
+    /**
+    * NONE: Do not run any duplicate validation. REJECT: Reject the upload if a duplicate is found. RETURN_EXISTING: If a duplicate file is found, do not upload a new file and return the found duplicate instead.
+    */
+    'duplicateValidationStrategy'?: ImportFromUrlInputDuplicateValidationStrategyEnum;
+    /**
+    * Specifies the date and time when the file will expire.
+    */
+    'expiresAt'?: Date;
+    /**
+    * One of folderId or folderPath is required. Destination folderId for the uploaded file.
+    */
+    'folderId'?: string;
+    /**
+    * One of folderPath or folderId is required. Destination folder path for the uploaded file. If the folder path does not exist, there will be an attempt to create the folder path.
+    */
+    'folderPath'?: string;
     /**
     * Name to give the resulting file in the file manager.
     */
     'name'?: string;
     /**
-    * NONE: Do not run any duplicate validation. REJECT: Reject the upload if a duplicate is found. RETURN_EXISTING: If a duplicate file is found, do not upload a new file and return the found duplicate instead. 
+    * If true, will overwrite existing file if one with the same name and extension exists in the given folder. The overwritten file will be deleted and the uploaded file will take its place with a new ID. If unset or set as false, the new file\'s name will be updated to prevent colliding with existing file if one exists with the same path, name, and extension
     */
-    'duplicateValidationStrategy'?: ImportFromUrlInputDuplicateValidationStrategyEnum;
+    'overwrite'?: boolean;
     /**
     * Time to live. If specified the file will be deleted after the given time frame. If left unset, the file will exist indefinitely
     */
     'ttl'?: string;
     /**
-    * If true, will overwrite existing file if one with the same name and extension exists in the given folder. The overwritten file will be deleted and the uploaded file will take its place with a new ID. If unset or set as false, the new file\'s name will be updated to prevent colliding with existing file if one exists with the same path, name, and extension
-    */
-    'overwrite'?: boolean;
-    'expiresAt'?: Date;
-    /**
     * URL to download the new file from.
     */
     'url': string;
-    /**
-    * One of folderId or folderPath is required. Destination folderId for the uploaded file.
-    */
-    'folderId'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "folderPath",
-            "baseName": "folderPath",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "access",
             "baseName": "access",
@@ -74,20 +71,32 @@ export class ImportFromUrlInput {
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "duplicateValidationStrategy",
             "baseName": "duplicateValidationStrategy",
             "type": "ImportFromUrlInputDuplicateValidationStrategyEnum",
             "format": ""
         },
         {
-            "name": "ttl",
-            "baseName": "ttl",
+            "name": "expiresAt",
+            "baseName": "expiresAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "folderId",
+            "baseName": "folderId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "folderPath",
+            "baseName": "folderPath",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -98,20 +107,14 @@ export class ImportFromUrlInput {
             "format": ""
         },
         {
-            "name": "expiresAt",
-            "baseName": "expiresAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "url",
-            "baseName": "url",
+            "name": "ttl",
+            "baseName": "ttl",
             "type": "string",
             "format": ""
         },
         {
-            "name": "folderId",
-            "baseName": "folderId",
+            "name": "url",
+            "baseName": "url",
             "type": "string",
             "format": ""
         }    ];
@@ -125,13 +128,13 @@ export class ImportFromUrlInput {
 }
 
 export enum ImportFromUrlInputAccessEnum {
-    PublicIndexable = 'PUBLIC_INDEXABLE',
-    PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
     HiddenIndexable = 'HIDDEN_INDEXABLE',
     HiddenNotIndexable = 'HIDDEN_NOT_INDEXABLE',
     HiddenPrivate = 'HIDDEN_PRIVATE',
-    Private = 'PRIVATE',
     HiddenSensitive = 'HIDDEN_SENSITIVE',
+    Private = 'PRIVATE',
+    PublicIndexable = 'PUBLIC_INDEXABLE',
+    PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
     Sensitive = 'SENSITIVE'
 }
 export enum ImportFromUrlInputDuplicateValidationScopeEnum {

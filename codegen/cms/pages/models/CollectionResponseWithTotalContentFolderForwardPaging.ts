@@ -17,27 +17,21 @@ import { ForwardPaging } from '../models/ForwardPaging';
 * Response object for collections of content folders with pagination information.
 */
 export class CollectionResponseWithTotalContentFolderForwardPaging {
-    /**
-    * Total number of content folders.
-    */
-    'total': number;
     'paging'?: ForwardPaging;
     /**
     * Collection of content folders.
     */
     'results': Array<ContentFolder>;
+    /**
+    * Total number of content folders.
+    */
+    'total': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "total",
-            "baseName": "total",
-            "type": "number",
-            "format": "int32"
-        },
         {
             "name": "paging",
             "baseName": "paging",
@@ -49,6 +43,12 @@ export class CollectionResponseWithTotalContentFolderForwardPaging {
             "baseName": "results",
             "type": "Array<ContentFolder>",
             "format": ""
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

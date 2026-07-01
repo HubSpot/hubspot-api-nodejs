@@ -1,6 +1,6 @@
 /**
  * Site Search
- * Use these endpoints for searching content on your HubSpot hosted CMS website(s).
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -12,10 +12,19 @@
 
 
 export class IndexedField {
-    'values': Array<any>;
-    'name': string;
-    'value': any;
+    /**
+    * Indicates whether the field is a metadata field.
+    */
     'metadataField': boolean;
+    /**
+    * The name of the indexed field.
+    */
+    'name': string;
+    /**
+    * The primary value of the indexed field.
+    */
+    'value': any;
+    'values': Array<any>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,9 +32,9 @@ export class IndexedField {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "values",
-            "baseName": "values",
-            "type": "Array<any>",
+            "name": "metadataField",
+            "baseName": "metadataField",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -41,9 +50,9 @@ export class IndexedField {
             "format": ""
         },
         {
-            "name": "metadataField",
-            "baseName": "metadataField",
-            "type": "boolean",
+            "name": "values",
+            "baseName": "values",
+            "type": "Array<any>",
             "format": ""
         }    ];
 

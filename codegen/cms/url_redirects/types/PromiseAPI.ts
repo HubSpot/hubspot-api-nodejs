@@ -5,18 +5,18 @@ import { PromiseMiddlewareWrapper } from '../middleware';
 import { CollectionResponseWithTotalUrlMappingForwardPaging } from '../models/CollectionResponseWithTotalUrlMappingForwardPaging';
 import { UrlMapping } from '../models/UrlMapping';
 import { UrlMappingCreateRequestBody } from '../models/UrlMappingCreateRequestBody';
-import { ObservableRedirectsApi } from './ObservableAPI';
+import { ObservableBasicApi } from './ObservableAPI';
 
-import { RedirectsApiRequestFactory, RedirectsApiResponseProcessor} from "../apis/RedirectsApi";
-export class PromiseRedirectsApi {
-    private api: ObservableRedirectsApi
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class PromiseBasicApi {
+    private api: ObservableBasicApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: RedirectsApiRequestFactory,
-        responseProcessor?: RedirectsApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
-        this.api = new ObservableRedirectsApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -64,11 +64,18 @@ export class PromiseRedirectsApi {
     }
 
     /**
-     * Creates and configures a new URL redirect.
-     * Create a redirect
-     * @param urlMappingCreateRequestBody
+     * @param [after]
+     * @param [archived]
+     * @param [createdAfter]
+     * @param [createdAt]
+     * @param [createdBefore]
+     * @param [limit]
+     * @param [sort]
+     * @param [updatedAfter]
+     * @param [updatedAt]
+     * @param [updatedBefore]
      */
-    public createWithHttpInfo(urlMappingCreateRequestBody: UrlMappingCreateRequestBody, _options?: PromiseConfigurationOptions): Promise<HttpInfo<UrlMapping>> {
+    public cmsUrlRedirectsV3WithHttpInfo(after?: string, archived?: boolean, createdAfter?: Date, createdAt?: Date, createdBefore?: Date, limit?: number, sort?: Array<string>, updatedAfter?: Date, updatedAt?: Date, updatedBefore?: Date, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalUrlMappingForwardPaging>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -81,16 +88,23 @@ export class PromiseRedirectsApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.createWithHttpInfo(urlMappingCreateRequestBody, observableOptions);
+        const result = this.api.cmsUrlRedirectsV3WithHttpInfo(after, archived, createdAfter, createdAt, createdBefore, limit, sort, updatedAfter, updatedAt, updatedBefore, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Creates and configures a new URL redirect.
-     * Create a redirect
-     * @param urlMappingCreateRequestBody
+     * @param [after]
+     * @param [archived]
+     * @param [createdAfter]
+     * @param [createdAt]
+     * @param [createdBefore]
+     * @param [limit]
+     * @param [sort]
+     * @param [updatedAfter]
+     * @param [updatedAt]
+     * @param [updatedBefore]
      */
-    public create(urlMappingCreateRequestBody: UrlMappingCreateRequestBody, _options?: PromiseConfigurationOptions): Promise<UrlMapping> {
+    public cmsUrlRedirectsV3(after?: string, archived?: boolean, createdAfter?: Date, createdAt?: Date, createdBefore?: Date, limit?: number, sort?: Array<string>, updatedAfter?: Date, updatedAt?: Date, updatedBefore?: Date, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalUrlMappingForwardPaging> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -103,7 +117,47 @@ export class PromiseRedirectsApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.create(urlMappingCreateRequestBody, observableOptions);
+        const result = this.api.cmsUrlRedirectsV3(after, archived, createdAfter, createdAt, createdBefore, limit, sort, updatedAfter, updatedAt, updatedBefore, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * @param urlMappingCreateRequestBody
+     */
+    public cmsUrlRedirectsV3_1WithHttpInfo(urlMappingCreateRequestBody: UrlMappingCreateRequestBody, _options?: PromiseConfigurationOptions): Promise<HttpInfo<UrlMapping>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.cmsUrlRedirectsV3_1WithHttpInfo(urlMappingCreateRequestBody, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * @param urlMappingCreateRequestBody
+     */
+    public cmsUrlRedirectsV3_1(urlMappingCreateRequestBody: UrlMappingCreateRequestBody, _options?: PromiseConfigurationOptions): Promise<UrlMapping> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.cmsUrlRedirectsV3_1(urlMappingCreateRequestBody, observableOptions);
         return result.toPromise();
     }
 
@@ -152,71 +206,9 @@ export class PromiseRedirectsApi {
     }
 
     /**
-     * Returns all existing URL redirects. Results can be limited and filtered by creation or updated date.
-     * Get current redirects
-     * @param [createdAt] Only return redirects created on exactly this date.
-     * @param [createdAfter] Only return redirects created after this date.
-     * @param [createdBefore] Only return redirects created before this date.
-     * @param [updatedAt] Only return redirects last updated on exactly this date.
-     * @param [updatedAfter] Only return redirects last updated after this date.
-     * @param [updatedBefore] Only return redirects last updated before this date.
-     * @param [sort]
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [limit] Maximum number of result per page
-     * @param [archived] Whether to return only results that have been archived.
-     */
-    public getPageWithHttpInfo(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalUrlMappingForwardPaging>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getPageWithHttpInfo(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Returns all existing URL redirects. Results can be limited and filtered by creation or updated date.
-     * Get current redirects
-     * @param [createdAt] Only return redirects created on exactly this date.
-     * @param [createdAfter] Only return redirects created after this date.
-     * @param [createdBefore] Only return redirects created before this date.
-     * @param [updatedAt] Only return redirects last updated on exactly this date.
-     * @param [updatedAfter] Only return redirects last updated after this date.
-     * @param [updatedBefore] Only return redirects last updated before this date.
-     * @param [sort]
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [limit] Maximum number of result per page
-     * @param [archived] Whether to return only results that have been archived.
-     */
-    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalUrlMappingForwardPaging> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
      * Updates the settings for an existing URL redirect.
      * Update a redirect
-     * @param urlRedirectId
+     * @param urlRedirectId 
      * @param urlMapping
      */
     public updateWithHttpInfo(urlRedirectId: string, urlMapping: UrlMapping, _options?: PromiseConfigurationOptions): Promise<HttpInfo<UrlMapping>> {
@@ -239,7 +231,7 @@ export class PromiseRedirectsApi {
     /**
      * Updates the settings for an existing URL redirect.
      * Update a redirect
-     * @param urlRedirectId
+     * @param urlRedirectId 
      * @param urlMapping
      */
     public update(urlRedirectId: string, urlMapping: UrlMapping, _options?: PromiseConfigurationOptions): Promise<UrlMapping> {

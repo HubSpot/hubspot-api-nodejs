@@ -17,19 +17,14 @@ import { SimpleUser } from '../models/SimpleUser';
 */
 export class Option {
     /**
-    * The ID of the user who created the option.
-    */
-    'createdByUserId'?: number;
-    /**
     * The timestamp when the option was created, in ISO 8601 format.
     */
     'createdAt': Date;
-    'updatedBy'?: SimpleUser;
     'createdBy'?: SimpleUser;
     /**
-    * An internal name assigned to the option, distinct from the label.
+    * The ID of the user who created the option.
     */
-    'name': string;
+    'createdByUserId'?: number;
     /**
     * The unique ID of the option.
     */
@@ -37,20 +32,28 @@ export class Option {
     /**
     * A user-friendly label that identifies the option.
     */
-    'label'?: string;
+    'label': string;
     /**
-    * The ID of the user who last updated the option.
+    * An internal name assigned to the option, distinct from the label.
     */
-    'updatedByUserId'?: number;
+    'name': string;
+    /**
+    * The order in which the option appears, represented as an integer.
+    */
+    'order': number;
     /**
     * Indicates the category or data type of the option (e.g., string, number).
     */
     'type': string;
-    'order': number;
     /**
     * The timestamp when the option was last updated, in ISO 8601 format.
     */
     'updatedAt': Date;
+    'updatedBy'?: SimpleUser;
+    /**
+    * The ID of the user who last updated the option.
+    */
+    'updatedByUserId'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -58,22 +61,10 @@ export class Option {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "createdByUserId",
-            "baseName": "createdByUserId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "createdAt",
             "baseName": "createdAt",
             "type": "Date",
             "format": "date-time"
-        },
-        {
-            "name": "updatedBy",
-            "baseName": "updatedBy",
-            "type": "SimpleUser",
-            "format": ""
         },
         {
             "name": "createdBy",
@@ -82,10 +73,10 @@ export class Option {
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
+            "name": "createdByUserId",
+            "baseName": "createdByUserId",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "id",
@@ -100,14 +91,8 @@ export class Option {
             "format": ""
         },
         {
-            "name": "updatedByUserId",
-            "baseName": "updatedByUserId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "type",
-            "baseName": "type",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -118,10 +103,28 @@ export class Option {
             "format": "int32"
         },
         {
+            "name": "type",
+            "baseName": "type",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "updatedAt",
             "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "updatedBy",
+            "baseName": "updatedBy",
+            "type": "SimpleUser",
+            "format": ""
+        },
+        {
+            "name": "updatedByUserId",
+            "baseName": "updatedByUserId",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

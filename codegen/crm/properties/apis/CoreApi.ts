@@ -126,14 +126,18 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
      * @param objectType 
      * @param archived Whether to return only results that have been archived.
      * @param properties 
+     * @param dataSensitivity 
+     * @param locale 
      */
-    public async getAll(objectType: string, archived?: boolean, properties?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getAll(objectType: string, archived?: boolean, properties?: string, dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive', locale?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
             throw new RequiredError("CoreApi", "getAll", "objectType");
         }
+
+
 
 
 
@@ -154,6 +158,16 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (properties !== undefined) {
             requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "string", ""));
+        }
+
+        // Query Params
+        if (dataSensitivity !== undefined) {
+            requestContext.setQueryParam("dataSensitivity", ObjectSerializer.serialize(dataSensitivity, "'highly_sensitive' | 'non_sensitive' | 'sensitive'", ""));
+        }
+
+        // Query Params
+        if (locale !== undefined) {
+            requestContext.setQueryParam("locale", ObjectSerializer.serialize(locale, "string", ""));
         }
 
 
@@ -179,8 +193,10 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
      * @param propertyName 
      * @param archived Whether to return only results that have been archived.
      * @param properties 
+     * @param dataSensitivity 
+     * @param locale 
      */
-    public async getByName(objectType: string, propertyName: string, archived?: boolean, properties?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getByName(objectType: string, propertyName: string, archived?: boolean, properties?: string, dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive', locale?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -193,6 +209,8 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         if (propertyName === null || propertyName === undefined) {
             throw new RequiredError("CoreApi", "getByName", "propertyName");
         }
+
+
 
 
 
@@ -216,6 +234,16 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "string", ""));
         }
 
+        // Query Params
+        if (dataSensitivity !== undefined) {
+            requestContext.setQueryParam("dataSensitivity", ObjectSerializer.serialize(dataSensitivity, "'highly_sensitive' | 'non_sensitive' | 'sensitive'", ""));
+        }
+
+        // Query Params
+        if (locale !== undefined) {
+            requestContext.setQueryParam("locale", ObjectSerializer.serialize(locale, "string", ""));
+        }
+
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -233,7 +261,7 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Perform a partial update of a property identified by {propertyName}. Provided fields will be overwritten.
+     * Perform a partial update of a property identified by \'{propertyName}\'. Provided fields will be overwritten.
      * Update a property
      * @param objectType 
      * @param propertyName 

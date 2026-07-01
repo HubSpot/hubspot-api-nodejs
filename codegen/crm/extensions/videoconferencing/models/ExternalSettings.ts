@@ -1,6 +1,6 @@
 /**
  * Video Conferencing Extension
- * These APIs allow you to specify URLs that can be used to interact with a video conferencing application, to allow HubSpot to add video conference links to meeting requests with contacts.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -11,27 +11,12 @@
  */
 
 
-/**
-* The URLs of the various actions provided by the video conferencing application. All URLs must use the `https` protocol.
-*/
 export class ExternalSettings {
-    /**
-    * The URL that HubSpot will use to verify that a user exists in the video conference application.
-    */
-    'userVerifyUrl'?: string;
-    'fetchAccountsUri'?: string;
-    /**
-    * The URL that HubSpot will send requests to create a new video conference.
-    */
     'createMeetingUrl': string;
-    /**
-    * The URL that HubSpot will send updates to existing meetings. Typically called when the user changes the topic or times of a meeting.
-    */
-    'updateMeetingUrl'?: string;
-    /**
-    * The URL that HubSpot will send notifications of meetings that have been deleted in HubSpot.
-    */
     'deleteMeetingUrl'?: string;
+    'fetchAccountsUri'?: string;
+    'updateMeetingUrl'?: string;
+    'userVerifyUrl'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -39,8 +24,14 @@ export class ExternalSettings {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "userVerifyUrl",
-            "baseName": "userVerifyUrl",
+            "name": "createMeetingUrl",
+            "baseName": "createMeetingUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "deleteMeetingUrl",
+            "baseName": "deleteMeetingUrl",
             "type": "string",
             "format": ""
         },
@@ -51,20 +42,14 @@ export class ExternalSettings {
             "format": ""
         },
         {
-            "name": "createMeetingUrl",
-            "baseName": "createMeetingUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "updateMeetingUrl",
             "baseName": "updateMeetingUrl",
             "type": "string",
             "format": ""
         },
         {
-            "name": "deleteMeetingUrl",
-            "baseName": "deleteMeetingUrl",
+            "name": "userVerifyUrl",
+            "baseName": "userVerifyUrl",
             "type": "string",
             "format": ""
         }    ];

@@ -17,25 +17,38 @@ import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels
 */
 export class ObjectTypeDefinitionPatch {
     /**
-    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+    * Determines if the object type can include properties that are marked as sensitive.
     */
-    'secondaryDisplayProperties'?: Array<string>;
+    'allowsSensitiveProperties'?: boolean;
+    /**
+    * Indicates whether the description of the object type should be cleared.
+    */
+    'clearDescription'?: boolean;
+    /**
+    * A brief explanation of the object type.
+    */
+    'description'?: string;
+    'labels'?: ObjectTypeDefinitionLabels;
+    /**
+    * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
+    */
+    'primaryDisplayProperty'?: string;
     /**
     * The names of properties that should be **required** when creating an object of this type.
     */
     'requiredProperties'?: Array<string>;
     /**
+    * Specifies if the object type can be restored after being deleted.
+    */
+    'restorable'?: boolean;
+    /**
     * Names of properties that will be indexed for this object type in by HubSpot\'s product search.
     */
     'searchableProperties'?: Array<string>;
-    'clearDescription'?: boolean;
     /**
-    * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
+    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
     */
-    'primaryDisplayProperty'?: string;
-    'description'?: string;
-    'restorable'?: boolean;
-    'labels'?: ObjectTypeDefinitionLabels;
+    'secondaryDisplayProperties'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -43,21 +56,9 @@ export class ObjectTypeDefinitionPatch {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "secondaryDisplayProperties",
-            "baseName": "secondaryDisplayProperties",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "requiredProperties",
-            "baseName": "requiredProperties",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "searchableProperties",
-            "baseName": "searchableProperties",
-            "type": "Array<string>",
+            "name": "allowsSensitiveProperties",
+            "baseName": "allowsSensitiveProperties",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -67,15 +68,27 @@ export class ObjectTypeDefinitionPatch {
             "format": ""
         },
         {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "labels",
+            "baseName": "labels",
+            "type": "ObjectTypeDefinitionLabels",
+            "format": ""
+        },
+        {
             "name": "primaryDisplayProperty",
             "baseName": "primaryDisplayProperty",
             "type": "string",
             "format": ""
         },
         {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
+            "name": "requiredProperties",
+            "baseName": "requiredProperties",
+            "type": "Array<string>",
             "format": ""
         },
         {
@@ -85,9 +98,15 @@ export class ObjectTypeDefinitionPatch {
             "format": ""
         },
         {
-            "name": "labels",
-            "baseName": "labels",
-            "type": "ObjectTypeDefinitionLabels",
+            "name": "searchableProperties",
+            "baseName": "searchableProperties",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "secondaryDisplayProperties",
+            "baseName": "secondaryDisplayProperties",
+            "type": "Array<string>",
             "format": ""
         }    ];
 

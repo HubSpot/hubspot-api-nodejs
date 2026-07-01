@@ -14,8 +14,8 @@ import { EmailStatisticsData } from '../models/EmailStatisticsData';
 import { Interval } from '../models/Interval';
 
 export class EmailStatisticInterval {
-    'interval'?: Interval;
-    'aggregations'?: EmailStatisticsData;
+    'aggregations': EmailStatisticsData;
+    'interval': Interval;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,15 +23,15 @@ export class EmailStatisticInterval {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "interval",
-            "baseName": "interval",
-            "type": "Interval",
-            "format": ""
-        },
-        {
             "name": "aggregations",
             "baseName": "aggregations",
             "type": "EmailStatisticsData",
+            "format": ""
+        },
+        {
+            "name": "interval",
+            "baseName": "interval",
+            "type": "Interval",
             "format": ""
         }    ];
 

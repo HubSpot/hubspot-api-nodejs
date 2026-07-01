@@ -12,8 +12,14 @@
 
 
 export class TaskLocator {
-    'links'?: { [key: string]: string; };
+    /**
+    * The unique identifier for the task.
+    */
     'id': string;
+    /**
+    * A map of link names to associated URIs containing documentation about the error or recommended remediation steps
+    */
+    'links'?: { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,15 +27,15 @@ export class TaskLocator {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
             "name": "id",
             "baseName": "id",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
             "format": ""
         }    ];
 

@@ -1,6 +1,6 @@
 /**
  * User Provisioning
- * Add, manage, and remove users from your account
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -11,22 +11,25 @@
  */
 
 
-/**
-* A user to update
-*/
 export class PublicUserUpdate {
+    /**
+    * The first name of the user.
+    */
     'firstName'?: string;
+    /**
+    * The last name of the user.
+    */
     'lastName'?: string;
     /**
-    * The user\'s primary team
+    * The user\'s primary team.
     */
     'primaryTeamId'?: string;
     /**
-    * The user\'s role
+    * The user\'s role.
     */
     'roleId'?: string;
     /**
-    * The user\'s additional teams
+    * The user\'s additional teams.
     */
     'secondaryTeamIds'?: Array<string>;
 

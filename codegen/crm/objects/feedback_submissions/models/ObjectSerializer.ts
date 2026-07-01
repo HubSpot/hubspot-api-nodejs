@@ -4,7 +4,7 @@ export * from '../models/BatchResponseSimplePublicObject';
 export * from '../models/BatchResponseSimplePublicObjectWithErrors';
 export * from '../models/CollectionResponseAssociatedId';
 export * from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-export * from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+export * from '../models/CollectionResponseWithTotalSimplePublicObject';
 export * from '../models/ErrorDetail';
 export * from '../models/Filter';
 export * from '../models/FilterGroup';
@@ -14,6 +14,7 @@ export * from '../models/NextPage';
 export * from '../models/Paging';
 export * from '../models/PreviousPage';
 export * from '../models/PublicObjectSearchRequest';
+export * from '../models/PublicObjectWarning';
 export * from '../models/SimplePublicObject';
 export * from '../models/SimplePublicObjectId';
 export * from '../models/SimplePublicObjectWithAssociations';
@@ -26,7 +27,7 @@ import { BatchResponseSimplePublicObject        } from '../models/BatchResponseS
 import { BatchResponseSimplePublicObjectWithErrors          } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObject } from '../models/CollectionResponseWithTotalSimplePublicObject';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { Filter       } from '../models/Filter';
 import { FilterGroup } from '../models/FilterGroup';
@@ -36,6 +37,7 @@ import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
+import { PublicObjectWarning } from '../models/PublicObjectWarning';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
@@ -67,7 +69,7 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseSimplePublicObjectWithErrors": BatchResponseSimplePublicObjectWithErrors,
     "CollectionResponseAssociatedId": CollectionResponseAssociatedId,
     "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging": CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
-    "CollectionResponseWithTotalSimplePublicObjectForwardPaging": CollectionResponseWithTotalSimplePublicObjectForwardPaging,
+    "CollectionResponseWithTotalSimplePublicObject": CollectionResponseWithTotalSimplePublicObject,
     "ErrorDetail": ErrorDetail,
     "Filter": Filter,
     "FilterGroup": FilterGroup,
@@ -77,6 +79,7 @@ let typeMap: {[index: string]: any} = {
     "Paging": Paging,
     "PreviousPage": PreviousPage,
     "PublicObjectSearchRequest": PublicObjectSearchRequest,
+    "PublicObjectWarning": PublicObjectWarning,
     "SimplePublicObject": SimplePublicObject,
     "SimplePublicObjectId": SimplePublicObjectId,
     "SimplePublicObjectWithAssociations": SimplePublicObjectWithAssociations,

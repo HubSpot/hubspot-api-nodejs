@@ -12,8 +12,17 @@
 
 
 export class PublicAllPropertyTypesOperation {
+    /**
+    * Indication of whether objects with no value should be included
+    */
     'includeObjectsWithNoValueSet': boolean;
+    /**
+    * Type of operation (ALL_PROPERTY)
+    */
     'operationType': PublicAllPropertyTypesOperationOperationTypeEnum;
+    /**
+    * Operator to be applied (IS_KNOWN, IS_UNKNOWN)
+    */
     'operator': string;
 
     static readonly discriminator: string | undefined = undefined;

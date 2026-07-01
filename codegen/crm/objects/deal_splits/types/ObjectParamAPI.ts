@@ -9,20 +9,20 @@ import { PublicDealSplitsBatchCreateRequest } from '../models/PublicDealSplitsBa
 import { ObservableBatchApi } from "./ObservableAPI";
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
 
-export interface BatchApiReadRequest {
+export interface BatchApiCrmObjectsV3DealsSplitsBatchReadRequest {
     /**
      * 
      * @type BatchInputPublicObjectId
-     * @memberof BatchApiread
+     * @memberof BatchApicrmObjectsV3DealsSplitsBatchRead
      */
     batchInputPublicObjectId: BatchInputPublicObjectId
 }
 
-export interface BatchApiUpsertRequest {
+export interface BatchApiCrmObjectsV3DealsSplitsBatchUpsertRequest {
     /**
      * 
      * @type PublicDealSplitsBatchCreateRequest
-     * @memberof BatchApiupsert
+     * @memberof BatchApicrmObjectsV3DealsSplitsBatchUpsert
      */
     publicDealSplitsBatchCreateRequest: PublicDealSplitsBatchCreateRequest
 }
@@ -36,34 +36,38 @@ export class ObjectBatchApi {
 
     /**
      * Read a batch of deal split objects by their associated deal object internal ID
+     * Read a batch of deal split objects by their associated deal object internal ID
      * @param param the request object
      */
-    public readWithHttpInfo(param: BatchApiReadRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
-        return this.api.readWithHttpInfo(param.batchInputPublicObjectId,  options).toPromise();
+    public crmObjectsV3DealsSplitsBatchReadWithHttpInfo(param: BatchApiCrmObjectsV3DealsSplitsBatchReadRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
+        return this.api.crmObjectsV3DealsSplitsBatchReadWithHttpInfo(param.batchInputPublicObjectId,  options).toPromise();
     }
 
     /**
      * Read a batch of deal split objects by their associated deal object internal ID
+     * Read a batch of deal split objects by their associated deal object internal ID
      * @param param the request object
      */
-    public read(param: BatchApiReadRequest, options?: ConfigurationOptions): Promise<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
-        return this.api.read(param.batchInputPublicObjectId,  options).toPromise();
+    public crmObjectsV3DealsSplitsBatchRead(param: BatchApiCrmObjectsV3DealsSplitsBatchReadRequest, options?: ConfigurationOptions): Promise<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
+        return this.api.crmObjectsV3DealsSplitsBatchRead(param.batchInputPublicObjectId,  options).toPromise();
     }
 
     /**
      * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
+     * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
      * @param param the request object
      */
-    public upsertWithHttpInfo(param: BatchApiUpsertRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
-        return this.api.upsertWithHttpInfo(param.publicDealSplitsBatchCreateRequest,  options).toPromise();
+    public crmObjectsV3DealsSplitsBatchUpsertWithHttpInfo(param: BatchApiCrmObjectsV3DealsSplitsBatchUpsertRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
+        return this.api.crmObjectsV3DealsSplitsBatchUpsertWithHttpInfo(param.publicDealSplitsBatchCreateRequest,  options).toPromise();
     }
 
     /**
      * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
+     * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
      * @param param the request object
      */
-    public upsert(param: BatchApiUpsertRequest, options?: ConfigurationOptions): Promise<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
-        return this.api.upsert(param.publicDealSplitsBatchCreateRequest,  options).toPromise();
+    public crmObjectsV3DealsSplitsBatchUpsert(param: BatchApiCrmObjectsV3DealsSplitsBatchUpsertRequest, options?: ConfigurationOptions): Promise<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
+        return this.api.crmObjectsV3DealsSplitsBatchUpsert(param.publicDealSplitsBatchCreateRequest,  options).toPromise();
     }
 
 }

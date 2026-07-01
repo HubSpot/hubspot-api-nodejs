@@ -15,62 +15,80 @@ import { Option } from '../models/Option';
 import { SimpleUser } from '../models/SimpleUser';
 
 export class Column {
-    'createdByUserId'?: number;
     /**
-    * Foreign table id referenced
+    * The timestamp when the column was created.
     */
-    'foreignTableId'?: number;
-    'updatedBy'?: SimpleUser;
-    'description'?: string;
-    /**
-    * Label of the column
-    */
-    'label': string;
-    'updatedByUserId'?: number;
-    /**
-    * Type of the column
-    */
-    'type': ColumnTypeEnum;
-    /**
-    * Number of options available
-    */
-    'optionCount'?: number;
-    /**
-    * Foreign Ids
-    */
-    'foreignIds'?: Array<ForeignId>;
     'createdAt'?: Date;
-    'deleted'?: boolean;
     'createdBy'?: SimpleUser;
     /**
-    * Name of the column
+    * The ID of the user who created the column.
     */
-    'name': string;
+    'createdByUserId'?: number;
     /**
-    * Options to choose for select and multi-select columns
+    * Indicates whether the column has been deleted.
     */
-    'options'?: Array<Option>;
+    'deleted': boolean;
     /**
-    * Column width for HubDB UI
+    * The description of the column.
     */
-    'width'?: number;
-    /**
-    * Column Id
-    */
-    'id'?: string;
-    /**
-    * Foreign ids
-    */
-    'foreignIdsById'?: { [key: string]: ForeignId; };
+    'description': string;
     /**
     * Foreign Column id
     */
     'foreignColumnId'?: number;
     /**
+    * Foreign Ids
+    */
+    'foreignIds'?: Array<ForeignId>;
+    /**
+    * Foreign ids
+    */
+    'foreignIdsById'?: { [key: string]: ForeignId; };
+    /**
     * Foreign ids by name
     */
     'foreignIdsByName'?: { [key: string]: ForeignId; };
+    /**
+    * Foreign table id referenced
+    */
+    'foreignTableId'?: number;
+    /**
+    * Column Id
+    */
+    'id': string;
+    /**
+    * Label of the column
+    */
+    'label': string;
+    /**
+    * Name of the column
+    */
+    'name': string;
+    /**
+    * Number of options available
+    */
+    'optionCount'?: number;
+    /**
+    * Options to choose for select and multi-select columns
+    */
+    'options'?: Array<Option>;
+    /**
+    * Type of the column
+    */
+    'type': ColumnTypeEnum;
+    /**
+    * The timestamp when the column was last updated.
+    */
     'updatedAt'?: Date;
+    'updatedBy'?: SimpleUser;
+    /**
+    * The ID of the user who last updated the column.
+    */
+    'updatedByUserId'?: number;
+    /**
+    * Column width for HubDB UI
+    */
+    'width'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -78,21 +96,27 @@ export class Column {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "createdBy",
+            "baseName": "createdBy",
+            "type": "SimpleUser",
+            "format": ""
+        },
+        {
             "name": "createdByUserId",
             "baseName": "createdByUserId",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "foreignTableId",
-            "baseName": "foreignTableId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "updatedBy",
-            "baseName": "updatedBy",
-            "type": "SimpleUser",
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -102,26 +126,8 @@ export class Column {
             "format": ""
         },
         {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "updatedByUserId",
-            "baseName": "updatedByUserId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "ColumnTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "optionCount",
-            "baseName": "optionCount",
+            "name": "foreignColumnId",
+            "baseName": "foreignColumnId",
             "type": "number",
             "format": "int32"
         },
@@ -132,21 +138,33 @@ export class Column {
             "format": ""
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "deleted",
-            "baseName": "deleted",
-            "type": "boolean",
+            "name": "foreignIdsById",
+            "baseName": "foreignIdsById",
+            "type": "{ [key: string]: ForeignId; }",
             "format": ""
         },
         {
-            "name": "createdBy",
-            "baseName": "createdBy",
-            "type": "SimpleUser",
+            "name": "foreignIdsByName",
+            "baseName": "foreignIdsByName",
+            "type": "{ [key: string]: ForeignId; }",
+            "format": ""
+        },
+        {
+            "name": "foreignTableId",
+            "baseName": "foreignTableId",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
             "format": ""
         },
         {
@@ -156,39 +174,21 @@ export class Column {
             "format": ""
         },
         {
+            "name": "optionCount",
+            "baseName": "optionCount",
+            "type": "number",
+            "format": "int32"
+        },
+        {
             "name": "options",
             "baseName": "options",
             "type": "Array<Option>",
             "format": ""
         },
         {
-            "name": "width",
-            "baseName": "width",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "foreignIdsById",
-            "baseName": "foreignIdsById",
-            "type": "{ [key: string]: ForeignId; }",
-            "format": ""
-        },
-        {
-            "name": "foreignColumnId",
-            "baseName": "foreignColumnId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "foreignIdsByName",
-            "baseName": "foreignIdsByName",
-            "type": "{ [key: string]: ForeignId; }",
+            "name": "type",
+            "baseName": "type",
+            "type": "ColumnTypeEnum",
             "format": ""
         },
         {
@@ -196,6 +196,24 @@ export class Column {
             "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "updatedBy",
+            "baseName": "updatedBy",
+            "type": "SimpleUser",
+            "format": ""
+        },
+        {
+            "name": "updatedByUserId",
+            "baseName": "updatedByUserId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "width",
+            "baseName": "width",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
@@ -207,27 +225,27 @@ export class Column {
 }
 
 export enum ColumnTypeEnum {
-    Null = 'NULL',
-    Text = 'TEXT',
-    Number = 'NUMBER',
-    Url = 'URL',
-    Image = 'IMAGE',
-    Select = 'SELECT',
-    Multiselect = 'MULTISELECT',
     Boolean = 'BOOLEAN',
-    Location = 'LOCATION',
+    Code = 'CODE',
+    Composite = 'COMPOSITE',
+    Cta = 'CTA',
+    Currency = 'CURRENCY',
     Date = 'DATE',
     Datetime = 'DATETIME',
-    Currency = 'CURRENCY',
-    Richtext = 'RICHTEXT',
-    ForeignId = 'FOREIGN_ID',
-    Video = 'VIDEO',
-    Cta = 'CTA',
+    Embed = 'EMBED',
     File = 'FILE',
-    Json = 'JSON',
-    Composite = 'COMPOSITE',
-    Code = 'CODE',
+    ForeignId = 'FOREIGN_ID',
     HubspotVideo = 'HUBSPOT_VIDEO',
-    Embed = 'EMBED'
+    Image = 'IMAGE',
+    Json = 'JSON',
+    Location = 'LOCATION',
+    Multiselect = 'MULTISELECT',
+    Null = 'NULL',
+    Number = 'NUMBER',
+    Richtext = 'RICHTEXT',
+    Select = 'SELECT',
+    Text = 'TEXT',
+    Url = 'URL',
+    Video = 'VIDEO'
 }
 

@@ -25,7 +25,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Batch delete associations for objects
-     * Delete
+     * Remove associations
      * @param fromObjectType 
      * @param toObjectType 
      * @param batchInputPublicAssociationMultiArchive 
@@ -153,7 +153,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Batch create associations for objects
-     * Create
+     * Associate records (labelled)
      * @param fromObjectType 
      * @param toObjectType 
      * @param batchInputPublicAssociationMultiPost 
@@ -281,7 +281,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
-     * Read
+     * Retrieve associations
      * @param fromObjectType 
      * @param toObjectType 
      * @param batchInputPublicFetchAssociationsBatchRequest 

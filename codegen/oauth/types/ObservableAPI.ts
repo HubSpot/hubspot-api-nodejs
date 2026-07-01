@@ -24,13 +24,11 @@ export class ObservableAccessTokensApi {
     }
 
     /**
-     * Retrieve a token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Retrieve OAuth token metadata
-     * @param token The access token that you want to retrieve information about.
+     * @param token
      */
     public getWithHttpInfo(token: string, _options?: ConfigurationOptions): Observable<HttpInfo<AccessTokenInfoResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -44,7 +42,7 @@ export class ObservableAccessTokensApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -55,7 +53,7 @@ export class ObservableAccessTokensApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -77,9 +75,7 @@ export class ObservableAccessTokensApi {
     }
 
     /**
-     * Retrieve a token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Retrieve OAuth token metadata
-     * @param token The access token that you want to retrieve information about.
+     * @param token
      */
     public get(token: string, _options?: ConfigurationOptions): Observable<AccessTokenInfoResponse> {
         return this.getWithHttpInfo(token, _options).pipe(map((apiResponse: HttpInfo<AccessTokenInfoResponse>) => apiResponse.data));
@@ -104,13 +100,11 @@ export class ObservableRefreshTokensApi {
     }
 
     /**
-     * Delete a refresh token, typically after a user uninstalls your app. Access tokens generated with the refresh token will not be affected.  This will not uninstall the application from HubSpot or inhibit data syncing between an account and the app.
-     * Delete a refresh token
-     * @param token The refresh token to delete.
+     * @param token
      */
     public archiveWithHttpInfo(token: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -124,7 +118,7 @@ export class ObservableRefreshTokensApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -135,7 +129,7 @@ export class ObservableRefreshTokensApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -157,22 +151,18 @@ export class ObservableRefreshTokensApi {
     }
 
     /**
-     * Delete a refresh token, typically after a user uninstalls your app. Access tokens generated with the refresh token will not be affected.  This will not uninstall the application from HubSpot or inhibit data syncing between an account and the app.
-     * Delete a refresh token
-     * @param token The refresh token to delete.
+     * @param token
      */
     public archive(token: string, _options?: ConfigurationOptions): Observable<void> {
         return this.archiveWithHttpInfo(token, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
-     * Retrieve a refresh token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with. Learn more about [refresh tokens](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#generate-initial-access-and-refresh-tokens).
-     * Retrieve refresh token metadata
-     * @param token The refresh token to retrieve information about.
+     * @param token
      */
     public getWithHttpInfo(token: string, _options?: ConfigurationOptions): Observable<HttpInfo<RefreshTokenInfoResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -186,7 +176,7 @@ export class ObservableRefreshTokensApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -197,7 +187,7 @@ export class ObservableRefreshTokensApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -219,9 +209,7 @@ export class ObservableRefreshTokensApi {
     }
 
     /**
-     * Retrieve a refresh token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with. Learn more about [refresh tokens](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#generate-initial-access-and-refresh-tokens).
-     * Retrieve refresh token metadata
-     * @param token The refresh token to retrieve information about.
+     * @param token
      */
     public get(token: string, _options?: ConfigurationOptions): Observable<RefreshTokenInfoResponse> {
         return this.getWithHttpInfo(token, _options).pipe(map((apiResponse: HttpInfo<RefreshTokenInfoResponse>) => apiResponse.data));
@@ -246,18 +234,20 @@ export class ObservableTokensApi {
     }
 
     /**
-     * Use a [previously obtained refresh token](#get-oauth-2.0-access-and-refresh-tokens) to generate a new access token.   Access tokens are short lived. You can check the `expires_in` parameter when generating an access token to determine its lifetime (in seconds). If you need offline access to HubSpot data, store the refresh token you get when [initiating your OAuth integration](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#initiating-oauth-access) and use it to generate a new access token once the initial one expires.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Refresh an access token
+     * Authenticates a client and returns access and refresh tokens.
+     * OAuth token endpoint
      * @param [grantType]
      * @param [code]
      * @param [redirectUri]
      * @param [clientId]
      * @param [clientSecret]
      * @param [refreshToken]
+     * @param [codeVerifier]
+     * @param [scope]
      */
-    public createWithHttpInfo(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: ConfigurationOptions): Observable<HttpInfo<TokenResponseIF>> {
+    public createWithHttpInfo(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, codeVerifier?: string, scope?: string, _options?: ConfigurationOptions): Observable<HttpInfo<TokenResponseIF>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -271,7 +261,7 @@ export class ObservableTokensApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -282,11 +272,11 @@ export class ObservableTokensApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _config);
+        const requestContextPromise = this.requestFactory.create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, codeVerifier, scope, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -304,17 +294,19 @@ export class ObservableTokensApi {
     }
 
     /**
-     * Use a [previously obtained refresh token](#get-oauth-2.0-access-and-refresh-tokens) to generate a new access token.   Access tokens are short lived. You can check the `expires_in` parameter when generating an access token to determine its lifetime (in seconds). If you need offline access to HubSpot data, store the refresh token you get when [initiating your OAuth integration](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#initiating-oauth-access) and use it to generate a new access token once the initial one expires.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Refresh an access token
+     * Authenticates a client and returns access and refresh tokens.
+     * OAuth token endpoint
      * @param [grantType]
      * @param [code]
      * @param [redirectUri]
      * @param [clientId]
      * @param [clientSecret]
      * @param [refreshToken]
+     * @param [codeVerifier]
+     * @param [scope]
      */
-    public create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: ConfigurationOptions): Observable<TokenResponseIF> {
-        return this.createWithHttpInfo(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options).pipe(map((apiResponse: HttpInfo<TokenResponseIF>) => apiResponse.data));
+    public create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, codeVerifier?: string, scope?: string, _options?: ConfigurationOptions): Observable<TokenResponseIF> {
+        return this.createWithHttpInfo(grantType, code, redirectUri, clientId, clientSecret, refreshToken, codeVerifier, scope, _options).pipe(map((apiResponse: HttpInfo<TokenResponseIF>) => apiResponse.data));
     }
 
 }

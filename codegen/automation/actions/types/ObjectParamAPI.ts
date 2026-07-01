@@ -9,6 +9,8 @@ import { CollectionResponsePublicActionRevisionForwardPaging } from '../models/C
 import { PublicActionDefinition } from '../models/PublicActionDefinition';
 import { PublicActionDefinitionEgg } from '../models/PublicActionDefinitionEgg';
 import { PublicActionDefinitionPatch } from '../models/PublicActionDefinitionPatch';
+import { PublicActionDefinitionRequiresObjectRequest } from '../models/PublicActionDefinitionRequiresObjectRequest';
+import { PublicActionDefinitionRequiresObjectResponse } from '../models/PublicActionDefinitionRequiresObjectResponse';
 import { PublicActionFunction } from '../models/PublicActionFunction';
 import { PublicActionFunctionIdentifier } from '../models/PublicActionFunctionIdentifier';
 import { PublicActionRevision } from '../models/PublicActionRevision';
@@ -18,7 +20,7 @@ import { CallbacksApiRequestFactory, CallbacksApiResponseProcessor} from "../api
 
 export interface CallbacksApiCompleteRequest {
     /**
-     * The ID of the action execution.
+     * The unique identifier for the specific callback to complete.
      * Defaults to: undefined
      * @type string
      * @memberof CallbacksApicomplete
@@ -91,24 +93,64 @@ import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "..
 
 export interface DefinitionsApiArchiveRequest {
     /**
-     * The ID of the custom action definition.
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionsApiarchive
-     */
-    definitionId: string
-    /**
-     * The ID of the app.
+     * The ID of the app associated with the action definition.
      * Defaults to: undefined
      * @type number
      * @memberof DefinitionsApiarchive
      */
     appId: number
+    /**
+     * The ID of the action definition to delete.
+     * Defaults to: undefined
+     * @type string
+     * @memberof DefinitionsApiarchive
+     */
+    definitionId: string
+}
+
+export interface DefinitionsApiAutomationV4ActionsAppIdDefinitionIdRequiresObjectRequest {
+    /**
+     * The ID of the app associated with the custom action definition.
+     * Defaults to: undefined
+     * @type number
+     * @memberof DefinitionsApiautomationV4ActionsAppIdDefinitionIdRequiresObject
+     */
+    appId: number
+    /**
+     * The ID of the custom action definition.
+     * Defaults to: undefined
+     * @type string
+     * @memberof DefinitionsApiautomationV4ActionsAppIdDefinitionIdRequiresObject
+     */
+    definitionId: string
+}
+
+export interface DefinitionsApiAutomationV4ActionsAppIdDefinitionIdRequiresObject0Request {
+    /**
+     * The ID of the app associated with the custom action definition.
+     * Defaults to: undefined
+     * @type number
+     * @memberof DefinitionsApiautomationV4ActionsAppIdDefinitionIdRequiresObject_1
+     */
+    appId: number
+    /**
+     * The ID of the custom action definition.
+     * Defaults to: undefined
+     * @type string
+     * @memberof DefinitionsApiautomationV4ActionsAppIdDefinitionIdRequiresObject_1
+     */
+    definitionId: string
+    /**
+     * 
+     * @type PublicActionDefinitionRequiresObjectRequest
+     * @memberof DefinitionsApiautomationV4ActionsAppIdDefinitionIdRequiresObject_1
+     */
+    publicActionDefinitionRequiresObjectRequest: PublicActionDefinitionRequiresObjectRequest
 }
 
 export interface DefinitionsApiCreateRequest {
     /**
-     * The ID of the app.
+     * The unique identifier for the app.
      * Defaults to: undefined
      * @type number
      * @memberof DefinitionsApicreate
@@ -124,19 +166,19 @@ export interface DefinitionsApiCreateRequest {
 
 export interface DefinitionsApiGetByIdRequest {
     /**
-     * The ID of the custom action.
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionsApigetById
-     */
-    definitionId: string
-    /**
-     * The ID of the app.
+     * The ID of the app associated with the action definition.
      * Defaults to: undefined
      * @type number
      * @memberof DefinitionsApigetById
      */
     appId: number
+    /**
+     * The ID of the action definition to retrieve.
+     * Defaults to: undefined
+     * @type string
+     * @memberof DefinitionsApigetById
+     */
+    definitionId: string
     /**
      * Whether to return only results that have been archived.
      * Defaults to: false
@@ -148,19 +190,12 @@ export interface DefinitionsApiGetByIdRequest {
 
 export interface DefinitionsApiGetPageRequest {
     /**
-     * The ID of the app.
+     * The unique identifier for the app.
      * Defaults to: undefined
      * @type number
      * @memberof DefinitionsApigetPage
      */
     appId: number
-    /**
-     * The maximum number of results to display per page.
-     * Defaults to: undefined
-     * @type number
-     * @memberof DefinitionsApigetPage
-     */
-    limit?: number
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * Defaults to: undefined
@@ -175,23 +210,30 @@ export interface DefinitionsApiGetPageRequest {
      * @memberof DefinitionsApigetPage
      */
     archived?: boolean
+    /**
+     * The maximum number of results to display per page.
+     * Defaults to: undefined
+     * @type number
+     * @memberof DefinitionsApigetPage
+     */
+    limit?: number
 }
 
 export interface DefinitionsApiUpdateRequest {
     /**
-     * The ID of the custom action definition.
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionsApiupdate
-     */
-    definitionId: string
-    /**
-     * The ID of the app.
+     * The ID of the app associated with the action definition.
      * Defaults to: undefined
      * @type number
      * @memberof DefinitionsApiupdate
      */
     appId: number
+    /**
+     * The ID of the action definition to update.
+     * Defaults to: undefined
+     * @type string
+     * @memberof DefinitionsApiupdate
+     */
+    definitionId: string
     /**
      * 
      * @type PublicActionDefinitionPatch
@@ -213,7 +255,7 @@ export class ObjectDefinitionsApi {
      * @param param the request object
      */
     public archiveWithHttpInfo(param: DefinitionsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.archiveWithHttpInfo(param.definitionId, param.appId,  options).toPromise();
+        return this.api.archiveWithHttpInfo(param.appId, param.definitionId,  options).toPromise();
     }
 
     /**
@@ -222,7 +264,43 @@ export class ObjectDefinitionsApi {
      * @param param the request object
      */
     public archive(param: DefinitionsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.archive(param.definitionId, param.appId,  options).toPromise();
+        return this.api.archive(param.appId, param.definitionId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve whether a custom action definition requires an object.
+     * Retrieve the object requirement status for a custom action definition.
+     * @param param the request object
+     */
+    public automationV4ActionsAppIdDefinitionIdRequiresObjectWithHttpInfo(param: DefinitionsApiAutomationV4ActionsAppIdDefinitionIdRequiresObjectRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicActionDefinitionRequiresObjectResponse>> {
+        return this.api.automationV4ActionsAppIdDefinitionIdRequiresObjectWithHttpInfo(param.appId, param.definitionId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve whether a custom action definition requires an object.
+     * Retrieve the object requirement status for a custom action definition.
+     * @param param the request object
+     */
+    public automationV4ActionsAppIdDefinitionIdRequiresObject(param: DefinitionsApiAutomationV4ActionsAppIdDefinitionIdRequiresObjectRequest, options?: ConfigurationOptions): Promise<PublicActionDefinitionRequiresObjectResponse> {
+        return this.api.automationV4ActionsAppIdDefinitionIdRequiresObject(param.appId, param.definitionId,  options).toPromise();
+    }
+
+    /**
+     * Set whether a custom action definition requires an object.
+     * Set the object requirement for a custom action definition.
+     * @param param the request object
+     */
+    public automationV4ActionsAppIdDefinitionIdRequiresObject_1WithHttpInfo(param: DefinitionsApiAutomationV4ActionsAppIdDefinitionIdRequiresObject0Request, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.automationV4ActionsAppIdDefinitionIdRequiresObject_1WithHttpInfo(param.appId, param.definitionId, param.publicActionDefinitionRequiresObjectRequest,  options).toPromise();
+    }
+
+    /**
+     * Set whether a custom action definition requires an object.
+     * Set the object requirement for a custom action definition.
+     * @param param the request object
+     */
+    public automationV4ActionsAppIdDefinitionIdRequiresObject_1(param: DefinitionsApiAutomationV4ActionsAppIdDefinitionIdRequiresObject0Request, options?: ConfigurationOptions): Promise<void> {
+        return this.api.automationV4ActionsAppIdDefinitionIdRequiresObject_1(param.appId, param.definitionId, param.publicActionDefinitionRequiresObjectRequest,  options).toPromise();
     }
 
     /**
@@ -249,7 +327,7 @@ export class ObjectDefinitionsApi {
      * @param param the request object
      */
     public getByIdWithHttpInfo(param: DefinitionsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicActionDefinition>> {
-        return this.api.getByIdWithHttpInfo(param.definitionId, param.appId, param.archived,  options).toPromise();
+        return this.api.getByIdWithHttpInfo(param.appId, param.definitionId, param.archived,  options).toPromise();
     }
 
     /**
@@ -258,7 +336,7 @@ export class ObjectDefinitionsApi {
      * @param param the request object
      */
     public getById(param: DefinitionsApiGetByIdRequest, options?: ConfigurationOptions): Promise<PublicActionDefinition> {
-        return this.api.getById(param.definitionId, param.appId, param.archived,  options).toPromise();
+        return this.api.getById(param.appId, param.definitionId, param.archived,  options).toPromise();
     }
 
     /**
@@ -267,7 +345,7 @@ export class ObjectDefinitionsApi {
      * @param param the request object
      */
     public getPageWithHttpInfo(param: DefinitionsApiGetPageRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicActionDefinitionForwardPaging>> {
-        return this.api.getPageWithHttpInfo(param.appId, param.limit, param.after, param.archived,  options).toPromise();
+        return this.api.getPageWithHttpInfo(param.appId, param.after, param.archived, param.limit,  options).toPromise();
     }
 
     /**
@@ -276,7 +354,7 @@ export class ObjectDefinitionsApi {
      * @param param the request object
      */
     public getPage(param: DefinitionsApiGetPageRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicActionDefinitionForwardPaging> {
-        return this.api.getPage(param.appId, param.limit, param.after, param.archived,  options).toPromise();
+        return this.api.getPage(param.appId, param.after, param.archived, param.limit,  options).toPromise();
     }
 
     /**
@@ -285,7 +363,7 @@ export class ObjectDefinitionsApi {
      * @param param the request object
      */
     public updateWithHttpInfo(param: DefinitionsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicActionDefinition>> {
-        return this.api.updateWithHttpInfo(param.definitionId, param.appId, param.publicActionDefinitionPatch,  options).toPromise();
+        return this.api.updateWithHttpInfo(param.appId, param.definitionId, param.publicActionDefinitionPatch,  options).toPromise();
     }
 
     /**
@@ -294,7 +372,7 @@ export class ObjectDefinitionsApi {
      * @param param the request object
      */
     public update(param: DefinitionsApiUpdateRequest, options?: ConfigurationOptions): Promise<PublicActionDefinition> {
-        return this.api.update(param.definitionId, param.appId, param.publicActionDefinitionPatch,  options).toPromise();
+        return this.api.update(param.appId, param.definitionId, param.publicActionDefinitionPatch,  options).toPromise();
     }
 
 }
@@ -304,88 +382,88 @@ import { FunctionsApiRequestFactory, FunctionsApiResponseProcessor} from "../api
 
 export interface FunctionsApiArchiveRequest {
     /**
-     * 
+     * The ID of the application associated with the custom workflow action.
+     * Defaults to: undefined
+     * @type number
+     * @memberof FunctionsApiarchive
+     */
+    appId: number
+    /**
+     * The ID of the custom workflow action definition.
      * Defaults to: undefined
      * @type string
      * @memberof FunctionsApiarchive
      */
     definitionId: string
     /**
-     * 
-     * Defaults to: undefined
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
-     * @memberof FunctionsApiarchive
-     */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
-    /**
-     * 
+     * The ID of the specific function within the workflow action definition.
      * Defaults to: undefined
      * @type string
      * @memberof FunctionsApiarchive
      */
     functionId: string
     /**
-     * 
+     * The type of function, accepted values are: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
      * Defaults to: undefined
-     * @type number
+     * @type &#39;POST_ACTION_EXECUTION&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39;
      * @memberof FunctionsApiarchive
      */
-    appId: number
+    functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS'
 }
 
 export interface FunctionsApiArchiveByFunctionTypeRequest {
     /**
-     * The ID of the definition.
-     * Defaults to: undefined
-     * @type string
-     * @memberof FunctionsApiarchiveByFunctionType
-     */
-    definitionId: string
-    /**
-     * The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
-     * Defaults to: undefined
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
-     * @memberof FunctionsApiarchiveByFunctionType
-     */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
-    /**
-     * The ID of the app.
+     * The ID of the app from which the function will be deleted.
      * Defaults to: undefined
      * @type number
      * @memberof FunctionsApiarchiveByFunctionType
      */
     appId: number
+    /**
+     * The ID of the definition from which the function will be deleted.
+     * Defaults to: undefined
+     * @type string
+     * @memberof FunctionsApiarchiveByFunctionType
+     */
+    definitionId: string
+    /**
+     * The type of function to delete, with accepted values: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
+     * Defaults to: undefined
+     * @type &#39;POST_ACTION_EXECUTION&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39;
+     * @memberof FunctionsApiarchiveByFunctionType
+     */
+    functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS'
 }
 
 export interface FunctionsApiCreateOrReplaceRequest {
     /**
-     * The ID of the definition.
+     * The ID of the application associated with the custom workflow action.
+     * Defaults to: undefined
+     * @type number
+     * @memberof FunctionsApicreateOrReplace
+     */
+    appId: number
+    /**
+     * The ID of the custom workflow action definition.
      * Defaults to: undefined
      * @type string
      * @memberof FunctionsApicreateOrReplace
      */
     definitionId: string
     /**
-     * The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
-     * Defaults to: undefined
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
-     * @memberof FunctionsApicreateOrReplace
-     */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
-    /**
-     * The ID of the function.
+     * The ID of the specific function within the workflow action definition.
      * Defaults to: undefined
      * @type string
      * @memberof FunctionsApicreateOrReplace
      */
     functionId: string
     /**
-     * The ID of the app.
+     * The type of function, accepted values are: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
      * Defaults to: undefined
-     * @type number
+     * @type &#39;POST_ACTION_EXECUTION&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39;
      * @memberof FunctionsApicreateOrReplace
      */
-    appId: number
+    functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS'
     /**
      * 
      * @type string
@@ -396,26 +474,26 @@ export interface FunctionsApiCreateOrReplaceRequest {
 
 export interface FunctionsApiCreateOrReplaceByFunctionTypeRequest {
     /**
-     * The ID of the definition.
+     * The ID of the app to which the function will be added.
+     * Defaults to: undefined
+     * @type number
+     * @memberof FunctionsApicreateOrReplaceByFunctionType
+     */
+    appId: number
+    /**
+     * The ID of the definition to which the function will be added.
      * Defaults to: undefined
      * @type string
      * @memberof FunctionsApicreateOrReplaceByFunctionType
      */
     definitionId: string
     /**
-     * The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * The type of function to add, with accepted values: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
      * Defaults to: undefined
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
+     * @type &#39;POST_ACTION_EXECUTION&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39;
      * @memberof FunctionsApicreateOrReplaceByFunctionType
      */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
-    /**
-     * The ID of the app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof FunctionsApicreateOrReplaceByFunctionType
-     */
-    appId: number
+    functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS'
     /**
      * 
      * @type string
@@ -426,74 +504,74 @@ export interface FunctionsApiCreateOrReplaceByFunctionTypeRequest {
 
 export interface FunctionsApiGetByFunctionTypeRequest {
     /**
-     * The ID of the definition.
-     * Defaults to: undefined
-     * @type string
-     * @memberof FunctionsApigetByFunctionType
-     */
-    definitionId: string
-    /**
-     * The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
-     * Defaults to: undefined
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
-     * @memberof FunctionsApigetByFunctionType
-     */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
-    /**
-     * The ID of the app.
+     * The ID of the app associated with the function.
      * Defaults to: undefined
      * @type number
      * @memberof FunctionsApigetByFunctionType
      */
     appId: number
+    /**
+     * The ID of the definition associated with the function.
+     * Defaults to: undefined
+     * @type string
+     * @memberof FunctionsApigetByFunctionType
+     */
+    definitionId: string
+    /**
+     * The type of function to retrieve, with accepted values: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
+     * Defaults to: undefined
+     * @type &#39;POST_ACTION_EXECUTION&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39;
+     * @memberof FunctionsApigetByFunctionType
+     */
+    functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS'
 }
 
 export interface FunctionsApiGetByIdRequest {
     /**
-     * The ID of the definition.
+     * The ID of the application associated with the custom workflow action.
+     * Defaults to: undefined
+     * @type number
+     * @memberof FunctionsApigetById
+     */
+    appId: number
+    /**
+     * The ID of the custom workflow action definition.
      * Defaults to: undefined
      * @type string
      * @memberof FunctionsApigetById
      */
     definitionId: string
     /**
-     * The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
-     * Defaults to: undefined
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
-     * @memberof FunctionsApigetById
-     */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
-    /**
-     * The ID of the function.
+     * The ID of the specific function within the workflow action definition.
      * Defaults to: undefined
      * @type string
      * @memberof FunctionsApigetById
      */
     functionId: string
     /**
-     * The ID of the app.
+     * The type of function, accepted values are: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
      * Defaults to: undefined
-     * @type number
+     * @type &#39;POST_ACTION_EXECUTION&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39;
      * @memberof FunctionsApigetById
      */
-    appId: number
+    functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS'
 }
 
 export interface FunctionsApiGetPageRequest {
     /**
-     * The ID of the definition.
+     * The unique identifier for the app.
+     * Defaults to: undefined
+     * @type number
+     * @memberof FunctionsApigetPage
+     */
+    appId: number
+    /**
+     * The unique identifier for the action definition.
      * Defaults to: undefined
      * @type string
      * @memberof FunctionsApigetPage
      */
     definitionId: string
-    /**
-     * The ID of the app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof FunctionsApigetPage
-     */
-    appId: number
 }
 
 export class ObjectFunctionsApi {
@@ -504,19 +582,21 @@ export class ObjectFunctionsApi {
     }
 
     /**
+     * Archive a function for a specific definition.
      * Archive a function for a definition
      * @param param the request object
      */
     public archiveWithHttpInfo(param: FunctionsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.archiveWithHttpInfo(param.definitionId, param.functionType, param.functionId, param.appId,  options).toPromise();
+        return this.api.archiveWithHttpInfo(param.appId, param.definitionId, param.functionId, param.functionType,  options).toPromise();
     }
 
     /**
+     * Archive a function for a specific definition.
      * Archive a function for a definition
      * @param param the request object
      */
     public archive(param: FunctionsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.archive(param.definitionId, param.functionType, param.functionId, param.appId,  options).toPromise();
+        return this.api.archive(param.appId, param.definitionId, param.functionId, param.functionType,  options).toPromise();
     }
 
     /**
@@ -525,7 +605,7 @@ export class ObjectFunctionsApi {
      * @param param the request object
      */
     public archiveByFunctionTypeWithHttpInfo(param: FunctionsApiArchiveByFunctionTypeRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.archiveByFunctionTypeWithHttpInfo(param.definitionId, param.functionType, param.appId,  options).toPromise();
+        return this.api.archiveByFunctionTypeWithHttpInfo(param.appId, param.definitionId, param.functionType,  options).toPromise();
     }
 
     /**
@@ -534,7 +614,7 @@ export class ObjectFunctionsApi {
      * @param param the request object
      */
     public archiveByFunctionType(param: FunctionsApiArchiveByFunctionTypeRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.archiveByFunctionType(param.definitionId, param.functionType, param.appId,  options).toPromise();
+        return this.api.archiveByFunctionType(param.appId, param.definitionId, param.functionType,  options).toPromise();
     }
 
     /**
@@ -543,7 +623,7 @@ export class ObjectFunctionsApi {
      * @param param the request object
      */
     public createOrReplaceWithHttpInfo(param: FunctionsApiCreateOrReplaceRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicActionFunctionIdentifier>> {
-        return this.api.createOrReplaceWithHttpInfo(param.definitionId, param.functionType, param.functionId, param.appId, param.body,  options).toPromise();
+        return this.api.createOrReplaceWithHttpInfo(param.appId, param.definitionId, param.functionId, param.functionType, param.body,  options).toPromise();
     }
 
     /**
@@ -552,7 +632,7 @@ export class ObjectFunctionsApi {
      * @param param the request object
      */
     public createOrReplace(param: FunctionsApiCreateOrReplaceRequest, options?: ConfigurationOptions): Promise<PublicActionFunctionIdentifier> {
-        return this.api.createOrReplace(param.definitionId, param.functionType, param.functionId, param.appId, param.body,  options).toPromise();
+        return this.api.createOrReplace(param.appId, param.definitionId, param.functionId, param.functionType, param.body,  options).toPromise();
     }
 
     /**
@@ -561,7 +641,7 @@ export class ObjectFunctionsApi {
      * @param param the request object
      */
     public createOrReplaceByFunctionTypeWithHttpInfo(param: FunctionsApiCreateOrReplaceByFunctionTypeRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicActionFunctionIdentifier>> {
-        return this.api.createOrReplaceByFunctionTypeWithHttpInfo(param.definitionId, param.functionType, param.appId, param.body,  options).toPromise();
+        return this.api.createOrReplaceByFunctionTypeWithHttpInfo(param.appId, param.definitionId, param.functionType, param.body,  options).toPromise();
     }
 
     /**
@@ -570,23 +650,25 @@ export class ObjectFunctionsApi {
      * @param param the request object
      */
     public createOrReplaceByFunctionType(param: FunctionsApiCreateOrReplaceByFunctionTypeRequest, options?: ConfigurationOptions): Promise<PublicActionFunctionIdentifier> {
-        return this.api.createOrReplaceByFunctionType(param.definitionId, param.functionType, param.appId, param.body,  options).toPromise();
+        return this.api.createOrReplaceByFunctionType(param.appId, param.definitionId, param.functionType, param.body,  options).toPromise();
     }
 
     /**
+     * Retrieve functions of a specific type for a given definition.
      * Retrieve functions by a type for a given definition
      * @param param the request object
      */
     public getByFunctionTypeWithHttpInfo(param: FunctionsApiGetByFunctionTypeRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicActionFunction>> {
-        return this.api.getByFunctionTypeWithHttpInfo(param.definitionId, param.functionType, param.appId,  options).toPromise();
+        return this.api.getByFunctionTypeWithHttpInfo(param.appId, param.definitionId, param.functionType,  options).toPromise();
     }
 
     /**
+     * Retrieve functions of a specific type for a given definition.
      * Retrieve functions by a type for a given definition
      * @param param the request object
      */
     public getByFunctionType(param: FunctionsApiGetByFunctionTypeRequest, options?: ConfigurationOptions): Promise<PublicActionFunction> {
-        return this.api.getByFunctionType(param.definitionId, param.functionType, param.appId,  options).toPromise();
+        return this.api.getByFunctionType(param.appId, param.definitionId, param.functionType,  options).toPromise();
     }
 
     /**
@@ -595,7 +677,7 @@ export class ObjectFunctionsApi {
      * @param param the request object
      */
     public getByIdWithHttpInfo(param: FunctionsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicActionFunction>> {
-        return this.api.getByIdWithHttpInfo(param.definitionId, param.functionType, param.functionId, param.appId,  options).toPromise();
+        return this.api.getByIdWithHttpInfo(param.appId, param.definitionId, param.functionId, param.functionType,  options).toPromise();
     }
 
     /**
@@ -604,7 +686,7 @@ export class ObjectFunctionsApi {
      * @param param the request object
      */
     public getById(param: FunctionsApiGetByIdRequest, options?: ConfigurationOptions): Promise<PublicActionFunction> {
-        return this.api.getById(param.definitionId, param.functionType, param.functionId, param.appId,  options).toPromise();
+        return this.api.getById(param.appId, param.definitionId, param.functionId, param.functionType,  options).toPromise();
     }
 
     /**
@@ -613,7 +695,7 @@ export class ObjectFunctionsApi {
      * @param param the request object
      */
     public getPageWithHttpInfo(param: FunctionsApiGetPageRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicActionFunctionIdentifierNoPaging>> {
-        return this.api.getPageWithHttpInfo(param.definitionId, param.appId,  options).toPromise();
+        return this.api.getPageWithHttpInfo(param.appId, param.definitionId,  options).toPromise();
     }
 
     /**
@@ -622,7 +704,7 @@ export class ObjectFunctionsApi {
      * @param param the request object
      */
     public getPage(param: FunctionsApiGetPageRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging> {
-        return this.api.getPage(param.definitionId, param.appId,  options).toPromise();
+        return this.api.getPage(param.appId, param.definitionId,  options).toPromise();
     }
 
 }
@@ -632,50 +714,43 @@ import { RevisionsApiRequestFactory, RevisionsApiResponseProcessor} from "../api
 
 export interface RevisionsApiGetByIdRequest {
     /**
-     * The ID of the definition.
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof RevisionsApigetById
+     */
+    appId: number
+    /**
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RevisionsApigetById
      */
     definitionId: string
     /**
-     * The ID of the revision.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RevisionsApigetById
      */
     revisionId: string
-    /**
-     * The ID of the app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof RevisionsApigetById
-     */
-    appId: number
 }
 
 export interface RevisionsApiGetPageRequest {
     /**
-     * The ID of the definition.
+     * The unique identifier for the app.
+     * Defaults to: undefined
+     * @type number
+     * @memberof RevisionsApigetPage
+     */
+    appId: number
+    /**
+     * The unique identifier for the action definition.
      * Defaults to: undefined
      * @type string
      * @memberof RevisionsApigetPage
      */
     definitionId: string
-    /**
-     * The ID of the app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof RevisionsApigetPage
-     */
-    appId: number
-    /**
-     * The maximum number of results to display per page.
-     * Defaults to: undefined
-     * @type number
-     * @memberof RevisionsApigetPage
-     */
-    limit?: number
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * Defaults to: undefined
@@ -683,6 +758,13 @@ export interface RevisionsApiGetPageRequest {
      * @memberof RevisionsApigetPage
      */
     after?: string
+    /**
+     * The maximum number of results to display per page.
+     * Defaults to: undefined
+     * @type number
+     * @memberof RevisionsApigetPage
+     */
+    limit?: number
 }
 
 export class ObjectRevisionsApi {
@@ -698,7 +780,7 @@ export class ObjectRevisionsApi {
      * @param param the request object
      */
     public getByIdWithHttpInfo(param: RevisionsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicActionRevision>> {
-        return this.api.getByIdWithHttpInfo(param.definitionId, param.revisionId, param.appId,  options).toPromise();
+        return this.api.getByIdWithHttpInfo(param.appId, param.definitionId, param.revisionId,  options).toPromise();
     }
 
     /**
@@ -707,7 +789,7 @@ export class ObjectRevisionsApi {
      * @param param the request object
      */
     public getById(param: RevisionsApiGetByIdRequest, options?: ConfigurationOptions): Promise<PublicActionRevision> {
-        return this.api.getById(param.definitionId, param.revisionId, param.appId,  options).toPromise();
+        return this.api.getById(param.appId, param.definitionId, param.revisionId,  options).toPromise();
     }
 
     /**
@@ -716,7 +798,7 @@ export class ObjectRevisionsApi {
      * @param param the request object
      */
     public getPageWithHttpInfo(param: RevisionsApiGetPageRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicActionRevisionForwardPaging>> {
-        return this.api.getPageWithHttpInfo(param.definitionId, param.appId, param.limit, param.after,  options).toPromise();
+        return this.api.getPageWithHttpInfo(param.appId, param.definitionId, param.after, param.limit,  options).toPromise();
     }
 
     /**
@@ -725,7 +807,7 @@ export class ObjectRevisionsApi {
      * @param param the request object
      */
     public getPage(param: RevisionsApiGetPageRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicActionRevisionForwardPaging> {
-        return this.api.getPage(param.definitionId, param.appId, param.limit, param.after,  options).toPromise();
+        return this.api.getPage(param.appId, param.definitionId, param.after, param.limit,  options).toPromise();
     }
 
 }

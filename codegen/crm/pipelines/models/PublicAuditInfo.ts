@@ -12,12 +12,33 @@
 
 
 export class PublicAuditInfo {
-    'identifier': string;
-    'rawObject'?: any;
-    'fromUserId'?: number;
-    'portalId': number;
+    /**
+    * The action performed that triggered the audit event.
+    */
     'action': string;
+    /**
+    * The ID of the user who initiated the audit event.
+    */
+    'fromUserId'?: number;
+    /**
+    * A unique string identifier for the audit event.
+    */
+    'identifier': string;
+    /**
+    * A descriptive message related to the audit event.
+    */
     'message'?: string;
+    /**
+    * The unique identifier for the HubSpot portal where the audit event occurred.
+    */
+    'portalId': number;
+    /**
+    * An object containing the raw data associated with the audit event.
+    */
+    'rawObject'?: any;
+    /**
+    * The date and time when the audit event took place.
+    */
     'timestamp'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
@@ -26,15 +47,9 @@ export class PublicAuditInfo {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "identifier",
-            "baseName": "identifier",
+            "name": "action",
+            "baseName": "action",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "rawObject",
-            "baseName": "rawObject",
-            "type": "any",
             "format": ""
         },
         {
@@ -44,14 +59,8 @@ export class PublicAuditInfo {
             "format": "int32"
         },
         {
-            "name": "portalId",
-            "baseName": "portalId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "action",
-            "baseName": "action",
+            "name": "identifier",
+            "baseName": "identifier",
             "type": "string",
             "format": ""
         },
@@ -59,6 +68,18 @@ export class PublicAuditInfo {
             "name": "message",
             "baseName": "message",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "portalId",
+            "baseName": "portalId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "rawObject",
+            "baseName": "rawObject",
+            "type": "any",
             "format": ""
         },
         {

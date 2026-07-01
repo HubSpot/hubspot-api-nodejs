@@ -24,8 +24,8 @@ export class ObjectBasicApi {
     }
 
     /**
-     * Send data for a single event completion.
-     * Send a custom event completion
+     * Send data for a single custom event occurrence.
+     * Send a custom event occurrence
      * @param param the request object
      */
     public sendWithHttpInfo(param: BasicApiSendRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
@@ -33,8 +33,8 @@ export class ObjectBasicApi {
     }
 
     /**
-     * Send data for a single event completion.
-     * Send a custom event completion
+     * Send data for a single custom event occurrence.
+     * Send a custom event occurrence
      * @param param the request object
      */
     public send(param: BasicApiSendRequest, options?: ConfigurationOptions): Promise<void> {
@@ -63,8 +63,8 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Send multiple event completions at once.
-     * Send a batch of event completions
+     * Send multiple event occurrences at once.
+     * Send a batch of event occurrences
      * @param param the request object
      */
     public sendWithHttpInfo(param: BatchApiSendRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
@@ -72,8 +72,8 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Send multiple event completions at once.
-     * Send a batch of event completions
+     * Send multiple event occurrences at once.
+     * Send a batch of event occurrences
      * @param param the request object
      */
     public send(param: BatchApiSendRequest, options?: ConfigurationOptions): Promise<void> {

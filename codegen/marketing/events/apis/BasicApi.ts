@@ -76,7 +76,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Deletes the existing Marketing Event with the specified objectId, if it exists.
      * Delete Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      */
     public async archiveByObjectId(objectId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -160,53 +160,9 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns all Marketing Events available on the portal, along with their properties, regardless of whether they were created manually or through the application.  The marketing events returned by this endpoint are sorted by objectId.
-     * Get all marketing event
-     * @param after The cursor indicating the position of the last retrieved item.
-     * @param limit The limit for response size. The default value is 10, the max number is 100
-     */
-    public async getAll(after?: string, limit?: number, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-
-
-        // Path Params
-        const localVarPath = '/marketing/v3/marketing-events/';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (after !== undefined) {
-            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
-        }
-
-        // Query Params
-        if (limit !== undefined) {
-            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
-        }
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
      * Returns the details of a Marketing Event with the specified objectId, if it exists.
      * Get Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      */
     public async getByObjectId(objectId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -273,6 +229,48 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (externalAccountId !== undefined) {
             requestContext.setQueryParam("externalAccountId", ObjectSerializer.serialize(externalAccountId, "string", ""));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * @param after 
+     * @param limit 
+     */
+    public async marketingMarketingEventsV3(after?: string, limit?: number, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+
+
+        // Path Params
+        const localVarPath = '/marketing/marketing-events/v3';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (after !== undefined) {
+            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
+        }
+
+        // Query Params
+        if (limit !== undefined) {
+            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
 
 
@@ -362,7 +360,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Updates the details of an existing Marketing Event identified by its objectId, if it exists.
      * Update Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      * @param marketingEventPublicUpdateRequestV2 
      */
     public async updateByObjectId(objectId: string, marketingEventPublicUpdateRequestV2: MarketingEventPublicUpdateRequestV2, _options?: Configuration): Promise<RequestContext> {
@@ -579,42 +577,6 @@ export class BasicApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getAll
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async getAllWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging >> {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging", ""
-            ) as CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging", ""
-            ) as CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
      * @params response Response returned by the server for a request to getByObjectId
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -677,6 +639,42 @@ export class BasicApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "MarketingEventPublicReadResponse", ""
             ) as MarketingEventPublicReadResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to marketingMarketingEventsV3
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async marketingMarketingEventsV3WithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging", ""
+            ) as CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging", ""
+            ) as CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

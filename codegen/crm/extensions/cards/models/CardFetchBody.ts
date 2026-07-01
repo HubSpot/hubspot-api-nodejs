@@ -16,12 +16,18 @@ import { CardObjectTypeBody } from '../models/CardObjectTypeBody';
 * Configuration for this card\'s data fetch request.
 */
 export class CardFetchBody {
-    'serverlessFunction'?: string;
+    /**
+    * A deprecated field to determine the type of card returned.
+    */
     'cardType'?: CardFetchBodyCardTypeEnum;
     /**
     * An array of CRM object types where this card should be displayed. HubSpot will call your data fetch URL whenever a user visits a record page of the types defined here.
     */
     'objectTypes': Array<CardObjectTypeBody>;
+    /**
+    * A deprecated field to specify serverless functionality with the card
+    */
+    'serverlessFunction'?: string;
     /**
     * URL to a service endpoints that will respond with card details. HubSpot will call this endpoint each time a user visits a CRM record page where this card should be displayed.
     */
@@ -33,12 +39,6 @@ export class CardFetchBody {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "serverlessFunction",
-            "baseName": "serverlessFunction",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "cardType",
             "baseName": "cardType",
             "type": "CardFetchBodyCardTypeEnum",
@@ -48,6 +48,12 @@ export class CardFetchBody {
             "name": "objectTypes",
             "baseName": "objectTypes",
             "type": "Array<CardObjectTypeBody>",
+            "format": ""
+        },
+        {
+            "name": "serverlessFunction",
+            "baseName": "serverlessFunction",
+            "type": "string",
             "format": ""
         },
         {

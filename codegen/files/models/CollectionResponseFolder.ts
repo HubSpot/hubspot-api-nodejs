@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -15,9 +15,6 @@ import { Paging } from '../models/Paging';
 
 export class CollectionResponseFolder {
     'paging'?: Paging;
-    /**
-    * 
-    */
     'results': Array<Folder>;
 
     static readonly discriminator: string | undefined = undefined;

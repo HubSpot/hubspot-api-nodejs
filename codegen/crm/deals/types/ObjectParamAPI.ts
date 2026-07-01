@@ -11,7 +11,7 @@ import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchRespon
 import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
 import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObject } from '../models/CollectionResponseWithTotalSimplePublicObject';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
@@ -50,6 +50,27 @@ export interface BasicApiGetByIdRequest {
      */
     dealId: string
     /**
+     * Whether to return only results that have been archived.
+     * Defaults to: false
+     * @type boolean
+     * @memberof BasicApigetById
+     */
+    archived?: boolean
+    /**
+     * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetById
+     */
+    associations?: Array<string>
+    /**
+     * The name of a property whose values are unique for this object type
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApigetById
+     */
+    idProperty?: string
+    /**
      * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * Defaults to: undefined
      * @type Array&lt;string&gt;
@@ -63,37 +84,9 @@ export interface BasicApiGetByIdRequest {
      * @memberof BasicApigetById
      */
     propertiesWithHistory?: Array<string>
-    /**
-     * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetById
-     */
-    associations?: Array<string>
-    /**
-     * Whether to return only results that have been archived.
-     * Defaults to: false
-     * @type boolean
-     * @memberof BasicApigetById
-     */
-    archived?: boolean
-    /**
-     * The name of a property whose values are unique for this object
-     * Defaults to: undefined
-     * @type string
-     * @memberof BasicApigetById
-     */
-    idProperty?: string
 }
 
 export interface BasicApiGetPageRequest {
-    /**
-     * The maximum number of results to display per page.
-     * Defaults to: 10
-     * @type number
-     * @memberof BasicApigetPage
-     */
-    limit?: number
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * Defaults to: undefined
@@ -101,6 +94,27 @@ export interface BasicApiGetPageRequest {
      * @memberof BasicApigetPage
      */
     after?: string
+    /**
+     * Whether to return only results that have been archived.
+     * Defaults to: false
+     * @type boolean
+     * @memberof BasicApigetPage
+     */
+    archived?: boolean
+    /**
+     * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetPage
+     */
+    associations?: Array<string>
+    /**
+     * The maximum number of results to display per page.
+     * Defaults to: 10
+     * @type number
+     * @memberof BasicApigetPage
+     */
+    limit?: number
     /**
      * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * Defaults to: undefined
@@ -115,20 +129,6 @@ export interface BasicApiGetPageRequest {
      * @memberof BasicApigetPage
      */
     propertiesWithHistory?: Array<string>
-    /**
-     * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetPage
-     */
-    associations?: Array<string>
-    /**
-     * Whether to return only results that have been archived.
-     * Defaults to: false
-     * @type boolean
-     * @memberof BasicApigetPage
-     */
-    archived?: boolean
 }
 
 export interface BasicApiMergeRequest {
@@ -155,7 +155,7 @@ export interface BasicApiUpdateRequest {
      */
     simplePublicObjectInput: SimplePublicObjectInput
     /**
-     * The name of a property whose values are unique for this object
+     * The name of a property whose values are unique for this object type
      * Defaults to: undefined
      * @type string
      * @memberof BasicApiupdate
@@ -212,7 +212,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
-        return this.api.getByIdWithHttpInfo(param.dealId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
+        return this.api.getByIdWithHttpInfo(param.dealId, param.archived, param.associations, param.idProperty, param.properties, param.propertiesWithHistory,  options).toPromise();
     }
 
     /**
@@ -221,7 +221,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<SimplePublicObjectWithAssociations> {
-        return this.api.getById(param.dealId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
+        return this.api.getById(param.dealId, param.archived, param.associations, param.idProperty, param.properties, param.propertiesWithHistory,  options).toPromise();
     }
 
     /**
@@ -230,7 +230,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getPageWithHttpInfo(param: BasicApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>> {
-        return this.api.getPageWithHttpInfo(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+        return this.api.getPageWithHttpInfo(param.after, param.archived, param.associations, param.limit, param.properties, param.propertiesWithHistory,  options).toPromise();
     }
 
     /**
@@ -239,10 +239,11 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getPage(param: BasicApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
-        return this.api.getPage(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+        return this.api.getPage(param.after, param.archived, param.associations, param.limit, param.properties, param.propertiesWithHistory,  options).toPromise();
     }
 
     /**
+     * Combine two deals of the same type into a single deal.
      * Merge two deals with same type
      * @param param the request object
      */
@@ -251,6 +252,7 @@ export class ObjectBasicApi {
     }
 
     /**
+     * Combine two deals of the same type into a single deal.
      * Merge two deals with same type
      * @param param the request object
      */
@@ -341,6 +343,7 @@ export class ObjectBatchApi {
     }
 
     /**
+     * Archive multiple deals using their IDs.
      * Archive a batch of deals by ID
      * @param param the request object
      */
@@ -349,6 +352,7 @@ export class ObjectBatchApi {
     }
 
     /**
+     * Archive multiple deals using their IDs.
      * Archive a batch of deals by ID
      * @param param the request object
      */
@@ -357,6 +361,7 @@ export class ObjectBatchApi {
     }
 
     /**
+     * Create multiple deals in a single request.
      * Create a batch of deals
      * @param param the request object
      */
@@ -365,6 +370,7 @@ export class ObjectBatchApi {
     }
 
     /**
+     * Create multiple deals in a single request.
      * Create a batch of deals
      * @param param the request object
      */
@@ -391,6 +397,7 @@ export class ObjectBatchApi {
     }
 
     /**
+     * Update multiple deals using their internal IDs or unique property values.
      * Update a batch of deals by internal ID, or unique property values
      * @param param the request object
      */
@@ -399,6 +406,7 @@ export class ObjectBatchApi {
     }
 
     /**
+     * Update multiple deals using their internal IDs or unique property values.
      * Update a batch of deals by internal ID, or unique property values
      * @param param the request object
      */
@@ -446,16 +454,20 @@ export class ObjectSearchApi {
     }
 
     /**
+     * Search for deals using specified criteria and filters.
+     * Search for deals using various filters and criteria to retrieve specific records.
      * @param param the request object
      */
-    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>> {
+    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObject>> {
         return this.api.doSearchWithHttpInfo(param.publicObjectSearchRequest,  options).toPromise();
     }
 
     /**
+     * Search for deals using specified criteria and filters.
+     * Search for deals using various filters and criteria to retrieve specific records.
      * @param param the request object
      */
-    public doSearch(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
+    public doSearch(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObject> {
         return this.api.doSearch(param.publicObjectSearchRequest,  options).toPromise();
     }
 

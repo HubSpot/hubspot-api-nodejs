@@ -17,7 +17,7 @@ import { PreviousPage } from '../models/PreviousPage';
 * Contains information pagination of results.
 */
 export class Paging {
-    'next': NextPage;
+    'next'?: NextPage;
     'prev'?: PreviousPage;
 
     static readonly discriminator: string | undefined = undefined;

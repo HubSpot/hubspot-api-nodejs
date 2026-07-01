@@ -8,6 +8,107 @@ import { CollectionResponsePublicUserForwardPaging } from '../models/CollectionR
 import { PublicUser } from '../models/PublicUser';
 import { PublicUserUpdate } from '../models/PublicUserUpdate';
 import { UserProvisionRequest } from '../models/UserProvisionRequest';
+import { ObservableBasicApi } from './ObservableAPI';
+
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class PromiseBasicApi {
+    private api: ObservableBasicApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
+    ) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param [after]
+     * @param [limit]
+     */
+    public settingsUsersV3WithHttpInfo(after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicUserForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.settingsUsersV3WithHttpInfo(after, limit, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * @param [after]
+     * @param [limit]
+     */
+    public settingsUsersV3(after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicUserForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.settingsUsersV3(after, limit, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * @param userProvisionRequest
+     */
+    public settingsUsersV3_1WithHttpInfo(userProvisionRequest: UserProvisionRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicUser>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.settingsUsersV3_1WithHttpInfo(userProvisionRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * @param userProvisionRequest
+     */
+    public settingsUsersV3_1(userProvisionRequest: UserProvisionRequest, _options?: PromiseConfigurationOptions): Promise<PublicUser> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.settingsUsersV3_1(userProvisionRequest, observableOptions);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
 import { ObservableRolesApi } from './ObservableAPI';
 
 import { RolesApiRequestFactory, RolesApiResponseProcessor} from "../apis/RolesApi";
@@ -147,10 +248,10 @@ export class PromiseUsersApi {
     /**
      * Removes a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
      * Removes a user
-     * @param userId Identifier of user to delete
-     * @param [idProperty] The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
+     * @param userId 
+     * @param [idProperty] 
      */
-    public archiveWithHttpInfo(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(userId: string, idProperty?: 'EMAIL' | 'USER_ID', _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -170,10 +271,10 @@ export class PromiseUsersApi {
     /**
      * Removes a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
      * Removes a user
-     * @param userId Identifier of user to delete
-     * @param [idProperty] The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
+     * @param userId 
+     * @param [idProperty] 
      */
-    public archive(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: PromiseConfigurationOptions): Promise<void> {
+    public archive(userId: string, idProperty?: 'EMAIL' | 'USER_ID', _options?: PromiseConfigurationOptions): Promise<void> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -191,56 +292,12 @@ export class PromiseUsersApi {
     }
 
     /**
-     * New users will only have minimal permissions, which is contacts-base. A welcome email will prompt them to set a password and log in to HubSpot.
-     * Adds a user
-     * @param userProvisionRequest
-     */
-    public createWithHttpInfo(userProvisionRequest: UserProvisionRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicUser>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.createWithHttpInfo(userProvisionRequest, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * New users will only have minimal permissions, which is contacts-base. A welcome email will prompt them to set a password and log in to HubSpot.
-     * Adds a user
-     * @param userProvisionRequest
-     */
-    public create(userProvisionRequest: UserProvisionRequest, _options?: PromiseConfigurationOptions): Promise<PublicUser> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.create(userProvisionRequest, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
      * Retrieves a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
      * Retrieves a user
-     * @param userId Identifier of user to retrieve
-     * @param [idProperty] The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
+     * @param userId 
+     * @param [idProperty] 
      */
-    public getByIdWithHttpInfo(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicUser>> {
+    public getByIdWithHttpInfo(userId: string, idProperty?: 'EMAIL' | 'USER_ID', _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicUser>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -260,10 +317,10 @@ export class PromiseUsersApi {
     /**
      * Retrieves a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
      * Retrieves a user
-     * @param userId Identifier of user to retrieve
-     * @param [idProperty] The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
+     * @param userId 
+     * @param [idProperty] 
      */
-    public getById(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: PromiseConfigurationOptions): Promise<PublicUser> {
+    public getById(userId: string, idProperty?: 'EMAIL' | 'USER_ID', _options?: PromiseConfigurationOptions): Promise<PublicUser> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -281,12 +338,13 @@ export class PromiseUsersApi {
     }
 
     /**
-     * Retrieves a list of users from an account
-     * Retrieves a list of users from an account
-     * @param [limit] The number of users to retrieve
-     * @param [after] Results will display maximum 100 users per page. Additional results will be on the next page.
+     * Modifies a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
+     * Modifies a user
+     * @param userId 
+     * @param publicUserUpdate
+     * @param [idProperty] 
      */
-    public getPageWithHttpInfo(limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicUserForwardPaging>> {
+    public updateWithHttpInfo(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: 'EMAIL' | 'USER_ID', _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicUser>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -299,41 +357,18 @@ export class PromiseUsersApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getPageWithHttpInfo(limit, after, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Retrieves a list of users from an account
-     * Retrieves a list of users from an account
-     * @param [limit] The number of users to retrieve
-     * @param [after] Results will display maximum 100 users per page. Additional results will be on the next page.
-     */
-    public getPage(limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicUserForwardPaging> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getPage(limit, after, observableOptions);
+        const result = this.api.updateWithHttpInfo(userId, publicUserUpdate, idProperty, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Modifies a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
      * Modifies a user
-     * @param userId Identifier of user to retrieve
+     * @param userId 
      * @param publicUserUpdate
-     * @param [idProperty] The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
+     * @param [idProperty] 
      */
-    public replaceWithHttpInfo(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: 'USER_ID' | 'EMAIL', _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicUser>> {
+    public update(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: 'EMAIL' | 'USER_ID', _options?: PromiseConfigurationOptions): Promise<PublicUser> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -346,31 +381,7 @@ export class PromiseUsersApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.replaceWithHttpInfo(userId, publicUserUpdate, idProperty, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Modifies a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
-     * Modifies a user
-     * @param userId Identifier of user to retrieve
-     * @param publicUserUpdate
-     * @param [idProperty] The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
-     */
-    public replace(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: 'USER_ID' | 'EMAIL', _options?: PromiseConfigurationOptions): Promise<PublicUser> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.replace(userId, publicUserUpdate, idProperty, observableOptions);
+        const result = this.api.update(userId, publicUserUpdate, idProperty, observableOptions);
         return result.toPromise();
     }
 

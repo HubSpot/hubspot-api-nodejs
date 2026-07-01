@@ -10,13 +10,13 @@
  * Do not edit the class manually.
  */
 
-import { PublicPropertyAssociationFilterBranchFilterBranchesInner } from '../models/PublicPropertyAssociationFilterBranchFilterBranchesInner';
+import { ListFilterUpdateRequestFilterBranch } from '../models/ListFilterUpdateRequestFilterBranch';
 
 /**
 * The definition of the list filter branch update request.
 */
 export class ListFilterUpdateRequest {
-    'filterBranch': PublicPropertyAssociationFilterBranchFilterBranchesInner;
+    'filterBranch': ListFilterUpdateRequestFilterBranch;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -26,7 +26,7 @@ export class ListFilterUpdateRequest {
         {
             "name": "filterBranch",
             "baseName": "filterBranch",
-            "type": "PublicPropertyAssociationFilterBranchFilterBranchesInner",
+            "type": "ListFilterUpdateRequestFilterBranch",
             "format": ""
         }    ];
 

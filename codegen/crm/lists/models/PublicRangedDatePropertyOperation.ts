@@ -12,12 +12,30 @@
 
 
 export class PublicRangedDatePropertyOperation {
+    /**
+    * Specifies whether objects without a set value should be included in the operation.
+    */
     'includeObjectsWithNoValueSet': boolean;
-    'upperBound': number;
-    'requiresTimeZoneConversion': boolean;
-    'operationType': PublicRangedDatePropertyOperationOperationTypeEnum;
+    /**
+    * The lower limit of the date range for the operation.
+    */
     'lowerBound': number;
+    /**
+    * Specifies the type of operation (RANGED_DATE).
+    */
+    'operationType': PublicRangedDatePropertyOperationOperationTypeEnum;
+    /**
+    * Defines the operation to be applied in the ranged date property operation (IS_BETWEEN, IS_NOT_BETWEEN).
+    */
     'operator': string;
+    /**
+    * Indicates whether the operation requires conversion to a different time zone.
+    */
+    'requiresTimeZoneConversion': boolean;
+    /**
+    * The upper limit of the date range for the operation.
+    */
+    'upperBound': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -31,16 +49,10 @@ export class PublicRangedDatePropertyOperation {
             "format": ""
         },
         {
-            "name": "upperBound",
-            "baseName": "upperBound",
+            "name": "lowerBound",
+            "baseName": "lowerBound",
             "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "requiresTimeZoneConversion",
-            "baseName": "requiresTimeZoneConversion",
-            "type": "boolean",
-            "format": ""
+            "format": "int64"
         },
         {
             "name": "operationType",
@@ -49,16 +61,22 @@ export class PublicRangedDatePropertyOperation {
             "format": ""
         },
         {
-            "name": "lowerBound",
-            "baseName": "lowerBound",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "operator",
             "baseName": "operator",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "requiresTimeZoneConversion",
+            "baseName": "requiresTimeZoneConversion",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "upperBound",
+            "baseName": "upperBound",
+            "type": "number",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {

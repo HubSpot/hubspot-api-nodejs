@@ -12,7 +12,7 @@
 
 
 /**
-* Defines an association between two object types.
+* The definition of an association
 */
 export class AssociationDefinition {
     /**
@@ -24,15 +24,15 @@ export class AssociationDefinition {
     */
     'fromObjectTypeId': string;
     /**
-    * A unique name for this association.
-    */
-    'name'?: string;
-    /**
     * A unique ID for this association.
     */
     'id': string;
     /**
-    * ID of the target object type to link to.
+    * A unique name for this association.
+    */
+    'name'?: string;
+    /**
+    * ID of the target object type ID to link to.
     */
     'toObjectTypeId': string;
     /**
@@ -58,14 +58,14 @@ export class AssociationDefinition {
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },

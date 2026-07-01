@@ -12,8 +12,14 @@
 
 
 export class BoundedNextPage {
-    'offset': number;
+    /**
+    * A URL that can be used to retrieve the next set of results.
+    */
     'link'?: string;
+    /**
+    * The offset value indicating the starting point for the next set of results.
+    */
+    'offset': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,16 +27,16 @@ export class BoundedNextPage {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "offset",
-            "baseName": "offset",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "link",
             "baseName": "link",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "offset",
+            "baseName": "offset",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

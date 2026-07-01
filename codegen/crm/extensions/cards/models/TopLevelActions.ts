@@ -12,17 +12,27 @@
 
 import { IFrameActionBody } from '../models/IFrameActionBody';
 import { IntegratorObjectResultActionsInner } from '../models/IntegratorObjectResultActionsInner';
+import { TopLevelActionsPrimary } from '../models/TopLevelActionsPrimary';
 
 export class TopLevelActions {
+    'primary'?: TopLevelActionsPrimary;
+    /**
+    * Specifies a list of secondary actions for a card, each of which can be an action hook or an iframe.
+    */
     'secondary': Array<IntegratorObjectResultActionsInner>;
     'settings'?: IFrameActionBody;
-    'primary'?: IntegratorObjectResultActionsInner;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "primary",
+            "baseName": "primary",
+            "type": "TopLevelActionsPrimary",
+            "format": ""
+        },
         {
             "name": "secondary",
             "baseName": "secondary",
@@ -33,12 +43,6 @@ export class TopLevelActions {
             "name": "settings",
             "baseName": "settings",
             "type": "IFrameActionBody",
-            "format": ""
-        },
-        {
-            "name": "primary",
-            "baseName": "primary",
-            "type": "IntegratorObjectResultActionsInner",
             "format": ""
         }    ];
 

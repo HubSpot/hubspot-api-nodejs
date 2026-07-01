@@ -6,114 +6,105 @@ import { AssetFileMetadata } from '../models/AssetFileMetadata';
 import { FileExtractRequest } from '../models/FileExtractRequest';
 import { TaskLocator } from '../models/TaskLocator';
 
-import { ObservableContentApi } from "./ObservableAPI";
-import { ContentApiRequestFactory, ContentApiResponseProcessor} from "../apis/ContentApi";
+import { ObservableAdvancedApi } from "./ObservableAPI";
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
 
-export interface ContentApiArchiveRequest {
+export interface AdvancedApiCreateRequest {
     /**
-     * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof ContentApiarchive
+     * @memberof AdvancedApicreate
      */
     environment: string
     /**
-     * The file system location of the file.
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof ContentApiarchive
-     */
-    path: string
-}
-
-export interface ContentApiCreateRequest {
-    /**
-     * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
-     * Defaults to: undefined
-     * @type string
-     * @memberof ContentApicreate
-     */
-    environment: string
-    /**
-     * The file system location of the file.
-     * Defaults to: undefined
-     * @type string
-     * @memberof ContentApicreate
+     * @memberof AdvancedApicreate
      */
     path: string
     /**
      * 
      * Defaults to: undefined
      * @type HttpFile
-     * @memberof ContentApicreate
+     * @memberof AdvancedApicreate
      */
     file?: HttpFile
 }
 
-export interface ContentApiCreateOrUpdateRequest {
+export interface AdvancedApiCreateOrUpdateRequest {
     /**
-     * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof ContentApicreateOrUpdate
+     * @memberof AdvancedApicreateOrUpdate
      */
     environment: string
     /**
-     * The file system location of the file.
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof ContentApicreateOrUpdate
+     * @memberof AdvancedApicreateOrUpdate
      */
     path: string
     /**
      * 
      * Defaults to: undefined
      * @type HttpFile
-     * @memberof ContentApicreateOrUpdate
+     * @memberof AdvancedApicreateOrUpdate
      */
     file?: HttpFile
 }
 
-export interface ContentApiDownloadRequest {
+export interface AdvancedApiDoAsyncRequest {
     /**
-     * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * 
+     * @type FileExtractRequest
+     * @memberof AdvancedApidoAsync
+     */
+    fileExtractRequest: FileExtractRequest
+}
+
+export interface AdvancedApiDoValidateRequest {
+    /**
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof ContentApidownload
+     * @memberof AdvancedApidoValidate
      */
     environment: string
     /**
-     * The file system location of the file.
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof ContentApidownload
+     * @memberof AdvancedApidoValidate
      */
     path: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type HttpFile
+     * @memberof AdvancedApidoValidate
+     */
+    file?: HttpFile
 }
 
-export class ObjectContentApi {
-    private api: ObservableContentApi
-
-    public constructor(configuration: Configuration, requestFactory?: ContentApiRequestFactory, responseProcessor?: ContentApiResponseProcessor) {
-        this.api = new ObservableContentApi(configuration, requestFactory, responseProcessor);
-    }
-
+export interface AdvancedApiGetAsyncStatusRequest {
     /**
-     * Deletes the file at the specified path in the specified environment.
-     * Delete a file
-     * @param param the request object
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof AdvancedApigetAsyncStatus
      */
-    public archiveWithHttpInfo(param: ContentApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.archiveWithHttpInfo(param.environment, param.path,  options).toPromise();
-    }
+    taskId: number
+}
 
-    /**
-     * Deletes the file at the specified path in the specified environment.
-     * Delete a file
-     * @param param the request object
-     */
-    public archive(param: ContentApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.archive(param.environment, param.path,  options).toPromise();
+export class ObjectAdvancedApi {
+    private api: ObservableAdvancedApi
+
+    public constructor(configuration: Configuration, requestFactory?: AdvancedApiRequestFactory, responseProcessor?: AdvancedApiResponseProcessor) {
+        this.api = new ObservableAdvancedApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -121,7 +112,7 @@ export class ObjectContentApi {
      * Create a file
      * @param param the request object
      */
-    public createWithHttpInfo(param: ContentApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<AssetFileMetadata>> {
+    public createWithHttpInfo(param: AdvancedApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<AssetFileMetadata>> {
         return this.api.createWithHttpInfo(param.environment, param.path, param.file,  options).toPromise();
     }
 
@@ -130,7 +121,7 @@ export class ObjectContentApi {
      * Create a file
      * @param param the request object
      */
-    public create(param: ContentApiCreateRequest, options?: ConfigurationOptions): Promise<AssetFileMetadata> {
+    public create(param: AdvancedApiCreateRequest, options?: ConfigurationOptions): Promise<AssetFileMetadata> {
         return this.api.create(param.environment, param.path, param.file,  options).toPromise();
     }
 
@@ -139,7 +130,7 @@ export class ObjectContentApi {
      * Create or update a file
      * @param param the request object
      */
-    public createOrUpdateWithHttpInfo(param: ContentApiCreateOrUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<AssetFileMetadata>> {
+    public createOrUpdateWithHttpInfo(param: AdvancedApiCreateOrUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<AssetFileMetadata>> {
         return this.api.createOrUpdateWithHttpInfo(param.environment, param.path, param.file,  options).toPromise();
     }
 
@@ -148,57 +139,8 @@ export class ObjectContentApi {
      * Create or update a file
      * @param param the request object
      */
-    public createOrUpdate(param: ContentApiCreateOrUpdateRequest, options?: ConfigurationOptions): Promise<AssetFileMetadata> {
+    public createOrUpdate(param: AdvancedApiCreateOrUpdateRequest, options?: ConfigurationOptions): Promise<AssetFileMetadata> {
         return this.api.createOrUpdate(param.environment, param.path, param.file,  options).toPromise();
-    }
-
-    /**
-     * Downloads the byte contents of the file at the specified path in the specified environment.
-     * Download a file
-     * @param param the request object
-     */
-    public downloadWithHttpInfo(param: ContentApiDownloadRequest, options?: ConfigurationOptions): Promise<HttpInfo<HttpFile>> {
-        return this.api.downloadWithHttpInfo(param.environment, param.path,  options).toPromise();
-    }
-
-    /**
-     * Downloads the byte contents of the file at the specified path in the specified environment.
-     * Download a file
-     * @param param the request object
-     */
-    public download(param: ContentApiDownloadRequest, options?: ConfigurationOptions): Promise<HttpFile> {
-        return this.api.download(param.environment, param.path,  options).toPromise();
-    }
-
-}
-
-import { ObservableExtractApi } from "./ObservableAPI";
-import { ExtractApiRequestFactory, ExtractApiResponseProcessor} from "../apis/ExtractApi";
-
-export interface ExtractApiDoAsyncRequest {
-    /**
-     * 
-     * @type FileExtractRequest
-     * @memberof ExtractApidoAsync
-     */
-    fileExtractRequest: FileExtractRequest
-}
-
-export interface ExtractApiGetAsyncStatusRequest {
-    /**
-     * The extraction task ID returned by the initial &#x60;extract/async&#x60; request.
-     * Defaults to: undefined
-     * @type number
-     * @memberof ExtractApigetAsyncStatus
-     */
-    taskId: number
-}
-
-export class ObjectExtractApi {
-    private api: ObservableExtractApi
-
-    public constructor(configuration: Configuration, requestFactory?: ExtractApiRequestFactory, responseProcessor?: ExtractApiResponseProcessor) {
-        this.api = new ObservableExtractApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -206,7 +148,7 @@ export class ObjectExtractApi {
      * Extract a zip file
      * @param param the request object
      */
-    public doAsyncWithHttpInfo(param: ExtractApiDoAsyncRequest, options?: ConfigurationOptions): Promise<HttpInfo<TaskLocator>> {
+    public doAsyncWithHttpInfo(param: AdvancedApiDoAsyncRequest, options?: ConfigurationOptions): Promise<HttpInfo<TaskLocator>> {
         return this.api.doAsyncWithHttpInfo(param.fileExtractRequest,  options).toPromise();
     }
 
@@ -215,8 +157,26 @@ export class ObjectExtractApi {
      * Extract a zip file
      * @param param the request object
      */
-    public doAsync(param: ExtractApiDoAsyncRequest, options?: ConfigurationOptions): Promise<TaskLocator> {
+    public doAsync(param: AdvancedApiDoAsyncRequest, options?: ConfigurationOptions): Promise<TaskLocator> {
         return this.api.doAsync(param.fileExtractRequest,  options).toPromise();
+    }
+
+    /**
+     * Validates the file contents passed to the endpoint given a specified path and environment. Accepts multipart/form-data content type.
+     * Validate the contents of a file
+     * @param param the request object
+     */
+    public doValidateWithHttpInfo(param: AdvancedApiDoValidateRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.doValidateWithHttpInfo(param.environment, param.path, param.file,  options).toPromise();
+    }
+
+    /**
+     * Validates the file contents passed to the endpoint given a specified path and environment. Accepts multipart/form-data content type.
+     * Validate the contents of a file
+     * @param param the request object
+     */
+    public doValidate(param: AdvancedApiDoValidateRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.doValidate(param.environment, param.path, param.file,  options).toPromise();
     }
 
     /**
@@ -224,7 +184,7 @@ export class ObjectExtractApi {
      * Get extraction status
      * @param param the request object
      */
-    public getAsyncStatusWithHttpInfo(param: ExtractApiGetAsyncStatusRequest, options?: ConfigurationOptions): Promise<HttpInfo<ActionResponse>> {
+    public getAsyncStatusWithHttpInfo(param: AdvancedApiGetAsyncStatusRequest, options?: ConfigurationOptions): Promise<HttpInfo<ActionResponse>> {
         return this.api.getAsyncStatusWithHttpInfo(param.taskId,  options).toPromise();
     }
 
@@ -233,44 +193,114 @@ export class ObjectExtractApi {
      * Get extraction status
      * @param param the request object
      */
-    public getAsyncStatus(param: ExtractApiGetAsyncStatusRequest, options?: ConfigurationOptions): Promise<ActionResponse> {
+    public getAsyncStatus(param: AdvancedApiGetAsyncStatusRequest, options?: ConfigurationOptions): Promise<ActionResponse> {
         return this.api.getAsyncStatus(param.taskId,  options).toPromise();
     }
 
 }
 
-import { ObservableMetadataApi } from "./ObservableAPI";
-import { MetadataApiRequestFactory, MetadataApiResponseProcessor} from "../apis/MetadataApi";
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
-export interface MetadataApiGetRequest {
+export interface BasicApiArchiveRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiarchive
+     */
+    environment: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiarchive
+     */
+    path: string
+}
+
+export interface BasicApiDownloadRequest {
     /**
      * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * Defaults to: undefined
      * @type string
-     * @memberof MetadataApiget
+     * @memberof BasicApidownload
      */
     environment: string
     /**
      * The file system location of the file.
      * Defaults to: undefined
      * @type string
-     * @memberof MetadataApiget
+     * @memberof BasicApidownload
+     */
+    path: string
+}
+
+export interface BasicApiGetRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiget
+     */
+    environment: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiget
      */
     path: string
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof MetadataApiget
+     * @memberof BasicApiget
      */
     properties?: string
 }
 
-export class ObjectMetadataApi {
-    private api: ObservableMetadataApi
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
 
-    public constructor(configuration: Configuration, requestFactory?: MetadataApiRequestFactory, responseProcessor?: MetadataApiResponseProcessor) {
-        this.api = new ObservableMetadataApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Deletes the file at the specified path in the specified environment.
+     * Delete a file
+     * @param param the request object
+     */
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.environment, param.path,  options).toPromise();
+    }
+
+    /**
+     * Deletes the file at the specified path in the specified environment.
+     * Delete a file
+     * @param param the request object
+     */
+    public archive(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.archive(param.environment, param.path,  options).toPromise();
+    }
+
+    /**
+     * Downloads the byte contents of the file at the specified path in the specified environment.
+     * Download a file
+     * @param param the request object
+     */
+    public downloadWithHttpInfo(param: BasicApiDownloadRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.downloadWithHttpInfo(param.environment, param.path,  options).toPromise();
+    }
+
+    /**
+     * Downloads the byte contents of the file at the specified path in the specified environment.
+     * Download a file
+     * @param param the request object
+     */
+    public download(param: BasicApiDownloadRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.download(param.environment, param.path,  options).toPromise();
     }
 
     /**
@@ -278,7 +308,7 @@ export class ObjectMetadataApi {
      * Get the metadata for a file
      * @param param the request object
      */
-    public getWithHttpInfo(param: MetadataApiGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<AssetFileMetadata>> {
+    public getWithHttpInfo(param: BasicApiGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<AssetFileMetadata>> {
         return this.api.getWithHttpInfo(param.environment, param.path, param.properties,  options).toPromise();
     }
 
@@ -287,55 +317,8 @@ export class ObjectMetadataApi {
      * Get the metadata for a file
      * @param param the request object
      */
-    public get(param: MetadataApiGetRequest, options?: ConfigurationOptions): Promise<AssetFileMetadata> {
+    public get(param: BasicApiGetRequest, options?: ConfigurationOptions): Promise<AssetFileMetadata> {
         return this.api.get(param.environment, param.path, param.properties,  options).toPromise();
-    }
-
-}
-
-import { ObservableValidationApi } from "./ObservableAPI";
-import { ValidationApiRequestFactory, ValidationApiResponseProcessor} from "../apis/ValidationApi";
-
-export interface ValidationApiDoValidateRequest {
-    /**
-     * The file system location of the file.
-     * Defaults to: undefined
-     * @type string
-     * @memberof ValidationApidoValidate
-     */
-    path: string
-    /**
-     * 
-     * Defaults to: undefined
-     * @type HttpFile
-     * @memberof ValidationApidoValidate
-     */
-    file?: HttpFile
-}
-
-export class ObjectValidationApi {
-    private api: ObservableValidationApi
-
-    public constructor(configuration: Configuration, requestFactory?: ValidationApiRequestFactory, responseProcessor?: ValidationApiResponseProcessor) {
-        this.api = new ObservableValidationApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Validates the file contents passed to the endpoint given a specified path and environment. Accepts multipart/form-data content type.
-     * Validate the contents of a file
-     * @param param the request object
-     */
-    public doValidateWithHttpInfo(param: ValidationApiDoValidateRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.doValidateWithHttpInfo(param.path, param.file,  options).toPromise();
-    }
-
-    /**
-     * Validates the file contents passed to the endpoint given a specified path and environment. Accepts multipart/form-data content type.
-     * Validate the contents of a file
-     * @param param the request object
-     */
-    public doValidate(param: ValidationApiDoValidateRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.doValidate(param.path, param.file,  options).toPromise();
     }
 
 }

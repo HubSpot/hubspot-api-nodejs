@@ -4,40 +4,40 @@ import { Configuration, ConfigurationOptions } from '../configuration'
 import { IdentificationTokenGenerationRequest } from '../models/IdentificationTokenGenerationRequest';
 import { IdentificationTokenResponse } from '../models/IdentificationTokenResponse';
 
-import { ObservableGenerateApi } from "./ObservableAPI";
-import { GenerateApiRequestFactory, GenerateApiResponseProcessor} from "../apis/GenerateApi";
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
-export interface GenerateApiGenerateTokenRequest {
+export interface BasicApiGenerateTokenRequest {
     /**
      * 
      * @type IdentificationTokenGenerationRequest
-     * @memberof GenerateApigenerateToken
+     * @memberof BasicApigenerateToken
      */
     identificationTokenGenerationRequest: IdentificationTokenGenerationRequest
 }
 
-export class ObjectGenerateApi {
-    private api: ObservableGenerateApi
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
 
-    public constructor(configuration: Configuration, requestFactory?: GenerateApiRequestFactory, responseProcessor?: GenerateApiResponseProcessor) {
-        this.api = new ObservableGenerateApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Generates a new visitor identification token. This token will be unique every time this endpoint is called, even if called with the same email address. This token is temporary and will expire after 12 hours
-     * Generate a token
+     * Generate an identification token for a website visitor who has been authenticated using your own system. An identification token returned from this API can be used to pass information about your already-authenticated visitor to the chat widget, so that it treats the visitor as a known contact. This allows support agents to recognize and assist the visitor more effectively.
+     * Generate visitor token
      * @param param the request object
      */
-    public generateTokenWithHttpInfo(param: GenerateApiGenerateTokenRequest, options?: ConfigurationOptions): Promise<HttpInfo<IdentificationTokenResponse>> {
+    public generateTokenWithHttpInfo(param: BasicApiGenerateTokenRequest, options?: ConfigurationOptions): Promise<HttpInfo<IdentificationTokenResponse>> {
         return this.api.generateTokenWithHttpInfo(param.identificationTokenGenerationRequest,  options).toPromise();
     }
 
     /**
-     * Generates a new visitor identification token. This token will be unique every time this endpoint is called, even if called with the same email address. This token is temporary and will expire after 12 hours
-     * Generate a token
+     * Generate an identification token for a website visitor who has been authenticated using your own system. An identification token returned from this API can be used to pass information about your already-authenticated visitor to the chat widget, so that it treats the visitor as a known contact. This allows support agents to recognize and assist the visitor more effectively.
+     * Generate visitor token
      * @param param the request object
      */
-    public generateToken(param: GenerateApiGenerateTokenRequest, options?: ConfigurationOptions): Promise<IdentificationTokenResponse> {
+    public generateToken(param: BasicApiGenerateTokenRequest, options?: ConfigurationOptions): Promise<IdentificationTokenResponse> {
         return this.api.generateToken(param.identificationTokenGenerationRequest,  options).toPromise();
     }
 

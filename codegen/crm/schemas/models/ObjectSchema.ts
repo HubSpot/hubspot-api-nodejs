@@ -18,28 +18,40 @@ import { Property } from '../models/Property';
 * Defines an object schema, including its properties and associations.
 */
 export class ObjectSchema {
+    'allowsSensitiveProperties'?: boolean;
+    'archived'?: boolean;
     /**
     * Associations defined for a given object type.
     */
     'associations': Array<AssociationDefinition>;
     /**
-    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+    * When the object schema was created.
     */
-    'secondaryDisplayProperties'?: Array<string>;
+    'createdAt'?: Date;
     'createdByUserId'?: number;
-    'objectTypeId'?: string;
     'description'?: string;
-    'updatedByUserId'?: number;
     /**
     * An assigned unique ID for the object, including portal ID and object name.
     */
     'fullyQualifiedName'?: string;
-    'labels': ObjectTypeDefinitionLabels;
-    'archived'?: boolean;
     /**
-    * When the object schema was created.
+    * A unique ID for this schema\'s object type. Will be defined as {meta-type}-{unique ID}.
     */
-    'createdAt'?: Date;
+    'id': string;
+    'labels': ObjectTypeDefinitionLabels;
+    /**
+    * A unique name for the schema\'s object type.
+    */
+    'name': string;
+    'objectTypeId'?: string;
+    /**
+    * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
+    */
+    'primaryDisplayProperty'?: string;
+    /**
+    * Properties defined for this object type.
+    */
+    'properties': Array<Property>;
     /**
     * The names of properties that should be **required** when creating an object of this type.
     */
@@ -49,25 +61,14 @@ export class ObjectSchema {
     */
     'searchableProperties'?: Array<string>;
     /**
-    * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
+    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
     */
-    'primaryDisplayProperty'?: string;
-    /**
-    * A unique name for the schema\'s object type.
-    */
-    'name': string;
-    /**
-    * A unique ID for this schema\'s object type. Will be defined as {meta-type}-{unique ID}.
-    */
-    'id': string;
-    /**
-    * Properties defined for this object type.
-    */
-    'properties': Array<Property>;
+    'secondaryDisplayProperties'?: Array<string>;
     /**
     * When the object schema was last updated.
     */
     'updatedAt'?: Date;
+    'updatedByUserId'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -75,16 +76,28 @@ export class ObjectSchema {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "allowsSensitiveProperties",
+            "baseName": "allowsSensitiveProperties",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "associations",
             "baseName": "associations",
             "type": "Array<AssociationDefinition>",
             "format": ""
         },
         {
-            "name": "secondaryDisplayProperties",
-            "baseName": "secondaryDisplayProperties",
-            "type": "Array<string>",
-            "format": ""
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "createdByUserId",
@@ -93,26 +106,20 @@ export class ObjectSchema {
             "format": "int32"
         },
         {
-            "name": "objectTypeId",
-            "baseName": "objectTypeId",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "description",
             "baseName": "description",
             "type": "string",
             "format": ""
         },
         {
-            "name": "updatedByUserId",
-            "baseName": "updatedByUserId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "fullyQualifiedName",
             "baseName": "fullyQualifiedName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
@@ -123,16 +130,28 @@ export class ObjectSchema {
             "format": ""
         },
         {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "primaryDisplayProperty",
+            "baseName": "primaryDisplayProperty",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "properties",
+            "baseName": "properties",
+            "type": "Array<Property>",
+            "format": ""
         },
         {
             "name": "requiredProperties",
@@ -147,27 +166,9 @@ export class ObjectSchema {
             "format": ""
         },
         {
-            "name": "primaryDisplayProperty",
-            "baseName": "primaryDisplayProperty",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "properties",
-            "baseName": "properties",
-            "type": "Array<Property>",
+            "name": "secondaryDisplayProperties",
+            "baseName": "secondaryDisplayProperties",
+            "type": "Array<string>",
             "format": ""
         },
         {
@@ -175,6 +176,12 @@ export class ObjectSchema {
             "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "updatedByUserId",
+            "baseName": "updatedByUserId",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

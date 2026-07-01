@@ -10,29 +10,56 @@
  * Do not edit the class manually.
  */
 
+import { PublicObjectWarning } from '../models/PublicObjectWarning';
 import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
+/**
+* A simple public object.
+*/
 export class SimplePublicObject {
-    'createdAt': Date;
+    /**
+    * Whether the object is archived.
+    */
     'archived'?: boolean;
+    /**
+    * The timestamp when the object was archived, in ISO 8601 format.
+    */
     'archivedAt'?: Date;
-    'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
+    /**
+    * The timestamp when the object was created, in ISO 8601 format.
+    */
+    'createdAt': Date;
+    /**
+    * The unique ID of the object.
+    */
     'id': string;
+    /**
+    * An identifier used for tracing the write request for the object.
+    */
     'objectWriteTraceId'?: string;
-    'properties': { [key: string]: string | null; };
+    /**
+    * Key-value pairs representing the properties of the object.
+    */
+    'properties': { [key: string]: string; };
+    /**
+    * Key-value pairs representing the properties of the object along with their history.
+    */
+    'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
+    /**
+    * The timestamp when the object was last updated, in ISO 8601 format.
+    */
     'updatedAt': Date;
+    /**
+    * Direct URL for this object in the portal
+    */
+    'url'?: string;
+    'warnings'?: Array<PublicObjectWarning>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
         {
             "name": "archived",
             "baseName": "archived",
@@ -46,10 +73,10 @@ export class SimplePublicObject {
             "format": "date-time"
         },
         {
-            "name": "propertiesWithHistory",
-            "baseName": "propertiesWithHistory",
-            "type": "{ [key: string]: Array<ValueWithTimestamp>; }",
-            "format": ""
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "id",
@@ -66,7 +93,13 @@ export class SimplePublicObject {
         {
             "name": "properties",
             "baseName": "properties",
-            "type": "{ [key: string]: string | null; }",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "propertiesWithHistory",
+            "baseName": "propertiesWithHistory",
+            "type": "{ [key: string]: Array<ValueWithTimestamp>; }",
             "format": ""
         },
         {
@@ -74,6 +107,18 @@ export class SimplePublicObject {
             "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "warnings",
+            "baseName": "warnings",
+            "type": "Array<PublicObjectWarning>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

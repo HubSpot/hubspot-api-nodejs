@@ -5,7 +5,6 @@ import { BatchInputTimelineEvent } from '../models/BatchInputTimelineEvent';
 import { BatchResponseTimelineEventResponse } from '../models/BatchResponseTimelineEventResponse';
 import { BatchResponseTimelineEventResponseWithErrors } from '../models/BatchResponseTimelineEventResponseWithErrors';
 import { CollectionResponseTimelineEventTemplateNoPaging } from '../models/CollectionResponseTimelineEventTemplateNoPaging';
-import { EventDetail } from '../models/EventDetail';
 import { TimelineEvent } from '../models/TimelineEvent';
 import { TimelineEventResponse } from '../models/TimelineEventResponse';
 import { TimelineEventTemplate } from '../models/TimelineEventTemplate';
@@ -14,508 +13,431 @@ import { TimelineEventTemplateToken } from '../models/TimelineEventTemplateToken
 import { TimelineEventTemplateTokenUpdateRequest } from '../models/TimelineEventTemplateTokenUpdateRequest';
 import { TimelineEventTemplateUpdateRequest } from '../models/TimelineEventTemplateUpdateRequest';
 
-import { ObservableEventsApi } from "./ObservableAPI";
-import { EventsApiRequestFactory, EventsApiResponseProcessor} from "../apis/EventsApi";
+import { ObservableAdvancedApi } from "./ObservableAPI";
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
 
-export interface EventsApiCreateRequest {
+export interface AdvancedApiCreateRequest {
     /**
-     * The timeline event definition.
+     * 
      * @type TimelineEvent
-     * @memberof EventsApicreate
+     * @memberof AdvancedApicreate
      */
     timelineEvent: TimelineEvent
 }
 
-export interface EventsApiCreateBatchRequest {
+export interface AdvancedApiCreate0Request {
     /**
-     * The timeline event definition.
-     * @type BatchInputTimelineEvent
-     * @memberof EventsApicreateBatch
-     */
-    batchInputTimelineEvent: BatchInputTimelineEvent
-}
-
-export interface EventsApiGetByIdRequest {
-    /**
-     * The event template ID.
-     * Defaults to: undefined
-     * @type string
-     * @memberof EventsApigetById
-     */
-    eventTemplateId: string
-    /**
-     * The event ID.
-     * Defaults to: undefined
-     * @type string
-     * @memberof EventsApigetById
-     */
-    eventId: string
-}
-
-export interface EventsApiGetDetailByIdRequest {
-    /**
-     * The event template ID.
-     * Defaults to: undefined
-     * @type string
-     * @memberof EventsApigetDetailById
-     */
-    eventTemplateId: string
-    /**
-     * The event ID.
-     * Defaults to: undefined
-     * @type string
-     * @memberof EventsApigetDetailById
-     */
-    eventId: string
-}
-
-export interface EventsApiGetRenderByIdRequest {
-    /**
-     * The event template ID.
-     * Defaults to: undefined
-     * @type string
-     * @memberof EventsApigetRenderById
-     */
-    eventTemplateId: string
-    /**
-     * The event ID.
-     * Defaults to: undefined
-     * @type string
-     * @memberof EventsApigetRenderById
-     */
-    eventId: string
-    /**
-     * Set to \&#39;true\&#39;, we want to render the &#x60;detailTemplate&#x60; instead of the &#x60;headerTemplate&#x60;.
-     * Defaults to: undefined
-     * @type boolean
-     * @memberof EventsApigetRenderById
-     */
-    detail?: boolean
-}
-
-export class ObjectEventsApi {
-    private api: ObservableEventsApi
-
-    public constructor(configuration: Configuration, requestFactory?: EventsApiRequestFactory, responseProcessor?: EventsApiResponseProcessor) {
-        this.api = new ObservableEventsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Creates an instance of a timeline event based on an event template. Once created, this event is immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
-     * Create a single event
-     * @param param the request object
-     */
-    public createWithHttpInfo(param: EventsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventResponse>> {
-        return this.api.createWithHttpInfo(param.timelineEvent,  options).toPromise();
-    }
-
-    /**
-     * Creates an instance of a timeline event based on an event template. Once created, this event is immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
-     * Create a single event
-     * @param param the request object
-     */
-    public create(param: EventsApiCreateRequest, options?: ConfigurationOptions): Promise<TimelineEventResponse> {
-        return this.api.create(param.timelineEvent,  options).toPromise();
-    }
-
-    /**
-     * Creates multiple instances of timeline events based on an event template. Once created, these event are immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
-     * Creates multiple events
-     * @param param the request object
-     */
-    public createBatchWithHttpInfo(param: EventsApiCreateBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors>> {
-        return this.api.createBatchWithHttpInfo(param.batchInputTimelineEvent,  options).toPromise();
-    }
-
-    /**
-     * Creates multiple instances of timeline events based on an event template. Once created, these event are immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
-     * Creates multiple events
-     * @param param the request object
-     */
-    public createBatch(param: EventsApiCreateBatchRequest, options?: ConfigurationOptions): Promise<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors> {
-        return this.api.createBatch(param.batchInputTimelineEvent,  options).toPromise();
-    }
-
-    /**
-     * This returns the previously created event. It contains all existing info for the event, but not necessarily the CRM object.
-     * Gets the event
-     * @param param the request object
-     */
-    public getByIdWithHttpInfo(param: EventsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventResponse>> {
-        return this.api.getByIdWithHttpInfo(param.eventTemplateId, param.eventId,  options).toPromise();
-    }
-
-    /**
-     * This returns the previously created event. It contains all existing info for the event, but not necessarily the CRM object.
-     * Gets the event
-     * @param param the request object
-     */
-    public getById(param: EventsApiGetByIdRequest, options?: ConfigurationOptions): Promise<TimelineEventResponse> {
-        return this.api.getById(param.eventTemplateId, param.eventId,  options).toPromise();
-    }
-
-    /**
-     * This will take the `detailTemplate` from the event template and return an object rendering the specified event. If the template references `extraData` that isn\'t found in the event, it will be ignored and we\'ll render without it.
-     * Gets the detailTemplate as rendered
-     * @param param the request object
-     */
-    public getDetailByIdWithHttpInfo(param: EventsApiGetDetailByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<EventDetail>> {
-        return this.api.getDetailByIdWithHttpInfo(param.eventTemplateId, param.eventId,  options).toPromise();
-    }
-
-    /**
-     * This will take the `detailTemplate` from the event template and return an object rendering the specified event. If the template references `extraData` that isn\'t found in the event, it will be ignored and we\'ll render without it.
-     * Gets the detailTemplate as rendered
-     * @param param the request object
-     */
-    public getDetailById(param: EventsApiGetDetailByIdRequest, options?: ConfigurationOptions): Promise<EventDetail> {
-        return this.api.getDetailById(param.eventTemplateId, param.eventId,  options).toPromise();
-    }
-
-    /**
-     * This will take either the `headerTemplate` or `detailTemplate` from the event template and render for the specified event as HTML. If the template references `extraData` that isn\'t found in the event, it will be ignored and we\'ll render without it.
-     * Renders the header or detail as HTML
-     * @param param the request object
-     */
-    public getRenderByIdWithHttpInfo(param: EventsApiGetRenderByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<string>> {
-        return this.api.getRenderByIdWithHttpInfo(param.eventTemplateId, param.eventId, param.detail,  options).toPromise();
-    }
-
-    /**
-     * This will take either the `headerTemplate` or `detailTemplate` from the event template and render for the specified event as HTML. If the template references `extraData` that isn\'t found in the event, it will be ignored and we\'ll render without it.
-     * Renders the header or detail as HTML
-     * @param param the request object
-     */
-    public getRenderById(param: EventsApiGetRenderByIdRequest, options?: ConfigurationOptions): Promise<string> {
-        return this.api.getRenderById(param.eventTemplateId, param.eventId, param.detail,  options).toPromise();
-    }
-
-}
-
-import { ObservableTemplatesApi } from "./ObservableAPI";
-import { TemplatesApiRequestFactory, TemplatesApiResponseProcessor} from "../apis/TemplatesApi";
-
-export interface TemplatesApiArchiveRequest {
-    /**
-     * The event template ID.
-     * Defaults to: undefined
-     * @type string
-     * @memberof TemplatesApiarchive
-     */
-    eventTemplateId: string
-    /**
-     * The ID of the target app.
+     * 
      * Defaults to: undefined
      * @type number
-     * @memberof TemplatesApiarchive
-     */
-    appId: number
-}
-
-export interface TemplatesApiCreateRequest {
-    /**
-     * The ID of the target app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof TemplatesApicreate
+     * @memberof AdvancedApicreate_1
      */
     appId: number
     /**
-     * The new event template definition.
-     * @type TimelineEventTemplateCreateRequest
-     * @memberof TemplatesApicreate
-     */
-    timelineEventTemplateCreateRequest: TimelineEventTemplateCreateRequest
-}
-
-export interface TemplatesApiGetAllRequest {
-    /**
-     * The ID of the target app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof TemplatesApigetAll
-     */
-    appId: number
-}
-
-export interface TemplatesApiGetByIdRequest {
-    /**
-     * The event template ID.
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof TemplatesApigetById
+     * @memberof AdvancedApicreate_1
      */
     eventTemplateId: string
     /**
-     * The ID of the target app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof TemplatesApigetById
-     */
-    appId: number
-}
-
-export interface TemplatesApiUpdateRequest {
-    /**
-     * The event template ID.
-     * Defaults to: undefined
-     * @type string
-     * @memberof TemplatesApiupdate
-     */
-    eventTemplateId: string
-    /**
-     * The ID of the target app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof TemplatesApiupdate
-     */
-    appId: number
-    /**
-     * The updated event template definition.
-     * @type TimelineEventTemplateUpdateRequest
-     * @memberof TemplatesApiupdate
-     */
-    timelineEventTemplateUpdateRequest: TimelineEventTemplateUpdateRequest
-}
-
-export class ObjectTemplatesApi {
-    private api: ObservableTemplatesApi
-
-    public constructor(configuration: Configuration, requestFactory?: TemplatesApiRequestFactory, responseProcessor?: TemplatesApiResponseProcessor) {
-        this.api = new ObservableTemplatesApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * This will delete the event template. All associated events will be removed from search results and the timeline UI.  This action can\'t be undone, so it\'s highly recommended that you stop using any associated events before deleting a template.
-     * Deletes an event template for the app
-     * @param param the request object
-     */
-    public archiveWithHttpInfo(param: TemplatesApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.archiveWithHttpInfo(param.eventTemplateId, param.appId,  options).toPromise();
-    }
-
-    /**
-     * This will delete the event template. All associated events will be removed from search results and the timeline UI.  This action can\'t be undone, so it\'s highly recommended that you stop using any associated events before deleting a template.
-     * Deletes an event template for the app
-     * @param param the request object
-     */
-    public archive(param: TemplatesApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.archive(param.eventTemplateId, param.appId,  options).toPromise();
-    }
-
-    /**
-     * Event templates define the general structure for a custom timeline event. This includes formatted copy for its heading and details, as well as any custom property definitions. The event could be something like viewing a video, registering for a webinar, or filling out a survey. A single app can define multiple event templates.  Event templates will be created for contacts by default, but they can be created for companies, tickets, and deals as well.  Each event template contains its own set of tokens and `Markdown` templates. These tokens can be associated with any CRM object properties via the `objectPropertyName` field to fully build out CRM objects.  You must create an event template before you can create events.
-     * Create an event template for your app
-     * @param param the request object
-     */
-    public createWithHttpInfo(param: TemplatesApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplate>> {
-        return this.api.createWithHttpInfo(param.appId, param.timelineEventTemplateCreateRequest,  options).toPromise();
-    }
-
-    /**
-     * Event templates define the general structure for a custom timeline event. This includes formatted copy for its heading and details, as well as any custom property definitions. The event could be something like viewing a video, registering for a webinar, or filling out a survey. A single app can define multiple event templates.  Event templates will be created for contacts by default, but they can be created for companies, tickets, and deals as well.  Each event template contains its own set of tokens and `Markdown` templates. These tokens can be associated with any CRM object properties via the `objectPropertyName` field to fully build out CRM objects.  You must create an event template before you can create events.
-     * Create an event template for your app
-     * @param param the request object
-     */
-    public create(param: TemplatesApiCreateRequest, options?: ConfigurationOptions): Promise<TimelineEventTemplate> {
-        return this.api.create(param.appId, param.timelineEventTemplateCreateRequest,  options).toPromise();
-    }
-
-    /**
-     * Use this to list all event templates owned by your app.
-     * List all event templates for your app
-     * @param param the request object
-     */
-    public getAllWithHttpInfo(param: TemplatesApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseTimelineEventTemplateNoPaging>> {
-        return this.api.getAllWithHttpInfo(param.appId,  options).toPromise();
-    }
-
-    /**
-     * Use this to list all event templates owned by your app.
-     * List all event templates for your app
-     * @param param the request object
-     */
-    public getAll(param: TemplatesApiGetAllRequest, options?: ConfigurationOptions): Promise<CollectionResponseTimelineEventTemplateNoPaging> {
-        return this.api.getAll(param.appId,  options).toPromise();
-    }
-
-    /**
-     * View the current state of a specific template and its tokens.
-     * Gets a specific event template for your app
-     * @param param the request object
-     */
-    public getByIdWithHttpInfo(param: TemplatesApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplate>> {
-        return this.api.getByIdWithHttpInfo(param.eventTemplateId, param.appId,  options).toPromise();
-    }
-
-    /**
-     * View the current state of a specific template and its tokens.
-     * Gets a specific event template for your app
-     * @param param the request object
-     */
-    public getById(param: TemplatesApiGetByIdRequest, options?: ConfigurationOptions): Promise<TimelineEventTemplate> {
-        return this.api.getById(param.eventTemplateId, param.appId,  options).toPromise();
-    }
-
-    /**
-     * Updates an existing template and its tokens. This is primarily used to update the headerTemplate/detailTemplate, and those changes will take effect for existing events.  You can also update or replace all the tokens in the template here instead of doing individual API calls on the `/tokens` endpoint.
-     * Update an existing event template
-     * @param param the request object
-     */
-    public updateWithHttpInfo(param: TemplatesApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplate>> {
-        return this.api.updateWithHttpInfo(param.eventTemplateId, param.appId, param.timelineEventTemplateUpdateRequest,  options).toPromise();
-    }
-
-    /**
-     * Updates an existing template and its tokens. This is primarily used to update the headerTemplate/detailTemplate, and those changes will take effect for existing events.  You can also update or replace all the tokens in the template here instead of doing individual API calls on the `/tokens` endpoint.
-     * Update an existing event template
-     * @param param the request object
-     */
-    public update(param: TemplatesApiUpdateRequest, options?: ConfigurationOptions): Promise<TimelineEventTemplate> {
-        return this.api.update(param.eventTemplateId, param.appId, param.timelineEventTemplateUpdateRequest,  options).toPromise();
-    }
-
-}
-
-import { ObservableTokensApi } from "./ObservableAPI";
-import { TokensApiRequestFactory, TokensApiResponseProcessor} from "../apis/TokensApi";
-
-export interface TokensApiArchiveRequest {
-    /**
-     * The event template ID.
-     * Defaults to: undefined
-     * @type string
-     * @memberof TokensApiarchive
-     */
-    eventTemplateId: string
-    /**
-     * The token name.
-     * Defaults to: undefined
-     * @type string
-     * @memberof TokensApiarchive
-     */
-    tokenName: string
-    /**
-     * The ID of the target app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof TokensApiarchive
-     */
-    appId: number
-}
-
-export interface TokensApiCreateRequest {
-    /**
-     * The event template ID.
-     * Defaults to: undefined
-     * @type string
-     * @memberof TokensApicreate
-     */
-    eventTemplateId: string
-    /**
-     * The ID of the target app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof TokensApicreate
-     */
-    appId: number
-    /**
-     * The new token definition.
+     * 
      * @type TimelineEventTemplateToken
-     * @memberof TokensApicreate
+     * @memberof AdvancedApicreate_1
      */
     timelineEventTemplateToken: TimelineEventTemplateToken
 }
 
-export interface TokensApiUpdateRequest {
+export class ObjectAdvancedApi {
+    private api: ObservableAdvancedApi
+
+    public constructor(configuration: Configuration, requestFactory?: AdvancedApiRequestFactory, responseProcessor?: AdvancedApiResponseProcessor) {
+        this.api = new ObservableAdvancedApi(configuration, requestFactory, responseProcessor);
+    }
+
     /**
-     * The event template ID.
-     * Defaults to: undefined
-     * @type string
-     * @memberof TokensApiupdate
+     * Send a single instance of event data to a specified event type.
+     * Send event data (single)
+     * @param param the request object
      */
-    eventTemplateId: string
+    public createWithHttpInfo(param: AdvancedApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventResponse>> {
+        return this.api.createWithHttpInfo(param.timelineEvent,  options).toPromise();
+    }
+
     /**
-     * The token name.
-     * Defaults to: undefined
-     * @type string
-     * @memberof TokensApiupdate
+     * Send a single instance of event data to a specified event type.
+     * Send event data (single)
+     * @param param the request object
      */
-    tokenName: string
+    public create(param: AdvancedApiCreateRequest, options?: ConfigurationOptions): Promise<TimelineEventResponse> {
+        return this.api.create(param.timelineEvent,  options).toPromise();
+    }
+
     /**
-     * The ID of the target app.
+     * Update an existing event type template with new tokens.
+     * Add tokens to an existing template
+     * @param param the request object
+     */
+    public create_1WithHttpInfo(param: AdvancedApiCreate0Request, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplateToken>> {
+        return this.api.create_1WithHttpInfo(param.appId, param.eventTemplateId, param.timelineEventTemplateToken,  options).toPromise();
+    }
+
+    /**
+     * Update an existing event type template with new tokens.
+     * Add tokens to an existing template
+     * @param param the request object
+     */
+    public create_1(param: AdvancedApiCreate0Request, options?: ConfigurationOptions): Promise<TimelineEventTemplateToken> {
+        return this.api.create_1(param.appId, param.eventTemplateId, param.timelineEventTemplateToken,  options).toPromise();
+    }
+
+}
+
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+
+export interface BasicApiArchiveRequest {
+    /**
+     * 
      * Defaults to: undefined
      * @type number
-     * @memberof TokensApiupdate
+     * @memberof BasicApiarchive
      */
     appId: number
     /**
-     * The updated token definition.
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiarchive
+     */
+    eventTemplateId: string
+}
+
+export interface BasicApiArchive0Request {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApiarchive_1
+     */
+    appId: number
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiarchive_1
+     */
+    eventTemplateId: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiarchive_1
+     */
+    tokenName: string
+}
+
+export interface BasicApiCreateRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApicreate
+     */
+    appId: number
+    /**
+     * 
+     * @type TimelineEventTemplateCreateRequest
+     * @memberof BasicApicreate
+     */
+    timelineEventTemplateCreateRequest: TimelineEventTemplateCreateRequest
+}
+
+export interface BasicApiGetAllRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApigetAll
+     */
+    appId: number
+}
+
+export interface BasicApiGetByIdRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApigetById
+     */
+    eventId: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApigetById
+     */
+    eventTemplateId: string
+}
+
+export interface BasicApiGetById0Request {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApigetById_2
+     */
+    appId: number
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApigetById_2
+     */
+    eventTemplateId: string
+}
+
+export interface BasicApiUpdateRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApiupdate
+     */
+    appId: number
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiupdate
+     */
+    eventTemplateId: string
+    /**
+     * 
+     * @type TimelineEventTemplateUpdateRequest
+     * @memberof BasicApiupdate
+     */
+    timelineEventTemplateUpdateRequest: TimelineEventTemplateUpdateRequest
+}
+
+export interface BasicApiUpdate0Request {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApiupdate_3
+     */
+    appId: number
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiupdate_3
+     */
+    eventTemplateId: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiupdate_3
+     */
+    tokenName: string
+    /**
+     * 
      * @type TimelineEventTemplateTokenUpdateRequest
-     * @memberof TokensApiupdate
+     * @memberof BasicApiupdate_3
      */
     timelineEventTemplateTokenUpdateRequest: TimelineEventTemplateTokenUpdateRequest
 }
 
-export class ObjectTokensApi {
-    private api: ObservableTokensApi
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
 
-    public constructor(configuration: Configuration, requestFactory?: TokensApiRequestFactory, responseProcessor?: TokensApiResponseProcessor) {
-        this.api = new ObservableTokensApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * This will remove the token from an existing template. Existing events and CRM objects will still retain the token and its mapped object properties, but new ones will not.  The timeline will still display this property for older CRM objects if it\'s still referenced in the template `Markdown`. New events will not.  Any lists or reports referencing deleted tokens will no longer return new contacts, but old ones will still exist in the lists.
-     * Removes a token from the event template
+     * Delete an event type template by ID.
+     * Delete an event template
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: TokensApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.archiveWithHttpInfo(param.eventTemplateId, param.tokenName, param.appId,  options).toPromise();
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.appId, param.eventTemplateId,  options).toPromise();
     }
 
     /**
-     * This will remove the token from an existing template. Existing events and CRM objects will still retain the token and its mapped object properties, but new ones will not.  The timeline will still display this property for older CRM objects if it\'s still referenced in the template `Markdown`. New events will not.  Any lists or reports referencing deleted tokens will no longer return new contacts, but old ones will still exist in the lists.
-     * Removes a token from the event template
+     * Delete an event type template by ID.
+     * Delete an event template
      * @param param the request object
      */
-    public archive(param: TokensApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.archive(param.eventTemplateId, param.tokenName, param.appId,  options).toPromise();
+    public archive(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.archive(param.appId, param.eventTemplateId,  options).toPromise();
     }
 
     /**
-     * Once you\'ve defined an event template, it\'s likely that you\'ll want to define tokens for it as well. You can do this on the event template itself or update individual tokens here.  Event type tokens allow you to attach custom data to events displayed in a timeline or used for list segmentation.  You can also use `objectPropertyName` to associate any CRM object properties. This will allow you to fully build out CRM objects.  Token names should be unique across the template.
-     * Adds a token to an existing event template
+     * Delete an existing token from a specific event type template.
+     * Delete a template token
      * @param param the request object
      */
-    public createWithHttpInfo(param: TokensApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplateToken>> {
-        return this.api.createWithHttpInfo(param.eventTemplateId, param.appId, param.timelineEventTemplateToken,  options).toPromise();
+    public archive_1WithHttpInfo(param: BasicApiArchive0Request, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.archive_1WithHttpInfo(param.appId, param.eventTemplateId, param.tokenName,  options).toPromise();
     }
 
     /**
-     * Once you\'ve defined an event template, it\'s likely that you\'ll want to define tokens for it as well. You can do this on the event template itself or update individual tokens here.  Event type tokens allow you to attach custom data to events displayed in a timeline or used for list segmentation.  You can also use `objectPropertyName` to associate any CRM object properties. This will allow you to fully build out CRM objects.  Token names should be unique across the template.
-     * Adds a token to an existing event template
+     * Delete an existing token from a specific event type template.
+     * Delete a template token
      * @param param the request object
      */
-    public create(param: TokensApiCreateRequest, options?: ConfigurationOptions): Promise<TimelineEventTemplateToken> {
-        return this.api.create(param.eventTemplateId, param.appId, param.timelineEventTemplateToken,  options).toPromise();
+    public archive_1(param: BasicApiArchive0Request, options?: ConfigurationOptions): Promise<void> {
+        return this.api.archive_1(param.appId, param.eventTemplateId, param.tokenName,  options).toPromise();
     }
 
     /**
-     * This will update the existing token on an event template. Name and type can\'t be changed on existing tokens.
-     * Updates an existing token on an event template
+     * Event templates define the general structure for a custom timeline event, and enable you to send event data to HubSpot. A template includes formatted copy for its heading and details, as well as any custom property definitions. A single app can include up to 750 event templates.<br/><Warning>the `v1` and `v3` timeline events APIs are only available for app partners with existing `v1`/`v3` timeline events defined in their public app. <ul><li>If your app doesn\'t include any timeline events yet, requests to this endpoint will fail. Instead, you can get started on [latest version of the developer platform](/apps/developer-platform/build-apps/overview). Note that you\'ll need to request approval before you can define app events for your app. Learn more in the [app events overview](/apps/developer-platform/add-features/app-events/overview).</li><li>If your app includes a `v1`/`v3` timeline event, learn how to [migrate it to the developer platform](/apps/developer-platform/add-features/app-events/create-and-manage-event-types#migrate-an-existing-timeline-event-type). You don\'t need to request approval before migrating existing event types.</li></ul>If you\'re not an app partner, you can send custom event data to HubSpot using the [custom events API](/api-reference/events-manage-event-definitions-v3/guide).</Warning>
+     * Create an event template
      * @param param the request object
      */
-    public updateWithHttpInfo(param: TokensApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplateToken>> {
-        return this.api.updateWithHttpInfo(param.eventTemplateId, param.tokenName, param.appId, param.timelineEventTemplateTokenUpdateRequest,  options).toPromise();
+    public createWithHttpInfo(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplate>> {
+        return this.api.createWithHttpInfo(param.appId, param.timelineEventTemplateCreateRequest,  options).toPromise();
     }
 
     /**
-     * This will update the existing token on an event template. Name and type can\'t be changed on existing tokens.
-     * Updates an existing token on an event template
+     * Event templates define the general structure for a custom timeline event, and enable you to send event data to HubSpot. A template includes formatted copy for its heading and details, as well as any custom property definitions. A single app can include up to 750 event templates.<br/><Warning>the `v1` and `v3` timeline events APIs are only available for app partners with existing `v1`/`v3` timeline events defined in their public app. <ul><li>If your app doesn\'t include any timeline events yet, requests to this endpoint will fail. Instead, you can get started on [latest version of the developer platform](/apps/developer-platform/build-apps/overview). Note that you\'ll need to request approval before you can define app events for your app. Learn more in the [app events overview](/apps/developer-platform/add-features/app-events/overview).</li><li>If your app includes a `v1`/`v3` timeline event, learn how to [migrate it to the developer platform](/apps/developer-platform/add-features/app-events/create-and-manage-event-types#migrate-an-existing-timeline-event-type). You don\'t need to request approval before migrating existing event types.</li></ul>If you\'re not an app partner, you can send custom event data to HubSpot using the [custom events API](/api-reference/events-manage-event-definitions-v3/guide).</Warning>
+     * Create an event template
      * @param param the request object
      */
-    public update(param: TokensApiUpdateRequest, options?: ConfigurationOptions): Promise<TimelineEventTemplateToken> {
-        return this.api.update(param.eventTemplateId, param.tokenName, param.appId, param.timelineEventTemplateTokenUpdateRequest,  options).toPromise();
+    public create(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<TimelineEventTemplate> {
+        return this.api.create(param.appId, param.timelineEventTemplateCreateRequest,  options).toPromise();
+    }
+
+    /**
+     * Retrieve all templates defined for an app.
+     * Get all event templates
+     * @param param the request object
+     */
+    public getAllWithHttpInfo(param: BasicApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseTimelineEventTemplateNoPaging>> {
+        return this.api.getAllWithHttpInfo(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve all templates defined for an app.
+     * Get all event templates
+     * @param param the request object
+     */
+    public getAll(param: BasicApiGetAllRequest, options?: ConfigurationOptions): Promise<CollectionResponseTimelineEventTemplateNoPaging> {
+        return this.api.getAll(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve an event instance, specified by template ID and event ID.
+     * Get an event instance
+     * @param param the request object
+     */
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventResponse>> {
+        return this.api.getByIdWithHttpInfo(param.eventId, param.eventTemplateId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve an event instance, specified by template ID and event ID.
+     * Get an event instance
+     * @param param the request object
+     */
+    public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<TimelineEventResponse> {
+        return this.api.getById(param.eventId, param.eventTemplateId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve an event type template by ID.
+     * Get an event template
+     * @param param the request object
+     */
+    public getById_2WithHttpInfo(param: BasicApiGetById0Request, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplate>> {
+        return this.api.getById_2WithHttpInfo(param.appId, param.eventTemplateId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve an event type template by ID.
+     * Get an event template
+     * @param param the request object
+     */
+    public getById_2(param: BasicApiGetById0Request, options?: ConfigurationOptions): Promise<TimelineEventTemplate> {
+        return this.api.getById_2(param.appId, param.eventTemplateId,  options).toPromise();
+    }
+
+    /**
+     * Update an existing event template, specified by ID.
+     * Update an event template
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplate>> {
+        return this.api.updateWithHttpInfo(param.appId, param.eventTemplateId, param.timelineEventTemplateUpdateRequest,  options).toPromise();
+    }
+
+    /**
+     * Update an existing event template, specified by ID.
+     * Update an event template
+     * @param param the request object
+     */
+    public update(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<TimelineEventTemplate> {
+        return this.api.update(param.appId, param.eventTemplateId, param.timelineEventTemplateUpdateRequest,  options).toPromise();
+    }
+
+    /**
+     * Update an event type template token, specified by token name.
+     * Update a template token
+     * @param param the request object
+     */
+    public update_3WithHttpInfo(param: BasicApiUpdate0Request, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplateToken>> {
+        return this.api.update_3WithHttpInfo(param.appId, param.eventTemplateId, param.tokenName, param.timelineEventTemplateTokenUpdateRequest,  options).toPromise();
+    }
+
+    /**
+     * Update an event type template token, specified by token name.
+     * Update a template token
+     * @param param the request object
+     */
+    public update_3(param: BasicApiUpdate0Request, options?: ConfigurationOptions): Promise<TimelineEventTemplateToken> {
+        return this.api.update_3(param.appId, param.eventTemplateId, param.tokenName, param.timelineEventTemplateTokenUpdateRequest,  options).toPromise();
+    }
+
+}
+
+import { ObservableBatchApi } from "./ObservableAPI";
+import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
+
+export interface BatchApiCreateBatchRequest {
+    /**
+     * 
+     * @type BatchInputTimelineEvent
+     * @memberof BatchApicreateBatch
+     */
+    batchInputTimelineEvent: BatchInputTimelineEvent
+}
+
+export class ObjectBatchApi {
+    private api: ObservableBatchApi
+
+    public constructor(configuration: Configuration, requestFactory?: BatchApiRequestFactory, responseProcessor?: BatchApiResponseProcessor) {
+        this.api = new ObservableBatchApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Batch create multiple instances of timeline events based on an event template. Once created, these event are immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
+     * Create multiple events
+     * @param param the request object
+     */
+    public createBatchWithHttpInfo(param: BatchApiCreateBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors>> {
+        return this.api.createBatchWithHttpInfo(param.batchInputTimelineEvent,  options).toPromise();
+    }
+
+    /**
+     * Batch create multiple instances of timeline events based on an event template. Once created, these event are immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
+     * Create multiple events
+     * @param param the request object
+     */
+    public createBatch(param: BatchApiCreateBatchRequest, options?: ConfigurationOptions): Promise<BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors> {
+        return this.api.createBatch(param.batchInputTimelineEvent,  options).toPromise();
     }
 
 }

@@ -12,18 +12,42 @@
 
 
 export class PublicDatePropertyOperation {
-    'includeObjectsWithNoValueSet': boolean;
-    'month': string;
-    'year': number;
-    'operationType': PublicDatePropertyOperationOperationTypeEnum;
+    /**
+    * The day of the month for the date operation.
+    */
     'day': number;
+    /**
+    * Indicates whether objects with no value set for the property should be included.
+    */
+    'includeObjectsWithNoValueSet': boolean;
+    /**
+    * The month for the date operation.
+    */
+    'month': string;
+    /**
+    * Specifies the type of operation (DATE).
+    */
+    'operationType': PublicDatePropertyOperationOperationTypeEnum;
+    /**
+    * Defines the operation to be applied in the date property operation (IS_LESS_THAN_X_DAYS_AGO, IS_MORE_THAN_X_DAYS_AGO, IS_LESS_THAN_X_DAYS_FROM_NOW, IS_MORE_THAN_X_DAYS_FROM_NOW).
+    */
     'operator': string;
+    /**
+    * The year for the date operation.
+    */
+    'year': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "day",
+            "baseName": "day",
+            "type": "number",
+            "format": "int32"
+        },
         {
             "name": "includeObjectsWithNoValueSet",
             "baseName": "includeObjectsWithNoValueSet",
@@ -37,28 +61,22 @@ export class PublicDatePropertyOperation {
             "format": ""
         },
         {
-            "name": "year",
-            "baseName": "year",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "operationType",
             "baseName": "operationType",
             "type": "PublicDatePropertyOperationOperationTypeEnum",
             "format": ""
         },
         {
-            "name": "day",
-            "baseName": "day",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "operator",
             "baseName": "operator",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "year",
+            "baseName": "year",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

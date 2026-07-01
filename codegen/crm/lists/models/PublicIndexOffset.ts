@@ -12,14 +12,41 @@
 
 
 export class PublicIndexOffset {
-    'milliseconds'?: number;
-    'hours'?: number;
-    'seconds'?: number;
-    'months'?: number;
-    'weeks'?: number;
-    'minutes'?: number;
-    'quarters'?: number;
+    /**
+    * The number of days to offset.
+    */
     'days'?: number;
+    /**
+    * The number of hours to offset.
+    */
+    'hours'?: number;
+    /**
+    * The number of milliseconds to offset.
+    */
+    'milliseconds'?: number;
+    /**
+    * The number of minutes to offset.
+    */
+    'minutes'?: number;
+    /**
+    * The number of months to offset.
+    */
+    'months'?: number;
+    /**
+    * The number of quarters to offset.
+    */
+    'quarters'?: number;
+    /**
+    * The number of seconds to offset.
+    */
+    'seconds'?: number;
+    /**
+    * The number of weeks to offset.
+    */
+    'weeks'?: number;
+    /**
+    * The number of years to offset.
+    */
     'years'?: number;
 
     static readonly discriminator: string | undefined = undefined;
@@ -28,8 +55,8 @@ export class PublicIndexOffset {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "milliseconds",
-            "baseName": "milliseconds",
+            "name": "days",
+            "baseName": "days",
             "type": "number",
             "format": "int32"
         },
@@ -40,20 +67,8 @@ export class PublicIndexOffset {
             "format": "int32"
         },
         {
-            "name": "seconds",
-            "baseName": "seconds",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "months",
-            "baseName": "months",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "weeks",
-            "baseName": "weeks",
+            "name": "milliseconds",
+            "baseName": "milliseconds",
             "type": "number",
             "format": "int32"
         },
@@ -64,14 +79,26 @@ export class PublicIndexOffset {
             "format": "int32"
         },
         {
+            "name": "months",
+            "baseName": "months",
+            "type": "number",
+            "format": "int32"
+        },
+        {
             "name": "quarters",
             "baseName": "quarters",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "days",
-            "baseName": "days",
+            "name": "seconds",
+            "baseName": "seconds",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "weeks",
+            "baseName": "weeks",
             "type": "number",
             "format": "int32"
         },

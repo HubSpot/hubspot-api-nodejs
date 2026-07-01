@@ -10,11 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
+import { PublicAdsTimeFilterPruningRefineBy } from '../models/PublicAdsTimeFilterPruningRefineBy';
 
 export class PublicAdsTimeFilter {
-    'pruningRefineBy': PublicFormSubmissionFilterCoalescingRefineBy;
+    /**
+    * Filter type (ADS_TIME)
+    */
     'filterType': PublicAdsTimeFilterFilterTypeEnum;
+    'pruningRefineBy': PublicAdsTimeFilterPruningRefineBy;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -22,15 +25,15 @@ export class PublicAdsTimeFilter {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "pruningRefineBy",
-            "baseName": "pruningRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
             "name": "filterType",
             "baseName": "filterType",
             "type": "PublicAdsTimeFilterFilterTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "pruningRefineBy",
+            "baseName": "pruningRefineBy",
+            "type": "PublicAdsTimeFilterPruningRefineBy",
             "format": ""
         }    ];
 

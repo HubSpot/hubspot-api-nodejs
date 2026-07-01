@@ -16,23 +16,23 @@ import { EventIdView } from '../models/EventIdView';
 * Describes the status of an email send request.
 */
 export class EmailSendStatusView {
-    'eventId'?: EventIdView;
     /**
     * Time when the send was completed.
     */
     'completedAt'?: Date;
+    'eventId'?: EventIdView;
     /**
-    * Identifier used to query the status of the send.
+    * A human readable message describing the error along with remediation steps where appropriate
     */
-    'statusId': string;
-    /**
-    * Result of the send.
-    */
-    'sendResult'?: EmailSendStatusViewSendResultEnum;
+    'message'?: string;
     /**
     * Time when the send was requested.
     */
     'requestedAt'?: Date;
+    /**
+    * Result of the send.
+    */
+    'sendResult'?: EmailSendStatusViewSendResultEnum;
     /**
     * Time when the send began processing.
     */
@@ -41,6 +41,10 @@ export class EmailSendStatusView {
     * Status of the send request.
     */
     'status': EmailSendStatusViewStatusEnum;
+    /**
+    * Identifier used to query the status of the send.
+    */
+    'statusId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,27 +52,21 @@ export class EmailSendStatusView {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "eventId",
-            "baseName": "eventId",
-            "type": "EventIdView",
-            "format": ""
-        },
-        {
             "name": "completedAt",
             "baseName": "completedAt",
             "type": "Date",
             "format": "date-time"
         },
         {
-            "name": "statusId",
-            "baseName": "statusId",
-            "type": "string",
+            "name": "eventId",
+            "baseName": "eventId",
+            "type": "EventIdView",
             "format": ""
         },
         {
-            "name": "sendResult",
-            "baseName": "sendResult",
-            "type": "EmailSendStatusViewSendResultEnum",
+            "name": "message",
+            "baseName": "message",
+            "type": "string",
             "format": ""
         },
         {
@@ -76,6 +74,12 @@ export class EmailSendStatusView {
             "baseName": "requestedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "sendResult",
+            "baseName": "sendResult",
+            "type": "EmailSendStatusViewSendResultEnum",
+            "format": ""
         },
         {
             "name": "startedAt",
@@ -88,6 +92,12 @@ export class EmailSendStatusView {
             "baseName": "status",
             "type": "EmailSendStatusViewStatusEnum",
             "format": ""
+        },
+        {
+            "name": "statusId",
+            "baseName": "statusId",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -99,54 +109,62 @@ export class EmailSendStatusView {
 }
 
 export enum EmailSendStatusViewSendResultEnum {
-    Sent = 'SENT',
-    IdempotentIgnore = 'IDEMPOTENT_IGNORE',
-    Queued = 'QUEUED',
-    IdempotentFail = 'IDEMPOTENT_FAIL',
-    Throttled = 'THROTTLED',
-    EmailDisabled = 'EMAIL_DISABLED',
-    PortalSuspended = 'PORTAL_SUSPENDED',
-    InvalidToAddress = 'INVALID_TO_ADDRESS',
-    BlockedDomain = 'BLOCKED_DOMAIN',
-    PreviouslyBounced = 'PREVIOUSLY_BOUNCED',
-    EmailUnconfirmed = 'EMAIL_UNCONFIRMED',
-    PreviousSpam = 'PREVIOUS_SPAM',
-    PreviouslyUnsubscribedMessage = 'PREVIOUSLY_UNSUBSCRIBED_MESSAGE',
-    PreviouslyUnsubscribedPortal = 'PREVIOUSLY_UNSUBSCRIBED_PORTAL',
-    InvalidFromAddress = 'INVALID_FROM_ADDRESS',
-    CampaignCancelled = 'CAMPAIGN_CANCELLED',
-    ValidationFailed = 'VALIDATION_FAILED',
-    MtaIgnore = 'MTA_IGNORE',
+    AddressListBombed = 'ADDRESS_LIST_BOMBED',
+    AddressOnlyAcceptedOnProd = 'ADDRESS_ONLY_ACCEPTED_ON_PROD',
+    AddressOptedOut = 'ADDRESS_OPTED_OUT',
+    AttachmentDownloadQueueFull = 'ATTACHMENT_DOWNLOAD_QUEUE_FULL',
     BlockedAddress = 'BLOCKED_ADDRESS',
-    PortalOverLimit = 'PORTAL_OVER_LIMIT',
+    BlockedDomain = 'BLOCKED_DOMAIN',
+    BrandRecipientFatigueSuppressed = 'BRAND_RECIPIENT_FATIGUE_SUPPRESSED',
+    CampaignCancelled = 'CAMPAIGN_CANCELLED',
+    CancelledAbuse = 'CANCELLED_ABUSE',
+    ContactViewPermission = 'CONTACT_VIEW_PERMISSION',
+    CorruptInput = 'CORRUPT_INPUT',
+    EmailDisabled = 'EMAIL_DISABLED',
+    EmailUnconfirmed = 'EMAIL_UNCONFIRMED',
+    GdprDoiEnabled = 'GDPR_DOI_ENABLED',
+    GraymailSuppressed = 'GRAYMAIL_SUPPRESSED',
+    HublLimitExceeded = 'HUBL_LIMIT_EXCEEDED',
+    IdempotentFail = 'IDEMPOTENT_FAIL',
+    IdempotentIgnore = 'IDEMPOTENT_IGNORE',
+    InvalidAppIdAttribution = 'INVALID_APP_ID_ATTRIBUTION',
+    InvalidFromAddress = 'INVALID_FROM_ADDRESS',
+    InvalidToAddress = 'INVALID_TO_ADDRESS',
+    LowContactQualityScore = 'LOW_CONTACT_QUALITY_SCORE',
+    MarketingActivationDisallowed = 'MARKETING_ACTIVATION_DISALLOWED',
+    MissingContent = 'MISSING_CONTENT',
+    MissingRequiredParameter = 'MISSING_REQUIRED_PARAMETER',
+    MissingTemplateProperties = 'MISSING_TEMPLATE_PROPERTIES',
+    MtaIgnore = 'MTA_IGNORE',
+    NonMarketableContact = 'NON_MARKETABLE_CONTACT',
+    PortalAuthenticationFailure = 'PORTAL_AUTHENTICATION_FAILURE',
     PortalExpired = 'PORTAL_EXPIRED',
     PortalMissingMarketingScope = 'PORTAL_MISSING_MARKETING_SCOPE',
-    MissingTemplateProperties = 'MISSING_TEMPLATE_PROPERTIES',
-    MissingRequiredParameter = 'MISSING_REQUIRED_PARAMETER',
-    PortalAuthenticationFailure = 'PORTAL_AUTHENTICATION_FAILURE',
-    MissingContent = 'MISSING_CONTENT',
-    CorruptInput = 'CORRUPT_INPUT',
+    PortalNotAuthorizedForApplication = 'PORTAL_NOT_AUTHORIZED_FOR_APPLICATION',
+    PortalOverLimit = 'PORTAL_OVER_LIMIT',
+    PortalSuspended = 'PORTAL_SUSPENDED',
+    PreviousSpam = 'PREVIOUS_SPAM',
+    PreviouslyBounced = 'PREVIOUSLY_BOUNCED',
+    PreviouslyUnsubscribedBrand = 'PREVIOUSLY_UNSUBSCRIBED_BRAND',
+    PreviouslyUnsubscribedBusinessUnit = 'PREVIOUSLY_UNSUBSCRIBED_BUSINESS_UNIT',
+    PreviouslyUnsubscribedMessage = 'PREVIOUSLY_UNSUBSCRIBED_MESSAGE',
+    PreviouslyUnsubscribedPortal = 'PREVIOUSLY_UNSUBSCRIBED_PORTAL',
+    QuarantinedAddress = 'QUARANTINED_ADDRESS',
+    Queued = 'QUEUED',
+    RecipientFatigueSuppressed = 'RECIPIENT_FATIGUE_SUPPRESSED',
+    Sent = 'SENT',
     TemplateRenderException = 'TEMPLATE_RENDER_EXCEPTION',
-    GraymailSuppressed = 'GRAYMAIL_SUPPRESSED',
+    Throttled = 'THROTTLED',
+    TooManyRecipients = 'TOO_MANY_RECIPIENTS',
+    UbbGovernanceMissing = 'UBB_GOVERNANCE_MISSING',
     UnconfiguredSendingDomain = 'UNCONFIGURED_SENDING_DOMAIN',
     Undeliverable = 'UNDELIVERABLE',
-    CancelledAbuse = 'CANCELLED_ABUSE',
-    QuarantinedAddress = 'QUARANTINED_ADDRESS',
-    AddressOnlyAcceptedOnProd = 'ADDRESS_ONLY_ACCEPTED_ON_PROD',
-    PortalNotAuthorizedForApplication = 'PORTAL_NOT_AUTHORIZED_FOR_APPLICATION',
-    AddressListBombed = 'ADDRESS_LIST_BOMBED',
-    AddressOptedOut = 'ADDRESS_OPTED_OUT',
-    RecipientFatigueSuppressed = 'RECIPIENT_FATIGUE_SUPPRESSED',
-    TooManyRecipients = 'TOO_MANY_RECIPIENTS',
-    PreviouslyUnsubscribedBrand = 'PREVIOUSLY_UNSUBSCRIBED_BRAND',
-    NonMarketableContact = 'NON_MARKETABLE_CONTACT',
-    PreviouslyUnsubscribedBusinessUnit = 'PREVIOUSLY_UNSUBSCRIBED_BUSINESS_UNIT',
-    GdprDoiEnabled = 'GDPR_DOI_ENABLED'
+    ValidationFailed = 'VALIDATION_FAILED'
 }
 export enum EmailSendStatusViewStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

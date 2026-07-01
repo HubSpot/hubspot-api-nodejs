@@ -10,11 +10,16 @@
  * Do not edit the class manually.
  */
 
+import { Margin } from '../models/Margin';
+import { Padding } from '../models/Padding';
 
 export class BreakpointStyles {
-    'padding': any;
-    'margin': any;
+    /**
+    * Boolean indicating if the breakpoint is visible.
+    */
     'hidden': boolean;
+    'margin': Margin;
+    'padding': Padding;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -22,21 +27,21 @@ export class BreakpointStyles {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "padding",
-            "baseName": "padding",
-            "type": "any",
+            "name": "hidden",
+            "baseName": "hidden",
+            "type": "boolean",
             "format": ""
         },
         {
             "name": "margin",
             "baseName": "margin",
-            "type": "any",
+            "type": "Margin",
             "format": ""
         },
         {
-            "name": "hidden",
-            "baseName": "hidden",
-            "type": "boolean",
+            "name": "padding",
+            "baseName": "padding",
+            "type": "Padding",
             "format": ""
         }    ];
 

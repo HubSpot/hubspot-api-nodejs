@@ -16,8 +16,8 @@ import { BehavioralEventHttpCompletionRequest } from '../models/BehavioralEventH
 export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Send data for a single event completion.
-     * Send a custom event completion
+     * Send data for a single custom event occurrence.
+     * Send a custom event occurrence
      * @param behavioralEventHttpCompletionRequest 
      */
     public async send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<RequestContext> {

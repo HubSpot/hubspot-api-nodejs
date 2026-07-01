@@ -11,13 +11,34 @@
  */
 
 
+/**
+* Property model that includes timestamp.
+*/
 export class ValueWithTimestamp {
+    /**
+    * The unique ID of the property.
+    */
     'sourceId'?: string;
-    'sourceType': string;
+    /**
+    * A human-readable label.
+    */
     'sourceLabel'?: string;
-    'updatedByUserId'?: number;
-    'value': string;
+    /**
+    * The property type.
+    */
+    'sourceType': string;
+    /**
+    * The timestamp when the property was updated, in ISO 8601 format.
+    */
     'timestamp': Date;
+    /**
+    * The ID of the user who last updated the property.
+    */
+    'updatedByUserId'?: number;
+    /**
+    * The property value.
+    */
+    'value': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -31,16 +52,22 @@ export class ValueWithTimestamp {
             "format": ""
         },
         {
+            "name": "sourceLabel",
+            "baseName": "sourceLabel",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "sourceType",
             "baseName": "sourceType",
             "type": "string",
             "format": ""
         },
         {
-            "name": "sourceLabel",
-            "baseName": "sourceLabel",
-            "type": "string",
-            "format": ""
+            "name": "timestamp",
+            "baseName": "timestamp",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "updatedByUserId",
@@ -53,12 +80,6 @@ export class ValueWithTimestamp {
             "baseName": "value",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "timestamp",
-            "baseName": "timestamp",
-            "type": "Date",
-            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

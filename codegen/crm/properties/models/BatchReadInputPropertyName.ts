@@ -13,7 +13,14 @@
 import { PropertyName } from '../models/PropertyName';
 
 export class BatchReadInputPropertyName {
+    /**
+    * Specifies whether the property is archived.
+    */
     'archived': boolean;
+    /**
+    * Indicates the sensitivity level of the data, such as \'non_sensitive\', \'sensitive\', or \'highly_sensitive\'.
+    */
+    'dataSensitivity': BatchReadInputPropertyNameDataSensitivityEnum;
     'inputs': Array<PropertyName>;
 
     static readonly discriminator: string | undefined = undefined;
@@ -25,6 +32,12 @@ export class BatchReadInputPropertyName {
             "name": "archived",
             "baseName": "archived",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "dataSensitivity",
+            "baseName": "dataSensitivity",
+            "type": "BatchReadInputPropertyNameDataSensitivityEnum",
             "format": ""
         },
         {
@@ -41,3 +54,10 @@ export class BatchReadInputPropertyName {
     public constructor() {
     }
 }
+
+export enum BatchReadInputPropertyNameDataSensitivityEnum {
+    HighlySensitive = 'highly_sensitive',
+    NonSensitive = 'non_sensitive',
+    Sensitive = 'sensitive'
+}
+

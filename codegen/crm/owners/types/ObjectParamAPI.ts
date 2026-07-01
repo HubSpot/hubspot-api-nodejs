@@ -4,101 +4,101 @@ import { Configuration, ConfigurationOptions } from '../configuration'
 import { CollectionResponsePublicOwnerForwardPaging } from '../models/CollectionResponsePublicOwnerForwardPaging';
 import { PublicOwner } from '../models/PublicOwner';
 
-import { ObservableOwnersApi } from "./ObservableAPI";
-import { OwnersApiRequestFactory, OwnersApiResponseProcessor} from "../apis/OwnersApi";
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
-export interface OwnersApiGetByIdRequest {
+export interface BasicApiCrmV3OwnersRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApicrmV3Owners
+     */
+    after?: string
+    /**
+     * 
+     * Defaults to: false
+     * @type boolean
+     * @memberof BasicApicrmV3Owners
+     */
+    archived?: boolean
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApicrmV3Owners
+     */
+    email?: string
+    /**
+     * 
+     * Defaults to: 100
+     * @type number
+     * @memberof BasicApicrmV3Owners
+     */
+    limit?: number
+}
+
+export interface BasicApiGetByIdRequest {
     /**
      * 
      * Defaults to: undefined
      * @type number
-     * @memberof OwnersApigetById
+     * @memberof BasicApigetById
      */
     ownerId: number
+    /**
+     * Whether to return only results that have been archived.
+     * Defaults to: false
+     * @type boolean
+     * @memberof BasicApigetById
+     */
+    archived?: boolean
     /**
      * 
      * Defaults to: &#39;id&#39;
      * @type &#39;id&#39; | &#39;userId&#39;
-     * @memberof OwnersApigetById
+     * @memberof BasicApigetById
      */
     idProperty?: 'id' | 'userId'
-    /**
-     * Whether to return only results that have been archived.
-     * Defaults to: false
-     * @type boolean
-     * @memberof OwnersApigetById
-     */
-    archived?: boolean
 }
 
-export interface OwnersApiGetPageRequest {
-    /**
-     * Filter by email address (optional)
-     * Defaults to: undefined
-     * @type string
-     * @memberof OwnersApigetPage
-     */
-    email?: string
-    /**
-     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * Defaults to: undefined
-     * @type string
-     * @memberof OwnersApigetPage
-     */
-    after?: string
-    /**
-     * The maximum number of results to display per page.
-     * Defaults to: 100
-     * @type number
-     * @memberof OwnersApigetPage
-     */
-    limit?: number
-    /**
-     * Whether to return only results that have been archived.
-     * Defaults to: false
-     * @type boolean
-     * @memberof OwnersApigetPage
-     */
-    archived?: boolean
-}
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
 
-export class ObjectOwnersApi {
-    private api: ObservableOwnersApi
-
-    public constructor(configuration: Configuration, requestFactory?: OwnersApiRequestFactory, responseProcessor?: OwnersApiResponseProcessor) {
-        this.api = new ObservableOwnersApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Read an owner by given `id` or `userId`
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: OwnersApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicOwner>> {
-        return this.api.getByIdWithHttpInfo(param.ownerId, param.idProperty, param.archived,  options).toPromise();
+    public crmV3OwnersWithHttpInfo(param: BasicApiCrmV3OwnersRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicOwnerForwardPaging>> {
+        return this.api.crmV3OwnersWithHttpInfo(param.after, param.archived, param.email, param.limit,  options).toPromise();
     }
 
     /**
-     * Read an owner by given `id` or `userId`
      * @param param the request object
      */
-    public getById(param: OwnersApiGetByIdRequest, options?: ConfigurationOptions): Promise<PublicOwner> {
-        return this.api.getById(param.ownerId, param.idProperty, param.archived,  options).toPromise();
+    public crmV3Owners(param: BasicApiCrmV3OwnersRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponsePublicOwnerForwardPaging> {
+        return this.api.crmV3Owners(param.after, param.archived, param.email, param.limit,  options).toPromise();
     }
 
     /**
-     * Get a page of owners
+     * Retrieve details of a specific owner using either their \'id\' or \'userId\'.
+     * Retrieve a specific owner by ID
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: OwnersApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicOwnerForwardPaging>> {
-        return this.api.getPageWithHttpInfo(param.email, param.after, param.limit, param.archived,  options).toPromise();
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicOwner>> {
+        return this.api.getByIdWithHttpInfo(param.ownerId, param.archived, param.idProperty,  options).toPromise();
     }
 
     /**
-     * Get a page of owners
+     * Retrieve details of a specific owner using either their \'id\' or \'userId\'.
+     * Retrieve a specific owner by ID
      * @param param the request object
      */
-    public getPage(param: OwnersApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponsePublicOwnerForwardPaging> {
-        return this.api.getPage(param.email, param.after, param.limit, param.archived,  options).toPromise();
+    public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<PublicOwner> {
+        return this.api.getById(param.ownerId, param.archived, param.idProperty,  options).toPromise();
     }
 
 }

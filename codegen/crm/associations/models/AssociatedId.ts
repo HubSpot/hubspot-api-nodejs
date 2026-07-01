@@ -11,8 +11,17 @@
  */
 
 
+/**
+* Contains the id and type of an association
+*/
 export class AssociatedId {
+    /**
+    * The ID for the association type.
+    */
     'id': string;
+    /**
+    * The type of association.
+    */
     'type': string;
 
     static readonly discriminator: string | undefined = undefined;

@@ -1,6 +1,6 @@
 /**
  * Cms Content Audit
- * Use this endpoint to query audit logs of CMS changes that occurred on your HubSpot account.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -12,27 +12,26 @@
 
 
 export class PublicAuditLog {
-    'meta'?: any;
-    /**
-    * The internal name of the object in HubSpot.
-    */
-    'objectName': string;
-    /**
-    * The name of the user who caused the event.
-    */
-    'fullName': string;
     /**
     * The type of event that took place (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
     */
     'event': PublicAuditLogEventEnum;
     /**
-    * The ID of the user who caused the event.
+    * The name of the user who caused the event.
     */
-    'userId': string;
+    'fullName': string;
+    /**
+    * Supplementary metadata associated with the audit log entry. It provides additional context about the audited event (ex: rows deleted/updated for a HubDB event, the specific fields that were changed for a Content Settings event).
+    */
+    'meta': any;
     /**
     * The ID of the object.
     */
     'objectId': string;
+    /**
+    * The internal name of the object in HubSpot.
+    */
+    'objectName': string;
     /**
     * The type of the object (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
     */
@@ -41,6 +40,10 @@ export class PublicAuditLog {
     * The timestamp at which the event occurred.
     */
     'timestamp': Date;
+    /**
+    * The ID of the user who caused the event.
+    */
+    'userId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,15 +51,9 @@ export class PublicAuditLog {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "meta",
-            "baseName": "meta",
-            "type": "any",
-            "format": ""
-        },
-        {
-            "name": "objectName",
-            "baseName": "objectName",
-            "type": "string",
+            "name": "event",
+            "baseName": "event",
+            "type": "PublicAuditLogEventEnum",
             "format": ""
         },
         {
@@ -66,20 +63,20 @@ export class PublicAuditLog {
             "format": ""
         },
         {
-            "name": "event",
-            "baseName": "event",
-            "type": "PublicAuditLogEventEnum",
-            "format": ""
-        },
-        {
-            "name": "userId",
-            "baseName": "userId",
-            "type": "string",
+            "name": "meta",
+            "baseName": "meta",
+            "type": "any",
             "format": ""
         },
         {
             "name": "objectId",
             "baseName": "objectId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "objectName",
+            "baseName": "objectName",
             "type": "string",
             "format": ""
         },
@@ -94,6 +91,12 @@ export class PublicAuditLog {
             "baseName": "timestamp",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "userId",
+            "baseName": "userId",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -106,32 +109,36 @@ export class PublicAuditLog {
 
 export enum PublicAuditLogEventEnum {
     Created = 'CREATED',
-    Updated = 'UPDATED',
-    Published = 'PUBLISHED',
     Deleted = 'DELETED',
+    Published = 'PUBLISHED',
+    Restore = 'RESTORE',
     Unpublished = 'UNPUBLISHED',
-    Restore = 'RESTORE'
+    Updated = 'UPDATED'
 }
 export enum PublicAuditLogObjectTypeEnum {
     Blog = 'BLOG',
     BlogPost = 'BLOG_POST',
-    LandingPage = 'LANDING_PAGE',
-    WebsitePage = 'WEBSITE_PAGE',
-    Template = 'TEMPLATE',
-    Module = 'MODULE',
-    GlobalModule = 'GLOBAL_MODULE',
-    ServerlessFunction = 'SERVERLESS_FUNCTION',
-    Domain = 'DOMAIN',
-    UrlMapping = 'URL_MAPPING',
-    Email = 'EMAIL',
+    CaseStudy = 'CASE_STUDY',
     ContentSettings = 'CONTENT_SETTINGS',
-    HubdbTable = 'HUBDB_TABLE',
-    KnowledgeBaseArticle = 'KNOWLEDGE_BASE_ARTICLE',
-    KnowledgeBase = 'KNOWLEDGE_BASE',
-    Theme = 'THEME',
     Css = 'CSS',
-    Js = 'JS',
     Cta = 'CTA',
-    File = 'FILE'
+    Domain = 'DOMAIN',
+    Email = 'EMAIL',
+    File = 'FILE',
+    GlobalModule = 'GLOBAL_MODULE',
+    HubdbTable = 'HUBDB_TABLE',
+    Js = 'JS',
+    KnowledgeBase = 'KNOWLEDGE_BASE',
+    KnowledgeBaseArticle = 'KNOWLEDGE_BASE_ARTICLE',
+    LandingPage = 'LANDING_PAGE',
+    Module = 'MODULE',
+    Podcast = 'PODCAST',
+    Quote = 'QUOTE',
+    ServerlessFunction = 'SERVERLESS_FUNCTION',
+    Template = 'TEMPLATE',
+    Theme = 'THEME',
+    UrlMapping = 'URL_MAPPING',
+    WebInteractive = 'WEB_INTERACTIVE',
+    WebsitePage = 'WEBSITE_PAGE'
 }
 

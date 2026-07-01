@@ -13,49 +13,85 @@
 
 export class Domain {
     /**
-    * Whether the domain is used for CMS landing pages.
+    * The expected CNAME record for the domain.
     */
-    'isUsedForLandingPage': boolean;
-    'primaryBlogPost'?: boolean;
-    'primaryKnowledge'?: boolean;
-    'created'?: Date;
-    'secondaryToDomain'?: string;
-    'manuallyMarkedAsResolving'?: boolean;
+    'correctCname'?: string;
     /**
-    * Whether the domain is used for CMS knowledge pages.
+    * The date and time when the domain was created.
     */
-    'isUsedForKnowledge': boolean;
+    'created'?: Date;
+    /**
+    * The actual domain or sub-domain. e.g. www.hubspot.com
+    */
+    'domain': string;
+    /**
+    * The unique ID of this domain.
+    */
+    'id': string;
+    /**
+    * Whether the DNS for this domain is optimally configured for use with HubSpot.
+    */
+    'isResolving': boolean;
+    /**
+    * Indicates whether SSL is enabled for the domain.
+    */
+    'isSslEnabled'?: boolean;
+    /**
+    * Indicates whether the domain is accessible only via SSL.
+    */
+    'isSslOnly'?: boolean;
     /**
     * Whether the domain is used for CMS blog posts.
     */
     'isUsedForBlogPost': boolean;
     /**
-    * Whether the domain is used for CMS site pages.
-    */
-    'isUsedForSitePage': boolean;
-    /**
-    * Whether the DNS for this domain is optimally configured for use with HubSpot.
-    */
-    'isResolving': boolean;
-    'isSslEnabled'?: boolean;
-    /**
     * Whether the domain is used for CMS email web pages.
     */
     'isUsedForEmail': boolean;
     /**
-    * The actual domain or sub-domain. e.g. www.hubspot.com
+    * Whether the domain is used for CMS knowledge pages.
     */
-    'domain': string;
-    'primarySitePage'?: boolean;
+    'isUsedForKnowledge': boolean;
+    /**
+    * Whether the domain is used for CMS landing pages.
+    */
+    'isUsedForLandingPage': boolean;
+    /**
+    * Whether the domain is used for CMS site pages.
+    */
+    'isUsedForSitePage': boolean;
+    /**
+    * Indicates whether the domain has been manually marked as resolving.
+    */
+    'manuallyMarkedAsResolving'?: boolean;
+    /**
+    * Indicates whether the domain is the primary domain for blog posts.
+    */
+    'primaryBlogPost'?: boolean;
+    /**
+    * Indicates whether the domain is the primary domain for email pages.
+    */
+    'primaryEmail'?: boolean;
+    /**
+    * Indicates whether the domain is the primary domain for knowledge pages.
+    */
+    'primaryKnowledge'?: boolean;
+    /**
+    * Indicates whether the domain is the primary domain for landing pages.
+    */
     'primaryLandingPage'?: boolean;
     /**
-    * The unique ID of this domain.
+    * Indicates whether the domain is the primary domain for site pages.
     */
-    'id': string;
-    'correctCname'?: string;
-    'isSslOnly'?: boolean;
+    'primarySitePage'?: boolean;
+    /**
+    * Specifies the domain to which this domain is secondary.
+    */
+    'secondaryToDomain'?: string;
+    /**
+    * The date and time when the domain was last updated.
+    */
     'updated'?: Date;
-    'primaryEmail'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -63,21 +99,9 @@ export class Domain {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "isUsedForLandingPage",
-            "baseName": "isUsedForLandingPage",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "primaryBlogPost",
-            "baseName": "primaryBlogPost",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "primaryKnowledge",
-            "baseName": "primaryKnowledge",
-            "type": "boolean",
+            "name": "correctCname",
+            "baseName": "correctCname",
+            "type": "string",
             "format": ""
         },
         {
@@ -87,33 +111,15 @@ export class Domain {
             "format": "date-time"
         },
         {
-            "name": "secondaryToDomain",
-            "baseName": "secondaryToDomain",
+            "name": "domain",
+            "baseName": "domain",
             "type": "string",
             "format": ""
         },
         {
-            "name": "manuallyMarkedAsResolving",
-            "baseName": "manuallyMarkedAsResolving",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isUsedForKnowledge",
-            "baseName": "isUsedForKnowledge",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isUsedForBlogPost",
-            "baseName": "isUsedForBlogPost",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isUsedForSitePage",
-            "baseName": "isUsedForSitePage",
-            "type": "boolean",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         },
         {
@@ -129,20 +135,62 @@ export class Domain {
             "format": ""
         },
         {
+            "name": "isSslOnly",
+            "baseName": "isSslOnly",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "isUsedForBlogPost",
+            "baseName": "isUsedForBlogPost",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "isUsedForEmail",
             "baseName": "isUsedForEmail",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "domain",
-            "baseName": "domain",
-            "type": "string",
+            "name": "isUsedForKnowledge",
+            "baseName": "isUsedForKnowledge",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "primarySitePage",
-            "baseName": "primarySitePage",
+            "name": "isUsedForLandingPage",
+            "baseName": "isUsedForLandingPage",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "isUsedForSitePage",
+            "baseName": "isUsedForSitePage",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "manuallyMarkedAsResolving",
+            "baseName": "manuallyMarkedAsResolving",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "primaryBlogPost",
+            "baseName": "primaryBlogPost",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "primaryEmail",
+            "baseName": "primaryEmail",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "primaryKnowledge",
+            "baseName": "primaryKnowledge",
             "type": "boolean",
             "format": ""
         },
@@ -153,21 +201,15 @@ export class Domain {
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "correctCname",
-            "baseName": "correctCname",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "isSslOnly",
-            "baseName": "isSslOnly",
+            "name": "primarySitePage",
+            "baseName": "primarySitePage",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "secondaryToDomain",
+            "baseName": "secondaryToDomain",
+            "type": "string",
             "format": ""
         },
         {
@@ -175,12 +217,6 @@ export class Domain {
             "baseName": "updated",
             "type": "Date",
             "format": "date-time"
-        },
-        {
-            "name": "primaryEmail",
-            "baseName": "primaryEmail",
-            "type": "boolean",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

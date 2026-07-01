@@ -10,30 +10,60 @@
  * Do not edit the class manually.
  */
 
+import { PublicObjectWarning } from '../models/PublicObjectWarning';
 import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
+/**
+* Represents a CRM object that has either been created or updated (upserted)
+*/
 export class SimplePublicUpsertObject {
-    'createdAt': Date;
+    /**
+    * Whether the object is archived.
+    */
     'archived'?: boolean;
+    /**
+    * The timestamp when the object was archived, in ISO 8601 format.
+    */
     'archivedAt'?: Date;
-    '_new': boolean;
-    'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
+    /**
+    * The timestamp when the object was created, in ISO 8601 format.
+    */
+    'createdAt': Date;
+    /**
+    * The unique ID of the object.
+    */
     'id': string;
+    /**
+    * Whether the property is new.
+    */
+    '_new': boolean;
+    /**
+    * An identifier used for tracing the write request for the object.
+    */
     'objectWriteTraceId'?: string;
+    /**
+    * Key value pairs representing the properties of the object.
+    */
     'properties': { [key: string]: string; };
+    /**
+    * Key-value pairs representing the properties of the object along with their history.
+    */
+    'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
+    /**
+    * The timestamp when the object was last updated, in ISO 8601 format.
+    */
     'updatedAt': Date;
+    /**
+    * Direct URL for this object in HubSpot
+    */
+    'url'?: string;
+    'warnings'?: Array<PublicObjectWarning>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
         {
             "name": "archived",
             "baseName": "archived",
@@ -47,21 +77,21 @@ export class SimplePublicUpsertObject {
             "format": "date-time"
         },
         {
-            "name": "_new",
-            "baseName": "new",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "propertiesWithHistory",
-            "baseName": "propertiesWithHistory",
-            "type": "{ [key: string]: Array<ValueWithTimestamp>; }",
-            "format": ""
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "id",
             "baseName": "id",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "_new",
+            "baseName": "new",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -77,10 +107,28 @@ export class SimplePublicUpsertObject {
             "format": ""
         },
         {
+            "name": "propertiesWithHistory",
+            "baseName": "propertiesWithHistory",
+            "type": "{ [key: string]: Array<ValueWithTimestamp>; }",
+            "format": ""
+        },
+        {
             "name": "updatedAt",
             "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "warnings",
+            "baseName": "warnings",
+            "type": "Array<PublicObjectWarning>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

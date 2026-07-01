@@ -12,9 +12,21 @@
 
 
 export class PublicRollingPropertyUpdatedOperation {
+    /**
+    * Indicates whether objects with no value set for the property should be included in the operation.
+    */
     'includeObjectsWithNoValueSet': boolean;
-    'operationType': PublicRollingPropertyUpdatedOperationOperationTypeEnum;
+    /**
+    * The number of days to be considered in the rolling property updated operation.
+    */
     'numberOfDays': number;
+    /**
+    * Specifies the type of operation (ROLLING_PROPERTY_UPDATED).
+    */
+    'operationType': PublicRollingPropertyUpdatedOperationOperationTypeEnum;
+    /**
+    * Defines the operation to be applied within the rolling property updated operation (UPDATED_IN_LAST_X_DAYS, NOT_UPDATED_IN_LAST_X_DAYS).
+    */
     'operator': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -29,16 +41,16 @@ export class PublicRollingPropertyUpdatedOperation {
             "format": ""
         },
         {
-            "name": "operationType",
-            "baseName": "operationType",
-            "type": "PublicRollingPropertyUpdatedOperationOperationTypeEnum",
-            "format": ""
-        },
-        {
             "name": "numberOfDays",
             "baseName": "numberOfDays",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "operationType",
+            "baseName": "operationType",
+            "type": "PublicRollingPropertyUpdatedOperationOperationTypeEnum",
+            "format": ""
         },
         {
             "name": "operator",

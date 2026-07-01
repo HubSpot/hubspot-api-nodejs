@@ -12,8 +12,17 @@
 
 
 export class PublicListConversionInactivity {
-    'offset': number;
+    /**
+    * Specifies the type of conversion (INACTIVITY).
+    */
     'conversionType': PublicListConversionInactivityConversionTypeEnum;
+    /**
+    * Value used to paginate through lists. The `offset` provided in the response can be used in the next request to fetch the next page of results. Defaults to `0` if no offset is provided.
+    */
+    'offset': number;
+    /**
+    * The unit of time for the inactivity period, such as (DAY, MONTH, WEEK).
+    */
     'timeUnit': PublicListConversionInactivityTimeUnitEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -22,16 +31,16 @@ export class PublicListConversionInactivity {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "offset",
-            "baseName": "offset",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "conversionType",
             "baseName": "conversionType",
             "type": "PublicListConversionInactivityConversionTypeEnum",
             "format": ""
+        },
+        {
+            "name": "offset",
+            "baseName": "offset",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "timeUnit",
@@ -53,7 +62,7 @@ export enum PublicListConversionInactivityConversionTypeEnum {
 }
 export enum PublicListConversionInactivityTimeUnitEnum {
     Day = 'DAY',
-    Week = 'WEEK',
-    Month = 'MONTH'
+    Month = 'MONTH',
+    Week = 'WEEK'
 }
 

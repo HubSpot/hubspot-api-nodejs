@@ -14,64 +14,52 @@ import { RowMetaData } from '../models/RowMetaData';
 import { Styles } from '../models/Styles';
 
 export class LayoutSection {
+    'cells': Array<LayoutSection>;
+    /**
+    * The CSS class applied to the layout section.
+    */
+    'cssClass': string;
+    /**
+    * The CSS ID applied to the layout section.
+    */
+    'cssId': string;
+    /**
+    * Custom CSS styles applied to the layout section.
+    */
     'cssStyle': string;
+    /**
+    * The label for the layout section.
+    */
     'label': string;
-    'type': string;
+    /**
+    * The name assigned to the layout section.
+    */
+    'name': string;
     /**
     * null
     */
     'params': { [key: string]: any; };
-    'rows': Array<{ [key: string]: LayoutSection; }>;
     'rowMetaData': Array<RowMetaData>;
-    'cells': Array<LayoutSection>;
-    'cssClass': string;
-    'w': number;
-    'cssId': string;
-    'x': number;
-    'name': string;
+    'rows': Array<{ [key: string]: LayoutSection; }>;
     'styles': Styles;
+    /**
+    * The type of the layout section.
+    */
+    'type': string;
+    /**
+    * The width of the layout section.
+    */
+    'w': number;
+    /**
+    * The x-coordinate position of the layout section.
+    */
+    'x': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "cssStyle",
-            "baseName": "cssStyle",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "params",
-            "baseName": "params",
-            "type": "{ [key: string]: any; }",
-            "format": ""
-        },
-        {
-            "name": "rows",
-            "baseName": "rows",
-            "type": "Array<{ [key: string]: LayoutSection; }>",
-            "format": ""
-        },
-        {
-            "name": "rowMetaData",
-            "baseName": "rowMetaData",
-            "type": "Array<RowMetaData>",
-            "format": ""
-        },
         {
             "name": "cells",
             "baseName": "cells",
@@ -85,22 +73,22 @@ export class LayoutSection {
             "format": ""
         },
         {
-            "name": "w",
-            "baseName": "w",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "cssId",
             "baseName": "cssId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "x",
-            "baseName": "x",
-            "type": "number",
-            "format": "int32"
+            "name": "cssStyle",
+            "baseName": "cssStyle",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "name",
@@ -109,10 +97,46 @@ export class LayoutSection {
             "format": ""
         },
         {
+            "name": "params",
+            "baseName": "params",
+            "type": "{ [key: string]: any; }",
+            "format": ""
+        },
+        {
+            "name": "rowMetaData",
+            "baseName": "rowMetaData",
+            "type": "Array<RowMetaData>",
+            "format": ""
+        },
+        {
+            "name": "rows",
+            "baseName": "rows",
+            "type": "Array<{ [key: string]: LayoutSection; }>",
+            "format": ""
+        },
+        {
             "name": "styles",
             "baseName": "styles",
             "type": "Styles",
             "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "w",
+            "baseName": "w",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "x",
+            "baseName": "x",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

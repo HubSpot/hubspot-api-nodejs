@@ -13,12 +13,27 @@
 import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
 
 export class BatchResponseHubDbTableRowV3 {
-    'completedAt'?: Date;
-    'requestedAt'?: Date;
-    'startedAt'?: Date;
+    /**
+    * The timestamp indicating when the batch processing was completed.
+    */
+    'completedAt': Date;
+    /**
+    * A collection of related links associated with the batch response.
+    */
     'links'?: { [key: string]: string; };
-    'results'?: Array<HubDbTableRowV3>;
-    'status'?: BatchResponseHubDbTableRowV3StatusEnum;
+    /**
+    * The timestamp indicating when the batch request was made.
+    */
+    'requestedAt'?: Date;
+    'results': Array<HubDbTableRowV3>;
+    /**
+    * The timestamp indicating when the batch processing began.
+    */
+    'startedAt': Date;
+    /**
+    * The current status of the batch operation, with possible values: CANCELED, COMPLETE, PENDING, PROCESSING.
+    */
+    'status': BatchResponseHubDbTableRowV3StatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -32,28 +47,28 @@ export class BatchResponseHubDbTableRowV3 {
             "format": "date-time"
         },
         {
-            "name": "requestedAt",
-            "baseName": "requestedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "results",
             "baseName": "results",
             "type": "Array<HubDbTableRowV3>",
             "format": ""
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -71,9 +86,9 @@ export class BatchResponseHubDbTableRowV3 {
 }
 
 export enum BatchResponseHubDbTableRowV3StatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

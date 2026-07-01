@@ -12,9 +12,21 @@
 
 
 export class ObjectToken {
+    /**
+    * Type of data represented by this property.
+    */
     'dataType'?: ObjectTokenDataTypeEnum;
-    'name'?: string;
+    /**
+    * The label for this property as you\'d like it displayed to users.
+    */
     'label'?: string;
+    /**
+    * An internal identifier for this property. This value must be unique TODO.
+    */
+    'name'?: string;
+    /**
+    * The value of the property
+    */
     'value': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -29,14 +41,14 @@ export class ObjectToken {
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "label",
+            "baseName": "label",
             "type": "string",
             "format": ""
         },
         {
-            "name": "label",
-            "baseName": "label",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -63,7 +75,7 @@ export enum ObjectTokenDataTypeEnum {
     Email = 'EMAIL',
     Link = 'LINK',
     Numeric = 'NUMERIC',
-    String = 'STRING',
-    Status = 'STATUS'
+    Status = 'STATUS',
+    String = 'STRING'
 }
 

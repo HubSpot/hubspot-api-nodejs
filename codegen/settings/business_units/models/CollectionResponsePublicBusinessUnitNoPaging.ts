@@ -1,6 +1,6 @@
 /**
  * Business Units
- * Retrieve Business Unit information.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -12,9 +12,6 @@
 
 import { PublicBusinessUnit } from '../models/PublicBusinessUnit';
 
-/**
-* A response object containing a collection of Business Units
-*/
 export class CollectionResponsePublicBusinessUnitNoPaging {
     /**
     * The collection of Business Units

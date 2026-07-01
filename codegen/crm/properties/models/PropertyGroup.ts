@@ -15,11 +15,10 @@
 * An ID for a group of properties
 */
 export class PropertyGroup {
-    'archived': boolean;
     /**
-    * The internal property group name, which must be used when referencing the property group via the API.
+    * Indicates whether the property group is archived.
     */
-    'name': string;
+    'archived': boolean;
     /**
     * Property groups are displayed in order starting with the lowest positive integer value. Values of -1 will cause the property group to be displayed after any positive values.
     */
@@ -28,6 +27,10 @@ export class PropertyGroup {
     * A human-readable label that will be shown in HubSpot.
     */
     'label': string;
+    /**
+    * The internal property group name, which must be used when referencing the property group via the API.
+    */
+    'name': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -41,12 +44,6 @@ export class PropertyGroup {
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "displayOrder",
             "baseName": "displayOrder",
             "type": "number",
@@ -55,6 +52,12 @@ export class PropertyGroup {
         {
             "name": "label",
             "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         }    ];

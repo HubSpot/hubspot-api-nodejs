@@ -1,5 +1,5 @@
 /**
- * Associations Schema
+ * CRM Associations Schema
  * Associations define the relationships between objects in HubSpot. These endpoints allow you to create, read, and remove associations.
  *
  * OpenAPI spec version: v3
@@ -12,8 +12,8 @@
 
 
 export class PublicAssociationDefinition {
-    'name': string;
     'id': string;
+    'name': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,14 +21,14 @@ export class PublicAssociationDefinition {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         }    ];

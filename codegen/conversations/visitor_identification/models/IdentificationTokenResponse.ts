@@ -1,6 +1,6 @@
 /**
  * Conversations Visitor Identification
- * The Visitor Identification API allows you to pass identification information to the HubSpot chat widget for otherwise unknown visitors that were verified by your own authentication system.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -11,12 +11,9 @@
  */
 
 
-/**
-* The identification token to be passed to the Conversations JS API to identify the visitor
-*/
 export class IdentificationTokenResponse {
     /**
-    * 
+    * An identification token that allows the visitor to be treated as a known contact.
     */
     'token': string;
 

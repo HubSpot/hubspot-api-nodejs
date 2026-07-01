@@ -13,13 +13,13 @@
 
 export class ListFolderCreateRequest {
     /**
-    * The folder this should be created in, if not specified will be created in the root folder 0.
-    */
-    'parentFolderId'?: string;
-    /**
     * The name of the folder to be created.
     */
     'name': string;
+    /**
+    * The folder this should be created in, if not specified will be created in the root folder 0.
+    */
+    'parentFolderId'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -27,14 +27,14 @@ export class ListFolderCreateRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "parentFolderId",
-            "baseName": "parentFolderId",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "parentFolderId",
+            "baseName": "parentFolderId",
             "type": "string",
             "format": ""
         }    ];

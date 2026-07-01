@@ -13,13 +13,31 @@
 import { PublicSurveyMonkeyValueFilterValueComparison } from '../models/PublicSurveyMonkeyValueFilterValueComparison';
 
 export class PublicSurveyMonkeyValueFilter {
-    'valueComparison': PublicSurveyMonkeyValueFilterValueComparison;
-    'surveyId': string;
-    'surveyQuestion': string;
+    /**
+    * Defines the type of filter (SURVEY_MONKEY_VALUE).
+    */
     'filterType': PublicSurveyMonkeyValueFilterFilterTypeEnum;
-    'surveyAnswerRowId'?: string;
-    'surveyAnswerColId'?: string;
+    /**
+    * Defines the operation to be applied within the filter (HAS_ANSWERED_SURVEY_QUESTION_WITH_VALUE).
+    */
     'operator': string;
+    /**
+    * The column ID of the survey answer used in the filter.
+    */
+    'surveyAnswerColId'?: string;
+    /**
+    * The row ID of the survey answer used in the filter.
+    */
+    'surveyAnswerRowId'?: string;
+    /**
+    * The ID of the survey used in the filter.
+    */
+    'surveyId': string;
+    /**
+    * The question from the survey used in the filter.
+    */
+    'surveyQuestion': string;
+    'valueComparison': PublicSurveyMonkeyValueFilterValueComparison;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -27,9 +45,27 @@ export class PublicSurveyMonkeyValueFilter {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "valueComparison",
-            "baseName": "valueComparison",
-            "type": "PublicSurveyMonkeyValueFilterValueComparison",
+            "name": "filterType",
+            "baseName": "filterType",
+            "type": "PublicSurveyMonkeyValueFilterFilterTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "operator",
+            "baseName": "operator",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "surveyAnswerColId",
+            "baseName": "surveyAnswerColId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "surveyAnswerRowId",
+            "baseName": "surveyAnswerRowId",
+            "type": "string",
             "format": ""
         },
         {
@@ -45,27 +81,9 @@ export class PublicSurveyMonkeyValueFilter {
             "format": ""
         },
         {
-            "name": "filterType",
-            "baseName": "filterType",
-            "type": "PublicSurveyMonkeyValueFilterFilterTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "surveyAnswerRowId",
-            "baseName": "surveyAnswerRowId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "surveyAnswerColId",
-            "baseName": "surveyAnswerColId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "operator",
-            "baseName": "operator",
-            "type": "string",
+            "name": "valueComparison",
+            "baseName": "valueComparison",
+            "type": "PublicSurveyMonkeyValueFilterValueComparison",
             "format": ""
         }    ];
 

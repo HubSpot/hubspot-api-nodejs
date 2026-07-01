@@ -11,38 +11,35 @@
  */
 
 
-/**
-* A SMTP API token provides both an ID and password that can be used to send email through the HubSpot SMTP API.
-*/
 export class SmtpApiTokenView {
     /**
-    * Timestamp generated when a token is created.
+    * A name for the campaign tied to the token.
     */
-    'createdAt': Date;
-    /**
-    * Password used to log into the HubSpot SMTP server.
-    */
-    'password'?: string;
-    /**
-    * Email address of the user that sent the token creation request.
-    */
-    'createdBy': string;
+    'campaignName': string;
     /**
     * Indicates whether a contact should be created for email recipients.
     */
     'createContact': boolean;
     /**
-    * User name to log into the HubSpot SMTP server.
+    * Timestamp generated when a token is created.
     */
-    'id': string;
+    'createdAt': Date;
+    /**
+    * Email address of the user that sent the token creation request.
+    */
+    'createdBy': string;
     /**
     * Identifier assigned to the campaign provided in the token creation request.
     */
     'emailCampaignId': string;
     /**
-    * A name for the campaign tied to the token.
+    * User name to log into the HubSpot SMTP server.
     */
-    'campaignName': string;
+    'id': string;
+    /**
+    * Password used to log into the HubSpot SMTP server.
+    */
+    'password'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -50,20 +47,8 @@ export class SmtpApiTokenView {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "password",
-            "baseName": "password",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "createdBy",
-            "baseName": "createdBy",
+            "name": "campaignName",
+            "baseName": "campaignName",
             "type": "string",
             "format": ""
         },
@@ -74,8 +59,14 @@ export class SmtpApiTokenView {
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "createdBy",
+            "baseName": "createdBy",
             "type": "string",
             "format": ""
         },
@@ -86,8 +77,14 @@ export class SmtpApiTokenView {
             "format": ""
         },
         {
-            "name": "campaignName",
-            "baseName": "campaignName",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "password",
+            "baseName": "password",
             "type": "string",
             "format": ""
         }    ];

@@ -13,13 +13,13 @@
 
 export class SideOrCorner {
     /**
-    * 
+    * Specifies the horizontal side of an element.
     */
-    'horizontalSide': string;
+    'horizontalSide': SideOrCornerHorizontalSideEnum;
     /**
-    * 
+    * Specifies the vertical side of an element.
     */
-    'verticalSide': string;
+    'verticalSide': SideOrCornerVerticalSideEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -29,13 +29,13 @@ export class SideOrCorner {
         {
             "name": "horizontalSide",
             "baseName": "horizontalSide",
-            "type": "string",
+            "type": "SideOrCornerHorizontalSideEnum",
             "format": ""
         },
         {
             "name": "verticalSide",
             "baseName": "verticalSide",
-            "type": "string",
+            "type": "SideOrCornerVerticalSideEnum",
             "format": ""
         }    ];
 
@@ -46,3 +46,15 @@ export class SideOrCorner {
     public constructor() {
     }
 }
+
+export enum SideOrCornerHorizontalSideEnum {
+    Center = 'CENTER',
+    Left = 'LEFT',
+    Right = 'RIGHT'
+}
+export enum SideOrCornerVerticalSideEnum {
+    Bottom = 'BOTTOM',
+    Middle = 'MIDDLE',
+    Top = 'TOP'
+}
+

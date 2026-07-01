@@ -1,6 +1,6 @@
 /**
  * Timeline
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -12,14 +12,19 @@
 
 import { TimelineEventTemplateToken } from '../models/TimelineEventTemplateToken';
 
-/**
-* State of the template definition being updated.
-*/
 export class TimelineEventTemplateUpdateRequest {
     /**
     * This uses Markdown syntax with Handlebars and event-specific data to render HTML on a timeline when you expand the details.
     */
     'detailTemplate'?: string;
+    /**
+    * This uses Markdown syntax with Handlebars and event-specific data to render HTML on a timeline as a header.
+    */
+    'headerTemplate'?: string;
+    /**
+    * The template ID.
+    */
+    'id': string;
     /**
     * The template name.
     */
@@ -28,14 +33,6 @@ export class TimelineEventTemplateUpdateRequest {
     * A collection of tokens that can be used as custom properties on the event and to create fully fledged CRM objects.
     */
     'tokens': Array<TimelineEventTemplateToken>;
-    /**
-    * The template ID.
-    */
-    'id': string;
-    /**
-    * This uses Markdown syntax with Handlebars and event-specific data to render HTML on a timeline as a header.
-    */
-    'headerTemplate'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -49,15 +46,9 @@ export class TimelineEventTemplateUpdateRequest {
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "headerTemplate",
+            "baseName": "headerTemplate",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tokens",
-            "baseName": "tokens",
-            "type": "Array<TimelineEventTemplateToken>",
             "format": ""
         },
         {
@@ -67,9 +58,15 @@ export class TimelineEventTemplateUpdateRequest {
             "format": ""
         },
         {
-            "name": "headerTemplate",
-            "baseName": "headerTemplate",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tokens",
+            "baseName": "tokens",
+            "type": "Array<TimelineEventTemplateToken>",
             "format": ""
         }    ];
 

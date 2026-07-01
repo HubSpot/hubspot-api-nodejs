@@ -12,8 +12,14 @@
 
 import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
 
+/**
+* Is the input object used to create a new CRM object, containing the properties to be set and optional associations to link the new record with other CRM objects.
+*/
 export class SimplePublicObjectInputForCreate {
     'associations'?: Array<PublicAssociationsForObject>;
+    /**
+    * Key-value pairs for setting properties for the new object.
+    */
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;

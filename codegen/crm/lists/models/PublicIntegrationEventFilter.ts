@@ -13,8 +13,14 @@
 import { PublicEventFilterMetadata } from '../models/PublicEventFilterMetadata';
 
 export class PublicIntegrationEventFilter {
+    /**
+    * The ID representing the type of event for the integration event filter.
+    */
     'eventTypeId': number;
     'filterLines': Array<PublicEventFilterMetadata>;
+    /**
+    * Indicates the type of filter (INTEGRATION_EVENT).
+    */
     'filterType': PublicIntegrationEventFilterFilterTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;

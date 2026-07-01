@@ -5,31 +5,29 @@ import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
 
-import { TypesApiRequestFactory, TypesApiResponseProcessor} from "../apis/TypesApi";
-export class ObservableTypesApi {
-    private requestFactory: TypesApiRequestFactory;
-    private responseProcessor: TypesApiResponseProcessor;
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class ObservableBasicApi {
+    private requestFactory: BasicApiRequestFactory;
+    private responseProcessor: BasicApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: TypesApiRequestFactory,
-        responseProcessor?: TypesApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new TypesApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new TypesApiResponseProcessor();
+        this.requestFactory = requestFactory || new BasicApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BasicApiResponseProcessor();
     }
 
     /**
-     * List all the valid association types available between two object types
-     * List association types
      * @param fromObjectType
      * @param toObjectType
      */
     public getAllWithHttpInfo(fromObjectType: string, toObjectType: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePublicAssociationDefinitionNoPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -43,7 +41,7 @@ export class ObservableTypesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -54,7 +52,7 @@ export class ObservableTypesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -76,8 +74,6 @@ export class ObservableTypesApi {
     }
 
     /**
-     * List all the valid association types available between two object types
-     * List association types
      * @param fromObjectType
      * @param toObjectType
      */

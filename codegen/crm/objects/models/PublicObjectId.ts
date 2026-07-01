@@ -11,7 +11,13 @@
  */
 
 
+/**
+* Contains the Id of a Public Object
+*/
 export class PublicObjectId {
+    /**
+    * The unique ID of the object.
+    */
     'id': string;
 
     static readonly discriminator: string | undefined = undefined;

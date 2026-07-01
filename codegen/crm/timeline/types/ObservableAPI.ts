@@ -7,7 +7,6 @@ import { BatchInputTimelineEvent } from '../models/BatchInputTimelineEvent';
 import { BatchResponseTimelineEventResponse } from '../models/BatchResponseTimelineEventResponse';
 import { BatchResponseTimelineEventResponseWithErrors } from '../models/BatchResponseTimelineEventResponseWithErrors';
 import { CollectionResponseTimelineEventTemplateNoPaging } from '../models/CollectionResponseTimelineEventTemplateNoPaging';
-import { EventDetail } from '../models/EventDetail';
 import { TimelineEvent } from '../models/TimelineEvent';
 import { TimelineEventResponse } from '../models/TimelineEventResponse';
 import { TimelineEventTemplate } from '../models/TimelineEventTemplate';
@@ -16,30 +15,30 @@ import { TimelineEventTemplateToken } from '../models/TimelineEventTemplateToken
 import { TimelineEventTemplateTokenUpdateRequest } from '../models/TimelineEventTemplateTokenUpdateRequest';
 import { TimelineEventTemplateUpdateRequest } from '../models/TimelineEventTemplateUpdateRequest';
 
-import { EventsApiRequestFactory, EventsApiResponseProcessor} from "../apis/EventsApi";
-export class ObservableEventsApi {
-    private requestFactory: EventsApiRequestFactory;
-    private responseProcessor: EventsApiResponseProcessor;
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
+export class ObservableAdvancedApi {
+    private requestFactory: AdvancedApiRequestFactory;
+    private responseProcessor: AdvancedApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: EventsApiRequestFactory,
-        responseProcessor?: EventsApiResponseProcessor
+        requestFactory?: AdvancedApiRequestFactory,
+        responseProcessor?: AdvancedApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new EventsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new EventsApiResponseProcessor();
+        this.requestFactory = requestFactory || new AdvancedApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new AdvancedApiResponseProcessor();
     }
 
     /**
-     * Creates an instance of a timeline event based on an event template. Once created, this event is immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
-     * Create a single event
-     * @param timelineEvent The timeline event definition.
+     * Send a single instance of event data to a specified event type.
+     * Send event data (single)
+     * @param timelineEvent
      */
     public createWithHttpInfo(timelineEvent: TimelineEvent, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -53,7 +52,7 @@ export class ObservableEventsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -64,7 +63,7 @@ export class ObservableEventsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -86,22 +85,24 @@ export class ObservableEventsApi {
     }
 
     /**
-     * Creates an instance of a timeline event based on an event template. Once created, this event is immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
-     * Create a single event
-     * @param timelineEvent The timeline event definition.
+     * Send a single instance of event data to a specified event type.
+     * Send event data (single)
+     * @param timelineEvent
      */
     public create(timelineEvent: TimelineEvent, _options?: ConfigurationOptions): Observable<TimelineEventResponse> {
         return this.createWithHttpInfo(timelineEvent, _options).pipe(map((apiResponse: HttpInfo<TimelineEventResponse>) => apiResponse.data));
     }
 
     /**
-     * Creates multiple instances of timeline events based on an event template. Once created, these event are immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
-     * Creates multiple events
-     * @param batchInputTimelineEvent The timeline event definition.
+     * Update an existing event type template with new tokens.
+     * Add tokens to an existing template
+     * @param appId 
+     * @param eventTemplateId 
+     * @param timelineEventTemplateToken
      */
-    public createBatchWithHttpInfo(batchInputTimelineEvent: BatchInputTimelineEvent, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors>> {
+    public create_1WithHttpInfo(appId: number, eventTemplateId: string, timelineEventTemplateToken: TimelineEventTemplateToken, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventTemplateToken>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -115,7 +116,7 @@ export class ObservableEventsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -126,11 +127,11 @@ export class ObservableEventsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.createBatch(batchInputTimelineEvent, _config);
+        const requestContextPromise = this.requestFactory.create_1(appId, eventTemplateId, timelineEventTemplateToken, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -143,240 +144,48 @@ export class ObservableEventsApi {
                 for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createBatchWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create_1WithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Creates multiple instances of timeline events based on an event template. Once created, these event are immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
-     * Creates multiple events
-     * @param batchInputTimelineEvent The timeline event definition.
+     * Update an existing event type template with new tokens.
+     * Add tokens to an existing template
+     * @param appId 
+     * @param eventTemplateId 
+     * @param timelineEventTemplateToken
      */
-    public createBatch(batchInputTimelineEvent: BatchInputTimelineEvent, _options?: ConfigurationOptions): Observable<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors> {
-        return this.createBatchWithHttpInfo(batchInputTimelineEvent, _options).pipe(map((apiResponse: HttpInfo<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors>) => apiResponse.data));
-    }
-
-    /**
-     * This returns the previously created event. It contains all existing info for the event, but not necessarily the CRM object.
-     * Gets the event
-     * @param eventTemplateId The event template ID.
-     * @param eventId The event ID.
-     */
-    public getByIdWithHttpInfo(eventTemplateId: string, eventId: string, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventResponse>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.getById(eventTemplateId, eventId, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * This returns the previously created event. It contains all existing info for the event, but not necessarily the CRM object.
-     * Gets the event
-     * @param eventTemplateId The event template ID.
-     * @param eventId The event ID.
-     */
-    public getById(eventTemplateId: string, eventId: string, _options?: ConfigurationOptions): Observable<TimelineEventResponse> {
-        return this.getByIdWithHttpInfo(eventTemplateId, eventId, _options).pipe(map((apiResponse: HttpInfo<TimelineEventResponse>) => apiResponse.data));
-    }
-
-    /**
-     * This will take the `detailTemplate` from the event template and return an object rendering the specified event. If the template references `extraData` that isn\'t found in the event, it will be ignored and we\'ll render without it.
-     * Gets the detailTemplate as rendered
-     * @param eventTemplateId The event template ID.
-     * @param eventId The event ID.
-     */
-    public getDetailByIdWithHttpInfo(eventTemplateId: string, eventId: string, _options?: ConfigurationOptions): Observable<HttpInfo<EventDetail>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.getDetailById(eventTemplateId, eventId, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getDetailByIdWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * This will take the `detailTemplate` from the event template and return an object rendering the specified event. If the template references `extraData` that isn\'t found in the event, it will be ignored and we\'ll render without it.
-     * Gets the detailTemplate as rendered
-     * @param eventTemplateId The event template ID.
-     * @param eventId The event ID.
-     */
-    public getDetailById(eventTemplateId: string, eventId: string, _options?: ConfigurationOptions): Observable<EventDetail> {
-        return this.getDetailByIdWithHttpInfo(eventTemplateId, eventId, _options).pipe(map((apiResponse: HttpInfo<EventDetail>) => apiResponse.data));
-    }
-
-    /**
-     * This will take either the `headerTemplate` or `detailTemplate` from the event template and render for the specified event as HTML. If the template references `extraData` that isn\'t found in the event, it will be ignored and we\'ll render without it.
-     * Renders the header or detail as HTML
-     * @param eventTemplateId The event template ID.
-     * @param eventId The event ID.
-     * @param [detail] Set to \&#39;true\&#39;, we want to render the &#x60;detailTemplate&#x60; instead of the &#x60;headerTemplate&#x60;.
-     */
-    public getRenderByIdWithHttpInfo(eventTemplateId: string, eventId: string, detail?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<string>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.getRenderById(eventTemplateId, eventId, detail, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getRenderByIdWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * This will take either the `headerTemplate` or `detailTemplate` from the event template and render for the specified event as HTML. If the template references `extraData` that isn\'t found in the event, it will be ignored and we\'ll render without it.
-     * Renders the header or detail as HTML
-     * @param eventTemplateId The event template ID.
-     * @param eventId The event ID.
-     * @param [detail] Set to \&#39;true\&#39;, we want to render the &#x60;detailTemplate&#x60; instead of the &#x60;headerTemplate&#x60;.
-     */
-    public getRenderById(eventTemplateId: string, eventId: string, detail?: boolean, _options?: ConfigurationOptions): Observable<string> {
-        return this.getRenderByIdWithHttpInfo(eventTemplateId, eventId, detail, _options).pipe(map((apiResponse: HttpInfo<string>) => apiResponse.data));
+    public create_1(appId: number, eventTemplateId: string, timelineEventTemplateToken: TimelineEventTemplateToken, _options?: ConfigurationOptions): Observable<TimelineEventTemplateToken> {
+        return this.create_1WithHttpInfo(appId, eventTemplateId, timelineEventTemplateToken, _options).pipe(map((apiResponse: HttpInfo<TimelineEventTemplateToken>) => apiResponse.data));
     }
 
 }
 
-import { TemplatesApiRequestFactory, TemplatesApiResponseProcessor} from "../apis/TemplatesApi";
-export class ObservableTemplatesApi {
-    private requestFactory: TemplatesApiRequestFactory;
-    private responseProcessor: TemplatesApiResponseProcessor;
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class ObservableBasicApi {
+    private requestFactory: BasicApiRequestFactory;
+    private responseProcessor: BasicApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: TemplatesApiRequestFactory,
-        responseProcessor?: TemplatesApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new TemplatesApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new TemplatesApiResponseProcessor();
+        this.requestFactory = requestFactory || new BasicApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BasicApiResponseProcessor();
     }
 
     /**
-     * This will delete the event template. All associated events will be removed from search results and the timeline UI.  This action can\'t be undone, so it\'s highly recommended that you stop using any associated events before deleting a template.
-     * Deletes an event template for the app
-     * @param eventTemplateId The event template ID.
-     * @param appId The ID of the target app.
+     * Delete an event type template by ID.
+     * Delete an event template
+     * @param appId 
+     * @param eventTemplateId 
      */
-    public archiveWithHttpInfo(eventTemplateId: string, appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    public archiveWithHttpInfo(appId: number, eventTemplateId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -390,7 +199,7 @@ export class ObservableTemplatesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -401,11 +210,11 @@ export class ObservableTemplatesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.archive(eventTemplateId, appId, _config);
+        const requestContextPromise = this.requestFactory.archive(appId, eventTemplateId, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -423,24 +232,25 @@ export class ObservableTemplatesApi {
     }
 
     /**
-     * This will delete the event template. All associated events will be removed from search results and the timeline UI.  This action can\'t be undone, so it\'s highly recommended that you stop using any associated events before deleting a template.
-     * Deletes an event template for the app
-     * @param eventTemplateId The event template ID.
-     * @param appId The ID of the target app.
+     * Delete an event type template by ID.
+     * Delete an event template
+     * @param appId 
+     * @param eventTemplateId 
      */
-    public archive(eventTemplateId: string, appId: number, _options?: ConfigurationOptions): Observable<void> {
-        return this.archiveWithHttpInfo(eventTemplateId, appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    public archive(appId: number, eventTemplateId: string, _options?: ConfigurationOptions): Observable<void> {
+        return this.archiveWithHttpInfo(appId, eventTemplateId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
-     * Event templates define the general structure for a custom timeline event. This includes formatted copy for its heading and details, as well as any custom property definitions. The event could be something like viewing a video, registering for a webinar, or filling out a survey. A single app can define multiple event templates.  Event templates will be created for contacts by default, but they can be created for companies, tickets, and deals as well.  Each event template contains its own set of tokens and `Markdown` templates. These tokens can be associated with any CRM object properties via the `objectPropertyName` field to fully build out CRM objects.  You must create an event template before you can create events.
-     * Create an event template for your app
-     * @param appId The ID of the target app.
-     * @param timelineEventTemplateCreateRequest The new event template definition.
+     * Delete an existing token from a specific event type template.
+     * Delete a template token
+     * @param appId 
+     * @param eventTemplateId 
+     * @param tokenName 
      */
-    public createWithHttpInfo(appId: number, timelineEventTemplateCreateRequest: TimelineEventTemplateCreateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventTemplate>> {
+    public archive_1WithHttpInfo(appId: number, eventTemplateId: string, tokenName: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -454,7 +264,7 @@ export class ObservableTemplatesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -465,7 +275,72 @@ export class ObservableTemplatesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.archive_1(appId, eventTemplateId, tokenName, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive_1WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Delete an existing token from a specific event type template.
+     * Delete a template token
+     * @param appId 
+     * @param eventTemplateId 
+     * @param tokenName 
+     */
+    public archive_1(appId: number, eventTemplateId: string, tokenName: string, _options?: ConfigurationOptions): Observable<void> {
+        return this.archive_1WithHttpInfo(appId, eventTemplateId, tokenName, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
+     * Event templates define the general structure for a custom timeline event, and enable you to send event data to HubSpot. A template includes formatted copy for its heading and details, as well as any custom property definitions. A single app can include up to 750 event templates.<br/><Warning>the `v1` and `v3` timeline events APIs are only available for app partners with existing `v1`/`v3` timeline events defined in their public app. <ul><li>If your app doesn\'t include any timeline events yet, requests to this endpoint will fail. Instead, you can get started on [latest version of the developer platform](/apps/developer-platform/build-apps/overview). Note that you\'ll need to request approval before you can define app events for your app. Learn more in the [app events overview](/apps/developer-platform/add-features/app-events/overview).</li><li>If your app includes a `v1`/`v3` timeline event, learn how to [migrate it to the developer platform](/apps/developer-platform/add-features/app-events/create-and-manage-event-types#migrate-an-existing-timeline-event-type). You don\'t need to request approval before migrating existing event types.</li></ul>If you\'re not an app partner, you can send custom event data to HubSpot using the [custom events API](/api-reference/events-manage-event-definitions-v3/guide).</Warning>
+     * Create an event template
+     * @param appId 
+     * @param timelineEventTemplateCreateRequest
+     */
+    public createWithHttpInfo(appId: number, timelineEventTemplateCreateRequest: TimelineEventTemplateCreateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventTemplate>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
 		};
 	}
 
@@ -487,23 +362,23 @@ export class ObservableTemplatesApi {
     }
 
     /**
-     * Event templates define the general structure for a custom timeline event. This includes formatted copy for its heading and details, as well as any custom property definitions. The event could be something like viewing a video, registering for a webinar, or filling out a survey. A single app can define multiple event templates.  Event templates will be created for contacts by default, but they can be created for companies, tickets, and deals as well.  Each event template contains its own set of tokens and `Markdown` templates. These tokens can be associated with any CRM object properties via the `objectPropertyName` field to fully build out CRM objects.  You must create an event template before you can create events.
-     * Create an event template for your app
-     * @param appId The ID of the target app.
-     * @param timelineEventTemplateCreateRequest The new event template definition.
+     * Event templates define the general structure for a custom timeline event, and enable you to send event data to HubSpot. A template includes formatted copy for its heading and details, as well as any custom property definitions. A single app can include up to 750 event templates.<br/><Warning>the `v1` and `v3` timeline events APIs are only available for app partners with existing `v1`/`v3` timeline events defined in their public app. <ul><li>If your app doesn\'t include any timeline events yet, requests to this endpoint will fail. Instead, you can get started on [latest version of the developer platform](/apps/developer-platform/build-apps/overview). Note that you\'ll need to request approval before you can define app events for your app. Learn more in the [app events overview](/apps/developer-platform/add-features/app-events/overview).</li><li>If your app includes a `v1`/`v3` timeline event, learn how to [migrate it to the developer platform](/apps/developer-platform/add-features/app-events/create-and-manage-event-types#migrate-an-existing-timeline-event-type). You don\'t need to request approval before migrating existing event types.</li></ul>If you\'re not an app partner, you can send custom event data to HubSpot using the [custom events API](/api-reference/events-manage-event-definitions-v3/guide).</Warning>
+     * Create an event template
+     * @param appId 
+     * @param timelineEventTemplateCreateRequest
      */
     public create(appId: number, timelineEventTemplateCreateRequest: TimelineEventTemplateCreateRequest, _options?: ConfigurationOptions): Observable<TimelineEventTemplate> {
         return this.createWithHttpInfo(appId, timelineEventTemplateCreateRequest, _options).pipe(map((apiResponse: HttpInfo<TimelineEventTemplate>) => apiResponse.data));
     }
 
     /**
-     * Use this to list all event templates owned by your app.
-     * List all event templates for your app
-     * @param appId The ID of the target app.
+     * Retrieve all templates defined for an app.
+     * Get all event templates
+     * @param appId 
      */
     public getAllWithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseTimelineEventTemplateNoPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -517,7 +392,7 @@ export class ObservableTemplatesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -528,7 +403,7 @@ export class ObservableTemplatesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -550,23 +425,23 @@ export class ObservableTemplatesApi {
     }
 
     /**
-     * Use this to list all event templates owned by your app.
-     * List all event templates for your app
-     * @param appId The ID of the target app.
+     * Retrieve all templates defined for an app.
+     * Get all event templates
+     * @param appId 
      */
     public getAll(appId: number, _options?: ConfigurationOptions): Observable<CollectionResponseTimelineEventTemplateNoPaging> {
         return this.getAllWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseTimelineEventTemplateNoPaging>) => apiResponse.data));
     }
 
     /**
-     * View the current state of a specific template and its tokens.
-     * Gets a specific event template for your app
-     * @param eventTemplateId The event template ID.
-     * @param appId The ID of the target app.
+     * Retrieve an event instance, specified by template ID and event ID.
+     * Get an event instance
+     * @param eventId 
+     * @param eventTemplateId 
      */
-    public getByIdWithHttpInfo(eventTemplateId: string, appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventTemplate>> {
+    public getByIdWithHttpInfo(eventId: string, eventTemplateId: string, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -580,7 +455,7 @@ export class ObservableTemplatesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -591,11 +466,11 @@ export class ObservableTemplatesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.getById(eventTemplateId, appId, _config);
+        const requestContextPromise = this.requestFactory.getById(eventId, eventTemplateId, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -613,25 +488,24 @@ export class ObservableTemplatesApi {
     }
 
     /**
-     * View the current state of a specific template and its tokens.
-     * Gets a specific event template for your app
-     * @param eventTemplateId The event template ID.
-     * @param appId The ID of the target app.
+     * Retrieve an event instance, specified by template ID and event ID.
+     * Get an event instance
+     * @param eventId 
+     * @param eventTemplateId 
      */
-    public getById(eventTemplateId: string, appId: number, _options?: ConfigurationOptions): Observable<TimelineEventTemplate> {
-        return this.getByIdWithHttpInfo(eventTemplateId, appId, _options).pipe(map((apiResponse: HttpInfo<TimelineEventTemplate>) => apiResponse.data));
+    public getById(eventId: string, eventTemplateId: string, _options?: ConfigurationOptions): Observable<TimelineEventResponse> {
+        return this.getByIdWithHttpInfo(eventId, eventTemplateId, _options).pipe(map((apiResponse: HttpInfo<TimelineEventResponse>) => apiResponse.data));
     }
 
     /**
-     * Updates an existing template and its tokens. This is primarily used to update the headerTemplate/detailTemplate, and those changes will take effect for existing events.  You can also update or replace all the tokens in the template here instead of doing individual API calls on the `/tokens` endpoint.
-     * Update an existing event template
-     * @param eventTemplateId The event template ID.
-     * @param appId The ID of the target app.
-     * @param timelineEventTemplateUpdateRequest The updated event template definition.
+     * Retrieve an event type template by ID.
+     * Get an event template
+     * @param appId 
+     * @param eventTemplateId 
      */
-    public updateWithHttpInfo(eventTemplateId: string, appId: number, timelineEventTemplateUpdateRequest: TimelineEventTemplateUpdateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventTemplate>> {
+    public getById_2WithHttpInfo(appId: number, eventTemplateId: string, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventTemplate>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -645,7 +519,7 @@ export class ObservableTemplatesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -656,11 +530,76 @@ export class ObservableTemplatesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.update(eventTemplateId, appId, timelineEventTemplateUpdateRequest, _config);
+        const requestContextPromise = this.requestFactory.getById_2(appId, eventTemplateId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById_2WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieve an event type template by ID.
+     * Get an event template
+     * @param appId 
+     * @param eventTemplateId 
+     */
+    public getById_2(appId: number, eventTemplateId: string, _options?: ConfigurationOptions): Observable<TimelineEventTemplate> {
+        return this.getById_2WithHttpInfo(appId, eventTemplateId, _options).pipe(map((apiResponse: HttpInfo<TimelineEventTemplate>) => apiResponse.data));
+    }
+
+    /**
+     * Update an existing event template, specified by ID.
+     * Update an event template
+     * @param appId 
+     * @param eventTemplateId 
+     * @param timelineEventTemplateUpdateRequest
+     */
+    public updateWithHttpInfo(appId: number, eventTemplateId: string, timelineEventTemplateUpdateRequest: TimelineEventTemplateUpdateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventTemplate>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.update(appId, eventTemplateId, timelineEventTemplateUpdateRequest, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -678,44 +617,110 @@ export class ObservableTemplatesApi {
     }
 
     /**
-     * Updates an existing template and its tokens. This is primarily used to update the headerTemplate/detailTemplate, and those changes will take effect for existing events.  You can also update or replace all the tokens in the template here instead of doing individual API calls on the `/tokens` endpoint.
-     * Update an existing event template
-     * @param eventTemplateId The event template ID.
-     * @param appId The ID of the target app.
-     * @param timelineEventTemplateUpdateRequest The updated event template definition.
+     * Update an existing event template, specified by ID.
+     * Update an event template
+     * @param appId 
+     * @param eventTemplateId 
+     * @param timelineEventTemplateUpdateRequest
      */
-    public update(eventTemplateId: string, appId: number, timelineEventTemplateUpdateRequest: TimelineEventTemplateUpdateRequest, _options?: ConfigurationOptions): Observable<TimelineEventTemplate> {
-        return this.updateWithHttpInfo(eventTemplateId, appId, timelineEventTemplateUpdateRequest, _options).pipe(map((apiResponse: HttpInfo<TimelineEventTemplate>) => apiResponse.data));
+    public update(appId: number, eventTemplateId: string, timelineEventTemplateUpdateRequest: TimelineEventTemplateUpdateRequest, _options?: ConfigurationOptions): Observable<TimelineEventTemplate> {
+        return this.updateWithHttpInfo(appId, eventTemplateId, timelineEventTemplateUpdateRequest, _options).pipe(map((apiResponse: HttpInfo<TimelineEventTemplate>) => apiResponse.data));
+    }
+
+    /**
+     * Update an event type template token, specified by token name.
+     * Update a template token
+     * @param appId 
+     * @param eventTemplateId 
+     * @param tokenName 
+     * @param timelineEventTemplateTokenUpdateRequest
+     */
+    public update_3WithHttpInfo(appId: number, eventTemplateId: string, tokenName: string, timelineEventTemplateTokenUpdateRequest: TimelineEventTemplateTokenUpdateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventTemplateToken>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.update_3(appId, eventTemplateId, tokenName, timelineEventTemplateTokenUpdateRequest, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update_3WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Update an event type template token, specified by token name.
+     * Update a template token
+     * @param appId 
+     * @param eventTemplateId 
+     * @param tokenName 
+     * @param timelineEventTemplateTokenUpdateRequest
+     */
+    public update_3(appId: number, eventTemplateId: string, tokenName: string, timelineEventTemplateTokenUpdateRequest: TimelineEventTemplateTokenUpdateRequest, _options?: ConfigurationOptions): Observable<TimelineEventTemplateToken> {
+        return this.update_3WithHttpInfo(appId, eventTemplateId, tokenName, timelineEventTemplateTokenUpdateRequest, _options).pipe(map((apiResponse: HttpInfo<TimelineEventTemplateToken>) => apiResponse.data));
     }
 
 }
 
-import { TokensApiRequestFactory, TokensApiResponseProcessor} from "../apis/TokensApi";
-export class ObservableTokensApi {
-    private requestFactory: TokensApiRequestFactory;
-    private responseProcessor: TokensApiResponseProcessor;
+import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
+export class ObservableBatchApi {
+    private requestFactory: BatchApiRequestFactory;
+    private responseProcessor: BatchApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: TokensApiRequestFactory,
-        responseProcessor?: TokensApiResponseProcessor
+        requestFactory?: BatchApiRequestFactory,
+        responseProcessor?: BatchApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new TokensApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new TokensApiResponseProcessor();
+        this.requestFactory = requestFactory || new BatchApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BatchApiResponseProcessor();
     }
 
     /**
-     * This will remove the token from an existing template. Existing events and CRM objects will still retain the token and its mapped object properties, but new ones will not.  The timeline will still display this property for older CRM objects if it\'s still referenced in the template `Markdown`. New events will not.  Any lists or reports referencing deleted tokens will no longer return new contacts, but old ones will still exist in the lists.
-     * Removes a token from the event template
-     * @param eventTemplateId The event template ID.
-     * @param tokenName The token name.
-     * @param appId The ID of the target app.
+     * Batch create multiple instances of timeline events based on an event template. Once created, these event are immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
+     * Create multiple events
+     * @param batchInputTimelineEvent
      */
-    public archiveWithHttpInfo(eventTemplateId: string, tokenName: string, appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    public createBatchWithHttpInfo(batchInputTimelineEvent: BatchInputTimelineEvent, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -729,7 +734,7 @@ export class ObservableTokensApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -740,11 +745,11 @@ export class ObservableTokensApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.archive(eventTemplateId, tokenName, appId, _config);
+        const requestContextPromise = this.requestFactory.createBatch(batchInputTimelineEvent, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -757,153 +762,17 @@ export class ObservableTokensApi {
                 for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createBatchWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * This will remove the token from an existing template. Existing events and CRM objects will still retain the token and its mapped object properties, but new ones will not.  The timeline will still display this property for older CRM objects if it\'s still referenced in the template `Markdown`. New events will not.  Any lists or reports referencing deleted tokens will no longer return new contacts, but old ones will still exist in the lists.
-     * Removes a token from the event template
-     * @param eventTemplateId The event template ID.
-     * @param tokenName The token name.
-     * @param appId The ID of the target app.
+     * Batch create multiple instances of timeline events based on an event template. Once created, these event are immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
+     * Create multiple events
+     * @param batchInputTimelineEvent
      */
-    public archive(eventTemplateId: string, tokenName: string, appId: number, _options?: ConfigurationOptions): Observable<void> {
-        return this.archiveWithHttpInfo(eventTemplateId, tokenName, appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
-    }
-
-    /**
-     * Once you\'ve defined an event template, it\'s likely that you\'ll want to define tokens for it as well. You can do this on the event template itself or update individual tokens here.  Event type tokens allow you to attach custom data to events displayed in a timeline or used for list segmentation.  You can also use `objectPropertyName` to associate any CRM object properties. This will allow you to fully build out CRM objects.  Token names should be unique across the template.
-     * Adds a token to an existing event template
-     * @param eventTemplateId The event template ID.
-     * @param appId The ID of the target app.
-     * @param timelineEventTemplateToken The new token definition.
-     */
-    public createWithHttpInfo(eventTemplateId: string, appId: number, timelineEventTemplateToken: TimelineEventTemplateToken, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventTemplateToken>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.create(eventTemplateId, appId, timelineEventTemplateToken, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Once you\'ve defined an event template, it\'s likely that you\'ll want to define tokens for it as well. You can do this on the event template itself or update individual tokens here.  Event type tokens allow you to attach custom data to events displayed in a timeline or used for list segmentation.  You can also use `objectPropertyName` to associate any CRM object properties. This will allow you to fully build out CRM objects.  Token names should be unique across the template.
-     * Adds a token to an existing event template
-     * @param eventTemplateId The event template ID.
-     * @param appId The ID of the target app.
-     * @param timelineEventTemplateToken The new token definition.
-     */
-    public create(eventTemplateId: string, appId: number, timelineEventTemplateToken: TimelineEventTemplateToken, _options?: ConfigurationOptions): Observable<TimelineEventTemplateToken> {
-        return this.createWithHttpInfo(eventTemplateId, appId, timelineEventTemplateToken, _options).pipe(map((apiResponse: HttpInfo<TimelineEventTemplateToken>) => apiResponse.data));
-    }
-
-    /**
-     * This will update the existing token on an event template. Name and type can\'t be changed on existing tokens.
-     * Updates an existing token on an event template
-     * @param eventTemplateId The event template ID.
-     * @param tokenName The token name.
-     * @param appId The ID of the target app.
-     * @param timelineEventTemplateTokenUpdateRequest The updated token definition.
-     */
-    public updateWithHttpInfo(eventTemplateId: string, tokenName: string, appId: number, timelineEventTemplateTokenUpdateRequest: TimelineEventTemplateTokenUpdateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<TimelineEventTemplateToken>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.update(eventTemplateId, tokenName, appId, timelineEventTemplateTokenUpdateRequest, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * This will update the existing token on an event template. Name and type can\'t be changed on existing tokens.
-     * Updates an existing token on an event template
-     * @param eventTemplateId The event template ID.
-     * @param tokenName The token name.
-     * @param appId The ID of the target app.
-     * @param timelineEventTemplateTokenUpdateRequest The updated token definition.
-     */
-    public update(eventTemplateId: string, tokenName: string, appId: number, timelineEventTemplateTokenUpdateRequest: TimelineEventTemplateTokenUpdateRequest, _options?: ConfigurationOptions): Observable<TimelineEventTemplateToken> {
-        return this.updateWithHttpInfo(eventTemplateId, tokenName, appId, timelineEventTemplateTokenUpdateRequest, _options).pipe(map((apiResponse: HttpInfo<TimelineEventTemplateToken>) => apiResponse.data));
+    public createBatch(batchInputTimelineEvent: BatchInputTimelineEvent, _options?: ConfigurationOptions): Observable<BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors> {
+        return this.createBatchWithHttpInfo(batchInputTimelineEvent, _options).pipe(map((apiResponse: HttpInfo<BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors>) => apiResponse.data));
     }
 
 }

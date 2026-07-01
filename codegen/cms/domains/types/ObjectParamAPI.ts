@@ -1,100 +1,114 @@
 import { HttpInfo } from '../http/http';
 import { Configuration, ConfigurationOptions } from '../configuration'
 
-import { CollectionResponseWithTotalDomainForwardPaging } from '../models/CollectionResponseWithTotalDomainForwardPaging';
+import { CollectionResponseWithTotalDomain } from '../models/CollectionResponseWithTotalDomain';
 import { Domain } from '../models/Domain';
 
-import { ObservableDomainsApi } from "./ObservableAPI";
-import { DomainsApiRequestFactory, DomainsApiResponseProcessor} from "../apis/DomainsApi";
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
-export interface DomainsApiGetByIdRequest {
+export interface BasicApiCmsV3DomainsRequest {
     /**
-     * The unique ID of the domain.
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof DomainsApigetById
+     * @memberof BasicApicmsV3Domains
      */
-    domainId: string
-}
-
-export interface DomainsApiGetPageRequest {
+    after?: string
     /**
-     * Only return domains created at this date.
+     * 
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof BasicApicmsV3Domains
+     */
+    archived?: boolean
+    /**
+     * 
      * Defaults to: undefined
      * @type Date
-     * @memberof DomainsApigetPage
-     */
-    createdAt?: Date
-    /**
-     * Only return domains created after this date.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof DomainsApigetPage
+     * @memberof BasicApicmsV3Domains
      */
     createdAfter?: Date
     /**
-     * Only return domains created before this date.
+     * 
      * Defaults to: undefined
      * @type Date
-     * @memberof DomainsApigetPage
+     * @memberof BasicApicmsV3Domains
+     */
+    createdAt?: Date
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof BasicApicmsV3Domains
      */
     createdBefore?: Date
     /**
-     * Only return domains updated at this date.
+     * 
      * Defaults to: undefined
-     * @type Date
-     * @memberof DomainsApigetPage
+     * @type number
+     * @memberof BasicApicmsV3Domains
      */
-    updatedAt?: Date
-    /**
-     * Only return domains updated after this date.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof DomainsApigetPage
-     */
-    updatedAfter?: Date
-    /**
-     * Only return domains updated before this date.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof DomainsApigetPage
-     */
-    updatedBefore?: Date
+    limit?: number
     /**
      * 
      * Defaults to: undefined
      * @type Array&lt;string&gt;
-     * @memberof DomainsApigetPage
+     * @memberof BasicApicmsV3Domains
      */
     sort?: Array<string>
     /**
-     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * 
      * Defaults to: undefined
-     * @type string
-     * @memberof DomainsApigetPage
+     * @type Date
+     * @memberof BasicApicmsV3Domains
      */
-    after?: string
+    updatedAfter?: Date
     /**
-     * Maximum number of results per page.
+     * 
      * Defaults to: undefined
-     * @type number
-     * @memberof DomainsApigetPage
+     * @type Date
+     * @memberof BasicApicmsV3Domains
      */
-    limit?: number
+    updatedAt?: Date
     /**
-     * Whether to return only results that have been archived.
+     * 
      * Defaults to: undefined
-     * @type boolean
-     * @memberof DomainsApigetPage
+     * @type Date
+     * @memberof BasicApicmsV3Domains
      */
-    archived?: boolean
+    updatedBefore?: Date
 }
 
-export class ObjectDomainsApi {
-    private api: ObservableDomainsApi
+export interface BasicApiGetByIdRequest {
+    /**
+     * The unique ID of the domain.
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApigetById
+     */
+    domainId: string
+}
 
-    public constructor(configuration: Configuration, requestFactory?: DomainsApiRequestFactory, responseProcessor?: DomainsApiResponseProcessor) {
-        this.api = new ObservableDomainsApi(configuration, requestFactory, responseProcessor);
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
+
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public cmsV3DomainsWithHttpInfo(param: BasicApiCmsV3DomainsRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalDomain>> {
+        return this.api.cmsV3DomainsWithHttpInfo(param.after, param.archived, param.createdAfter, param.createdAt, param.createdBefore, param.limit, param.sort, param.updatedAfter, param.updatedAt, param.updatedBefore,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public cmsV3Domains(param: BasicApiCmsV3DomainsRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalDomain> {
+        return this.api.cmsV3Domains(param.after, param.archived, param.createdAfter, param.createdAt, param.createdBefore, param.limit, param.sort, param.updatedAfter, param.updatedAt, param.updatedBefore,  options).toPromise();
     }
 
     /**
@@ -102,7 +116,7 @@ export class ObjectDomainsApi {
      * Get a single domain
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: DomainsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<Domain>> {
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<Domain>> {
         return this.api.getByIdWithHttpInfo(param.domainId,  options).toPromise();
     }
 
@@ -111,26 +125,8 @@ export class ObjectDomainsApi {
      * Get a single domain
      * @param param the request object
      */
-    public getById(param: DomainsApiGetByIdRequest, options?: ConfigurationOptions): Promise<Domain> {
+    public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<Domain> {
         return this.api.getById(param.domainId,  options).toPromise();
-    }
-
-    /**
-     * Returns all existing domains that have been created. Results can be limited and filtered by creation or updated date.
-     * Get current domains
-     * @param param the request object
-     */
-    public getPageWithHttpInfo(param: DomainsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalDomainForwardPaging>> {
-        return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
-    }
-
-    /**
-     * Returns all existing domains that have been created. Results can be limited and filtered by creation or updated date.
-     * Get current domains
-     * @param param the request object
-     */
-    public getPage(param: DomainsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalDomainForwardPaging> {
-        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
     }
 
 }

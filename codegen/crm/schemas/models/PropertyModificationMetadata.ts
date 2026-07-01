@@ -13,21 +13,21 @@
 
 export class PropertyModificationMetadata {
     /**
-    * 
+    * Indicates whether the property can be archived.
     */
-    'readOnlyOptions'?: boolean;
+    'archivable': boolean;
     /**
-    * 
-    */
-    'readOnlyValue': boolean;
-    /**
-    * 
+    * Indicates whether the property\'s definition is read-only.
     */
     'readOnlyDefinition': boolean;
     /**
-    * 
+    * Indicates whether the property\'s options are read-only.
     */
-    'archivable': boolean;
+    'readOnlyOptions'?: boolean;
+    /**
+    * Indicates whether the property\'s value is read-only.
+    */
+    'readOnlyValue': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,14 +35,8 @@ export class PropertyModificationMetadata {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "readOnlyOptions",
-            "baseName": "readOnlyOptions",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "readOnlyValue",
-            "baseName": "readOnlyValue",
+            "name": "archivable",
+            "baseName": "archivable",
             "type": "boolean",
             "format": ""
         },
@@ -53,8 +47,14 @@ export class PropertyModificationMetadata {
             "format": ""
         },
         {
-            "name": "archivable",
-            "baseName": "archivable",
+            "name": "readOnlyOptions",
+            "baseName": "readOnlyOptions",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "readOnlyValue",
+            "baseName": "readOnlyValue",
             "type": "boolean",
             "format": ""
         }    ];

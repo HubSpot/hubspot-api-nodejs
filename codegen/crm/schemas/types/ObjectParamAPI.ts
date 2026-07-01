@@ -5,239 +5,333 @@ import { AssociationDefinition } from '../models/AssociationDefinition';
 import { AssociationDefinitionEgg } from '../models/AssociationDefinitionEgg';
 import { CollectionResponseObjectSchemaNoPaging } from '../models/CollectionResponseObjectSchemaNoPaging';
 import { ObjectSchema } from '../models/ObjectSchema';
+import { ObjectSchemaBatchReadRequest } from '../models/ObjectSchemaBatchReadRequest';
 import { ObjectSchemaEgg } from '../models/ObjectSchemaEgg';
 import { ObjectTypeDefinition } from '../models/ObjectTypeDefinition';
 import { ObjectTypeDefinitionPatch } from '../models/ObjectTypeDefinitionPatch';
 
-import { ObservableCoreApi } from "./ObservableAPI";
-import { CoreApiRequestFactory, CoreApiResponseProcessor} from "../apis/CoreApi";
+import { ObservableAdvancedApi } from "./ObservableAPI";
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
 
-export interface CoreApiArchiveRequest {
+export interface AdvancedApiCreateAssociationRequest {
     /**
      * Fully qualified name or object type ID of your schema.
      * Defaults to: undefined
      * @type string
-     * @memberof CoreApiarchive
-     */
-    objectType: string
-    /**
-     * Whether to return only results that have been archived.
-     * Defaults to: false
-     * @type boolean
-     * @memberof CoreApiarchive
-     */
-    archived?: boolean
-}
-
-export interface CoreApiArchiveAssociationRequest {
-    /**
-     * Fully qualified name or object type ID of your schema.
-     * Defaults to: undefined
-     * @type string
-     * @memberof CoreApiarchiveAssociation
-     */
-    objectType: string
-    /**
-     * Unique ID of the association to remove.
-     * Defaults to: undefined
-     * @type string
-     * @memberof CoreApiarchiveAssociation
-     */
-    associationIdentifier: string
-}
-
-export interface CoreApiCreateRequest {
-    /**
-     * Object schema definition, including properties and associations.
-     * @type ObjectSchemaEgg
-     * @memberof CoreApicreate
-     */
-    objectSchemaEgg: ObjectSchemaEgg
-}
-
-export interface CoreApiCreateAssociationRequest {
-    /**
-     * Fully qualified name or object type ID of your schema.
-     * Defaults to: undefined
-     * @type string
-     * @memberof CoreApicreateAssociation
+     * @memberof AdvancedApicreateAssociation
      */
     objectType: string
     /**
      * Attributes that define the association.
      * @type AssociationDefinitionEgg
-     * @memberof CoreApicreateAssociation
+     * @memberof AdvancedApicreateAssociation
      */
     associationDefinitionEgg: AssociationDefinitionEgg
 }
 
-export interface CoreApiGetAllRequest {
+export class ObjectAdvancedApi {
+    private api: ObservableAdvancedApi
+
+    public constructor(configuration: Configuration, requestFactory?: AdvancedApiRequestFactory, responseProcessor?: AdvancedApiResponseProcessor) {
+        this.api = new ObservableAdvancedApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Create a new association between the specified object type and another object type. This operation requires the definition of the association attributes, such as the primary and target object type IDs.
+     * Create an association for a specified object type.
+     * @param param the request object
+     */
+    public createAssociationWithHttpInfo(param: AdvancedApiCreateAssociationRequest, options?: ConfigurationOptions): Promise<HttpInfo<AssociationDefinition>> {
+        return this.api.createAssociationWithHttpInfo(param.objectType, param.associationDefinitionEgg,  options).toPromise();
+    }
+
+    /**
+     * Create a new association between the specified object type and another object type. This operation requires the definition of the association attributes, such as the primary and target object type IDs.
+     * Create an association for a specified object type.
+     * @param param the request object
+     */
+    public createAssociation(param: AdvancedApiCreateAssociationRequest, options?: ConfigurationOptions): Promise<AssociationDefinition> {
+        return this.api.createAssociation(param.objectType, param.associationDefinitionEgg,  options).toPromise();
+    }
+
+}
+
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+
+export interface BasicApiArchiveRequest {
+    /**
+     * Fully qualified name or object type ID of your schema.
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiarchive
+     */
+    objectType: string
     /**
      * Whether to return only results that have been archived.
      * Defaults to: false
      * @type boolean
-     * @memberof CoreApigetAll
+     * @memberof BasicApiarchive
      */
     archived?: boolean
 }
 
-export interface CoreApiGetByIdRequest {
+export interface BasicApiArchiveAssociationRequest {
+    /**
+     * Unique ID of the association to remove.
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiarchiveAssociation
+     */
+    associationIdentifier: string
     /**
      * Fully qualified name or object type ID of your schema.
      * Defaults to: undefined
      * @type string
-     * @memberof CoreApigetById
+     * @memberof BasicApiarchiveAssociation
      */
     objectType: string
 }
 
-export interface CoreApiUpdateRequest {
+export interface BasicApiCreateRequest {
+    /**
+     * Object schema definition, including properties and associations.
+     * @type ObjectSchemaEgg
+     * @memberof BasicApicreate
+     */
+    objectSchemaEgg: ObjectSchemaEgg
+}
+
+export interface BasicApiGetAllRequest {
+    /**
+     * Whether to return only results that have been archived.
+     * Defaults to: false
+     * @type boolean
+     * @memberof BasicApigetAll
+     */
+    archived?: boolean
+    /**
+     * 
+     * Defaults to: true
+     * @type boolean
+     * @memberof BasicApigetAll
+     */
+    includeAssociationDefinitions?: boolean
+    /**
+     * 
+     * Defaults to: true
+     * @type boolean
+     * @memberof BasicApigetAll
+     */
+    includeAuditMetadata?: boolean
+    /**
+     * 
+     * Defaults to: true
+     * @type boolean
+     * @memberof BasicApigetAll
+     */
+    includePropertyDefinitions?: boolean
+}
+
+export interface BasicApiGetByIdRequest {
     /**
      * Fully qualified name or object type ID of your schema.
      * Defaults to: undefined
      * @type string
-     * @memberof CoreApiupdate
+     * @memberof BasicApigetById
+     */
+    objectType: string
+    /**
+     * 
+     * Defaults to: true
+     * @type boolean
+     * @memberof BasicApigetById
+     */
+    includeAssociationDefinitions?: boolean
+    /**
+     * 
+     * Defaults to: true
+     * @type boolean
+     * @memberof BasicApigetById
+     */
+    includeAuditMetadata?: boolean
+    /**
+     * 
+     * Defaults to: true
+     * @type boolean
+     * @memberof BasicApigetById
+     */
+    includePropertyDefinitions?: boolean
+}
+
+export interface BasicApiUpdateRequest {
+    /**
+     * Fully qualified name or object type ID of your schema.
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiupdate
      */
     objectType: string
     /**
      * Attributes to update in your schema.
      * @type ObjectTypeDefinitionPatch
-     * @memberof CoreApiupdate
+     * @memberof BasicApiupdate
      */
     objectTypeDefinitionPatch: ObjectTypeDefinitionPatch
 }
 
-export class ObjectCoreApi {
-    private api: ObservableCoreApi
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
 
-    public constructor(configuration: Configuration, requestFactory?: CoreApiRequestFactory, responseProcessor?: CoreApiResponseProcessor) {
-        this.api = new ObservableCoreApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Deletes a schema. Any existing records of this schema must be deleted **first**. Otherwise this call will fail.
-     * Delete a schema
+     * Remove a custom object schema from the account using its object type ID or fully qualified name.
+     * Delete the schema of a specified custom object.
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: CoreApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.objectType, param.archived,  options).toPromise();
     }
 
     /**
-     * Deletes a schema. Any existing records of this schema must be deleted **first**. Otherwise this call will fail.
-     * Delete a schema
+     * Remove a custom object schema from the account using its object type ID or fully qualified name.
+     * Delete the schema of a specified custom object.
      * @param param the request object
      */
-    public archive(param: CoreApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
+    public archive(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.objectType, param.archived,  options).toPromise();
     }
 
     /**
-     * Removes an existing association from a schema.
-     * Remove an association
+     * Remove an association between two object types identified by the association identifier and object type. This operation is irreversible and will permanently delete the specified association.
+     * Delete an existing association for a specified object type.
      * @param param the request object
      */
-    public archiveAssociationWithHttpInfo(param: CoreApiArchiveAssociationRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.archiveAssociationWithHttpInfo(param.objectType, param.associationIdentifier,  options).toPromise();
+    public archiveAssociationWithHttpInfo(param: BasicApiArchiveAssociationRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.archiveAssociationWithHttpInfo(param.associationIdentifier, param.objectType,  options).toPromise();
     }
 
     /**
-     * Removes an existing association from a schema.
-     * Remove an association
+     * Remove an association between two object types identified by the association identifier and object type. This operation is irreversible and will permanently delete the specified association.
+     * Delete an existing association for a specified object type.
      * @param param the request object
      */
-    public archiveAssociation(param: CoreApiArchiveAssociationRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.archiveAssociation(param.objectType, param.associationIdentifier,  options).toPromise();
+    public archiveAssociation(param: BasicApiArchiveAssociationRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.archiveAssociation(param.associationIdentifier, param.objectType,  options).toPromise();
     }
 
     /**
-     * Define a new object schema, along with custom properties and associations. The entire object schema, including its object type ID, properties, and associations will be returned in the response.
-     * Create a new schema
+     * Create a new custom object schema by defining its properties and associations.
+     * Create a new custom object schema.
      * @param param the request object
      */
-    public createWithHttpInfo(param: CoreApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<ObjectSchema>> {
+    public createWithHttpInfo(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<ObjectSchema>> {
         return this.api.createWithHttpInfo(param.objectSchemaEgg,  options).toPromise();
     }
 
     /**
-     * Define a new object schema, along with custom properties and associations. The entire object schema, including its object type ID, properties, and associations will be returned in the response.
-     * Create a new schema
+     * Create a new custom object schema by defining its properties and associations.
+     * Create a new custom object schema.
      * @param param the request object
      */
-    public create(param: CoreApiCreateRequest, options?: ConfigurationOptions): Promise<ObjectSchema> {
+    public create(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<ObjectSchema> {
         return this.api.create(param.objectSchemaEgg,  options).toPromise();
     }
 
     /**
-     * Defines a new association between the primary schema\'s object type and other object types.
-     * Create an association
+     * Retrieve all custom object schemas, with options to include property definitions, association definitions, and audit metadata.
+     * Retrieve all custom object schemas.
      * @param param the request object
      */
-    public createAssociationWithHttpInfo(param: CoreApiCreateAssociationRequest, options?: ConfigurationOptions): Promise<HttpInfo<AssociationDefinition>> {
-        return this.api.createAssociationWithHttpInfo(param.objectType, param.associationDefinitionEgg,  options).toPromise();
+    public getAllWithHttpInfo(param: BasicApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseObjectSchemaNoPaging>> {
+        return this.api.getAllWithHttpInfo(param.archived, param.includeAssociationDefinitions, param.includeAuditMetadata, param.includePropertyDefinitions,  options).toPromise();
     }
 
     /**
-     * Defines a new association between the primary schema\'s object type and other object types.
-     * Create an association
+     * Retrieve all custom object schemas, with options to include property definitions, association definitions, and audit metadata.
+     * Retrieve all custom object schemas.
      * @param param the request object
      */
-    public createAssociation(param: CoreApiCreateAssociationRequest, options?: ConfigurationOptions): Promise<AssociationDefinition> {
-        return this.api.createAssociation(param.objectType, param.associationDefinitionEgg,  options).toPromise();
+    public getAll(param: BasicApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseObjectSchemaNoPaging> {
+        return this.api.getAll(param.archived, param.includeAssociationDefinitions, param.includeAuditMetadata, param.includePropertyDefinitions,  options).toPromise();
     }
 
     /**
-     * Returns all object schemas that have been defined for your account.
-     * Get all schemas
+     * Retrieve details of a custom object schema, including its properties and associations, using the object type ID or fully qualified name.
+     * Retrieve the schema of a specified custom object.
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: CoreApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseObjectSchemaNoPaging>> {
-        return this.api.getAllWithHttpInfo(param.archived,  options).toPromise();
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<ObjectSchema>> {
+        return this.api.getByIdWithHttpInfo(param.objectType, param.includeAssociationDefinitions, param.includeAuditMetadata, param.includePropertyDefinitions,  options).toPromise();
     }
 
     /**
-     * Returns all object schemas that have been defined for your account.
-     * Get all schemas
+     * Retrieve details of a custom object schema, including its properties and associations, using the object type ID or fully qualified name.
+     * Retrieve the schema of a specified custom object.
      * @param param the request object
      */
-    public getAll(param: CoreApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseObjectSchemaNoPaging> {
-        return this.api.getAll(param.archived,  options).toPromise();
+    public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<ObjectSchema> {
+        return this.api.getById(param.objectType, param.includeAssociationDefinitions, param.includeAuditMetadata, param.includePropertyDefinitions,  options).toPromise();
     }
 
     /**
-     * Returns an existing object schema.
-     * Get an existing schema
+     * Update attributes of a custom object schema, such as properties and labels, using the object type ID or fully qualified name.
+     * Update the schema of a specified custom object.
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: CoreApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<ObjectSchema>> {
-        return this.api.getByIdWithHttpInfo(param.objectType,  options).toPromise();
-    }
-
-    /**
-     * Returns an existing object schema.
-     * Get an existing schema
-     * @param param the request object
-     */
-    public getById(param: CoreApiGetByIdRequest, options?: ConfigurationOptions): Promise<ObjectSchema> {
-        return this.api.getById(param.objectType,  options).toPromise();
-    }
-
-    /**
-     * Update the details for an existing object schema.
-     * Update a schema
-     * @param param the request object
-     */
-    public updateWithHttpInfo(param: CoreApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<ObjectTypeDefinition>> {
+    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<ObjectTypeDefinition>> {
         return this.api.updateWithHttpInfo(param.objectType, param.objectTypeDefinitionPatch,  options).toPromise();
     }
 
     /**
-     * Update the details for an existing object schema.
-     * Update a schema
+     * Update attributes of a custom object schema, such as properties and labels, using the object type ID or fully qualified name.
+     * Update the schema of a specified custom object.
      * @param param the request object
      */
-    public update(param: CoreApiUpdateRequest, options?: ConfigurationOptions): Promise<ObjectTypeDefinition> {
+    public update(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<ObjectTypeDefinition> {
         return this.api.update(param.objectType, param.objectTypeDefinitionPatch,  options).toPromise();
+    }
+
+}
+
+import { ObservableBatchApi } from "./ObservableAPI";
+import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
+
+export interface BatchApiCrmObjectSchemasV3SchemasBatchReadRequest {
+    /**
+     * 
+     * @type ObjectSchemaBatchReadRequest
+     * @memberof BatchApicrmObjectSchemasV3SchemasBatchRead
+     */
+    objectSchemaBatchReadRequest: ObjectSchemaBatchReadRequest
+}
+
+export class ObjectBatchApi {
+    private api: ObservableBatchApi
+
+    public constructor(configuration: Configuration, requestFactory?: BatchApiRequestFactory, responseProcessor?: BatchApiResponseProcessor) {
+        this.api = new ObservableBatchApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Retrieve details of multiple custom object schemas by providing a batch request with specified inputs. This operation allows you to fetch schema information, including properties and associations, for multiple custom objects in a single API call.
+     * Retrieve multiple custom object schemas in a batch request.
+     * @param param the request object
+     */
+    public crmObjectSchemasV3SchemasBatchReadWithHttpInfo(param: BatchApiCrmObjectSchemasV3SchemasBatchReadRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseObjectSchemaNoPaging>> {
+        return this.api.crmObjectSchemasV3SchemasBatchReadWithHttpInfo(param.objectSchemaBatchReadRequest,  options).toPromise();
+    }
+
+    /**
+     * Retrieve details of multiple custom object schemas by providing a batch request with specified inputs. This operation allows you to fetch schema information, including properties and associations, for multiple custom objects in a single API call.
+     * Retrieve multiple custom object schemas in a batch request.
+     * @param param the request object
+     */
+    public crmObjectSchemasV3SchemasBatchRead(param: BatchApiCrmObjectSchemasV3SchemasBatchReadRequest, options?: ConfigurationOptions): Promise<CollectionResponseObjectSchemaNoPaging> {
+        return this.api.crmObjectSchemasV3SchemasBatchRead(param.objectSchemaBatchReadRequest,  options).toPromise();
     }
 
 }

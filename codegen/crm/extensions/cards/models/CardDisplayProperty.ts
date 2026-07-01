@@ -21,6 +21,10 @@ export class CardDisplayProperty {
     */
     'dataType': CardDisplayPropertyDataTypeEnum;
     /**
+    * The label for this property as you\'d like it displayed to users.
+    */
+    'label': string;
+    /**
     * An internal identifier for this property. This value must be unique TODO.
     */
     'name': string;
@@ -28,10 +32,6 @@ export class CardDisplayProperty {
     * An array of available options that can be displayed. Only used in when `dataType` is `STATUS`.
     */
     'options': Array<DisplayOption>;
-    /**
-    * The label for this property as you\'d like it displayed to users.
-    */
-    'label': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -45,6 +45,12 @@ export class CardDisplayProperty {
             "format": ""
         },
         {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "name",
             "baseName": "name",
             "type": "string",
@@ -54,12 +60,6 @@ export class CardDisplayProperty {
             "name": "options",
             "baseName": "options",
             "type": "Array<DisplayOption>",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
             "format": ""
         }    ];
 
@@ -79,7 +79,7 @@ export enum CardDisplayPropertyDataTypeEnum {
     Email = 'EMAIL',
     Link = 'LINK',
     Numeric = 'NUMERIC',
-    String = 'STRING',
-    Status = 'STATUS'
+    Status = 'STATUS',
+    String = 'STRING'
 }
 

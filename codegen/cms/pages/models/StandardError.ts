@@ -13,41 +13,41 @@
 import { ErrorDetail } from '../models/ErrorDetail';
 
 /**
-* Model definition for a standard error.
+* Represents a standard error response in the HubSpot API, providing detailed information about an error that occurred during an API request.
 */
 export class StandardError {
-    /**
-    * Error subcategory.
-    */
-    'subCategory'?: any;
-    /**
-    * Error context.
-    */
-    'context': { [key: string]: Array<string>; };
-    /**
-    * Error links.
-    */
-    'links': { [key: string]: string; };
-    /**
-    * Error ID.
-    */
-    'id'?: string;
     /**
     * Error category.
     */
     'category': string;
     /**
-    * Error message.
+    * Error context.
     */
-    'message': string;
+    'context': { [key: string]: Array<string>; };
     /**
     * List of error details.
     */
     'errors': Array<ErrorDetail>;
     /**
+    * Error ID.
+    */
+    'id'?: string;
+    /**
+    * Error links.
+    */
+    'links': { [key: string]: string; };
+    /**
+    * Error message.
+    */
+    'message': string;
+    /**
     * Error status.
     */
     'status': string;
+    /**
+    * Error subcategory.
+    */
+    'subCategory'?: any;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -55,9 +55,9 @@ export class StandardError {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "subCategory",
-            "baseName": "subCategory",
-            "type": "any",
+            "name": "category",
+            "baseName": "category",
+            "type": "string",
             "format": ""
         },
         {
@@ -67,9 +67,9 @@ export class StandardError {
             "format": ""
         },
         {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<ErrorDetail>",
             "format": ""
         },
         {
@@ -79,9 +79,9 @@ export class StandardError {
             "format": ""
         },
         {
-            "name": "category",
-            "baseName": "category",
-            "type": "string",
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
@@ -91,15 +91,15 @@ export class StandardError {
             "format": ""
         },
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<ErrorDetail>",
-            "format": ""
-        },
-        {
             "name": "status",
             "baseName": "status",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "subCategory",
+            "baseName": "subCategory",
+            "type": "any",
             "format": ""
         }    ];
 

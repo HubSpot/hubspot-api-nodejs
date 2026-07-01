@@ -17,16 +17,16 @@ import { ThrottlingSettings } from '../models/ThrottlingSettings';
 */
 export class SettingsResponse {
     /**
-    * When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
+    * When this subscription was created, formatted as a date-time string.
     */
     'createdAt': Date;
-    'throttling': ThrottlingSettings;
     /**
-    * A publicly available URL for HubSpot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
+    * A publicly available URL for HubSpot to call where event payloads will be delivered.
     */
     'targetUrl': string;
+    'throttling': ThrottlingSettings;
     /**
-    * When this subscription was last updated. Formatted as milliseconds from the [Unix epoch](#).
+    * When this subscription was last updated, formatted as a date-time string.
     */
     'updatedAt'?: Date;
 
@@ -42,15 +42,15 @@ export class SettingsResponse {
             "format": "date-time"
         },
         {
-            "name": "throttling",
-            "baseName": "throttling",
-            "type": "ThrottlingSettings",
-            "format": ""
-        },
-        {
             "name": "targetUrl",
             "baseName": "targetUrl",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "throttling",
+            "baseName": "throttling",
+            "type": "ThrottlingSettings",
             "format": ""
         },
         {

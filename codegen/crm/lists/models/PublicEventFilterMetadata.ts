@@ -10,11 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { PublicSurveyMonkeyValueFilterValueComparison } from '../models/PublicSurveyMonkeyValueFilterValueComparison';
+import { PublicEventFilterMetadataOperation } from '../models/PublicEventFilterMetadataOperation';
 
 export class PublicEventFilterMetadata {
+    'operation': PublicEventFilterMetadataOperation;
+    /**
+    * Specifies the property on which the operation is to be applied.
+    */
     'property': string;
-    'operation': PublicSurveyMonkeyValueFilterValueComparison;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -22,15 +25,15 @@ export class PublicEventFilterMetadata {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "property",
-            "baseName": "property",
-            "type": "string",
+            "name": "operation",
+            "baseName": "operation",
+            "type": "PublicEventFilterMetadataOperation",
             "format": ""
         },
         {
-            "name": "operation",
-            "baseName": "operation",
-            "type": "PublicSurveyMonkeyValueFilterValueComparison",
+            "name": "property",
+            "baseName": "property",
+            "type": "string",
             "format": ""
         }    ];
 

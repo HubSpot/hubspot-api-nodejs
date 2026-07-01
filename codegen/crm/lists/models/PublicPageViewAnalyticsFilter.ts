@@ -10,15 +10,28 @@
  * Do not edit the class manually.
  */
 
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
+import { PublicCtaAnalyticsFilterCoalescingRefineBy } from '../models/PublicCtaAnalyticsFilterCoalescingRefineBy';
+import { PublicCtaAnalyticsFilterPruningRefineBy } from '../models/PublicCtaAnalyticsFilterPruningRefineBy';
 
 export class PublicPageViewAnalyticsFilter {
-    'coalescingRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
+    'coalescingRefineBy'?: PublicCtaAnalyticsFilterCoalescingRefineBy;
+    /**
+    * Indicates whether tracking is enabled for the page view.
+    */
     'enableTracking'?: boolean;
-    'pruningRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
-    'pageUrl': string;
+    /**
+    * Indicates the type of filter being applied (PAGE_VIEW).
+    */
     'filterType': PublicPageViewAnalyticsFilterFilterTypeEnum;
+    /**
+    * Defines the operation to be applied within the filter (HAS_PAGEVIEW_EQ, HAS_PAGEVIEW_CONTAINS, HAS_PAGEVIEW_MATCHES_REGEX, NOT_HAS_PAGEVIEW_EQ, NOT_HAS_PAGEVIEW_CONTAINS).
+    */
     'operator': string;
+    /**
+    * The URL of the page to be used in the filter.
+    */
+    'pageUrl': string;
+    'pruningRefineBy'?: PublicCtaAnalyticsFilterPruningRefineBy;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,25 +41,13 @@ export class PublicPageViewAnalyticsFilter {
         {
             "name": "coalescingRefineBy",
             "baseName": "coalescingRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
+            "type": "PublicCtaAnalyticsFilterCoalescingRefineBy",
             "format": ""
         },
         {
             "name": "enableTracking",
             "baseName": "enableTracking",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "pruningRefineBy",
-            "baseName": "pruningRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
-            "name": "pageUrl",
-            "baseName": "pageUrl",
-            "type": "string",
             "format": ""
         },
         {
@@ -59,6 +60,18 @@ export class PublicPageViewAnalyticsFilter {
             "name": "operator",
             "baseName": "operator",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pageUrl",
+            "baseName": "pageUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pruningRefineBy",
+            "baseName": "pruningRefineBy",
+            "type": "PublicCtaAnalyticsFilterPruningRefineBy",
             "format": ""
         }    ];
 

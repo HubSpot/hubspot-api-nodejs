@@ -16,7 +16,7 @@
 */
 export class ThrottlingSettings {
     /**
-    * The maximum number of concurrent HTTP requests HubSpot will attempt to make to your app.
+    * The maximum number of HTTP requests HubSpot will attempt to make to your app in a given time frame determined by `period`. This is an integer value.
     */
     'maxConcurrentRequests': number;
 

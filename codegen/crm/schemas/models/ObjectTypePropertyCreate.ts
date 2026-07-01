@@ -16,31 +16,22 @@ import { OptionInput } from '../models/OptionInput';
 * Defines a property to create.
 */
 export class ObjectTypePropertyCreate {
-    'hidden'?: boolean;
-    /**
-    * Controls how the property options will be sorted in the HubSpot UI.
-    */
-    'optionSortStrategy'?: ObjectTypePropertyCreateOptionSortStrategyEnum;
-    /**
-    * The order that this property should be displayed in the HubSpot UI relative to other properties for this object type. Properties are displayed in order starting with the lowest positive integer value. A value of -1 will cause the property to be displayed **after** any positive values.
-    */
-    'displayOrder'?: number;
     /**
     * A description of the property that will be shown as help text in HubSpot.
     */
     'description'?: string;
     /**
-    * Whether the property will display the currency symbol in the HubSpot UI.
+    * The order that this property should be displayed in the HubSpot UI relative to other properties for this object type. Properties are displayed in order starting with the lowest positive integer value. A value of -1 will cause the property to be displayed **after** any positive values.
     */
-    'showCurrencySymbol'?: boolean;
+    'displayOrder'?: number;
     /**
-    * A human-readable property label that will be shown in HubSpot.
+    * Specifies the reference type for external options associated with the property.
     */
-    'label': string;
+    'externalOptionsReferenceType'?: string;
     /**
-    * The data type of the property.
+    * Controls how the property appears in HubSpot.
     */
-    'type': ObjectTypePropertyCreateTypeEnum;
+    'fieldType': string;
     /**
     * Whether the property can be used in a HubSpot form.
     */
@@ -50,37 +41,53 @@ export class ObjectTypePropertyCreate {
     */
     'groupName'?: string;
     /**
-    * Defines the options this property will return, e.g. OWNER would return name of users on the portal.
+    * Whether or not the property\'s value must be unique. Once set, this can\'t be changed.
     */
-    'referencedObjectType'?: string;
+    'hasUniqueValue'?: boolean;
     /**
-    * Controls how text properties are formatted in the HubSpot UI
+    * Hidden options won\'t be shown in HubSpot.
     */
-    'textDisplayHint'?: ObjectTypePropertyCreateTextDisplayHintEnum;
+    'hidden'?: boolean;
+    /**
+    * A human-readable property label that will be shown in HubSpot.
+    */
+    'label': string;
     /**
     * The internal property name, which must be used when referencing the property from the API.
     */
     'name': string;
     /**
+    * Controls how numeric properties are formatted in the HubSpot UI
+    */
+    'numberDisplayHint'?: ObjectTypePropertyCreateNumberDisplayHintEnum;
+    /**
+    * Controls how the property options will be sorted in the HubSpot UI.
+    */
+    'optionSortStrategy'?: ObjectTypePropertyCreateOptionSortStrategyEnum;
+    /**
     * A list of available options for the property. This field is only required for enumerated properties.
     */
     'options'?: Array<OptionInput>;
+    /**
+    * Defines the options this property will return, e.g. OWNER would return name of users on the portal.
+    */
+    'referencedObjectType'?: string;
     /**
     * Allow users to search for information entered to this field (limited to 3 properties)
     */
     'searchableInGlobalSearch'?: boolean;
     /**
-    * Controls how numeric properties are formatted in the HubSpot UI
+    * Whether the property will display the currency symbol in the HubSpot UI.
     */
-    'numberDisplayHint'?: ObjectTypePropertyCreateNumberDisplayHintEnum;
+    'showCurrencySymbol'?: boolean;
     /**
-    * Whether or not the property\'s value must be unique. Once set, this can\'t be changed.
+    * Controls how text properties are formatted in the HubSpot UI
     */
-    'hasUniqueValue'?: boolean;
+    'textDisplayHint'?: ObjectTypePropertyCreateTextDisplayHintEnum;
     /**
-    * Controls how the property appears in HubSpot.
+    * The data type of the property.
     */
-    'fieldType': string;
+    'type': ObjectTypePropertyCreateTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -88,15 +95,9 @@ export class ObjectTypePropertyCreate {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "hidden",
-            "baseName": "hidden",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "optionSortStrategy",
-            "baseName": "optionSortStrategy",
-            "type": "ObjectTypePropertyCreateOptionSortStrategyEnum",
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
             "format": ""
         },
         {
@@ -106,27 +107,15 @@ export class ObjectTypePropertyCreate {
             "format": "int32"
         },
         {
-            "name": "description",
-            "baseName": "description",
+            "name": "externalOptionsReferenceType",
+            "baseName": "externalOptionsReferenceType",
             "type": "string",
             "format": ""
         },
         {
-            "name": "showCurrencySymbol",
-            "baseName": "showCurrencySymbol",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
+            "name": "fieldType",
+            "baseName": "fieldType",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "ObjectTypePropertyCreateTypeEnum",
             "format": ""
         },
         {
@@ -142,15 +131,21 @@ export class ObjectTypePropertyCreate {
             "format": ""
         },
         {
-            "name": "referencedObjectType",
-            "baseName": "referencedObjectType",
-            "type": "string",
+            "name": "hasUniqueValue",
+            "baseName": "hasUniqueValue",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "textDisplayHint",
-            "baseName": "textDisplayHint",
-            "type": "ObjectTypePropertyCreateTextDisplayHintEnum",
+            "name": "hidden",
+            "baseName": "hidden",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
             "format": ""
         },
         {
@@ -160,9 +155,27 @@ export class ObjectTypePropertyCreate {
             "format": ""
         },
         {
+            "name": "numberDisplayHint",
+            "baseName": "numberDisplayHint",
+            "type": "ObjectTypePropertyCreateNumberDisplayHintEnum",
+            "format": ""
+        },
+        {
+            "name": "optionSortStrategy",
+            "baseName": "optionSortStrategy",
+            "type": "ObjectTypePropertyCreateOptionSortStrategyEnum",
+            "format": ""
+        },
+        {
             "name": "options",
             "baseName": "options",
             "type": "Array<OptionInput>",
+            "format": ""
+        },
+        {
+            "name": "referencedObjectType",
+            "baseName": "referencedObjectType",
+            "type": "string",
             "format": ""
         },
         {
@@ -172,21 +185,21 @@ export class ObjectTypePropertyCreate {
             "format": ""
         },
         {
-            "name": "numberDisplayHint",
-            "baseName": "numberDisplayHint",
-            "type": "ObjectTypePropertyCreateNumberDisplayHintEnum",
-            "format": ""
-        },
-        {
-            "name": "hasUniqueValue",
-            "baseName": "hasUniqueValue",
+            "name": "showCurrencySymbol",
+            "baseName": "showCurrencySymbol",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "fieldType",
-            "baseName": "fieldType",
-            "type": "string",
+            "name": "textDisplayHint",
+            "baseName": "textDisplayHint",
+            "type": "ObjectTypePropertyCreateTextDisplayHintEnum",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "ObjectTypePropertyCreateTypeEnum",
             "format": ""
         }    ];
 
@@ -198,34 +211,35 @@ export class ObjectTypePropertyCreate {
     }
 }
 
+export enum ObjectTypePropertyCreateNumberDisplayHintEnum {
+    Currency = 'currency',
+    Duration = 'duration',
+    Formatted = 'formatted',
+    Percentage = 'percentage',
+    Probability = 'probability',
+    Unformatted = 'unformatted'
+}
 export enum ObjectTypePropertyCreateOptionSortStrategyEnum {
-    DisplayOrder = 'DISPLAY_ORDER',
-    Alphabetical = 'ALPHABETICAL'
+    Alphabetical = 'ALPHABETICAL',
+    DisplayOrder = 'DISPLAY_ORDER'
+}
+export enum ObjectTypePropertyCreateTextDisplayHintEnum {
+    DomainName = 'domain_name',
+    Email = 'email',
+    IpAddress = 'ip_address',
+    MultiLine = 'multi_line',
+    PhoneNumber = 'phone_number',
+    PhysicalAddress = 'physical_address',
+    PostalCode = 'postal_code',
+    UnformattedSingleLine = 'unformatted_single_line'
 }
 export enum ObjectTypePropertyCreateTypeEnum {
-    String = 'string',
-    Number = 'number',
+    Bool = 'bool',
     Date = 'date',
     Datetime = 'datetime',
     Enumeration = 'enumeration',
-    Bool = 'bool'
-}
-export enum ObjectTypePropertyCreateTextDisplayHintEnum {
-    UnformattedSingleLine = 'unformatted_single_line',
-    MultiLine = 'multi_line',
-    Email = 'email',
+    Number = 'number',
     PhoneNumber = 'phone_number',
-    DomainName = 'domain_name',
-    IpAddress = 'ip_address',
-    PhysicalAddress = 'physical_address',
-    PostalCode = 'postal_code'
-}
-export enum ObjectTypePropertyCreateNumberDisplayHintEnum {
-    Unformatted = 'unformatted',
-    Formatted = 'formatted',
-    Currency = 'currency',
-    Percentage = 'percentage',
-    Duration = 'duration',
-    Probability = 'probability'
+    String = 'string'
 }
 

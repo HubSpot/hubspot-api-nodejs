@@ -23,10 +23,10 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Remove the associations between all pairs of objects identified in the request body.
-     * Archive a batch of associations
-     * @param fromObjectType
-     * @param toObjectType
+     * Batch delete associations for objects
+     * Remove associations
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociation
      */
     public archiveWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
@@ -47,10 +47,10 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Remove the associations between all pairs of objects identified in the request body.
-     * Archive a batch of associations
-     * @param fromObjectType
-     * @param toObjectType
+     * Batch delete associations for objects
+     * Remove associations
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociation
      */
     public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: PromiseConfigurationOptions): Promise<void> {
@@ -71,10 +71,10 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Associate all pairs of objects identified in the request body.
-     * Create a batch of associations
-     * @param fromObjectType
-     * @param toObjectType
+     * Batch create associations for objects
+     * Associate records (labelled)
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociation
      */
     public createWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors>> {
@@ -95,10 +95,10 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Associate all pairs of objects identified in the request body.
-     * Create a batch of associations
-     * @param fromObjectType
-     * @param toObjectType
+     * Batch create associations for objects
+     * Associate records (labelled)
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociation
      */
     public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: PromiseConfigurationOptions): Promise<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
@@ -119,10 +119,10 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Get the IDs of all `{toObjectType}` objects associated with those specified in the request body.
-     * Read a batch of associations
-     * @param fromObjectType
-     * @param toObjectType
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
+     * Retrieve associations
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicObjectId
      */
     public readWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti>> {
@@ -143,10 +143,10 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Get the IDs of all `{toObjectType}` objects associated with those specified in the request body.
-     * Read a batch of associations
-     * @param fromObjectType
-     * @param toObjectType
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
+     * Retrieve associations
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicObjectId
      */
     public read(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: PromiseConfigurationOptions): Promise<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {

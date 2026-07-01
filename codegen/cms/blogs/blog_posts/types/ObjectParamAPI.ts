@@ -9,14 +9,14 @@ import { BatchResponseBlogPost } from '../models/BatchResponseBlogPost';
 import { BatchResponseBlogPostWithErrors } from '../models/BatchResponseBlogPostWithErrors';
 import { BlogPost } from '../models/BlogPost';
 import { BlogPostLanguageCloneRequestVNext } from '../models/BlogPostLanguageCloneRequestVNext';
+import { BlogPostVersion } from '../models/BlogPostVersion';
 import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
-import { CollectionResponseWithTotalVersionBlogPost } from '../models/CollectionResponseWithTotalVersionBlogPost';
+import { CollectionResponseWithTotalBlogPostVersion } from '../models/CollectionResponseWithTotalBlogPostVersion';
 import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
 import { ContentScheduleRequestVNext } from '../models/ContentScheduleRequestVNext';
 import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
 import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
 import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';
-import { VersionBlogPost } from '../models/VersionBlogPost';
 
 import { ObservableBasicApi } from "./ObservableAPI";
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -30,7 +30,7 @@ export interface BasicApiArchiveRequest {
      */
     objectId: string
     /**
-     * Whether to return only results that have been deleted.
+     * Whether to return only results that have been archived.
      * Defaults to: undefined
      * @type boolean
      * @memberof BasicApiarchive
@@ -40,7 +40,7 @@ export interface BasicApiArchiveRequest {
 
 export interface BasicApiCloneRequest {
     /**
-     * The JSON representation of the ContentCloneRequest object.
+     * 
      * @type ContentCloneRequestVNext
      * @memberof BasicApiclone
      */
@@ -49,7 +49,7 @@ export interface BasicApiCloneRequest {
 
 export interface BasicApiCreateRequest {
     /**
-     * The JSON representation of a new Blog Post.
+     * 
      * @type BlogPost
      * @memberof BasicApicreate
      */
@@ -92,68 +92,12 @@ export interface BasicApiGetDraftByIdRequest {
 
 export interface BasicApiGetPageRequest {
     /**
-     * Only return blog posts created at exactly the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof BasicApigetPage
-     */
-    createdAt?: Date
-    /**
-     * Only return blog posts created after the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof BasicApigetPage
-     */
-    createdAfter?: Date
-    /**
-     * Only return blog posts created before the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof BasicApigetPage
-     */
-    createdBefore?: Date
-    /**
-     * Only return blog posts last updated at exactly the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof BasicApigetPage
-     */
-    updatedAt?: Date
-    /**
-     * Only return blog posts last updated after the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof BasicApigetPage
-     */
-    updatedAfter?: Date
-    /**
-     * Only return blog posts last updated before the specified time.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof BasicApigetPage
-     */
-    updatedBefore?: Date
-    /**
-     * Specifies which fields to use for sorting results. Valid fields are &#x60;createdAt&#x60; (default), &#x60;name&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetPage
-     */
-    sort?: Array<string>
-    /**
-     * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPage
      */
     after?: string
-    /**
-     * The maximum number of results to return. Default is 20.
-     * Defaults to: undefined
-     * @type number
-     * @memberof BasicApigetPage
-     */
-    limit?: number
     /**
      * Specifies whether to return deleted blog posts. Defaults to &#x60;false&#x60;.
      * Defaults to: undefined
@@ -162,60 +106,68 @@ export interface BasicApiGetPageRequest {
      */
     archived?: boolean
     /**
-     * 
+     * Only return blog posts created after the specified time.
+     * Defaults to: undefined
+     * @type Date
+     * @memberof BasicApigetPage
+     */
+    createdAfter?: Date
+    /**
+     * Only return blog posts created at exactly the specified time.
+     * Defaults to: undefined
+     * @type Date
+     * @memberof BasicApigetPage
+     */
+    createdAt?: Date
+    /**
+     * Only return blog posts created before the specified time.
+     * Defaults to: undefined
+     * @type Date
+     * @memberof BasicApigetPage
+     */
+    createdBefore?: Date
+    /**
+     * The maximum number of results to return. Default is 20.
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApigetPage
+     */
+    limit?: number
+    /**
+     * Specific properties to return from the posts
      * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPage
      */
     property?: string
-}
-
-export interface BasicApiGetPreviousVersionRequest {
     /**
-     * The ID of the blog post.
+     * Specifies which fields to use for sorting results. Valid fields are &#x60;createdAt&#x60; (default), &#x60;name&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;.
      * Defaults to: undefined
-     * @type string
-     * @memberof BasicApigetPreviousVersion
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetPage
      */
-    objectId: string
+    sort?: Array<string>
     /**
-     * The ID of the version to retrieve.
+     * Only return blog posts last updated after the specified time.
      * Defaults to: undefined
-     * @type string
-     * @memberof BasicApigetPreviousVersion
+     * @type Date
+     * @memberof BasicApigetPage
      */
-    revisionId: string
-}
-
-export interface BasicApiGetPreviousVersionsRequest {
+    updatedAfter?: Date
     /**
-     * The ID of the blog post to retrieve previous versions of.
+     * Only return blog posts last updated at exactly the specified time.
      * Defaults to: undefined
-     * @type string
-     * @memberof BasicApigetPreviousVersions
+     * @type Date
+     * @memberof BasicApigetPage
      */
-    objectId: string
+    updatedAt?: Date
     /**
-     * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Only return blog posts last updated before the specified time.
      * Defaults to: undefined
-     * @type string
-     * @memberof BasicApigetPreviousVersions
+     * @type Date
+     * @memberof BasicApigetPage
      */
-    after?: string
-    /**
-     * 
-     * Defaults to: undefined
-     * @type string
-     * @memberof BasicApigetPreviousVersions
-     */
-    before?: string
-    /**
-     * The maximum number of results to return. Default is 100.
-     * Defaults to: undefined
-     * @type number
-     * @memberof BasicApigetPreviousVersions
-     */
-    limit?: number
+    updatedBefore?: Date
 }
 
 export interface BasicApiPushLiveRequest {
@@ -238,43 +190,9 @@ export interface BasicApiResetDraftRequest {
     objectId: string
 }
 
-export interface BasicApiRestorePreviousVersionRequest {
-    /**
-     * The ID of the blog post.
-     * Defaults to: undefined
-     * @type string
-     * @memberof BasicApirestorePreviousVersion
-     */
-    objectId: string
-    /**
-     * The ID of the version to restore the blog post to.
-     * Defaults to: undefined
-     * @type string
-     * @memberof BasicApirestorePreviousVersion
-     */
-    revisionId: string
-}
-
-export interface BasicApiRestorePreviousVersionToDraftRequest {
-    /**
-     * The ID of the blog post.
-     * Defaults to: undefined
-     * @type string
-     * @memberof BasicApirestorePreviousVersionToDraft
-     */
-    objectId: string
-    /**
-     * The ID of the version to restore the blog post to.
-     * Defaults to: undefined
-     * @type number
-     * @memberof BasicApirestorePreviousVersionToDraft
-     */
-    revisionId: number
-}
-
 export interface BasicApiScheduleRequest {
     /**
-     * The JSON representation of the ContentScheduleRequestVNext object.
+     * 
      * @type ContentScheduleRequestVNext
      * @memberof BasicApischedule
      */
@@ -290,7 +208,7 @@ export interface BasicApiUpdateRequest {
      */
     objectId: string
     /**
-     * The JSON representation of the updated Blog Post.
+     * 
      * @type BlogPost
      * @memberof BasicApiupdate
      */
@@ -313,7 +231,7 @@ export interface BasicApiUpdateDraftRequest {
      */
     objectId: string
     /**
-     * The JSON representation of the updated Blog Post to be applied to the draft.
+     * 
      * @type BlogPost
      * @memberof BasicApiupdateDraft
      */
@@ -423,7 +341,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getPageWithHttpInfo(param: BasicApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalBlogPostForwardPaging>> {
-        return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
+        return this.api.getPageWithHttpInfo(param.after, param.archived, param.createdAfter, param.createdAt, param.createdBefore, param.limit, param.property, param.sort, param.updatedAfter, param.updatedAt, param.updatedBefore,  options).toPromise();
     }
 
     /**
@@ -432,43 +350,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getPage(param: BasicApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalBlogPostForwardPaging> {
-        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
-    }
-
-    /**
-     * Retrieve a previous version of a blog post.
-     * Retrieve a previous version of a blog post
-     * @param param the request object
-     */
-    public getPreviousVersionWithHttpInfo(param: BasicApiGetPreviousVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionBlogPost>> {
-        return this.api.getPreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
-    }
-
-    /**
-     * Retrieve a previous version of a blog post.
-     * Retrieve a previous version of a blog post
-     * @param param the request object
-     */
-    public getPreviousVersion(param: BasicApiGetPreviousVersionRequest, options?: ConfigurationOptions): Promise<VersionBlogPost> {
-        return this.api.getPreviousVersion(param.objectId, param.revisionId,  options).toPromise();
-    }
-
-    /**
-     * Retrieve all the previous versions of a blog post.
-     * Retrieves all previous versions of a post
-     * @param param the request object
-     */
-    public getPreviousVersionsWithHttpInfo(param: BasicApiGetPreviousVersionsRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalVersionBlogPost>> {
-        return this.api.getPreviousVersionsWithHttpInfo(param.objectId, param.after, param.before, param.limit,  options).toPromise();
-    }
-
-    /**
-     * Retrieve all the previous versions of a blog post.
-     * Retrieves all previous versions of a post
-     * @param param the request object
-     */
-    public getPreviousVersions(param: BasicApiGetPreviousVersionsRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalVersionBlogPost> {
-        return this.api.getPreviousVersions(param.objectId, param.after, param.before, param.limit,  options).toPromise();
+        return this.api.getPage(param.after, param.archived, param.createdAfter, param.createdAt, param.createdBefore, param.limit, param.property, param.sort, param.updatedAfter, param.updatedAt, param.updatedBefore,  options).toPromise();
     }
 
     /**
@@ -505,42 +387,6 @@ export class ObjectBasicApi {
      */
     public resetDraft(param: BasicApiResetDraftRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.resetDraft(param.objectId,  options).toPromise();
-    }
-
-    /**
-     * Restores a blog post to one of its previous versions.
-     * Restore a previous version
-     * @param param the request object
-     */
-    public restorePreviousVersionWithHttpInfo(param: BasicApiRestorePreviousVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
-        return this.api.restorePreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
-    }
-
-    /**
-     * Restores a blog post to one of its previous versions.
-     * Restore a previous version
-     * @param param the request object
-     */
-    public restorePreviousVersion(param: BasicApiRestorePreviousVersionRequest, options?: ConfigurationOptions): Promise<BlogPost> {
-        return this.api.restorePreviousVersion(param.objectId, param.revisionId,  options).toPromise();
-    }
-
-    /**
-     * Takes a specified version of a blog post, sets it as the new draft version of the blog post.
-     * Restore a draft to a previous version
-     * @param param the request object
-     */
-    public restorePreviousVersionToDraftWithHttpInfo(param: BasicApiRestorePreviousVersionToDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
-        return this.api.restorePreviousVersionToDraftWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
-    }
-
-    /**
-     * Takes a specified version of a blog post, sets it as the new draft version of the blog post.
-     * Restore a draft to a previous version
-     * @param param the request object
-     */
-    public restorePreviousVersionToDraft(param: BasicApiRestorePreviousVersionToDraftRequest, options?: ConfigurationOptions): Promise<BlogPost> {
-        return this.api.restorePreviousVersionToDraft(param.objectId, param.revisionId,  options).toPromise();
     }
 
     /**
@@ -604,7 +450,7 @@ import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchA
 
 export interface BatchApiArchiveRequest {
     /**
-     * The JSON array of Blog Post ids.
+     * 
      * @type BatchInputString
      * @memberof BatchApiarchive
      */
@@ -613,7 +459,7 @@ export interface BatchApiArchiveRequest {
 
 export interface BatchApiCreateRequest {
     /**
-     * The JSON array of new Blog Posts to create.
+     * 
      * @type BatchInputBlogPost
      * @memberof BatchApicreate
      */
@@ -622,7 +468,7 @@ export interface BatchApiCreateRequest {
 
 export interface BatchApiReadRequest {
     /**
-     * The JSON array of Blog Post ids.
+     * 
      * @type BatchInputString
      * @memberof BatchApiread
      */
@@ -638,7 +484,7 @@ export interface BatchApiReadRequest {
 
 export interface BatchApiUpdateRequest {
     /**
-     * A JSON array of the JSON representations of the updated Blog Posts.
+     * 
      * @type BatchInputJsonNode
      * @memberof BatchApiupdate
      */
@@ -738,7 +584,7 @@ import { MultiLanguageApiRequestFactory, MultiLanguageApiResponseProcessor} from
 
 export interface MultiLanguageApiAttachToLangGroupRequest {
     /**
-     * The JSON representation of the AttachToLangPrimaryRequest object.
+     * 
      * @type AttachToLangPrimaryRequestVNext
      * @memberof MultiLanguageApiattachToLangGroup
      */
@@ -747,7 +593,7 @@ export interface MultiLanguageApiAttachToLangGroupRequest {
 
 export interface MultiLanguageApiCreateLangVariationRequest {
     /**
-     * The JSON representation of the BlogPostLanguageCloneRequestVNext object.
+     * 
      * @type BlogPostLanguageCloneRequestVNext
      * @memberof MultiLanguageApicreateLangVariation
      */
@@ -756,7 +602,7 @@ export interface MultiLanguageApiCreateLangVariationRequest {
 
 export interface MultiLanguageApiDetachFromLangGroupRequest {
     /**
-     * The JSON representation of the DetachFromLangGroupRequest object.
+     * 
      * @type DetachFromLangGroupRequestVNext
      * @memberof MultiLanguageApidetachFromLangGroup
      */
@@ -765,7 +611,7 @@ export interface MultiLanguageApiDetachFromLangGroupRequest {
 
 export interface MultiLanguageApiSetLangPrimaryRequest {
     /**
-     * The JSON representation of the SetNewLanguagePrimaryRequest object.
+     * 
      * @type SetNewLanguagePrimaryRequestVNext
      * @memberof MultiLanguageApisetLangPrimary
      */
@@ -774,7 +620,7 @@ export interface MultiLanguageApiSetLangPrimaryRequest {
 
 export interface MultiLanguageApiUpdateLangsRequest {
     /**
-     * The JSON representation of the SetNewLanguagePrimaryRequest object.
+     * 
      * @type UpdateLanguagesRequestVNext
      * @memberof MultiLanguageApiupdateLangs
      */
@@ -876,6 +722,172 @@ export class ObjectMultiLanguageApi {
      */
     public updateLangs(param: MultiLanguageApiUpdateLangsRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.updateLangs(param.updateLanguagesRequestVNext,  options).toPromise();
+    }
+
+}
+
+import { ObservableRevisionsApi } from "./ObservableAPI";
+import { RevisionsApiRequestFactory, RevisionsApiResponseProcessor} from "../apis/RevisionsApi";
+
+export interface RevisionsApiGetPreviousVersionRequest {
+    /**
+     * The ID of the blog post.
+     * Defaults to: undefined
+     * @type string
+     * @memberof RevisionsApigetPreviousVersion
+     */
+    objectId: string
+    /**
+     * The ID of the revision to retrieve
+     * Defaults to: undefined
+     * @type string
+     * @memberof RevisionsApigetPreviousVersion
+     */
+    revisionId: string
+}
+
+export interface RevisionsApiGetPreviousVersionsRequest {
+    /**
+     * The ID of the blog post to retrieve previous versions of.
+     * Defaults to: undefined
+     * @type string
+     * @memberof RevisionsApigetPreviousVersions
+     */
+    objectId: string
+    /**
+     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
+     * @type string
+     * @memberof RevisionsApigetPreviousVersions
+     */
+    after?: string
+    /**
+     * A paging cursor token for retrieving previous pages.
+     * Defaults to: undefined
+     * @type string
+     * @memberof RevisionsApigetPreviousVersions
+     */
+    before?: string
+    /**
+     * The maximum number of results to return. Default is 100.
+     * Defaults to: undefined
+     * @type number
+     * @memberof RevisionsApigetPreviousVersions
+     */
+    limit?: number
+}
+
+export interface RevisionsApiRestorePreviousVersionRequest {
+    /**
+     * The ID of the blog post to restore
+     * Defaults to: undefined
+     * @type string
+     * @memberof RevisionsApirestorePreviousVersion
+     */
+    objectId: string
+    /**
+     * The ID of the version to restore the blog post to.
+     * Defaults to: undefined
+     * @type string
+     * @memberof RevisionsApirestorePreviousVersion
+     */
+    revisionId: string
+}
+
+export interface RevisionsApiRestorePreviousVersionToDraftRequest {
+    /**
+     * The ID of the blog post.
+     * Defaults to: undefined
+     * @type string
+     * @memberof RevisionsApirestorePreviousVersionToDraft
+     */
+    objectId: string
+    /**
+     * The ID of the version to restore the blog post to.
+     * Defaults to: undefined
+     * @type number
+     * @memberof RevisionsApirestorePreviousVersionToDraft
+     */
+    revisionId: number
+}
+
+export class ObjectRevisionsApi {
+    private api: ObservableRevisionsApi
+
+    public constructor(configuration: Configuration, requestFactory?: RevisionsApiRequestFactory, responseProcessor?: RevisionsApiResponseProcessor) {
+        this.api = new ObservableRevisionsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Retrieve a previous version of a blog post.
+     * Retrieve a previous version of a blog post
+     * @param param the request object
+     */
+    public getPreviousVersionWithHttpInfo(param: RevisionsApiGetPreviousVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPostVersion>> {
+        return this.api.getPreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve a previous version of a blog post.
+     * Retrieve a previous version of a blog post
+     * @param param the request object
+     */
+    public getPreviousVersion(param: RevisionsApiGetPreviousVersionRequest, options?: ConfigurationOptions): Promise<BlogPostVersion> {
+        return this.api.getPreviousVersion(param.objectId, param.revisionId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve all the previous versions of a blog post.
+     * Retrieves all previous versions of a post
+     * @param param the request object
+     */
+    public getPreviousVersionsWithHttpInfo(param: RevisionsApiGetPreviousVersionsRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalBlogPostVersion>> {
+        return this.api.getPreviousVersionsWithHttpInfo(param.objectId, param.after, param.before, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Retrieve all the previous versions of a blog post.
+     * Retrieves all previous versions of a post
+     * @param param the request object
+     */
+    public getPreviousVersions(param: RevisionsApiGetPreviousVersionsRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalBlogPostVersion> {
+        return this.api.getPreviousVersions(param.objectId, param.after, param.before, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Restores a blog post to one of its previous versions.
+     * Restore a previous version
+     * @param param the request object
+     */
+    public restorePreviousVersionWithHttpInfo(param: RevisionsApiRestorePreviousVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
+        return this.api.restorePreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
+    }
+
+    /**
+     * Restores a blog post to one of its previous versions.
+     * Restore a previous version
+     * @param param the request object
+     */
+    public restorePreviousVersion(param: RevisionsApiRestorePreviousVersionRequest, options?: ConfigurationOptions): Promise<BlogPost> {
+        return this.api.restorePreviousVersion(param.objectId, param.revisionId,  options).toPromise();
+    }
+
+    /**
+     * Takes a specified version of a blog post, sets it as the new draft version of the blog post.
+     * Restore a draft to a previous version
+     * @param param the request object
+     */
+    public restorePreviousVersionToDraftWithHttpInfo(param: RevisionsApiRestorePreviousVersionToDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
+        return this.api.restorePreviousVersionToDraftWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
+    }
+
+    /**
+     * Takes a specified version of a blog post, sets it as the new draft version of the blog post.
+     * Restore a draft to a previous version
+     * @param param the request object
+     */
+    public restorePreviousVersionToDraft(param: RevisionsApiRestorePreviousVersionToDraftRequest, options?: ConfigurationOptions): Promise<BlogPost> {
+        return this.api.restorePreviousVersionToDraft(param.objectId, param.revisionId,  options).toPromise();
     }
 
 }

@@ -12,10 +12,19 @@
 
 
 export class PublicMultiStringPropertyOperation {
+    /**
+    * Indicates whether objects with no value set for the property should be included in the operation.
+    */
     'includeObjectsWithNoValueSet': boolean;
-    'values': Array<string>;
+    /**
+    * Specifies the type of operation (MULTISTRING).
+    */
     'operationType': PublicMultiStringPropertyOperationOperationTypeEnum;
+    /**
+    * Defines the operation to be applied in the multi-string property operation (IS_EQUAL_TO, IS_NOT_EQUAL_TO, CONTAINS, CONTAINS_EXACTLY, DOES_NOT_CONTAIN, DOES_NOT_CONTAIN_EXACTLY, STARTS_WITH, ENDS_WITH).
+    */
     'operator': string;
+    'values': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -29,12 +38,6 @@ export class PublicMultiStringPropertyOperation {
             "format": ""
         },
         {
-            "name": "values",
-            "baseName": "values",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
             "name": "operationType",
             "baseName": "operationType",
             "type": "PublicMultiStringPropertyOperationOperationTypeEnum",
@@ -44,6 +47,12 @@ export class PublicMultiStringPropertyOperation {
             "name": "operator",
             "baseName": "operator",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "values",
+            "baseName": "values",
+            "type": "Array<string>",
             "format": ""
         }    ];
 

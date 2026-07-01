@@ -1,10 +1,12 @@
 export * from '../models/ActionResponseWithSingleResultURI';
 export * from '../models/ErrorDetail';
 export * from '../models/Filter';
+export * from '../models/FilterGroup';
 export * from '../models/ModelError';
 export * from '../models/PublicCrmSearchRequest';
 export * from '../models/PublicExportListRequest';
 export * from '../models/PublicExportRequest';
+export * from '../models/PublicExportResponse';
 export * from '../models/PublicExportViewRequest';
 export * from '../models/StandardError';
 export * from '../models/TaskLocator';
@@ -12,11 +14,13 @@ export * from '../models/TaskLocator';
 import { ActionResponseWithSingleResultURI          } from '../models/ActionResponseWithSingleResultURI';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { Filter       } from '../models/Filter';
+import { FilterGroup } from '../models/FilterGroup';
 import { ModelError } from '../models/ModelError';
 import { PublicCrmSearchRequest } from '../models/PublicCrmSearchRequest';
-import { PublicExportListRequest     } from '../models/PublicExportListRequest';
+import { PublicExportListRequest        } from '../models/PublicExportListRequest';
 import { PublicExportRequestClass } from '../models/PublicExportRequest';
-import { PublicExportViewRequest     } from '../models/PublicExportViewRequest';
+import { PublicExportResponse          } from '../models/PublicExportResponse';
+import { PublicExportViewRequest        } from '../models/PublicExportViewRequest';
 import { StandardError } from '../models/StandardError';
 import { TaskLocator } from '../models/TaskLocator';
 
@@ -35,28 +39,32 @@ let primitives = [
 let enumsMap: Set<string> = new Set<string>([
     "ActionResponseWithSingleResultURIStatusEnum",
     "FilterOperatorEnum",
+    "PublicExportListRequestExportInternalValuesOptionsEnum",
     "PublicExportListRequestExportTypeEnum",
     "PublicExportListRequestFormatEnum",
     "PublicExportListRequestLanguageEnum",
-    "PublicExportListRequestExportInternalValuesOptionsEnum",
+    "PublicExportRequestExportInternalValuesOptionsEnum",
     "PublicExportRequestExportTypeEnum",
     "PublicExportRequestFormatEnum",
     "PublicExportRequestLanguageEnum",
-    "PublicExportRequestExportInternalValuesOptionsEnum",
+    "PublicExportResponseExportStateEnum",
+    "PublicExportResponseExportTypeEnum",
+    "PublicExportViewRequestExportInternalValuesOptionsEnum",
     "PublicExportViewRequestExportTypeEnum",
     "PublicExportViewRequestFormatEnum",
     "PublicExportViewRequestLanguageEnum",
-    "PublicExportViewRequestExportInternalValuesOptionsEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
     "ActionResponseWithSingleResultURI": ActionResponseWithSingleResultURI,
     "ErrorDetail": ErrorDetail,
     "Filter": Filter,
+    "FilterGroup": FilterGroup,
     "ModelError": ModelError,
     "PublicCrmSearchRequest": PublicCrmSearchRequest,
     "PublicExportListRequest": PublicExportListRequest,
     "PublicExportRequest": PublicExportRequestClass,
+    "PublicExportResponse": PublicExportResponse,
     "PublicExportViewRequest": PublicExportViewRequest,
     "StandardError": StandardError,
     "TaskLocator": TaskLocator,

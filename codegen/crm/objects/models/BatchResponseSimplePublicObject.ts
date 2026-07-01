@@ -12,12 +12,30 @@
 
 import { SimplePublicObject } from '../models/SimplePublicObject';
 
+/**
+* A public object batch response object
+*/
 export class BatchResponseSimplePublicObject {
+    /**
+    * The timestamp when the batch processing was completed, in ISO 8601 format.
+    */
     'completedAt': Date;
-    'requestedAt'?: Date;
-    'startedAt': Date;
+    /**
+    * An object containing relevant links related to the batch request.
+    */
     'links'?: { [key: string]: string; };
+    /**
+    * The timestamp when the batch request was initially made, in ISO 8601 format.
+    */
+    'requestedAt'?: Date;
     'results': Array<SimplePublicObject>;
+    /**
+    * The timestamp when the batch processing began, in ISO 8601 format.
+    */
+    'startedAt': Date;
+    /**
+    * The status of the batch processing request. Expected value is \"COMPLETE\".
+    */
     'status': BatchResponseSimplePublicObjectStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -32,28 +50,28 @@ export class BatchResponseSimplePublicObject {
             "format": "date-time"
         },
         {
-            "name": "requestedAt",
-            "baseName": "requestedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "results",
             "baseName": "results",
             "type": "Array<SimplePublicObject>",
             "format": ""
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -71,9 +89,9 @@ export class BatchResponseSimplePublicObject {
 }
 
 export enum BatchResponseSimplePublicObjectStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

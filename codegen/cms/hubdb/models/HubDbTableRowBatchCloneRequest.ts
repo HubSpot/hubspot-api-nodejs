@@ -12,8 +12,14 @@
 
 
 export class HubDbTableRowBatchCloneRequest {
-    'name'?: string;
+    /**
+    * The ID of the row to be cloned.
+    */
     'id': string;
+    /**
+    * The name for the cloned row.
+    */
+    'name'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,14 +27,14 @@ export class HubDbTableRowBatchCloneRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         }    ];

@@ -13,8 +13,14 @@
 import { PublicTimeOffset } from '../models/PublicTimeOffset';
 
 export class PublicRelativeComparativeTimestampRefineBy {
+    /**
+    * Defines the comparison operation to be used in the refinement (BEFORE, AFTER).
+    */
     'comparison': string;
     'timeOffset': PublicTimeOffset;
+    /**
+    * Specifies the type of refinement, (RELATIVE_COMPARATIVE).
+    */
     'type': PublicRelativeComparativeTimestampRefineByTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;

@@ -16,13 +16,13 @@
 */
 export class ContentScheduleRequestVNext {
     /**
-    * The date the object should transition from scheduled to published.
-    */
-    'publishDate': Date;
-    /**
     * The ID of the object to be scheduled.
     */
     'id': string;
+    /**
+    * The date the object should transition from scheduled to published.
+    */
+    'publishDate': Date;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,16 +30,16 @@ export class ContentScheduleRequestVNext {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "publishDate",
-            "baseName": "publishDate",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "id",
             "baseName": "id",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "publishDate",
+            "baseName": "publishDate",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

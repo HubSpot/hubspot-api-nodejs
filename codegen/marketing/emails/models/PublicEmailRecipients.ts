@@ -16,13 +16,13 @@
 */
 export class PublicEmailRecipients {
     /**
-    * Included IDs.
-    */
-    'include'?: Array<string>;
-    /**
     * Excluded IDs.
     */
     'exclude'?: Array<string>;
+    /**
+    * Included IDs.
+    */
+    'include'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,14 +30,14 @@ export class PublicEmailRecipients {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "include",
-            "baseName": "include",
+            "name": "exclude",
+            "baseName": "exclude",
             "type": "Array<string>",
             "format": ""
         },
         {
-            "name": "exclude",
-            "baseName": "exclude",
+            "name": "include",
+            "baseName": "include",
             "type": "Array<string>",
             "format": ""
         }    ];

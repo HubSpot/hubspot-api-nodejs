@@ -1,6 +1,6 @@
 /**
  * Timeline
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -12,27 +12,27 @@
 
 import { TimelineEventResponse } from '../models/TimelineEventResponse';
 
-/**
-* The state of the batch event request.
-*/
 export class BatchResponseTimelineEventResponse {
     /**
     * The time the request was completed.
     */
     'completedAt': Date;
     /**
+    * Any links to documentation.
+    */
+    'links'?: { [key: string]: string; };
+    /**
     * The time the request occurred.
     */
     'requestedAt'?: Date;
     /**
-    * The time the request began processing.
-    */
-    'startedAt': Date;
-    'links'?: { [key: string]: string; };
-    /**
     * Successfully created events.
     */
     'results': Array<TimelineEventResponse>;
+    /**
+    * The time the request began processing.
+    */
+    'startedAt': Date;
     /**
     * The status of the batch response. Should always be COMPLETED if processed.
     */
@@ -50,28 +50,28 @@ export class BatchResponseTimelineEventResponse {
             "format": "date-time"
         },
         {
-            "name": "requestedAt",
-            "baseName": "requestedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "results",
             "baseName": "results",
             "type": "Array<TimelineEventResponse>",
             "format": ""
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -89,9 +89,9 @@ export class BatchResponseTimelineEventResponse {
 }
 
 export enum BatchResponseTimelineEventResponseStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

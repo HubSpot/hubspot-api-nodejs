@@ -12,9 +12,18 @@
 
 
 export class PublicAbsoluteComparativeTimestampRefineBy {
+    /**
+    * Timestamp comparison options (BEFORE, AFTER)
+    */
     'comparison': string;
-    'type': PublicAbsoluteComparativeTimestampRefineByTypeEnum;
+    /**
+    * Timestamp to be used in refine by criteria
+    */
     'timestamp': number;
+    /**
+    * type of refine by criteria (ABSOLUTE_COMPARATIVE)
+    */
+    'type': PublicAbsoluteComparativeTimestampRefineByTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,16 +37,16 @@ export class PublicAbsoluteComparativeTimestampRefineBy {
             "format": ""
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PublicAbsoluteComparativeTimestampRefineByTypeEnum",
-            "format": ""
-        },
-        {
             "name": "timestamp",
             "baseName": "timestamp",
             "type": "number",
             "format": "int64"
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "PublicAbsoluteComparativeTimestampRefineByTypeEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

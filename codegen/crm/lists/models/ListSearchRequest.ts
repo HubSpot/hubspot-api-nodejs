@@ -16,29 +16,33 @@
 */
 export class ListSearchRequest {
     /**
-    * The `listIds` that will be used to filter results by `listId`. If values are provided, then the response will only include results that have a `listId` in this array.  If no value is provided, or if an empty list is provided, then the results will not be filtered by `listId`.
+    * The property names of any additional list properties to include in the response. Properties that do not exist or that are empty for a particular list are not included in the response.  By default, all requests will fetch the following properties for each list: `hs_list_size`, `hs_last_record_added_at`, `hs_last_record_removed_at`, `hs_folder_name`, and `hs_list_reference_count`.
     */
-    'listIds'?: Array<string>;
-    /**
-    * Value used to paginate through lists. The `offset` provided in the response can be used in the next request to fetch the next page of results. Defaults to `0` if no offset is provided.
-    */
-    'offset'?: number;
-    /**
-    * The `query` that will be used to search for lists by list name. If no `query` is provided, then the results will include all lists.
-    */
-    'query'?: string;
+    'additionalProperties': Array<string>;
     /**
     * The number of lists to include in the response. Defaults to `20` if no value is provided. The max `count` is `500`.
     */
     'count'?: number;
     /**
-    * The `processingTypes` that will be used to filter results by `processingType`. If values are provided, then the response will only include results that have a `processingType` in this array.  If no value is provided, or if an empty list is provided, then results will not be filtered by `processingType`.  Valid `processingTypes` are: `MANUAL`, `SNAPSHOT`, or `DYNAMIC`.
+    * ILS list ids to be included in search results. If not specified, all lists matching other criteria will be included
+    */
+    'listIds'?: Array<string>;
+    'objectTypeId'?: string;
+    /**
+    * Value used to paginate through lists. The `offset` provided in the response can be used in the next request to fetch the next page of results. Defaults to `0` if no offset is provided.
+    */
+    'offset': number;
+    /**
+    * List processing types to be included in search results. If not specified, all lists with all processing types will be included.
     */
     'processingTypes'?: Array<string>;
     /**
-    * The property names of any additional list properties to include in the response. Properties that do not exist or that are empty for a particular list are not included in the response.  By default, all requests will fetch the following properties for each list: `hs_list_size`, `hs_last_record_added_at`, `hs_last_record_removed_at`, `hs_folder_name`, and `hs_list_reference_count`.
+    * The `query` that will be used to search for lists by list name. If no `query` is provided, then the results will include all lists.
     */
-    'additionalProperties'?: Array<string>;
+    'query'?: string;
+    /**
+    * Sort field and order
+    */
     'sort'?: string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -47,26 +51,32 @@ export class ListSearchRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "additionalProperties",
+            "baseName": "additionalProperties",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "count",
+            "baseName": "count",
+            "type": "number",
+            "format": "int32"
+        },
+        {
             "name": "listIds",
             "baseName": "listIds",
             "type": "Array<string>",
             "format": ""
         },
         {
-            "name": "offset",
-            "baseName": "offset",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "query",
-            "baseName": "query",
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "count",
-            "baseName": "count",
+            "name": "offset",
+            "baseName": "offset",
             "type": "number",
             "format": "int32"
         },
@@ -77,9 +87,9 @@ export class ListSearchRequest {
             "format": ""
         },
         {
-            "name": "additionalProperties",
-            "baseName": "additionalProperties",
-            "type": "Array<string>",
+            "name": "query",
+            "baseName": "query",
+            "type": "string",
             "format": ""
         },
         {

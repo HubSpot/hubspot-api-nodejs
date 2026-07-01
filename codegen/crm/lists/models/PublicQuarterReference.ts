@@ -12,12 +12,33 @@
 
 
 export class PublicQuarterReference {
-    'hour'?: number;
-    'month': number;
-    'millisecond'?: number;
-    'referenceType': PublicQuarterReferenceReferenceTypeEnum;
+    /**
+    * The day component of the quarter reference.
+    */
     'day': number;
+    /**
+    * The hour component of the quarter reference.
+    */
+    'hour'?: number;
+    /**
+    * The millisecond component of the quarter reference.
+    */
+    'millisecond'?: number;
+    /**
+    * The minute component of the quarter reference.
+    */
     'minute'?: number;
+    /**
+    * The month component of the quarter reference.
+    */
+    'month': number;
+    /**
+    * Indicates the type of reference (QUARTER).
+    */
+    'referenceType': PublicQuarterReferenceReferenceTypeEnum;
+    /**
+    * The second component of the quarter reference.
+    */
     'second'?: number;
 
     static readonly discriminator: string | undefined = undefined;
@@ -26,14 +47,14 @@ export class PublicQuarterReference {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "hour",
-            "baseName": "hour",
+            "name": "day",
+            "baseName": "day",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "month",
-            "baseName": "month",
+            "name": "hour",
+            "baseName": "hour",
             "type": "number",
             "format": "int32"
         },
@@ -44,22 +65,22 @@ export class PublicQuarterReference {
             "format": "int32"
         },
         {
-            "name": "referenceType",
-            "baseName": "referenceType",
-            "type": "PublicQuarterReferenceReferenceTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "day",
-            "baseName": "day",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "minute",
             "baseName": "minute",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "month",
+            "baseName": "month",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "referenceType",
+            "baseName": "referenceType",
+            "type": "PublicQuarterReferenceReferenceTypeEnum",
+            "format": ""
         },
         {
             "name": "second",

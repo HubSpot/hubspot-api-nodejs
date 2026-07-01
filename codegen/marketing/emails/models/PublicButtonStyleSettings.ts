@@ -14,8 +14,8 @@ import { PublicFontStyle } from '../models/PublicFontStyle';
 
 export class PublicButtonStyleSettings {
     'backgroundColor'?: any;
-    'fontStyle'?: PublicFontStyle;
     'cornerRadius'?: number;
+    'fontStyle'?: PublicFontStyle;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -29,16 +29,16 @@ export class PublicButtonStyleSettings {
             "format": ""
         },
         {
-            "name": "fontStyle",
-            "baseName": "fontStyle",
-            "type": "PublicFontStyle",
-            "format": ""
-        },
-        {
             "name": "cornerRadius",
             "baseName": "cornerRadius",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "fontStyle",
+            "baseName": "fontStyle",
+            "type": "PublicFontStyle",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

@@ -29,6 +29,9 @@ import { PublicStringPropertyOperation } from '../models/PublicStringPropertyOpe
 import { PublicTimePointOperation } from '../models/PublicTimePointOperation';
 
 /**
+* Specifies the operation used to compare the survey answer value.
+*/
+/**
  * @type PublicSurveyMonkeyValueFilterValueComparison
  * Type
  * @export
@@ -37,6 +40,7 @@ export type PublicSurveyMonkeyValueFilterValueComparison = PublicAllPropertyType
 
 /**
 * @type PublicSurveyMonkeyValueFilterValueComparisonClass
+    * Specifies the operation used to compare the survey answer value.
 * @export
 */
 export class PublicSurveyMonkeyValueFilterValueComparisonClass {

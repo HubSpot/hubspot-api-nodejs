@@ -12,8 +12,14 @@
 
 
 export class JoinTimeAndRecordId {
-    'recordId': string;
+    /**
+    * The date and time when the record was added to the list.
+    */
     'membershipTimestamp': Date;
+    /**
+    * The unique identifier of the record.
+    */
+    'recordId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,16 +27,16 @@ export class JoinTimeAndRecordId {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "recordId",
-            "baseName": "recordId",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "membershipTimestamp",
             "baseName": "membershipTimestamp",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "recordId",
+            "baseName": "recordId",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

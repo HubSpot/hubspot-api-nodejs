@@ -24,6 +24,7 @@ import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/Batch
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive multiple line items simultaneously by specifying their IDs in the request body.
      * Archive a batch of line items by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -71,6 +72,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Create multiple line items in a single request by providing the necessary properties and associations for each item. This endpoint allows for efficient batch processing of line items, returning the created objects with their unique identifiers.
      * Create a batch of line items
      * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
@@ -173,6 +175,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Update multiple line items using their internal IDs or unique property values. This endpoint allows for batch processing of updates, ensuring efficient modification of line item records in bulk.
      * Update a batch of line items by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */

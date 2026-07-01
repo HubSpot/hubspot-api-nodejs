@@ -8,7 +8,7 @@ import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObject } from '../models/CollectionResponseWithTotalSimplePublicObject';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 
 /**
@@ -17,8 +17,8 @@ import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 export class SearchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Search for invoices by filtering on properties, searching through associations, and sorting results. Learn more about [CRM search](https://developers.hubspot.com/docs/guides/api/crm/search#make-a-search-request).
-     * Search for invoices
+     * Execute a search for invoices based on filter criteria, sorting options, and properties to include in the response. This endpoint supports pagination and allows for complex queries using multiple filter groups.
+     * Search for invoices using specified criteria.
      * @param publicObjectSearchRequest 
      */
     public async doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Promise<RequestContext> {
@@ -75,13 +75,13 @@ export class SearchApiResponseProcessor {
      * @params response Response returned by the server for a request to doSearch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async doSearchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging >> {
+     public async doSearchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObject >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseWithTotalSimplePublicObjectForwardPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponseWithTotalSimplePublicObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalSimplePublicObjectForwardPaging", ""
-            ) as CollectionResponseWithTotalSimplePublicObjectForwardPaging;
+                "CollectionResponseWithTotalSimplePublicObject", ""
+            ) as CollectionResponseWithTotalSimplePublicObject;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -94,10 +94,10 @@ export class SearchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseWithTotalSimplePublicObjectForwardPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponseWithTotalSimplePublicObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalSimplePublicObjectForwardPaging", ""
-            ) as CollectionResponseWithTotalSimplePublicObjectForwardPaging;
+                "CollectionResponseWithTotalSimplePublicObject", ""
+            ) as CollectionResponseWithTotalSimplePublicObject;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

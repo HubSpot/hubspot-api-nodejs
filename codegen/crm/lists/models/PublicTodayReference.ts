@@ -12,10 +12,25 @@
 
 
 export class PublicTodayReference {
+    /**
+    * The hour component of the current day reference.
+    */
     'hour'?: number;
+    /**
+    * The millisecond component of the current day reference.
+    */
     'millisecond'?: number;
-    'referenceType': PublicTodayReferenceReferenceTypeEnum;
+    /**
+    * The minute component of the current day reference.
+    */
     'minute'?: number;
+    /**
+    * Indicates the type of reference (TODAY).
+    */
+    'referenceType': PublicTodayReferenceReferenceTypeEnum;
+    /**
+    * The second component of the current day reference.
+    */
     'second'?: number;
 
     static readonly discriminator: string | undefined = undefined;
@@ -36,16 +51,16 @@ export class PublicTodayReference {
             "format": "int32"
         },
         {
-            "name": "referenceType",
-            "baseName": "referenceType",
-            "type": "PublicTodayReferenceReferenceTypeEnum",
-            "format": ""
-        },
-        {
             "name": "minute",
             "baseName": "minute",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "referenceType",
+            "baseName": "referenceType",
+            "type": "PublicTodayReferenceReferenceTypeEnum",
+            "format": ""
         },
         {
             "name": "second",

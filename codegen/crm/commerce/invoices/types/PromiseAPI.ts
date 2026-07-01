@@ -12,7 +12,7 @@ import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchRespon
 import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
 import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObject } from '../models/CollectionResponseWithTotalSimplePublicObject';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
@@ -124,13 +124,13 @@ export class PromiseBasicApi {
      * Read an Object identified by `{invoiceId}`. `{invoiceId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * Read
      * @param invoiceId
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param [idProperty] The name of a property whose values are unique for this object type
      * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param [archived] Whether to return only results that have been archived.
-     * @param [idProperty] The name of a property whose values are unique for this object
      */
-    public getByIdWithHttpInfo(invoiceId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
+    public getByIdWithHttpInfo(invoiceId: string, archived?: boolean, associations?: Array<string>, idProperty?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -143,7 +143,7 @@ export class PromiseBasicApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getByIdWithHttpInfo(invoiceId, properties, propertiesWithHistory, associations, archived, idProperty, observableOptions);
+        const result = this.api.getByIdWithHttpInfo(invoiceId, archived, associations, idProperty, properties, propertiesWithHistory, observableOptions);
         return result.toPromise();
     }
 
@@ -151,13 +151,13 @@ export class PromiseBasicApi {
      * Read an Object identified by `{invoiceId}`. `{invoiceId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * Read
      * @param invoiceId
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param [idProperty] The name of a property whose values are unique for this object type
      * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param [archived] Whether to return only results that have been archived.
-     * @param [idProperty] The name of a property whose values are unique for this object
      */
-    public getById(invoiceId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<SimplePublicObjectWithAssociations> {
+    public getById(invoiceId: string, archived?: boolean, associations?: Array<string>, idProperty?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, _options?: PromiseConfigurationOptions): Promise<SimplePublicObjectWithAssociations> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -170,21 +170,21 @@ export class PromiseBasicApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getById(invoiceId, properties, propertiesWithHistory, associations, archived, idProperty, observableOptions);
+        const result = this.api.getById(invoiceId, archived, associations, idProperty, properties, propertiesWithHistory, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read a page of invoices. Control what is returned via the `properties` query param.
      * List
-     * @param [limit] The maximum number of results to display per page.
      * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
-     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param [archived] Whether to return only results that have been archived.
+     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param [limit] The maximum number of results to display per page.
+     * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of invoices that can be read by a single request.
      */
-    public getPageWithHttpInfo(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>> {
+    public getPageWithHttpInfo(after?: string, archived?: boolean, associations?: Array<string>, limit?: number, properties?: Array<string>, propertiesWithHistory?: Array<string>, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -197,21 +197,21 @@ export class PromiseBasicApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getPageWithHttpInfo(limit, after, properties, propertiesWithHistory, associations, archived, observableOptions);
+        const result = this.api.getPageWithHttpInfo(after, archived, associations, limit, properties, propertiesWithHistory, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read a page of invoices. Control what is returned via the `properties` query param.
      * List
-     * @param [limit] The maximum number of results to display per page.
      * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
-     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param [archived] Whether to return only results that have been archived.
+     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param [limit] The maximum number of results to display per page.
+     * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of invoices that can be read by a single request.
      */
-    public getPage(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
+    public getPage(after?: string, archived?: boolean, associations?: Array<string>, limit?: number, properties?: Array<string>, propertiesWithHistory?: Array<string>, _options?: PromiseConfigurationOptions): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -224,7 +224,7 @@ export class PromiseBasicApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getPage(limit, after, properties, propertiesWithHistory, associations, archived, observableOptions);
+        const result = this.api.getPage(after, archived, associations, limit, properties, propertiesWithHistory, observableOptions);
         return result.toPromise();
     }
 
@@ -233,7 +233,7 @@ export class PromiseBasicApi {
      * Update
      * @param invoiceId
      * @param simplePublicObjectInput
-     * @param [idProperty] The name of a property whose values are unique for this object
+     * @param [idProperty] The name of a property whose values are unique for this object type
      */
     public updateWithHttpInfo(invoiceId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObject>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -257,7 +257,7 @@ export class PromiseBasicApi {
      * Update
      * @param invoiceId
      * @param simplePublicObjectInput
-     * @param [idProperty] The name of a property whose values are unique for this object
+     * @param [idProperty] The name of a property whose values are unique for this object type
      */
     public update(invoiceId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<SimplePublicObject> {
         let observableOptions: undefined | ConfigurationOptions
@@ -296,6 +296,7 @@ export class PromiseBatchApi {
     }
 
     /**
+     * Archive multiple invoices by their IDs in a single request. This operation moves the specified invoices to the archive, making them inactive but retrievable for future reference.
      * Archive a batch of invoices by ID
      * @param batchInputSimplePublicObjectId
      */
@@ -317,6 +318,7 @@ export class PromiseBatchApi {
     }
 
     /**
+     * Archive multiple invoices by their IDs in a single request. This operation moves the specified invoices to the archive, making them inactive but retrievable for future reference.
      * Archive a batch of invoices by ID
      * @param batchInputSimplePublicObjectId
      */
@@ -338,6 +340,7 @@ export class PromiseBatchApi {
     }
 
     /**
+     * Create multiple invoices at once by providing a batch of invoice data, and receive a response with details of the created invoices, including their IDs.
      * Create a batch of invoices
      * @param batchInputSimplePublicObjectBatchInputForCreate
      */
@@ -359,6 +362,7 @@ export class PromiseBatchApi {
     }
 
     /**
+     * Create multiple invoices at once by providing a batch of invoice data, and receive a response with details of the created invoices, including their IDs.
      * Create a batch of invoices
      * @param batchInputSimplePublicObjectBatchInputForCreate
      */
@@ -426,6 +430,7 @@ export class PromiseBatchApi {
     }
 
     /**
+     * Update multiple invoices in a single request using either their internal IDs or unique property values. This endpoint allows for efficient batch processing of invoice updates, ensuring that changes are applied consistently across multiple records.
      * Update a batch of invoices by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput
      */
@@ -447,6 +452,7 @@ export class PromiseBatchApi {
     }
 
     /**
+     * Update multiple invoices in a single request using either their internal IDs or unique property values. This endpoint allows for efficient batch processing of invoice updates, ensuring that changes are applied consistently across multiple records.
      * Update a batch of invoices by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput
      */
@@ -531,11 +537,11 @@ export class PromiseSearchApi {
     }
 
     /**
-     * Search for invoices by filtering on properties, searching through associations, and sorting results. Learn more about [CRM search](https://developers.hubspot.com/docs/guides/api/crm/search#make-a-search-request).
-     * Search for invoices
+     * Execute a search for invoices based on filter criteria, sorting options, and properties to include in the response. This endpoint supports pagination and allows for complex queries using multiple filter groups.
+     * Search for invoices using specified criteria.
      * @param publicObjectSearchRequest
      */
-    public doSearchWithHttpInfo(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>> {
+    public doSearchWithHttpInfo(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObject>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -553,11 +559,11 @@ export class PromiseSearchApi {
     }
 
     /**
-     * Search for invoices by filtering on properties, searching through associations, and sorting results. Learn more about [CRM search](https://developers.hubspot.com/docs/guides/api/crm/search#make-a-search-request).
-     * Search for invoices
+     * Execute a search for invoices based on filter criteria, sorting options, and properties to include in the response. This endpoint supports pagination and allows for complex queries using multiple filter groups.
+     * Search for invoices using specified criteria.
      * @param publicObjectSearchRequest
      */
-    public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
+    public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObject> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {

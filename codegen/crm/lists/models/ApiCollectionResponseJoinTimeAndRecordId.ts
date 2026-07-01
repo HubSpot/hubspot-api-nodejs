@@ -14,21 +14,18 @@ import { JoinTimeAndRecordId } from '../models/JoinTimeAndRecordId';
 import { Paging } from '../models/Paging';
 
 export class ApiCollectionResponseJoinTimeAndRecordId {
-    'total'?: number;
     'paging'?: Paging;
     'results': Array<JoinTimeAndRecordId>;
+    /**
+    * The total number of records that match the query.
+    */
+    'total'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "total",
-            "baseName": "total",
-            "type": "number",
-            "format": "int64"
-        },
         {
             "name": "paging",
             "baseName": "paging",
@@ -40,6 +37,12 @@ export class ApiCollectionResponseJoinTimeAndRecordId {
             "baseName": "results",
             "type": "Array<JoinTimeAndRecordId>",
             "format": ""
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {

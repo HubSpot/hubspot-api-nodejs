@@ -11,36 +11,60 @@
  */
 
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
+import { PublicObjectWarning } from '../models/PublicObjectWarning';
 import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
+/**
+* Represents a CRM object along with its properties, timestamps, and a set of associated object IDs grouped by association type.
+*/
 export class SimplePublicObjectWithAssociations {
-    'associations'?: { [key: string]: CollectionResponseAssociatedId; };
-    'createdAt': Date;
+    /**
+    * Whether the object is archived.
+    */
     'archived'?: boolean;
+    /**
+    * The timestamp when the object was archived, in ISO 8601 format.
+    */
     'archivedAt'?: Date;
-    'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
+    /**
+    * A list defining relationships with other objects.
+    */
+    'associations'?: { [key: string]: CollectionResponseAssociatedId; };
+    /**
+    * The timestamp when the object was created, in ISO 8601 format.
+    */
+    'createdAt': Date;
+    /**
+    * The unique ID of the object.
+    */
     'id': string;
+    /**
+    * An identifier used for tracing the creation or update request of the object.
+    */
     'objectWriteTraceId'?: string;
-    'properties': { [key: string]: string | null; };
+    /**
+    * Key value pairs representing the properties of the object.
+    */
+    'properties': { [key: string]: string; };
+    /**
+    * Key-value pairs representing the properties of the object along with their history.
+    */
+    'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
+    /**
+    * The timestamp when the object was last updated, in ISO 8601 format.
+    */
     'updatedAt': Date;
+    /**
+    * Direct URL for this object in HubSpot
+    */
+    'url'?: string;
+    'warnings'?: Array<PublicObjectWarning>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "associations",
-            "baseName": "associations",
-            "type": "{ [key: string]: CollectionResponseAssociatedId; }",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
         {
             "name": "archived",
             "baseName": "archived",
@@ -54,10 +78,16 @@ export class SimplePublicObjectWithAssociations {
             "format": "date-time"
         },
         {
-            "name": "propertiesWithHistory",
-            "baseName": "propertiesWithHistory",
-            "type": "{ [key: string]: Array<ValueWithTimestamp>; }",
+            "name": "associations",
+            "baseName": "associations",
+            "type": "{ [key: string]: CollectionResponseAssociatedId; }",
             "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "id",
@@ -74,7 +104,13 @@ export class SimplePublicObjectWithAssociations {
         {
             "name": "properties",
             "baseName": "properties",
-            "type": "{ [key: string]: string | null; }",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "propertiesWithHistory",
+            "baseName": "propertiesWithHistory",
+            "type": "{ [key: string]: Array<ValueWithTimestamp>; }",
             "format": ""
         },
         {
@@ -82,6 +118,18 @@ export class SimplePublicObjectWithAssociations {
             "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "warnings",
+            "baseName": "warnings",
+            "type": "Array<PublicObjectWarning>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

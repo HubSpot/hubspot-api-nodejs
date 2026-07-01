@@ -130,7 +130,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
-     * @param idProperty The name of a property whose values are unique for this object
+     * @param idProperty The name of a property whose values are unique for this object type
      */
     public async getById(objectType: string, objectId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -303,23 +303,23 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Perform a partial update of an Object identified by `{objectId}`or optionally a unique property value as specified by the `idProperty` query param. `{objectId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
      * Update
-     * @param objectType 
      * @param objectId 
+     * @param objectType 
      * @param simplePublicObjectInput 
-     * @param idProperty The name of a property whose values are unique for this object
+     * @param idProperty The name of a property whose values are unique for this object type
      */
-    public async update(objectType: string, objectId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
+    public async update(objectId: string, objectType: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'objectType' is not null or undefined
-        if (objectType === null || objectType === undefined) {
-            throw new RequiredError("BasicApi", "update", "objectType");
-        }
-
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
             throw new RequiredError("BasicApi", "update", "objectId");
+        }
+
+
+        // verify required parameter 'objectType' is not null or undefined
+        if (objectType === null || objectType === undefined) {
+            throw new RequiredError("BasicApi", "update", "objectType");
         }
 
 
@@ -332,8 +332,8 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
         // Path Params
         const localVarPath = '/crm/v3/objects/{objectType}/{objectId}'
-            .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
-            .replace('{' + 'objectId' + '}', encodeURIComponent(String(objectId)));
+            .replace('{' + 'objectId' + '}', encodeURIComponent(String(objectId)))
+            .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);

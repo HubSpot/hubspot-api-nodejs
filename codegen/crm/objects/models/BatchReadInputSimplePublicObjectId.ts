@@ -12,26 +12,29 @@
 
 import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
 
+/**
+* Specifies the input for reading a batch of CRM objects, including arrays of object IDs, requested property names (with optional history), and an optional unique identifying property.
+*/
 export class BatchReadInputSimplePublicObjectId {
-    'propertiesWithHistory': Array<string>;
     /**
     * When using a custom unique value property to retrieve records, the name of the property. Do not include this parameter if retrieving by record ID.
     */
     'idProperty'?: string;
     'inputs': Array<SimplePublicObjectId>;
+    /**
+    * Key-value pairs for setting properties for the new object.
+    */
     'properties': Array<string>;
+    /**
+    * Key-value pairs for setting properties for the new object and their histories.
+    */
+    'propertiesWithHistory': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "propertiesWithHistory",
-            "baseName": "propertiesWithHistory",
-            "type": "Array<string>",
-            "format": ""
-        },
         {
             "name": "idProperty",
             "baseName": "idProperty",
@@ -47,6 +50,12 @@ export class BatchReadInputSimplePublicObjectId {
         {
             "name": "properties",
             "baseName": "properties",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "propertiesWithHistory",
+            "baseName": "propertiesWithHistory",
             "type": "Array<string>",
             "format": ""
         }    ];

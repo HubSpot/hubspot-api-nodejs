@@ -12,7 +12,7 @@ import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchRespon
 import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
 import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObject } from '../models/CollectionResponseWithTotalSimplePublicObject';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
@@ -35,8 +35,8 @@ export class PromiseBasicApi {
     /**
      * Move an Object identified by `{objectId}` to the recycling bin.
      * Archive
-     * @param objectType
-     * @param objectId
+     * @param objectType 
+     * @param objectId 
      */
     public archiveWithHttpInfo(objectType: string, objectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -58,8 +58,8 @@ export class PromiseBasicApi {
     /**
      * Move an Object identified by `{objectId}` to the recycling bin.
      * Archive
-     * @param objectType
-     * @param objectId
+     * @param objectType 
+     * @param objectId 
      */
     public archive(objectType: string, objectId: string, _options?: PromiseConfigurationOptions): Promise<void> {
         let observableOptions: undefined | ConfigurationOptions
@@ -81,7 +81,7 @@ export class PromiseBasicApi {
     /**
      * Create a CRM object with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard objects is provided.
      * Create
-     * @param objectType
+     * @param objectType 
      * @param simplePublicObjectInputForCreate
      */
     public createWithHttpInfo(objectType: string, simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObject>> {
@@ -104,7 +104,7 @@ export class PromiseBasicApi {
     /**
      * Create a CRM object with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard objects is provided.
      * Create
-     * @param objectType
+     * @param objectType 
      * @param simplePublicObjectInputForCreate
      */
     public create(objectType: string, simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: PromiseConfigurationOptions): Promise<SimplePublicObject> {
@@ -127,13 +127,13 @@ export class PromiseBasicApi {
     /**
      * Read an Object identified by `{objectId}`. `{objectId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * Read
-     * @param objectType
-     * @param objectId
+     * @param objectType 
+     * @param objectId 
      * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param [archived] Whether to return only results that have been archived.
-     * @param [idProperty] The name of a property whose values are unique for this object
+     * @param [idProperty] The name of a property whose values are unique for this object type
      */
     public getByIdWithHttpInfo(objectType: string, objectId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -155,13 +155,13 @@ export class PromiseBasicApi {
     /**
      * Read an Object identified by `{objectId}`. `{objectId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * Read
-     * @param objectType
-     * @param objectId
+     * @param objectType 
+     * @param objectId 
      * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param [archived] Whether to return only results that have been archived.
-     * @param [idProperty] The name of a property whose values are unique for this object
+     * @param [idProperty] The name of a property whose values are unique for this object type
      */
     public getById(objectType: string, objectId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<SimplePublicObjectWithAssociations> {
         let observableOptions: undefined | ConfigurationOptions
@@ -183,7 +183,7 @@ export class PromiseBasicApi {
     /**
      * Read a page of objects. Control what is returned via the `properties` query param.
      * List
-     * @param objectType
+     * @param objectType 
      * @param [limit] The maximum number of results to display per page.
      * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
@@ -211,7 +211,7 @@ export class PromiseBasicApi {
     /**
      * Read a page of objects. Control what is returned via the `properties` query param.
      * List
-     * @param objectType
+     * @param objectType 
      * @param [limit] The maximum number of results to display per page.
      * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
@@ -239,12 +239,12 @@ export class PromiseBasicApi {
     /**
      * Perform a partial update of an Object identified by `{objectId}`or optionally a unique property value as specified by the `idProperty` query param. `{objectId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
      * Update
-     * @param objectType
-     * @param objectId
+     * @param objectId 
+     * @param objectType 
      * @param simplePublicObjectInput
-     * @param [idProperty] The name of a property whose values are unique for this object
+     * @param [idProperty] The name of a property whose values are unique for this object type
      */
-    public updateWithHttpInfo(objectType: string, objectId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObject>> {
+    public updateWithHttpInfo(objectId: string, objectType: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObject>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -257,19 +257,19 @@ export class PromiseBasicApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.updateWithHttpInfo(objectType, objectId, simplePublicObjectInput, idProperty, observableOptions);
+        const result = this.api.updateWithHttpInfo(objectId, objectType, simplePublicObjectInput, idProperty, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Perform a partial update of an Object identified by `{objectId}`or optionally a unique property value as specified by the `idProperty` query param. `{objectId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
      * Update
-     * @param objectType
-     * @param objectId
+     * @param objectId 
+     * @param objectType 
      * @param simplePublicObjectInput
-     * @param [idProperty] The name of a property whose values are unique for this object
+     * @param [idProperty] The name of a property whose values are unique for this object type
      */
-    public update(objectType: string, objectId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<SimplePublicObject> {
+    public update(objectId: string, objectType: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<SimplePublicObject> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -282,7 +282,7 @@ export class PromiseBasicApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.update(objectType, objectId, simplePublicObjectInput, idProperty, observableOptions);
+        const result = this.api.update(objectId, objectType, simplePublicObjectInput, idProperty, observableOptions);
         return result.toPromise();
     }
 
@@ -307,7 +307,7 @@ export class PromiseBatchApi {
 
     /**
      * Archive a batch of objects by ID
-     * @param objectType
+     * @param objectType 
      * @param batchInputSimplePublicObjectId
      */
     public archiveWithHttpInfo(objectType: string, batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
@@ -329,7 +329,7 @@ export class PromiseBatchApi {
 
     /**
      * Archive a batch of objects by ID
-     * @param objectType
+     * @param objectType 
      * @param batchInputSimplePublicObjectId
      */
     public archive(objectType: string, batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: PromiseConfigurationOptions): Promise<void> {
@@ -351,7 +351,7 @@ export class PromiseBatchApi {
 
     /**
      * Create a batch of objects
-     * @param objectType
+     * @param objectType 
      * @param batchInputSimplePublicObjectBatchInputForCreate
      */
     public createWithHttpInfo(objectType: string, batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
@@ -373,7 +373,7 @@ export class PromiseBatchApi {
 
     /**
      * Create a batch of objects
-     * @param objectType
+     * @param objectType 
      * @param batchInputSimplePublicObjectBatchInputForCreate
      */
     public create(objectType: string, batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate, _options?: PromiseConfigurationOptions): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
@@ -396,7 +396,7 @@ export class PromiseBatchApi {
     /**
      * Retrieve records by record ID or include the `idProperty` parameter to retrieve records by a custom unique value property. 
      * Read a batch of objects by internal ID, or unique property values
-     * @param objectType
+     * @param objectType 
      * @param batchReadInputSimplePublicObjectId
      * @param [archived] Whether to return only results that have been archived.
      */
@@ -420,7 +420,7 @@ export class PromiseBatchApi {
     /**
      * Retrieve records by record ID or include the `idProperty` parameter to retrieve records by a custom unique value property. 
      * Read a batch of objects by internal ID, or unique property values
-     * @param objectType
+     * @param objectType 
      * @param batchReadInputSimplePublicObjectId
      * @param [archived] Whether to return only results that have been archived.
      */
@@ -443,7 +443,7 @@ export class PromiseBatchApi {
 
     /**
      * Update a batch of objects by internal ID, or unique property values
-     * @param objectType
+     * @param objectType 
      * @param batchInputSimplePublicObjectBatchInput
      */
     public updateWithHttpInfo(objectType: string, batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
@@ -465,7 +465,7 @@ export class PromiseBatchApi {
 
     /**
      * Update a batch of objects by internal ID, or unique property values
-     * @param objectType
+     * @param objectType 
      * @param batchInputSimplePublicObjectBatchInput
      */
     public update(objectType: string, batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: PromiseConfigurationOptions): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
@@ -488,7 +488,7 @@ export class PromiseBatchApi {
     /**
      * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
      * Create or update a batch of objects by unique property values
-     * @param objectType
+     * @param objectType 
      * @param batchInputSimplePublicObjectBatchInputUpsert
      */
     public upsertWithHttpInfo(objectType: string, batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject>> {
@@ -511,7 +511,7 @@ export class PromiseBatchApi {
     /**
      * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
      * Create or update a batch of objects by unique property values
-     * @param objectType
+     * @param objectType 
      * @param batchInputSimplePublicObjectBatchInputUpsert
      */
     public upsert(objectType: string, batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: PromiseConfigurationOptions): Promise<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject> {
@@ -551,10 +551,10 @@ export class PromiseSearchApi {
     }
 
     /**
-     * @param objectType
+     * @param objectType 
      * @param publicObjectSearchRequest
      */
-    public doSearchWithHttpInfo(objectType: string, publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>> {
+    public doSearchWithHttpInfo(objectType: string, publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObject>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -572,10 +572,10 @@ export class PromiseSearchApi {
     }
 
     /**
-     * @param objectType
+     * @param objectType 
      * @param publicObjectSearchRequest
      */
-    public doSearch(objectType: string, publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
+    public doSearch(objectType: string, publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObject> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {

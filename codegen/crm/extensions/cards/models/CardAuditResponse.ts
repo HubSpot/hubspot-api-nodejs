@@ -12,12 +12,30 @@
 
 
 export class CardAuditResponse {
+    /**
+    * The type of action performed, with possible values: CREATE, DELETE, UPDATE.
+    */
     'actionType': CardAuditResponseActionTypeEnum;
-    'objectTypeId': number;
-    'authSource': CardAuditResponseAuthSourceEnum;
-    'changedAt': number;
+    /**
+    * The ID of the application associated with the card.
+    */
     'applicationId': number;
+    /**
+    * The source of authentication for the action, with possible values: APP, EXTERNAL, INTERNAL.
+    */
+    'authSource': CardAuditResponseAuthSourceEnum;
+    /**
+    * The timestamp indicating when the change occurred.
+    */
+    'changedAt': number;
+    /**
+    * The ID of the user who initiated the action.
+    */
     'initiatingUserId': number;
+    /**
+    * The ID of the card.
+    */
+    'objectTypeId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -31,8 +49,8 @@ export class CardAuditResponse {
             "format": ""
         },
         {
-            "name": "objectTypeId",
-            "baseName": "objectTypeId",
+            "name": "applicationId",
+            "baseName": "applicationId",
             "type": "number",
             "format": "int32"
         },
@@ -49,16 +67,16 @@ export class CardAuditResponse {
             "format": "int64"
         },
         {
-            "name": "applicationId",
-            "baseName": "applicationId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "initiatingUserId",
             "baseName": "initiatingUserId",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
+            "type": "number",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {
@@ -71,12 +89,12 @@ export class CardAuditResponse {
 
 export enum CardAuditResponseActionTypeEnum {
     Create = 'CREATE',
-    Update = 'UPDATE',
-    Delete = 'DELETE'
+    Delete = 'DELETE',
+    Update = 'UPDATE'
 }
 export enum CardAuditResponseAuthSourceEnum {
-    Internal = 'INTERNAL',
     App = 'APP',
-    External = 'EXTERNAL'
+    External = 'EXTERNAL',
+    Internal = 'INTERNAL'
 }
 

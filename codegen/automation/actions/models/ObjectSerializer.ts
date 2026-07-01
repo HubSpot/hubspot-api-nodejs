@@ -1,56 +1,106 @@
+export * from '../models/ActionExecutionIndexIdentifier';
+export * from '../models/AgentRequestContext';
+export * from '../models/ArrayFieldSchema';
+export * from '../models/ArrayFieldSchemaItems';
 export * from '../models/BatchInputCallbackCompletionBatchRequest';
+export * from '../models/BooleanFieldSchema';
 export * from '../models/CallbackCompletionBatchRequest';
+export * from '../models/CallbackCompletionBatchRequestRequestContext';
 export * from '../models/CallbackCompletionRequest';
+export * from '../models/CallbackCompletionRequestRequestContext';
+export * from '../models/ChirpAiContextObject';
 export * from '../models/CollectionResponsePublicActionDefinitionForwardPaging';
 export * from '../models/CollectionResponsePublicActionFunctionIdentifierNoPaging';
 export * from '../models/CollectionResponsePublicActionRevisionForwardPaging';
+export * from '../models/ComplianceIds';
+export * from '../models/ContactId';
+export * from '../models/CopilotRequestContext';
+export * from '../models/DoubleFieldSchema';
 export * from '../models/ErrorDetail';
 export * from '../models/FieldTypeDefinition';
+export * from '../models/FieldTypeDefinitionSchema';
 export * from '../models/ForwardPaging';
-export * from '../models/InputFieldDefinition';
+export * from '../models/IntegerFieldSchema';
+export * from '../models/LongFieldSchema';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
+export * from '../models/ObjectFieldSchema';
 export * from '../models/Option';
 export * from '../models/OutputFieldDefinition';
 export * from '../models/PublicActionDefinition';
 export * from '../models/PublicActionDefinitionEgg';
 export * from '../models/PublicActionDefinitionInputFieldDependenciesInner';
 export * from '../models/PublicActionDefinitionPatch';
+export * from '../models/PublicActionDefinitionRequiresObjectRequest';
+export * from '../models/PublicActionDefinitionRequiresObjectResponse';
 export * from '../models/PublicActionFunction';
 export * from '../models/PublicActionFunctionIdentifier';
 export * from '../models/PublicActionLabels';
 export * from '../models/PublicActionRevision';
 export * from '../models/PublicConditionalSingleFieldDependency';
 export * from '../models/PublicExecutionTranslationRule';
+export * from '../models/PublicFieldTypeDefinition';
+export * from '../models/PublicInputFieldDefinition';
 export * from '../models/PublicObjectRequestOptions';
+export * from '../models/PublicOption';
 export * from '../models/PublicSingleFieldDependency';
+export * from '../models/StandaloneRequestContext';
+export * from '../models/StringFieldSchema';
+export * from '../models/TestRequestContext';
+export * from '../models/UnknownFieldSchema';
+export * from '../models/WorkflowsRequestContext';
 
+import { ActionExecutionIndexIdentifier } from '../models/ActionExecutionIndexIdentifier';
+import { AgentRequestContext      } from '../models/AgentRequestContext';
+import { ArrayFieldSchema    } from '../models/ArrayFieldSchema';
+import { ArrayFieldSchemaItemsClass } from '../models/ArrayFieldSchemaItems';
 import { BatchInputCallbackCompletionBatchRequest } from '../models/BatchInputCallbackCompletionBatchRequest';
+import { BooleanFieldSchema   } from '../models/BooleanFieldSchema';
 import { CallbackCompletionBatchRequest } from '../models/CallbackCompletionBatchRequest';
+import { CallbackCompletionBatchRequestRequestContextClass } from '../models/CallbackCompletionBatchRequestRequestContext';
 import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
+import { CallbackCompletionRequestRequestContextClass } from '../models/CallbackCompletionRequestRequestContext';
+import { ChirpAiContextObject             } from '../models/ChirpAiContextObject';
 import { CollectionResponsePublicActionDefinitionForwardPaging } from '../models/CollectionResponsePublicActionDefinitionForwardPaging';
 import { CollectionResponsePublicActionFunctionIdentifierNoPaging } from '../models/CollectionResponsePublicActionFunctionIdentifierNoPaging';
 import { CollectionResponsePublicActionRevisionForwardPaging } from '../models/CollectionResponsePublicActionRevisionForwardPaging';
+import { ComplianceIds } from '../models/ComplianceIds';
+import { ContactId } from '../models/ContactId';
+import { CopilotRequestContext    } from '../models/CopilotRequestContext';
+import { DoubleFieldSchema     } from '../models/DoubleFieldSchema';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { FieldTypeDefinition        } from '../models/FieldTypeDefinition';
+import { FieldTypeDefinition          } from '../models/FieldTypeDefinition';
+import { FieldTypeDefinitionSchemaClass } from '../models/FieldTypeDefinitionSchema';
 import { ForwardPaging } from '../models/ForwardPaging';
-import { InputFieldDefinition      } from '../models/InputFieldDefinition';
+import { IntegerFieldSchema     } from '../models/IntegerFieldSchema';
+import { LongFieldSchema     } from '../models/LongFieldSchema';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
+import { ObjectFieldSchema    } from '../models/ObjectFieldSchema';
 import { Option } from '../models/Option';
 import { OutputFieldDefinition } from '../models/OutputFieldDefinition';
 import { PublicActionDefinition } from '../models/PublicActionDefinition';
 import { PublicActionDefinitionEgg } from '../models/PublicActionDefinitionEgg';
 import { PublicActionDefinitionInputFieldDependenciesInnerClass } from '../models/PublicActionDefinitionInputFieldDependenciesInner';
 import { PublicActionDefinitionPatch } from '../models/PublicActionDefinitionPatch';
+import { PublicActionDefinitionRequiresObjectRequest } from '../models/PublicActionDefinitionRequiresObjectRequest';
+import { PublicActionDefinitionRequiresObjectResponse } from '../models/PublicActionDefinitionRequiresObjectResponse';
 import { PublicActionFunction     } from '../models/PublicActionFunction';
 import { PublicActionFunctionIdentifier    } from '../models/PublicActionFunctionIdentifier';
 import { PublicActionLabels } from '../models/PublicActionLabels';
 import { PublicActionRevision } from '../models/PublicActionRevision';
 import { PublicConditionalSingleFieldDependency      } from '../models/PublicConditionalSingleFieldDependency';
 import { PublicExecutionTranslationRule } from '../models/PublicExecutionTranslationRule';
+import { PublicFieldTypeDefinition      } from '../models/PublicFieldTypeDefinition';
+import { PublicInputFieldDefinition     } from '../models/PublicInputFieldDefinition';
 import { PublicObjectRequestOptions } from '../models/PublicObjectRequestOptions';
+import { PublicOption } from '../models/PublicOption';
 import { PublicSingleFieldDependency     } from '../models/PublicSingleFieldDependency';
+import { StandaloneRequestContext     } from '../models/StandaloneRequestContext';
+import { StringFieldSchema   } from '../models/StringFieldSchema';
+import { TestRequestContext   } from '../models/TestRequestContext';
+import { UnknownFieldSchema   } from '../models/UnknownFieldSchema';
+import { WorkflowsRequestContext      } from '../models/WorkflowsRequestContext';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -65,44 +115,93 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
+    "AgentRequestContextSourceEnum",
+    "ArrayFieldSchemaTypeEnum",
+    "ArrayFieldSchemaItemsTypeEnum",
+    "ArrayFieldSchemaItemsFormatEnum",
+    "BooleanFieldSchemaTypeEnum",
+    "CallbackCompletionBatchRequestRequestContextSourceEnum",
+    "CallbackCompletionRequestRequestContextSourceEnum",
+    "ChirpAiContextObjectUnstructuredSourcesEnum",
+    "CopilotRequestContextSourceEnum",
+    "DoubleFieldSchemaTypeEnum",
+    "FieldTypeDefinitionFieldTypeEnum",
     "FieldTypeDefinitionReferencedObjectTypeEnum",
     "FieldTypeDefinitionTypeEnum",
-    "FieldTypeDefinitionFieldTypeEnum",
-    "InputFieldDefinitionSupportedValueTypesEnum",
+    "FieldTypeDefinitionSchemaTypeEnum",
+    "FieldTypeDefinitionSchemaFormatEnum",
+    "IntegerFieldSchemaTypeEnum",
+    "LongFieldSchemaTypeEnum",
+    "ObjectFieldSchemaTypeEnum",
     "PublicActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum",
     "PublicActionFunctionFunctionTypeEnum",
     "PublicActionFunctionIdentifierFunctionTypeEnum",
     "PublicConditionalSingleFieldDependencyDependencyTypeEnum",
+    "PublicFieldTypeDefinitionFieldTypeEnum",
+    "PublicFieldTypeDefinitionReferencedObjectTypeEnum",
+    "PublicFieldTypeDefinitionTypeEnum",
+    "PublicInputFieldDefinitionSupportedValueTypesEnum",
     "PublicSingleFieldDependencyDependencyTypeEnum",
+    "StandaloneRequestContextSourceEnum",
+    "StringFieldSchemaFormatEnum",
+    "StringFieldSchemaTypeEnum",
+    "TestRequestContextSourceEnum",
+    "UnknownFieldSchemaTypeEnum",
+    "WorkflowsRequestContextSourceEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "ActionExecutionIndexIdentifier": ActionExecutionIndexIdentifier,
+    "AgentRequestContext": AgentRequestContext,
+    "ArrayFieldSchema": ArrayFieldSchema,
+    "ArrayFieldSchemaItems": ArrayFieldSchemaItemsClass,
     "BatchInputCallbackCompletionBatchRequest": BatchInputCallbackCompletionBatchRequest,
+    "BooleanFieldSchema": BooleanFieldSchema,
     "CallbackCompletionBatchRequest": CallbackCompletionBatchRequest,
+    "CallbackCompletionBatchRequestRequestContext": CallbackCompletionBatchRequestRequestContextClass,
     "CallbackCompletionRequest": CallbackCompletionRequest,
+    "CallbackCompletionRequestRequestContext": CallbackCompletionRequestRequestContextClass,
+    "ChirpAiContextObject": ChirpAiContextObject,
     "CollectionResponsePublicActionDefinitionForwardPaging": CollectionResponsePublicActionDefinitionForwardPaging,
     "CollectionResponsePublicActionFunctionIdentifierNoPaging": CollectionResponsePublicActionFunctionIdentifierNoPaging,
     "CollectionResponsePublicActionRevisionForwardPaging": CollectionResponsePublicActionRevisionForwardPaging,
+    "ComplianceIds": ComplianceIds,
+    "ContactId": ContactId,
+    "CopilotRequestContext": CopilotRequestContext,
+    "DoubleFieldSchema": DoubleFieldSchema,
     "ErrorDetail": ErrorDetail,
     "FieldTypeDefinition": FieldTypeDefinition,
+    "FieldTypeDefinitionSchema": FieldTypeDefinitionSchemaClass,
     "ForwardPaging": ForwardPaging,
-    "InputFieldDefinition": InputFieldDefinition,
+    "IntegerFieldSchema": IntegerFieldSchema,
+    "LongFieldSchema": LongFieldSchema,
     "ModelError": ModelError,
     "NextPage": NextPage,
+    "ObjectFieldSchema": ObjectFieldSchema,
     "Option": Option,
     "OutputFieldDefinition": OutputFieldDefinition,
     "PublicActionDefinition": PublicActionDefinition,
     "PublicActionDefinitionEgg": PublicActionDefinitionEgg,
     "PublicActionDefinitionInputFieldDependenciesInner": PublicActionDefinitionInputFieldDependenciesInnerClass,
     "PublicActionDefinitionPatch": PublicActionDefinitionPatch,
+    "PublicActionDefinitionRequiresObjectRequest": PublicActionDefinitionRequiresObjectRequest,
+    "PublicActionDefinitionRequiresObjectResponse": PublicActionDefinitionRequiresObjectResponse,
     "PublicActionFunction": PublicActionFunction,
     "PublicActionFunctionIdentifier": PublicActionFunctionIdentifier,
     "PublicActionLabels": PublicActionLabels,
     "PublicActionRevision": PublicActionRevision,
     "PublicConditionalSingleFieldDependency": PublicConditionalSingleFieldDependency,
     "PublicExecutionTranslationRule": PublicExecutionTranslationRule,
+    "PublicFieldTypeDefinition": PublicFieldTypeDefinition,
+    "PublicInputFieldDefinition": PublicInputFieldDefinition,
     "PublicObjectRequestOptions": PublicObjectRequestOptions,
+    "PublicOption": PublicOption,
     "PublicSingleFieldDependency": PublicSingleFieldDependency,
+    "StandaloneRequestContext": StandaloneRequestContext,
+    "StringFieldSchema": StringFieldSchema,
+    "TestRequestContext": TestRequestContext,
+    "UnknownFieldSchema": UnknownFieldSchema,
+    "WorkflowsRequestContext": WorkflowsRequestContext,
 }
 
 type MimeTypeDescriptor = {

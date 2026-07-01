@@ -16,9 +16,7 @@ import { AccessTokenInfoResponse } from '../models/AccessTokenInfoResponse';
 export class AccessTokensApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Retrieve a token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Retrieve OAuth token metadata
-     * @param token The access token that you want to retrieve information about.
+     * @param token 
      */
     public async get(token: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

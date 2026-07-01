@@ -3,24 +3,24 @@ import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from
 import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { ExternalSettings } from '../models/ExternalSettings';
-import { ObservableSettingsApi } from './ObservableAPI';
+import { ObservableBasicApi } from './ObservableAPI';
 
-import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/SettingsApi";
-export class PromiseSettingsApi {
-    private api: ObservableSettingsApi
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class PromiseBasicApi {
+    private api: ObservableBasicApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: SettingsApiRequestFactory,
-        responseProcessor?: SettingsApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
-        this.api = new ObservableSettingsApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Deletes the settings for a video conference application with the specified ID.
+     * Delete video conference extension settings for your app
      * Delete settings
-     * @param appId The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * @param appId 
      */
     public archiveWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -40,9 +40,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Deletes the settings for a video conference application with the specified ID.
+     * Delete video conference extension settings for your app
      * Delete settings
-     * @param appId The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * @param appId 
      */
     public archive(appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
         let observableOptions: undefined | ConfigurationOptions
@@ -62,9 +62,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Return the settings for a video conference application with the specified ID.
+     * Fetch video conference extension settings for your app
      * Get settings
-     * @param appId The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * @param appId 
      */
     public getByIdWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ExternalSettings>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -84,9 +84,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Return the settings for a video conference application with the specified ID.
+     * Fetch video conference extension settings for your app
      * Get settings
-     * @param appId The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * @param appId 
      */
     public getById(appId: number, _options?: PromiseConfigurationOptions): Promise<ExternalSettings> {
         let observableOptions: undefined | ConfigurationOptions
@@ -106,9 +106,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Updates the settings for a video conference application with the specified ID.
-     * Update settings
-     * @param appId The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * Create or update video conference extension settings for your app
+     * Create or update settings
+     * @param appId 
      * @param externalSettings
      */
     public replaceWithHttpInfo(appId: number, externalSettings: ExternalSettings, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ExternalSettings>> {
@@ -129,9 +129,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Updates the settings for a video conference application with the specified ID.
-     * Update settings
-     * @param appId The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * Create or update video conference extension settings for your app
+     * Create or update settings
+     * @param appId 
      * @param externalSettings
      */
     public replace(appId: number, externalSettings: ExternalSettings, _options?: PromiseConfigurationOptions): Promise<ExternalSettings> {

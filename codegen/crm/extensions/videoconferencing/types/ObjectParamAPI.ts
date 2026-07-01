@@ -3,103 +3,103 @@ import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { ExternalSettings } from '../models/ExternalSettings';
 
-import { ObservableSettingsApi } from "./ObservableAPI";
-import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/SettingsApi";
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
-export interface SettingsApiArchiveRequest {
+export interface BasicApiArchiveRequest {
     /**
-     * The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * 
      * Defaults to: undefined
      * @type number
-     * @memberof SettingsApiarchive
+     * @memberof BasicApiarchive
      */
     appId: number
 }
 
-export interface SettingsApiGetByIdRequest {
+export interface BasicApiGetByIdRequest {
     /**
-     * The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * 
      * Defaults to: undefined
      * @type number
-     * @memberof SettingsApigetById
+     * @memberof BasicApigetById
      */
     appId: number
 }
 
-export interface SettingsApiReplaceRequest {
+export interface BasicApiReplaceRequest {
     /**
-     * The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * 
      * Defaults to: undefined
      * @type number
-     * @memberof SettingsApireplace
+     * @memberof BasicApireplace
      */
     appId: number
     /**
      * 
      * @type ExternalSettings
-     * @memberof SettingsApireplace
+     * @memberof BasicApireplace
      */
     externalSettings: ExternalSettings
 }
 
-export class ObjectSettingsApi {
-    private api: ObservableSettingsApi
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
 
-    public constructor(configuration: Configuration, requestFactory?: SettingsApiRequestFactory, responseProcessor?: SettingsApiResponseProcessor) {
-        this.api = new ObservableSettingsApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Deletes the settings for a video conference application with the specified ID.
+     * Delete video conference extension settings for your app
      * Delete settings
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: SettingsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.appId,  options).toPromise();
     }
 
     /**
-     * Deletes the settings for a video conference application with the specified ID.
+     * Delete video conference extension settings for your app
      * Delete settings
      * @param param the request object
      */
-    public archive(param: SettingsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
+    public archive(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.appId,  options).toPromise();
     }
 
     /**
-     * Return the settings for a video conference application with the specified ID.
+     * Fetch video conference extension settings for your app
      * Get settings
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: SettingsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<ExternalSettings>> {
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<ExternalSettings>> {
         return this.api.getByIdWithHttpInfo(param.appId,  options).toPromise();
     }
 
     /**
-     * Return the settings for a video conference application with the specified ID.
+     * Fetch video conference extension settings for your app
      * Get settings
      * @param param the request object
      */
-    public getById(param: SettingsApiGetByIdRequest, options?: ConfigurationOptions): Promise<ExternalSettings> {
+    public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<ExternalSettings> {
         return this.api.getById(param.appId,  options).toPromise();
     }
 
     /**
-     * Updates the settings for a video conference application with the specified ID.
-     * Update settings
+     * Create or update video conference extension settings for your app
+     * Create or update settings
      * @param param the request object
      */
-    public replaceWithHttpInfo(param: SettingsApiReplaceRequest, options?: ConfigurationOptions): Promise<HttpInfo<ExternalSettings>> {
+    public replaceWithHttpInfo(param: BasicApiReplaceRequest, options?: ConfigurationOptions): Promise<HttpInfo<ExternalSettings>> {
         return this.api.replaceWithHttpInfo(param.appId, param.externalSettings,  options).toPromise();
     }
 
     /**
-     * Updates the settings for a video conference application with the specified ID.
-     * Update settings
+     * Create or update video conference extension settings for your app
+     * Create or update settings
      * @param param the request object
      */
-    public replace(param: SettingsApiReplaceRequest, options?: ConfigurationOptions): Promise<ExternalSettings> {
+    public replace(param: BasicApiReplaceRequest, options?: ConfigurationOptions): Promise<ExternalSettings> {
         return this.api.replace(param.appId, param.externalSettings,  options).toPromise();
     }
 

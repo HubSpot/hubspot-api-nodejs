@@ -12,6 +12,9 @@
 
 
 export class PublicAllHistoryRefineBy {
+    /**
+    * Type of refine by (ALL_HISTORY)
+    */
     'type': PublicAllHistoryRefineByTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;

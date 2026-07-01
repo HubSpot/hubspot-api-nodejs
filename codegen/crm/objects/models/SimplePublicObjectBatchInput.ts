@@ -11,16 +11,25 @@
  */
 
 
+/**
+* Contains an array of CRM object records to be processed in a batch operation, each defined by their ID and properties.
+*/
 export class SimplePublicObjectBatchInput {
-    /**
-    * The name of a property whose values are unique for this object
-    */
-    'idProperty'?: string;
-    'objectWriteTraceId'?: string;
     /**
     * The id to be updated. This can be the object id, or the unique property value of the idProperty property
     */
     'id': string;
+    /**
+    * The name of a property whose values are unique for this object
+    */
+    'idProperty'?: string;
+    /**
+    * A unique identifier for tracing the request.
+    */
+    'objectWriteTraceId'?: string;
+    /**
+    * Key-value pairs representing the properties of the object.
+    */
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
@@ -28,6 +37,12 @@ export class SimplePublicObjectBatchInput {
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "idProperty",
             "baseName": "idProperty",
@@ -37,12 +52,6 @@ export class SimplePublicObjectBatchInput {
         {
             "name": "objectWriteTraceId",
             "baseName": "objectWriteTraceId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
             "type": "string",
             "format": ""
         },

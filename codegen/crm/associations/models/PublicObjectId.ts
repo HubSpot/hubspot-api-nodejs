@@ -11,9 +11,12 @@
  */
 
 
+/**
+* Contains the Id of a Public Object
+*/
 export class PublicObjectId {
     /**
-    * The unique ID that identifies an object.
+    * ID of the object
     */
     'id': string;
 

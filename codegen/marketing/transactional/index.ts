@@ -9,5 +9,5 @@ export { RequiredError } from "./apis/baseapi";
 
 export type { PromiseMiddleware as Middleware, Middleware as ObservableMiddleware } from './middleware';
 export { Observable } from './rxjsStub';
-export { PromisePublicSMTPTokensApi as PublicSMTPTokensApi,  PromiseSingleSendApi as SingleSendApi } from './types/PromiseAPI';
+export { PromiseSMTPTokensApi as SMTPTokensApi,  PromiseSendTransactionalEmailApi as SendTransactionalEmailApi } from './types/PromiseAPI';
 

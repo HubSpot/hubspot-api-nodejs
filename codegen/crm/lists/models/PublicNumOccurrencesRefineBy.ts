@@ -12,9 +12,18 @@
 
 
 export class PublicNumOccurrencesRefineBy {
+    /**
+    * The maximum number of occurrences allowed.
+    */
     'maxOccurrences'?: number;
-    'type': PublicNumOccurrencesRefineByTypeEnum;
+    /**
+    * The minimum number of occurrences required.
+    */
     'minOccurrences'?: number;
+    /**
+    * The type of refinement (NUM_OCCURRENCES).
+    */
+    'type': PublicNumOccurrencesRefineByTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,16 +37,16 @@ export class PublicNumOccurrencesRefineBy {
             "format": "int32"
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PublicNumOccurrencesRefineByTypeEnum",
-            "format": ""
-        },
-        {
             "name": "minOccurrences",
             "baseName": "minOccurrences",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "PublicNumOccurrencesRefineByTypeEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

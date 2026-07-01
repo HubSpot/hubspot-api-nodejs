@@ -16,9 +16,9 @@ import { BatchResponseSubscriberEmailResponse } from '../models/BatchResponseSub
 import { BatchResponseSubscriberVidResponse } from '../models/BatchResponseSubscriberVidResponse';
 import { CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging } from '../models/CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging';
 import { CollectionResponseSearchPublicResponseWrapperNoPaging } from '../models/CollectionResponseSearchPublicResponseWrapperNoPaging';
-import { CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging } from '../models/CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging';
-import { CollectionResponseWithTotalParticipationBreakdownForwardPaging } from '../models/CollectionResponseWithTotalParticipationBreakdownForwardPaging';
-import { CollectionResponseWithTotalPublicListNoPaging } from '../models/CollectionResponseWithTotalPublicListNoPaging';
+import { CollectionResponseWithTotalMarketingEventIdentifiersResponse } from '../models/CollectionResponseWithTotalMarketingEventIdentifiersResponse';
+import { CollectionResponseWithTotalParticipationBreakdown } from '../models/CollectionResponseWithTotalParticipationBreakdown';
+import { CollectionResponseWithTotalPublicList } from '../models/CollectionResponseWithTotalPublicList';
 import { EventDetailSettings } from '../models/EventDetailSettings';
 import { EventDetailSettingsUrl } from '../models/EventDetailSettingsUrl';
 import { MarketingEventCompleteRequestParams } from '../models/MarketingEventCompleteRequestParams';
@@ -30,221 +30,6 @@ import { MarketingEventPublicReadResponse } from '../models/MarketingEventPublic
 import { MarketingEventPublicReadResponseV2 } from '../models/MarketingEventPublicReadResponseV2';
 import { MarketingEventPublicUpdateRequestV2 } from '../models/MarketingEventPublicUpdateRequestV2';
 import { MarketingEventUpdateRequestParams } from '../models/MarketingEventUpdateRequestParams';
-import { ObservableAddEventAttendeesApi } from './ObservableAPI';
-
-import { AddEventAttendeesApiRequestFactory, AddEventAttendeesApiResponseProcessor} from "../apis/AddEventAttendeesApi";
-export class PromiseAddEventAttendeesApi {
-    private api: ObservableAddEventAttendeesApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: AddEventAttendeesApiRequestFactory,
-        responseProcessor?: AddEventAttendeesApiResponseProcessor
-    ) {
-        this.api = new ObservableAddEventAttendeesApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by Email with Marketing Event External Ids
-     * @param externalEventId The id of the marketing event in the external event application
-     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param batchInputMarketingEventEmailSubscriber
-     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
-     */
-    public recordByContactEmailsWithHttpInfo(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.recordByContactEmailsWithHttpInfo(externalEventId, subscriberState, batchInputMarketingEventEmailSubscriber, externalAccountId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by Email with Marketing Event External Ids
-     * @param externalEventId The id of the marketing event in the external event application
-     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param batchInputMarketingEventEmailSubscriber
-     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
-     */
-    public recordByContactEmails(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriberEmailResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.recordByContactEmails(externalEventId, subscriberState, batchInputMarketingEventEmailSubscriber, externalAccountId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by ContactId with Marketing Event Object Id
-     * @param objectId The internal id of the marketing event in HubSpot
-     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
-     * @param batchInputMarketingEventSubscriber
-     */
-    public recordByContactIdWithHttpInfo(objectId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.recordByContactIdWithHttpInfo(objectId, subscriberState, batchInputMarketingEventSubscriber, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by ContactId with Marketing Event Object Id
-     * @param objectId The internal id of the marketing event in HubSpot
-     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
-     * @param batchInputMarketingEventSubscriber
-     */
-    public recordByContactId(objectId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriberVidResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.recordByContactId(objectId, subscriberState, batchInputMarketingEventSubscriber, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by ContactId with Marketing Event External Ids
-     * @param externalEventId The id of the marketing event in the external event application
-     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param batchInputMarketingEventSubscriber
-     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
-     */
-    public recordByContactIdsWithHttpInfo(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.recordByContactIdsWithHttpInfo(externalEventId, subscriberState, batchInputMarketingEventSubscriber, externalAccountId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by ContactId with Marketing Event External Ids
-     * @param externalEventId The id of the marketing event in the external event application
-     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param batchInputMarketingEventSubscriber
-     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
-     */
-    public recordByContactIds(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriberVidResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.recordByContactIds(externalEventId, subscriberState, batchInputMarketingEventSubscriber, externalAccountId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by Email with Marketing Event Object Id
-     * @param objectId The internal ID of the marketing event in HubSpot
-     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
-     * @param batchInputMarketingEventEmailSubscriber
-     */
-    public recordByEmailWithHttpInfo(objectId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.recordByEmailWithHttpInfo(objectId, subscriberState, batchInputMarketingEventEmailSubscriber, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
-     * Record Participants by Email with Marketing Event Object Id
-     * @param objectId The internal ID of the marketing event in HubSpot
-     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
-     * @param batchInputMarketingEventEmailSubscriber
-     */
-    public recordByEmail(objectId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriberEmailResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.recordByEmail(objectId, subscriberState, batchInputMarketingEventEmailSubscriber, observableOptions);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
 import { ObservableBasicApi } from './ObservableAPI';
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -308,7 +93,7 @@ export class PromiseBasicApi {
     /**
      * Deletes the existing Marketing Event with the specified objectId, if it exists.
      * Delete Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      */
     public archiveByObjectIdWithHttpInfo(objectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -330,7 +115,7 @@ export class PromiseBasicApi {
     /**
      * Deletes the existing Marketing Event with the specified objectId, if it exists.
      * Delete Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      */
     public archiveByObjectId(objectId: string, _options?: PromiseConfigurationOptions): Promise<void> {
         let observableOptions: undefined | ConfigurationOptions
@@ -394,55 +179,9 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Returns all Marketing Events available on the portal, along with their properties, regardless of whether they were created manually or through the application.  The marketing events returned by this endpoint are sorted by objectId.
-     * Get all marketing event
-     * @param [after] The cursor indicating the position of the last retrieved item.
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
-     */
-    public getAllWithHttpInfo(after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getAllWithHttpInfo(after, limit, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Returns all Marketing Events available on the portal, along with their properties, regardless of whether they were created manually or through the application.  The marketing events returned by this endpoint are sorted by objectId.
-     * Get all marketing event
-     * @param [after] The cursor indicating the position of the last retrieved item.
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
-     */
-    public getAll(after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getAll(after, limit, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
      * Returns the details of a Marketing Event with the specified objectId, if it exists.
      * Get Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      */
     public getByObjectIdWithHttpInfo(objectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MarketingEventPublicReadResponseV2>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -464,7 +203,7 @@ export class PromiseBasicApi {
     /**
      * Returns the details of a Marketing Event with the specified objectId, if it exists.
      * Get Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      */
     public getByObjectId(objectId: string, _options?: PromiseConfigurationOptions): Promise<MarketingEventPublicReadResponseV2> {
         let observableOptions: undefined | ConfigurationOptions
@@ -530,6 +269,48 @@ export class PromiseBasicApi {
     }
 
     /**
+     * @param [after]
+     * @param [limit]
+     */
+    public marketingMarketingEventsV3WithHttpInfo(after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.marketingMarketingEventsV3WithHttpInfo(after, limit, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * @param [after]
+     * @param [limit]
+     */
+    public marketingMarketingEventsV3(after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.marketingMarketingEventsV3(after, limit, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
      * Updates the details of an existing Marketing Event identified by its externalAccountId, externalEventId if it exists.  Only Marketing Events created by the same app can be updated.
      * Update Marketing Event by External IDs
      * @param externalEventId The id of the marketing event in the external event application
@@ -580,7 +361,7 @@ export class PromiseBasicApi {
     /**
      * Updates the details of an existing Marketing Event identified by its objectId, if it exists.
      * Update Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      * @param marketingEventPublicUpdateRequestV2
      */
     public updateByObjectIdWithHttpInfo(objectId: string, marketingEventPublicUpdateRequestV2: MarketingEventPublicUpdateRequestV2, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MarketingEventPublicDefaultResponseV2>> {
@@ -603,7 +384,7 @@ export class PromiseBasicApi {
     /**
      * Updates the details of an existing Marketing Event identified by its objectId, if it exists.
      * Update Marketing Event by objectId
-     * @param objectId The internal ID of the marketing event in HubSpot
+     * @param objectId The internal id of the marketing event in HubSpot.
      * @param marketingEventPublicUpdateRequestV2
      */
     public updateByObjectId(objectId: string, marketingEventPublicUpdateRequestV2: MarketingEventPublicUpdateRequestV2, _options?: PromiseConfigurationOptions): Promise<MarketingEventPublicDefaultResponseV2> {
@@ -869,18 +650,233 @@ export class PromiseBatchApi {
 
 
 
-import { ObservableChangePropertyApi } from './ObservableAPI';
+import { ObservableEventAttendeesApi } from './ObservableAPI';
 
-import { ChangePropertyApiRequestFactory, ChangePropertyApiResponseProcessor} from "../apis/ChangePropertyApi";
-export class PromiseChangePropertyApi {
-    private api: ObservableChangePropertyApi
+import { EventAttendeesApiRequestFactory, EventAttendeesApiResponseProcessor} from "../apis/EventAttendeesApi";
+export class PromiseEventAttendeesApi {
+    private api: ObservableEventAttendeesApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: ChangePropertyApiRequestFactory,
-        responseProcessor?: ChangePropertyApiResponseProcessor
+        requestFactory?: EventAttendeesApiRequestFactory,
+        responseProcessor?: EventAttendeesApiResponseProcessor
     ) {
-        this.api = new ObservableChangePropertyApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableEventAttendeesApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by Email with Marketing Event External Ids
+     * @param externalEventId The id of the marketing event in the external event application
+     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
+     * @param batchInputMarketingEventEmailSubscriber
+     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
+     */
+    public recordByContactEmailsWithHttpInfo(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByContactEmailsWithHttpInfo(externalEventId, subscriberState, batchInputMarketingEventEmailSubscriber, externalAccountId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by Email with Marketing Event External Ids
+     * @param externalEventId The id of the marketing event in the external event application
+     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
+     * @param batchInputMarketingEventEmailSubscriber
+     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
+     */
+    public recordByContactEmails(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriberEmailResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByContactEmails(externalEventId, subscriberState, batchInputMarketingEventEmailSubscriber, externalAccountId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by ContactId with Marketing Event Object Id
+     * @param objectId The internal id of the marketing event in HubSpot.
+     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
+     * @param batchInputMarketingEventSubscriber
+     */
+    public recordByContactIdWithHttpInfo(objectId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByContactIdWithHttpInfo(objectId, subscriberState, batchInputMarketingEventSubscriber, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by ContactId with Marketing Event Object Id
+     * @param objectId The internal id of the marketing event in HubSpot.
+     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
+     * @param batchInputMarketingEventSubscriber
+     */
+    public recordByContactId(objectId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriberVidResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByContactId(objectId, subscriberState, batchInputMarketingEventSubscriber, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by ContactId with Marketing Event External Ids
+     * @param externalEventId The id of the marketing event in the external event application
+     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
+     * @param batchInputMarketingEventSubscriber
+     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
+     */
+    public recordByContactIdsWithHttpInfo(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByContactIdsWithHttpInfo(externalEventId, subscriberState, batchInputMarketingEventSubscriber, externalAccountId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their HubSpot contact IDs.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by ContactId with Marketing Event External Ids
+     * @param externalEventId The id of the marketing event in the external event application
+     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
+     * @param batchInputMarketingEventSubscriber
+     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
+     */
+    public recordByContactIds(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriberVidResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByContactIds(externalEventId, subscriberState, batchInputMarketingEventSubscriber, externalAccountId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by Email with Marketing Event Object Id
+     * @param objectId The internal id of the marketing event in HubSpot.
+     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
+     * @param batchInputMarketingEventEmailSubscriber
+     */
+    public recordByEmailWithHttpInfo(objectId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByEmailWithHttpInfo(objectId, subscriberState, batchInputMarketingEventEmailSubscriber, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Records the participation of multiple HubSpot contacts in a Marketing Event using their email addresses.  If a contact does not exist, it will be automatically created. The contactProperties field is used exclusively for creating new contacts and will not update properties of existing contacts.  Additional Functionality: - Adds a timeline event to the contacts.  Allowed Properties: For the state \"attend\": - joinedAt - leftAt
+     * Record Participants by Email with Marketing Event Object Id
+     * @param objectId The internal id of the marketing event in HubSpot.
+     * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
+     * @param batchInputMarketingEventEmailSubscriber
+     */
+    public recordByEmail(objectId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriberEmailResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByEmail(objectId, subscriberState, batchInputMarketingEventEmailSubscriber, observableOptions);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableEventStatusApi } from './ObservableAPI';
+
+import { EventStatusApiRequestFactory, EventStatusApiResponseProcessor} from "../apis/EventStatusApi";
+export class PromiseEventStatusApi {
+    private api: ObservableEventStatusApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: EventStatusApiRequestFactory,
+        responseProcessor?: EventStatusApiResponseProcessor
+    ) {
+        this.api = new ObservableEventStatusApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -1045,7 +1041,7 @@ export class PromiseIdentifiersApi {
      * Find Marketing Events by External Event Id
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public searchPortalEventsWithHttpInfo(externalEventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging>> {
+    public searchPortalEventsWithHttpInfo(externalEventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalMarketingEventIdentifiersResponse>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1067,7 +1063,7 @@ export class PromiseIdentifiersApi {
      * Find Marketing Events by External Event Id
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public searchPortalEvents(externalEventId: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging> {
+    public searchPortalEvents(externalEventId: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalMarketingEventIdentifiersResponse> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1154,10 +1150,10 @@ export class PromiseListAssociationsApi {
     /**
      * Associates a list with a marketing event by marketing event id and ILS list id
      * Associate a list with a marketing event
-     * @param marketingEventId The internal id of the marketing event in HubSpot.
      * @param listId The ILS ID of the list.
+     * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public associateByMarketingEventIdWithHttpInfo(marketingEventId: string, listId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+    public associateByMarketingEventIdWithHttpInfo(listId: string, marketingEventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1170,17 +1166,17 @@ export class PromiseListAssociationsApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.associateByMarketingEventIdWithHttpInfo(marketingEventId, listId, observableOptions);
+        const result = this.api.associateByMarketingEventIdWithHttpInfo(listId, marketingEventId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Associates a list with a marketing event by marketing event id and ILS list id
      * Associate a list with a marketing event
-     * @param marketingEventId The internal id of the marketing event in HubSpot.
      * @param listId The ILS ID of the list.
+     * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public associateByMarketingEventId(marketingEventId: string, listId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+    public associateByMarketingEventId(listId: string, marketingEventId: string, _options?: PromiseConfigurationOptions): Promise<void> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1193,7 +1189,7 @@ export class PromiseListAssociationsApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.associateByMarketingEventId(marketingEventId, listId, observableOptions);
+        const result = this.api.associateByMarketingEventId(listId, marketingEventId, observableOptions);
         return result.toPromise();
     }
 
@@ -1248,10 +1244,10 @@ export class PromiseListAssociationsApi {
     /**
      * Disassociates a list from a marketing event by marketing event id and ILS list id
      * Disassociate a list from a marketing event
-     * @param marketingEventId The internal id of the marketing event in HubSpot.
      * @param listId The ILS ID of the list.
+     * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public disassociateByMarketingEventIdWithHttpInfo(marketingEventId: string, listId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+    public disassociateByMarketingEventIdWithHttpInfo(listId: string, marketingEventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1264,17 +1260,17 @@ export class PromiseListAssociationsApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.disassociateByMarketingEventIdWithHttpInfo(marketingEventId, listId, observableOptions);
+        const result = this.api.disassociateByMarketingEventIdWithHttpInfo(listId, marketingEventId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Disassociates a list from a marketing event by marketing event id and ILS list id
      * Disassociate a list from a marketing event
-     * @param marketingEventId The internal id of the marketing event in HubSpot.
      * @param listId The ILS ID of the list.
+     * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public disassociateByMarketingEventId(marketingEventId: string, listId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+    public disassociateByMarketingEventId(listId: string, marketingEventId: string, _options?: PromiseConfigurationOptions): Promise<void> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1287,17 +1283,17 @@ export class PromiseListAssociationsApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.disassociateByMarketingEventId(marketingEventId, listId, observableOptions);
+        const result = this.api.disassociateByMarketingEventId(listId, marketingEventId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Gets lists associated with a marketing event by external account id and external event id
      * Get lists associated with a marketing event
-     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
+     * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public getAllByExternalAccountAndEventIdsWithHttpInfo(externalAccountId: string, externalEventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPublicListNoPaging>> {
+    public getAllByExternalAccountAndEventIdsWithHttpInfo(externalAccountId: string, externalEventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPublicList>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1317,10 +1313,10 @@ export class PromiseListAssociationsApi {
     /**
      * Gets lists associated with a marketing event by external account id and external event id
      * Get lists associated with a marketing event
-     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
+     * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public getAllByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalPublicListNoPaging> {
+    public getAllByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalPublicList> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1342,7 +1338,7 @@ export class PromiseListAssociationsApi {
      * Get lists associated with a marketing event
      * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public getAllByMarketingEventIdWithHttpInfo(marketingEventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPublicListNoPaging>> {
+    public getAllByMarketingEventIdWithHttpInfo(marketingEventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPublicList>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1364,7 +1360,7 @@ export class PromiseListAssociationsApi {
      * Get lists associated with a marketing event
      * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public getAllByMarketingEventId(marketingEventId: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalPublicListNoPaging> {
+    public getAllByMarketingEventId(marketingEventId: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalPublicList> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1386,29 +1382,29 @@ export class PromiseListAssociationsApi {
 
 
 
-import { ObservableRetrieveParticipantStateApi } from './ObservableAPI';
+import { ObservableParticipantStateApi } from './ObservableAPI';
 
-import { RetrieveParticipantStateApiRequestFactory, RetrieveParticipantStateApiResponseProcessor} from "../apis/RetrieveParticipantStateApi";
-export class PromiseRetrieveParticipantStateApi {
-    private api: ObservableRetrieveParticipantStateApi
+import { ParticipantStateApiRequestFactory, ParticipantStateApiResponseProcessor} from "../apis/ParticipantStateApi";
+export class PromiseParticipantStateApi {
+    private api: ObservableParticipantStateApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: RetrieveParticipantStateApiRequestFactory,
-        responseProcessor?: RetrieveParticipantStateApiResponseProcessor
+        requestFactory?: ParticipantStateApiRequestFactory,
+        responseProcessor?: ParticipantStateApiResponseProcessor
     ) {
-        this.api = new ObservableRetrieveParticipantStateApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableParticipantStateApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
      * Read Contact\'s participations by identifier - email or internal id.
      * Read participations breakdown by Contact identifier
      * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
      */
-    public getParticipationsBreakdownByContactIdWithHttpInfo(contactIdentifier: string, state?: string, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
+    public getParticipationsBreakdownByContactIdWithHttpInfo(contactIdentifier: string, after?: string, limit?: number, state?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdown>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1421,7 +1417,7 @@ export class PromiseRetrieveParticipantStateApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getParticipationsBreakdownByContactIdWithHttpInfo(contactIdentifier, state, limit, after, observableOptions);
+        const result = this.api.getParticipationsBreakdownByContactIdWithHttpInfo(contactIdentifier, after, limit, state, observableOptions);
         return result.toPromise();
     }
 
@@ -1429,11 +1425,11 @@ export class PromiseRetrieveParticipantStateApi {
      * Read Contact\'s participations by identifier - email or internal id.
      * Read participations breakdown by Contact identifier
      * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
      */
-    public getParticipationsBreakdownByContactId(contactIdentifier: string, state?: string, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+    public getParticipationsBreakdownByContactId(contactIdentifier: string, after?: string, limit?: number, state?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalParticipationBreakdown> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1446,7 +1442,7 @@ export class PromiseRetrieveParticipantStateApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getParticipationsBreakdownByContactId(contactIdentifier, state, limit, after, observableOptions);
+        const result = this.api.getParticipationsBreakdownByContactId(contactIdentifier, after, limit, state, observableOptions);
         return result.toPromise();
     }
 
@@ -1455,12 +1451,12 @@ export class PromiseRetrieveParticipantStateApi {
      * Read participations breakdown by Marketing Event external identifier
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
-     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
-     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
      */
-    public getParticipationsBreakdownByExternalEventIdWithHttpInfo(externalAccountId: string, externalEventId: string, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
+    public getParticipationsBreakdownByExternalEventIdWithHttpInfo(externalAccountId: string, externalEventId: string, after?: string, contactIdentifier?: string, limit?: number, state?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdown>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1473,7 +1469,7 @@ export class PromiseRetrieveParticipantStateApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getParticipationsBreakdownByExternalEventIdWithHttpInfo(externalAccountId, externalEventId, contactIdentifier, state, limit, after, observableOptions);
+        const result = this.api.getParticipationsBreakdownByExternalEventIdWithHttpInfo(externalAccountId, externalEventId, after, contactIdentifier, limit, state, observableOptions);
         return result.toPromise();
     }
 
@@ -1482,12 +1478,12 @@ export class PromiseRetrieveParticipantStateApi {
      * Read participations breakdown by Marketing Event external identifier
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
-     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
-     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
      */
-    public getParticipationsBreakdownByExternalEventId(externalAccountId: string, externalEventId: string, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+    public getParticipationsBreakdownByExternalEventId(externalAccountId: string, externalEventId: string, after?: string, contactIdentifier?: string, limit?: number, state?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalParticipationBreakdown> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1500,7 +1496,7 @@ export class PromiseRetrieveParticipantStateApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getParticipationsBreakdownByExternalEventId(externalAccountId, externalEventId, contactIdentifier, state, limit, after, observableOptions);
+        const result = this.api.getParticipationsBreakdownByExternalEventId(externalAccountId, externalEventId, after, contactIdentifier, limit, state, observableOptions);
         return result.toPromise();
     }
 
@@ -1508,12 +1504,12 @@ export class PromiseRetrieveParticipantStateApi {
      * Read Marketing event\'s participations breakdown with optional filters by internal identifier marketingEventId.
      * Read participations breakdown by Marketing Event internal identifier
      * @param marketingEventId The internal id of the marketing event in HubSpot.
-     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
-     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
      */
-    public getParticipationsBreakdownByMarketingEventIdWithHttpInfo(marketingEventId: number, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
+    public getParticipationsBreakdownByMarketingEventIdWithHttpInfo(marketingEventId: number, after?: string, contactIdentifier?: string, limit?: number, state?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdown>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1526,7 +1522,7 @@ export class PromiseRetrieveParticipantStateApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getParticipationsBreakdownByMarketingEventIdWithHttpInfo(marketingEventId, contactIdentifier, state, limit, after, observableOptions);
+        const result = this.api.getParticipationsBreakdownByMarketingEventIdWithHttpInfo(marketingEventId, after, contactIdentifier, limit, state, observableOptions);
         return result.toPromise();
     }
 
@@ -1534,12 +1530,12 @@ export class PromiseRetrieveParticipantStateApi {
      * Read Marketing event\'s participations breakdown with optional filters by internal identifier marketingEventId.
      * Read participations breakdown by Marketing Event internal identifier
      * @param marketingEventId The internal id of the marketing event in HubSpot.
-     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
-     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
      */
-    public getParticipationsBreakdownByMarketingEventId(marketingEventId: number, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+    public getParticipationsBreakdownByMarketingEventId(marketingEventId: number, after?: string, contactIdentifier?: string, limit?: number, state?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalParticipationBreakdown> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1552,7 +1548,7 @@ export class PromiseRetrieveParticipantStateApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getParticipationsBreakdownByMarketingEventId(marketingEventId, contactIdentifier, state, limit, after, observableOptions);
+        const result = this.api.getParticipationsBreakdownByMarketingEventId(marketingEventId, after, contactIdentifier, limit, state, observableOptions);
         return result.toPromise();
     }
 

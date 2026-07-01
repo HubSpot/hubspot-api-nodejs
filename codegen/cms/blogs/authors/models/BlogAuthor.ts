@@ -16,23 +16,41 @@
 */
 export class BlogAuthor {
     /**
-    * URL to the website of the Blog Author.
+    * URL to the blog author\'s avatar, if supplying a custom one.
     */
-    'website': string;
-    /**
-    * The full name of the Blog Author to be displayed.
-    */
-    'displayName': string;
-    'created': Date;
-    /**
-    * URL to the Blog Author\'s Facebook page.
-    */
-    'facebook': string;
-    'fullName': string;
+    'avatar': string;
     /**
     * A short biography of the blog author.
     */
     'bio': string;
+    /**
+    * The timestamp (ISO8601 format) when this Blog Author was created.
+    */
+    'created': Date;
+    /**
+    * The timestamp (ISO8601 format) when this Blog Author was deleted.
+    */
+    'deletedAt': Date;
+    /**
+    * The full name of the Blog Author to be displayed.
+    */
+    'displayName': string;
+    /**
+    * Email address of the Blog Author.
+    */
+    'email': string;
+    /**
+    * URL to the Blog Author\'s Facebook page.
+    */
+    'facebook': string;
+    /**
+    * The full, unabbreviated name of the blog author, typically their first and last name combined.
+    */
+    'fullName': string;
+    /**
+    * The unique ID of the Blog Author.
+    */
+    'id': string;
     /**
     * The explicitly defined ISO 639 language code of the blog author.
     */
@@ -42,9 +60,13 @@ export class BlogAuthor {
     */
     'linkedin': string;
     /**
-    * URL to the blog author\'s avatar, if supplying a custom one.
+    * The name field for the blog author. (This appears to be a shorter or alternative name field compared to fullName.)
     */
-    'avatar': string;
+    'name': string;
+    /**
+    * A URL-friendly identifier for the blog author that can be used to reference the author in URLs. Typically generated from the author\'s name and contains lowercase letters, hyphens, and underscores.
+    */
+    'slug': string;
     /**
     * ID of the primary blog author this object was translated from.
     */
@@ -54,20 +76,13 @@ export class BlogAuthor {
     */
     'twitter': string;
     /**
-    * The timestamp (ISO8601 format) when this Blog Author was deleted.
+    * The timestamp (ISO8601 format) when this Blog Author was updated.
     */
-    'deletedAt': Date;
-    'name': string;
-    /**
-    * The unique ID of the Blog Author.
-    */
-    'id': string;
     'updated': Date;
     /**
-    * Email address of the Blog Author.
+    * URL to the website of the Blog Author.
     */
-    'email': string;
-    'slug': string;
+    'website': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -75,14 +90,14 @@ export class BlogAuthor {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "website",
-            "baseName": "website",
+            "name": "avatar",
+            "baseName": "avatar",
             "type": "string",
             "format": ""
         },
         {
-            "name": "displayName",
-            "baseName": "displayName",
+            "name": "bio",
+            "baseName": "bio",
             "type": "string",
             "format": ""
         },
@@ -91,6 +106,24 @@ export class BlogAuthor {
             "baseName": "created",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "deletedAt",
+            "baseName": "deletedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "displayName",
+            "baseName": "displayName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "facebook",
@@ -105,8 +138,8 @@ export class BlogAuthor {
             "format": ""
         },
         {
-            "name": "bio",
-            "baseName": "bio",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
@@ -123,8 +156,14 @@ export class BlogAuthor {
             "format": ""
         },
         {
-            "name": "avatar",
-            "baseName": "avatar",
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "slug",
+            "baseName": "slug",
             "type": "string",
             "format": ""
         },
@@ -141,38 +180,14 @@ export class BlogAuthor {
             "format": ""
         },
         {
-            "name": "deletedAt",
-            "baseName": "deletedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "updated",
             "baseName": "updated",
             "type": "Date",
             "format": "date-time"
         },
         {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "slug",
-            "baseName": "slug",
+            "name": "website",
+            "baseName": "website",
             "type": "string",
             "format": ""
         }    ];
@@ -186,6 +201,9 @@ export class BlogAuthor {
 }
 
 export enum BlogAuthorLanguageEnum {
+    Aa = 'aa',
+    Ab = 'ab',
+    Ae = 'ae',
     Af = 'af',
     AfNa = 'af-na',
     AfZa = 'af-za',
@@ -195,6 +213,9 @@ export enum BlogAuthorLanguageEnum {
     AkGh = 'ak-gh',
     Am = 'am',
     AmEt = 'am-et',
+    An = 'an',
+    Ann = 'ann',
+    AnnNg = 'ann-ng',
     Ar = 'ar',
     Ar001 = 'ar-001',
     ArAe = 'ar-ae',
@@ -230,8 +251,13 @@ export enum BlogAuthorLanguageEnum {
     AsaTz = 'asa-tz',
     Ast = 'ast',
     AstEs = 'ast-es',
+    Av = 'av',
+    Ay = 'ay',
     Az = 'az',
     AzAz = 'az-az',
+    Ba = 'ba',
+    Bal = 'bal',
+    BalPk = 'bal-pk',
     Bas = 'bas',
     BasCm = 'bas-cm',
     Be = 'be',
@@ -242,6 +268,13 @@ export enum BlogAuthorLanguageEnum {
     BezTz = 'bez-tz',
     Bg = 'bg',
     BgBg = 'bg-bg',
+    Bgc = 'bgc',
+    BgcIn = 'bgc-in',
+    Bho = 'bho',
+    BhoIn = 'bho-in',
+    Bi = 'bi',
+    Blo = 'blo',
+    BloBj = 'blo-bj',
     Bm = 'bm',
     BmMl = 'bm-ml',
     Bn = 'bn',
@@ -270,15 +303,22 @@ export enum BlogAuthorLanguageEnum {
     CebPh = 'ceb-ph',
     Cgg = 'cgg',
     CggUg = 'cgg-ug',
+    Ch = 'ch',
     Chr = 'chr',
     ChrUs = 'chr-us',
     Ckb = 'ckb',
     CkbIq = 'ckb-iq',
     CkbIr = 'ckb-ir',
+    Co = 'co',
+    Cr = 'cr',
     Cs = 'cs',
     CsCz = 'cs-cz',
+    Csw = 'csw',
+    CswCa = 'csw-ca',
     Cu = 'cu',
     CuRu = 'cu-ru',
+    Cv = 'cv',
+    CvRu = 'cv-ru',
     Cy = 'cy',
     CyGb = 'cy-gb',
     Da = 'da',
@@ -303,6 +343,7 @@ export enum BlogAuthorLanguageEnum {
     DsbDe = 'dsb-de',
     Dua = 'dua',
     DuaCm = 'dua-cm',
+    Dv = 'dv',
     Dyo = 'dyo',
     DyoSn = 'dyo-sn',
     Dz = 'dz',
@@ -339,29 +380,38 @@ export enum BlogAuthorLanguageEnum {
     EnCn = 'en-cn',
     EnCx = 'en-cx',
     EnCy = 'en-cy',
+    EnCz = 'en-cz',
     EnDe = 'en-de',
     EnDg = 'en-dg',
     EnDk = 'en-dk',
     EnDm = 'en-dm',
+    EnEe = 'en-ee',
+    EnEg = 'en-eg',
     EnEr = 'en-er',
+    EnEs = 'en-es',
     EnFi = 'en-fi',
     EnFj = 'en-fj',
     EnFk = 'en-fk',
     EnFm = 'en-fm',
+    EnFr = 'en-fr',
     EnGb = 'en-gb',
     EnGd = 'en-gd',
     EnGg = 'en-gg',
     EnGh = 'en-gh',
     EnGi = 'en-gi',
     EnGm = 'en-gm',
+    EnGs = 'en-gs',
     EnGu = 'en-gu',
     EnGy = 'en-gy',
     EnHk = 'en-hk',
+    EnHu = 'en-hu',
+    EnId = 'en-id',
     EnIe = 'en-ie',
     EnIl = 'en-il',
     EnIm = 'en-im',
     EnIn = 'en-in',
     EnIo = 'en-io',
+    EnIt = 'en-it',
     EnJe = 'en-je',
     EnJm = 'en-jm',
     EnKe = 'en-ke',
@@ -379,6 +429,7 @@ export enum BlogAuthorLanguageEnum {
     EnMs = 'en-ms',
     EnMt = 'en-mt',
     EnMu = 'en-mu',
+    EnMv = 'en-mv',
     EnMw = 'en-mw',
     EnMx = 'en-mx',
     EnMy = 'en-my',
@@ -386,15 +437,19 @@ export enum BlogAuthorLanguageEnum {
     EnNf = 'en-nf',
     EnNg = 'en-ng',
     EnNl = 'en-nl',
+    EnNo = 'en-no',
     EnNr = 'en-nr',
     EnNu = 'en-nu',
     EnNz = 'en-nz',
     EnPg = 'en-pg',
     EnPh = 'en-ph',
     EnPk = 'en-pk',
+    EnPl = 'en-pl',
     EnPn = 'en-pn',
     EnPr = 'en-pr',
+    EnPt = 'en-pt',
     EnPw = 'en-pw',
+    EnRo = 'en-ro',
     EnRw = 'en-rw',
     EnSb = 'en-sb',
     EnSc = 'en-sc',
@@ -403,12 +458,15 @@ export enum BlogAuthorLanguageEnum {
     EnSg = 'en-sg',
     EnSh = 'en-sh',
     EnSi = 'en-si',
+    EnSk = 'en-sk',
     EnSl = 'en-sl',
     EnSs = 'en-ss',
     EnSx = 'en-sx',
     EnSz = 'en-sz',
     EnTc = 'en-tc',
+    EnTh = 'en-th',
     EnTk = 'en-tk',
+    EnTn = 'en-tn',
     EnTo = 'en-to',
     EnTt = 'en-tt',
     EnTv = 'en-tv',
@@ -419,6 +477,7 @@ export enum BlogAuthorLanguageEnum {
     EnVc = 'en-vc',
     EnVg = 'en-vg',
     EnVi = 'en-vi',
+    EnVn = 'en-vn',
     EnVu = 'en-vu',
     EnWs = 'en-ws',
     EnZa = 'en-za',
@@ -481,6 +540,7 @@ export enum BlogAuthorLanguageEnum {
     FiFi = 'fi-fi',
     Fil = 'fil',
     FilPh = 'fil-ph',
+    Fj = 'fj',
     Fo = 'fo',
     FoDk = 'fo-dk',
     FoFo = 'fo-fo',
@@ -531,6 +591,8 @@ export enum BlogAuthorLanguageEnum {
     FrVu = 'fr-vu',
     FrWf = 'fr-wf',
     FrYt = 'fr-yt',
+    Frr = 'frr',
+    FrrDe = 'frr-de',
     Fur = 'fur',
     FurIt = 'fur-it',
     Fy = 'fy',
@@ -538,10 +600,13 @@ export enum BlogAuthorLanguageEnum {
     Ga = 'ga',
     GaGb = 'ga-gb',
     GaIe = 'ga-ie',
+    Gaa = 'gaa',
+    GaaGh = 'gaa-gh',
     Gd = 'gd',
     GdGb = 'gd-gb',
     Gl = 'gl',
     GlEs = 'gl-es',
+    Gn = 'gn',
     Gsw = 'gsw',
     GswCh = 'gsw-ch',
     GswFr = 'gsw-fr',
@@ -559,25 +624,35 @@ export enum BlogAuthorLanguageEnum {
     Haw = 'haw',
     HawUs = 'haw-us',
     He = 'he',
+    HeIl = 'he-il',
     Hi = 'hi',
     HiIn = 'hi-in',
+    Hmn = 'hmn',
+    Ho = 'ho',
     Hr = 'hr',
     HrBa = 'hr-ba',
     HrHr = 'hr-hr',
     Hsb = 'hsb',
     HsbDe = 'hsb-de',
+    Ht = 'ht',
+    HtHt = 'ht-ht',
     Hu = 'hu',
     HuHu = 'hu-hu',
     Hy = 'hy',
     HyAm = 'hy-am',
+    Hz = 'hz',
     Ia = 'ia',
     Ia001 = 'ia-001',
     Id = 'id',
+    IdId = 'id-id',
+    Ie = 'ie',
+    IeEe = 'ie-ee',
     Ig = 'ig',
     IgNg = 'ig-ng',
     Ii = 'ii',
     IiCn = 'ii-cn',
-    IdId = 'id-id',
+    Ik = 'ik',
+    Io = 'io',
     Is = 'is',
     IsIs = 'is-is',
     It = 'it',
@@ -585,13 +660,11 @@ export enum BlogAuthorLanguageEnum {
     ItIt = 'it-it',
     ItSm = 'it-sm',
     ItVa = 'it-va',
-    HeIl = 'he-il',
+    Iu = 'iu',
     Ja = 'ja',
     JaJp = 'ja-jp',
     Jgo = 'jgo',
     JgoCm = 'jgo-cm',
-    Yi = 'yi',
-    Yi001 = 'yi-001',
     Jmc = 'jmc',
     JmcTz = 'jmc-tz',
     Jv = 'jv',
@@ -602,14 +675,20 @@ export enum BlogAuthorLanguageEnum {
     KabDz = 'kab-dz',
     Kam = 'kam',
     KamKe = 'kam-ke',
+    Kar = 'kar',
     Kde = 'kde',
     KdeTz = 'kde-tz',
     Kea = 'kea',
     KeaCv = 'kea-cv',
+    Kg = 'kg',
+    Kgp = 'kgp',
+    KgpBr = 'kgp-br',
+    Kh = 'kh',
     Khq = 'khq',
     KhqMl = 'khq-ml',
     Ki = 'ki',
     KiKe = 'ki-ke',
+    Kj = 'kj',
     Kk = 'kk',
     KkKz = 'kk-kz',
     Kkj = 'kkj',
@@ -623,10 +702,12 @@ export enum BlogAuthorLanguageEnum {
     Kn = 'kn',
     KnIn = 'kn-in',
     Ko = 'ko',
+    KoCn = 'ko-cn',
     KoKp = 'ko-kp',
     KoKr = 'ko-kr',
     Kok = 'kok',
     KokIn = 'kok-in',
+    Kr = 'kr',
     Ks = 'ks',
     KsIn = 'ks-in',
     Ksb = 'ksb',
@@ -635,20 +716,29 @@ export enum BlogAuthorLanguageEnum {
     KsfCm = 'ksf-cm',
     Ksh = 'ksh',
     KshDe = 'ksh-de',
-    Kw = 'kw',
-    KwGb = 'kw-gb',
     Ku = 'ku',
     KuTr = 'ku-tr',
+    Kv = 'kv',
+    Kw = 'kw',
+    KwGb = 'kw-gb',
+    Kxv = 'kxv',
+    KxvIn = 'kxv-in',
     Ky = 'ky',
     KyKg = 'ky-kg',
+    La = 'la',
     Lag = 'lag',
     LagTz = 'lag-tz',
     Lb = 'lb',
     LbLu = 'lb-lu',
     Lg = 'lg',
     LgUg = 'lg-ug',
+    Li = 'li',
+    Lij = 'lij',
+    LijIt = 'lij-it',
     Lkt = 'lkt',
     LktUs = 'lkt-us',
+    Lmo = 'lmo',
+    LmoIt = 'lmo-it',
     Ln = 'ln',
     LnAo = 'ln-ao',
     LnCd = 'ln-cd',
@@ -674,6 +764,8 @@ export enum BlogAuthorLanguageEnum {
     Mas = 'mas',
     MasKe = 'mas-ke',
     MasTz = 'mas-tz',
+    Mdf = 'mdf',
+    MdfRu = 'mdf-ru',
     Mer = 'mer',
     MerKe = 'mer-ke',
     Mfe = 'mfe',
@@ -684,6 +776,7 @@ export enum BlogAuthorLanguageEnum {
     MghMz = 'mgh-mz',
     Mgo = 'mgo',
     MgoCm = 'mgo-cm',
+    Mh = 'mh',
     Mi = 'mi',
     MiNz = 'mi-nz',
     Mk = 'mk',
@@ -709,6 +802,7 @@ export enum BlogAuthorLanguageEnum {
     MyMm = 'my-mm',
     Mzn = 'mzn',
     MznIr = 'mzn-ir',
+    Na = 'na',
     Naq = 'naq',
     NaqNa = 'naq-na',
     Nb = 'nb',
@@ -722,11 +816,12 @@ export enum BlogAuthorLanguageEnum {
     Ne = 'ne',
     NeIn = 'ne-in',
     NeNp = 'ne-np',
+    Ng = 'ng',
     Nl = 'nl',
     NlAw = 'nl-aw',
     NlBe = 'nl-be',
-    NlCh = 'nl-ch',
     NlBq = 'nl-bq',
+    NlCh = 'nl-ch',
     NlCw = 'nl-cw',
     NlLu = 'nl-lu',
     NlNl = 'nl-nl',
@@ -740,10 +835,21 @@ export enum BlogAuthorLanguageEnum {
     NnhCm = 'nnh-cm',
     No = 'no',
     NoNo = 'no-no',
+    Nqo = 'nqo',
+    NqoGn = 'nqo-gn',
+    Nr = 'nr',
+    Nso = 'nso',
+    NsoZa = 'nso-za',
     Nus = 'nus',
     NusSs = 'nus-ss',
+    Nv = 'nv',
+    Ny = 'ny',
     Nyn = 'nyn',
     NynUg = 'nyn-ug',
+    Oc = 'oc',
+    OcEs = 'oc-es',
+    OcFr = 'oc-fr',
+    Oj = 'oj',
     Om = 'om',
     OmEt = 'om-et',
     OmKe = 'om-ke',
@@ -757,6 +863,9 @@ export enum BlogAuthorLanguageEnum {
     PaPk = 'pa-pk',
     Pcm = 'pcm',
     PcmNg = 'pcm-ng',
+    Pi = 'pi',
+    Pis = 'pis',
+    PisSb = 'pis-sb',
     Pl = 'pl',
     PlPl = 'pl-pl',
     Prg = 'prg',
@@ -781,6 +890,8 @@ export enum BlogAuthorLanguageEnum {
     QuBo = 'qu-bo',
     QuEc = 'qu-ec',
     QuPe = 'qu-pe',
+    Raj = 'raj',
+    RajIn = 'raj-in',
     Rm = 'rm',
     RmCh = 'rm-ch',
     Rn = 'rn',
@@ -811,6 +922,8 @@ export enum BlogAuthorLanguageEnum {
     SatIn = 'sat-in',
     Sbp = 'sbp',
     SbpTz = 'sbp-tz',
+    Sc = 'sc',
+    ScIt = 'sc-it',
     Sd = 'sd',
     SdIn = 'sd-in',
     SdPk = 'sd-pk',
@@ -832,8 +945,11 @@ export enum BlogAuthorLanguageEnum {
     SkSk = 'sk-sk',
     Sl = 'sl',
     SlSi = 'sl-si',
+    Sm = 'sm',
     Smn = 'smn',
     SmnFi = 'smn-fi',
+    Sms = 'sms',
+    SmsFi = 'sms-fi',
     Sn = 'sn',
     SnZw = 'sn-zw',
     So = 'so',
@@ -851,6 +967,10 @@ export enum BlogAuthorLanguageEnum {
     SrMe = 'sr-me',
     SrRs = 'sr-rs',
     SrXk = 'sr-xk',
+    Ss = 'ss',
+    St = 'st',
+    StLs = 'st-ls',
+    StZa = 'st-za',
     Su = 'su',
     SuId = 'su-id',
     Sv = 'sv',
@@ -863,6 +983,11 @@ export enum BlogAuthorLanguageEnum {
     SwTz = 'sw-tz',
     SwUg = 'sw-ug',
     Sy = 'sy',
+    Syr = 'syr',
+    SyrIq = 'syr-iq',
+    SyrSy = 'syr-sy',
+    Szl = 'szl',
+    SzlPl = 'szl-pl',
     Ta = 'ta',
     TaIn = 'ta-in',
     TaLk = 'ta-lk',
@@ -883,15 +1008,23 @@ export enum BlogAuthorLanguageEnum {
     Tk = 'tk',
     TkTm = 'tk-tm',
     Tl = 'tl',
+    Tn = 'tn',
+    TnBw = 'tn-bw',
+    TnZa = 'tn-za',
     To = 'to',
     ToTo = 'to-to',
+    Tok = 'tok',
+    Tok001 = 'tok-001',
     Tr = 'tr',
     TrCy = 'tr-cy',
     TrTr = 'tr-tr',
+    Ts = 'ts',
     Tt = 'tt',
     TtRu = 'tt-ru',
+    Tw = 'tw',
     Twq = 'twq',
     TwqNe = 'twq-ne',
+    Ty = 'ty',
     Tzm = 'tzm',
     TzmMa = 'tzm-ma',
     Ug = 'ug',
@@ -906,38 +1039,57 @@ export enum BlogAuthorLanguageEnum {
     UzUz = 'uz-uz',
     Vai = 'vai',
     VaiLr = 'vai-lr',
+    Ve = 've',
+    Vec = 'vec',
+    VecIt = 'vec-it',
     Vi = 'vi',
     ViVn = 'vi-vn',
+    Vmw = 'vmw',
+    VmwMz = 'vmw-mz',
     Vo = 'vo',
     Vo001 = 'vo-001',
     Vun = 'vun',
     VunTz = 'vun-tz',
+    Wa = 'wa',
     Wae = 'wae',
     WaeCh = 'wae-ch',
     Wo = 'wo',
     WoSn = 'wo-sn',
     Xh = 'xh',
     XhZa = 'xh-za',
+    Xnr = 'xnr',
+    XnrIn = 'xnr-in',
     Xog = 'xog',
     XogUg = 'xog-ug',
     Yav = 'yav',
     YavCm = 'yav-cm',
+    Yi = 'yi',
+    Yi001 = 'yi-001',
+    YiUa = 'yi-ua',
     Yo = 'yo',
     YoBj = 'yo-bj',
     YoNg = 'yo-ng',
+    Yrl = 'yrl',
+    YrlBr = 'yrl-br',
+    YrlCo = 'yrl-co',
+    YrlVe = 'yrl-ve',
     Yue = 'yue',
     YueCn = 'yue-cn',
     YueHk = 'yue-hk',
+    YueMo = 'yue-mo',
+    Za = 'za',
+    ZaCn = 'za-cn',
     Zgh = 'zgh',
     ZghMa = 'zgh-ma',
     Zh = 'zh',
     ZhCn = 'zh-cn',
-    ZhHk = 'zh-hk',
-    ZhMo = 'zh-mo',
-    ZhSg = 'zh-sg',
-    ZhTw = 'zh-tw',
     ZhHans = 'zh-hans',
     ZhHant = 'zh-hant',
+    ZhHk = 'zh-hk',
+    ZhMo = 'zh-mo',
+    ZhMy = 'zh-my',
+    ZhSg = 'zh-sg',
+    ZhTw = 'zh-tw',
     Zu = 'zu',
     ZuZa = 'zu-za'
 }

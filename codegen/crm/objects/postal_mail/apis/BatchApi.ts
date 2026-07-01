@@ -24,7 +24,6 @@ import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/Batch
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Archive a batch of postal mail by ID
      * @param batchInputSimplePublicObjectId 
      */
     public async archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<RequestContext> {
@@ -71,7 +70,6 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Create a batch of postal mail
      * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
     public async create(batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate, _options?: Configuration): Promise<RequestContext> {
@@ -118,8 +116,6 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Retrieve records by record ID or include the `idProperty` parameter to retrieve records by a custom unique value property. 
-     * Read a batch of postal mail by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
      */
@@ -173,7 +169,6 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Update a batch of postal mail by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */
     public async update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<RequestContext> {
@@ -220,8 +215,6 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
-     * Create or update a batch of postal mail by unique property values
      * @param batchInputSimplePublicObjectBatchInputUpsert 
      */
     public async upsert(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: Configuration): Promise<RequestContext> {

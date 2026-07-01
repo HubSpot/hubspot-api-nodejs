@@ -16,13 +16,13 @@
 */
 export class AbTestEndRequestVNext {
     /**
-    * ID of the object to designate as the test winner.
-    */
-    'winnerId': string;
-    /**
     * ID of the test to end.
     */
     'abTestId': string;
+    /**
+    * ID of the object to designate as the test winner.
+    */
+    'winnerId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,14 +30,14 @@ export class AbTestEndRequestVNext {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "winnerId",
-            "baseName": "winnerId",
+            "name": "abTestId",
+            "baseName": "abTestId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "abTestId",
-            "baseName": "abTestId",
+            "name": "winnerId",
+            "baseName": "winnerId",
             "type": "string",
             "format": ""
         }    ];

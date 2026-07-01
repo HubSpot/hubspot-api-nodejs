@@ -9,30 +9,30 @@ import { FormDefinitionCreateRequestBase } from '../models/FormDefinitionCreateR
 import { HubSpotFormDefinition } from '../models/HubSpotFormDefinition';
 import { HubSpotFormDefinitionPatchRequest } from '../models/HubSpotFormDefinitionPatchRequest';
 
-import { FormsApiRequestFactory, FormsApiResponseProcessor} from "../apis/FormsApi";
-export class ObservableFormsApi {
-    private requestFactory: FormsApiRequestFactory;
-    private responseProcessor: FormsApiResponseProcessor;
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class ObservableBasicApi {
+    private requestFactory: BasicApiRequestFactory;
+    private responseProcessor: BasicApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: FormsApiRequestFactory,
-        responseProcessor?: FormsApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new FormsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new FormsApiResponseProcessor();
+        this.requestFactory = requestFactory || new BasicApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BasicApiResponseProcessor();
     }
 
     /**
      * Archive a form definition. New submissions will not be accepted and the form definition will be permanently deleted after 3 months.
      * Archive a form definition
-     * @param formId The ID of the form to archive.
+     * @param formId 
      */
     public archiveWithHttpInfo(formId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -46,7 +46,7 @@ export class ObservableFormsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -57,7 +57,7 @@ export class ObservableFormsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -81,83 +81,21 @@ export class ObservableFormsApi {
     /**
      * Archive a form definition. New submissions will not be accepted and the form definition will be permanently deleted after 3 months.
      * Archive a form definition
-     * @param formId The ID of the form to archive.
+     * @param formId 
      */
     public archive(formId: string, _options?: ConfigurationOptions): Observable<void> {
         return this.archiveWithHttpInfo(formId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
-     * Add a new `hubspot` form
-     * Create a form
-     * @param formDefinitionCreateRequestBase
-     */
-    public createWithHttpInfo(formDefinitionCreateRequestBase: FormDefinitionCreateRequestBase, _options?: ConfigurationOptions): Observable<HttpInfo<FormDefinitionBase>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.create(formDefinitionCreateRequestBase, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Add a new `hubspot` form
-     * Create a form
-     * @param formDefinitionCreateRequestBase
-     */
-    public create(formDefinitionCreateRequestBase: FormDefinitionCreateRequestBase, _options?: ConfigurationOptions): Observable<FormDefinitionBase> {
-        return this.createWithHttpInfo(formDefinitionCreateRequestBase, _options).pipe(map((apiResponse: HttpInfo<FormDefinitionBase>) => apiResponse.data));
-    }
-
-    /**
      * Returns a form based on the form ID provided.
      * Get a form definition
-     * @param formId The unique identifier of the form
+     * @param formId 
      * @param [archived] Whether to return only results that have been archived.
      */
     public getByIdWithHttpInfo(formId: string, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<FormDefinitionBase>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -171,7 +109,7 @@ export class ObservableFormsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -182,7 +120,7 @@ export class ObservableFormsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -206,7 +144,7 @@ export class ObservableFormsApi {
     /**
      * Returns a form based on the form ID provided.
      * Get a form definition
-     * @param formId The unique identifier of the form
+     * @param formId 
      * @param [archived] Whether to return only results that have been archived.
      */
     public getById(formId: string, archived?: boolean, _options?: ConfigurationOptions): Observable<FormDefinitionBase> {
@@ -214,16 +152,14 @@ export class ObservableFormsApi {
     }
 
     /**
-     * Returns a list of forms based on the search filters. By default, it returns the first 20 `hubspot` forms
-     * Get a list of forms
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [limit] The maximum number of results to display per page.
-     * @param [archived] Whether to return only results that have been archived.
-     * @param [formTypes] The form types to be included in the results.
+     * @param [after]
+     * @param [archived]
+     * @param [formTypes]
+     * @param [limit]
      */
-    public getPageWithHttpInfo(after?: string, limit?: number, archived?: boolean, formTypes?: Array<'hubspot' | 'captured' | 'flow' | 'blog_comment' | 'all'>, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseFormDefinitionBaseForwardPaging>> {
+    public marketingV3FormsWithHttpInfo(after?: string, archived?: boolean, formTypes?: Array<'hubspot' | 'captured' | 'flow' | 'blog_comment' | 'all'>, limit?: number, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseFormDefinitionBaseForwardPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -237,7 +173,7 @@ export class ObservableFormsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -248,11 +184,11 @@ export class ObservableFormsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.getPage(after, limit, archived, formTypes, _config);
+        const requestContextPromise = this.requestFactory.marketingV3Forms(after, archived, formTypes, limit, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -265,31 +201,26 @@ export class ObservableFormsApi {
                 for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPageWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.marketingV3FormsWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Returns a list of forms based on the search filters. By default, it returns the first 20 `hubspot` forms
-     * Get a list of forms
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [limit] The maximum number of results to display per page.
-     * @param [archived] Whether to return only results that have been archived.
-     * @param [formTypes] The form types to be included in the results.
+     * @param [after]
+     * @param [archived]
+     * @param [formTypes]
+     * @param [limit]
      */
-    public getPage(after?: string, limit?: number, archived?: boolean, formTypes?: Array<'hubspot' | 'captured' | 'flow' | 'blog_comment' | 'all'>, _options?: ConfigurationOptions): Observable<CollectionResponseFormDefinitionBaseForwardPaging> {
-        return this.getPageWithHttpInfo(after, limit, archived, formTypes, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseFormDefinitionBaseForwardPaging>) => apiResponse.data));
+    public marketingV3Forms(after?: string, archived?: boolean, formTypes?: Array<'hubspot' | 'captured' | 'flow' | 'blog_comment' | 'all'>, limit?: number, _options?: ConfigurationOptions): Observable<CollectionResponseFormDefinitionBaseForwardPaging> {
+        return this.marketingV3FormsWithHttpInfo(after, archived, formTypes, limit, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseFormDefinitionBaseForwardPaging>) => apiResponse.data));
     }
 
     /**
-     * Update all fields of a hubspot form definition.
-     * Update a form definition
-     * @param formId
-     * @param hubSpotFormDefinition
+     * @param formDefinitionCreateRequestBase
      */
-    public replaceWithHttpInfo(formId: string, hubSpotFormDefinition: HubSpotFormDefinition, _options?: ConfigurationOptions): Observable<HttpInfo<FormDefinitionBase>> {
+    public marketingV3Forms_1WithHttpInfo(formDefinitionCreateRequestBase: FormDefinitionCreateRequestBase, _options?: ConfigurationOptions): Observable<HttpInfo<FormDefinitionBase>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -303,7 +234,7 @@ export class ObservableFormsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -314,7 +245,68 @@ export class ObservableFormsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.marketingV3Forms_1(formDefinitionCreateRequestBase, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.marketingV3Forms_1WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * @param formDefinitionCreateRequestBase
+     */
+    public marketingV3Forms_1(formDefinitionCreateRequestBase: FormDefinitionCreateRequestBase, _options?: ConfigurationOptions): Observable<FormDefinitionBase> {
+        return this.marketingV3Forms_1WithHttpInfo(formDefinitionCreateRequestBase, _options).pipe(map((apiResponse: HttpInfo<FormDefinitionBase>) => apiResponse.data));
+    }
+
+    /**
+     * Update all fields of a hubspot form definition.
+     * Update a form definition
+     * @param formId 
+     * @param hubSpotFormDefinition
+     */
+    public replaceWithHttpInfo(formId: string, hubSpotFormDefinition: HubSpotFormDefinition, _options?: ConfigurationOptions): Observable<HttpInfo<FormDefinitionBase>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
 		};
 	}
 
@@ -338,7 +330,7 @@ export class ObservableFormsApi {
     /**
      * Update all fields of a hubspot form definition.
      * Update a form definition
-     * @param formId
+     * @param formId 
      * @param hubSpotFormDefinition
      */
     public replace(formId: string, hubSpotFormDefinition: HubSpotFormDefinition, _options?: ConfigurationOptions): Observable<FormDefinitionBase> {
@@ -348,12 +340,12 @@ export class ObservableFormsApi {
     /**
      * Update some of the form definition components
      * Partially update a form definition
-     * @param formId The ID of the form to update.
+     * @param formId 
      * @param hubSpotFormDefinitionPatchRequest
      */
     public updateWithHttpInfo(formId: string, hubSpotFormDefinitionPatchRequest: HubSpotFormDefinitionPatchRequest, _options?: ConfigurationOptions): Observable<HttpInfo<FormDefinitionBase>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -367,7 +359,7 @@ export class ObservableFormsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -378,7 +370,7 @@ export class ObservableFormsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -402,7 +394,7 @@ export class ObservableFormsApi {
     /**
      * Update some of the form definition components
      * Partially update a form definition
-     * @param formId The ID of the form to update.
+     * @param formId 
      * @param hubSpotFormDefinitionPatchRequest
      */
     public update(formId: string, hubSpotFormDefinitionPatchRequest: HubSpotFormDefinitionPatchRequest, _options?: ConfigurationOptions): Observable<FormDefinitionBase> {

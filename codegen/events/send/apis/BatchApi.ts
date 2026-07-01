@@ -16,8 +16,8 @@ import { BatchedBehavioralEventHttpCompletionRequest } from '../models/BatchedBe
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Send multiple event completions at once.
-     * Send a batch of event completions
+     * Send multiple event occurrences at once.
+     * Send a batch of event occurrences
      * @param batchedBehavioralEventHttpCompletionRequest 
      */
     public async send(batchedBehavioralEventHttpCompletionRequest: BatchedBehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<RequestContext> {

@@ -13,11 +13,26 @@
 import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
 
 export class ActionHookActionBody {
-    'propertyNamesIncluded': Array<string>;
     'confirmation'?: ActionConfirmationBody;
-    'label'?: string;
-    'type': ActionHookActionBodyTypeEnum;
+    /**
+    * The HTTP method to be used when making the call, which can be set to GET, POST, PUT, DELETE, or PATCH. If using GET or DELETE
+    */
     'httpMethod': ActionHookActionBodyHttpMethodEnum;
+    /**
+    * The label for this property as you\'d like it displayed to users.
+    */
+    'label'?: string;
+    /**
+    * A list of property names that will be included on the action. See the documentation for more information
+    */
+    'propertyNamesIncluded': Array<string>;
+    /**
+    * The type of status.
+    */
+    'type': ActionHookActionBodyTypeEnum;
+    /**
+    * The URL endpoint that will be called when the action is triggered.
+    */
     'url': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -26,15 +41,15 @@ export class ActionHookActionBody {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "propertyNamesIncluded",
-            "baseName": "propertyNamesIncluded",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
             "name": "confirmation",
             "baseName": "confirmation",
             "type": "ActionConfirmationBody",
+            "format": ""
+        },
+        {
+            "name": "httpMethod",
+            "baseName": "httpMethod",
+            "type": "ActionHookActionBodyHttpMethodEnum",
             "format": ""
         },
         {
@@ -44,15 +59,15 @@ export class ActionHookActionBody {
             "format": ""
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "ActionHookActionBodyTypeEnum",
+            "name": "propertyNamesIncluded",
+            "baseName": "propertyNamesIncluded",
+            "type": "Array<string>",
             "format": ""
         },
         {
-            "name": "httpMethod",
-            "baseName": "httpMethod",
-            "type": "ActionHookActionBodyHttpMethodEnum",
+            "name": "type",
+            "baseName": "type",
+            "type": "ActionHookActionBodyTypeEnum",
             "format": ""
         },
         {
@@ -70,9 +85,6 @@ export class ActionHookActionBody {
     }
 }
 
-export enum ActionHookActionBodyTypeEnum {
-    ActionHook = 'ACTION_HOOK'
-}
 export enum ActionHookActionBodyHttpMethodEnum {
     Connect = 'CONNECT',
     Delete = 'DELETE',
@@ -83,5 +95,8 @@ export enum ActionHookActionBodyHttpMethodEnum {
     Post = 'POST',
     Put = 'PUT',
     Trace = 'TRACE'
+}
+export enum ActionHookActionBodyTypeEnum {
+    ActionHook = 'ACTION_HOOK'
 }
 

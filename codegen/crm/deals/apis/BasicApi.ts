@@ -35,7 +35,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/{dealId}'
+        const localVarPath = '/crm/v3/objects/0-3/{dealId}'
             .replace('{' + 'dealId' + '}', encodeURIComponent(String(dealId)));
 
         // Make Request Context
@@ -73,7 +73,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals';
+        const localVarPath = '/crm/v3/objects/0-3';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -110,13 +110,13 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * Read an Object identified by `{dealId}`. `{dealId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * Read
      * @param dealId 
+     * @param archived Whether to return only results that have been archived.
+     * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param idProperty The name of a property whose values are unique for this object type
      * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param archived Whether to return only results that have been archived.
-     * @param idProperty The name of a property whose values are unique for this object
      */
-    public async getById(dealId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getById(dealId: string, archived?: boolean, associations?: Array<string>, idProperty?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'dealId' is not null or undefined
@@ -131,12 +131,30 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/{dealId}'
+        const localVarPath = '/crm/v3/objects/0-3/{dealId}'
             .replace('{' + 'dealId' + '}', encodeURIComponent(String(dealId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (archived !== undefined) {
+            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
+        }
+
+        // Query Params
+        if (associations !== undefined) {
+            const serializedParams = ObjectSerializer.serialize(associations, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("associations", serializedParam);
+            }
+        }
+
+        // Query Params
+        if (idProperty !== undefined) {
+            requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "string", ""));
+        }
 
         // Query Params
         if (properties !== undefined) {
@@ -152,24 +170,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             for (const serializedParam of serializedParams) {
                 requestContext.appendQueryParam("propertiesWithHistory", serializedParam);
             }
-        }
-
-        // Query Params
-        if (associations !== undefined) {
-            const serializedParams = ObjectSerializer.serialize(associations, "Array<string>", "");
-            for (const serializedParam of serializedParams) {
-                requestContext.appendQueryParam("associations", serializedParam);
-            }
-        }
-
-        // Query Params
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
-
-        // Query Params
-        if (idProperty !== undefined) {
-            requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "string", ""));
         }
 
 
@@ -191,14 +191,14 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Read a page of deals. Control what is returned via the `properties` query param.
      * List
-     * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param archived Whether to return only results that have been archived.
+     * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param limit The maximum number of results to display per page.
      * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
-     * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param archived Whether to return only results that have been archived.
      */
-    public async getPage(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getPage(after?: string, archived?: boolean, associations?: Array<string>, limit?: number, properties?: Array<string>, propertiesWithHistory?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -208,20 +208,33 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals';
+        const localVarPath = '/crm/v3/objects/0-3';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (limit !== undefined) {
-            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
+        if (after !== undefined) {
+            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
         }
 
         // Query Params
-        if (after !== undefined) {
-            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
+        if (archived !== undefined) {
+            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
+        }
+
+        // Query Params
+        if (associations !== undefined) {
+            const serializedParams = ObjectSerializer.serialize(associations, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("associations", serializedParam);
+            }
+        }
+
+        // Query Params
+        if (limit !== undefined) {
+            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
 
         // Query Params
@@ -238,19 +251,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             for (const serializedParam of serializedParams) {
                 requestContext.appendQueryParam("propertiesWithHistory", serializedParam);
             }
-        }
-
-        // Query Params
-        if (associations !== undefined) {
-            const serializedParams = ObjectSerializer.serialize(associations, "Array<string>", "");
-            for (const serializedParam of serializedParams) {
-                requestContext.appendQueryParam("associations", serializedParam);
-            }
-        }
-
-        // Query Params
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
 
 
@@ -270,6 +270,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Combine two deals of the same type into a single deal.
      * Merge two deals with same type
      * @param publicMergeInput 
      */
@@ -283,7 +284,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/merge';
+        const localVarPath = '/crm/v3/objects/0-3/merge';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -321,7 +322,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * Update
      * @param dealId 
      * @param simplePublicObjectInput 
-     * @param idProperty The name of a property whose values are unique for this object
+     * @param idProperty The name of a property whose values are unique for this object type
      */
     public async update(dealId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -340,7 +341,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/{dealId}'
+        const localVarPath = '/crm/v3/objects/0-3/{dealId}'
             .replace('{' + 'dealId' + '}', encodeURIComponent(String(dealId)));
 
         // Make Request Context

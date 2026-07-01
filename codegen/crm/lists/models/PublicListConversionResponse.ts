@@ -13,15 +13,27 @@
 import { PublicListConversionResponseRequestedConversionTime } from '../models/PublicListConversionResponseRequestedConversionTime';
 
 export class PublicListConversionResponse {
+    /**
+    * The date and time when the list was converted.
+    */
+    'convertedAt'?: Date;
+    /**
+    * The unique identifier of the list for which the conversion details are provided.
+    */
     'listId': string;
     'requestedConversionTime'?: PublicListConversionResponseRequestedConversionTime;
-    'convertedAt'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "convertedAt",
+            "baseName": "convertedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
         {
             "name": "listId",
             "baseName": "listId",
@@ -33,12 +45,6 @@ export class PublicListConversionResponse {
             "baseName": "requestedConversionTime",
             "type": "PublicListConversionResponseRequestedConversionTime",
             "format": ""
-        },
-        {
-            "name": "convertedAt",
-            "baseName": "convertedAt",
-            "type": "Date",
-            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

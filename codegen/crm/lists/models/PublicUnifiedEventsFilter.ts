@@ -10,15 +10,22 @@
  * Do not edit the class manually.
  */
 
+import { PublicCtaAnalyticsFilterCoalescingRefineBy } from '../models/PublicCtaAnalyticsFilterCoalescingRefineBy';
+import { PublicCtaAnalyticsFilterPruningRefineBy } from '../models/PublicCtaAnalyticsFilterPruningRefineBy';
 import { PublicEventFilterMetadata } from '../models/PublicEventFilterMetadata';
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
 
 export class PublicUnifiedEventsFilter {
-    'coalescingRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
+    'coalescingRefineBy'?: PublicCtaAnalyticsFilterCoalescingRefineBy;
+    /**
+    * The identifier for the type of event in the unified events filter.
+    */
     'eventTypeId'?: string;
     'filterLines': Array<PublicEventFilterMetadata>;
-    'pruningRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
+    /**
+    * Indicates the type of filter being applied (UNIFIED_EVENTS).
+    */
     'filterType': PublicUnifiedEventsFilterFilterTypeEnum;
+    'pruningRefineBy'?: PublicCtaAnalyticsFilterPruningRefineBy;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,7 +35,7 @@ export class PublicUnifiedEventsFilter {
         {
             "name": "coalescingRefineBy",
             "baseName": "coalescingRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
+            "type": "PublicCtaAnalyticsFilterCoalescingRefineBy",
             "format": ""
         },
         {
@@ -44,15 +51,15 @@ export class PublicUnifiedEventsFilter {
             "format": ""
         },
         {
-            "name": "pruningRefineBy",
-            "baseName": "pruningRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
             "name": "filterType",
             "baseName": "filterType",
             "type": "PublicUnifiedEventsFilterFilterTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "pruningRefineBy",
+            "baseName": "pruningRefineBy",
+            "type": "PublicCtaAnalyticsFilterPruningRefineBy",
             "format": ""
         }    ];
 

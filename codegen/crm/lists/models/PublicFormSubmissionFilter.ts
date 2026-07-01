@@ -10,14 +10,24 @@
  * Do not edit the class manually.
  */
 
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
+import { PublicCtaAnalyticsFilterCoalescingRefineBy } from '../models/PublicCtaAnalyticsFilterCoalescingRefineBy';
+import { PublicCtaAnalyticsFilterPruningRefineBy } from '../models/PublicCtaAnalyticsFilterPruningRefineBy';
 
 export class PublicFormSubmissionFilter {
-    'formId'?: string;
-    'coalescingRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
-    'pruningRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
+    'coalescingRefineBy'?: PublicCtaAnalyticsFilterCoalescingRefineBy;
+    /**
+    * Indicates the type of filter (FORM_SUBMISSION).
+    */
     'filterType': PublicFormSubmissionFilterFilterTypeEnum;
+    /**
+    * The ID of the form used in the filter.
+    */
+    'formId'?: string;
+    /**
+    * Specifies the operation to be performed (FILLED_OUT, NOT_FILLED_OUT).
+    */
     'operator': PublicFormSubmissionFilterOperatorEnum;
+    'pruningRefineBy'?: PublicCtaAnalyticsFilterPruningRefineBy;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -25,21 +35,9 @@ export class PublicFormSubmissionFilter {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "formId",
-            "baseName": "formId",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "coalescingRefineBy",
             "baseName": "coalescingRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
-            "name": "pruningRefineBy",
-            "baseName": "pruningRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
+            "type": "PublicCtaAnalyticsFilterCoalescingRefineBy",
             "format": ""
         },
         {
@@ -49,9 +47,21 @@ export class PublicFormSubmissionFilter {
             "format": ""
         },
         {
+            "name": "formId",
+            "baseName": "formId",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "operator",
             "baseName": "operator",
             "type": "PublicFormSubmissionFilterOperatorEnum",
+            "format": ""
+        },
+        {
+            "name": "pruningRefineBy",
+            "baseName": "pruningRefineBy",
+            "type": "PublicCtaAnalyticsFilterPruningRefineBy",
             "format": ""
         }    ];
 

@@ -20,19 +20,20 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Read a batch of deal split objects by their associated deal object internal ID
+     * Read a batch of deal split objects by their associated deal object internal ID
      * @param batchInputPublicObjectId 
      */
-    public async read(batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Promise<RequestContext> {
+    public async crmObjectsV3DealsSplitsBatchRead(batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'batchInputPublicObjectId' is not null or undefined
         if (batchInputPublicObjectId === null || batchInputPublicObjectId === undefined) {
-            throw new RequiredError("BatchApi", "read", "batchInputPublicObjectId");
+            throw new RequiredError("BatchApi", "crmObjectsV3DealsSplitsBatchRead", "batchInputPublicObjectId");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/splits/batch/read';
+        const localVarPath = '/crm/objects/v3/deals/splits/batch/read';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -67,19 +68,20 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
+     * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
      * @param publicDealSplitsBatchCreateRequest 
      */
-    public async upsert(publicDealSplitsBatchCreateRequest: PublicDealSplitsBatchCreateRequest, _options?: Configuration): Promise<RequestContext> {
+    public async crmObjectsV3DealsSplitsBatchUpsert(publicDealSplitsBatchCreateRequest: PublicDealSplitsBatchCreateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'publicDealSplitsBatchCreateRequest' is not null or undefined
         if (publicDealSplitsBatchCreateRequest === null || publicDealSplitsBatchCreateRequest === undefined) {
-            throw new RequiredError("BatchApi", "upsert", "publicDealSplitsBatchCreateRequest");
+            throw new RequiredError("BatchApi", "crmObjectsV3DealsSplitsBatchUpsert", "publicDealSplitsBatchCreateRequest");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/splits/batch/upsert';
+        const localVarPath = '/crm/objects/v3/deals/splits/batch/upsert';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -120,10 +122,10 @@ export class BatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to read
+     * @params response Response returned by the server for a request to crmObjectsV3DealsSplitsBatchRead
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async readWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors >> {
+     public async crmObjectsV3DealsSplitsBatchReadWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseDealToDealSplits = ObjectSerializer.deserialize(
@@ -163,10 +165,10 @@ export class BatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to upsert
+     * @params response Response returned by the server for a request to crmObjectsV3DealsSplitsBatchUpsert
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async upsertWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors >> {
+     public async crmObjectsV3DealsSplitsBatchUpsertWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseDealToDealSplits = ObjectSerializer.deserialize(

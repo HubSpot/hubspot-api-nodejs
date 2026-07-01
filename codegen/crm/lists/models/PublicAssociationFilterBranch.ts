@@ -10,17 +10,35 @@
  * Do not edit the class manually.
  */
 
-import { PublicPropertyAssociationFilterBranchFilterBranchesInner } from '../models/PublicPropertyAssociationFilterBranchFilterBranchesInner';
-import { PublicPropertyAssociationFilterBranchFiltersInner } from '../models/PublicPropertyAssociationFilterBranchFiltersInner';
+import { PublicAndFilterBranchFilterBranchesInner } from '../models/PublicAndFilterBranchFilterBranchesInner';
+import { PublicAndFilterBranchFiltersInner } from '../models/PublicAndFilterBranchFiltersInner';
 
 export class PublicAssociationFilterBranch {
-    'filterBranchType': PublicAssociationFilterBranchFilterBranchTypeEnum;
-    'filterBranches': Array<PublicPropertyAssociationFilterBranchFilterBranchesInner>;
-    'objectTypeId': string;
-    'filterBranchOperator': string;
-    'associationTypeId': number;
+    /**
+    * Specifies the category of the association for the filter branch (HUBSPOT_DEFINED, USER_DEFINED, INTEGRATOR_DEFINED, WORK).
+    */
     'associationCategory': string;
-    'filters': Array<PublicPropertyAssociationFilterBranchFiltersInner>;
+    /**
+    * Type id of the association
+    */
+    'associationTypeId': number;
+    /**
+    * Filter branch operator (AND)
+    */
+    'filterBranchOperator': string;
+    /**
+    * Type of the filter branch (ASSOCIATION)
+    */
+    'filterBranchType': PublicAssociationFilterBranchFilterBranchTypeEnum;
+    'filterBranches': Array<PublicAndFilterBranchFilterBranchesInner>;
+    'filters': Array<PublicAndFilterBranchFiltersInner>;
+    /**
+    * The ID representing the type of object associated with the filter branch.
+    */
+    'objectTypeId': string;
+    /**
+    * Defines the operation to be applied within the filter branch (IN_LIST, NOT_IN_LIST).
+    */
     'operator': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -29,26 +47,8 @@ export class PublicAssociationFilterBranch {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "filterBranchType",
-            "baseName": "filterBranchType",
-            "type": "PublicAssociationFilterBranchFilterBranchTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "filterBranches",
-            "baseName": "filterBranches",
-            "type": "Array<PublicPropertyAssociationFilterBranchFilterBranchesInner>",
-            "format": ""
-        },
-        {
-            "name": "objectTypeId",
-            "baseName": "objectTypeId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "filterBranchOperator",
-            "baseName": "filterBranchOperator",
+            "name": "associationCategory",
+            "baseName": "associationCategory",
             "type": "string",
             "format": ""
         },
@@ -59,15 +59,33 @@ export class PublicAssociationFilterBranch {
             "format": "int32"
         },
         {
-            "name": "associationCategory",
-            "baseName": "associationCategory",
+            "name": "filterBranchOperator",
+            "baseName": "filterBranchOperator",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "filterBranchType",
+            "baseName": "filterBranchType",
+            "type": "PublicAssociationFilterBranchFilterBranchTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "filterBranches",
+            "baseName": "filterBranches",
+            "type": "Array<PublicAndFilterBranchFilterBranchesInner>",
             "format": ""
         },
         {
             "name": "filters",
             "baseName": "filters",
-            "type": "Array<PublicPropertyAssociationFilterBranchFiltersInner>",
+            "type": "Array<PublicAndFilterBranchFiltersInner>",
+            "format": ""
+        },
+        {
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
+            "type": "string",
             "format": ""
         },
         {

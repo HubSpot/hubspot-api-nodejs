@@ -16,7 +16,7 @@
 */
 export class SubscriptionPatchRequest {
     /**
-    * Determines if the subscription is active or paused.
+    * A boolean indicating whether to activate or pause the webhook subscription. If true, the subscription will send webhook notifications. If false, the subscription is paused and will not send notifications.
     */
     'active'?: boolean;
 

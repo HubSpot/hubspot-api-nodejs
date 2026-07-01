@@ -12,15 +12,30 @@
 
 
 export class PublicConstantFilter {
-    'shouldAccept': boolean;
-    'source'?: string;
+    /**
+    * Specifies the type of filter, which is (CONSTANT).
+    */
     'filterType': PublicConstantFilterFilterTypeEnum;
+    /**
+    * Indicates whether the filter should accept the condition.
+    */
+    'shouldAccept': boolean;
+    /**
+    * Defines the source of the constant filter.
+    */
+    'source'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "filterType",
+            "baseName": "filterType",
+            "type": "PublicConstantFilterFilterTypeEnum",
+            "format": ""
+        },
         {
             "name": "shouldAccept",
             "baseName": "shouldAccept",
@@ -31,12 +46,6 @@ export class PublicConstantFilter {
             "name": "source",
             "baseName": "source",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "filterType",
-            "baseName": "filterType",
-            "type": "PublicConstantFilterFilterTypeEnum",
             "format": ""
         }    ];
 

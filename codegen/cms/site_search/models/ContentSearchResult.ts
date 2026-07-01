@@ -1,6 +1,6 @@
 /**
  * Site Search
- * Use these endpoints for searching content on your HubSpot hosted CMS website(s).
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -11,78 +11,78 @@
  */
 
 
-/**
-* An individual search result.
-*/
 export class ContentSearchResult {
-    /**
-    * The ID of the document in HubSpot.
-    */
-    'combinedId'?: string;
-    /**
-    * The result\'s description. The content will be determined by the value of `length` in the request.
-    */
-    'description'?: string;
-    /**
-    * The document\'s language.
-    */
-    'language'?: ContentSearchResultLanguageEnum;
-    /**
-    * The type of document. Can be `SITE_PAGE`, `LANDING_PAGE`, `BLOG_POST`, `LISTING_PAGE`, or `KNOWLEDGE_ARTICLE`.
-    */
-    'type': ContentSearchResultTypeEnum;
-    /**
-    * The title of the returned document.
-    */
-    'title'?: string;
-    /**
-    * The url of the document.
-    */
-    'url': string;
-    /**
-    * If a blog post, the tags associated with it.
-    */
-    'tags'?: Array<string>;
-    /**
-    * If a dynamic page, the row ID in the HubDB table.
-    */
-    'rowId'?: number;
-    /**
-    * URL of the featured image.
-    */
-    'featuredImageUrl'?: string;
-    /**
-    * The matching score of the document.
-    */
-    'score': number;
     /**
     * Name of the author.
     */
     'authorFullName'?: string;
     /**
+    * The error category
+    */
+    'category'?: string;
+    /**
+    * The ID of the document in HubSpot.
+    */
+    'combinedId'?: string;
+    'contentType'?: string;
+    /**
+    * The result\'s description. The content will be determined by the value of `length` in the request.
+    */
+    'description'?: string;
+    /**
     * The domain the document is hosted on.
     */
     'domain': string;
     /**
-    * If a dynamic page, the ID of the HubDB table.
+    * URL of the featured image.
     */
-    'tableId'?: number;
+    'featuredImageUrl'?: string;
     /**
     * The ID of the content.
     */
     'id': number;
+    'inBeta'?: boolean;
+    'isPrivate'?: boolean;
+    /**
+    * The document\'s language.
+    */
+    'language'?: ContentSearchResultLanguageEnum;
     /**
     * The date the content was published.
     */
     'publishedDate'?: number;
     /**
-    * For knowledge articles, the category of the article.
+    * If a dynamic page, the row ID in the HubDB table.
     */
-    'category'?: string;
+    'rowId'?: number;
+    /**
+    * The matching score of the document.
+    */
+    'score': number;
     /**
     * For knowledge articles, the subcategory of the article.
     */
     'subcategory'?: string;
+    /**
+    * If a dynamic page, the ID of the HubDB table.
+    */
+    'tableId'?: number;
+    /**
+    * If a blog post, the tags associated with it.
+    */
+    'tags'?: Array<string>;
+    /**
+    * The title of the returned document.
+    */
+    'title'?: string;
+    /**
+    * The type of document. Can be `SITE_PAGE`, `LANDING_PAGE`, `BLOG_POST`, `LISTING_PAGE`, or `KNOWLEDGE_ARTICLE`.
+    */
+    'type': ContentSearchResultTypeEnum;
+    /**
+    * The url of the document.
+    */
+    'url': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -90,8 +90,26 @@ export class ContentSearchResult {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "authorFullName",
+            "baseName": "authorFullName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "category",
+            "baseName": "category",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "combinedId",
             "baseName": "combinedId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "contentType",
+            "baseName": "contentType",
             "type": "string",
             "format": ""
         },
@@ -102,40 +120,10 @@ export class ContentSearchResult {
             "format": ""
         },
         {
-            "name": "language",
-            "baseName": "language",
-            "type": "ContentSearchResultLanguageEnum",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "ContentSearchResultTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "title",
-            "baseName": "title",
+            "name": "domain",
+            "baseName": "domain",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tags",
-            "baseName": "tags",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "rowId",
-            "baseName": "rowId",
-            "type": "number",
-            "format": "int64"
         },
         {
             "name": "featuredImageUrl",
@@ -144,20 +132,50 @@ export class ContentSearchResult {
             "format": ""
         },
         {
+            "name": "id",
+            "baseName": "id",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "inBeta",
+            "baseName": "inBeta",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "isPrivate",
+            "baseName": "isPrivate",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "language",
+            "baseName": "language",
+            "type": "ContentSearchResultLanguageEnum",
+            "format": ""
+        },
+        {
+            "name": "publishedDate",
+            "baseName": "publishedDate",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "rowId",
+            "baseName": "rowId",
+            "type": "number",
+            "format": "int64"
+        },
+        {
             "name": "score",
             "baseName": "score",
             "type": "number",
             "format": ""
         },
         {
-            "name": "authorFullName",
-            "baseName": "authorFullName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "domain",
-            "baseName": "domain",
+            "name": "subcategory",
+            "baseName": "subcategory",
             "type": "string",
             "format": ""
         },
@@ -168,26 +186,26 @@ export class ContentSearchResult {
             "format": "int64"
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "number",
-            "format": "int32"
+            "name": "tags",
+            "baseName": "tags",
+            "type": "Array<string>",
+            "format": ""
         },
         {
-            "name": "publishedDate",
-            "baseName": "publishedDate",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "category",
-            "baseName": "category",
+            "name": "title",
+            "baseName": "title",
             "type": "string",
             "format": ""
         },
         {
-            "name": "subcategory",
-            "baseName": "subcategory",
+            "name": "type",
+            "baseName": "type",
+            "type": "ContentSearchResultTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
             "type": "string",
             "format": ""
         }    ];
@@ -201,6 +219,9 @@ export class ContentSearchResult {
 }
 
 export enum ContentSearchResultLanguageEnum {
+    Aa = 'aa',
+    Ab = 'ab',
+    Ae = 'ae',
     Af = 'af',
     AfNa = 'af-na',
     AfZa = 'af-za',
@@ -210,6 +231,9 @@ export enum ContentSearchResultLanguageEnum {
     AkGh = 'ak-gh',
     Am = 'am',
     AmEt = 'am-et',
+    An = 'an',
+    Ann = 'ann',
+    AnnNg = 'ann-ng',
     Ar = 'ar',
     Ar001 = 'ar-001',
     ArAe = 'ar-ae',
@@ -245,8 +269,13 @@ export enum ContentSearchResultLanguageEnum {
     AsaTz = 'asa-tz',
     Ast = 'ast',
     AstEs = 'ast-es',
+    Av = 'av',
+    Ay = 'ay',
     Az = 'az',
     AzAz = 'az-az',
+    Ba = 'ba',
+    Bal = 'bal',
+    BalPk = 'bal-pk',
     Bas = 'bas',
     BasCm = 'bas-cm',
     Be = 'be',
@@ -257,6 +286,13 @@ export enum ContentSearchResultLanguageEnum {
     BezTz = 'bez-tz',
     Bg = 'bg',
     BgBg = 'bg-bg',
+    Bgc = 'bgc',
+    BgcIn = 'bgc-in',
+    Bho = 'bho',
+    BhoIn = 'bho-in',
+    Bi = 'bi',
+    Blo = 'blo',
+    BloBj = 'blo-bj',
     Bm = 'bm',
     BmMl = 'bm-ml',
     Bn = 'bn',
@@ -285,15 +321,22 @@ export enum ContentSearchResultLanguageEnum {
     CebPh = 'ceb-ph',
     Cgg = 'cgg',
     CggUg = 'cgg-ug',
+    Ch = 'ch',
     Chr = 'chr',
     ChrUs = 'chr-us',
     Ckb = 'ckb',
     CkbIq = 'ckb-iq',
     CkbIr = 'ckb-ir',
+    Co = 'co',
+    Cr = 'cr',
     Cs = 'cs',
     CsCz = 'cs-cz',
+    Csw = 'csw',
+    CswCa = 'csw-ca',
     Cu = 'cu',
     CuRu = 'cu-ru',
+    Cv = 'cv',
+    CvRu = 'cv-ru',
     Cy = 'cy',
     CyGb = 'cy-gb',
     Da = 'da',
@@ -318,6 +361,7 @@ export enum ContentSearchResultLanguageEnum {
     DsbDe = 'dsb-de',
     Dua = 'dua',
     DuaCm = 'dua-cm',
+    Dv = 'dv',
     Dyo = 'dyo',
     DyoSn = 'dyo-sn',
     Dz = 'dz',
@@ -354,29 +398,38 @@ export enum ContentSearchResultLanguageEnum {
     EnCn = 'en-cn',
     EnCx = 'en-cx',
     EnCy = 'en-cy',
+    EnCz = 'en-cz',
     EnDe = 'en-de',
     EnDg = 'en-dg',
     EnDk = 'en-dk',
     EnDm = 'en-dm',
+    EnEe = 'en-ee',
+    EnEg = 'en-eg',
     EnEr = 'en-er',
+    EnEs = 'en-es',
     EnFi = 'en-fi',
     EnFj = 'en-fj',
     EnFk = 'en-fk',
     EnFm = 'en-fm',
+    EnFr = 'en-fr',
     EnGb = 'en-gb',
     EnGd = 'en-gd',
     EnGg = 'en-gg',
     EnGh = 'en-gh',
     EnGi = 'en-gi',
     EnGm = 'en-gm',
+    EnGs = 'en-gs',
     EnGu = 'en-gu',
     EnGy = 'en-gy',
     EnHk = 'en-hk',
+    EnHu = 'en-hu',
+    EnId = 'en-id',
     EnIe = 'en-ie',
     EnIl = 'en-il',
     EnIm = 'en-im',
     EnIn = 'en-in',
     EnIo = 'en-io',
+    EnIt = 'en-it',
     EnJe = 'en-je',
     EnJm = 'en-jm',
     EnKe = 'en-ke',
@@ -394,6 +447,7 @@ export enum ContentSearchResultLanguageEnum {
     EnMs = 'en-ms',
     EnMt = 'en-mt',
     EnMu = 'en-mu',
+    EnMv = 'en-mv',
     EnMw = 'en-mw',
     EnMx = 'en-mx',
     EnMy = 'en-my',
@@ -401,15 +455,19 @@ export enum ContentSearchResultLanguageEnum {
     EnNf = 'en-nf',
     EnNg = 'en-ng',
     EnNl = 'en-nl',
+    EnNo = 'en-no',
     EnNr = 'en-nr',
     EnNu = 'en-nu',
     EnNz = 'en-nz',
     EnPg = 'en-pg',
     EnPh = 'en-ph',
     EnPk = 'en-pk',
+    EnPl = 'en-pl',
     EnPn = 'en-pn',
     EnPr = 'en-pr',
+    EnPt = 'en-pt',
     EnPw = 'en-pw',
+    EnRo = 'en-ro',
     EnRw = 'en-rw',
     EnSb = 'en-sb',
     EnSc = 'en-sc',
@@ -418,12 +476,15 @@ export enum ContentSearchResultLanguageEnum {
     EnSg = 'en-sg',
     EnSh = 'en-sh',
     EnSi = 'en-si',
+    EnSk = 'en-sk',
     EnSl = 'en-sl',
     EnSs = 'en-ss',
     EnSx = 'en-sx',
     EnSz = 'en-sz',
     EnTc = 'en-tc',
+    EnTh = 'en-th',
     EnTk = 'en-tk',
+    EnTn = 'en-tn',
     EnTo = 'en-to',
     EnTt = 'en-tt',
     EnTv = 'en-tv',
@@ -434,6 +495,7 @@ export enum ContentSearchResultLanguageEnum {
     EnVc = 'en-vc',
     EnVg = 'en-vg',
     EnVi = 'en-vi',
+    EnVn = 'en-vn',
     EnVu = 'en-vu',
     EnWs = 'en-ws',
     EnZa = 'en-za',
@@ -496,6 +558,7 @@ export enum ContentSearchResultLanguageEnum {
     FiFi = 'fi-fi',
     Fil = 'fil',
     FilPh = 'fil-ph',
+    Fj = 'fj',
     Fo = 'fo',
     FoDk = 'fo-dk',
     FoFo = 'fo-fo',
@@ -546,6 +609,8 @@ export enum ContentSearchResultLanguageEnum {
     FrVu = 'fr-vu',
     FrWf = 'fr-wf',
     FrYt = 'fr-yt',
+    Frr = 'frr',
+    FrrDe = 'frr-de',
     Fur = 'fur',
     FurIt = 'fur-it',
     Fy = 'fy',
@@ -553,10 +618,13 @@ export enum ContentSearchResultLanguageEnum {
     Ga = 'ga',
     GaGb = 'ga-gb',
     GaIe = 'ga-ie',
+    Gaa = 'gaa',
+    GaaGh = 'gaa-gh',
     Gd = 'gd',
     GdGb = 'gd-gb',
     Gl = 'gl',
     GlEs = 'gl-es',
+    Gn = 'gn',
     Gsw = 'gsw',
     GswCh = 'gsw-ch',
     GswFr = 'gsw-fr',
@@ -574,25 +642,35 @@ export enum ContentSearchResultLanguageEnum {
     Haw = 'haw',
     HawUs = 'haw-us',
     He = 'he',
+    HeIl = 'he-il',
     Hi = 'hi',
     HiIn = 'hi-in',
+    Hmn = 'hmn',
+    Ho = 'ho',
     Hr = 'hr',
     HrBa = 'hr-ba',
     HrHr = 'hr-hr',
     Hsb = 'hsb',
     HsbDe = 'hsb-de',
+    Ht = 'ht',
+    HtHt = 'ht-ht',
     Hu = 'hu',
     HuHu = 'hu-hu',
     Hy = 'hy',
     HyAm = 'hy-am',
+    Hz = 'hz',
     Ia = 'ia',
     Ia001 = 'ia-001',
     Id = 'id',
+    IdId = 'id-id',
+    Ie = 'ie',
+    IeEe = 'ie-ee',
     Ig = 'ig',
     IgNg = 'ig-ng',
     Ii = 'ii',
     IiCn = 'ii-cn',
-    IdId = 'id-id',
+    Ik = 'ik',
+    Io = 'io',
     Is = 'is',
     IsIs = 'is-is',
     It = 'it',
@@ -600,13 +678,11 @@ export enum ContentSearchResultLanguageEnum {
     ItIt = 'it-it',
     ItSm = 'it-sm',
     ItVa = 'it-va',
-    HeIl = 'he-il',
+    Iu = 'iu',
     Ja = 'ja',
     JaJp = 'ja-jp',
     Jgo = 'jgo',
     JgoCm = 'jgo-cm',
-    Yi = 'yi',
-    Yi001 = 'yi-001',
     Jmc = 'jmc',
     JmcTz = 'jmc-tz',
     Jv = 'jv',
@@ -617,14 +693,20 @@ export enum ContentSearchResultLanguageEnum {
     KabDz = 'kab-dz',
     Kam = 'kam',
     KamKe = 'kam-ke',
+    Kar = 'kar',
     Kde = 'kde',
     KdeTz = 'kde-tz',
     Kea = 'kea',
     KeaCv = 'kea-cv',
+    Kg = 'kg',
+    Kgp = 'kgp',
+    KgpBr = 'kgp-br',
+    Kh = 'kh',
     Khq = 'khq',
     KhqMl = 'khq-ml',
     Ki = 'ki',
     KiKe = 'ki-ke',
+    Kj = 'kj',
     Kk = 'kk',
     KkKz = 'kk-kz',
     Kkj = 'kkj',
@@ -638,10 +720,12 @@ export enum ContentSearchResultLanguageEnum {
     Kn = 'kn',
     KnIn = 'kn-in',
     Ko = 'ko',
+    KoCn = 'ko-cn',
     KoKp = 'ko-kp',
     KoKr = 'ko-kr',
     Kok = 'kok',
     KokIn = 'kok-in',
+    Kr = 'kr',
     Ks = 'ks',
     KsIn = 'ks-in',
     Ksb = 'ksb',
@@ -650,20 +734,29 @@ export enum ContentSearchResultLanguageEnum {
     KsfCm = 'ksf-cm',
     Ksh = 'ksh',
     KshDe = 'ksh-de',
-    Kw = 'kw',
-    KwGb = 'kw-gb',
     Ku = 'ku',
     KuTr = 'ku-tr',
+    Kv = 'kv',
+    Kw = 'kw',
+    KwGb = 'kw-gb',
+    Kxv = 'kxv',
+    KxvIn = 'kxv-in',
     Ky = 'ky',
     KyKg = 'ky-kg',
+    La = 'la',
     Lag = 'lag',
     LagTz = 'lag-tz',
     Lb = 'lb',
     LbLu = 'lb-lu',
     Lg = 'lg',
     LgUg = 'lg-ug',
+    Li = 'li',
+    Lij = 'lij',
+    LijIt = 'lij-it',
     Lkt = 'lkt',
     LktUs = 'lkt-us',
+    Lmo = 'lmo',
+    LmoIt = 'lmo-it',
     Ln = 'ln',
     LnAo = 'ln-ao',
     LnCd = 'ln-cd',
@@ -689,6 +782,8 @@ export enum ContentSearchResultLanguageEnum {
     Mas = 'mas',
     MasKe = 'mas-ke',
     MasTz = 'mas-tz',
+    Mdf = 'mdf',
+    MdfRu = 'mdf-ru',
     Mer = 'mer',
     MerKe = 'mer-ke',
     Mfe = 'mfe',
@@ -699,6 +794,7 @@ export enum ContentSearchResultLanguageEnum {
     MghMz = 'mgh-mz',
     Mgo = 'mgo',
     MgoCm = 'mgo-cm',
+    Mh = 'mh',
     Mi = 'mi',
     MiNz = 'mi-nz',
     Mk = 'mk',
@@ -724,6 +820,7 @@ export enum ContentSearchResultLanguageEnum {
     MyMm = 'my-mm',
     Mzn = 'mzn',
     MznIr = 'mzn-ir',
+    Na = 'na',
     Naq = 'naq',
     NaqNa = 'naq-na',
     Nb = 'nb',
@@ -737,11 +834,12 @@ export enum ContentSearchResultLanguageEnum {
     Ne = 'ne',
     NeIn = 'ne-in',
     NeNp = 'ne-np',
+    Ng = 'ng',
     Nl = 'nl',
     NlAw = 'nl-aw',
     NlBe = 'nl-be',
-    NlCh = 'nl-ch',
     NlBq = 'nl-bq',
+    NlCh = 'nl-ch',
     NlCw = 'nl-cw',
     NlLu = 'nl-lu',
     NlNl = 'nl-nl',
@@ -755,10 +853,21 @@ export enum ContentSearchResultLanguageEnum {
     NnhCm = 'nnh-cm',
     No = 'no',
     NoNo = 'no-no',
+    Nqo = 'nqo',
+    NqoGn = 'nqo-gn',
+    Nr = 'nr',
+    Nso = 'nso',
+    NsoZa = 'nso-za',
     Nus = 'nus',
     NusSs = 'nus-ss',
+    Nv = 'nv',
+    Ny = 'ny',
     Nyn = 'nyn',
     NynUg = 'nyn-ug',
+    Oc = 'oc',
+    OcEs = 'oc-es',
+    OcFr = 'oc-fr',
+    Oj = 'oj',
     Om = 'om',
     OmEt = 'om-et',
     OmKe = 'om-ke',
@@ -772,6 +881,9 @@ export enum ContentSearchResultLanguageEnum {
     PaPk = 'pa-pk',
     Pcm = 'pcm',
     PcmNg = 'pcm-ng',
+    Pi = 'pi',
+    Pis = 'pis',
+    PisSb = 'pis-sb',
     Pl = 'pl',
     PlPl = 'pl-pl',
     Prg = 'prg',
@@ -796,6 +908,8 @@ export enum ContentSearchResultLanguageEnum {
     QuBo = 'qu-bo',
     QuEc = 'qu-ec',
     QuPe = 'qu-pe',
+    Raj = 'raj',
+    RajIn = 'raj-in',
     Rm = 'rm',
     RmCh = 'rm-ch',
     Rn = 'rn',
@@ -826,6 +940,8 @@ export enum ContentSearchResultLanguageEnum {
     SatIn = 'sat-in',
     Sbp = 'sbp',
     SbpTz = 'sbp-tz',
+    Sc = 'sc',
+    ScIt = 'sc-it',
     Sd = 'sd',
     SdIn = 'sd-in',
     SdPk = 'sd-pk',
@@ -847,8 +963,11 @@ export enum ContentSearchResultLanguageEnum {
     SkSk = 'sk-sk',
     Sl = 'sl',
     SlSi = 'sl-si',
+    Sm = 'sm',
     Smn = 'smn',
     SmnFi = 'smn-fi',
+    Sms = 'sms',
+    SmsFi = 'sms-fi',
     Sn = 'sn',
     SnZw = 'sn-zw',
     So = 'so',
@@ -866,6 +985,10 @@ export enum ContentSearchResultLanguageEnum {
     SrMe = 'sr-me',
     SrRs = 'sr-rs',
     SrXk = 'sr-xk',
+    Ss = 'ss',
+    St = 'st',
+    StLs = 'st-ls',
+    StZa = 'st-za',
     Su = 'su',
     SuId = 'su-id',
     Sv = 'sv',
@@ -878,6 +1001,11 @@ export enum ContentSearchResultLanguageEnum {
     SwTz = 'sw-tz',
     SwUg = 'sw-ug',
     Sy = 'sy',
+    Syr = 'syr',
+    SyrIq = 'syr-iq',
+    SyrSy = 'syr-sy',
+    Szl = 'szl',
+    SzlPl = 'szl-pl',
     Ta = 'ta',
     TaIn = 'ta-in',
     TaLk = 'ta-lk',
@@ -898,15 +1026,23 @@ export enum ContentSearchResultLanguageEnum {
     Tk = 'tk',
     TkTm = 'tk-tm',
     Tl = 'tl',
+    Tn = 'tn',
+    TnBw = 'tn-bw',
+    TnZa = 'tn-za',
     To = 'to',
     ToTo = 'to-to',
+    Tok = 'tok',
+    Tok001 = 'tok-001',
     Tr = 'tr',
     TrCy = 'tr-cy',
     TrTr = 'tr-tr',
+    Ts = 'ts',
     Tt = 'tt',
     TtRu = 'tt-ru',
+    Tw = 'tw',
     Twq = 'twq',
     TwqNe = 'twq-ne',
+    Ty = 'ty',
     Tzm = 'tzm',
     TzmMa = 'tzm-ma',
     Ug = 'ug',
@@ -921,46 +1057,66 @@ export enum ContentSearchResultLanguageEnum {
     UzUz = 'uz-uz',
     Vai = 'vai',
     VaiLr = 'vai-lr',
+    Ve = 've',
+    Vec = 'vec',
+    VecIt = 'vec-it',
     Vi = 'vi',
     ViVn = 'vi-vn',
+    Vmw = 'vmw',
+    VmwMz = 'vmw-mz',
     Vo = 'vo',
     Vo001 = 'vo-001',
     Vun = 'vun',
     VunTz = 'vun-tz',
+    Wa = 'wa',
     Wae = 'wae',
     WaeCh = 'wae-ch',
     Wo = 'wo',
     WoSn = 'wo-sn',
     Xh = 'xh',
     XhZa = 'xh-za',
+    Xnr = 'xnr',
+    XnrIn = 'xnr-in',
     Xog = 'xog',
     XogUg = 'xog-ug',
     Yav = 'yav',
     YavCm = 'yav-cm',
+    Yi = 'yi',
+    Yi001 = 'yi-001',
+    YiUa = 'yi-ua',
     Yo = 'yo',
     YoBj = 'yo-bj',
     YoNg = 'yo-ng',
+    Yrl = 'yrl',
+    YrlBr = 'yrl-br',
+    YrlCo = 'yrl-co',
+    YrlVe = 'yrl-ve',
     Yue = 'yue',
     YueCn = 'yue-cn',
     YueHk = 'yue-hk',
+    YueMo = 'yue-mo',
+    Za = 'za',
+    ZaCn = 'za-cn',
     Zgh = 'zgh',
     ZghMa = 'zgh-ma',
     Zh = 'zh',
     ZhCn = 'zh-cn',
-    ZhHk = 'zh-hk',
-    ZhMo = 'zh-mo',
-    ZhSg = 'zh-sg',
-    ZhTw = 'zh-tw',
     ZhHans = 'zh-hans',
     ZhHant = 'zh-hant',
+    ZhHk = 'zh-hk',
+    ZhMo = 'zh-mo',
+    ZhMy = 'zh-my',
+    ZhSg = 'zh-sg',
+    ZhTw = 'zh-tw',
     Zu = 'zu',
     ZuZa = 'zu-za'
 }
 export enum ContentSearchResultTypeEnum {
-    LandingPage = 'LANDING_PAGE',
     BlogPost = 'BLOG_POST',
-    SitePage = 'SITE_PAGE',
     KnowledgeArticle = 'KNOWLEDGE_ARTICLE',
-    ListingPage = 'LISTING_PAGE'
+    LandingPage = 'LANDING_PAGE',
+    ListingPage = 'LISTING_PAGE',
+    SitePage = 'SITE_PAGE',
+    StructuredContent = 'STRUCTURED_CONTENT'
 }
 

@@ -14,10 +14,10 @@ import { PublicAssociationMulti } from '../models/PublicAssociationMulti';
 
 export class BatchResponsePublicAssociationMulti {
     'completedAt': Date;
-    'requestedAt'?: Date;
-    'startedAt': Date;
     'links'?: { [key: string]: string; };
+    'requestedAt'?: Date;
     'results': Array<PublicAssociationMulti>;
+    'startedAt': Date;
     'status': BatchResponsePublicAssociationMultiStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -32,28 +32,28 @@ export class BatchResponsePublicAssociationMulti {
             "format": "date-time"
         },
         {
-            "name": "requestedAt",
-            "baseName": "requestedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "results",
             "baseName": "results",
             "type": "Array<PublicAssociationMulti>",
             "format": ""
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -71,9 +71,9 @@ export class BatchResponsePublicAssociationMulti {
 }
 
 export enum BatchResponsePublicAssociationMultiStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

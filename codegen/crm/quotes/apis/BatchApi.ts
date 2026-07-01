@@ -24,6 +24,7 @@ import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/Batch
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive multiple quotes by their IDs in a single request, effectively moving them to the recycling bin.
      * Archive a batch of quotes by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -71,6 +72,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Create multiple quotes in a single request by providing a batch of quote objects, each with its own properties and optional associations.
      * Create a batch of quotes
      * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
@@ -173,6 +175,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Update multiple quotes using their internal IDs or unique property values. This endpoint allows batch processing of quote updates, ensuring efficient management of multiple records in a single request.
      * Update a batch of quotes by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */

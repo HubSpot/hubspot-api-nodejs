@@ -24,6 +24,7 @@ import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/Batch
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive multiple taxes by their IDs in a single request.
      * Archive a batch of taxes by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -71,6 +72,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Create multiple tax records in a single request, each with specified properties and optional associations, and receive a response with details of the created objects.
      * Create a batch of taxes
      * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
@@ -173,6 +175,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Update multiple tax records using their internal IDs or unique property values. This operation allows for batch processing of updates to tax objects, ensuring efficient management of tax data in bulk.
      * Update a batch of taxes by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */

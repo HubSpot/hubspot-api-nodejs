@@ -12,12 +12,24 @@
 
 
 export class PublicCommunicationSubscriptionFilter {
-    'subscriptionType': string;
-    'subscriptionIds': Array<string>;
-    'channel': string;
     'acceptedOptStates': Array<string>;
-    'filterType': PublicCommunicationSubscriptionFilterFilterTypeEnum;
+    /**
+    * The ID of the business unit associated with the subscription filter.
+    */
     'businessUnitId'?: string;
+    /**
+    * Specifies the communication channel associated with the subscription filter (EMAIL, WHATSAPP, SMS).
+    */
+    'channel': string;
+    /**
+    * Indicates the type of filter, which is (COMMUNICATION_SUBSCRIPTION)
+    */
+    'filterType': PublicCommunicationSubscriptionFilterFilterTypeEnum;
+    'subscriptionIds': Array<string>;
+    /**
+    * Defines the type of subscription related to the filter (PORTAL_WIDE, BUSINESS_UNIT_WIDE, INDIVIDUAL_SUBSCRIPTION)
+    */
+    'subscriptionType': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -25,15 +37,15 @@ export class PublicCommunicationSubscriptionFilter {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "subscriptionType",
-            "baseName": "subscriptionType",
-            "type": "string",
+            "name": "acceptedOptStates",
+            "baseName": "acceptedOptStates",
+            "type": "Array<string>",
             "format": ""
         },
         {
-            "name": "subscriptionIds",
-            "baseName": "subscriptionIds",
-            "type": "Array<string>",
+            "name": "businessUnitId",
+            "baseName": "businessUnitId",
+            "type": "string",
             "format": ""
         },
         {
@@ -43,20 +55,20 @@ export class PublicCommunicationSubscriptionFilter {
             "format": ""
         },
         {
-            "name": "acceptedOptStates",
-            "baseName": "acceptedOptStates",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
             "name": "filterType",
             "baseName": "filterType",
             "type": "PublicCommunicationSubscriptionFilterFilterTypeEnum",
             "format": ""
         },
         {
-            "name": "businessUnitId",
-            "baseName": "businessUnitId",
+            "name": "subscriptionIds",
+            "baseName": "subscriptionIds",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "subscriptionType",
+            "baseName": "subscriptionType",
             "type": "string",
             "format": ""
         }    ];

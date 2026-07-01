@@ -6,6 +6,8 @@ import {mergeMap, map} from  '../rxjsStub';
 import { ChannelConnectionSettingsPatchRequest } from '../models/ChannelConnectionSettingsPatchRequest';
 import { ChannelConnectionSettingsRequest } from '../models/ChannelConnectionSettingsRequest';
 import { ChannelConnectionSettingsResponse } from '../models/ChannelConnectionSettingsResponse';
+import { CompletedThirdPartyCallRequest } from '../models/CompletedThirdPartyCallRequest';
+import { CompletedThirdPartyCallResponse } from '../models/CompletedThirdPartyCallResponse';
 import { MarkRecordingAsReadyRequest } from '../models/MarkRecordingAsReadyRequest';
 import { RecordingSettingsPatchRequest } from '../models/RecordingSettingsPatchRequest';
 import { RecordingSettingsRequest } from '../models/RecordingSettingsRequest';
@@ -14,30 +16,30 @@ import { SettingsPatchRequest } from '../models/SettingsPatchRequest';
 import { SettingsRequest } from '../models/SettingsRequest';
 import { SettingsResponse } from '../models/SettingsResponse';
 
-import { ChannelConnectionSettingsApiRequestFactory, ChannelConnectionSettingsApiResponseProcessor} from "../apis/ChannelConnectionSettingsApi";
-export class ObservableChannelConnectionSettingsApi {
-    private requestFactory: ChannelConnectionSettingsApiRequestFactory;
-    private responseProcessor: ChannelConnectionSettingsApiResponseProcessor;
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
+export class ObservableAdvancedApi {
+    private requestFactory: AdvancedApiRequestFactory;
+    private responseProcessor: AdvancedApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: ChannelConnectionSettingsApiRequestFactory,
-        responseProcessor?: ChannelConnectionSettingsApiResponseProcessor
+        requestFactory?: AdvancedApiRequestFactory,
+        responseProcessor?: AdvancedApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new ChannelConnectionSettingsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new ChannelConnectionSettingsApiResponseProcessor();
+        this.requestFactory = requestFactory || new AdvancedApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new AdvancedApiResponseProcessor();
     }
 
     /**
-     * Delete the [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#delete-existing-channel-connection-settings) for the app.
-     * Delete channel connection settings
-     * @param appId The ID of the app.
+     * This endpoint allows you to submit information about an inbound call to the CRM system. The request must include details such as the external call ID, call status, and involved phone numbers. This operation helps in logging and managing inbound call data within the CRM.
+     * Submit details of an inbound call to the CRM.
+     * @param completedThirdPartyCallRequest
      */
-    public archiveWithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    public crmV3ExtensionsCallingInboundCallWithHttpInfo(completedThirdPartyCallRequest: CompletedThirdPartyCallRequest, _options?: ConfigurationOptions): Observable<HttpInfo<CompletedThirdPartyCallResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -51,7 +53,7 @@ export class ObservableChannelConnectionSettingsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -62,11 +64,11 @@ export class ObservableChannelConnectionSettingsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.archive(appId, _config);
+        const requestContextPromise = this.requestFactory.crmV3ExtensionsCallingInboundCall(completedThirdPartyCallRequest, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -79,297 +81,27 @@ export class ObservableChannelConnectionSettingsApi {
                 for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.crmV3ExtensionsCallingInboundCallWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Delete the [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#delete-existing-channel-connection-settings) for the app.
-     * Delete channel connection settings
-     * @param appId The ID of the app.
+     * This endpoint allows you to submit information about an inbound call to the CRM system. The request must include details such as the external call ID, call status, and involved phone numbers. This operation helps in logging and managing inbound call data within the CRM.
+     * Submit details of an inbound call to the CRM.
+     * @param completedThirdPartyCallRequest
      */
-    public archive(appId: number, _options?: ConfigurationOptions): Observable<void> {
-        return this.archiveWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    public crmV3ExtensionsCallingInboundCall(completedThirdPartyCallRequest: CompletedThirdPartyCallRequest, _options?: ConfigurationOptions): Observable<CompletedThirdPartyCallResponse> {
+        return this.crmV3ExtensionsCallingInboundCallWithHttpInfo(completedThirdPartyCallRequest, _options).pipe(map((apiResponse: HttpInfo<CompletedThirdPartyCallResponse>) => apiResponse.data));
     }
 
     /**
-     * Configure [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#create-channel-connection-settings) for the app. 
-     * Configure channel connection settings
-     * @param appId The ID of the app.
-     * @param channelConnectionSettingsRequest
-     */
-    public createWithHttpInfo(appId: number, channelConnectionSettingsRequest: ChannelConnectionSettingsRequest, _options?: ConfigurationOptions): Observable<HttpInfo<ChannelConnectionSettingsResponse>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.create(appId, channelConnectionSettingsRequest, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Configure [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#create-channel-connection-settings) for the app. 
-     * Configure channel connection settings
-     * @param appId The ID of the app.
-     * @param channelConnectionSettingsRequest
-     */
-    public create(appId: number, channelConnectionSettingsRequest: ChannelConnectionSettingsRequest, _options?: ConfigurationOptions): Observable<ChannelConnectionSettingsResponse> {
-        return this.createWithHttpInfo(appId, channelConnectionSettingsRequest, _options).pipe(map((apiResponse: HttpInfo<ChannelConnectionSettingsResponse>) => apiResponse.data));
-    }
-
-    /**
-     * Retrieve the settings related to the app\'s [channel connection](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#fetch-existing-channel-connection-settings).
-     * Retrieve channel connection settings
-     * @param appId The ID of the app.
-     */
-    public getByIdWithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<ChannelConnectionSettingsResponse>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.getById(appId, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Retrieve the settings related to the app\'s [channel connection](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#fetch-existing-channel-connection-settings).
-     * Retrieve channel connection settings
-     * @param appId The ID of the app.
-     */
-    public getById(appId: number, _options?: ConfigurationOptions): Observable<ChannelConnectionSettingsResponse> {
-        return this.getByIdWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<ChannelConnectionSettingsResponse>) => apiResponse.data));
-    }
-
-    /**
-     * Update existing [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#manage-the-webhook-settings-for-channel-connection) for your app.
-     * Update channel connection settings
-     * @param appId The ID of the app.
-     * @param channelConnectionSettingsPatchRequest
-     */
-    public updateWithHttpInfo(appId: number, channelConnectionSettingsPatchRequest: ChannelConnectionSettingsPatchRequest, _options?: ConfigurationOptions): Observable<HttpInfo<ChannelConnectionSettingsResponse>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.update(appId, channelConnectionSettingsPatchRequest, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Update existing [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#manage-the-webhook-settings-for-channel-connection) for your app.
-     * Update channel connection settings
-     * @param appId The ID of the app.
-     * @param channelConnectionSettingsPatchRequest
-     */
-    public update(appId: number, channelConnectionSettingsPatchRequest: ChannelConnectionSettingsPatchRequest, _options?: ConfigurationOptions): Observable<ChannelConnectionSettingsResponse> {
-        return this.updateWithHttpInfo(appId, channelConnectionSettingsPatchRequest, _options).pipe(map((apiResponse: HttpInfo<ChannelConnectionSettingsResponse>) => apiResponse.data));
-    }
-
-}
-
-import { RecordingSettingsApiRequestFactory, RecordingSettingsApiResponseProcessor} from "../apis/RecordingSettingsApi";
-export class ObservableRecordingSettingsApi {
-    private requestFactory: RecordingSettingsApiRequestFactory;
-    private responseProcessor: RecordingSettingsApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: RecordingSettingsApiRequestFactory,
-        responseProcessor?: RecordingSettingsApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new RecordingSettingsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new RecordingSettingsApiResponseProcessor();
-    }
-
-    /**
-     * Retrieve the URL that is registered for [call recording](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Retrieve recording settings
-     * @param appId The ID of the app.
-     */
-    public getUrlFormatWithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<RecordingSettingsResponse>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.getUrlFormat(appId, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getUrlFormatWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Retrieve the URL that is registered for [call recording](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Retrieve recording settings
-     * @param appId The ID of the app.
-     */
-    public getUrlFormat(appId: number, _options?: ConfigurationOptions): Observable<RecordingSettingsResponse> {
-        return this.getUrlFormatWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<RecordingSettingsResponse>) => apiResponse.data));
-    }
-
-    /**
-     * Mark a call recording as ready for transcription, specifying the call by its ID (`engagementid`).
-     * Mark recording as ready for transcription
+     * This endpoint is used to mark a call recording as ready. It requires the engagementId to identify the specific recording.
+     * Mark a call recording as ready for retrieval.
      * @param markRecordingAsReadyRequest
      */
     public markAsReadyWithHttpInfo(markRecordingAsReadyRequest: MarkRecordingAsReadyRequest, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -383,7 +115,7 @@ export class ObservableRecordingSettingsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -394,7 +126,7 @@ export class ObservableRecordingSettingsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -416,231 +148,41 @@ export class ObservableRecordingSettingsApi {
     }
 
     /**
-     * Mark a call recording as ready for transcription, specifying the call by its ID (`engagementid`).
-     * Mark recording as ready for transcription
+     * This endpoint is used to mark a call recording as ready. It requires the engagementId to identify the specific recording.
+     * Mark a call recording as ready for retrieval.
      * @param markRecordingAsReadyRequest
      */
     public markAsReady(markRecordingAsReadyRequest: MarkRecordingAsReadyRequest, _options?: ConfigurationOptions): Observable<void> {
         return this.markAsReadyWithHttpInfo(markRecordingAsReadyRequest, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
-    /**
-     * Register an external URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Enable the app for call recording
-     * @param appId The ID of the app.
-     * @param recordingSettingsRequest
-     */
-    public registerUrlFormatWithHttpInfo(appId: number, recordingSettingsRequest: RecordingSettingsRequest, _options?: ConfigurationOptions): Observable<HttpInfo<RecordingSettingsResponse>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.registerUrlFormat(appId, recordingSettingsRequest, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.registerUrlFormatWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Register an external URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Enable the app for call recording
-     * @param appId The ID of the app.
-     * @param recordingSettingsRequest
-     */
-    public registerUrlFormat(appId: number, recordingSettingsRequest: RecordingSettingsRequest, _options?: ConfigurationOptions): Observable<RecordingSettingsResponse> {
-        return this.registerUrlFormatWithHttpInfo(appId, recordingSettingsRequest, _options).pipe(map((apiResponse: HttpInfo<RecordingSettingsResponse>) => apiResponse.data));
-    }
-
-    /**
-     * Update the URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Update recording settings
-     * @param appId The ID of the app.
-     * @param recordingSettingsPatchRequest
-     */
-    public updateUrlFormatWithHttpInfo(appId: number, recordingSettingsPatchRequest: RecordingSettingsPatchRequest, _options?: ConfigurationOptions): Observable<HttpInfo<RecordingSettingsResponse>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.updateUrlFormat(appId, recordingSettingsPatchRequest, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateUrlFormatWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Update the URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Update recording settings
-     * @param appId The ID of the app.
-     * @param recordingSettingsPatchRequest
-     */
-    public updateUrlFormat(appId: number, recordingSettingsPatchRequest: RecordingSettingsPatchRequest, _options?: ConfigurationOptions): Observable<RecordingSettingsResponse> {
-        return this.updateUrlFormatWithHttpInfo(appId, recordingSettingsPatchRequest, _options).pipe(map((apiResponse: HttpInfo<RecordingSettingsResponse>) => apiResponse.data));
-    }
-
 }
 
-import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/SettingsApi";
-export class ObservableSettingsApi {
-    private requestFactory: SettingsApiRequestFactory;
-    private responseProcessor: SettingsApiResponseProcessor;
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class ObservableBasicApi {
+    private requestFactory: BasicApiRequestFactory;
+    private responseProcessor: BasicApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: SettingsApiRequestFactory,
-        responseProcessor?: SettingsApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new SettingsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new SettingsApiResponseProcessor();
+        this.requestFactory = requestFactory || new BasicApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BasicApiResponseProcessor();
     }
 
     /**
-     * Delete a calling extension. This will remove your service as an option for all connected accounts.
-     * Delete calling settings
-     * @param appId The ID of the app.
-     */
-    public archiveWithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
-    let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
-    if (_options && _options.middleware){
-      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
-      // call-time middleware provided
-      const calltimeMiddleware: Middleware[] = _options.middleware;
-
-      switch(middlewareMergeStrategy){
-      case 'append':
-        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
-        break;
-      case 'prepend':
-        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
-        break;
-      case 'replace':
-        allMiddleware = calltimeMiddleware
-        break;
-      default: 
-        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
-      }
-	}
-	if (_options){
-    _config = {
-      baseServer: _options.baseServer || this.configuration.baseServer,
-      httpApi: _options.httpApi || this.configuration.httpApi,
-      authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
-		};
-	}
-
-        const requestContextPromise = this.requestFactory.archive(appId, _config);
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of allMiddleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of allMiddleware.reverse()) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Delete a calling extension. This will remove your service as an option for all connected accounts.
-     * Delete calling settings
-     * @param appId The ID of the app.
-     */
-    public archive(appId: number, _options?: ConfigurationOptions): Observable<void> {
-        return this.archiveWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
-    }
-
-    /**
-     * Set the menu label, target iframe URL, and dimensions for your calling extension.
-     * Configure a calling extension
-     * @param appId The ID of the app.
+     * Create new settings for the calling extension associated with the specified appId.
+     * Create new calling extension settings for a specific app.
+     * @param appId The unique identifier for the app for which new calling extension settings are being created.
      * @param settingsRequest
      */
     public createWithHttpInfo(appId: number, settingsRequest: SettingsRequest, _options?: ConfigurationOptions): Observable<HttpInfo<SettingsResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -654,7 +196,7 @@ export class ObservableSettingsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -665,7 +207,7 @@ export class ObservableSettingsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -687,9 +229,9 @@ export class ObservableSettingsApi {
     }
 
     /**
-     * Set the menu label, target iframe URL, and dimensions for your calling extension.
-     * Configure a calling extension
-     * @param appId The ID of the app.
+     * Create new settings for the calling extension associated with the specified appId.
+     * Create new calling extension settings for a specific app.
+     * @param appId The unique identifier for the app for which new calling extension settings are being created.
      * @param settingsRequest
      */
     public create(appId: number, settingsRequest: SettingsRequest, _options?: ConfigurationOptions): Observable<SettingsResponse> {
@@ -697,13 +239,14 @@ export class ObservableSettingsApi {
     }
 
     /**
-     * Retrieve the settings configured for the app.
-     * Retrieve settings
-     * @param appId The ID of the app.
+     * Establish new channel connection settings for the specified app.
+     * Create new channel connection settings for a specific app.
+     * @param appId The unique identifier for the app for which new channel connection settings are to be created.
+     * @param channelConnectionSettingsRequest
      */
-    public getByIdWithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<SettingsResponse>> {
+    public create_1WithHttpInfo(appId: number, channelConnectionSettingsRequest: ChannelConnectionSettingsRequest, _options?: ConfigurationOptions): Observable<HttpInfo<ChannelConnectionSettingsResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -717,7 +260,7 @@ export class ObservableSettingsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -728,11 +271,11 @@ export class ObservableSettingsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.getById(appId, _config);
+        const requestContextPromise = this.requestFactory.create_1(appId, channelConnectionSettingsRequest, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -745,28 +288,29 @@ export class ObservableSettingsApi {
                 for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create_1WithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Retrieve the settings configured for the app.
-     * Retrieve settings
-     * @param appId The ID of the app.
+     * Establish new channel connection settings for the specified app.
+     * Create new channel connection settings for a specific app.
+     * @param appId The unique identifier for the app for which new channel connection settings are to be created.
+     * @param channelConnectionSettingsRequest
      */
-    public getById(appId: number, _options?: ConfigurationOptions): Observable<SettingsResponse> {
-        return this.getByIdWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<SettingsResponse>) => apiResponse.data));
+    public create_1(appId: number, channelConnectionSettingsRequest: ChannelConnectionSettingsRequest, _options?: ConfigurationOptions): Observable<ChannelConnectionSettingsResponse> {
+        return this.create_1WithHttpInfo(appId, channelConnectionSettingsRequest, _options).pipe(map((apiResponse: HttpInfo<ChannelConnectionSettingsResponse>) => apiResponse.data));
     }
 
     /**
-     * Update existing calling extension settings.
-     * Update settings
-     * @param appId The ID of the app.
-     * @param settingsPatchRequest
+     * Create new recording settings for a specific app using the provided app ID.
+     * Create recording settings for an app.
+     * @param appId The unique identifier for the app for which new recording settings are being created.
+     * @param recordingSettingsRequest
      */
-    public updateWithHttpInfo(appId: number, settingsPatchRequest: SettingsPatchRequest, _options?: ConfigurationOptions): Observable<HttpInfo<SettingsResponse>> {
+    public create_2WithHttpInfo(appId: number, recordingSettingsRequest: RecordingSettingsRequest, _options?: ConfigurationOptions): Observable<HttpInfo<RecordingSettingsResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -780,7 +324,7 @@ export class ObservableSettingsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -791,7 +335,381 @@ export class ObservableSettingsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.create_2(appId, recordingSettingsRequest, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create_2WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Create new recording settings for a specific app using the provided app ID.
+     * Create recording settings for an app.
+     * @param appId The unique identifier for the app for which new recording settings are being created.
+     * @param recordingSettingsRequest
+     */
+    public create_2(appId: number, recordingSettingsRequest: RecordingSettingsRequest, _options?: ConfigurationOptions): Observable<RecordingSettingsResponse> {
+        return this.create_2WithHttpInfo(appId, recordingSettingsRequest, _options).pipe(map((apiResponse: HttpInfo<RecordingSettingsResponse>) => apiResponse.data));
+    }
+
+    /**
+     * Retrieve the current settings of the calling extension for the specified appId. 
+     * Retrieve the calling extension settings for a specific app.
+     * @param appId The unique identifier for the app whose calling extension settings are being retrieved.
+     */
+    public getWithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<SettingsResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.get(appId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieve the current settings of the calling extension for the specified appId. 
+     * Retrieve the calling extension settings for a specific app.
+     * @param appId The unique identifier for the app whose calling extension settings are being retrieved.
+     */
+    public get(appId: number, _options?: ConfigurationOptions): Observable<SettingsResponse> {
+        return this.getWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<SettingsResponse>) => apiResponse.data));
+    }
+
+    /**
+     * Access the current channel connection settings for the specified app.
+     * Retrieve the channel connection settings for a specific app.
+     * @param appId The unique identifier for the app whose channel connection settings are to be retrieved.
+     */
+    public get_3WithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<ChannelConnectionSettingsResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.get_3(appId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.get_3WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Access the current channel connection settings for the specified app.
+     * Retrieve the channel connection settings for a specific app.
+     * @param appId The unique identifier for the app whose channel connection settings are to be retrieved.
+     */
+    public get_3(appId: number, _options?: ConfigurationOptions): Observable<ChannelConnectionSettingsResponse> {
+        return this.get_3WithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<ChannelConnectionSettingsResponse>) => apiResponse.data));
+    }
+
+    /**
+     * Retrieve the current recording settings for a specific app using the provided app ID.
+     * Retrieve recording settings for an app.
+     * @param appId The unique identifier for the app whose recording settings are being retrieved.
+     */
+    public get_4WithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<RecordingSettingsResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.get_4(appId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.get_4WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieve the current recording settings for a specific app using the provided app ID.
+     * Retrieve recording settings for an app.
+     * @param appId The unique identifier for the app whose recording settings are being retrieved.
+     */
+    public get_4(appId: number, _options?: ConfigurationOptions): Observable<RecordingSettingsResponse> {
+        return this.get_4WithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<RecordingSettingsResponse>) => apiResponse.data));
+    }
+
+    /**
+     * Remove the calling extension settings associated with the specified appId. This action cannot be undone.
+     * Delete the calling extension settings for a specific app.
+     * @param appId The unique identifier for the app whose calling extension settings are being deleted.
+     */
+    public removeWithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.remove(appId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.removeWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Remove the calling extension settings associated with the specified appId. This action cannot be undone.
+     * Delete the calling extension settings for a specific app.
+     * @param appId The unique identifier for the app whose calling extension settings are being deleted.
+     */
+    public remove(appId: number, _options?: ConfigurationOptions): Observable<void> {
+        return this.removeWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
+     * Delete the channel connection settings associated with the specified app.
+     * Remove the channel connection settings for a specific app.
+     * @param appId The unique identifier for the app whose channel connection settings are to be deleted.
+     */
+    public remove_5WithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.remove_5(appId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.remove_5WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Delete the channel connection settings associated with the specified app.
+     * Remove the channel connection settings for a specific app.
+     * @param appId The unique identifier for the app whose channel connection settings are to be deleted.
+     */
+    public remove_5(appId: number, _options?: ConfigurationOptions): Observable<void> {
+        return this.remove_5WithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
+     * Modify existing calling extension settings for the specified appId. Only the fields provided in the request will be updated.
+     * Update the calling extension settings for a specific app.
+     * @param appId The unique identifier for the app whose calling extension settings are being updated.
+     * @param settingsPatchRequest
+     */
+    public updateWithHttpInfo(appId: number, settingsPatchRequest: SettingsPatchRequest, _options?: ConfigurationOptions): Observable<HttpInfo<SettingsResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
 		};
 	}
 
@@ -813,13 +731,141 @@ export class ObservableSettingsApi {
     }
 
     /**
-     * Update existing calling extension settings.
-     * Update settings
-     * @param appId The ID of the app.
+     * Modify existing calling extension settings for the specified appId. Only the fields provided in the request will be updated.
+     * Update the calling extension settings for a specific app.
+     * @param appId The unique identifier for the app whose calling extension settings are being updated.
      * @param settingsPatchRequest
      */
     public update(appId: number, settingsPatchRequest: SettingsPatchRequest, _options?: ConfigurationOptions): Observable<SettingsResponse> {
         return this.updateWithHttpInfo(appId, settingsPatchRequest, _options).pipe(map((apiResponse: HttpInfo<SettingsResponse>) => apiResponse.data));
+    }
+
+    /**
+     * Modify the existing channel connection settings for the specified app.
+     * Update the channel connection settings for a specific app.
+     * @param appId The unique identifier for the app whose channel connection settings are to be updated.
+     * @param channelConnectionSettingsPatchRequest
+     */
+    public update_6WithHttpInfo(appId: number, channelConnectionSettingsPatchRequest: ChannelConnectionSettingsPatchRequest, _options?: ConfigurationOptions): Observable<HttpInfo<ChannelConnectionSettingsResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.update_6(appId, channelConnectionSettingsPatchRequest, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update_6WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Modify the existing channel connection settings for the specified app.
+     * Update the channel connection settings for a specific app.
+     * @param appId The unique identifier for the app whose channel connection settings are to be updated.
+     * @param channelConnectionSettingsPatchRequest
+     */
+    public update_6(appId: number, channelConnectionSettingsPatchRequest: ChannelConnectionSettingsPatchRequest, _options?: ConfigurationOptions): Observable<ChannelConnectionSettingsResponse> {
+        return this.update_6WithHttpInfo(appId, channelConnectionSettingsPatchRequest, _options).pipe(map((apiResponse: HttpInfo<ChannelConnectionSettingsResponse>) => apiResponse.data));
+    }
+
+    /**
+     * Update the recording settings for a specific app using the provided app ID.
+     * Update recording settings for an app.
+     * @param appId The unique identifier for the app whose recording settings are being updated.
+     * @param recordingSettingsPatchRequest
+     */
+    public update_7WithHttpInfo(appId: number, recordingSettingsPatchRequest: RecordingSettingsPatchRequest, _options?: ConfigurationOptions): Observable<HttpInfo<RecordingSettingsResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = [...calltimeMiddleware]
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.update_7(appId, recordingSettingsPatchRequest, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update_7WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Update the recording settings for a specific app using the provided app ID.
+     * Update recording settings for an app.
+     * @param appId The unique identifier for the app whose recording settings are being updated.
+     * @param recordingSettingsPatchRequest
+     */
+    public update_7(appId: number, recordingSettingsPatchRequest: RecordingSettingsPatchRequest, _options?: ConfigurationOptions): Observable<RecordingSettingsResponse> {
+        return this.update_7WithHttpInfo(appId, recordingSettingsPatchRequest, _options).pipe(map((apiResponse: HttpInfo<RecordingSettingsResponse>) => apiResponse.data));
     }
 
 }

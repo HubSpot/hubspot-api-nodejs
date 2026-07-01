@@ -13,17 +13,47 @@
 import { PublicTeam } from '../models/PublicTeam';
 
 export class PublicOwner {
-    'firstName'?: string;
-    'lastName'?: string;
-    'createdAt': Date;
+    /**
+    * Indicates whether the owner is archived.
+    */
     'archived': boolean;
-    'teams'?: Array<PublicTeam>;
-    'id': string;
-    'userIdIncludingInactive'?: number;
-    'type': PublicOwnerTypeEnum;
-    'userId'?: number;
+    /**
+    * The date and time when the owner was created.
+    */
+    'createdAt': Date;
+    /**
+    * The email address of the owner.
+    */
     'email'?: string;
+    /**
+    * The first name of the owner.
+    */
+    'firstName'?: string;
+    /**
+    * The unique identifier of the owner.
+    */
+    'id': string;
+    /**
+    * The last name of the owner.
+    */
+    'lastName'?: string;
+    'teams'?: Array<PublicTeam>;
+    /**
+    * The type of the owner, which can be either PERSON or QUEUE.
+    */
+    'type': PublicOwnerTypeEnum;
+    /**
+    * The date and time when the owner was last updated.
+    */
     'updatedAt': Date;
+    /**
+    * The user ID of the owner.
+    */
+    'userId'?: number;
+    /**
+    * The user ID of the owner, including inactive users.
+    */
+    'userIdIncludingInactive'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -31,8 +61,32 @@ export class PublicOwner {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "firstName",
             "baseName": "firstName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
@@ -43,34 +97,10 @@ export class PublicOwner {
             "format": ""
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "teams",
             "baseName": "teams",
             "type": "Array<PublicTeam>",
             "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "userIdIncludingInactive",
-            "baseName": "userIdIncludingInactive",
-            "type": "number",
-            "format": "int32"
         },
         {
             "name": "type",
@@ -79,22 +109,22 @@ export class PublicOwner {
             "format": ""
         },
         {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "userId",
             "baseName": "userId",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "Date",
-            "format": "date-time"
+            "name": "userIdIncludingInactive",
+            "baseName": "userIdIncludingInactive",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

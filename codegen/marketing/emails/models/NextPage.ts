@@ -12,17 +12,17 @@
 
 
 /**
-* Contains information about the next page.
+* Specifies the paging information needed to retrieve the next set of results in a paginated API response
 */
 export class NextPage {
-    /**
-    * The link to the next page.
-    */
-    'link'?: string;
     /**
     * The cursor token value to get the next set of results. Use this value as query parameter (&after=...) to obtain the next page.
     */
     'after': string;
+    /**
+    * The link to the next page.
+    */
+    'link'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,14 +30,14 @@ export class NextPage {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "link",
-            "baseName": "link",
+            "name": "after",
+            "baseName": "after",
             "type": "string",
             "format": ""
         },
         {
-            "name": "after",
-            "baseName": "after",
+            "name": "link",
+            "baseName": "link",
             "type": "string",
             "format": ""
         }    ];

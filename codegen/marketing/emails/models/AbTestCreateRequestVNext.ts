@@ -15,11 +15,14 @@
 * Request body object for creating A/B tests.
 */
 export class AbTestCreateRequestVNext {
-    'variationName': string;
     /**
     * ID of the object to test.
     */
     'contentId': string;
+    /**
+    * Name of the variation to be created.
+    */
+    'variationName': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -27,14 +30,14 @@ export class AbTestCreateRequestVNext {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "variationName",
-            "baseName": "variationName",
+            "name": "contentId",
+            "baseName": "contentId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "contentId",
-            "baseName": "contentId",
+            "name": "variationName",
+            "baseName": "variationName",
             "type": "string",
             "format": ""
         }    ];

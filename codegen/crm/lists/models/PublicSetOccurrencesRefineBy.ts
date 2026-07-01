@@ -12,8 +12,14 @@
 
 
 export class PublicSetOccurrencesRefineBy {
-    'type': PublicSetOccurrencesRefineByTypeEnum;
+    /**
+    * Indicates the specific set type used in the refinement (ALL, ALL_INCLUDE_EMPTY, ANY, NONE, NONE_EXCLUDE_EMPTY, ANY_INCLUDE_EMPTY).
+    */
     'setType': string;
+    /**
+    * Specifies the type of refinement (SET_OCCURRENCES).
+    */
+    'type': PublicSetOccurrencesRefineByTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,15 +27,15 @@ export class PublicSetOccurrencesRefineBy {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "PublicSetOccurrencesRefineByTypeEnum",
-            "format": ""
-        },
-        {
             "name": "setType",
             "baseName": "setType",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "PublicSetOccurrencesRefineByTypeEnum",
             "format": ""
         }    ];
 

@@ -17,21 +17,21 @@ import { PublicObjectListSearchResult } from '../models/PublicObjectListSearchRe
 */
 export class ListSearchResponse {
     /**
-    * The total number of lists that match the search criteria.
+    * Whether or not there are more results to page through.
     */
-    'total': number;
-    /**
-    * Value to be passed in a future request to paginate through list search results.
-    */
-    'offset': number;
+    'hasMore': boolean;
     /**
     * The lists that matched the search criteria.
     */
     'lists': Array<PublicObjectListSearchResult>;
     /**
-    * Whether or not there are more results to page through.
+    * Value to be passed in a future request to paginate through list search results.
     */
-    'hasMore': boolean;
+    'offset': number;
+    /**
+    * The total number of lists that match the search criteria.
+    */
+    'total': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -39,16 +39,10 @@ export class ListSearchResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "total",
-            "baseName": "total",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "offset",
-            "baseName": "offset",
-            "type": "number",
-            "format": "int32"
+            "name": "hasMore",
+            "baseName": "hasMore",
+            "type": "boolean",
+            "format": ""
         },
         {
             "name": "lists",
@@ -57,10 +51,16 @@ export class ListSearchResponse {
             "format": ""
         },
         {
-            "name": "hasMore",
-            "baseName": "hasMore",
-            "type": "boolean",
-            "format": ""
+            "name": "offset",
+            "baseName": "offset",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

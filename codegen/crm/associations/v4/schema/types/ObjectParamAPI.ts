@@ -13,364 +13,364 @@ import { CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging 
 import { PublicAssociationDefinitionCreateRequest } from '../models/PublicAssociationDefinitionCreateRequest';
 import { PublicAssociationDefinitionUpdateRequest } from '../models/PublicAssociationDefinitionUpdateRequest';
 
-import { ObservableDefinitionConfigurationsApi } from "./ObservableAPI";
-import { DefinitionConfigurationsApiRequestFactory, DefinitionConfigurationsApiResponseProcessor} from "../apis/DefinitionConfigurationsApi";
+import { ObservableLabelsApi } from "./ObservableAPI";
+import { LabelsApiRequestFactory, LabelsApiResponseProcessor} from "../apis/LabelsApi";
 
-export interface DefinitionConfigurationsApiBatchCreateRequest {
+export interface LabelsApiCreateRequest {
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof DefinitionConfigurationsApibatchCreate
+     * @memberof LabelsApicreate
      */
     fromObjectType: string
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof DefinitionConfigurationsApibatchCreate
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type BatchInputPublicAssociationDefinitionConfigurationCreateRequest
-     * @memberof DefinitionConfigurationsApibatchCreate
-     */
-    batchInputPublicAssociationDefinitionConfigurationCreateRequest: BatchInputPublicAssociationDefinitionConfigurationCreateRequest
-}
-
-export interface DefinitionConfigurationsApiBatchRemoveRequest {
-    /**
-     * 
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionConfigurationsApibatchRemove
-     */
-    fromObjectType: string
-    /**
-     * 
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionConfigurationsApibatchRemove
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type BatchInputPublicAssociationSpec
-     * @memberof DefinitionConfigurationsApibatchRemove
-     */
-    batchInputPublicAssociationSpec: BatchInputPublicAssociationSpec
-}
-
-export interface DefinitionConfigurationsApiBatchUpdateRequest {
-    /**
-     * 
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionConfigurationsApibatchUpdate
-     */
-    fromObjectType: string
-    /**
-     * 
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionConfigurationsApibatchUpdate
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type BatchInputPublicAssociationDefinitionConfigurationUpdateRequest
-     * @memberof DefinitionConfigurationsApibatchUpdate
-     */
-    batchInputPublicAssociationDefinitionConfigurationUpdateRequest: BatchInputPublicAssociationDefinitionConfigurationUpdateRequest
-}
-
-export interface DefinitionConfigurationsApiGetAllRequest {
-}
-
-export interface DefinitionConfigurationsApiGetAllBetweenTwoObjectTypesRequest {
-    /**
-     * 
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionConfigurationsApigetAllBetweenTwoObjectTypes
-     */
-    fromObjectType: string
-    /**
-     * 
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionConfigurationsApigetAllBetweenTwoObjectTypes
-     */
-    toObjectType: string
-}
-
-export class ObjectDefinitionConfigurationsApi {
-    private api: ObservableDefinitionConfigurationsApi
-
-    public constructor(configuration: Configuration, requestFactory?: DefinitionConfigurationsApiRequestFactory, responseProcessor?: DefinitionConfigurationsApiResponseProcessor) {
-        this.api = new ObservableDefinitionConfigurationsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Batch create user configurations between two object types
-     * Create
-     * @param param the request object
-     */
-    public batchCreateWithHttpInfo(param: DefinitionConfigurationsApiBatchCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors | BatchResponsePublicAssociationDefinitionUserConfiguration>> {
-        return this.api.batchCreateWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationDefinitionConfigurationCreateRequest,  options).toPromise();
-    }
-
-    /**
-     * Batch create user configurations between two object types
-     * Create
-     * @param param the request object
-     */
-    public batchCreate(param: DefinitionConfigurationsApiBatchCreateRequest, options?: ConfigurationOptions): Promise<BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors | BatchResponsePublicAssociationDefinitionUserConfiguration> {
-        return this.api.batchCreate(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationDefinitionConfigurationCreateRequest,  options).toPromise();
-    }
-
-    /**
-     * Batch delete user configurations between two object types
-     * Delete
-     * @param param the request object
-     */
-    public batchRemoveWithHttpInfo(param: DefinitionConfigurationsApiBatchRemoveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.batchRemoveWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationSpec,  options).toPromise();
-    }
-
-    /**
-     * Batch delete user configurations between two object types
-     * Delete
-     * @param param the request object
-     */
-    public batchRemove(param: DefinitionConfigurationsApiBatchRemoveRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.batchRemove(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationSpec,  options).toPromise();
-    }
-
-    /**
-     * Batch update user configurations between two object types
-     * Update
-     * @param param the request object
-     */
-    public batchUpdateWithHttpInfo(param: DefinitionConfigurationsApiBatchUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePublicAssociationDefinitionConfigurationUpdateResult | BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors>> {
-        return this.api.batchUpdateWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationDefinitionConfigurationUpdateRequest,  options).toPromise();
-    }
-
-    /**
-     * Batch update user configurations between two object types
-     * Update
-     * @param param the request object
-     */
-    public batchUpdate(param: DefinitionConfigurationsApiBatchUpdateRequest, options?: ConfigurationOptions): Promise<BatchResponsePublicAssociationDefinitionConfigurationUpdateResult | BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors> {
-        return this.api.batchUpdate(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationDefinitionConfigurationUpdateRequest,  options).toPromise();
-    }
-
-    /**
-     * Returns all user configurations available on a given portal
-     * Read All
-     * @param param the request object
-     */
-    public getAllWithHttpInfo(param: DefinitionConfigurationsApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging>> {
-        return this.api.getAllWithHttpInfo( options).toPromise();
-    }
-
-    /**
-     * Returns all user configurations available on a given portal
-     * Read All
-     * @param param the request object
-     */
-    public getAll(param: DefinitionConfigurationsApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging> {
-        return this.api.getAll( options).toPromise();
-    }
-
-    /**
-     * Returns user configurations on all association definitions between two object types
-     * Read
-     * @param param the request object
-     */
-    public getAllBetweenTwoObjectTypesWithHttpInfo(param: DefinitionConfigurationsApiGetAllBetweenTwoObjectTypesRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging>> {
-        return this.api.getAllBetweenTwoObjectTypesWithHttpInfo(param.fromObjectType, param.toObjectType,  options).toPromise();
-    }
-
-    /**
-     * Returns user configurations on all association definitions between two object types
-     * Read
-     * @param param the request object
-     */
-    public getAllBetweenTwoObjectTypes(param: DefinitionConfigurationsApiGetAllBetweenTwoObjectTypesRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging> {
-        return this.api.getAllBetweenTwoObjectTypes(param.fromObjectType, param.toObjectType,  options).toPromise();
-    }
-
-}
-
-import { ObservableDefinitionsApi } from "./ObservableAPI";
-import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "../apis/DefinitionsApi";
-
-export interface DefinitionsApiCreateRequest {
-    /**
-     * 
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionsApicreate
-     */
-    fromObjectType: string
-    /**
-     * 
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionsApicreate
+     * @memberof LabelsApicreate
      */
     toObjectType: string
     /**
      * 
      * @type PublicAssociationDefinitionCreateRequest
-     * @memberof DefinitionsApicreate
+     * @memberof LabelsApicreate
      */
     publicAssociationDefinitionCreateRequest: PublicAssociationDefinitionCreateRequest
 }
 
-export interface DefinitionsApiGetAllRequest {
+export interface LabelsApiGetPageRequest {
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof DefinitionsApigetAll
+     * @memberof LabelsApigetPage
      */
     fromObjectType: string
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof DefinitionsApigetAll
+     * @memberof LabelsApigetPage
      */
     toObjectType: string
 }
 
-export interface DefinitionsApiRemoveRequest {
-    /**
-     * 
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionsApiremove
-     */
-    fromObjectType: string
-    /**
-     * 
-     * Defaults to: undefined
-     * @type string
-     * @memberof DefinitionsApiremove
-     */
-    toObjectType: string
+export interface LabelsApiRemoveRequest {
     /**
      * 
      * Defaults to: undefined
      * @type number
-     * @memberof DefinitionsApiremove
+     * @memberof LabelsApiremove
      */
     associationTypeId: number
-}
-
-export interface DefinitionsApiUpdateRequest {
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof DefinitionsApiupdate
+     * @memberof LabelsApiremove
      */
     fromObjectType: string
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof DefinitionsApiupdate
+     * @memberof LabelsApiremove
+     */
+    toObjectType: string
+}
+
+export interface LabelsApiUpdateRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof LabelsApiupdate
+     */
+    fromObjectType: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof LabelsApiupdate
      */
     toObjectType: string
     /**
      * 
      * @type PublicAssociationDefinitionUpdateRequest
-     * @memberof DefinitionsApiupdate
+     * @memberof LabelsApiupdate
      */
     publicAssociationDefinitionUpdateRequest: PublicAssociationDefinitionUpdateRequest
 }
 
-export class ObjectDefinitionsApi {
-    private api: ObservableDefinitionsApi
+export class ObjectLabelsApi {
+    private api: ObservableLabelsApi
 
-    public constructor(configuration: Configuration, requestFactory?: DefinitionsApiRequestFactory, responseProcessor?: DefinitionsApiResponseProcessor) {
-        this.api = new ObservableDefinitionsApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: LabelsApiRequestFactory, responseProcessor?: LabelsApiResponseProcessor) {
+        this.api = new ObservableLabelsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Create a user defined association definition
-     * Create
+     * Create a new label that describes the relationship between two specified CRM object types. This can help in categorizing and managing associations more effectively.
+     * Create association label
      * @param param the request object
      */
-    public createWithHttpInfo(param: DefinitionsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging>> {
+    public createWithHttpInfo(param: LabelsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging>> {
         return this.api.createWithHttpInfo(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionCreateRequest,  options).toPromise();
     }
 
     /**
-     * Create a user defined association definition
-     * Create
+     * Create a new label that describes the relationship between two specified CRM object types. This can help in categorizing and managing associations more effectively.
+     * Create association label
      * @param param the request object
      */
-    public create(param: DefinitionsApiCreateRequest, options?: ConfigurationOptions): Promise<CollectionResponseAssociationSpecWithLabelNoPaging> {
+    public create(param: LabelsApiCreateRequest, options?: ConfigurationOptions): Promise<CollectionResponseAssociationSpecWithLabelNoPaging> {
         return this.api.create(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionCreateRequest,  options).toPromise();
     }
 
     /**
-     * Returns all association types between two object types
-     * Read
+     * Retrieve all labels that describe the relationships between two specified CRM object types. These labels provide context about the nature of the associations.
+     * Retrieve association labels
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: DefinitionsApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging>> {
-        return this.api.getAllWithHttpInfo(param.fromObjectType, param.toObjectType,  options).toPromise();
+    public getPageWithHttpInfo(param: LabelsApiGetPageRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging>> {
+        return this.api.getPageWithHttpInfo(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
     /**
-     * Returns all association types between two object types
-     * Read
+     * Retrieve all labels that describe the relationships between two specified CRM object types. These labels provide context about the nature of the associations.
+     * Retrieve association labels
      * @param param the request object
      */
-    public getAll(param: DefinitionsApiGetAllRequest, options?: ConfigurationOptions): Promise<CollectionResponseAssociationSpecWithLabelNoPaging> {
-        return this.api.getAll(param.fromObjectType, param.toObjectType,  options).toPromise();
+    public getPage(param: LabelsApiGetPageRequest, options?: ConfigurationOptions): Promise<CollectionResponseAssociationSpecWithLabelNoPaging> {
+        return this.api.getPage(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
     /**
-     * Deletes an association definition
-     * Delete
+     * Remove a specific label from the association between two CRM object types.
+     * Delete association label
      * @param param the request object
      */
-    public removeWithHttpInfo(param: DefinitionsApiRemoveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.removeWithHttpInfo(param.fromObjectType, param.toObjectType, param.associationTypeId,  options).toPromise();
+    public removeWithHttpInfo(param: LabelsApiRemoveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.removeWithHttpInfo(param.associationTypeId, param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
     /**
-     * Deletes an association definition
-     * Delete
+     * Remove a specific label from the association between two CRM object types.
+     * Delete association label
      * @param param the request object
      */
-    public remove(param: DefinitionsApiRemoveRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.remove(param.fromObjectType, param.toObjectType, param.associationTypeId,  options).toPromise();
+    public remove(param: LabelsApiRemoveRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.remove(param.associationTypeId, param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
     /**
-     * Update a user defined association definition
-     * Update
+     * Update an existing label that describes the relationship between two specified CRM object types. This allows for modifications to existing association labels to better reflect the nature of the relationship.
+     * Update association label
      * @param param the request object
      */
-    public updateWithHttpInfo(param: DefinitionsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+    public updateWithHttpInfo(param: LabelsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.updateWithHttpInfo(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionUpdateRequest,  options).toPromise();
     }
 
     /**
-     * Update a user defined association definition
-     * Update
+     * Update an existing label that describes the relationship between two specified CRM object types. This allows for modifications to existing association labels to better reflect the nature of the relationship.
+     * Update association label
      * @param param the request object
      */
-    public update(param: DefinitionsApiUpdateRequest, options?: ConfigurationOptions): Promise<void> {
+    public update(param: LabelsApiUpdateRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.update(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionUpdateRequest,  options).toPromise();
+    }
+
+}
+
+import { ObservableLimitsApi } from "./ObservableAPI";
+import { LimitsApiRequestFactory, LimitsApiResponseProcessor} from "../apis/LimitsApi";
+
+export interface LimitsApiBatchCreateRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof LimitsApibatchCreate
+     */
+    fromObjectType: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof LimitsApibatchCreate
+     */
+    toObjectType: string
+    /**
+     * 
+     * @type BatchInputPublicAssociationDefinitionConfigurationCreateRequest
+     * @memberof LimitsApibatchCreate
+     */
+    batchInputPublicAssociationDefinitionConfigurationCreateRequest: BatchInputPublicAssociationDefinitionConfigurationCreateRequest
+}
+
+export interface LimitsApiBatchRemoveRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof LimitsApibatchRemove
+     */
+    fromObjectType: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof LimitsApibatchRemove
+     */
+    toObjectType: string
+    /**
+     * 
+     * @type BatchInputPublicAssociationSpec
+     * @memberof LimitsApibatchRemove
+     */
+    batchInputPublicAssociationSpec: BatchInputPublicAssociationSpec
+}
+
+export interface LimitsApiBatchUpdateRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof LimitsApibatchUpdate
+     */
+    fromObjectType: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof LimitsApibatchUpdate
+     */
+    toObjectType: string
+    /**
+     * 
+     * @type BatchInputPublicAssociationDefinitionConfigurationUpdateRequest
+     * @memberof LimitsApibatchUpdate
+     */
+    batchInputPublicAssociationDefinitionConfigurationUpdateRequest: BatchInputPublicAssociationDefinitionConfigurationUpdateRequest
+}
+
+export interface LimitsApiGetPageRequest {
+}
+
+export interface LimitsApiGetPageBetweenTwoObjectTypesRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof LimitsApigetPageBetweenTwoObjectTypes
+     */
+    fromObjectType: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof LimitsApigetPageBetweenTwoObjectTypes
+     */
+    toObjectType: string
+}
+
+export class ObjectLimitsApi {
+    private api: ObservableLimitsApi
+
+    public constructor(configuration: Configuration, requestFactory?: LimitsApiRequestFactory, responseProcessor?: LimitsApiResponseProcessor) {
+        this.api = new ObservableLimitsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Batch configure association limits between two object types.
+     * Configure association limits
+     * @param param the request object
+     */
+    public batchCreateWithHttpInfo(param: LimitsApiBatchCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors | BatchResponsePublicAssociationDefinitionUserConfiguration>> {
+        return this.api.batchCreateWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationDefinitionConfigurationCreateRequest,  options).toPromise();
+    }
+
+    /**
+     * Batch configure association limits between two object types.
+     * Configure association limits
+     * @param param the request object
+     */
+    public batchCreate(param: LimitsApiBatchCreateRequest, options?: ConfigurationOptions): Promise<BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors | BatchResponsePublicAssociationDefinitionUserConfiguration> {
+        return this.api.batchCreate(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationDefinitionConfigurationCreateRequest,  options).toPromise();
+    }
+
+    /**
+     * Batch delete limits that have been defined for association types between two object types.
+     * Remove association limits
+     * @param param the request object
+     */
+    public batchRemoveWithHttpInfo(param: LimitsApiBatchRemoveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.batchRemoveWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationSpec,  options).toPromise();
+    }
+
+    /**
+     * Batch delete limits that have been defined for association types between two object types.
+     * Remove association limits
+     * @param param the request object
+     */
+    public batchRemove(param: LimitsApiBatchRemoveRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.batchRemove(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationSpec,  options).toPromise();
+    }
+
+    /**
+     * Batch update association limits that have been configured between two object types.
+     * Update association limits
+     * @param param the request object
+     */
+    public batchUpdateWithHttpInfo(param: LimitsApiBatchUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePublicAssociationDefinitionConfigurationUpdateResult | BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors>> {
+        return this.api.batchUpdateWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationDefinitionConfigurationUpdateRequest,  options).toPromise();
+    }
+
+    /**
+     * Batch update association limits that have been configured between two object types.
+     * Update association limits
+     * @param param the request object
+     */
+    public batchUpdate(param: LimitsApiBatchUpdateRequest, options?: ConfigurationOptions): Promise<BatchResponsePublicAssociationDefinitionConfigurationUpdateResult | BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors> {
+        return this.api.batchUpdate(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationDefinitionConfigurationUpdateRequest,  options).toPromise();
+    }
+
+    /**
+     * Retrieve all configured association limits between objects, which include details about how different CRM object types are associated with each other.
+     * Retrieve all association limits
+     * @param param the request object
+     */
+    public getPageWithHttpInfo(param: LimitsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging>> {
+        return this.api.getPageWithHttpInfo( options).toPromise();
+    }
+
+    /**
+     * Retrieve all configured association limits between objects, which include details about how different CRM object types are associated with each other.
+     * Retrieve all association limits
+     * @param param the request object
+     */
+    public getPage(param: LimitsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging> {
+        return this.api.getPage( options).toPromise();
+    }
+
+    /**
+     * Retrieve the configuration details for associations between two specified CRM object types. Use this endpoint to understand limits that have been set for specific association types.
+     * Retrieve association limits
+     * @param param the request object
+     */
+    public getPageBetweenTwoObjectTypesWithHttpInfo(param: LimitsApiGetPageBetweenTwoObjectTypesRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging>> {
+        return this.api.getPageBetweenTwoObjectTypesWithHttpInfo(param.fromObjectType, param.toObjectType,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the configuration details for associations between two specified CRM object types. Use this endpoint to understand limits that have been set for specific association types.
+     * Retrieve association limits
+     * @param param the request object
+     */
+    public getPageBetweenTwoObjectTypes(param: LimitsApiGetPageBetweenTwoObjectTypesRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging> {
+        return this.api.getPageBetweenTwoObjectTypes(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
 }

@@ -5,132 +5,132 @@ import { CollectionResponseWithTotalUrlMappingForwardPaging } from '../models/Co
 import { UrlMapping } from '../models/UrlMapping';
 import { UrlMappingCreateRequestBody } from '../models/UrlMappingCreateRequestBody';
 
-import { ObservableRedirectsApi } from "./ObservableAPI";
-import { RedirectsApiRequestFactory, RedirectsApiResponseProcessor} from "../apis/RedirectsApi";
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
-export interface RedirectsApiArchiveRequest {
+export interface BasicApiArchiveRequest {
     /**
      * The ID of the target redirect.
      * Defaults to: undefined
      * @type string
-     * @memberof RedirectsApiarchive
+     * @memberof BasicApiarchive
      */
     urlRedirectId: string
 }
 
-export interface RedirectsApiCreateRequest {
+export interface BasicApiCmsUrlRedirectsV3Request {
     /**
      * 
-     * @type UrlMappingCreateRequestBody
-     * @memberof RedirectsApicreate
-     */
-    urlMappingCreateRequestBody: UrlMappingCreateRequestBody
-}
-
-export interface RedirectsApiGetByIdRequest {
-    /**
-     * The ID of the target redirect.
      * Defaults to: undefined
      * @type string
-     * @memberof RedirectsApigetById
+     * @memberof BasicApicmsUrlRedirectsV3
      */
-    urlRedirectId: string
-}
-
-export interface RedirectsApiGetPageRequest {
+    after?: string
     /**
-     * Only return redirects created on exactly this date.
+     * 
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof BasicApicmsUrlRedirectsV3
+     */
+    archived?: boolean
+    /**
+     * 
      * Defaults to: undefined
      * @type Date
-     * @memberof RedirectsApigetPage
-     */
-    createdAt?: Date
-    /**
-     * Only return redirects created after this date.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof RedirectsApigetPage
+     * @memberof BasicApicmsUrlRedirectsV3
      */
     createdAfter?: Date
     /**
-     * Only return redirects created before this date.
+     * 
      * Defaults to: undefined
      * @type Date
-     * @memberof RedirectsApigetPage
+     * @memberof BasicApicmsUrlRedirectsV3
+     */
+    createdAt?: Date
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Date
+     * @memberof BasicApicmsUrlRedirectsV3
      */
     createdBefore?: Date
     /**
-     * Only return redirects last updated on exactly this date.
+     * 
      * Defaults to: undefined
-     * @type Date
-     * @memberof RedirectsApigetPage
+     * @type number
+     * @memberof BasicApicmsUrlRedirectsV3
      */
-    updatedAt?: Date
-    /**
-     * Only return redirects last updated after this date.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof RedirectsApigetPage
-     */
-    updatedAfter?: Date
-    /**
-     * Only return redirects last updated before this date.
-     * Defaults to: undefined
-     * @type Date
-     * @memberof RedirectsApigetPage
-     */
-    updatedBefore?: Date
+    limit?: number
     /**
      * 
      * Defaults to: undefined
      * @type Array&lt;string&gt;
-     * @memberof RedirectsApigetPage
+     * @memberof BasicApicmsUrlRedirectsV3
      */
     sort?: Array<string>
     /**
-     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * 
      * Defaults to: undefined
-     * @type string
-     * @memberof RedirectsApigetPage
+     * @type Date
+     * @memberof BasicApicmsUrlRedirectsV3
      */
-    after?: string
+    updatedAfter?: Date
     /**
-     * Maximum number of result per page
+     * 
      * Defaults to: undefined
-     * @type number
-     * @memberof RedirectsApigetPage
+     * @type Date
+     * @memberof BasicApicmsUrlRedirectsV3
      */
-    limit?: number
+    updatedAt?: Date
     /**
-     * Whether to return only results that have been archived.
+     * 
      * Defaults to: undefined
-     * @type boolean
-     * @memberof RedirectsApigetPage
+     * @type Date
+     * @memberof BasicApicmsUrlRedirectsV3
      */
-    archived?: boolean
+    updatedBefore?: Date
 }
 
-export interface RedirectsApiUpdateRequest {
+export interface BasicApiCmsUrlRedirectsV30Request {
+    /**
+     * 
+     * @type UrlMappingCreateRequestBody
+     * @memberof BasicApicmsUrlRedirectsV3_1
+     */
+    urlMappingCreateRequestBody: UrlMappingCreateRequestBody
+}
+
+export interface BasicApiGetByIdRequest {
+    /**
+     * The ID of the target redirect.
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApigetById
+     */
+    urlRedirectId: string
+}
+
+export interface BasicApiUpdateRequest {
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof RedirectsApiupdate
+     * @memberof BasicApiupdate
      */
     urlRedirectId: string
     /**
      * 
      * @type UrlMapping
-     * @memberof RedirectsApiupdate
+     * @memberof BasicApiupdate
      */
     urlMapping: UrlMapping
 }
 
-export class ObjectRedirectsApi {
-    private api: ObservableRedirectsApi
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
 
-    public constructor(configuration: Configuration, requestFactory?: RedirectsApiRequestFactory, responseProcessor?: RedirectsApiResponseProcessor) {
-        this.api = new ObservableRedirectsApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -138,7 +138,7 @@ export class ObjectRedirectsApi {
      * Delete a redirect
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: RedirectsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.urlRedirectId,  options).toPromise();
     }
 
@@ -147,26 +147,36 @@ export class ObjectRedirectsApi {
      * Delete a redirect
      * @param param the request object
      */
-    public archive(param: RedirectsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
+    public archive(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.urlRedirectId,  options).toPromise();
     }
 
     /**
-     * Creates and configures a new URL redirect.
-     * Create a redirect
      * @param param the request object
      */
-    public createWithHttpInfo(param: RedirectsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<UrlMapping>> {
-        return this.api.createWithHttpInfo(param.urlMappingCreateRequestBody,  options).toPromise();
+    public cmsUrlRedirectsV3WithHttpInfo(param: BasicApiCmsUrlRedirectsV3Request = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalUrlMappingForwardPaging>> {
+        return this.api.cmsUrlRedirectsV3WithHttpInfo(param.after, param.archived, param.createdAfter, param.createdAt, param.createdBefore, param.limit, param.sort, param.updatedAfter, param.updatedAt, param.updatedBefore,  options).toPromise();
     }
 
     /**
-     * Creates and configures a new URL redirect.
-     * Create a redirect
      * @param param the request object
      */
-    public create(param: RedirectsApiCreateRequest, options?: ConfigurationOptions): Promise<UrlMapping> {
-        return this.api.create(param.urlMappingCreateRequestBody,  options).toPromise();
+    public cmsUrlRedirectsV3(param: BasicApiCmsUrlRedirectsV3Request = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalUrlMappingForwardPaging> {
+        return this.api.cmsUrlRedirectsV3(param.after, param.archived, param.createdAfter, param.createdAt, param.createdBefore, param.limit, param.sort, param.updatedAfter, param.updatedAt, param.updatedBefore,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public cmsUrlRedirectsV3_1WithHttpInfo(param: BasicApiCmsUrlRedirectsV30Request, options?: ConfigurationOptions): Promise<HttpInfo<UrlMapping>> {
+        return this.api.cmsUrlRedirectsV3_1WithHttpInfo(param.urlMappingCreateRequestBody,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public cmsUrlRedirectsV3_1(param: BasicApiCmsUrlRedirectsV30Request, options?: ConfigurationOptions): Promise<UrlMapping> {
+        return this.api.cmsUrlRedirectsV3_1(param.urlMappingCreateRequestBody,  options).toPromise();
     }
 
     /**
@@ -174,7 +184,7 @@ export class ObjectRedirectsApi {
      * Get details for a redirect
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: RedirectsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<UrlMapping>> {
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<UrlMapping>> {
         return this.api.getByIdWithHttpInfo(param.urlRedirectId,  options).toPromise();
     }
 
@@ -183,26 +193,8 @@ export class ObjectRedirectsApi {
      * Get details for a redirect
      * @param param the request object
      */
-    public getById(param: RedirectsApiGetByIdRequest, options?: ConfigurationOptions): Promise<UrlMapping> {
+    public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<UrlMapping> {
         return this.api.getById(param.urlRedirectId,  options).toPromise();
-    }
-
-    /**
-     * Returns all existing URL redirects. Results can be limited and filtered by creation or updated date.
-     * Get current redirects
-     * @param param the request object
-     */
-    public getPageWithHttpInfo(param: RedirectsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalUrlMappingForwardPaging>> {
-        return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
-    }
-
-    /**
-     * Returns all existing URL redirects. Results can be limited and filtered by creation or updated date.
-     * Get current redirects
-     * @param param the request object
-     */
-    public getPage(param: RedirectsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalUrlMappingForwardPaging> {
-        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
     }
 
     /**
@@ -210,7 +202,7 @@ export class ObjectRedirectsApi {
      * Update a redirect
      * @param param the request object
      */
-    public updateWithHttpInfo(param: RedirectsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<UrlMapping>> {
+    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<UrlMapping>> {
         return this.api.updateWithHttpInfo(param.urlRedirectId, param.urlMapping,  options).toPromise();
     }
 
@@ -219,7 +211,7 @@ export class ObjectRedirectsApi {
      * Update a redirect
      * @param param the request object
      */
-    public update(param: RedirectsApiUpdateRequest, options?: ConfigurationOptions): Promise<UrlMapping> {
+    public update(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<UrlMapping> {
         return this.api.update(param.urlRedirectId, param.urlMapping,  options).toPromise();
     }
 

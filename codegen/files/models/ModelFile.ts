@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -16,80 +16,83 @@
 */
 export class ModelFile {
     /**
-    * Extension of the file. ex: .jpg, .png, .gif, .pdf, etc.
-    */
-    'extension'?: string;
-    /**
     * File access. Can be PUBLIC_INDEXABLE, PUBLIC_NOT_INDEXABLE, PRIVATE.
     */
     'access': ModelFileAccessEnum;
-    /**
-    * ID of the folder the file is in.
-    */
-    'parentFolderId'?: string;
-    'sourceGroup'?: string;
-    'fileMd5'?: string;
-    /**
-    * Encoding of the file.
-    */
-    'encoding'?: string;
-    /**
-    * Type of the file. Can be IMG, DOCUMENT, AUDIO, MOVIE, or OTHER.
-    */
-    'type'?: string;
-    /**
-    * Previously \"archied\". Indicates if the file should be used when creating new content like web pages.
-    */
-    'isUsableInContent'?: boolean;
-    /**
-    * URL of the given file. This URL can change depending on the domain settings of the account. Will use the select file hosting domain.
-    */
-    'url'?: string;
-    'expiresAt'?: number;
-    /**
-    * Creation time of the file object.
-    */
-    'createdAt': Date;
-    /**
-    * Deletion time of the file object.
-    */
-    'archivedAt'?: Date;
-    /**
-    * Path of the file in the file manager.
-    */
-    'path'?: string;
     /**
     * If the file is deleted.
     */
     'archived': boolean;
     /**
-    * Size of the file in bytes.
+    * Deletion time of the file object.
     */
-    'size'?: number;
+    'archivedAt'?: Date;
     /**
-    * Name of the file.
+    * Creation time of the file object.
     */
-    'name'?: string;
-    /**
-    * For image and video files, the width of the content.
-    */
-    'width'?: number;
-    /**
-    * File ID.
-    */
-    'id': string;
+    'createdAt': Date;
     /**
     * Default hosting URL of the file. This will use one of HubSpot\'s provided URLs to serve the file.
     */
     'defaultHostingUrl'?: string;
     /**
-    * Timestamp of the latest update to the file.
+    * Encoding of the file.
     */
-    'updatedAt': Date;
+    'encoding'?: string;
+    'expiresAt'?: number;
+    /**
+    * Extension of the file. ex: .jpg, .png, .gif, .pdf, etc.
+    */
+    'extension'?: string;
+    /**
+    * The MD5 hash of the file.
+    */
+    'fileMd5'?: string;
     /**
     * For image and video files, the height of the content.
     */
     'height'?: number;
+    /**
+    * File ID.
+    */
+    'id': string;
+    /**
+    * Previously \"archied\". Indicates if the file should be used when creating new content like web pages.
+    */
+    'isUsableInContent'?: boolean;
+    /**
+    * Name of the file.
+    */
+    'name'?: string;
+    /**
+    * ID of the folder the file is in.
+    */
+    'parentFolderId'?: string;
+    /**
+    * Path of the file in the file manager.
+    */
+    'path'?: string;
+    /**
+    * Size of the file in bytes.
+    */
+    'size'?: number;
+    'sourceGroup'?: ModelFileSourceGroupEnum;
+    /**
+    * Type of the file. Can be IMG, DOCUMENT, AUDIO, MOVIE, or OTHER.
+    */
+    'type'?: string;
+    /**
+    * Timestamp of the latest update to the file.
+    */
+    'updatedAt': Date;
+    /**
+    * URL of the given file. This URL can change depending on the domain settings of the account. Will use the select file hosting domain.
+    */
+    'url'?: string;
+    /**
+    * For image and video files, the width of the content.
+    */
+    'width'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -97,32 +100,32 @@ export class ModelFile {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "extension",
-            "baseName": "extension",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "access",
             "baseName": "access",
             "type": "ModelFileAccessEnum",
             "format": ""
         },
         {
-            "name": "parentFolderId",
-            "baseName": "parentFolderId",
-            "type": "string",
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "sourceGroup",
-            "baseName": "sourceGroup",
-            "type": "string",
-            "format": ""
+            "name": "archivedAt",
+            "baseName": "archivedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
-            "name": "fileMd5",
-            "baseName": "fileMd5",
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "defaultHostingUrl",
+            "baseName": "defaultHostingUrl",
             "type": "string",
             "format": ""
         },
@@ -133,68 +136,26 @@ export class ModelFile {
             "format": ""
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "isUsableInContent",
-            "baseName": "isUsableInContent",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "expiresAt",
             "baseName": "expiresAt",
             "type": "number",
             "format": "int64"
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "archivedAt",
-            "baseName": "archivedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "path",
-            "baseName": "path",
+            "name": "extension",
+            "baseName": "extension",
             "type": "string",
             "format": ""
         },
         {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "size",
-            "baseName": "size",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
+            "name": "fileMd5",
+            "baseName": "fileMd5",
             "type": "string",
             "format": ""
         },
         {
-            "name": "width",
-            "baseName": "width",
+            "name": "height",
+            "baseName": "height",
             "type": "number",
             "format": "int32"
         },
@@ -205,8 +166,44 @@ export class ModelFile {
             "format": ""
         },
         {
-            "name": "defaultHostingUrl",
-            "baseName": "defaultHostingUrl",
+            "name": "isUsableInContent",
+            "baseName": "isUsableInContent",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "parentFolderId",
+            "baseName": "parentFolderId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "path",
+            "baseName": "path",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "size",
+            "baseName": "size",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "sourceGroup",
+            "baseName": "sourceGroup",
+            "type": "ModelFileSourceGroupEnum",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
             "type": "string",
             "format": ""
         },
@@ -217,8 +214,14 @@ export class ModelFile {
             "format": "date-time"
         },
         {
-            "name": "height",
-            "baseName": "height",
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "width",
+            "baseName": "width",
             "type": "number",
             "format": "int32"
         }    ];
@@ -232,13 +235,20 @@ export class ModelFile {
 }
 
 export enum ModelFileAccessEnum {
-    PublicIndexable = 'PUBLIC_INDEXABLE',
-    PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
     HiddenIndexable = 'HIDDEN_INDEXABLE',
     HiddenNotIndexable = 'HIDDEN_NOT_INDEXABLE',
     HiddenPrivate = 'HIDDEN_PRIVATE',
-    Private = 'PRIVATE',
     HiddenSensitive = 'HIDDEN_SENSITIVE',
+    Private = 'PRIVATE',
+    PublicIndexable = 'PUBLIC_INDEXABLE',
+    PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
     Sensitive = 'SENSITIVE'
+}
+export enum ModelFileSourceGroupEnum {
+    Content = 'CONTENT',
+    Conversations = 'CONVERSATIONS',
+    Forms = 'FORMS',
+    UiExtensions = 'UI_EXTENSIONS',
+    Unknown = 'UNKNOWN'
 }
 

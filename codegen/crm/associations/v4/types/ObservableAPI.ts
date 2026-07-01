@@ -35,7 +35,7 @@ export class ObservableBasicApi {
 
     /**
      * deletes all associations between two records.
-     * Delete
+     * Delete associations between two records
      * @param objectType
      * @param objectId
      * @param toObjectType
@@ -43,7 +43,7 @@ export class ObservableBasicApi {
      */
     public archiveWithHttpInfo(objectType: string, objectId: string, toObjectType: string, toObjectId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -57,7 +57,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -68,7 +68,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -91,7 +91,7 @@ export class ObservableBasicApi {
 
     /**
      * deletes all associations between two records.
-     * Delete
+     * Delete associations between two records
      * @param objectType
      * @param objectId
      * @param toObjectType
@@ -103,7 +103,7 @@ export class ObservableBasicApi {
 
     /**
      * Set association labels between two records.
-     * Create
+     * Associate records (labelled)
      * @param objectType
      * @param objectId
      * @param toObjectType
@@ -112,7 +112,7 @@ export class ObservableBasicApi {
      */
     public createWithHttpInfo(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationSpec: Array<AssociationSpec>, _options?: ConfigurationOptions): Observable<HttpInfo<LabelsBetweenObjectPair>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -126,7 +126,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -137,7 +137,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -160,7 +160,7 @@ export class ObservableBasicApi {
 
     /**
      * Set association labels between two records.
-     * Create
+     * Associate records (labelled)
      * @param objectType
      * @param objectId
      * @param toObjectType
@@ -173,7 +173,7 @@ export class ObservableBasicApi {
 
     /**
      * Create the default (most generic) association type between two object types
-     * Create Default
+     * Associate records (default)
      * @param fromObjectType
      * @param fromObjectId
      * @param toObjectType
@@ -181,7 +181,7 @@ export class ObservableBasicApi {
      */
     public createDefaultWithHttpInfo(fromObjectType: string, fromObjectId: string, toObjectType: string, toObjectId: string, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponsePublicDefaultAssociation>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -195,7 +195,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -206,7 +206,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -229,7 +229,7 @@ export class ObservableBasicApi {
 
     /**
      * Create the default (most generic) association type between two object types
-     * Create Default
+     * Associate records (default)
      * @param fromObjectType
      * @param fromObjectId
      * @param toObjectType
@@ -240,8 +240,8 @@ export class ObservableBasicApi {
     }
 
     /**
-     * List all associations of an object by object type. Limit 500 per call.
-     * List
+     * Retrieve all associations between a specific record and an object type. Limit 500 per call.
+     * Retrieve all associations by object type
      * @param objectType
      * @param objectId
      * @param toObjectType
@@ -250,7 +250,7 @@ export class ObservableBasicApi {
      */
     public getPageWithHttpInfo(objectType: string, objectId: string, toObjectType: string, after?: string, limit?: number, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -264,7 +264,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -275,7 +275,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -297,8 +297,8 @@ export class ObservableBasicApi {
     }
 
     /**
-     * List all associations of an object by object type. Limit 500 per call.
-     * List
+     * Retrieve all associations between a specific record and an object type. Limit 500 per call.
+     * Retrieve all associations by object type
      * @param objectType
      * @param objectId
      * @param toObjectType
@@ -329,14 +329,14 @@ export class ObservableBatchApi {
 
     /**
      * Batch delete associations for objects
-     * Delete
-     * @param fromObjectType
-     * @param toObjectType
+     * Remove associations
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociationMultiArchive
      */
     public archiveWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -350,7 +350,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -361,7 +361,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -384,9 +384,9 @@ export class ObservableBatchApi {
 
     /**
      * Batch delete associations for objects
-     * Delete
-     * @param fromObjectType
-     * @param toObjectType
+     * Remove associations
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociationMultiArchive
      */
     public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: ConfigurationOptions): Observable<void> {
@@ -396,13 +396,13 @@ export class ObservableBatchApi {
     /**
      * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
      * Delete Specific Labels
-     * @param fromObjectType
-     * @param toObjectType
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociationMultiPost
      */
     public archiveLabelsWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -416,7 +416,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -427,7 +427,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -451,8 +451,8 @@ export class ObservableBatchApi {
     /**
      * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
      * Delete Specific Labels
-     * @param fromObjectType
-     * @param toObjectType
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociationMultiPost
      */
     public archiveLabels(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: ConfigurationOptions): Observable<void> {
@@ -461,14 +461,14 @@ export class ObservableBatchApi {
 
     /**
      * Batch create associations for objects
-     * Create
-     * @param fromObjectType
-     * @param toObjectType
+     * Associate records (labelled)
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociationMultiPost
      */
     public createWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -482,7 +482,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -493,7 +493,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -516,9 +516,9 @@ export class ObservableBatchApi {
 
     /**
      * Batch create associations for objects
-     * Create
-     * @param fromObjectType
-     * @param toObjectType
+     * Associate records (labelled)
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociationMultiPost
      */
     public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: ConfigurationOptions): Observable<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair> {
@@ -528,13 +528,13 @@ export class ObservableBatchApi {
     /**
      * Create the default (most generic) association type between two object types
      *  Create Default Associations
-     * @param fromObjectType
-     * @param toObjectType
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicDefaultAssociationMultiPost
      */
     public createDefaultWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponsePublicDefaultAssociation>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -548,7 +548,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -559,7 +559,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -583,8 +583,8 @@ export class ObservableBatchApi {
     /**
      * Create the default (most generic) association type between two object types
      *  Create Default Associations
-     * @param fromObjectType
-     * @param toObjectType
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicDefaultAssociationMultiPost
      */
     public createDefault(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: ConfigurationOptions): Observable<BatchResponsePublicDefaultAssociation> {
@@ -593,14 +593,14 @@ export class ObservableBatchApi {
 
     /**
      * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
-     * Read
-     * @param fromObjectType
-     * @param toObjectType
+     * Retrieve associations
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicFetchAssociationsBatchRequest
      */
     public getPageWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -614,7 +614,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -625,7 +625,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -648,9 +648,9 @@ export class ObservableBatchApi {
 
     /**
      * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
-     * Read
-     * @param fromObjectType
-     * @param toObjectType
+     * Retrieve associations
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicFetchAssociationsBatchRequest
      */
     public getPage(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: ConfigurationOptions): Observable<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
@@ -677,12 +677,12 @@ export class ObservableReportApi {
 
     /**
      * Requests a report of all objects in the portal which have a high usage of associations
-     * Report
+     * Report high usage
      * @param userId 
      */
     public requestWithHttpInfo(userId: number, _options?: ConfigurationOptions): Observable<HttpInfo<ReportCreationResponse>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -696,7 +696,7 @@ export class ObservableReportApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -707,7 +707,7 @@ export class ObservableReportApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -730,7 +730,7 @@ export class ObservableReportApi {
 
     /**
      * Requests a report of all objects in the portal which have a high usage of associations
-     * Report
+     * Report high usage
      * @param userId 
      */
     public request(userId: number, _options?: ConfigurationOptions): Observable<ReportCreationResponse> {

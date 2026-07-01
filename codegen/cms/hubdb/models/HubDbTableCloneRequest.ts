@@ -13,18 +13,21 @@
 
 export class HubDbTableCloneRequest {
     /**
-    * The new name for the cloned table
+    * Specifies whether to copy the rows during clone
     */
-    'newName'?: string;
+    'copyRows': boolean;
+    /**
+    * Indicates whether the table is defined by HubSpot.
+    */
     'isHubspotDefined': boolean;
     /**
     * The new label for the cloned table
     */
     'newLabel'?: string;
     /**
-    * Specifies whether to copy the rows during clone
+    * The new name for the cloned table
     */
-    'copyRows': boolean;
+    'newName'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -32,9 +35,9 @@ export class HubDbTableCloneRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "newName",
-            "baseName": "newName",
-            "type": "string",
+            "name": "copyRows",
+            "baseName": "copyRows",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -50,9 +53,9 @@ export class HubDbTableCloneRequest {
             "format": ""
         },
         {
-            "name": "copyRows",
-            "baseName": "copyRows",
-            "type": "boolean",
+            "name": "newName",
+            "baseName": "newName",
+            "type": "string",
             "format": ""
         }    ];
 

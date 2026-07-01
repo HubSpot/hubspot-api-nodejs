@@ -13,11 +13,29 @@
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 
 export class BatchResponseSubscriptionResponse {
+    /**
+    * The timestamp when the batch operation completed, in ISO 8601 format.
+    */
     'completedAt': Date;
-    'requestedAt'?: Date;
-    'startedAt': Date;
+    /**
+    * An object containing URLs for related resources or operations.
+    */
     'links'?: { [key: string]: string; };
+    /**
+    * The timestamp when the batch operation was requested, in ISO 8601 format.
+    */
+    'requestedAt'?: Date;
+    /**
+    * An array containing the successfully processed webhook subscriptions from the batch operation.
+    */
     'results': Array<SubscriptionResponse>;
+    /**
+    * The timestamp when the batch operation started processing, in ISO 8601 format.
+    */
+    'startedAt': Date;
+    /**
+    * The status of the batch operation. Accepted values are \'PENDING\', \'PROCESSING\', \'CANCELED\', or \'COMPLETE\'.
+    */
     'status': BatchResponseSubscriptionResponseStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -32,28 +50,28 @@ export class BatchResponseSubscriptionResponse {
             "format": "date-time"
         },
         {
-            "name": "requestedAt",
-            "baseName": "requestedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "results",
             "baseName": "results",
             "type": "Array<SubscriptionResponse>",
             "format": ""
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -71,9 +89,9 @@ export class BatchResponseSubscriptionResponse {
 }
 
 export enum BatchResponseSubscriptionResponseStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

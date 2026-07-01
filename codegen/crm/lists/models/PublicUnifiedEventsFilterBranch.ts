@@ -10,18 +10,32 @@
  * Do not edit the class manually.
  */
 
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
-import { PublicPropertyAssociationFilterBranchFilterBranchesInner } from '../models/PublicPropertyAssociationFilterBranchFilterBranchesInner';
-import { PublicPropertyAssociationFilterBranchFiltersInner } from '../models/PublicPropertyAssociationFilterBranchFiltersInner';
+import { PublicAndFilterBranchFilterBranchesInner } from '../models/PublicAndFilterBranchFilterBranchesInner';
+import { PublicAndFilterBranchFiltersInner } from '../models/PublicAndFilterBranchFiltersInner';
+import { PublicCtaAnalyticsFilterCoalescingRefineBy } from '../models/PublicCtaAnalyticsFilterCoalescingRefineBy';
+import { PublicUnifiedEventsFilterBranchPruningRefineBy } from '../models/PublicUnifiedEventsFilterBranchPruningRefineBy';
 
 export class PublicUnifiedEventsFilterBranch {
-    'filterBranchType': PublicUnifiedEventsFilterBranchFilterBranchTypeEnum;
-    'filterBranches': Array<PublicPropertyAssociationFilterBranchFilterBranchesInner>;
+    'coalescingRefineBy'?: PublicCtaAnalyticsFilterCoalescingRefineBy;
+    /**
+    * The identifier for the type of event associated with the filter branch.
+    */
     'eventTypeId': string;
-    'coalescingRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
+    /**
+    * The logical operator used to combine filters within the branch (AND).
+    */
     'filterBranchOperator': string;
-    'filters': Array<PublicPropertyAssociationFilterBranchFiltersInner>;
+    /**
+    * The type of the filter branch (UNIFIED_EVENTS).
+    */
+    'filterBranchType': PublicUnifiedEventsFilterBranchFilterBranchTypeEnum;
+    'filterBranches': Array<PublicAndFilterBranchFilterBranchesInner>;
+    'filters': Array<PublicAndFilterBranchFiltersInner>;
+    /**
+    * Defines the operation to be applied within the filter branch (HAS_COMPLETED, HAS_NOT_COMPLETED).
+    */
     'operator': PublicUnifiedEventsFilterBranchOperatorEnum;
+    'pruningRefineBy'?: PublicUnifiedEventsFilterBranchPruningRefineBy;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -29,15 +43,9 @@ export class PublicUnifiedEventsFilterBranch {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "filterBranchType",
-            "baseName": "filterBranchType",
-            "type": "PublicUnifiedEventsFilterBranchFilterBranchTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "filterBranches",
-            "baseName": "filterBranches",
-            "type": "Array<PublicPropertyAssociationFilterBranchFilterBranchesInner>",
+            "name": "coalescingRefineBy",
+            "baseName": "coalescingRefineBy",
+            "type": "PublicCtaAnalyticsFilterCoalescingRefineBy",
             "format": ""
         },
         {
@@ -47,27 +55,39 @@ export class PublicUnifiedEventsFilterBranch {
             "format": ""
         },
         {
-            "name": "coalescingRefineBy",
-            "baseName": "coalescingRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
             "name": "filterBranchOperator",
             "baseName": "filterBranchOperator",
             "type": "string",
             "format": ""
         },
         {
+            "name": "filterBranchType",
+            "baseName": "filterBranchType",
+            "type": "PublicUnifiedEventsFilterBranchFilterBranchTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "filterBranches",
+            "baseName": "filterBranches",
+            "type": "Array<PublicAndFilterBranchFilterBranchesInner>",
+            "format": ""
+        },
+        {
             "name": "filters",
             "baseName": "filters",
-            "type": "Array<PublicPropertyAssociationFilterBranchFiltersInner>",
+            "type": "Array<PublicAndFilterBranchFiltersInner>",
             "format": ""
         },
         {
             "name": "operator",
             "baseName": "operator",
             "type": "PublicUnifiedEventsFilterBranchOperatorEnum",
+            "format": ""
+        },
+        {
+            "name": "pruningRefineBy",
+            "baseName": "pruningRefineBy",
+            "type": "PublicUnifiedEventsFilterBranchPruningRefineBy",
             "format": ""
         }    ];
 

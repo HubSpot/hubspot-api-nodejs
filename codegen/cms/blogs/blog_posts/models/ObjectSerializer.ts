@@ -8,9 +8,10 @@ export * from '../models/BatchResponseBlogPost';
 export * from '../models/BatchResponseBlogPostWithErrors';
 export * from '../models/BlogPost';
 export * from '../models/BlogPostLanguageCloneRequestVNext';
+export * from '../models/BlogPostVersion';
 export * from '../models/BreakpointStyles';
 export * from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
-export * from '../models/CollectionResponseWithTotalVersionBlogPost';
+export * from '../models/CollectionResponseWithTotalBlogPostVersion';
 export * from '../models/ColorStop';
 export * from '../models/ContentCloneRequestVNext';
 export * from '../models/ContentLanguageVariation';
@@ -20,33 +21,37 @@ export * from '../models/ErrorDetail';
 export * from '../models/ForwardPaging';
 export * from '../models/Gradient';
 export * from '../models/LayoutSection';
+export * from '../models/Margin';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
+export * from '../models/Padding';
 export * from '../models/Paging';
 export * from '../models/PreviousPage';
 export * from '../models/RGBAColor';
 export * from '../models/RowMetaData';
 export * from '../models/SetNewLanguagePrimaryRequestVNext';
 export * from '../models/SideOrCorner';
+export * from '../models/Size';
 export * from '../models/StandardError';
 export * from '../models/Styles';
 export * from '../models/UpdateLanguagesRequestVNext';
 export * from '../models/VersionBlogPost';
 export * from '../models/VersionUser';
 
-import { Angle } from '../models/Angle';
-import { AttachToLangPrimaryRequestVNext      } from '../models/AttachToLangPrimaryRequestVNext';
+import { Angle    } from '../models/Angle';
+import { AttachToLangPrimaryRequestVNext    } from '../models/AttachToLangPrimaryRequestVNext';
 import { BackgroundImage } from '../models/BackgroundImage';
 import { BatchInputBlogPost } from '../models/BatchInputBlogPost';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseBlogPost        } from '../models/BatchResponseBlogPost';
 import { BatchResponseBlogPostWithErrors          } from '../models/BatchResponseBlogPostWithErrors';
-import { BlogPost      } from '../models/BlogPost';
+import { BlogPost                                 } from '../models/BlogPost';
 import { BlogPostLanguageCloneRequestVNext } from '../models/BlogPostLanguageCloneRequestVNext';
+import { BlogPostVersion } from '../models/BlogPostVersion';
 import { BreakpointStyles } from '../models/BreakpointStyles';
 import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
-import { CollectionResponseWithTotalVersionBlogPost } from '../models/CollectionResponseWithTotalVersionBlogPost';
+import { CollectionResponseWithTotalBlogPostVersion } from '../models/CollectionResponseWithTotalBlogPostVersion';
 import { ColorStop } from '../models/ColorStop';
 import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
 import { ContentLanguageVariation } from '../models/ContentLanguageVariation';
@@ -56,17 +61,20 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { Gradient } from '../models/Gradient';
 import { LayoutSection } from '../models/LayoutSection';
+import { Margin } from '../models/Margin';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
+import { Padding } from '../models/Padding';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
 import { RGBAColor } from '../models/RGBAColor';
 import { RowMetaData } from '../models/RowMetaData';
 import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
-import { SideOrCorner } from '../models/SideOrCorner';
+import { SideOrCorner   } from '../models/SideOrCorner';
+import { Size    } from '../models/Size';
 import { StandardError } from '../models/StandardError';
-import { Styles } from '../models/Styles';
-import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';
+import { Styles       } from '../models/Styles';
+import { UpdateLanguagesRequestVNext    } from '../models/UpdateLanguagesRequestVNext';
 import { VersionBlogPost } from '../models/VersionBlogPost';
 import { VersionUser } from '../models/VersionUser';
 
@@ -83,13 +91,21 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
+    "AngleUnitsEnum",
     "AttachToLangPrimaryRequestVNextLanguageEnum",
+    "AttachToLangPrimaryRequestVNextPrimaryLanguageEnum",
     "BatchResponseBlogPostStatusEnum",
     "BatchResponseBlogPostWithErrorsStatusEnum",
-    "BlogPostLanguageEnum",
-    "BlogPostContentTypeCategoryEnum",
     "BlogPostAbStatusEnum",
+    "BlogPostContentTypeCategoryEnum",
     "BlogPostCurrentStateEnum",
+    "BlogPostLanguageEnum",
+    "SideOrCornerHorizontalSideEnum",
+    "SideOrCornerVerticalSideEnum",
+    "SizeUnitsEnum",
+    "StylesFlexboxPositioningEnum",
+    "StylesVerticalAlignmentEnum",
+    "UpdateLanguagesRequestVNextLanguagesEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -103,9 +119,10 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseBlogPostWithErrors": BatchResponseBlogPostWithErrors,
     "BlogPost": BlogPost,
     "BlogPostLanguageCloneRequestVNext": BlogPostLanguageCloneRequestVNext,
+    "BlogPostVersion": BlogPostVersion,
     "BreakpointStyles": BreakpointStyles,
     "CollectionResponseWithTotalBlogPostForwardPaging": CollectionResponseWithTotalBlogPostForwardPaging,
-    "CollectionResponseWithTotalVersionBlogPost": CollectionResponseWithTotalVersionBlogPost,
+    "CollectionResponseWithTotalBlogPostVersion": CollectionResponseWithTotalBlogPostVersion,
     "ColorStop": ColorStop,
     "ContentCloneRequestVNext": ContentCloneRequestVNext,
     "ContentLanguageVariation": ContentLanguageVariation,
@@ -115,14 +132,17 @@ let typeMap: {[index: string]: any} = {
     "ForwardPaging": ForwardPaging,
     "Gradient": Gradient,
     "LayoutSection": LayoutSection,
+    "Margin": Margin,
     "ModelError": ModelError,
     "NextPage": NextPage,
+    "Padding": Padding,
     "Paging": Paging,
     "PreviousPage": PreviousPage,
     "RGBAColor": RGBAColor,
     "RowMetaData": RowMetaData,
     "SetNewLanguagePrimaryRequestVNext": SetNewLanguagePrimaryRequestVNext,
     "SideOrCorner": SideOrCorner,
+    "Size": Size,
     "StandardError": StandardError,
     "Styles": Styles,
     "UpdateLanguagesRequestVNext": UpdateLanguagesRequestVNext,

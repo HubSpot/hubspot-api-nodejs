@@ -14,37 +14,18 @@ import { OptionInput } from '../models/OptionInput';
 
 export class PropertyUpdate {
     /**
-    * The name of the property group the property belongs to.
+    * Represents a formula that is used to compute a calculated property.
     */
-    'groupName'?: string;
-    /**
-    * If true, the property won\'t be visible and can\'t be used in HubSpot.
-    */
-    'hidden'?: boolean;
-    /**
-    * A list of valid options for the property.
-    */
-    'options'?: Array<OptionInput>;
-    /**
-    * Properties are displayed in order starting with the lowest positive integer value. Values of -1 will cause the Property to be displayed after any positive values.
-    */
-    'displayOrder'?: number;
+    'calculationFormula'?: string;
+    'currencyPropertyName'?: string;
     /**
     * A description of the property that will be shown as help text in HubSpot.
     */
     'description'?: string;
     /**
-    * Represents a formula that is used to compute a calculated property.
+    * Properties are displayed in order starting with the lowest positive integer value. Values of -1 will cause the Property to be displayed after any positive values.
     */
-    'calculationFormula'?: string;
-    /**
-    * A human-readable property label that will be shown in HubSpot.
-    */
-    'label'?: string;
-    /**
-    * The data type of the property.
-    */
-    'type'?: PropertyUpdateTypeEnum;
+    'displayOrder'?: number;
     /**
     * Controls how the property appears in HubSpot.
     */
@@ -53,12 +34,71 @@ export class PropertyUpdate {
     * Whether or not the property can be used in a HubSpot form.
     */
     'formField'?: boolean;
+    /**
+    * The name of the property group the property belongs to.
+    */
+    'groupName'?: string;
+    /**
+    * If true, the property won\'t be visible and can\'t be used in HubSpot.
+    */
+    'hidden'?: boolean;
+    /**
+    * A human-readable property label that will be shown in HubSpot.
+    */
+    'label'?: string;
+    'numberDisplayHint'?: PropertyUpdateNumberDisplayHintEnum;
+    /**
+    * A list of valid options for the property.
+    */
+    'options'?: Array<OptionInput>;
+    'showCurrencySymbol'?: boolean;
+    'textDisplayHint'?: PropertyUpdateTextDisplayHintEnum;
+    /**
+    * The data type of the property.
+    */
+    'type'?: PropertyUpdateTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "calculationFormula",
+            "baseName": "calculationFormula",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "currencyPropertyName",
+            "baseName": "currencyPropertyName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "displayOrder",
+            "baseName": "displayOrder",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "fieldType",
+            "baseName": "fieldType",
+            "type": "PropertyUpdateFieldTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "formField",
+            "baseName": "formField",
+            "type": "boolean",
+            "format": ""
+        },
         {
             "name": "groupName",
             "baseName": "groupName",
@@ -72,51 +112,39 @@ export class PropertyUpdate {
             "format": ""
         },
         {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<OptionInput>",
-            "format": ""
-        },
-        {
-            "name": "displayOrder",
-            "baseName": "displayOrder",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "calculationFormula",
-            "baseName": "calculationFormula",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "label",
             "baseName": "label",
             "type": "string",
             "format": ""
         },
         {
+            "name": "numberDisplayHint",
+            "baseName": "numberDisplayHint",
+            "type": "PropertyUpdateNumberDisplayHintEnum",
+            "format": ""
+        },
+        {
+            "name": "options",
+            "baseName": "options",
+            "type": "Array<OptionInput>",
+            "format": ""
+        },
+        {
+            "name": "showCurrencySymbol",
+            "baseName": "showCurrencySymbol",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "textDisplayHint",
+            "baseName": "textDisplayHint",
+            "type": "PropertyUpdateTextDisplayHintEnum",
+            "format": ""
+        },
+        {
             "name": "type",
             "baseName": "type",
             "type": "PropertyUpdateTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "fieldType",
-            "baseName": "fieldType",
-            "type": "PropertyUpdateFieldTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "formField",
-            "baseName": "formField",
-            "type": "boolean",
             "format": ""
         }    ];
 
@@ -128,24 +156,45 @@ export class PropertyUpdate {
     }
 }
 
-export enum PropertyUpdateTypeEnum {
-    String = 'string',
+export enum PropertyUpdateFieldTypeEnum {
+    Booleancheckbox = 'booleancheckbox',
+    CalculationEquation = 'calculation_equation',
+    Checkbox = 'checkbox',
+    Date = 'date',
+    File = 'file',
+    Html = 'html',
     Number = 'number',
+    Phonenumber = 'phonenumber',
+    Radio = 'radio',
+    Select = 'select',
+    Text = 'text',
+    Textarea = 'textarea'
+}
+export enum PropertyUpdateNumberDisplayHintEnum {
+    Currency = 'currency',
+    Duration = 'duration',
+    Formatted = 'formatted',
+    Percentage = 'percentage',
+    Probability = 'probability',
+    Unformatted = 'unformatted'
+}
+export enum PropertyUpdateTextDisplayHintEnum {
+    DomainName = 'domain_name',
+    Email = 'email',
+    IpAddress = 'ip_address',
+    MultiLine = 'multi_line',
+    PhoneNumber = 'phone_number',
+    PhysicalAddress = 'physical_address',
+    PostalCode = 'postal_code',
+    UnformattedSingleLine = 'unformatted_single_line'
+}
+export enum PropertyUpdateTypeEnum {
+    Bool = 'bool',
     Date = 'date',
     Datetime = 'datetime',
     Enumeration = 'enumeration',
-    Bool = 'bool'
-}
-export enum PropertyUpdateFieldTypeEnum {
-    Textarea = 'textarea',
-    Text = 'text',
-    Date = 'date',
-    File = 'file',
     Number = 'number',
-    Select = 'select',
-    Radio = 'radio',
-    Checkbox = 'checkbox',
-    Booleancheckbox = 'booleancheckbox',
-    CalculationEquation = 'calculation_equation'
+    PhoneNumber = 'phone_number',
+    String = 'string'
 }
 

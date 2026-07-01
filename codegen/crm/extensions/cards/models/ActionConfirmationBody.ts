@@ -12,8 +12,17 @@
 
 
 export class ActionConfirmationBody {
-    'confirmButtonLabel': string;
+    /**
+    * The label for the button that cancels the action.
+    */
     'cancelButtonLabel': string;
+    /**
+    * The label for the button that confirms the action.
+    */
+    'confirmButtonLabel': string;
+    /**
+    * The message displayed to the user to confirm the action.
+    */
     'prompt': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -22,14 +31,14 @@ export class ActionConfirmationBody {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "confirmButtonLabel",
-            "baseName": "confirmButtonLabel",
+            "name": "cancelButtonLabel",
+            "baseName": "cancelButtonLabel",
             "type": "string",
             "format": ""
         },
         {
-            "name": "cancelButtonLabel",
-            "baseName": "cancelButtonLabel",
+            "name": "confirmButtonLabel",
+            "baseName": "confirmButtonLabel",
             "type": "string",
             "format": ""
         },

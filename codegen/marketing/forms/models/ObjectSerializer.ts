@@ -10,6 +10,7 @@ export * from '../models/EmailFieldValidation';
 export * from '../models/EnumeratedFieldOption';
 export * from '../models/ErrorDetail';
 export * from '../models/FieldGroup';
+export * from '../models/FieldGroupFieldsInner';
 export * from '../models/FileField';
 export * from '../models/FormDefinitionBase';
 export * from '../models/FormDefinitionCreateRequestBase';
@@ -19,10 +20,10 @@ export * from '../models/FormStyle';
 export * from '../models/ForwardPaging';
 export * from '../models/HubSpotFormConfiguration';
 export * from '../models/HubSpotFormDefinition';
-export * from '../models/HubSpotFormDefinitionAllOfLegalConsentOptions';
 export * from '../models/HubSpotFormDefinitionCreateRequest';
-export * from '../models/HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions';
+export * from '../models/HubSpotFormDefinitionLegalConsentOptions';
 export * from '../models/HubSpotFormDefinitionPatchRequest';
+export * from '../models/HubSpotFormDefinitionPatchRequestLegalConsentOptions';
 export * from '../models/LegalConsentCheckbox';
 export * from '../models/LegalConsentOptionsExplicitConsentToProcess';
 export * from '../models/LegalConsentOptionsImplicitConsentToProcess';
@@ -54,7 +55,8 @@ import { EmailField             } from '../models/EmailField';
 import { EmailFieldValidation } from '../models/EmailFieldValidation';
 import { EnumeratedFieldOption } from '../models/EnumeratedFieldOption';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { FieldGroup     } from '../models/FieldGroup';
+import { FieldGroup    } from '../models/FieldGroup';
+import { FieldGroupFieldsInnerClass } from '../models/FieldGroupFieldsInner';
 import { FileField             } from '../models/FileField';
 import { FormDefinitionBaseClass } from '../models/FormDefinitionBase';
 import { FormDefinitionCreateRequestBaseClass } from '../models/FormDefinitionCreateRequestBase';
@@ -64,14 +66,14 @@ import { FormStyle              } from '../models/FormStyle';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { HubSpotFormConfiguration              } from '../models/HubSpotFormConfiguration';
 import { HubSpotFormDefinition             } from '../models/HubSpotFormDefinition';
-import { HubSpotFormDefinitionAllOfLegalConsentOptionsClass } from '../models/HubSpotFormDefinitionAllOfLegalConsentOptions';
 import { HubSpotFormDefinitionCreateRequest            } from '../models/HubSpotFormDefinitionCreateRequest';
-import { HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsClass } from '../models/HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions';
+import { HubSpotFormDefinitionLegalConsentOptionsClass } from '../models/HubSpotFormDefinitionLegalConsentOptions';
 import { HubSpotFormDefinitionPatchRequest } from '../models/HubSpotFormDefinitionPatchRequest';
+import { HubSpotFormDefinitionPatchRequestLegalConsentOptionsClass } from '../models/HubSpotFormDefinitionPatchRequestLegalConsentOptions';
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
 import { LegalConsentOptionsExplicitConsentToProcess         } from '../models/LegalConsentOptionsExplicitConsentToProcess';
 import { LegalConsentOptionsImplicitConsentToProcess       } from '../models/LegalConsentOptionsImplicitConsentToProcess';
-import { LegalConsentOptionsLegitimateInterest     } from '../models/LegalConsentOptionsLegitimateInterest';
+import { LegalConsentOptionsLegitimateInterest   } from '../models/LegalConsentOptionsLegitimateInterest';
 import { LegalConsentOptionsNone   } from '../models/LegalConsentOptionsNone';
 import { LifecycleStage } from '../models/LifecycleStage';
 import { MobilePhoneField             } from '../models/MobilePhoneField';
@@ -109,19 +111,21 @@ let enumsMap: Set<string> = new Set<string>([
     "EmailFieldFieldTypeEnum",
     "FieldGroupGroupTypeEnum",
     "FieldGroupRichTextTypeEnum",
+    "FieldGroupFieldsInnerFieldTypeEnum",
     "FileFieldFieldTypeEnum",
     "FormDefinitionBaseFormTypeEnum",
     "FormDefinitionCreateRequestBaseFormTypeEnum",
     "FormDisplayOptionsThemeEnum",
     "FormPostSubmitActionTypeEnum",
     "FormStyleSubmitAlignmentEnum",
+    "HubSpotFormConfigurationEmbedTypeEnum",
     "HubSpotFormConfigurationLanguageEnum",
     "HubSpotFormDefinitionFormTypeEnum",
-    "HubSpotFormDefinitionAllOfLegalConsentOptionsTypeEnum",
-    "HubSpotFormDefinitionAllOfLegalConsentOptionsLawfulBasisEnum",
     "HubSpotFormDefinitionCreateRequestFormTypeEnum",
-    "HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsTypeEnum",
-    "HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsLawfulBasisEnum",
+    "HubSpotFormDefinitionLegalConsentOptionsTypeEnum",
+    "HubSpotFormDefinitionLegalConsentOptionsLawfulBasisEnum",
+    "HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum",
+    "HubSpotFormDefinitionPatchRequestLegalConsentOptionsLawfulBasisEnum",
     "LegalConsentOptionsExplicitConsentToProcessTypeEnum",
     "LegalConsentOptionsImplicitConsentToProcessTypeEnum",
     "LegalConsentOptionsLegitimateInterestLawfulBasisEnum",
@@ -151,6 +155,7 @@ let typeMap: {[index: string]: any} = {
     "EnumeratedFieldOption": EnumeratedFieldOption,
     "ErrorDetail": ErrorDetail,
     "FieldGroup": FieldGroup,
+    "FieldGroupFieldsInner": FieldGroupFieldsInnerClass,
     "FileField": FileField,
     "FormDefinitionBase": FormDefinitionBaseClass,
     "FormDefinitionCreateRequestBase": FormDefinitionCreateRequestBaseClass,
@@ -160,10 +165,10 @@ let typeMap: {[index: string]: any} = {
     "ForwardPaging": ForwardPaging,
     "HubSpotFormConfiguration": HubSpotFormConfiguration,
     "HubSpotFormDefinition": HubSpotFormDefinition,
-    "HubSpotFormDefinitionAllOfLegalConsentOptions": HubSpotFormDefinitionAllOfLegalConsentOptionsClass,
     "HubSpotFormDefinitionCreateRequest": HubSpotFormDefinitionCreateRequest,
-    "HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions": HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsClass,
+    "HubSpotFormDefinitionLegalConsentOptions": HubSpotFormDefinitionLegalConsentOptionsClass,
     "HubSpotFormDefinitionPatchRequest": HubSpotFormDefinitionPatchRequest,
+    "HubSpotFormDefinitionPatchRequestLegalConsentOptions": HubSpotFormDefinitionPatchRequestLegalConsentOptionsClass,
     "LegalConsentCheckbox": LegalConsentCheckbox,
     "LegalConsentOptionsExplicitConsentToProcess": LegalConsentOptionsExplicitConsentToProcess,
     "LegalConsentOptionsImplicitConsentToProcess": LegalConsentOptionsImplicitConsentToProcess,

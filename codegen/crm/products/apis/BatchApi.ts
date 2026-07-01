@@ -24,6 +24,7 @@ import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/Batch
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive multiple products at once by providing their IDs. This operation moves the specified products to the recycling bin, effectively removing them from active use without permanently deleting them.
      * Archive a batch of products by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -71,6 +72,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Create multiple products in a single request by specifying their properties, and receive a response containing the details of the created products.
      * Create a batch of products
      * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
@@ -173,6 +175,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Update multiple products in a single request using their internal IDs or unique property values. This batch operation allows for efficient modifications of product records by specifying the properties to be updated. Ensure that the provided property values are correct, as read-only and non-existent properties will result in an error.
      * Update a batch of products by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */

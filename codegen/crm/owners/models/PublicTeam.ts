@@ -12,8 +12,8 @@
 
 
 export class PublicTeam {
-    'name': string;
     'id': string;
+    'name': string;
     'primary': boolean;
 
     static readonly discriminator: string | undefined = undefined;
@@ -22,14 +22,14 @@ export class PublicTeam {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },

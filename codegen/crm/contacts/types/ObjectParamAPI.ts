@@ -11,7 +11,7 @@ import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchRespon
 import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
 import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObject } from '../models/CollectionResponseWithTotalSimplePublicObject';
 import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
@@ -20,12 +20,78 @@ import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
 import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 
+import { ObservableAdvancedApi } from "./ObservableAPI";
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
+
+export interface AdvancedApiMergeRequest {
+    /**
+     * 
+     * @type PublicMergeInput
+     * @memberof AdvancedApimerge
+     */
+    publicMergeInput: PublicMergeInput
+}
+
+export interface AdvancedApiPurgeRequest {
+    /**
+     * 
+     * @type PublicGdprDeleteInput
+     * @memberof AdvancedApipurge
+     */
+    publicGdprDeleteInput: PublicGdprDeleteInput
+}
+
+export class ObjectAdvancedApi {
+    private api: ObservableAdvancedApi
+
+    public constructor(configuration: Configuration, requestFactory?: AdvancedApiRequestFactory, responseProcessor?: AdvancedApiResponseProcessor) {
+        this.api = new ObservableAdvancedApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Merge two contact records. Learn more about [merging records](https://knowledge.hubspot.com/records/merge-records). 
+     * Merge two contacts
+     * @param param the request object
+     */
+    public mergeWithHttpInfo(param: AdvancedApiMergeRequest, options?: ConfigurationOptions): Promise<HttpInfo<SimplePublicObject>> {
+        return this.api.mergeWithHttpInfo(param.publicMergeInput,  options).toPromise();
+    }
+
+    /**
+     * Merge two contact records. Learn more about [merging records](https://knowledge.hubspot.com/records/merge-records). 
+     * Merge two contacts
+     * @param param the request object
+     */
+    public merge(param: AdvancedApiMergeRequest, options?: ConfigurationOptions): Promise<SimplePublicObject> {
+        return this.api.merge(param.publicMergeInput,  options).toPromise();
+    }
+
+    /**
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property `idProperty` set to `email` to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future. Learn more about [permanently deleting contacts](https://knowledge.hubspot.com/privacy-and-consent/how-do-i-perform-a-gdpr-delete-in-hubspot).
+     * Permanently delete a contact (GDPR-compliant)
+     * @param param the request object
+     */
+    public purgeWithHttpInfo(param: AdvancedApiPurgeRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.purgeWithHttpInfo(param.publicGdprDeleteInput,  options).toPromise();
+    }
+
+    /**
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property `idProperty` set to `email` to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future. Learn more about [permanently deleting contacts](https://knowledge.hubspot.com/privacy-and-consent/how-do-i-perform-a-gdpr-delete-in-hubspot).
+     * Permanently delete a contact (GDPR-compliant)
+     * @param param the request object
+     */
+    public purge(param: AdvancedApiPurgeRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.purge(param.publicGdprDeleteInput,  options).toPromise();
+    }
+
+}
+
 import { ObservableBasicApi } from "./ObservableAPI";
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
 export interface BasicApiArchiveRequest {
     /**
-     * The ID of the contact to delete.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof BasicApiarchive
@@ -44,12 +110,33 @@ export interface BasicApiCreateRequest {
 
 export interface BasicApiGetByIdRequest {
     /**
-     * The ID of the contact to retrieve.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof BasicApigetById
      */
     contactId: string
+    /**
+     * Whether to return only results that have been archived.
+     * Defaults to: false
+     * @type boolean
+     * @memberof BasicApigetById
+     */
+    archived?: boolean
+    /**
+     * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetById
+     */
+    associations?: Array<string>
+    /**
+     * The name of a property whose values are unique for this object type
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApigetById
+     */
+    idProperty?: string
     /**
      * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * Defaults to: undefined
@@ -64,37 +151,9 @@ export interface BasicApiGetByIdRequest {
      * @memberof BasicApigetById
      */
     propertiesWithHistory?: Array<string>
-    /**
-     * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetById
-     */
-    associations?: Array<string>
-    /**
-     * Whether to return only results that have been archived.
-     * Defaults to: false
-     * @type boolean
-     * @memberof BasicApigetById
-     */
-    archived?: boolean
-    /**
-     * The name of a property whose values are unique for this object type
-     * Defaults to: undefined
-     * @type string
-     * @memberof BasicApigetById
-     */
-    idProperty?: string
 }
 
 export interface BasicApiGetPageRequest {
-    /**
-     * The maximum number of results to display per page.
-     * Defaults to: 10
-     * @type number
-     * @memberof BasicApigetPage
-     */
-    limit?: number
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * Defaults to: undefined
@@ -103,19 +162,12 @@ export interface BasicApiGetPageRequest {
      */
     after?: string
     /**
-     * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
+     * Whether to return only results that have been archived.
+     * Defaults to: false
+     * @type boolean
      * @memberof BasicApigetPage
      */
-    properties?: Array<string>
-    /**
-     * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetPage
-     */
-    propertiesWithHistory?: Array<string>
+    archived?: boolean
     /**
      * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * Defaults to: undefined
@@ -124,35 +176,31 @@ export interface BasicApiGetPageRequest {
      */
     associations?: Array<string>
     /**
-     * Whether to return only results that have been archived.
-     * Defaults to: false
-     * @type boolean
+     * The maximum number of results to display per page.
+     * Defaults to: 10
+     * @type number
      * @memberof BasicApigetPage
      */
-    archived?: boolean
-}
-
-export interface BasicApiMergeRequest {
+    limit?: number
     /**
-     * 
-     * @type PublicMergeInput
-     * @memberof BasicApimerge
+     * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetPage
      */
-    publicMergeInput: PublicMergeInput
-}
-
-export interface BasicApiPurgeRequest {
+    properties?: Array<string>
     /**
-     * 
-     * @type PublicGdprDeleteInput
-     * @memberof BasicApipurge
+     * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of contacts that can be read by a single request.
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetPage
      */
-    publicGdprDeleteInput: PublicGdprDeleteInput
+    propertiesWithHistory?: Array<string>
 }
 
 export interface BasicApiUpdateRequest {
     /**
-     * The ID of the contact to update.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof BasicApiupdate
@@ -222,7 +270,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
-        return this.api.getByIdWithHttpInfo(param.contactId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
+        return this.api.getByIdWithHttpInfo(param.contactId, param.archived, param.associations, param.idProperty, param.properties, param.propertiesWithHistory,  options).toPromise();
     }
 
     /**
@@ -231,7 +279,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<SimplePublicObjectWithAssociations> {
-        return this.api.getById(param.contactId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
+        return this.api.getById(param.contactId, param.archived, param.associations, param.idProperty, param.properties, param.propertiesWithHistory,  options).toPromise();
     }
 
     /**
@@ -240,7 +288,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getPageWithHttpInfo(param: BasicApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>> {
-        return this.api.getPageWithHttpInfo(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+        return this.api.getPageWithHttpInfo(param.after, param.archived, param.associations, param.limit, param.properties, param.propertiesWithHistory,  options).toPromise();
     }
 
     /**
@@ -249,47 +297,11 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getPage(param: BasicApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
-        return this.api.getPage(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+        return this.api.getPage(param.after, param.archived, param.associations, param.limit, param.properties, param.propertiesWithHistory,  options).toPromise();
     }
 
     /**
-     * Merge two contact records. Learn more about [merging records](https://knowledge.hubspot.com/records/merge-records). 
-     * Merge two contacts
-     * @param param the request object
-     */
-    public mergeWithHttpInfo(param: BasicApiMergeRequest, options?: ConfigurationOptions): Promise<HttpInfo<SimplePublicObject>> {
-        return this.api.mergeWithHttpInfo(param.publicMergeInput,  options).toPromise();
-    }
-
-    /**
-     * Merge two contact records. Learn more about [merging records](https://knowledge.hubspot.com/records/merge-records). 
-     * Merge two contacts
-     * @param param the request object
-     */
-    public merge(param: BasicApiMergeRequest, options?: ConfigurationOptions): Promise<SimplePublicObject> {
-        return this.api.merge(param.publicMergeInput,  options).toPromise();
-    }
-
-    /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property `idProperty` set to `email` to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future. Learn more about [permanently deleting contacts](https://knowledge.hubspot.com/privacy-and-consent/how-do-i-perform-a-gdpr-delete-in-hubspot).
-     * Permanently delete a contact (GDPR-compliant)
-     * @param param the request object
-     */
-    public purgeWithHttpInfo(param: BasicApiPurgeRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.purgeWithHttpInfo(param.publicGdprDeleteInput,  options).toPromise();
-    }
-
-    /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property `idProperty` set to `email` to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future. Learn more about [permanently deleting contacts](https://knowledge.hubspot.com/privacy-and-consent/how-do-i-perform-a-gdpr-delete-in-hubspot).
-     * Permanently delete a contact (GDPR-compliant)
-     * @param param the request object
-     */
-    public purge(param: BasicApiPurgeRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.purge(param.publicGdprDeleteInput,  options).toPromise();
-    }
-
-    /**
-     * Update a contact by ID (`contactId`) or unique property value (`idProperty`). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
+     * Update an existing contact, identified by ID or email/unique property value. To identify a contact by ID, include the ID in the request URL path. To identify a contact by their email or other unique property, include the email/property value in the request URL path, and add the `idProperty` query parameter (`/crm/v3/objects/contacts/jon@website.com?idProperty=email`). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
      * Update a contact
      * @param param the request object
      */
@@ -298,7 +310,7 @@ export class ObjectBasicApi {
     }
 
     /**
-     * Update a contact by ID (`contactId`) or unique property value (`idProperty`). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
+     * Update an existing contact, identified by ID or email/unique property value. To identify a contact by ID, include the ID in the request URL path. To identify a contact by their email or other unique property, include the email/property value in the request URL path, and add the `idProperty` query parameter (`/crm/v3/objects/contacts/jon@website.com?idProperty=email`). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
      * Update a contact
      * @param param the request object
      */
@@ -486,7 +498,7 @@ export class ObjectSearchApi {
      * Search for contacts
      * @param param the request object
      */
-    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>> {
+    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObject>> {
         return this.api.doSearchWithHttpInfo(param.publicObjectSearchRequest,  options).toPromise();
     }
 
@@ -495,7 +507,7 @@ export class ObjectSearchApi {
      * Search for contacts
      * @param param the request object
      */
-    public doSearch(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
+    public doSearch(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObject> {
         return this.api.doSearch(param.publicObjectSearchRequest,  options).toPromise();
     }
 

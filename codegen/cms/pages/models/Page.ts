@@ -18,212 +18,233 @@ import { LayoutSection } from '../models/LayoutSection';
 */
 export class Page {
     /**
-    * The date (ISO8601 format) the page is to be published at.
-    */
-    'publishDate': Date;
-    /**
-    * The explicitly defined ISO 639 language code of the page. If null, the page will default to the language of the Domain.
-    */
-    'language': PageLanguageEnum;
-    /**
-    * Boolean to determine whether or not the styles from the template should be applied.
-    */
-    'enableLayoutStylesheets': boolean;
-    /**
-    * A description that goes in <meta> tag on the page.
-    */
-    'metaDescription': string;
-    /**
-    * List of stylesheets to attach to this page. These stylesheets are attached to just this page. Order of precedence is bottom to top, just like in the HTML.
-    */
-    'attachedStylesheets': Array<{ [key: string]: any; }>;
-    /**
-    * Set this to create a password protected page. Entering the password will be required to view the page.
-    */
-    'password': string;
-    /**
-    * Set this to true if you want to be published immediately when the schedule publish endpoint is called, and to ignore the publish_date setting.
-    */
-    'publishImmediately': boolean;
-    /**
-    * The html title of this page.
-    */
-    'htmlTitle': string;
-    'translations': { [key: string]: ContentLanguageVariation; };
-    /**
-    * The unique ID of the page.
-    */
-    'id': string;
-    /**
-    * An ENUM descibing the current state of this page.
-    */
-    'state': string;
-    /**
-    * The path of the this page. This field is appended to the domain to construct the url of this page.
-    */
-    'slug': string;
-    /**
-    * The ID of the user that created this page.
-    */
-    'createdById': string;
-    'currentlyPublished': boolean;
-    /**
-    * If True, the page will not show up in your dashboard, although the page could still be live.
-    */
-    'archivedInDashboard': boolean;
-    'created': Date;
-    /**
-    * An ENUM descibing the type of this object. Should be either LANDING_PAGE or SITE_PAGE.
-    */
-    'contentTypeCategory': PageContentTypeCategoryEnum;
-    /**
-    * The ID of the MAB test (or dynamic test) associated with this page, if applicable
-    */
-    'mabExperimentId': string;
-    /**
-    * The ID of the user that updated this page.
-    */
-    'updatedById': string;
-    /**
-    * ID of the primary page this object was translated from.
-    */
-    'translatedFromId': string;
-    /**
-    * The ID of the associated folder this landing page is organized under in the app dashboard.
-    */
-    'folderId': string;
-    /**
-    * A data structure containing the data for all the modules inside the containers for this page. This will only be populated if the page has widget containers.
-    */
-    'widgetContainers': { [key: string]: any; };
-    /**
-    * The ID of another page this page\'s url should redirect to once this page expires. Should only set this or pageExpiryRedirectUrl.
-    */
-    'pageExpiryRedirectId': number;
-    'dynamicPageDataSourceType': number;
-    /**
-    * The featuredImage of this page.
-    */
-    'featuredImage': string;
-    /**
-    * The name of the user that updated this page.
-    */
-    'authorName': string;
-    /**
-    * The domain this page will resolve to. If null, the page will default to the primary domain for this content type.
-    */
-    'domain': string;
-    /**
-    * The internal name of the page.
-    */
-    'name': string;
-    /**
-    * The ID of the HubDB table this page references, if applicable
-    */
-    'dynamicPageHubDbTableId': string;
-    /**
-    * The GUID of the marketing campaign this page is a part of.
-    */
-    'campaign': string;
-    'dynamicPageDataSourceId': string;
-    /**
-    * Boolean to determine whether or not the styles from the template should be applied.
-    */
-    'enableDomainStylesheets': boolean;
-    /**
-    * Boolean to determine whether or not the Primary CSS Files should be applied.
-    */
-    'includeDefaultCustomCss': boolean;
-    /**
-    * Details the type of page this is. Should always be landing_page or site_page
-    */
-    'subcategory': string;
-    /**
-    * 
-    */
-    'layoutSections': { [key: string]: LayoutSection; };
-    'updated': Date;
-    /**
-    * Custom HTML for embed codes, javascript that should be placed before the </body> tag of the page.
-    */
-    'footerHtml': string;
-    /**
-    * A data structure containing the data for all the modules for this page.
-    */
-    'widgets': { [key: string]: any; };
-    /**
-    * Custom HTML for embed codes, javascript, etc. that goes in the <head> tag of the page.
-    */
-    'headHtml': string;
-    /**
-    * The URL this page\'s url should redirect to once this page expires. Should only set this or pageExpiryRedirectId.
-    */
-    'pageExpiryRedirectUrl': string;
-    /**
     * The status of the AB test associated with this page, if applicable
     */
     'abStatus': PageAbStatusEnum;
-    /**
-    * Boolean to determine if this page should use a featuredImage.
-    */
-    'useFeaturedImage': boolean;
     /**
     * The ID of the AB test associated with this page, if applicable
     */
     'abTestId': string;
     /**
-    * Alt Text of the featuredImage.
-    */
-    'featuredImageAltText': string;
-    'contentGroupId': string;
-    /**
-    * Boolean describing if the page expiration feature is enabled for this page
-    */
-    'pageExpiryEnabled': boolean;
-    /**
-    * String detailing the path of the template used for this page.
-    */
-    'templatePath': string;
-    /**
-    * A generated field representing the URL of this page.
-    */
-    'url': string;
-    /**
-    * Rules for require member registration to access private content.
-    */
-    'publicAccessRules': Array<any>;
-    /**
     * The timestamp (ISO8601 format) when this page was deleted.
     */
     'archivedAt': Date;
     /**
-    * 
+    * If True, the page will not show up in your dashboard, although the page could still be live.
     */
-    'themeSettingsValues': { [key: string]: any; };
+    'archivedInDashboard': boolean;
     /**
-    * The date at which this page should expire and begin redirecting to another url or page.
+    * List of stylesheets to attach to this page. These stylesheets are attached to just this page. Order of precedence is bottom to top, just like in the HTML.
     */
-    'pageExpiryDate': number;
+    'attachedStylesheets': Array<{ [key: string]: any; }>;
     /**
-    * Boolean to determine whether or not to respect publicAccessRules.
+    * The name of the user that updated this page.
     */
-    'publicAccessRulesEnabled': boolean;
+    'authorName': string;
     /**
-    * A generated Boolean describing whether or not this page is currently expired and being redirected.
+    * The GUID of the marketing campaign this page is a part of.
     */
-    'pageRedirected': boolean;
-    /**
-    * A generated ENUM descibing the current state of this page.
-    */
-    'currentState': PageCurrentStateEnum;
+    'campaign': string;
     /**
     * ID of the type of object this is. Should always .
     */
     'categoryId': number;
     /**
+    * The unique identifier for the content group associated with the page.
+    */
+    'contentGroupId': string;
+    /**
+    * An ENUM descibing the type of this object. Should be either LANDING_PAGE or SITE_PAGE.
+    */
+    'contentTypeCategory': PageContentTypeCategoryEnum;
+    /**
+    * The timestamp indicating when the page was created.
+    */
+    'created': Date;
+    /**
+    * The ID of the user that created this page.
+    */
+    'createdById': string;
+    /**
+    * A generated ENUM descibing the current state of this page.
+    */
+    'currentState': PageCurrentStateEnum;
+    /**
+    * Indicates whether the page is currently published.
+    */
+    'currentlyPublished': boolean;
+    /**
+    * The domain this page will resolve to. If null, the page will default to the primary domain for this content type.
+    */
+    'domain': string;
+    /**
+    * The identifier for the data source used by the dynamic page.
+    */
+    'dynamicPageDataSourceId': string;
+    /**
+    * The type of data source used by the dynamic page.
+    */
+    'dynamicPageDataSourceType': number;
+    /**
+    * The ID of the HubDB table this page references, if applicable
+    */
+    'dynamicPageHubDbTableId': string;
+    /**
+    * Boolean to determine whether or not the styles from the template should be applied.
+    */
+    'enableDomainStylesheets': boolean;
+    /**
+    * Boolean to determine whether or not the styles from the template should be applied.
+    */
+    'enableLayoutStylesheets': boolean;
+    /**
+    * The featuredImage of this page.
+    */
+    'featuredImage': string;
+    /**
+    * Alt Text of the featuredImage.
+    */
+    'featuredImageAltText': string;
+    /**
+    * The ID of the associated folder this landing page is organized under in the app dashboard.
+    */
+    'folderId': string;
+    /**
+    * Custom HTML for embed codes, javascript that should be placed before the </body> tag of the page.
+    */
+    'footerHtml': string;
+    /**
+    * Custom HTML for embed codes, javascript, etc. that goes in the <head> tag of the page.
+    */
+    'headHtml': string;
+    /**
+    * The html title of this page.
+    */
+    'htmlTitle': string;
+    /**
+    * The unique ID of the page.
+    */
+    'id': string;
+    /**
+    * Boolean to determine whether or not the Primary CSS Files should be applied.
+    */
+    'includeDefaultCustomCss': boolean;
+    /**
+    * The explicitly defined ISO 639 language code of the page. If null, the page will default to the language of the Domain.
+    */
+    'language': PageLanguageEnum;
+    /**
+    * A structure detailing the layout sections of the page.
+    */
+    'layoutSections': { [key: string]: LayoutSection; };
+    /**
     * Optional override to set the URL to be used in the rel=canonical link tag on the page.
     */
     'linkRelCanonicalUrl': string;
+    /**
+    * The ID of the MAB test (or dynamic test) associated with this page, if applicable
+    */
+    'mabExperimentId': string;
+    /**
+    * A description that goes in <meta> tag on the page.
+    */
+    'metaDescription': string;
+    /**
+    * The internal name of the page.
+    */
+    'name': string;
+    /**
+    * The date at which this page should expire and begin redirecting to another url or page.
+    */
+    'pageExpiryDate': number;
+    /**
+    * Boolean describing if the page expiration feature is enabled for this page
+    */
+    'pageExpiryEnabled': boolean;
+    /**
+    * The ID of another page this page\'s url should redirect to once this page expires. Should only set this or pageExpiryRedirectUrl.
+    */
+    'pageExpiryRedirectId': number;
+    /**
+    * The URL this page\'s url should redirect to once this page expires. Should only set this or pageExpiryRedirectId.
+    */
+    'pageExpiryRedirectUrl': string;
+    /**
+    * A generated Boolean describing whether or not this page is currently expired and being redirected.
+    */
+    'pageRedirected': boolean;
+    /**
+    * Set this to create a password protected page. Entering the password will be required to view the page.
+    */
+    'password': string;
+    /**
+    * Rules for require member registration to access private content.
+    */
+    'publicAccessRules': Array<any>;
+    /**
+    * Boolean to determine whether or not to respect publicAccessRules.
+    */
+    'publicAccessRulesEnabled': boolean;
+    /**
+    * The date (ISO8601 format) the page is to be published at.
+    */
+    'publishDate': Date;
+    /**
+    * Set this to true if you want to be published immediately when the schedule publish endpoint is called, and to ignore the publish_date setting.
+    */
+    'publishImmediately': boolean;
+    /**
+    * The path of the this page. This field is appended to the domain to construct the url of this page.
+    */
+    'slug': string;
+    /**
+    * An ENUM descibing the current state of this page.
+    */
+    'state': string;
+    /**
+    * Details the type of page this is. Should always be landing_page or site_page
+    */
+    'subcategory': string;
+    /**
+    * String detailing the path of the template used for this page.
+    */
+    'templatePath': string;
+    /**
+    * A collection of settings specific to the theme applied to the page.
+    */
+    'themeSettingsValues': { [key: string]: any; };
+    /**
+    * ID of the primary page this object was translated from.
+    */
+    'translatedFromId': string;
+    /**
+    * A map of translations for the page, each associated with a specific language variation.
+    */
+    'translations': { [key: string]: ContentLanguageVariation; };
+    /**
+    * The timestamp indicating when the page was last updated.
+    */
+    'updated': Date;
+    /**
+    * The ID of the user that updated this page.
+    */
+    'updatedById': string;
+    /**
+    * A generated field representing the URL of this page.
+    */
+    'url': string;
+    /**
+    * Boolean to determine if this page should use a featuredImage.
+    */
+    'useFeaturedImage': boolean;
+    /**
+    * A data structure containing the data for all the modules inside the containers for this page. This will only be populated if the page has widget containers.
+    */
+    'widgetContainers': { [key: string]: any; };
+    /**
+    * A data structure containing the data for all the modules for this page.
+    */
+    'widgets': { [key: string]: any; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -231,27 +252,27 @@ export class Page {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "publishDate",
-            "baseName": "publishDate",
+            "name": "abStatus",
+            "baseName": "abStatus",
+            "type": "PageAbStatusEnum",
+            "format": ""
+        },
+        {
+            "name": "abTestId",
+            "baseName": "abTestId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "archivedAt",
+            "baseName": "archivedAt",
             "type": "Date",
             "format": "date-time"
         },
         {
-            "name": "language",
-            "baseName": "language",
-            "type": "PageLanguageEnum",
-            "format": ""
-        },
-        {
-            "name": "enableLayoutStylesheets",
-            "baseName": "enableLayoutStylesheets",
+            "name": "archivedInDashboard",
+            "baseName": "archivedInDashboard",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "metaDescription",
-            "baseName": "metaDescription",
-            "type": "string",
             "format": ""
         },
         {
@@ -261,146 +282,8 @@ export class Page {
             "format": ""
         },
         {
-            "name": "password",
-            "baseName": "password",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "publishImmediately",
-            "baseName": "publishImmediately",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "htmlTitle",
-            "baseName": "htmlTitle",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "translations",
-            "baseName": "translations",
-            "type": "{ [key: string]: ContentLanguageVariation; }",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "state",
-            "baseName": "state",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "slug",
-            "baseName": "slug",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "createdById",
-            "baseName": "createdById",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "currentlyPublished",
-            "baseName": "currentlyPublished",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "archivedInDashboard",
-            "baseName": "archivedInDashboard",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "created",
-            "baseName": "created",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "contentTypeCategory",
-            "baseName": "contentTypeCategory",
-            "type": "PageContentTypeCategoryEnum",
-            "format": ""
-        },
-        {
-            "name": "mabExperimentId",
-            "baseName": "mabExperimentId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "updatedById",
-            "baseName": "updatedById",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "translatedFromId",
-            "baseName": "translatedFromId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "folderId",
-            "baseName": "folderId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "widgetContainers",
-            "baseName": "widgetContainers",
-            "type": "{ [key: string]: any; }",
-            "format": ""
-        },
-        {
-            "name": "pageExpiryRedirectId",
-            "baseName": "pageExpiryRedirectId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "dynamicPageDataSourceType",
-            "baseName": "dynamicPageDataSourceType",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "featuredImage",
-            "baseName": "featuredImage",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "authorName",
             "baseName": "authorName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "domain",
-            "baseName": "domain",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "dynamicPageHubDbTableId",
-            "baseName": "dynamicPageHubDbTableId",
             "type": "string",
             "format": ""
         },
@@ -411,8 +294,68 @@ export class Page {
             "format": ""
         },
         {
+            "name": "categoryId",
+            "baseName": "categoryId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "contentGroupId",
+            "baseName": "contentGroupId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "contentTypeCategory",
+            "baseName": "contentTypeCategory",
+            "type": "PageContentTypeCategoryEnum",
+            "format": ""
+        },
+        {
+            "name": "created",
+            "baseName": "created",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "createdById",
+            "baseName": "createdById",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "currentState",
+            "baseName": "currentState",
+            "type": "PageCurrentStateEnum",
+            "format": ""
+        },
+        {
+            "name": "currentlyPublished",
+            "baseName": "currentlyPublished",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "domain",
+            "baseName": "domain",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "dynamicPageDataSourceId",
             "baseName": "dynamicPageDataSourceId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "dynamicPageDataSourceType",
+            "baseName": "dynamicPageDataSourceType",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "dynamicPageHubDbTableId",
+            "baseName": "dynamicPageHubDbTableId",
             "type": "string",
             "format": ""
         },
@@ -423,68 +366,14 @@ export class Page {
             "format": ""
         },
         {
-            "name": "includeDefaultCustomCss",
-            "baseName": "includeDefaultCustomCss",
+            "name": "enableLayoutStylesheets",
+            "baseName": "enableLayoutStylesheets",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "subcategory",
-            "baseName": "subcategory",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "layoutSections",
-            "baseName": "layoutSections",
-            "type": "{ [key: string]: LayoutSection; }",
-            "format": ""
-        },
-        {
-            "name": "updated",
-            "baseName": "updated",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "footerHtml",
-            "baseName": "footerHtml",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "widgets",
-            "baseName": "widgets",
-            "type": "{ [key: string]: any; }",
-            "format": ""
-        },
-        {
-            "name": "headHtml",
-            "baseName": "headHtml",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "pageExpiryRedirectUrl",
-            "baseName": "pageExpiryRedirectUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "abStatus",
-            "baseName": "abStatus",
-            "type": "PageAbStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "useFeaturedImage",
-            "baseName": "useFeaturedImage",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "abTestId",
-            "baseName": "abTestId",
+            "name": "featuredImage",
+            "baseName": "featuredImage",
             "type": "string",
             "format": ""
         },
@@ -495,10 +384,82 @@ export class Page {
             "format": ""
         },
         {
-            "name": "contentGroupId",
-            "baseName": "contentGroupId",
+            "name": "folderId",
+            "baseName": "folderId",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "footerHtml",
+            "baseName": "footerHtml",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "headHtml",
+            "baseName": "headHtml",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "htmlTitle",
+            "baseName": "htmlTitle",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "includeDefaultCustomCss",
+            "baseName": "includeDefaultCustomCss",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "language",
+            "baseName": "language",
+            "type": "PageLanguageEnum",
+            "format": ""
+        },
+        {
+            "name": "layoutSections",
+            "baseName": "layoutSections",
+            "type": "{ [key: string]: LayoutSection; }",
+            "format": ""
+        },
+        {
+            "name": "linkRelCanonicalUrl",
+            "baseName": "linkRelCanonicalUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "mabExperimentId",
+            "baseName": "mabExperimentId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "metaDescription",
+            "baseName": "metaDescription",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pageExpiryDate",
+            "baseName": "pageExpiryDate",
+            "type": "number",
+            "format": "int64"
         },
         {
             "name": "pageExpiryEnabled",
@@ -507,14 +468,26 @@ export class Page {
             "format": ""
         },
         {
-            "name": "templatePath",
-            "baseName": "templatePath",
+            "name": "pageExpiryRedirectId",
+            "baseName": "pageExpiryRedirectId",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "pageExpiryRedirectUrl",
+            "baseName": "pageExpiryRedirectUrl",
             "type": "string",
             "format": ""
         },
         {
-            "name": "url",
-            "baseName": "url",
+            "name": "pageRedirected",
+            "baseName": "pageRedirected",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "password",
+            "baseName": "password",
             "type": "string",
             "format": ""
         },
@@ -525,10 +498,46 @@ export class Page {
             "format": ""
         },
         {
-            "name": "archivedAt",
-            "baseName": "archivedAt",
+            "name": "publicAccessRulesEnabled",
+            "baseName": "publicAccessRulesEnabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "publishDate",
+            "baseName": "publishDate",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "publishImmediately",
+            "baseName": "publishImmediately",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "slug",
+            "baseName": "slug",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "state",
+            "baseName": "state",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "subcategory",
+            "baseName": "subcategory",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "templatePath",
+            "baseName": "templatePath",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "themeSettingsValues",
@@ -537,39 +546,51 @@ export class Page {
             "format": ""
         },
         {
-            "name": "pageExpiryDate",
-            "baseName": "pageExpiryDate",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "publicAccessRulesEnabled",
-            "baseName": "publicAccessRulesEnabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "pageRedirected",
-            "baseName": "pageRedirected",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "currentState",
-            "baseName": "currentState",
-            "type": "PageCurrentStateEnum",
-            "format": ""
-        },
-        {
-            "name": "categoryId",
-            "baseName": "categoryId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "linkRelCanonicalUrl",
-            "baseName": "linkRelCanonicalUrl",
+            "name": "translatedFromId",
+            "baseName": "translatedFromId",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "translations",
+            "baseName": "translations",
+            "type": "{ [key: string]: ContentLanguageVariation; }",
+            "format": ""
+        },
+        {
+            "name": "updated",
+            "baseName": "updated",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "updatedById",
+            "baseName": "updatedById",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "useFeaturedImage",
+            "baseName": "useFeaturedImage",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "widgetContainers",
+            "baseName": "widgetContainers",
+            "type": "{ [key: string]: any; }",
+            "format": ""
+        },
+        {
+            "name": "widgets",
+            "baseName": "widgets",
+            "type": "{ [key: string]: any; }",
             "format": ""
         }    ];
 
@@ -581,7 +602,79 @@ export class Page {
     }
 }
 
+export enum PageAbStatusEnum {
+    AutomatedLoserVariant = 'automated_loser_variant',
+    AutomatedMaster = 'automated_master',
+    AutomatedVariant = 'automated_variant',
+    LoserVariant = 'loser_variant',
+    MabMaster = 'mab_master',
+    MabVariant = 'mab_variant',
+    Master = 'master',
+    Variant = 'variant'
+}
+export enum PageContentTypeCategoryEnum {
+    _0 = '0',
+    _1 = '1',
+    _10 = '10',
+    _11 = '11',
+    _12 = '12',
+    _13 = '13',
+    _14 = '14',
+    _15 = '15',
+    _16 = '16',
+    _17 = '17',
+    _18 = '18',
+    _19 = '19',
+    _2 = '2',
+    _20 = '20',
+    _21 = '21',
+    _22 = '22',
+    _3 = '3',
+    _4 = '4',
+    _5 = '5',
+    _6 = '6',
+    _7 = '7',
+    _8 = '8',
+    _9 = '9'
+}
+export enum PageCurrentStateEnum {
+    AgentGenerated = 'AGENT_GENERATED',
+    Automated = 'AUTOMATED',
+    AutomatedAb = 'AUTOMATED_AB',
+    AutomatedAbVariant = 'AUTOMATED_AB_VARIANT',
+    AutomatedDraft = 'AUTOMATED_DRAFT',
+    AutomatedDraftAb = 'AUTOMATED_DRAFT_AB',
+    AutomatedDraftAbvariant = 'AUTOMATED_DRAFT_ABVARIANT',
+    AutomatedForForm = 'AUTOMATED_FOR_FORM',
+    AutomatedForFormBuffer = 'AUTOMATED_FOR_FORM_BUFFER',
+    AutomatedForFormDraft = 'AUTOMATED_FOR_FORM_DRAFT',
+    AutomatedForFormLegacy = 'AUTOMATED_FOR_FORM_LEGACY',
+    AutomatedLoserAbvariant = 'AUTOMATED_LOSER_ABVARIANT',
+    AutomatedSending = 'AUTOMATED_SENDING',
+    BlogEmailDraft = 'BLOG_EMAIL_DRAFT',
+    BlogEmailPublished = 'BLOG_EMAIL_PUBLISHED',
+    Draft = 'DRAFT',
+    DraftAb = 'DRAFT_AB',
+    DraftAbVariant = 'DRAFT_AB_VARIANT',
+    Error = 'ERROR',
+    LoserAbVariant = 'LOSER_AB_VARIANT',
+    PageStub = 'PAGE_STUB',
+    PreProcessing = 'PRE_PROCESSING',
+    Processing = 'PROCESSING',
+    Published = 'PUBLISHED',
+    PublishedAb = 'PUBLISHED_AB',
+    PublishedAbVariant = 'PUBLISHED_AB_VARIANT',
+    PublishedOrScheduled = 'PUBLISHED_OR_SCHEDULED',
+    RssToEmailDraft = 'RSS_TO_EMAIL_DRAFT',
+    RssToEmailPublished = 'RSS_TO_EMAIL_PUBLISHED',
+    Scheduled = 'SCHEDULED',
+    ScheduledAb = 'SCHEDULED_AB',
+    ScheduledOrPublished = 'SCHEDULED_OR_PUBLISHED'
+}
 export enum PageLanguageEnum {
+    Aa = 'aa',
+    Ab = 'ab',
+    Ae = 'ae',
     Af = 'af',
     AfNa = 'af-na',
     AfZa = 'af-za',
@@ -591,6 +684,9 @@ export enum PageLanguageEnum {
     AkGh = 'ak-gh',
     Am = 'am',
     AmEt = 'am-et',
+    An = 'an',
+    Ann = 'ann',
+    AnnNg = 'ann-ng',
     Ar = 'ar',
     Ar001 = 'ar-001',
     ArAe = 'ar-ae',
@@ -626,8 +722,13 @@ export enum PageLanguageEnum {
     AsaTz = 'asa-tz',
     Ast = 'ast',
     AstEs = 'ast-es',
+    Av = 'av',
+    Ay = 'ay',
     Az = 'az',
     AzAz = 'az-az',
+    Ba = 'ba',
+    Bal = 'bal',
+    BalPk = 'bal-pk',
     Bas = 'bas',
     BasCm = 'bas-cm',
     Be = 'be',
@@ -638,6 +739,13 @@ export enum PageLanguageEnum {
     BezTz = 'bez-tz',
     Bg = 'bg',
     BgBg = 'bg-bg',
+    Bgc = 'bgc',
+    BgcIn = 'bgc-in',
+    Bho = 'bho',
+    BhoIn = 'bho-in',
+    Bi = 'bi',
+    Blo = 'blo',
+    BloBj = 'blo-bj',
     Bm = 'bm',
     BmMl = 'bm-ml',
     Bn = 'bn',
@@ -666,15 +774,22 @@ export enum PageLanguageEnum {
     CebPh = 'ceb-ph',
     Cgg = 'cgg',
     CggUg = 'cgg-ug',
+    Ch = 'ch',
     Chr = 'chr',
     ChrUs = 'chr-us',
     Ckb = 'ckb',
     CkbIq = 'ckb-iq',
     CkbIr = 'ckb-ir',
+    Co = 'co',
+    Cr = 'cr',
     Cs = 'cs',
     CsCz = 'cs-cz',
+    Csw = 'csw',
+    CswCa = 'csw-ca',
     Cu = 'cu',
     CuRu = 'cu-ru',
+    Cv = 'cv',
+    CvRu = 'cv-ru',
     Cy = 'cy',
     CyGb = 'cy-gb',
     Da = 'da',
@@ -699,6 +814,7 @@ export enum PageLanguageEnum {
     DsbDe = 'dsb-de',
     Dua = 'dua',
     DuaCm = 'dua-cm',
+    Dv = 'dv',
     Dyo = 'dyo',
     DyoSn = 'dyo-sn',
     Dz = 'dz',
@@ -735,29 +851,38 @@ export enum PageLanguageEnum {
     EnCn = 'en-cn',
     EnCx = 'en-cx',
     EnCy = 'en-cy',
+    EnCz = 'en-cz',
     EnDe = 'en-de',
     EnDg = 'en-dg',
     EnDk = 'en-dk',
     EnDm = 'en-dm',
+    EnEe = 'en-ee',
+    EnEg = 'en-eg',
     EnEr = 'en-er',
+    EnEs = 'en-es',
     EnFi = 'en-fi',
     EnFj = 'en-fj',
     EnFk = 'en-fk',
     EnFm = 'en-fm',
+    EnFr = 'en-fr',
     EnGb = 'en-gb',
     EnGd = 'en-gd',
     EnGg = 'en-gg',
     EnGh = 'en-gh',
     EnGi = 'en-gi',
     EnGm = 'en-gm',
+    EnGs = 'en-gs',
     EnGu = 'en-gu',
     EnGy = 'en-gy',
     EnHk = 'en-hk',
+    EnHu = 'en-hu',
+    EnId = 'en-id',
     EnIe = 'en-ie',
     EnIl = 'en-il',
     EnIm = 'en-im',
     EnIn = 'en-in',
     EnIo = 'en-io',
+    EnIt = 'en-it',
     EnJe = 'en-je',
     EnJm = 'en-jm',
     EnKe = 'en-ke',
@@ -775,6 +900,7 @@ export enum PageLanguageEnum {
     EnMs = 'en-ms',
     EnMt = 'en-mt',
     EnMu = 'en-mu',
+    EnMv = 'en-mv',
     EnMw = 'en-mw',
     EnMx = 'en-mx',
     EnMy = 'en-my',
@@ -782,15 +908,19 @@ export enum PageLanguageEnum {
     EnNf = 'en-nf',
     EnNg = 'en-ng',
     EnNl = 'en-nl',
+    EnNo = 'en-no',
     EnNr = 'en-nr',
     EnNu = 'en-nu',
     EnNz = 'en-nz',
     EnPg = 'en-pg',
     EnPh = 'en-ph',
     EnPk = 'en-pk',
+    EnPl = 'en-pl',
     EnPn = 'en-pn',
     EnPr = 'en-pr',
+    EnPt = 'en-pt',
     EnPw = 'en-pw',
+    EnRo = 'en-ro',
     EnRw = 'en-rw',
     EnSb = 'en-sb',
     EnSc = 'en-sc',
@@ -799,12 +929,15 @@ export enum PageLanguageEnum {
     EnSg = 'en-sg',
     EnSh = 'en-sh',
     EnSi = 'en-si',
+    EnSk = 'en-sk',
     EnSl = 'en-sl',
     EnSs = 'en-ss',
     EnSx = 'en-sx',
     EnSz = 'en-sz',
     EnTc = 'en-tc',
+    EnTh = 'en-th',
     EnTk = 'en-tk',
+    EnTn = 'en-tn',
     EnTo = 'en-to',
     EnTt = 'en-tt',
     EnTv = 'en-tv',
@@ -815,6 +948,7 @@ export enum PageLanguageEnum {
     EnVc = 'en-vc',
     EnVg = 'en-vg',
     EnVi = 'en-vi',
+    EnVn = 'en-vn',
     EnVu = 'en-vu',
     EnWs = 'en-ws',
     EnZa = 'en-za',
@@ -877,6 +1011,7 @@ export enum PageLanguageEnum {
     FiFi = 'fi-fi',
     Fil = 'fil',
     FilPh = 'fil-ph',
+    Fj = 'fj',
     Fo = 'fo',
     FoDk = 'fo-dk',
     FoFo = 'fo-fo',
@@ -927,6 +1062,8 @@ export enum PageLanguageEnum {
     FrVu = 'fr-vu',
     FrWf = 'fr-wf',
     FrYt = 'fr-yt',
+    Frr = 'frr',
+    FrrDe = 'frr-de',
     Fur = 'fur',
     FurIt = 'fur-it',
     Fy = 'fy',
@@ -934,10 +1071,13 @@ export enum PageLanguageEnum {
     Ga = 'ga',
     GaGb = 'ga-gb',
     GaIe = 'ga-ie',
+    Gaa = 'gaa',
+    GaaGh = 'gaa-gh',
     Gd = 'gd',
     GdGb = 'gd-gb',
     Gl = 'gl',
     GlEs = 'gl-es',
+    Gn = 'gn',
     Gsw = 'gsw',
     GswCh = 'gsw-ch',
     GswFr = 'gsw-fr',
@@ -955,25 +1095,35 @@ export enum PageLanguageEnum {
     Haw = 'haw',
     HawUs = 'haw-us',
     He = 'he',
+    HeIl = 'he-il',
     Hi = 'hi',
     HiIn = 'hi-in',
+    Hmn = 'hmn',
+    Ho = 'ho',
     Hr = 'hr',
     HrBa = 'hr-ba',
     HrHr = 'hr-hr',
     Hsb = 'hsb',
     HsbDe = 'hsb-de',
+    Ht = 'ht',
+    HtHt = 'ht-ht',
     Hu = 'hu',
     HuHu = 'hu-hu',
     Hy = 'hy',
     HyAm = 'hy-am',
+    Hz = 'hz',
     Ia = 'ia',
     Ia001 = 'ia-001',
     Id = 'id',
+    IdId = 'id-id',
+    Ie = 'ie',
+    IeEe = 'ie-ee',
     Ig = 'ig',
     IgNg = 'ig-ng',
     Ii = 'ii',
     IiCn = 'ii-cn',
-    IdId = 'id-id',
+    Ik = 'ik',
+    Io = 'io',
     Is = 'is',
     IsIs = 'is-is',
     It = 'it',
@@ -981,13 +1131,11 @@ export enum PageLanguageEnum {
     ItIt = 'it-it',
     ItSm = 'it-sm',
     ItVa = 'it-va',
-    HeIl = 'he-il',
+    Iu = 'iu',
     Ja = 'ja',
     JaJp = 'ja-jp',
     Jgo = 'jgo',
     JgoCm = 'jgo-cm',
-    Yi = 'yi',
-    Yi001 = 'yi-001',
     Jmc = 'jmc',
     JmcTz = 'jmc-tz',
     Jv = 'jv',
@@ -998,14 +1146,20 @@ export enum PageLanguageEnum {
     KabDz = 'kab-dz',
     Kam = 'kam',
     KamKe = 'kam-ke',
+    Kar = 'kar',
     Kde = 'kde',
     KdeTz = 'kde-tz',
     Kea = 'kea',
     KeaCv = 'kea-cv',
+    Kg = 'kg',
+    Kgp = 'kgp',
+    KgpBr = 'kgp-br',
+    Kh = 'kh',
     Khq = 'khq',
     KhqMl = 'khq-ml',
     Ki = 'ki',
     KiKe = 'ki-ke',
+    Kj = 'kj',
     Kk = 'kk',
     KkKz = 'kk-kz',
     Kkj = 'kkj',
@@ -1019,10 +1173,12 @@ export enum PageLanguageEnum {
     Kn = 'kn',
     KnIn = 'kn-in',
     Ko = 'ko',
+    KoCn = 'ko-cn',
     KoKp = 'ko-kp',
     KoKr = 'ko-kr',
     Kok = 'kok',
     KokIn = 'kok-in',
+    Kr = 'kr',
     Ks = 'ks',
     KsIn = 'ks-in',
     Ksb = 'ksb',
@@ -1031,20 +1187,29 @@ export enum PageLanguageEnum {
     KsfCm = 'ksf-cm',
     Ksh = 'ksh',
     KshDe = 'ksh-de',
-    Kw = 'kw',
-    KwGb = 'kw-gb',
     Ku = 'ku',
     KuTr = 'ku-tr',
+    Kv = 'kv',
+    Kw = 'kw',
+    KwGb = 'kw-gb',
+    Kxv = 'kxv',
+    KxvIn = 'kxv-in',
     Ky = 'ky',
     KyKg = 'ky-kg',
+    La = 'la',
     Lag = 'lag',
     LagTz = 'lag-tz',
     Lb = 'lb',
     LbLu = 'lb-lu',
     Lg = 'lg',
     LgUg = 'lg-ug',
+    Li = 'li',
+    Lij = 'lij',
+    LijIt = 'lij-it',
     Lkt = 'lkt',
     LktUs = 'lkt-us',
+    Lmo = 'lmo',
+    LmoIt = 'lmo-it',
     Ln = 'ln',
     LnAo = 'ln-ao',
     LnCd = 'ln-cd',
@@ -1070,6 +1235,8 @@ export enum PageLanguageEnum {
     Mas = 'mas',
     MasKe = 'mas-ke',
     MasTz = 'mas-tz',
+    Mdf = 'mdf',
+    MdfRu = 'mdf-ru',
     Mer = 'mer',
     MerKe = 'mer-ke',
     Mfe = 'mfe',
@@ -1080,6 +1247,7 @@ export enum PageLanguageEnum {
     MghMz = 'mgh-mz',
     Mgo = 'mgo',
     MgoCm = 'mgo-cm',
+    Mh = 'mh',
     Mi = 'mi',
     MiNz = 'mi-nz',
     Mk = 'mk',
@@ -1105,6 +1273,7 @@ export enum PageLanguageEnum {
     MyMm = 'my-mm',
     Mzn = 'mzn',
     MznIr = 'mzn-ir',
+    Na = 'na',
     Naq = 'naq',
     NaqNa = 'naq-na',
     Nb = 'nb',
@@ -1118,11 +1287,12 @@ export enum PageLanguageEnum {
     Ne = 'ne',
     NeIn = 'ne-in',
     NeNp = 'ne-np',
+    Ng = 'ng',
     Nl = 'nl',
     NlAw = 'nl-aw',
     NlBe = 'nl-be',
-    NlCh = 'nl-ch',
     NlBq = 'nl-bq',
+    NlCh = 'nl-ch',
     NlCw = 'nl-cw',
     NlLu = 'nl-lu',
     NlNl = 'nl-nl',
@@ -1136,10 +1306,21 @@ export enum PageLanguageEnum {
     NnhCm = 'nnh-cm',
     No = 'no',
     NoNo = 'no-no',
+    Nqo = 'nqo',
+    NqoGn = 'nqo-gn',
+    Nr = 'nr',
+    Nso = 'nso',
+    NsoZa = 'nso-za',
     Nus = 'nus',
     NusSs = 'nus-ss',
+    Nv = 'nv',
+    Ny = 'ny',
     Nyn = 'nyn',
     NynUg = 'nyn-ug',
+    Oc = 'oc',
+    OcEs = 'oc-es',
+    OcFr = 'oc-fr',
+    Oj = 'oj',
     Om = 'om',
     OmEt = 'om-et',
     OmKe = 'om-ke',
@@ -1153,6 +1334,9 @@ export enum PageLanguageEnum {
     PaPk = 'pa-pk',
     Pcm = 'pcm',
     PcmNg = 'pcm-ng',
+    Pi = 'pi',
+    Pis = 'pis',
+    PisSb = 'pis-sb',
     Pl = 'pl',
     PlPl = 'pl-pl',
     Prg = 'prg',
@@ -1177,6 +1361,8 @@ export enum PageLanguageEnum {
     QuBo = 'qu-bo',
     QuEc = 'qu-ec',
     QuPe = 'qu-pe',
+    Raj = 'raj',
+    RajIn = 'raj-in',
     Rm = 'rm',
     RmCh = 'rm-ch',
     Rn = 'rn',
@@ -1207,6 +1393,8 @@ export enum PageLanguageEnum {
     SatIn = 'sat-in',
     Sbp = 'sbp',
     SbpTz = 'sbp-tz',
+    Sc = 'sc',
+    ScIt = 'sc-it',
     Sd = 'sd',
     SdIn = 'sd-in',
     SdPk = 'sd-pk',
@@ -1228,8 +1416,11 @@ export enum PageLanguageEnum {
     SkSk = 'sk-sk',
     Sl = 'sl',
     SlSi = 'sl-si',
+    Sm = 'sm',
     Smn = 'smn',
     SmnFi = 'smn-fi',
+    Sms = 'sms',
+    SmsFi = 'sms-fi',
     Sn = 'sn',
     SnZw = 'sn-zw',
     So = 'so',
@@ -1247,6 +1438,10 @@ export enum PageLanguageEnum {
     SrMe = 'sr-me',
     SrRs = 'sr-rs',
     SrXk = 'sr-xk',
+    Ss = 'ss',
+    St = 'st',
+    StLs = 'st-ls',
+    StZa = 'st-za',
     Su = 'su',
     SuId = 'su-id',
     Sv = 'sv',
@@ -1259,6 +1454,11 @@ export enum PageLanguageEnum {
     SwTz = 'sw-tz',
     SwUg = 'sw-ug',
     Sy = 'sy',
+    Syr = 'syr',
+    SyrIq = 'syr-iq',
+    SyrSy = 'syr-sy',
+    Szl = 'szl',
+    SzlPl = 'szl-pl',
     Ta = 'ta',
     TaIn = 'ta-in',
     TaLk = 'ta-lk',
@@ -1279,15 +1479,23 @@ export enum PageLanguageEnum {
     Tk = 'tk',
     TkTm = 'tk-tm',
     Tl = 'tl',
+    Tn = 'tn',
+    TnBw = 'tn-bw',
+    TnZa = 'tn-za',
     To = 'to',
     ToTo = 'to-to',
+    Tok = 'tok',
+    Tok001 = 'tok-001',
     Tr = 'tr',
     TrCy = 'tr-cy',
     TrTr = 'tr-tr',
+    Ts = 'ts',
     Tt = 'tt',
     TtRu = 'tt-ru',
+    Tw = 'tw',
     Twq = 'twq',
     TwqNe = 'twq-ne',
+    Ty = 'ty',
     Tzm = 'tzm',
     TzmMa = 'tzm-ma',
     Ug = 'ug',
@@ -1302,97 +1510,58 @@ export enum PageLanguageEnum {
     UzUz = 'uz-uz',
     Vai = 'vai',
     VaiLr = 'vai-lr',
+    Ve = 've',
+    Vec = 'vec',
+    VecIt = 'vec-it',
     Vi = 'vi',
     ViVn = 'vi-vn',
+    Vmw = 'vmw',
+    VmwMz = 'vmw-mz',
     Vo = 'vo',
     Vo001 = 'vo-001',
     Vun = 'vun',
     VunTz = 'vun-tz',
+    Wa = 'wa',
     Wae = 'wae',
     WaeCh = 'wae-ch',
     Wo = 'wo',
     WoSn = 'wo-sn',
     Xh = 'xh',
     XhZa = 'xh-za',
+    Xnr = 'xnr',
+    XnrIn = 'xnr-in',
     Xog = 'xog',
     XogUg = 'xog-ug',
     Yav = 'yav',
     YavCm = 'yav-cm',
+    Yi = 'yi',
+    Yi001 = 'yi-001',
+    YiUa = 'yi-ua',
     Yo = 'yo',
     YoBj = 'yo-bj',
     YoNg = 'yo-ng',
+    Yrl = 'yrl',
+    YrlBr = 'yrl-br',
+    YrlCo = 'yrl-co',
+    YrlVe = 'yrl-ve',
     Yue = 'yue',
     YueCn = 'yue-cn',
     YueHk = 'yue-hk',
+    YueMo = 'yue-mo',
+    Za = 'za',
+    ZaCn = 'za-cn',
     Zgh = 'zgh',
     ZghMa = 'zgh-ma',
     Zh = 'zh',
     ZhCn = 'zh-cn',
-    ZhHk = 'zh-hk',
-    ZhMo = 'zh-mo',
-    ZhSg = 'zh-sg',
-    ZhTw = 'zh-tw',
     ZhHans = 'zh-hans',
     ZhHant = 'zh-hant',
+    ZhHk = 'zh-hk',
+    ZhMo = 'zh-mo',
+    ZhMy = 'zh-my',
+    ZhSg = 'zh-sg',
+    ZhTw = 'zh-tw',
     Zu = 'zu',
     ZuZa = 'zu-za'
-}
-export enum PageContentTypeCategoryEnum {
-    _0 = '0',
-    _1 = '1',
-    _2 = '2',
-    _3 = '3',
-    _4 = '4',
-    _5 = '5',
-    _6 = '6',
-    _7 = '7',
-    _8 = '8',
-    _9 = '9',
-    _10 = '10',
-    _11 = '11',
-    _12 = '12'
-}
-export enum PageAbStatusEnum {
-    Master = 'master',
-    Variant = 'variant',
-    LoserVariant = 'loser_variant',
-    MabMaster = 'mab_master',
-    MabVariant = 'mab_variant',
-    AutomatedMaster = 'automated_master',
-    AutomatedVariant = 'automated_variant',
-    AutomatedLoserVariant = 'automated_loser_variant'
-}
-export enum PageCurrentStateEnum {
-    Automated = 'AUTOMATED',
-    AutomatedDraft = 'AUTOMATED_DRAFT',
-    AutomatedSending = 'AUTOMATED_SENDING',
-    AutomatedForForm = 'AUTOMATED_FOR_FORM',
-    AutomatedForFormBuffer = 'AUTOMATED_FOR_FORM_BUFFER',
-    AutomatedForFormDraft = 'AUTOMATED_FOR_FORM_DRAFT',
-    AutomatedForFormLegacy = 'AUTOMATED_FOR_FORM_LEGACY',
-    BlogEmailDraft = 'BLOG_EMAIL_DRAFT',
-    BlogEmailPublished = 'BLOG_EMAIL_PUBLISHED',
-    Draft = 'DRAFT',
-    DraftAb = 'DRAFT_AB',
-    DraftAbVariant = 'DRAFT_AB_VARIANT',
-    Error = 'ERROR',
-    LoserAbVariant = 'LOSER_AB_VARIANT',
-    PageStub = 'PAGE_STUB',
-    PreProcessing = 'PRE_PROCESSING',
-    Processing = 'PROCESSING',
-    Published = 'PUBLISHED',
-    PublishedAb = 'PUBLISHED_AB',
-    PublishedAbVariant = 'PUBLISHED_AB_VARIANT',
-    PublishedOrScheduled = 'PUBLISHED_OR_SCHEDULED',
-    RssToEmailDraft = 'RSS_TO_EMAIL_DRAFT',
-    RssToEmailPublished = 'RSS_TO_EMAIL_PUBLISHED',
-    Scheduled = 'SCHEDULED',
-    ScheduledAb = 'SCHEDULED_AB',
-    ScheduledOrPublished = 'SCHEDULED_OR_PUBLISHED',
-    AutomatedAb = 'AUTOMATED_AB',
-    AutomatedAbVariant = 'AUTOMATED_AB_VARIANT',
-    AutomatedDraftAb = 'AUTOMATED_DRAFT_AB',
-    AutomatedDraftAbvariant = 'AUTOMATED_DRAFT_ABVARIANT',
-    AutomatedLoserAbvariant = 'AUTOMATED_LOSER_ABVARIANT'
 }
 

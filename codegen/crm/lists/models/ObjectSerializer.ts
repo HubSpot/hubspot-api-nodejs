@@ -1,17 +1,24 @@
 export * from '../models/ApiCollectionResponseJoinTimeAndRecordId';
-export * from '../models/ApiCollectionResponseRecordListMembershipNoPaging';
+export * from '../models/ApiCollectionResponseRecordListMembership';
+export * from '../models/BatchInputRecordIdInput';
+export * from '../models/BatchResponseRecordIdWithMemberships';
+export * from '../models/BatchResponseRecordIdWithMembershipsWithErrors';
 export * from '../models/ErrorDetail';
 export * from '../models/JoinTimeAndRecordId';
 export * from '../models/ListCreateRequest';
+export * from '../models/ListCreateRequestFilterBranch';
 export * from '../models/ListCreateResponse';
 export * from '../models/ListFetchResponse';
 export * from '../models/ListFilterUpdateRequest';
+export * from '../models/ListFilterUpdateRequestFilterBranch';
 export * from '../models/ListFolderCreateRequest';
 export * from '../models/ListFolderCreateResponse';
 export * from '../models/ListFolderFetchResponse';
 export * from '../models/ListMoveRequest';
 export * from '../models/ListSearchRequest';
 export * from '../models/ListSearchResponse';
+export * from '../models/ListSizeAndEditHistoryResponse';
+export * from '../models/ListSizeDataPoint';
 export * from '../models/ListUpdateResponse';
 export * from '../models/ListsByIdResponse';
 export * from '../models/MembershipChangeRequest';
@@ -24,20 +31,25 @@ export * from '../models/PublicAbsoluteComparativeTimestampRefineBy';
 export * from '../models/PublicAbsoluteRangedTimestampRefineBy';
 export * from '../models/PublicAdsSearchFilter';
 export * from '../models/PublicAdsTimeFilter';
+export * from '../models/PublicAdsTimeFilterPruningRefineBy';
 export * from '../models/PublicAllHistoryRefineBy';
 export * from '../models/PublicAllPropertyTypesOperation';
 export * from '../models/PublicAndFilterBranch';
+export * from '../models/PublicAndFilterBranchFilterBranchesInner';
+export * from '../models/PublicAndFilterBranchFiltersInner';
 export * from '../models/PublicAssociationFilterBranch';
 export * from '../models/PublicAssociationInListFilter';
+export * from '../models/PublicAssociationInListFilterCoalescingRefineBy';
 export * from '../models/PublicBatchMigrationMapping';
 export * from '../models/PublicBoolPropertyOperation';
 export * from '../models/PublicCalendarDatePropertyOperation';
-export * from '../models/PublicCampaignInfluencedFilter';
 export * from '../models/PublicCommunicationSubscriptionFilter';
 export * from '../models/PublicComparativeDatePropertyOperation';
 export * from '../models/PublicComparativePropertyUpdatedOperation';
 export * from '../models/PublicConstantFilter';
 export * from '../models/PublicCtaAnalyticsFilter';
+export * from '../models/PublicCtaAnalyticsFilterCoalescingRefineBy';
+export * from '../models/PublicCtaAnalyticsFilterPruningRefineBy';
 export * from '../models/PublicDatePoint';
 export * from '../models/PublicDatePropertyOperation';
 export * from '../models/PublicDateTimePropertyOperation';
@@ -45,12 +57,15 @@ export * from '../models/PublicEmailEventFilter';
 export * from '../models/PublicEmailSubscriptionFilter';
 export * from '../models/PublicEnumerationPropertyOperation';
 export * from '../models/PublicEventAnalyticsFilter';
+export * from '../models/PublicEventAnalyticsFilterCoalescingRefineBy';
+export * from '../models/PublicEventAnalyticsFilterPruningRefineBy';
 export * from '../models/PublicEventFilterMetadata';
+export * from '../models/PublicEventFilterMetadataOperation';
 export * from '../models/PublicFiscalQuarterReference';
 export * from '../models/PublicFiscalYearReference';
 export * from '../models/PublicFormSubmissionFilter';
-export * from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
 export * from '../models/PublicFormSubmissionOnPageFilter';
+export * from '../models/PublicFormSubmissionOnPageFilterCoalescingRefineBy';
 export * from '../models/PublicInListFilter';
 export * from '../models/PublicInListFilterMetadata';
 export * from '../models/PublicIndexOffset';
@@ -71,24 +86,23 @@ export * from '../models/PublicMultiStringPropertyOperation';
 export * from '../models/PublicNotAllFilterBranch';
 export * from '../models/PublicNotAnyFilterBranch';
 export * from '../models/PublicNowReference';
-export * from '../models/PublicNumAssociationsFilter';
 export * from '../models/PublicNumOccurrencesRefineBy';
 export * from '../models/PublicNumberPropertyOperation';
 export * from '../models/PublicObjectList';
+export * from '../models/PublicObjectListFilterBranch';
 export * from '../models/PublicObjectListSearchResult';
 export * from '../models/PublicOrFilterBranch';
 export * from '../models/PublicPageViewAnalyticsFilter';
 export * from '../models/PublicPrivacyAnalyticsFilter';
-export * from '../models/PublicPropertyAssociationFilterBranch';
-export * from '../models/PublicPropertyAssociationFilterBranchFilterBranchesInner';
-export * from '../models/PublicPropertyAssociationFilterBranchFiltersInner';
-export * from '../models/PublicPropertyAssociationInListFilter';
 export * from '../models/PublicPropertyFilter';
+export * from '../models/PublicPropertyFilterOperation';
 export * from '../models/PublicPropertyReferencedTime';
 export * from '../models/PublicQuarterReference';
 export * from '../models/PublicRangedDatePropertyOperation';
 export * from '../models/PublicRangedNumberPropertyOperation';
 export * from '../models/PublicRangedTimeOperation';
+export * from '../models/PublicRangedTimeOperationLowerBoundTimePoint';
+export * from '../models/PublicRangedTimeOperationUpperBoundTimePoint';
 export * from '../models/PublicRelativeComparativeTimestampRefineBy';
 export * from '../models/PublicRelativeRangedTimestampRefineBy';
 export * from '../models/PublicRestrictedFilterBranch';
@@ -105,25 +119,36 @@ export * from '../models/PublicTimePointOperationTimePoint';
 export * from '../models/PublicTodayReference';
 export * from '../models/PublicUnifiedEventsFilter';
 export * from '../models/PublicUnifiedEventsFilterBranch';
+export * from '../models/PublicUnifiedEventsFilterBranchPruningRefineBy';
 export * from '../models/PublicWebinarFilter';
 export * from '../models/PublicWeekReference';
 export * from '../models/PublicYearReference';
+export * from '../models/RecordIdInput';
+export * from '../models/RecordIdWithMemberships';
 export * from '../models/RecordListMembership';
+export * from '../models/StandardError';
 
 import { ApiCollectionResponseJoinTimeAndRecordId } from '../models/ApiCollectionResponseJoinTimeAndRecordId';
-import { ApiCollectionResponseRecordListMembershipNoPaging } from '../models/ApiCollectionResponseRecordListMembershipNoPaging';
+import { ApiCollectionResponseRecordListMembership } from '../models/ApiCollectionResponseRecordListMembership';
+import { BatchInputRecordIdInput } from '../models/BatchInputRecordIdInput';
+import { BatchResponseRecordIdWithMemberships        } from '../models/BatchResponseRecordIdWithMemberships';
+import { BatchResponseRecordIdWithMembershipsWithErrors          } from '../models/BatchResponseRecordIdWithMembershipsWithErrors';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { JoinTimeAndRecordId } from '../models/JoinTimeAndRecordId';
 import { ListCreateRequest } from '../models/ListCreateRequest';
+import { ListCreateRequestFilterBranchClass } from '../models/ListCreateRequestFilterBranch';
 import { ListCreateResponse } from '../models/ListCreateResponse';
 import { ListFetchResponse } from '../models/ListFetchResponse';
 import { ListFilterUpdateRequest } from '../models/ListFilterUpdateRequest';
+import { ListFilterUpdateRequestFilterBranchClass } from '../models/ListFilterUpdateRequestFilterBranch';
 import { ListFolderCreateRequest } from '../models/ListFolderCreateRequest';
 import { ListFolderCreateResponse } from '../models/ListFolderCreateResponse';
 import { ListFolderFetchResponse } from '../models/ListFolderFetchResponse';
 import { ListMoveRequest } from '../models/ListMoveRequest';
 import { ListSearchRequest } from '../models/ListSearchRequest';
 import { ListSearchResponse } from '../models/ListSearchResponse';
+import { ListSizeAndEditHistoryResponse } from '../models/ListSizeAndEditHistoryResponse';
+import { ListSizeDataPoint } from '../models/ListSizeDataPoint';
 import { ListUpdateResponse } from '../models/ListUpdateResponse';
 import { ListsByIdResponse } from '../models/ListsByIdResponse';
 import { MembershipChangeRequest } from '../models/MembershipChangeRequest';
@@ -136,33 +161,41 @@ import { PublicAbsoluteComparativeTimestampRefineBy     } from '../models/Public
 import { PublicAbsoluteRangedTimestampRefineBy      } from '../models/PublicAbsoluteRangedTimestampRefineBy';
 import { PublicAdsSearchFilter        } from '../models/PublicAdsSearchFilter';
 import { PublicAdsTimeFilter    } from '../models/PublicAdsTimeFilter';
+import { PublicAdsTimeFilterPruningRefineByClass } from '../models/PublicAdsTimeFilterPruningRefineBy';
 import { PublicAllHistoryRefineBy   } from '../models/PublicAllHistoryRefineBy';
 import { PublicAllPropertyTypesOperation     } from '../models/PublicAllPropertyTypesOperation';
 import { PublicAndFilterBranch      } from '../models/PublicAndFilterBranch';
+import { PublicAndFilterBranchFilterBranchesInnerClass } from '../models/PublicAndFilterBranchFilterBranchesInner';
+import { PublicAndFilterBranchFiltersInnerClass } from '../models/PublicAndFilterBranchFiltersInner';
 import { PublicAssociationFilterBranch          } from '../models/PublicAssociationFilterBranch';
 import { PublicAssociationInListFilter          } from '../models/PublicAssociationInListFilter';
+import { PublicAssociationInListFilterCoalescingRefineByClass } from '../models/PublicAssociationInListFilterCoalescingRefineBy';
 import { PublicBatchMigrationMapping } from '../models/PublicBatchMigrationMapping';
 import { PublicBoolPropertyOperation      } from '../models/PublicBoolPropertyOperation';
 import { PublicCalendarDatePropertyOperation       } from '../models/PublicCalendarDatePropertyOperation';
-import { PublicCampaignInfluencedFilter    } from '../models/PublicCampaignInfluencedFilter';
 import { PublicCommunicationSubscriptionFilter        } from '../models/PublicCommunicationSubscriptionFilter';
 import { PublicComparativeDatePropertyOperation       } from '../models/PublicComparativeDatePropertyOperation';
 import { PublicComparativePropertyUpdatedOperation       } from '../models/PublicComparativePropertyUpdatedOperation';
 import { PublicConstantFilter     } from '../models/PublicConstantFilter';
 import { PublicCtaAnalyticsFilter       } from '../models/PublicCtaAnalyticsFilter';
+import { PublicCtaAnalyticsFilterCoalescingRefineByClass } from '../models/PublicCtaAnalyticsFilterCoalescingRefineBy';
+import { PublicCtaAnalyticsFilterPruningRefineByClass } from '../models/PublicCtaAnalyticsFilterPruningRefineBy';
 import { PublicDatePoint            } from '../models/PublicDatePoint';
 import { PublicDatePropertyOperation        } from '../models/PublicDatePropertyOperation';
 import { PublicDateTimePropertyOperation       } from '../models/PublicDateTimePropertyOperation';
-import { PublicEmailEventFilter        } from '../models/PublicEmailEventFilter';
+import { PublicEmailEventFilter       } from '../models/PublicEmailEventFilter';
 import { PublicEmailSubscriptionFilter      } from '../models/PublicEmailSubscriptionFilter';
 import { PublicEnumerationPropertyOperation      } from '../models/PublicEnumerationPropertyOperation';
 import { PublicEventAnalyticsFilter       } from '../models/PublicEventAnalyticsFilter';
+import { PublicEventAnalyticsFilterCoalescingRefineByClass } from '../models/PublicEventAnalyticsFilterCoalescingRefineBy';
+import { PublicEventAnalyticsFilterPruningRefineByClass } from '../models/PublicEventAnalyticsFilterPruningRefineBy';
 import { PublicEventFilterMetadata } from '../models/PublicEventFilterMetadata';
+import { PublicEventFilterMetadataOperationClass } from '../models/PublicEventFilterMetadataOperation';
 import { PublicFiscalQuarterReference         } from '../models/PublicFiscalQuarterReference';
 import { PublicFiscalYearReference         } from '../models/PublicFiscalYearReference';
-import { PublicFormSubmissionFilter      } from '../models/PublicFormSubmissionFilter';
-import { PublicFormSubmissionFilterCoalescingRefineByClass } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
+import { PublicFormSubmissionFilter     } from '../models/PublicFormSubmissionFilter';
 import { PublicFormSubmissionOnPageFilter      } from '../models/PublicFormSubmissionOnPageFilter';
+import { PublicFormSubmissionOnPageFilterCoalescingRefineByClass } from '../models/PublicFormSubmissionOnPageFilterCoalescingRefineBy';
 import { PublicInListFilter      } from '../models/PublicInListFilter';
 import { PublicInListFilterMetadata } from '../models/PublicInListFilterMetadata';
 import { PublicIndexOffset } from '../models/PublicIndexOffset';
@@ -170,7 +203,7 @@ import { PublicIndexedTimePoint       } from '../models/PublicIndexedTimePoint';
 import { PublicIndexedTimePointIndexReferenceClass } from '../models/PublicIndexedTimePointIndexReference';
 import { PublicIntegrationEventFilter     } from '../models/PublicIntegrationEventFilter';
 import { PublicListConversionDate      } from '../models/PublicListConversionDate';
-import { PublicListConversionInactivity    } from '../models/PublicListConversionInactivity';
+import { PublicListConversionInactivity   } from '../models/PublicListConversionInactivity';
 import { PublicListConversionResponse } from '../models/PublicListConversionResponse';
 import { PublicListConversionResponseRequestedConversionTimeClass } from '../models/PublicListConversionResponseRequestedConversionTime';
 import { PublicListConversionTimeClass } from '../models/PublicListConversionTime';
@@ -183,24 +216,23 @@ import { PublicMultiStringPropertyOperation      } from '../models/PublicMultiSt
 import { PublicNotAllFilterBranch      } from '../models/PublicNotAllFilterBranch';
 import { PublicNotAnyFilterBranch      } from '../models/PublicNotAnyFilterBranch';
 import { PublicNowReference       } from '../models/PublicNowReference';
-import { PublicNumAssociationsFilter      } from '../models/PublicNumAssociationsFilter';
 import { PublicNumOccurrencesRefineBy     } from '../models/PublicNumOccurrencesRefineBy';
 import { PublicNumberPropertyOperation      } from '../models/PublicNumberPropertyOperation';
 import { PublicObjectList } from '../models/PublicObjectList';
+import { PublicObjectListFilterBranchClass } from '../models/PublicObjectListFilterBranch';
 import { PublicObjectListSearchResult } from '../models/PublicObjectListSearchResult';
 import { PublicOrFilterBranch      } from '../models/PublicOrFilterBranch';
 import { PublicPageViewAnalyticsFilter        } from '../models/PublicPageViewAnalyticsFilter';
 import { PublicPrivacyAnalyticsFilter     } from '../models/PublicPrivacyAnalyticsFilter';
-import { PublicPropertyAssociationFilterBranch         } from '../models/PublicPropertyAssociationFilterBranch';
-import { PublicPropertyAssociationFilterBranchFilterBranchesInnerClass } from '../models/PublicPropertyAssociationFilterBranchFilterBranchesInner';
-import { PublicPropertyAssociationFilterBranchFiltersInnerClass } from '../models/PublicPropertyAssociationFilterBranchFiltersInner';
-import { PublicPropertyAssociationInListFilter        } from '../models/PublicPropertyAssociationInListFilter';
 import { PublicPropertyFilter     } from '../models/PublicPropertyFilter';
+import { PublicPropertyFilterOperationClass } from '../models/PublicPropertyFilterOperation';
 import { PublicPropertyReferencedTime       } from '../models/PublicPropertyReferencedTime';
 import { PublicQuarterReference         } from '../models/PublicQuarterReference';
 import { PublicRangedDatePropertyOperation        } from '../models/PublicRangedDatePropertyOperation';
 import { PublicRangedNumberPropertyOperation       } from '../models/PublicRangedNumberPropertyOperation';
 import { PublicRangedTimeOperation           } from '../models/PublicRangedTimeOperation';
+import { PublicRangedTimeOperationLowerBoundTimePointClass } from '../models/PublicRangedTimeOperationLowerBoundTimePoint';
+import { PublicRangedTimeOperationUpperBoundTimePointClass } from '../models/PublicRangedTimeOperationUpperBoundTimePoint';
 import { PublicRelativeComparativeTimestampRefineBy     } from '../models/PublicRelativeComparativeTimestampRefineBy';
 import { PublicRelativeRangedTimestampRefineBy      } from '../models/PublicRelativeRangedTimestampRefineBy';
 import { PublicRestrictedFilterBranch      } from '../models/PublicRestrictedFilterBranch';
@@ -216,11 +248,15 @@ import { PublicTimePointOperation         } from '../models/PublicTimePointOpera
 import { PublicTimePointOperationTimePointClass } from '../models/PublicTimePointOperationTimePoint';
 import { PublicTodayReference       } from '../models/PublicTodayReference';
 import { PublicUnifiedEventsFilter       } from '../models/PublicUnifiedEventsFilter';
-import { PublicUnifiedEventsFilterBranch   } from '../models/PublicUnifiedEventsFilterBranch';
+import { PublicUnifiedEventsFilterBranch       } from '../models/PublicUnifiedEventsFilterBranch';
+import { PublicUnifiedEventsFilterBranchPruningRefineByClass } from '../models/PublicUnifiedEventsFilterBranchPruningRefineBy';
 import { PublicWebinarFilter     } from '../models/PublicWebinarFilter';
-import { PublicWeekReference     } from '../models/PublicWeekReference';
+import { PublicWeekReference    } from '../models/PublicWeekReference';
 import { PublicYearReference         } from '../models/PublicYearReference';
+import { RecordIdInput } from '../models/RecordIdInput';
+import { RecordIdWithMemberships } from '../models/RecordIdWithMemberships';
 import { RecordListMembership } from '../models/RecordListMembership';
+import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -235,6 +271,10 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
+    "BatchResponseRecordIdWithMembershipsStatusEnum",
+    "BatchResponseRecordIdWithMembershipsWithErrorsStatusEnum",
+    "ListCreateRequestFilterBranchFilterBranchTypeEnum",
+    "ListFilterUpdateRequestFilterBranchFilterBranchTypeEnum",
     "PublicAbsoluteComparativeTimestampRefineByTypeEnum",
     "PublicAbsoluteRangedTimestampRefineByTypeEnum",
     "PublicAdsSearchFilterFilterTypeEnum",
@@ -242,12 +282,13 @@ let enumsMap: Set<string> = new Set<string>([
     "PublicAllHistoryRefineByTypeEnum",
     "PublicAllPropertyTypesOperationOperationTypeEnum",
     "PublicAndFilterBranchFilterBranchTypeEnum",
+    "PublicAndFilterBranchFilterBranchesInnerFilterBranchTypeEnum",
+    "PublicAndFilterBranchFiltersInnerFilterTypeEnum",
     "PublicAssociationFilterBranchFilterBranchTypeEnum",
     "PublicAssociationInListFilterFilterTypeEnum",
     "PublicBoolPropertyOperationOperationTypeEnum",
     "PublicCalendarDatePropertyOperationFiscalYearStartEnum",
     "PublicCalendarDatePropertyOperationOperationTypeEnum",
-    "PublicCampaignInfluencedFilterFilterTypeEnum",
     "PublicCommunicationSubscriptionFilterFilterTypeEnum",
     "PublicComparativeDatePropertyOperationOperationTypeEnum",
     "PublicComparativePropertyUpdatedOperationOperationTypeEnum",
@@ -261,6 +302,7 @@ let enumsMap: Set<string> = new Set<string>([
     "PublicEmailSubscriptionFilterFilterTypeEnum",
     "PublicEnumerationPropertyOperationOperationTypeEnum",
     "PublicEventAnalyticsFilterFilterTypeEnum",
+    "PublicEventFilterMetadataOperationFiscalYearStartEnum",
     "PublicFiscalQuarterReferenceReferenceTypeEnum",
     "PublicFiscalYearReferenceReferenceTypeEnum",
     "PublicFormSubmissionFilterFilterTypeEnum",
@@ -284,22 +326,21 @@ let enumsMap: Set<string> = new Set<string>([
     "PublicNotAllFilterBranchFilterBranchTypeEnum",
     "PublicNotAnyFilterBranchFilterBranchTypeEnum",
     "PublicNowReferenceReferenceTypeEnum",
-    "PublicNumAssociationsFilterFilterTypeEnum",
     "PublicNumOccurrencesRefineByTypeEnum",
     "PublicNumberPropertyOperationOperationTypeEnum",
+    "PublicObjectListFilterBranchFilterBranchTypeEnum",
     "PublicOrFilterBranchFilterBranchTypeEnum",
     "PublicPageViewAnalyticsFilterFilterTypeEnum",
     "PublicPrivacyAnalyticsFilterFilterTypeEnum",
-    "PublicPropertyAssociationFilterBranchFilterBranchTypeEnum",
-    "PublicPropertyAssociationFilterBranchFilterBranchesInnerFilterBranchTypeEnum",
-    "PublicPropertyAssociationFilterBranchFiltersInnerFilterTypeEnum",
-    "PublicPropertyAssociationInListFilterFilterTypeEnum",
     "PublicPropertyFilterFilterTypeEnum",
+    "PublicPropertyFilterOperationFiscalYearStartEnum",
     "PublicPropertyReferencedTimeTimeTypeEnum",
     "PublicQuarterReferenceReferenceTypeEnum",
     "PublicRangedDatePropertyOperationOperationTypeEnum",
     "PublicRangedNumberPropertyOperationOperationTypeEnum",
     "PublicRangedTimeOperationTypeEnum",
+    "PublicRangedTimeOperationLowerBoundTimePointTimeTypeEnum",
+    "PublicRangedTimeOperationUpperBoundTimePointTimeTypeEnum",
     "PublicRelativeComparativeTimestampRefineByTypeEnum",
     "PublicRelativeRangedTimestampRefineByTypeEnum",
     "PublicRestrictedFilterBranchFilterBranchTypeEnum",
@@ -324,19 +365,26 @@ let enumsMap: Set<string> = new Set<string>([
 
 let typeMap: {[index: string]: any} = {
     "ApiCollectionResponseJoinTimeAndRecordId": ApiCollectionResponseJoinTimeAndRecordId,
-    "ApiCollectionResponseRecordListMembershipNoPaging": ApiCollectionResponseRecordListMembershipNoPaging,
+    "ApiCollectionResponseRecordListMembership": ApiCollectionResponseRecordListMembership,
+    "BatchInputRecordIdInput": BatchInputRecordIdInput,
+    "BatchResponseRecordIdWithMemberships": BatchResponseRecordIdWithMemberships,
+    "BatchResponseRecordIdWithMembershipsWithErrors": BatchResponseRecordIdWithMembershipsWithErrors,
     "ErrorDetail": ErrorDetail,
     "JoinTimeAndRecordId": JoinTimeAndRecordId,
     "ListCreateRequest": ListCreateRequest,
+    "ListCreateRequestFilterBranch": ListCreateRequestFilterBranchClass,
     "ListCreateResponse": ListCreateResponse,
     "ListFetchResponse": ListFetchResponse,
     "ListFilterUpdateRequest": ListFilterUpdateRequest,
+    "ListFilterUpdateRequestFilterBranch": ListFilterUpdateRequestFilterBranchClass,
     "ListFolderCreateRequest": ListFolderCreateRequest,
     "ListFolderCreateResponse": ListFolderCreateResponse,
     "ListFolderFetchResponse": ListFolderFetchResponse,
     "ListMoveRequest": ListMoveRequest,
     "ListSearchRequest": ListSearchRequest,
     "ListSearchResponse": ListSearchResponse,
+    "ListSizeAndEditHistoryResponse": ListSizeAndEditHistoryResponse,
+    "ListSizeDataPoint": ListSizeDataPoint,
     "ListUpdateResponse": ListUpdateResponse,
     "ListsByIdResponse": ListsByIdResponse,
     "MembershipChangeRequest": MembershipChangeRequest,
@@ -349,20 +397,25 @@ let typeMap: {[index: string]: any} = {
     "PublicAbsoluteRangedTimestampRefineBy": PublicAbsoluteRangedTimestampRefineBy,
     "PublicAdsSearchFilter": PublicAdsSearchFilter,
     "PublicAdsTimeFilter": PublicAdsTimeFilter,
+    "PublicAdsTimeFilterPruningRefineBy": PublicAdsTimeFilterPruningRefineByClass,
     "PublicAllHistoryRefineBy": PublicAllHistoryRefineBy,
     "PublicAllPropertyTypesOperation": PublicAllPropertyTypesOperation,
     "PublicAndFilterBranch": PublicAndFilterBranch,
+    "PublicAndFilterBranchFilterBranchesInner": PublicAndFilterBranchFilterBranchesInnerClass,
+    "PublicAndFilterBranchFiltersInner": PublicAndFilterBranchFiltersInnerClass,
     "PublicAssociationFilterBranch": PublicAssociationFilterBranch,
     "PublicAssociationInListFilter": PublicAssociationInListFilter,
+    "PublicAssociationInListFilterCoalescingRefineBy": PublicAssociationInListFilterCoalescingRefineByClass,
     "PublicBatchMigrationMapping": PublicBatchMigrationMapping,
     "PublicBoolPropertyOperation": PublicBoolPropertyOperation,
     "PublicCalendarDatePropertyOperation": PublicCalendarDatePropertyOperation,
-    "PublicCampaignInfluencedFilter": PublicCampaignInfluencedFilter,
     "PublicCommunicationSubscriptionFilter": PublicCommunicationSubscriptionFilter,
     "PublicComparativeDatePropertyOperation": PublicComparativeDatePropertyOperation,
     "PublicComparativePropertyUpdatedOperation": PublicComparativePropertyUpdatedOperation,
     "PublicConstantFilter": PublicConstantFilter,
     "PublicCtaAnalyticsFilter": PublicCtaAnalyticsFilter,
+    "PublicCtaAnalyticsFilterCoalescingRefineBy": PublicCtaAnalyticsFilterCoalescingRefineByClass,
+    "PublicCtaAnalyticsFilterPruningRefineBy": PublicCtaAnalyticsFilterPruningRefineByClass,
     "PublicDatePoint": PublicDatePoint,
     "PublicDatePropertyOperation": PublicDatePropertyOperation,
     "PublicDateTimePropertyOperation": PublicDateTimePropertyOperation,
@@ -370,12 +423,15 @@ let typeMap: {[index: string]: any} = {
     "PublicEmailSubscriptionFilter": PublicEmailSubscriptionFilter,
     "PublicEnumerationPropertyOperation": PublicEnumerationPropertyOperation,
     "PublicEventAnalyticsFilter": PublicEventAnalyticsFilter,
+    "PublicEventAnalyticsFilterCoalescingRefineBy": PublicEventAnalyticsFilterCoalescingRefineByClass,
+    "PublicEventAnalyticsFilterPruningRefineBy": PublicEventAnalyticsFilterPruningRefineByClass,
     "PublicEventFilterMetadata": PublicEventFilterMetadata,
+    "PublicEventFilterMetadataOperation": PublicEventFilterMetadataOperationClass,
     "PublicFiscalQuarterReference": PublicFiscalQuarterReference,
     "PublicFiscalYearReference": PublicFiscalYearReference,
     "PublicFormSubmissionFilter": PublicFormSubmissionFilter,
-    "PublicFormSubmissionFilterCoalescingRefineBy": PublicFormSubmissionFilterCoalescingRefineByClass,
     "PublicFormSubmissionOnPageFilter": PublicFormSubmissionOnPageFilter,
+    "PublicFormSubmissionOnPageFilterCoalescingRefineBy": PublicFormSubmissionOnPageFilterCoalescingRefineByClass,
     "PublicInListFilter": PublicInListFilter,
     "PublicInListFilterMetadata": PublicInListFilterMetadata,
     "PublicIndexOffset": PublicIndexOffset,
@@ -396,24 +452,23 @@ let typeMap: {[index: string]: any} = {
     "PublicNotAllFilterBranch": PublicNotAllFilterBranch,
     "PublicNotAnyFilterBranch": PublicNotAnyFilterBranch,
     "PublicNowReference": PublicNowReference,
-    "PublicNumAssociationsFilter": PublicNumAssociationsFilter,
     "PublicNumOccurrencesRefineBy": PublicNumOccurrencesRefineBy,
     "PublicNumberPropertyOperation": PublicNumberPropertyOperation,
     "PublicObjectList": PublicObjectList,
+    "PublicObjectListFilterBranch": PublicObjectListFilterBranchClass,
     "PublicObjectListSearchResult": PublicObjectListSearchResult,
     "PublicOrFilterBranch": PublicOrFilterBranch,
     "PublicPageViewAnalyticsFilter": PublicPageViewAnalyticsFilter,
     "PublicPrivacyAnalyticsFilter": PublicPrivacyAnalyticsFilter,
-    "PublicPropertyAssociationFilterBranch": PublicPropertyAssociationFilterBranch,
-    "PublicPropertyAssociationFilterBranchFilterBranchesInner": PublicPropertyAssociationFilterBranchFilterBranchesInnerClass,
-    "PublicPropertyAssociationFilterBranchFiltersInner": PublicPropertyAssociationFilterBranchFiltersInnerClass,
-    "PublicPropertyAssociationInListFilter": PublicPropertyAssociationInListFilter,
     "PublicPropertyFilter": PublicPropertyFilter,
+    "PublicPropertyFilterOperation": PublicPropertyFilterOperationClass,
     "PublicPropertyReferencedTime": PublicPropertyReferencedTime,
     "PublicQuarterReference": PublicQuarterReference,
     "PublicRangedDatePropertyOperation": PublicRangedDatePropertyOperation,
     "PublicRangedNumberPropertyOperation": PublicRangedNumberPropertyOperation,
     "PublicRangedTimeOperation": PublicRangedTimeOperation,
+    "PublicRangedTimeOperationLowerBoundTimePoint": PublicRangedTimeOperationLowerBoundTimePointClass,
+    "PublicRangedTimeOperationUpperBoundTimePoint": PublicRangedTimeOperationUpperBoundTimePointClass,
     "PublicRelativeComparativeTimestampRefineBy": PublicRelativeComparativeTimestampRefineBy,
     "PublicRelativeRangedTimestampRefineBy": PublicRelativeRangedTimestampRefineBy,
     "PublicRestrictedFilterBranch": PublicRestrictedFilterBranch,
@@ -430,10 +485,14 @@ let typeMap: {[index: string]: any} = {
     "PublicTodayReference": PublicTodayReference,
     "PublicUnifiedEventsFilter": PublicUnifiedEventsFilter,
     "PublicUnifiedEventsFilterBranch": PublicUnifiedEventsFilterBranch,
+    "PublicUnifiedEventsFilterBranchPruningRefineBy": PublicUnifiedEventsFilterBranchPruningRefineByClass,
     "PublicWebinarFilter": PublicWebinarFilter,
     "PublicWeekReference": PublicWeekReference,
     "PublicYearReference": PublicYearReference,
+    "RecordIdInput": RecordIdInput,
+    "RecordIdWithMemberships": RecordIdWithMemberships,
     "RecordListMembership": RecordListMembership,
+    "StandardError": StandardError,
 }
 
 type MimeTypeDescriptor = {

@@ -1,6 +1,6 @@
 /**
  * User Provisioning
- * Add, manage, and remove users from your account
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -11,38 +11,47 @@
  */
 
 
-/**
-* A user creation request
-*/
 export class UserProvisionRequest {
+    /**
+    * The user\'s email.
+    */
+    'email': string;
+    /**
+    * The user\'s first name.
+    */
     'firstName'?: string;
+    /**
+    * The user\'s last name.
+    */
     'lastName'?: string;
     /**
-    * The user\'s primary team
+    * The user\'s primary team.
     */
     'primaryTeamId'?: string;
     /**
-    * Whether to send a welcome email
-    */
-    'sendWelcomeEmail'?: boolean;
-    /**
-    * The user\'s role
+    * The user\'s role.
     */
     'roleId'?: string;
     /**
-    * The user\'s additional teams
+    * The user\'s additional teams.
     */
     'secondaryTeamIds'?: Array<string>;
     /**
-    * The created user\'s email
+    * Whether to send a welcome email.
     */
-    'email': string;
+    'sendWelcomeEmail': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "firstName",
             "baseName": "firstName",
@@ -62,12 +71,6 @@ export class UserProvisionRequest {
             "format": ""
         },
         {
-            "name": "sendWelcomeEmail",
-            "baseName": "sendWelcomeEmail",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "roleId",
             "baseName": "roleId",
             "type": "string",
@@ -80,9 +83,9 @@ export class UserProvisionRequest {
             "format": ""
         },
         {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
+            "name": "sendWelcomeEmail",
+            "baseName": "sendWelcomeEmail",
+            "type": "boolean",
             "format": ""
         }    ];
 

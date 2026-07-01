@@ -5,32 +5,32 @@ import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { CollectionResponsePublicBusinessUnitNoPaging } from '../models/CollectionResponsePublicBusinessUnitNoPaging';
 
-import { BusinessUnitApiRequestFactory, BusinessUnitApiResponseProcessor} from "../apis/BusinessUnitApi";
-export class ObservableBusinessUnitApi {
-    private requestFactory: BusinessUnitApiRequestFactory;
-    private responseProcessor: BusinessUnitApiResponseProcessor;
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class ObservableBasicApi {
+    private requestFactory: BasicApiRequestFactory;
+    private responseProcessor: BasicApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: BusinessUnitApiRequestFactory,
-        responseProcessor?: BusinessUnitApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new BusinessUnitApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new BusinessUnitApiResponseProcessor();
+        this.requestFactory = requestFactory || new BasicApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BasicApiResponseProcessor();
     }
 
     /**
-     * Get Business Units identified by `userId`. The `userId` refers to the user’s ID.
-     * Get Business Units for a user
-     * @param userId Identifier of user to retrieve.
-     * @param [properties] The names of properties to optionally include in the response body. The only valid value is &#x60;logoMetadata&#x60;.
-     * @param [name] The names of Business Units to retrieve. If empty or not provided, then all associated Business Units will be returned.
+     * Retrieve the brands that a specific user can access.
+     * Retrieve brands by associated user
+     * @param userId 
+     * @param [name] 
+     * @param [properties] 
      */
-    public getByUserIDWithHttpInfo(userId: string, properties?: Array<string>, name?: Array<string>, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePublicBusinessUnitNoPaging>> {
+    public getByUserIDWithHttpInfo(userId: string, name?: Array<string>, properties?: Array<string>, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePublicBusinessUnitNoPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -44,7 +44,7 @@ export class ObservableBusinessUnitApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -55,11 +55,11 @@ export class ObservableBusinessUnitApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.getByUserID(userId, properties, name, _config);
+        const requestContextPromise = this.requestFactory.getByUserID(userId, name, properties, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -77,14 +77,14 @@ export class ObservableBusinessUnitApi {
     }
 
     /**
-     * Get Business Units identified by `userId`. The `userId` refers to the user’s ID.
-     * Get Business Units for a user
-     * @param userId Identifier of user to retrieve.
-     * @param [properties] The names of properties to optionally include in the response body. The only valid value is &#x60;logoMetadata&#x60;.
-     * @param [name] The names of Business Units to retrieve. If empty or not provided, then all associated Business Units will be returned.
+     * Retrieve the brands that a specific user can access.
+     * Retrieve brands by associated user
+     * @param userId 
+     * @param [name] 
+     * @param [properties] 
      */
-    public getByUserID(userId: string, properties?: Array<string>, name?: Array<string>, _options?: ConfigurationOptions): Observable<CollectionResponsePublicBusinessUnitNoPaging> {
-        return this.getByUserIDWithHttpInfo(userId, properties, name, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicBusinessUnitNoPaging>) => apiResponse.data));
+    public getByUserID(userId: string, name?: Array<string>, properties?: Array<string>, _options?: ConfigurationOptions): Observable<CollectionResponsePublicBusinessUnitNoPaging> {
+        return this.getByUserIDWithHttpInfo(userId, name, properties, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicBusinessUnitNoPaging>) => apiResponse.data));
     }
 
 }

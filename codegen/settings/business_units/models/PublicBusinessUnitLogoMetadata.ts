@@ -1,6 +1,6 @@
 /**
  * Business Units
- * Retrieve Business Unit information.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -11,22 +11,19 @@
  */
 
 
-/**
-* A Business Unit\'s logo metadata
-*/
 export class PublicBusinessUnitLogoMetadata {
     /**
     * The logo\'s alt text
     */
     'logoAltText'?: string;
     /**
-    * The logo\'s resized url
-    */
-    'resizedUrl'?: string;
-    /**
     * The logo\'s url
     */
     'logoUrl'?: string;
+    /**
+    * The logo\'s resized url
+    */
+    'resizedUrl'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -40,14 +37,14 @@ export class PublicBusinessUnitLogoMetadata {
             "format": ""
         },
         {
-            "name": "resizedUrl",
-            "baseName": "resizedUrl",
+            "name": "logoUrl",
+            "baseName": "logoUrl",
             "type": "string",
             "format": ""
         },
         {
-            "name": "logoUrl",
-            "baseName": "logoUrl",
+            "name": "resizedUrl",
+            "baseName": "resizedUrl",
             "type": "string",
             "format": ""
         }    ];

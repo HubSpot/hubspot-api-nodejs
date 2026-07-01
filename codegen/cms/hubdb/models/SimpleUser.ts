@@ -12,10 +12,22 @@
 
 
 export class SimpleUser {
-    'firstName': string;
-    'lastName': string;
-    'id': string;
+    /**
+    * The email address of the user.
+    */
     'email': string;
+    /**
+    * The first name of the user.
+    */
+    'firstName': string;
+    /**
+    * The unique identifier for the user.
+    */
+    'id': string;
+    /**
+    * The last name of the user.
+    */
+    'lastName': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,14 +35,14 @@ export class SimpleUser {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "firstName",
-            "baseName": "firstName",
+            "name": "email",
+            "baseName": "email",
             "type": "string",
             "format": ""
         },
         {
-            "name": "lastName",
-            "baseName": "lastName",
+            "name": "firstName",
+            "baseName": "firstName",
             "type": "string",
             "format": ""
         },
@@ -41,8 +53,8 @@ export class SimpleUser {
             "format": ""
         },
         {
-            "name": "email",
-            "baseName": "email",
+            "name": "lastName",
+            "baseName": "lastName",
             "type": "string",
             "format": ""
         }    ];

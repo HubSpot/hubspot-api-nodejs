@@ -13,13 +13,31 @@
 import { PublicTimePointOperationTimePoint } from '../models/PublicTimePointOperationTimePoint';
 
 export class PublicTimePointOperation {
+    /**
+    * Describes the behavior at the endpoint of the time point operation.
+    */
     'endpointBehavior'?: string;
+    /**
+    * Indicates whether objects with no value set for the property should be included in the operation.
+    */
     'includeObjectsWithNoValueSet': boolean;
-    'propertyParser'?: string;
+    /**
+    * Specifies the type of operation (TIME_POINT).
+    */
     'operationType': PublicTimePointOperationOperationTypeEnum;
-    'timePoint': PublicTimePointOperationTimePoint;
-    'type': string;
+    /**
+    * Specifies the operation to be applied within the time point operation (IS_BEFORE, IS_AFTER).
+    */
     'operator': string;
+    /**
+    * Specifies the parser used for interpreting the property in the operation.
+    */
+    'propertyParser'?: string;
+    'timePoint': PublicTimePointOperationTimePoint;
+    /**
+    * Defines the type of operation being performed.
+    */
+    'type': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -39,15 +57,21 @@ export class PublicTimePointOperation {
             "format": ""
         },
         {
-            "name": "propertyParser",
-            "baseName": "propertyParser",
+            "name": "operationType",
+            "baseName": "operationType",
+            "type": "PublicTimePointOperationOperationTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "operator",
+            "baseName": "operator",
             "type": "string",
             "format": ""
         },
         {
-            "name": "operationType",
-            "baseName": "operationType",
-            "type": "PublicTimePointOperationOperationTypeEnum",
+            "name": "propertyParser",
+            "baseName": "propertyParser",
+            "type": "string",
             "format": ""
         },
         {
@@ -59,12 +83,6 @@ export class PublicTimePointOperation {
         {
             "name": "type",
             "baseName": "type",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "operator",
-            "baseName": "operator",
             "type": "string",
             "format": ""
         }    ];

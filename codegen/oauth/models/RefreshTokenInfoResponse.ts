@@ -12,38 +12,14 @@
 
 
 export class RefreshTokenInfoResponse {
-    /**
-    * 
-    */
-    'hubId': number;
-    /**
-    * 
-    */
-    'userId': number;
-    /**
-    * 
-    */
-    'scopes': Array<string>;
-    /**
-    * 
-    */
-    'tokenType': string;
-    /**
-    * 
-    */
-    'user'?: string;
-    /**
-    * 
-    */
-    'hubDomain'?: string;
-    /**
-    * 
-    */
     'clientId': string;
-    /**
-    * 
-    */
+    'hubDomain'?: string;
+    'hubId': number;
+    'scopes': Array<string>;
     'token': string;
+    'tokenType': string;
+    'user'?: string;
+    'userId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -51,14 +27,20 @@ export class RefreshTokenInfoResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "hubId",
-            "baseName": "hub_id",
-            "type": "number",
-            "format": "int32"
+            "name": "clientId",
+            "baseName": "client_id",
+            "type": "string",
+            "format": ""
         },
         {
-            "name": "userId",
-            "baseName": "user_id",
+            "name": "hubDomain",
+            "baseName": "hub_domain",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "hubId",
+            "baseName": "hub_id",
             "type": "number",
             "format": "int32"
         },
@@ -66,6 +48,12 @@ export class RefreshTokenInfoResponse {
             "name": "scopes",
             "baseName": "scopes",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "token",
+            "baseName": "token",
+            "type": "string",
             "format": ""
         },
         {
@@ -81,22 +69,10 @@ export class RefreshTokenInfoResponse {
             "format": ""
         },
         {
-            "name": "hubDomain",
-            "baseName": "hub_domain",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "clientId",
-            "baseName": "client_id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "string",
-            "format": ""
+            "name": "userId",
+            "baseName": "user_id",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

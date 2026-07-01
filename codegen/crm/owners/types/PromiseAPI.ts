@@ -4,27 +4,27 @@ import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { CollectionResponsePublicOwnerForwardPaging } from '../models/CollectionResponsePublicOwnerForwardPaging';
 import { PublicOwner } from '../models/PublicOwner';
-import { ObservableOwnersApi } from './ObservableAPI';
+import { ObservableBasicApi } from './ObservableAPI';
 
-import { OwnersApiRequestFactory, OwnersApiResponseProcessor} from "../apis/OwnersApi";
-export class PromiseOwnersApi {
-    private api: ObservableOwnersApi
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class PromiseBasicApi {
+    private api: ObservableBasicApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: OwnersApiRequestFactory,
-        responseProcessor?: OwnersApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
-        this.api = new ObservableOwnersApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Read an owner by given `id` or `userId`
-     * @param ownerId
-     * @param [idProperty]
-     * @param [archived] Whether to return only results that have been archived.
+     * @param [after]
+     * @param [archived]
+     * @param [email]
+     * @param [limit]
      */
-    public getByIdWithHttpInfo(ownerId: number, idProperty?: 'id' | 'userId', archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicOwner>> {
+    public crmV3OwnersWithHttpInfo(after?: string, archived?: boolean, email?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicOwnerForwardPaging>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -37,17 +37,17 @@ export class PromiseOwnersApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getByIdWithHttpInfo(ownerId, idProperty, archived, observableOptions);
+        const result = this.api.crmV3OwnersWithHttpInfo(after, archived, email, limit, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Read an owner by given `id` or `userId`
-     * @param ownerId
-     * @param [idProperty]
-     * @param [archived] Whether to return only results that have been archived.
+     * @param [after]
+     * @param [archived]
+     * @param [email]
+     * @param [limit]
      */
-    public getById(ownerId: number, idProperty?: 'id' | 'userId', archived?: boolean, _options?: PromiseConfigurationOptions): Promise<PublicOwner> {
+    public crmV3Owners(after?: string, archived?: boolean, email?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicOwnerForwardPaging> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -60,18 +60,18 @@ export class PromiseOwnersApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getById(ownerId, idProperty, archived, observableOptions);
+        const result = this.api.crmV3Owners(after, archived, email, limit, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get a page of owners
-     * @param [email] Filter by email address (optional)
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [limit] The maximum number of results to display per page.
+     * Retrieve details of a specific owner using either their \'id\' or \'userId\'.
+     * Retrieve a specific owner by ID
+     * @param ownerId 
      * @param [archived] Whether to return only results that have been archived.
+     * @param [idProperty] 
      */
-    public getPageWithHttpInfo(email?: string, after?: string, limit?: number, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicOwnerForwardPaging>> {
+    public getByIdWithHttpInfo(ownerId: number, archived?: boolean, idProperty?: 'id' | 'userId', _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicOwner>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -84,18 +84,18 @@ export class PromiseOwnersApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getPageWithHttpInfo(email, after, limit, archived, observableOptions);
+        const result = this.api.getByIdWithHttpInfo(ownerId, archived, idProperty, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get a page of owners
-     * @param [email] Filter by email address (optional)
-     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param [limit] The maximum number of results to display per page.
+     * Retrieve details of a specific owner using either their \'id\' or \'userId\'.
+     * Retrieve a specific owner by ID
+     * @param ownerId 
      * @param [archived] Whether to return only results that have been archived.
+     * @param [idProperty] 
      */
-    public getPage(email?: string, after?: string, limit?: number, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicOwnerForwardPaging> {
+    public getById(ownerId: number, archived?: boolean, idProperty?: 'id' | 'userId', _options?: PromiseConfigurationOptions): Promise<PublicOwner> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -108,7 +108,7 @@ export class PromiseOwnersApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getPage(email, after, limit, archived, observableOptions);
+        const result = this.api.getById(ownerId, archived, idProperty, observableOptions);
         return result.toPromise();
     }
 

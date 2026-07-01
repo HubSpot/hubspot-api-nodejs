@@ -15,36 +15,36 @@ import { PublicDividerStyleSettings } from '../models/PublicDividerStyleSettings
 import { PublicFontStyle } from '../models/PublicFontStyle';
 
 export class PublicEmailStyleSettings {
-    'emailBodyPadding'?: string;
-    'colorPickerFavorite5'?: string;
-    'bodyColor'?: string;
-    'colorPickerFavorite6'?: string;
+    'backgroundColor'?: string;
     'backgroundImage'?: string;
-    'emailBodyWidth'?: string;
-    'secondaryFont'?: string;
-    'primaryAccentColor'?: string;
-    'colorPickerFavorite3'?: string;
-    'primaryFontLineHeight'?: string;
-    'colorPickerFavorite4'?: string;
-    'secondaryFontColor'?: string;
+    'backgroundImageType'?: PublicEmailStyleSettingsBackgroundImageTypeEnum;
+    'bodyBorderColor'?: string;
+    'bodyBorderColorChoice'?: string;
+    'bodyBorderWidth'?: number;
+    'bodyColor'?: string;
+    'buttonStyleSettings'?: PublicButtonStyleSettings;
     'colorPickerFavorite1'?: string;
     'colorPickerFavorite2'?: string;
-    'bodyBorderColor'?: string;
-    'bodyBorderWidth'?: number;
-    'linksFont'?: PublicFontStyle;
-    'backgroundColor'?: string;
-    'backgroundImageType'?: string;
+    'colorPickerFavorite3'?: string;
+    'colorPickerFavorite4'?: string;
+    'colorPickerFavorite5'?: string;
+    'colorPickerFavorite6'?: string;
     'dividerStyleSettings'?: PublicDividerStyleSettings;
-    'secondaryAccentColor'?: string;
-    'secondaryFontLineHeight'?: string;
-    'primaryFontSize'?: number;
-    'secondaryFontSize'?: number;
-    'primaryFontColor'?: string;
+    'emailBodyPadding'?: string;
+    'emailBodyWidth'?: string;
     'headingOneFont'?: PublicFontStyle;
-    'primaryFont'?: string;
     'headingTwoFont'?: PublicFontStyle;
-    'buttonStyleSettings'?: PublicButtonStyleSettings;
-    'bodyBorderColorChoice'?: string;
+    'linksFont'?: PublicFontStyle;
+    'primaryAccentColor'?: string;
+    'primaryFont'?: string;
+    'primaryFontColor'?: string;
+    'primaryFontLineHeight'?: string;
+    'primaryFontSize'?: number;
+    'secondaryAccentColor'?: string;
+    'secondaryFont'?: string;
+    'secondaryFontColor'?: string;
+    'secondaryFontLineHeight'?: string;
+    'secondaryFontSize'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -52,26 +52,8 @@ export class PublicEmailStyleSettings {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "emailBodyPadding",
-            "baseName": "emailBodyPadding",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "colorPickerFavorite5",
-            "baseName": "colorPickerFavorite5",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "bodyColor",
-            "baseName": "bodyColor",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "colorPickerFavorite6",
-            "baseName": "colorPickerFavorite6",
+            "name": "backgroundColor",
+            "baseName": "backgroundColor",
             "type": "string",
             "format": ""
         },
@@ -82,45 +64,39 @@ export class PublicEmailStyleSettings {
             "format": ""
         },
         {
-            "name": "emailBodyWidth",
-            "baseName": "emailBodyWidth",
+            "name": "backgroundImageType",
+            "baseName": "backgroundImageType",
+            "type": "PublicEmailStyleSettingsBackgroundImageTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "bodyBorderColor",
+            "baseName": "bodyBorderColor",
             "type": "string",
             "format": ""
         },
         {
-            "name": "secondaryFont",
-            "baseName": "secondaryFont",
+            "name": "bodyBorderColorChoice",
+            "baseName": "bodyBorderColorChoice",
             "type": "string",
             "format": ""
         },
         {
-            "name": "primaryAccentColor",
-            "baseName": "primaryAccentColor",
+            "name": "bodyBorderWidth",
+            "baseName": "bodyBorderWidth",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "bodyColor",
+            "baseName": "bodyColor",
             "type": "string",
             "format": ""
         },
         {
-            "name": "colorPickerFavorite3",
-            "baseName": "colorPickerFavorite3",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "primaryFontLineHeight",
-            "baseName": "primaryFontLineHeight",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "colorPickerFavorite4",
-            "baseName": "colorPickerFavorite4",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "secondaryFontColor",
-            "baseName": "secondaryFontColor",
-            "type": "string",
+            "name": "buttonStyleSettings",
+            "baseName": "buttonStyleSettings",
+            "type": "PublicButtonStyleSettings",
             "format": ""
         },
         {
@@ -136,32 +112,26 @@ export class PublicEmailStyleSettings {
             "format": ""
         },
         {
-            "name": "bodyBorderColor",
-            "baseName": "bodyBorderColor",
+            "name": "colorPickerFavorite3",
+            "baseName": "colorPickerFavorite3",
             "type": "string",
             "format": ""
         },
         {
-            "name": "bodyBorderWidth",
-            "baseName": "bodyBorderWidth",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "linksFont",
-            "baseName": "linksFont",
-            "type": "PublicFontStyle",
-            "format": ""
-        },
-        {
-            "name": "backgroundColor",
-            "baseName": "backgroundColor",
+            "name": "colorPickerFavorite4",
+            "baseName": "colorPickerFavorite4",
             "type": "string",
             "format": ""
         },
         {
-            "name": "backgroundImageType",
-            "baseName": "backgroundImageType",
+            "name": "colorPickerFavorite5",
+            "baseName": "colorPickerFavorite5",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "colorPickerFavorite6",
+            "baseName": "colorPickerFavorite6",
             "type": "string",
             "format": ""
         },
@@ -172,32 +142,14 @@ export class PublicEmailStyleSettings {
             "format": ""
         },
         {
-            "name": "secondaryAccentColor",
-            "baseName": "secondaryAccentColor",
+            "name": "emailBodyPadding",
+            "baseName": "emailBodyPadding",
             "type": "string",
             "format": ""
         },
         {
-            "name": "secondaryFontLineHeight",
-            "baseName": "secondaryFontLineHeight",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "primaryFontSize",
-            "baseName": "primaryFontSize",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "secondaryFontSize",
-            "baseName": "secondaryFontSize",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "primaryFontColor",
-            "baseName": "primaryFontColor",
+            "name": "emailBodyWidth",
+            "baseName": "emailBodyWidth",
             "type": "string",
             "format": ""
         },
@@ -208,27 +160,75 @@ export class PublicEmailStyleSettings {
             "format": ""
         },
         {
-            "name": "primaryFont",
-            "baseName": "primaryFont",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "headingTwoFont",
             "baseName": "headingTwoFont",
             "type": "PublicFontStyle",
             "format": ""
         },
         {
-            "name": "buttonStyleSettings",
-            "baseName": "buttonStyleSettings",
-            "type": "PublicButtonStyleSettings",
+            "name": "linksFont",
+            "baseName": "linksFont",
+            "type": "PublicFontStyle",
             "format": ""
         },
         {
-            "name": "bodyBorderColorChoice",
-            "baseName": "bodyBorderColorChoice",
+            "name": "primaryAccentColor",
+            "baseName": "primaryAccentColor",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "primaryFont",
+            "baseName": "primaryFont",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "primaryFontColor",
+            "baseName": "primaryFontColor",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "primaryFontLineHeight",
+            "baseName": "primaryFontLineHeight",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "primaryFontSize",
+            "baseName": "primaryFontSize",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "secondaryAccentColor",
+            "baseName": "secondaryAccentColor",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "secondaryFont",
+            "baseName": "secondaryFont",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "secondaryFontColor",
+            "baseName": "secondaryFontColor",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "secondaryFontLineHeight",
+            "baseName": "secondaryFontLineHeight",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "secondaryFontSize",
+            "baseName": "secondaryFontSize",
+            "type": "number",
             "format": ""
         }    ];
 
@@ -239,3 +239,10 @@ export class PublicEmailStyleSettings {
     public constructor() {
     }
 }
+
+export enum PublicEmailStyleSettingsBackgroundImageTypeEnum {
+    Repeat = 'REPEAT',
+    Single = 'SINGLE',
+    Stretch = 'STRETCH'
+}
+

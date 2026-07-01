@@ -12,11 +12,29 @@
 
 
 export class PublicMonthReference {
-    'hour'?: number;
-    'millisecond'?: number;
-    'referenceType': PublicMonthReferenceReferenceTypeEnum;
+    /**
+    * The day component of the month reference.
+    */
     'day': number;
+    /**
+    * The hour component of the month reference.
+    */
+    'hour'?: number;
+    /**
+    * The millisecond component of the month reference.
+    */
+    'millisecond'?: number;
+    /**
+    * The minute component of the month reference.
+    */
     'minute'?: number;
+    /**
+    * Indicates the type of reference, (MONTH).
+    */
+    'referenceType': PublicMonthReferenceReferenceTypeEnum;
+    /**
+    * The second component of the month reference.
+    */
     'second'?: number;
 
     static readonly discriminator: string | undefined = undefined;
@@ -24,6 +42,12 @@ export class PublicMonthReference {
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "day",
+            "baseName": "day",
+            "type": "number",
+            "format": "int32"
+        },
         {
             "name": "hour",
             "baseName": "hour",
@@ -37,22 +61,16 @@ export class PublicMonthReference {
             "format": "int32"
         },
         {
-            "name": "referenceType",
-            "baseName": "referenceType",
-            "type": "PublicMonthReferenceReferenceTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "day",
-            "baseName": "day",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "minute",
             "baseName": "minute",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "referenceType",
+            "baseName": "referenceType",
+            "type": "PublicMonthReferenceReferenceTypeEnum",
+            "format": ""
         },
         {
             "name": "second",

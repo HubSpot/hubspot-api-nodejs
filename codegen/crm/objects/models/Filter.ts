@@ -11,15 +11,30 @@
  */
 
 
+/**
+* Defines a single condition for searching CRM objects, specifying the property to filter on, the operator to use (such as equals, greater than, or contains), and the value(s) to compare against. 
+*/
 export class Filter {
-    'highValue'?: string;
-    'propertyName': string;
-    'values'?: Array<string>;
-    'value'?: string;
     /**
-    * null
+    * The upper boundary value when using ranged-based filters.
+    */
+    'highValue'?: string;
+    /**
+    * The comparison operator used in the filter, such as \"EQ\" or \"GT\".
     */
     'operator': FilterOperatorEnum;
+    /**
+    * The name of the property to apply the filter to.
+    */
+    'propertyName': string;
+    /**
+    * The value to match against the property.
+    */
+    'value'?: string;
+    /**
+    * The values to match against the property.
+    */
+    'values'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -33,15 +48,15 @@ export class Filter {
             "format": ""
         },
         {
-            "name": "propertyName",
-            "baseName": "propertyName",
-            "type": "string",
+            "name": "operator",
+            "baseName": "operator",
+            "type": "FilterOperatorEnum",
             "format": ""
         },
         {
-            "name": "values",
-            "baseName": "values",
-            "type": "Array<string>",
+            "name": "propertyName",
+            "baseName": "propertyName",
+            "type": "string",
             "format": ""
         },
         {
@@ -51,9 +66,9 @@ export class Filter {
             "format": ""
         },
         {
-            "name": "operator",
-            "baseName": "operator",
-            "type": "FilterOperatorEnum",
+            "name": "values",
+            "baseName": "values",
+            "type": "Array<string>",
             "format": ""
         }    ];
 
@@ -66,18 +81,18 @@ export class Filter {
 }
 
 export enum FilterOperatorEnum {
+    Between = 'BETWEEN',
+    ContainsToken = 'CONTAINS_TOKEN',
     Eq = 'EQ',
-    Neq = 'NEQ',
-    Lt = 'LT',
-    Lte = 'LTE',
     Gt = 'GT',
     Gte = 'GTE',
-    Between = 'BETWEEN',
-    In = 'IN',
-    NotIn = 'NOT_IN',
     HasProperty = 'HAS_PROPERTY',
+    In = 'IN',
+    Lt = 'LT',
+    Lte = 'LTE',
+    Neq = 'NEQ',
+    NotContainsToken = 'NOT_CONTAINS_TOKEN',
     NotHasProperty = 'NOT_HAS_PROPERTY',
-    ContainsToken = 'CONTAINS_TOKEN',
-    NotContainsToken = 'NOT_CONTAINS_TOKEN'
+    NotIn = 'NOT_IN'
 }
 

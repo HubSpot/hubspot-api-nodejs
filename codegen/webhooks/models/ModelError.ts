@@ -14,33 +14,33 @@ import { ErrorDetail } from '../models/ErrorDetail';
 
 export class ModelError {
     /**
-    * A specific category that contains more specific detail about the error
-    */
-    'subCategory'?: string;
-    /**
-    * Context about the error condition
-    */
-    'context'?: { [key: string]: Array<string>; };
-    /**
-    * A unique identifier for the request. Include this value with any error reports or support tickets
-    */
-    'correlationId': string;
-    /**
-    * A map of link names to associated URIs containing documentation about the error or recommended remediation steps
-    */
-    'links'?: { [key: string]: string; };
-    /**
-    * A human readable message describing the error along with remediation steps where appropriate
-    */
-    'message': string;
-    /**
-    * The error category
+    * The error category, represented as a string.
     */
     'category': string;
     /**
-    * further information about the error
+    * An object containing context about the error condition. This includes additional properties, each of which is an array of strings.
+    */
+    'context'?: { [key: string]: Array<string>; };
+    /**
+    * A unique identifier for the request, formatted as a UUID. Include this value with any error reports or support tickets.
+    */
+    'correlationId': string;
+    /**
+    * An array providing further information about the error. Each item in the array is an ErrorDetail object.
     */
     'errors'?: Array<ErrorDetail>;
+    /**
+    * A map of link names to associated URIs containing documentation about the error or recommended remediation steps. This is an object with string properties.
+    */
+    'links'?: { [key: string]: string; };
+    /**
+    * A human-readable message describing the error along with remediation steps where appropriate. This is a string.
+    */
+    'message': string;
+    /**
+    * A specific category that provides more detailed information about the error. This is a string.
+    */
+    'subCategory'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,8 +48,8 @@ export class ModelError {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "subCategory",
-            "baseName": "subCategory",
+            "name": "category",
+            "baseName": "category",
             "type": "string",
             "format": ""
         },
@@ -66,6 +66,12 @@ export class ModelError {
             "format": "uuid"
         },
         {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<ErrorDetail>",
+            "format": ""
+        },
+        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
@@ -78,15 +84,9 @@ export class ModelError {
             "format": ""
         },
         {
-            "name": "category",
-            "baseName": "category",
+            "name": "subCategory",
+            "baseName": "subCategory",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<ErrorDetail>",
             "format": ""
         }    ];
 

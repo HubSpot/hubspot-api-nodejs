@@ -5,30 +5,30 @@ import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { ExternalSettings } from '../models/ExternalSettings';
 
-import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/SettingsApi";
-export class ObservableSettingsApi {
-    private requestFactory: SettingsApiRequestFactory;
-    private responseProcessor: SettingsApiResponseProcessor;
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class ObservableBasicApi {
+    private requestFactory: BasicApiRequestFactory;
+    private responseProcessor: BasicApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: SettingsApiRequestFactory,
-        responseProcessor?: SettingsApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new SettingsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new SettingsApiResponseProcessor();
+        this.requestFactory = requestFactory || new BasicApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BasicApiResponseProcessor();
     }
 
     /**
-     * Deletes the settings for a video conference application with the specified ID.
+     * Delete video conference extension settings for your app
      * Delete settings
-     * @param appId The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * @param appId 
      */
     public archiveWithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -42,7 +42,7 @@ export class ObservableSettingsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -53,7 +53,7 @@ export class ObservableSettingsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -75,22 +75,22 @@ export class ObservableSettingsApi {
     }
 
     /**
-     * Deletes the settings for a video conference application with the specified ID.
+     * Delete video conference extension settings for your app
      * Delete settings
-     * @param appId The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * @param appId 
      */
     public archive(appId: number, _options?: ConfigurationOptions): Observable<void> {
         return this.archiveWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
-     * Return the settings for a video conference application with the specified ID.
+     * Fetch video conference extension settings for your app
      * Get settings
-     * @param appId The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * @param appId 
      */
     public getByIdWithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<ExternalSettings>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -104,7 +104,7 @@ export class ObservableSettingsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -115,7 +115,7 @@ export class ObservableSettingsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -137,23 +137,23 @@ export class ObservableSettingsApi {
     }
 
     /**
-     * Return the settings for a video conference application with the specified ID.
+     * Fetch video conference extension settings for your app
      * Get settings
-     * @param appId The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * @param appId 
      */
     public getById(appId: number, _options?: ConfigurationOptions): Observable<ExternalSettings> {
         return this.getByIdWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<ExternalSettings>) => apiResponse.data));
     }
 
     /**
-     * Updates the settings for a video conference application with the specified ID.
-     * Update settings
-     * @param appId The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * Create or update video conference extension settings for your app
+     * Create or update settings
+     * @param appId 
      * @param externalSettings
      */
     public replaceWithHttpInfo(appId: number, externalSettings: ExternalSettings, _options?: ConfigurationOptions): Observable<HttpInfo<ExternalSettings>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -167,7 +167,7 @@ export class ObservableSettingsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -178,7 +178,7 @@ export class ObservableSettingsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -200,9 +200,9 @@ export class ObservableSettingsApi {
     }
 
     /**
-     * Updates the settings for a video conference application with the specified ID.
-     * Update settings
-     * @param appId The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * Create or update video conference extension settings for your app
+     * Create or update settings
+     * @param appId 
      * @param externalSettings
      */
     public replace(appId: number, externalSettings: ExternalSettings, _options?: ConfigurationOptions): Observable<ExternalSettings> {

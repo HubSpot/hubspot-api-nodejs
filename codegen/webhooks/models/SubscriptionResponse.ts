@@ -16,31 +16,35 @@
 */
 export class SubscriptionResponse {
     /**
-    * When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
-    */
-    'createdAt': Date;
-    /**
-    * The identifier of the object type associated with the subscription.
-    */
-    'objectTypeId'?: string;
-    /**
-    * The internal name of the property being monitored for changes. Only applies when `eventType` is `propertyChange`.
-    */
-    'propertyName'?: string;
-    /**
-    * Determines if the subscription is active or paused.
+    * Whether the subscription is active or paused. If true, the subscription will send webhook notifications. If false, the subscription is paused and will not send notifications.
     */
     'active': boolean;
     /**
-    * Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
+    * The timestamp when the webhook subscription was created, in ISO 8601 format (e.g., 2020-02-29T12:30:00Z).
+    */
+    'createdAt': Date;
+    /**
+    * The type of event to listen for. Accepted values include contact.creation, contact.deletion, contact.propertyChange, and similar event types for other CRM objects and custom objects.
     */
     'eventType': SubscriptionResponseEventTypeEnum;
     /**
-    * The unique ID of the subscription.
+    * The name of the event to listen for. This is used with custom objects to specify custom event types beyond the standard eventType enum values.
+    */
+    'eventTypeName'?: string;
+    /**
+    * The unique ID of the webhook subscription.
     */
     'id': string;
     /**
-    * When this subscription was last updated. Formatted as milliseconds from the [Unix epoch](#).
+    * The ID of the object type for the subscription. This can be a standard CRM object (e.g., \'contact\', \'company\', \'deal\') or a custom object ID for custom object subscriptions.
+    */
+    'objectTypeId'?: string;
+    /**
+    * The internal name of the property to monitor for changes. Only applies when eventType is propertyChange.
+    */
+    'propertyName'?: string;
+    /**
+    * The timestamp when the webhook subscription was last updated, in ISO 8601 format (e.g., 2020-02-29T12:30:00Z).
     */
     'updatedAt'?: Date;
 
@@ -50,10 +54,34 @@ export class SubscriptionResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "active",
+            "baseName": "active",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "createdAt",
             "baseName": "createdAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "eventType",
+            "baseName": "eventType",
+            "type": "SubscriptionResponseEventTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "eventTypeName",
+            "baseName": "eventTypeName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "objectTypeId",
@@ -64,24 +92,6 @@ export class SubscriptionResponse {
         {
             "name": "propertyName",
             "baseName": "propertyName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "active",
-            "baseName": "active",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "eventType",
-            "baseName": "eventType",
-            "type": "SubscriptionResponseEventTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
             "type": "string",
             "format": ""
         },
@@ -101,52 +111,53 @@ export class SubscriptionResponse {
 }
 
 export enum SubscriptionResponseEventTypeEnum {
-    ContactPropertyChange = 'contact.propertyChange',
-    CompanyPropertyChange = 'company.propertyChange',
-    DealPropertyChange = 'deal.propertyChange',
-    TicketPropertyChange = 'ticket.propertyChange',
-    ProductPropertyChange = 'product.propertyChange',
-    LineItemPropertyChange = 'line_item.propertyChange',
-    ContactCreation = 'contact.creation',
-    ContactDeletion = 'contact.deletion',
-    ContactPrivacyDeletion = 'contact.privacyDeletion',
+    CompanyAssociationChange = 'company.associationChange',
     CompanyCreation = 'company.creation',
     CompanyDeletion = 'company.deletion',
-    DealCreation = 'deal.creation',
-    DealDeletion = 'deal.deletion',
-    TicketCreation = 'ticket.creation',
-    TicketDeletion = 'ticket.deletion',
-    ProductCreation = 'product.creation',
-    ProductDeletion = 'product.deletion',
-    LineItemCreation = 'line_item.creation',
-    LineItemDeletion = 'line_item.deletion',
+    CompanyMerge = 'company.merge',
+    CompanyPropertyChange = 'company.propertyChange',
+    CompanyRestore = 'company.restore',
+    ContactAssociationChange = 'contact.associationChange',
+    ContactCreation = 'contact.creation',
+    ContactDeletion = 'contact.deletion',
+    ContactMerge = 'contact.merge',
+    ContactPrivacyDeletion = 'contact.privacyDeletion',
+    ContactPropertyChange = 'contact.propertyChange',
+    ContactRestore = 'contact.restore',
     ConversationCreation = 'conversation.creation',
     ConversationDeletion = 'conversation.deletion',
     ConversationNewMessage = 'conversation.newMessage',
     ConversationPrivacyDeletion = 'conversation.privacyDeletion',
     ConversationPropertyChange = 'conversation.propertyChange',
-    ContactMerge = 'contact.merge',
-    CompanyMerge = 'company.merge',
-    DealMerge = 'deal.merge',
-    TicketMerge = 'ticket.merge',
-    ProductMerge = 'product.merge',
-    LineItemMerge = 'line_item.merge',
-    ContactRestore = 'contact.restore',
-    CompanyRestore = 'company.restore',
-    DealRestore = 'deal.restore',
-    TicketRestore = 'ticket.restore',
-    ProductRestore = 'product.restore',
-    LineItemRestore = 'line_item.restore',
-    ContactAssociationChange = 'contact.associationChange',
-    CompanyAssociationChange = 'company.associationChange',
     DealAssociationChange = 'deal.associationChange',
-    TicketAssociationChange = 'ticket.associationChange',
+    DealCreation = 'deal.creation',
+    DealDeletion = 'deal.deletion',
+    DealMerge = 'deal.merge',
+    DealPropertyChange = 'deal.propertyChange',
+    DealRestore = 'deal.restore',
+    EventCompleted = 'event.completed',
     LineItemAssociationChange = 'line_item.associationChange',
-    ObjectPropertyChange = 'object.propertyChange',
+    LineItemCreation = 'line_item.creation',
+    LineItemDeletion = 'line_item.deletion',
+    LineItemMerge = 'line_item.merge',
+    LineItemPropertyChange = 'line_item.propertyChange',
+    LineItemRestore = 'line_item.restore',
+    ObjectAssociationChange = 'object.associationChange',
     ObjectCreation = 'object.creation',
     ObjectDeletion = 'object.deletion',
     ObjectMerge = 'object.merge',
+    ObjectPropertyChange = 'object.propertyChange',
     ObjectRestore = 'object.restore',
-    ObjectAssociationChange = 'object.associationChange'
+    ProductCreation = 'product.creation',
+    ProductDeletion = 'product.deletion',
+    ProductMerge = 'product.merge',
+    ProductPropertyChange = 'product.propertyChange',
+    ProductRestore = 'product.restore',
+    TicketAssociationChange = 'ticket.associationChange',
+    TicketCreation = 'ticket.creation',
+    TicketDeletion = 'ticket.deletion',
+    TicketMerge = 'ticket.merge',
+    TicketPropertyChange = 'ticket.propertyChange',
+    TicketRestore = 'ticket.restore'
 }
 

@@ -10,20 +10,32 @@
  * Do not edit the class manually.
  */
 
-import { PublicPropertyAssociationFilterBranchFilterBranchesInner } from '../models/PublicPropertyAssociationFilterBranchFilterBranchesInner';
-import { PublicPropertyAssociationFilterBranchFiltersInner } from '../models/PublicPropertyAssociationFilterBranchFiltersInner';
+import { PublicAndFilterBranchFilterBranchesInner } from '../models/PublicAndFilterBranchFilterBranchesInner';
+import { PublicAndFilterBranchFiltersInner } from '../models/PublicAndFilterBranchFiltersInner';
 
 export class PublicOrFilterBranch {
-    'filterBranchType': PublicOrFilterBranchFilterBranchTypeEnum;
-    'filterBranches': Array<PublicPropertyAssociationFilterBranchFilterBranchesInner>;
+    /**
+    * The logical operator used to combine the filters within the branch (OR).
+    */
     'filterBranchOperator': string;
-    'filters': Array<PublicPropertyAssociationFilterBranchFiltersInner>;
+    /**
+    * The type of the filter branch (OR).
+    */
+    'filterBranchType': PublicOrFilterBranchFilterBranchTypeEnum;
+    'filterBranches': Array<PublicAndFilterBranchFilterBranchesInner>;
+    'filters': Array<PublicAndFilterBranchFiltersInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "filterBranchOperator",
+            "baseName": "filterBranchOperator",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "filterBranchType",
             "baseName": "filterBranchType",
@@ -33,19 +45,13 @@ export class PublicOrFilterBranch {
         {
             "name": "filterBranches",
             "baseName": "filterBranches",
-            "type": "Array<PublicPropertyAssociationFilterBranchFilterBranchesInner>",
-            "format": ""
-        },
-        {
-            "name": "filterBranchOperator",
-            "baseName": "filterBranchOperator",
-            "type": "string",
+            "type": "Array<PublicAndFilterBranchFilterBranchesInner>",
             "format": ""
         },
         {
             "name": "filters",
             "baseName": "filters",
-            "type": "Array<PublicPropertyAssociationFilterBranchFiltersInner>",
+            "type": "Array<PublicAndFilterBranchFiltersInner>",
             "format": ""
         }    ];
 

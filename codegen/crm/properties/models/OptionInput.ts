@@ -13,17 +13,17 @@
 
 export class OptionInput {
     /**
-    * Hidden options won\'t be shown in HubSpot.
+    * A description of the option.
     */
-    'hidden': boolean;
+    'description'?: string;
     /**
     * Options are shown in order starting with the lowest positive integer value. Values of -1 will cause the option to be displayed after any positive values.
     */
     'displayOrder'?: number;
     /**
-    * A description of the option.
+    * Hidden options won\'t be shown in HubSpot.
     */
-    'description'?: string;
+    'hidden': boolean;
     /**
     * A human-readable option label that will be shown in HubSpot.
     */
@@ -39,9 +39,9 @@ export class OptionInput {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "hidden",
-            "baseName": "hidden",
-            "type": "boolean",
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
             "format": ""
         },
         {
@@ -51,9 +51,9 @@ export class OptionInput {
             "format": "int32"
         },
         {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
+            "name": "hidden",
+            "baseName": "hidden",
+            "type": "boolean",
             "format": ""
         },
         {

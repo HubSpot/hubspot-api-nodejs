@@ -14,11 +14,26 @@ import { IntegratorObjectResultActionsInner } from '../models/IntegratorObjectRe
 import { ObjectToken } from '../models/ObjectToken';
 
 export class IntegratorObjectResult {
-    'linkUrl'?: string;
-    'tokens': Array<ObjectToken>;
-    'id': string;
-    'title': string;
+    /**
+    * A list of actions associated with the card, which can include action hooks, confirmation action hooks, or iframes.
+    */
     'actions': Array<IntegratorObjectResultActionsInner>;
+    /**
+    * The unique identifier for the card.
+    */
+    'id': string;
+    /**
+    * A URL used on the title of the card
+    */
+    'linkUrl'?: string;
+    /**
+    * The top-level title for this card. Displayed to users in the CRM UI.
+    */
+    'title': string;
+    /**
+    * A collection of tokens representing specific properties related to the card.
+    */
+    'tokens': Array<ObjectToken>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -26,20 +41,20 @@ export class IntegratorObjectResult {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "linkUrl",
-            "baseName": "linkUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tokens",
-            "baseName": "tokens",
-            "type": "Array<ObjectToken>",
+            "name": "actions",
+            "baseName": "actions",
+            "type": "Array<IntegratorObjectResultActionsInner>",
             "format": ""
         },
         {
             "name": "id",
             "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "linkUrl",
+            "baseName": "linkUrl",
             "type": "string",
             "format": ""
         },
@@ -50,9 +65,9 @@ export class IntegratorObjectResult {
             "format": ""
         },
         {
-            "name": "actions",
-            "baseName": "actions",
-            "type": "Array<IntegratorObjectResultActionsInner>",
+            "name": "tokens",
+            "baseName": "tokens",
+            "type": "Array<ObjectToken>",
             "format": ""
         }    ];
 

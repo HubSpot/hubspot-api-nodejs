@@ -16,11 +16,29 @@ import { ContentFolder } from '../models/ContentFolder';
 * Response object for successful batch operations on content folders.
 */
 export class BatchResponseContentFolder {
+    /**
+    * Time of batch operation completion.
+    */
     'completedAt': Date;
-    'requestedAt'?: Date;
-    'startedAt': Date;
+    /**
+    * Links associated with batch operation.
+    */
     'links'?: { [key: string]: string; };
+    /**
+    * Time of batch operation request.
+    */
+    'requestedAt'?: Date;
+    /**
+    * Results of batch operation.
+    */
     'results': Array<ContentFolder>;
+    /**
+    * Time of batch operation start.
+    */
+    'startedAt': Date;
+    /**
+    * Status of batch operation.
+    */
     'status': BatchResponseContentFolderStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -35,28 +53,28 @@ export class BatchResponseContentFolder {
             "format": "date-time"
         },
         {
-            "name": "requestedAt",
-            "baseName": "requestedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "results",
             "baseName": "results",
             "type": "Array<ContentFolder>",
             "format": ""
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -74,9 +92,9 @@ export class BatchResponseContentFolder {
 }
 
 export enum BatchResponseContentFolderStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

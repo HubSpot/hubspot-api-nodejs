@@ -13,22 +13,25 @@
 
 export class HubDbTableRowV3Request {
     /**
-    * Specifies the value for `hs_path` column, which will be used as slug in the dynamic pages
-    */
-    'path'?: string;
-    /**
     * Specifies the value for the column child table id
     */
-    'childTableId'?: number;
+    'childTableId': number;
     /**
-    * List of key value pairs with the column name and column value
+    * The index position for displaying the row within the table.
     */
-    'values': { [key: string]: any; };
+    'displayIndex': number;
     /**
     * Specifies the value for `hs_name` column, which will be used as title in the dynamic pages
     */
     'name'?: string;
-    'displayIndex'?: number;
+    /**
+    * Specifies the value for `hs_path` column, which will be used as slug in the dynamic pages
+    */
+    'path'?: string;
+    /**
+    * List of key value pairs with the column name and column value
+    */
+    'values': { [key: string]: any; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -36,22 +39,16 @@ export class HubDbTableRowV3Request {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "path",
-            "baseName": "path",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "childTableId",
             "baseName": "childTableId",
             "type": "number",
             "format": "int64"
         },
         {
-            "name": "values",
-            "baseName": "values",
-            "type": "{ [key: string]: any; }",
-            "format": ""
+            "name": "displayIndex",
+            "baseName": "displayIndex",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "name",
@@ -60,10 +57,16 @@ export class HubDbTableRowV3Request {
             "format": ""
         },
         {
-            "name": "displayIndex",
-            "baseName": "displayIndex",
-            "type": "number",
-            "format": "int32"
+            "name": "path",
+            "baseName": "path",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "values",
+            "baseName": "values",
+            "type": "{ [key: string]: any; }",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

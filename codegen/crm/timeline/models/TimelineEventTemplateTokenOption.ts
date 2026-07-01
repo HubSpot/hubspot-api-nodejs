@@ -1,6 +1,6 @@
 /**
  * Timeline
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -12,7 +12,13 @@
 
 
 export class TimelineEventTemplateTokenOption {
+    /**
+    * The label of the option that is displayed in the front end.
+    */
     'label': string;
+    /**
+    * The value of the option that is provided on the occurrence.
+    */
     'value': string;
 
     static readonly discriminator: string | undefined = undefined;

@@ -1,6 +1,6 @@
 /**
  * Site Search
- * Use these endpoints for searching content on your HubSpot hosted CMS website(s).
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -13,12 +13,27 @@
 import { ContentSearchResult } from '../models/ContentSearchResult';
 
 export class PublicSearchResults {
-    'total': number;
-    'searchTerm'?: string;
-    'offset': number;
+    /**
+    * The number of results returned in a single response.
+    */
     'limit': number;
+    /**
+    * The starting point for the next set of results in pagination.
+    */
+    'offset': number;
+    /**
+    * The current page number in the paginated results.
+    */
     'page': number;
     'results': Array<ContentSearchResult>;
+    /**
+    * The term used in the search query.
+    */
+    'searchTerm'?: string;
+    /**
+    * The total number of results found for the search term.
+    */
+    'total': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -26,26 +41,14 @@ export class PublicSearchResults {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "total",
-            "baseName": "total",
+            "name": "limit",
+            "baseName": "limit",
             "type": "number",
             "format": "int32"
-        },
-        {
-            "name": "searchTerm",
-            "baseName": "searchTerm",
-            "type": "string",
-            "format": ""
         },
         {
             "name": "offset",
             "baseName": "offset",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "limit",
-            "baseName": "limit",
             "type": "number",
             "format": "int32"
         },
@@ -60,6 +63,18 @@ export class PublicSearchResults {
             "baseName": "results",
             "type": "Array<ContentSearchResult>",
             "format": ""
+        },
+        {
+            "name": "searchTerm",
+            "baseName": "searchTerm",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {

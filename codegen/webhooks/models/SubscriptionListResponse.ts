@@ -17,7 +17,7 @@ import { SubscriptionResponse } from '../models/SubscriptionResponse';
 */
 export class SubscriptionListResponse {
     /**
-    * List of event subscriptions for your app
+    * An array containing all active and paused event subscriptions configured for the app. Each item in the array is a SubscriptionResponse object.
     */
     'results': Array<SubscriptionResponse>;
 

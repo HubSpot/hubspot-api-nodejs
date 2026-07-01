@@ -7,113 +7,113 @@ import { FormDefinitionCreateRequestBase } from '../models/FormDefinitionCreateR
 import { HubSpotFormDefinition } from '../models/HubSpotFormDefinition';
 import { HubSpotFormDefinitionPatchRequest } from '../models/HubSpotFormDefinitionPatchRequest';
 
-import { ObservableFormsApi } from "./ObservableAPI";
-import { FormsApiRequestFactory, FormsApiResponseProcessor} from "../apis/FormsApi";
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
-export interface FormsApiArchiveRequest {
+export interface BasicApiArchiveRequest {
     /**
-     * The ID of the form to archive.
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof FormsApiarchive
+     * @memberof BasicApiarchive
      */
     formId: string
 }
 
-export interface FormsApiCreateRequest {
+export interface BasicApiGetByIdRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApigetById
+     */
+    formId: string
+    /**
+     * Whether to return only results that have been archived.
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof BasicApigetById
+     */
+    archived?: boolean
+}
+
+export interface BasicApiMarketingV3FormsRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApimarketingV3Forms
+     */
+    after?: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof BasicApimarketingV3Forms
+     */
+    archived?: boolean
+    /**
+     * 
+     * Defaults to: undefined
+     * @type Array&lt;&#39;hubspot&#39; | &#39;captured&#39; | &#39;flow&#39; | &#39;blog_comment&#39; | &#39;all&#39;&gt;
+     * @memberof BasicApimarketingV3Forms
+     */
+    formTypes?: Array<'hubspot' | 'captured' | 'flow' | 'blog_comment' | 'all'>
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApimarketingV3Forms
+     */
+    limit?: number
+}
+
+export interface BasicApiMarketingV3Forms0Request {
     /**
      * 
      * @type FormDefinitionCreateRequestBase
-     * @memberof FormsApicreate
+     * @memberof BasicApimarketingV3Forms_1
      */
     formDefinitionCreateRequestBase: FormDefinitionCreateRequestBase
 }
 
-export interface FormsApiGetByIdRequest {
-    /**
-     * The unique identifier of the form
-     * Defaults to: undefined
-     * @type string
-     * @memberof FormsApigetById
-     */
-    formId: string
-    /**
-     * Whether to return only results that have been archived.
-     * Defaults to: undefined
-     * @type boolean
-     * @memberof FormsApigetById
-     */
-    archived?: boolean
-}
-
-export interface FormsApiGetPageRequest {
-    /**
-     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * Defaults to: undefined
-     * @type string
-     * @memberof FormsApigetPage
-     */
-    after?: string
-    /**
-     * The maximum number of results to display per page.
-     * Defaults to: undefined
-     * @type number
-     * @memberof FormsApigetPage
-     */
-    limit?: number
-    /**
-     * Whether to return only results that have been archived.
-     * Defaults to: undefined
-     * @type boolean
-     * @memberof FormsApigetPage
-     */
-    archived?: boolean
-    /**
-     * The form types to be included in the results.
-     * Defaults to: undefined
-     * @type Array&lt;&#39;hubspot&#39; | &#39;captured&#39; | &#39;flow&#39; | &#39;blog_comment&#39; | &#39;all&#39;&gt;
-     * @memberof FormsApigetPage
-     */
-    formTypes?: Array<'hubspot' | 'captured' | 'flow' | 'blog_comment' | 'all'>
-}
-
-export interface FormsApiReplaceRequest {
+export interface BasicApiReplaceRequest {
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof FormsApireplace
+     * @memberof BasicApireplace
      */
     formId: string
     /**
      * 
      * @type HubSpotFormDefinition
-     * @memberof FormsApireplace
+     * @memberof BasicApireplace
      */
     hubSpotFormDefinition: HubSpotFormDefinition
 }
 
-export interface FormsApiUpdateRequest {
+export interface BasicApiUpdateRequest {
     /**
-     * The ID of the form to update.
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof FormsApiupdate
+     * @memberof BasicApiupdate
      */
     formId: string
     /**
      * 
      * @type HubSpotFormDefinitionPatchRequest
-     * @memberof FormsApiupdate
+     * @memberof BasicApiupdate
      */
     hubSpotFormDefinitionPatchRequest: HubSpotFormDefinitionPatchRequest
 }
 
-export class ObjectFormsApi {
-    private api: ObservableFormsApi
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
 
-    public constructor(configuration: Configuration, requestFactory?: FormsApiRequestFactory, responseProcessor?: FormsApiResponseProcessor) {
-        this.api = new ObservableFormsApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -121,7 +121,7 @@ export class ObjectFormsApi {
      * Archive a form definition
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: FormsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.formId,  options).toPromise();
     }
 
@@ -130,26 +130,8 @@ export class ObjectFormsApi {
      * Archive a form definition
      * @param param the request object
      */
-    public archive(param: FormsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
+    public archive(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.formId,  options).toPromise();
-    }
-
-    /**
-     * Add a new `hubspot` form
-     * Create a form
-     * @param param the request object
-     */
-    public createWithHttpInfo(param: FormsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<FormDefinitionBase>> {
-        return this.api.createWithHttpInfo(param.formDefinitionCreateRequestBase,  options).toPromise();
-    }
-
-    /**
-     * Add a new `hubspot` form
-     * Create a form
-     * @param param the request object
-     */
-    public create(param: FormsApiCreateRequest, options?: ConfigurationOptions): Promise<FormDefinitionBase> {
-        return this.api.create(param.formDefinitionCreateRequestBase,  options).toPromise();
     }
 
     /**
@@ -157,7 +139,7 @@ export class ObjectFormsApi {
      * Get a form definition
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: FormsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<FormDefinitionBase>> {
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<FormDefinitionBase>> {
         return this.api.getByIdWithHttpInfo(param.formId, param.archived,  options).toPromise();
     }
 
@@ -166,26 +148,36 @@ export class ObjectFormsApi {
      * Get a form definition
      * @param param the request object
      */
-    public getById(param: FormsApiGetByIdRequest, options?: ConfigurationOptions): Promise<FormDefinitionBase> {
+    public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<FormDefinitionBase> {
         return this.api.getById(param.formId, param.archived,  options).toPromise();
     }
 
     /**
-     * Returns a list of forms based on the search filters. By default, it returns the first 20 `hubspot` forms
-     * Get a list of forms
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: FormsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseFormDefinitionBaseForwardPaging>> {
-        return this.api.getPageWithHttpInfo(param.after, param.limit, param.archived, param.formTypes,  options).toPromise();
+    public marketingV3FormsWithHttpInfo(param: BasicApiMarketingV3FormsRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseFormDefinitionBaseForwardPaging>> {
+        return this.api.marketingV3FormsWithHttpInfo(param.after, param.archived, param.formTypes, param.limit,  options).toPromise();
     }
 
     /**
-     * Returns a list of forms based on the search filters. By default, it returns the first 20 `hubspot` forms
-     * Get a list of forms
      * @param param the request object
      */
-    public getPage(param: FormsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseFormDefinitionBaseForwardPaging> {
-        return this.api.getPage(param.after, param.limit, param.archived, param.formTypes,  options).toPromise();
+    public marketingV3Forms(param: BasicApiMarketingV3FormsRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseFormDefinitionBaseForwardPaging> {
+        return this.api.marketingV3Forms(param.after, param.archived, param.formTypes, param.limit,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public marketingV3Forms_1WithHttpInfo(param: BasicApiMarketingV3Forms0Request, options?: ConfigurationOptions): Promise<HttpInfo<FormDefinitionBase>> {
+        return this.api.marketingV3Forms_1WithHttpInfo(param.formDefinitionCreateRequestBase,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public marketingV3Forms_1(param: BasicApiMarketingV3Forms0Request, options?: ConfigurationOptions): Promise<FormDefinitionBase> {
+        return this.api.marketingV3Forms_1(param.formDefinitionCreateRequestBase,  options).toPromise();
     }
 
     /**
@@ -193,7 +185,7 @@ export class ObjectFormsApi {
      * Update a form definition
      * @param param the request object
      */
-    public replaceWithHttpInfo(param: FormsApiReplaceRequest, options?: ConfigurationOptions): Promise<HttpInfo<FormDefinitionBase>> {
+    public replaceWithHttpInfo(param: BasicApiReplaceRequest, options?: ConfigurationOptions): Promise<HttpInfo<FormDefinitionBase>> {
         return this.api.replaceWithHttpInfo(param.formId, param.hubSpotFormDefinition,  options).toPromise();
     }
 
@@ -202,7 +194,7 @@ export class ObjectFormsApi {
      * Update a form definition
      * @param param the request object
      */
-    public replace(param: FormsApiReplaceRequest, options?: ConfigurationOptions): Promise<FormDefinitionBase> {
+    public replace(param: BasicApiReplaceRequest, options?: ConfigurationOptions): Promise<FormDefinitionBase> {
         return this.api.replace(param.formId, param.hubSpotFormDefinition,  options).toPromise();
     }
 
@@ -211,7 +203,7 @@ export class ObjectFormsApi {
      * Partially update a form definition
      * @param param the request object
      */
-    public updateWithHttpInfo(param: FormsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<FormDefinitionBase>> {
+    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<FormDefinitionBase>> {
         return this.api.updateWithHttpInfo(param.formId, param.hubSpotFormDefinitionPatchRequest,  options).toPromise();
     }
 
@@ -220,7 +212,7 @@ export class ObjectFormsApi {
      * Partially update a form definition
      * @param param the request object
      */
-    public update(param: FormsApiUpdateRequest, options?: ConfigurationOptions): Promise<FormDefinitionBase> {
+    public update(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<FormDefinitionBase> {
         return this.api.update(param.formId, param.hubSpotFormDefinitionPatchRequest,  options).toPromise();
     }
 

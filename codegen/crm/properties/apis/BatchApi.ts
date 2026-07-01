@@ -136,8 +136,9 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
      * Read a batch of properties
      * @param objectType 
      * @param batchReadInputPropertyName 
+     * @param locale 
      */
-    public async read(objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, _options?: Configuration): Promise<RequestContext> {
+    public async read(objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, locale?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -152,6 +153,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+
         // Path Params
         const localVarPath = '/crm/v3/properties/{objectType}/batch/read'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
@@ -159,6 +161,11 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (locale !== undefined) {
+            requestContext.setQueryParam("locale", ObjectSerializer.serialize(locale, "string", ""));
+        }
 
 
         // Body Params

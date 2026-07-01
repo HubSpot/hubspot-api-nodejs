@@ -18,13 +18,13 @@ import { CardFetchBodyPatch } from '../models/CardFetchBodyPatch';
 * Body for a patch with optional fields
 */
 export class CardPatchRequest {
-    'fetch'?: CardFetchBodyPatch;
+    'actions'?: CardActions;
     'display'?: CardDisplayBody;
+    'fetch'?: CardFetchBodyPatch;
     /**
     * The top-level title for this card. Displayed to users in the CRM UI.
     */
     'title'?: string;
-    'actions'?: CardActions;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -32,9 +32,9 @@ export class CardPatchRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "fetch",
-            "baseName": "fetch",
-            "type": "CardFetchBodyPatch",
+            "name": "actions",
+            "baseName": "actions",
+            "type": "CardActions",
             "format": ""
         },
         {
@@ -44,15 +44,15 @@ export class CardPatchRequest {
             "format": ""
         },
         {
-            "name": "title",
-            "baseName": "title",
-            "type": "string",
+            "name": "fetch",
+            "baseName": "fetch",
+            "type": "CardFetchBodyPatch",
             "format": ""
         },
         {
-            "name": "actions",
-            "baseName": "actions",
-            "type": "CardActions",
+            "name": "title",
+            "baseName": "title",
+            "type": "string",
             "format": ""
         }    ];
 

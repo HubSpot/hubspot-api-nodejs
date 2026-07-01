@@ -13,9 +13,18 @@
 import { PublicInListFilterMetadata } from '../models/PublicInListFilterMetadata';
 
 export class PublicInListFilter {
+    /**
+    * Indicates the type of filter being applied (IN_LIST).
+    */
+    'filterType': PublicInListFilterFilterTypeEnum;
+    /**
+    * The ID of the list used in the association filter.
+    */
     'listId': string;
     'metadata'?: PublicInListFilterMetadata;
-    'filterType': PublicInListFilterFilterTypeEnum;
+    /**
+    * Specifies the operation to be performed by the filter (IN_LIST, NOT_IN_LIST).
+    */
     'operator': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -23,6 +32,12 @@ export class PublicInListFilter {
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "filterType",
+            "baseName": "filterType",
+            "type": "PublicInListFilterFilterTypeEnum",
+            "format": ""
+        },
         {
             "name": "listId",
             "baseName": "listId",
@@ -33,12 +48,6 @@ export class PublicInListFilter {
             "name": "metadata",
             "baseName": "metadata",
             "type": "PublicInListFilterMetadata",
-            "format": ""
-        },
-        {
-            "name": "filterType",
-            "baseName": "filterType",
-            "type": "PublicInListFilterFilterTypeEnum",
             "format": ""
         },
         {

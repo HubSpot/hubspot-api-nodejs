@@ -20,10 +20,6 @@ export class RGBAColor {
     */
     'a': number;
     /**
-    * Red.
-    */
-    'r': number;
-    /**
     * Blue.
     */
     'b': number;
@@ -31,6 +27,10 @@ export class RGBAColor {
     * Green.
     */
     'g': number;
+    /**
+    * Red.
+    */
+    'r': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -44,12 +44,6 @@ export class RGBAColor {
             "format": ""
         },
         {
-            "name": "r",
-            "baseName": "r",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "b",
             "baseName": "b",
             "type": "number",
@@ -58,6 +52,12 @@ export class RGBAColor {
         {
             "name": "g",
             "baseName": "g",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "r",
+            "baseName": "r",
             "type": "number",
             "format": "int32"
         }    ];

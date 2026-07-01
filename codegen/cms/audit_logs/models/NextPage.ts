@@ -1,6 +1,6 @@
 /**
  * Cms Content Audit
- * Use this endpoint to query audit logs of CMS changes that occurred on your HubSpot account.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -11,9 +11,18 @@
  */
 
 
+/**
+* Specifies the paging information needed to retrieve the next set of results in a paginated API response
+*/
 export class NextPage {
-    'link'?: string;
+    /**
+    * Cursor token representing the boundary timestamp after which to fetch the next page of results. Pass this value as the after query parameter to retrieve later audit logs.
+    */
     'after': string;
+    /**
+    * Pre-constructed URL that can be used to directly fetch the next page of results without manually building the query.
+    */
+    'link'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,14 +30,14 @@ export class NextPage {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "link",
-            "baseName": "link",
+            "name": "after",
+            "baseName": "after",
             "type": "string",
             "format": ""
         },
         {
-            "name": "after",
-            "baseName": "after",
+            "name": "link",
+            "baseName": "link",
             "type": "string",
             "format": ""
         }    ];

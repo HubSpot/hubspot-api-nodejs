@@ -22,9 +22,10 @@ export class PromiseBatchApi {
 
     /**
      * Read a batch of deal split objects by their associated deal object internal ID
+     * Read a batch of deal split objects by their associated deal object internal ID
      * @param batchInputPublicObjectId
      */
-    public readWithHttpInfo(batchInputPublicObjectId: BatchInputPublicObjectId, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
+    public crmObjectsV3DealsSplitsBatchReadWithHttpInfo(batchInputPublicObjectId: BatchInputPublicObjectId, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -37,15 +38,16 @@ export class PromiseBatchApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.readWithHttpInfo(batchInputPublicObjectId, observableOptions);
+        const result = this.api.crmObjectsV3DealsSplitsBatchReadWithHttpInfo(batchInputPublicObjectId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read a batch of deal split objects by their associated deal object internal ID
+     * Read a batch of deal split objects by their associated deal object internal ID
      * @param batchInputPublicObjectId
      */
-    public read(batchInputPublicObjectId: BatchInputPublicObjectId, _options?: PromiseConfigurationOptions): Promise<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
+    public crmObjectsV3DealsSplitsBatchRead(batchInputPublicObjectId: BatchInputPublicObjectId, _options?: PromiseConfigurationOptions): Promise<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -58,15 +60,16 @@ export class PromiseBatchApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.read(batchInputPublicObjectId, observableOptions);
+        const result = this.api.crmObjectsV3DealsSplitsBatchRead(batchInputPublicObjectId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
+     * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
      * @param publicDealSplitsBatchCreateRequest
      */
-    public upsertWithHttpInfo(publicDealSplitsBatchCreateRequest: PublicDealSplitsBatchCreateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
+    public crmObjectsV3DealsSplitsBatchUpsertWithHttpInfo(publicDealSplitsBatchCreateRequest: PublicDealSplitsBatchCreateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -79,15 +82,16 @@ export class PromiseBatchApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.upsertWithHttpInfo(publicDealSplitsBatchCreateRequest, observableOptions);
+        const result = this.api.crmObjectsV3DealsSplitsBatchUpsertWithHttpInfo(publicDealSplitsBatchCreateRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
+     * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
      * @param publicDealSplitsBatchCreateRequest
      */
-    public upsert(publicDealSplitsBatchCreateRequest: PublicDealSplitsBatchCreateRequest, _options?: PromiseConfigurationOptions): Promise<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
+    public crmObjectsV3DealsSplitsBatchUpsert(publicDealSplitsBatchCreateRequest: PublicDealSplitsBatchCreateRequest, _options?: PromiseConfigurationOptions): Promise<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -100,7 +104,7 @@ export class PromiseBatchApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.upsert(publicDealSplitsBatchCreateRequest, observableOptions);
+        const result = this.api.crmObjectsV3DealsSplitsBatchUpsert(publicDealSplitsBatchCreateRequest, observableOptions);
         return result.toPromise();
     }
 

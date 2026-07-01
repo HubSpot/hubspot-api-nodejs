@@ -31,7 +31,7 @@ export class PromiseBasicApi {
 
     /**
      * deletes all associations between two records.
-     * Delete
+     * Delete associations between two records
      * @param objectType
      * @param objectId
      * @param toObjectType
@@ -56,7 +56,7 @@ export class PromiseBasicApi {
 
     /**
      * deletes all associations between two records.
-     * Delete
+     * Delete associations between two records
      * @param objectType
      * @param objectId
      * @param toObjectType
@@ -81,7 +81,7 @@ export class PromiseBasicApi {
 
     /**
      * Set association labels between two records.
-     * Create
+     * Associate records (labelled)
      * @param objectType
      * @param objectId
      * @param toObjectType
@@ -107,7 +107,7 @@ export class PromiseBasicApi {
 
     /**
      * Set association labels between two records.
-     * Create
+     * Associate records (labelled)
      * @param objectType
      * @param objectId
      * @param toObjectType
@@ -133,7 +133,7 @@ export class PromiseBasicApi {
 
     /**
      * Create the default (most generic) association type between two object types
-     * Create Default
+     * Associate records (default)
      * @param fromObjectType
      * @param fromObjectId
      * @param toObjectType
@@ -158,7 +158,7 @@ export class PromiseBasicApi {
 
     /**
      * Create the default (most generic) association type between two object types
-     * Create Default
+     * Associate records (default)
      * @param fromObjectType
      * @param fromObjectId
      * @param toObjectType
@@ -182,8 +182,8 @@ export class PromiseBasicApi {
     }
 
     /**
-     * List all associations of an object by object type. Limit 500 per call.
-     * List
+     * Retrieve all associations between a specific record and an object type. Limit 500 per call.
+     * Retrieve all associations by object type
      * @param objectType
      * @param objectId
      * @param toObjectType
@@ -208,8 +208,8 @@ export class PromiseBasicApi {
     }
 
     /**
-     * List all associations of an object by object type. Limit 500 per call.
-     * List
+     * Retrieve all associations between a specific record and an object type. Limit 500 per call.
+     * Retrieve all associations by object type
      * @param objectType
      * @param objectId
      * @param toObjectType
@@ -254,9 +254,9 @@ export class PromiseBatchApi {
 
     /**
      * Batch delete associations for objects
-     * Delete
-     * @param fromObjectType
-     * @param toObjectType
+     * Remove associations
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociationMultiArchive
      */
     public archiveWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
@@ -278,9 +278,9 @@ export class PromiseBatchApi {
 
     /**
      * Batch delete associations for objects
-     * Delete
-     * @param fromObjectType
-     * @param toObjectType
+     * Remove associations
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociationMultiArchive
      */
     public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: PromiseConfigurationOptions): Promise<void> {
@@ -303,8 +303,8 @@ export class PromiseBatchApi {
     /**
      * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
      * Delete Specific Labels
-     * @param fromObjectType
-     * @param toObjectType
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociationMultiPost
      */
     public archiveLabelsWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
@@ -327,8 +327,8 @@ export class PromiseBatchApi {
     /**
      * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
      * Delete Specific Labels
-     * @param fromObjectType
-     * @param toObjectType
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociationMultiPost
      */
     public archiveLabels(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: PromiseConfigurationOptions): Promise<void> {
@@ -350,9 +350,9 @@ export class PromiseBatchApi {
 
     /**
      * Batch create associations for objects
-     * Create
-     * @param fromObjectType
-     * @param toObjectType
+     * Associate records (labelled)
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociationMultiPost
      */
     public createWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair>> {
@@ -374,9 +374,9 @@ export class PromiseBatchApi {
 
     /**
      * Batch create associations for objects
-     * Create
-     * @param fromObjectType
-     * @param toObjectType
+     * Associate records (labelled)
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicAssociationMultiPost
      */
     public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: PromiseConfigurationOptions): Promise<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair> {
@@ -399,8 +399,8 @@ export class PromiseBatchApi {
     /**
      * Create the default (most generic) association type between two object types
      *  Create Default Associations
-     * @param fromObjectType
-     * @param toObjectType
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicDefaultAssociationMultiPost
      */
     public createDefaultWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
@@ -423,8 +423,8 @@ export class PromiseBatchApi {
     /**
      * Create the default (most generic) association type between two object types
      *  Create Default Associations
-     * @param fromObjectType
-     * @param toObjectType
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicDefaultAssociationMultiPost
      */
     public createDefault(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: PromiseConfigurationOptions): Promise<BatchResponsePublicDefaultAssociation> {
@@ -446,9 +446,9 @@ export class PromiseBatchApi {
 
     /**
      * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
-     * Read
-     * @param fromObjectType
-     * @param toObjectType
+     * Retrieve associations
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicFetchAssociationsBatchRequest
      */
     public getPageWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors>> {
@@ -470,9 +470,9 @@ export class PromiseBatchApi {
 
     /**
      * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
-     * Read
-     * @param fromObjectType
-     * @param toObjectType
+     * Retrieve associations
+     * @param fromObjectType 
+     * @param toObjectType 
      * @param batchInputPublicFetchAssociationsBatchRequest
      */
     public getPage(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: PromiseConfigurationOptions): Promise<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
@@ -513,7 +513,7 @@ export class PromiseReportApi {
 
     /**
      * Requests a report of all objects in the portal which have a high usage of associations
-     * Report
+     * Report high usage
      * @param userId 
      */
     public requestWithHttpInfo(userId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ReportCreationResponse>> {
@@ -535,7 +535,7 @@ export class PromiseReportApi {
 
     /**
      * Requests a report of all objects in the portal which have a high usage of associations
-     * Report
+     * Report high usage
      * @param userId 
      */
     public request(userId: number, _options?: PromiseConfigurationOptions): Promise<ReportCreationResponse> {

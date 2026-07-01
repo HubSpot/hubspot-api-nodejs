@@ -19,8 +19,8 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Send data for a single event completion.
-     * Send a custom event completion
+     * Send data for a single custom event occurrence.
+     * Send a custom event occurrence
      * @param behavioralEventHttpCompletionRequest
      */
     public sendWithHttpInfo(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
@@ -41,8 +41,8 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Send data for a single event completion.
-     * Send a custom event completion
+     * Send data for a single custom event occurrence.
+     * Send a custom event occurrence
      * @param behavioralEventHttpCompletionRequest
      */
     public send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: PromiseConfigurationOptions): Promise<void> {
@@ -82,8 +82,8 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Send multiple event completions at once.
-     * Send a batch of event completions
+     * Send multiple event occurrences at once.
+     * Send a batch of event occurrences
      * @param batchedBehavioralEventHttpCompletionRequest
      */
     public sendWithHttpInfo(batchedBehavioralEventHttpCompletionRequest: BatchedBehavioralEventHttpCompletionRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
@@ -104,8 +104,8 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Send multiple event completions at once.
-     * Send a batch of event completions
+     * Send multiple event occurrences at once.
+     * Send a batch of event occurrences
      * @param batchedBehavioralEventHttpCompletionRequest
      */
     public send(batchedBehavioralEventHttpCompletionRequest: BatchedBehavioralEventHttpCompletionRequest, _options?: PromiseConfigurationOptions): Promise<void> {

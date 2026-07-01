@@ -12,16 +12,46 @@
 
 
 export class PublicDatePoint {
-    'month': number;
-    'hour'?: number;
-    'year': number;
-    'timezoneSource'?: string;
-    'millisecond'?: number;
-    'timeType': PublicDatePointTimeTypeEnum;
-    'zoneId': string;
+    /**
+    * The day component of the date.
+    */
     'day': number;
+    /**
+    * The hour component of the time.
+    */
+    'hour'?: number;
+    /**
+    * The millisecond component of the time.
+    */
+    'millisecond'?: number;
+    /**
+    * The minute component of the time.
+    */
     'minute'?: number;
+    /**
+    * The month component of the date.
+    */
+    'month': number;
+    /**
+    * The second component of the time.
+    */
     'second'?: number;
+    /**
+    * Specifies the type of time (DATE).
+    */
+    'timeType': PublicDatePointTimeTypeEnum;
+    /**
+    * The source of the time zone information.
+    */
+    'timezoneSource'?: string;
+    /**
+    * The year component of the date.
+    */
+    'year': number;
+    /**
+    * The identifier for the time zone.
+    */
+    'zoneId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -29,8 +59,8 @@ export class PublicDatePoint {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "month",
-            "baseName": "month",
+            "name": "day",
+            "baseName": "day",
             "type": "number",
             "format": "int32"
         },
@@ -41,38 +71,8 @@ export class PublicDatePoint {
             "format": "int32"
         },
         {
-            "name": "year",
-            "baseName": "year",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "timezoneSource",
-            "baseName": "timezoneSource",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "millisecond",
             "baseName": "millisecond",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "timeType",
-            "baseName": "timeType",
-            "type": "PublicDatePointTimeTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "zoneId",
-            "baseName": "zoneId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "day",
-            "baseName": "day",
             "type": "number",
             "format": "int32"
         },
@@ -83,10 +83,40 @@ export class PublicDatePoint {
             "format": "int32"
         },
         {
+            "name": "month",
+            "baseName": "month",
+            "type": "number",
+            "format": "int32"
+        },
+        {
             "name": "second",
             "baseName": "second",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "timeType",
+            "baseName": "timeType",
+            "type": "PublicDatePointTimeTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "timezoneSource",
+            "baseName": "timezoneSource",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "year",
+            "baseName": "year",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "zoneId",
+            "baseName": "zoneId",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

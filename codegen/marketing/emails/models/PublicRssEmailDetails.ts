@@ -15,42 +15,15 @@
 * RSS related data if it is a blog or rss email.
 */
 export class PublicRssEmailDetails {
-    /**
-    * 
-    */
-    'blogImageMaxWidth'?: number;
-    /**
-    * 
-    */
     'blogEmailType'?: string;
-    /**
-    * 
-    */
+    'blogImageMaxWidth'?: number;
+    'blogLayout'?: PublicRssEmailDetailsBlogLayoutEnum;
     'hubspotBlogId'?: string;
-    /**
-    * 
-    */
-    'rssEntryTemplate'?: string;
-    /**
-    * 
-    */
-    'timing'?: { [key: string]: any; };
-    /**
-    * 
-    */
     'maxEntries'?: number;
-    /**
-    * 
-    */
-    'useHeadlineAsSubject'?: boolean;
-    /**
-    * 
-    */
-    'blogLayout'?: string;
-    /**
-    * 
-    */
+    'rssEntryTemplate'?: string;
+    'timing'?: { [key: string]: any; };
     'url'?: string;
+    'useHeadlineAsSubject'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -58,15 +31,21 @@ export class PublicRssEmailDetails {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "blogEmailType",
+            "baseName": "blogEmailType",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "blogImageMaxWidth",
             "baseName": "blogImageMaxWidth",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "blogEmailType",
-            "baseName": "blogEmailType",
-            "type": "string",
+            "name": "blogLayout",
+            "baseName": "blogLayout",
+            "type": "PublicRssEmailDetailsBlogLayoutEnum",
             "format": ""
         },
         {
@@ -74,6 +53,12 @@ export class PublicRssEmailDetails {
             "baseName": "hubspotBlogId",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "maxEntries",
+            "baseName": "maxEntries",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "rssEntryTemplate",
@@ -88,27 +73,15 @@ export class PublicRssEmailDetails {
             "format": ""
         },
         {
-            "name": "maxEntries",
-            "baseName": "maxEntries",
-            "type": "number",
-            "format": "int32"
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "useHeadlineAsSubject",
             "baseName": "useHeadlineAsSubject",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "blogLayout",
-            "baseName": "blogLayout",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string",
             "format": ""
         }    ];
 
@@ -119,3 +92,10 @@ export class PublicRssEmailDetails {
     public constructor() {
     }
 }
+
+export enum PublicRssEmailDetailsBlogLayoutEnum {
+    FullPost = 'FULL_POST',
+    SummaryNoFeaturedImage = 'SUMMARY_NO_FEATURED_IMAGE',
+    SummaryWithFeaturedImage = 'SUMMARY_WITH_FEATURED_IMAGE'
+}
+

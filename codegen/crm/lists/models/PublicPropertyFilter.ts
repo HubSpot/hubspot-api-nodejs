@@ -10,24 +10,24 @@
  * Do not edit the class manually.
  */
 
-import { PublicSurveyMonkeyValueFilterValueComparison } from '../models/PublicSurveyMonkeyValueFilterValueComparison';
+import { PublicPropertyFilterOperation } from '../models/PublicPropertyFilterOperation';
 
 export class PublicPropertyFilter {
-    'property': string;
+    /**
+    * Indicates that the filter (PROPERTY).
+    */
     'filterType': PublicPropertyFilterFilterTypeEnum;
-    'operation': PublicSurveyMonkeyValueFilterValueComparison;
+    'operation': PublicPropertyFilterOperation;
+    /**
+    * Specifies the name of the property that the filter is applied to.
+    */
+    'property': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "property",
-            "baseName": "property",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "filterType",
             "baseName": "filterType",
@@ -37,7 +37,13 @@ export class PublicPropertyFilter {
         {
             "name": "operation",
             "baseName": "operation",
-            "type": "PublicSurveyMonkeyValueFilterValueComparison",
+            "type": "PublicPropertyFilterOperation",
+            "format": ""
+        },
+        {
+            "name": "property",
+            "baseName": "property",
+            "type": "string",
             "format": ""
         }    ];
 

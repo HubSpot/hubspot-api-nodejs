@@ -12,11 +12,26 @@
 
 
 export class PublicRollingDateRangePropertyOperation {
+    /**
+    * Indicates whether objects with no value set for the property should be included in the operation.
+    */
     'includeObjectsWithNoValueSet': boolean;
-    'requiresTimeZoneConversion': boolean;
-    'operationType': PublicRollingDateRangePropertyOperationOperationTypeEnum;
+    /**
+    * The number of days to be considered in the rolling date range operation.
+    */
     'numberOfDays': number;
+    /**
+    * Specifies the type of operation (ROLLING_DATE_RANGE).
+    */
+    'operationType': PublicRollingDateRangePropertyOperationOperationTypeEnum;
+    /**
+    * Defines the operation to be applied within the rolling date range property operation (IS_LESS_THAN_X_DAYS_AGO, IS_MORE_THAN_X_DAYS_AGO, IS_LESS_THAN_X_DAYS_FROM_NOW, IS_MORE_THAN_X_DAYS_FROM_NOW).
+    */
     'operator': string;
+    /**
+    * Specifies whether the operation requires conversion to a different time zone.
+    */
+    'requiresTimeZoneConversion': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,10 +45,10 @@ export class PublicRollingDateRangePropertyOperation {
             "format": ""
         },
         {
-            "name": "requiresTimeZoneConversion",
-            "baseName": "requiresTimeZoneConversion",
-            "type": "boolean",
-            "format": ""
+            "name": "numberOfDays",
+            "baseName": "numberOfDays",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "operationType",
@@ -42,15 +57,15 @@ export class PublicRollingDateRangePropertyOperation {
             "format": ""
         },
         {
-            "name": "numberOfDays",
-            "baseName": "numberOfDays",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "operator",
             "baseName": "operator",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "requiresTimeZoneConversion",
+            "baseName": "requiresTimeZoneConversion",
+            "type": "boolean",
             "format": ""
         }    ];
 

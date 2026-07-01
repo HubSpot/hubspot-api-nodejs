@@ -17,27 +17,21 @@ import { ForwardPaging } from '../models/ForwardPaging';
 * Response object for collections of blog authors with pagination information.
 */
 export class CollectionResponseWithTotalBlogAuthorForwardPaging {
-    /**
-    * Total number of blog authors.
-    */
-    'total': number;
     'paging'?: ForwardPaging;
     /**
     * Collection of blog authors.
     */
     'results': Array<BlogAuthor>;
+    /**
+    * Total number of blog authors.
+    */
+    'total': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "total",
-            "baseName": "total",
-            "type": "number",
-            "format": "int32"
-        },
         {
             "name": "paging",
             "baseName": "paging",
@@ -49,6 +43,12 @@ export class CollectionResponseWithTotalBlogAuthorForwardPaging {
             "baseName": "results",
             "type": "Array<BlogAuthor>",
             "format": ""
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

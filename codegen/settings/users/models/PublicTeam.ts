@@ -1,6 +1,6 @@
 /**
  * User Provisioning
- * Add, manage, and remove users from your account
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -11,26 +11,23 @@
  */
 
 
-/**
-* A team that can be assigned to a user
-*/
 export class PublicTeam {
-    /**
-    * Primary members of this team
-    */
-    'userIds': Array<string>;
-    /**
-    * The team\'s name
-    */
-    'name': string;
     /**
     * The team\'s unique ID
     */
     'id': string;
     /**
+    * The team\'s name
+    */
+    'name': string;
+    /**
     * Secondary or additional members of this team
     */
     'secondaryUserIds': Array<string>;
+    /**
+    * Primary members of this team
+    */
+    'userIds': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -38,9 +35,9 @@ export class PublicTeam {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "userIds",
-            "baseName": "userIds",
-            "type": "Array<string>",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         },
         {
@@ -50,14 +47,14 @@ export class PublicTeam {
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "secondaryUserIds",
+            "baseName": "secondaryUserIds",
+            "type": "Array<string>",
             "format": ""
         },
         {
-            "name": "secondaryUserIds",
-            "baseName": "secondaryUserIds",
+            "name": "userIds",
+            "baseName": "userIds",
             "type": "Array<string>",
             "format": ""
         }    ];

@@ -8,6 +8,72 @@ import { PublicUser } from '../models/PublicUser';
 import { PublicUserUpdate } from '../models/PublicUserUpdate';
 import { UserProvisionRequest } from '../models/UserProvisionRequest';
 
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+
+export interface BasicApiSettingsUsersV3Request {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApisettingsUsersV3
+     */
+    after?: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApisettingsUsersV3
+     */
+    limit?: number
+}
+
+export interface BasicApiSettingsUsersV30Request {
+    /**
+     * 
+     * @type UserProvisionRequest
+     * @memberof BasicApisettingsUsersV3_1
+     */
+    userProvisionRequest: UserProvisionRequest
+}
+
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
+
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public settingsUsersV3WithHttpInfo(param: BasicApiSettingsUsersV3Request = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicUserForwardPaging>> {
+        return this.api.settingsUsersV3WithHttpInfo(param.after, param.limit,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public settingsUsersV3(param: BasicApiSettingsUsersV3Request = {}, options?: ConfigurationOptions): Promise<CollectionResponsePublicUserForwardPaging> {
+        return this.api.settingsUsersV3(param.after, param.limit,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public settingsUsersV3_1WithHttpInfo(param: BasicApiSettingsUsersV30Request, options?: ConfigurationOptions): Promise<HttpInfo<PublicUser>> {
+        return this.api.settingsUsersV3_1WithHttpInfo(param.userProvisionRequest,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public settingsUsersV3_1(param: BasicApiSettingsUsersV30Request, options?: ConfigurationOptions): Promise<PublicUser> {
+        return this.api.settingsUsersV3_1(param.userProvisionRequest,  options).toPromise();
+    }
+
+}
+
 import { ObservableRolesApi } from "./ObservableAPI";
 import { RolesApiRequestFactory, RolesApiResponseProcessor} from "../apis/RolesApi";
 
@@ -79,85 +145,59 @@ import { UsersApiRequestFactory, UsersApiResponseProcessor} from "../apis/UsersA
 
 export interface UsersApiArchiveRequest {
     /**
-     * Identifier of user to delete
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof UsersApiarchive
      */
     userId: string
     /**
-     * The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
+     * 
      * Defaults to: undefined
-     * @type &#39;USER_ID&#39; | &#39;EMAIL&#39;
+     * @type &#39;EMAIL&#39; | &#39;USER_ID&#39;
      * @memberof UsersApiarchive
      */
-    idProperty?: 'USER_ID' | 'EMAIL'
-}
-
-export interface UsersApiCreateRequest {
-    /**
-     * 
-     * @type UserProvisionRequest
-     * @memberof UsersApicreate
-     */
-    userProvisionRequest: UserProvisionRequest
+    idProperty?: 'EMAIL' | 'USER_ID'
 }
 
 export interface UsersApiGetByIdRequest {
     /**
-     * Identifier of user to retrieve
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof UsersApigetById
      */
     userId: string
     /**
-     * The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
+     * 
      * Defaults to: undefined
-     * @type &#39;USER_ID&#39; | &#39;EMAIL&#39;
+     * @type &#39;EMAIL&#39; | &#39;USER_ID&#39;
      * @memberof UsersApigetById
      */
-    idProperty?: 'USER_ID' | 'EMAIL'
+    idProperty?: 'EMAIL' | 'USER_ID'
 }
 
-export interface UsersApiGetPageRequest {
+export interface UsersApiUpdateRequest {
     /**
-     * The number of users to retrieve
-     * Defaults to: undefined
-     * @type number
-     * @memberof UsersApigetPage
-     */
-    limit?: number
-    /**
-     * Results will display maximum 100 users per page. Additional results will be on the next page.
+     * 
      * Defaults to: undefined
      * @type string
-     * @memberof UsersApigetPage
-     */
-    after?: string
-}
-
-export interface UsersApiReplaceRequest {
-    /**
-     * Identifier of user to retrieve
-     * Defaults to: undefined
-     * @type string
-     * @memberof UsersApireplace
+     * @memberof UsersApiupdate
      */
     userId: string
     /**
      * 
      * @type PublicUserUpdate
-     * @memberof UsersApireplace
+     * @memberof UsersApiupdate
      */
     publicUserUpdate: PublicUserUpdate
     /**
-     * The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
+     * 
      * Defaults to: undefined
-     * @type &#39;USER_ID&#39; | &#39;EMAIL&#39;
-     * @memberof UsersApireplace
+     * @type &#39;EMAIL&#39; | &#39;USER_ID&#39;
+     * @memberof UsersApiupdate
      */
-    idProperty?: 'USER_ID' | 'EMAIL'
+    idProperty?: 'EMAIL' | 'USER_ID'
 }
 
 export class ObjectUsersApi {
@@ -186,24 +226,6 @@ export class ObjectUsersApi {
     }
 
     /**
-     * New users will only have minimal permissions, which is contacts-base. A welcome email will prompt them to set a password and log in to HubSpot.
-     * Adds a user
-     * @param param the request object
-     */
-    public createWithHttpInfo(param: UsersApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicUser>> {
-        return this.api.createWithHttpInfo(param.userProvisionRequest,  options).toPromise();
-    }
-
-    /**
-     * New users will only have minimal permissions, which is contacts-base. A welcome email will prompt them to set a password and log in to HubSpot.
-     * Adds a user
-     * @param param the request object
-     */
-    public create(param: UsersApiCreateRequest, options?: ConfigurationOptions): Promise<PublicUser> {
-        return this.api.create(param.userProvisionRequest,  options).toPromise();
-    }
-
-    /**
      * Retrieves a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
      * Retrieves a user
      * @param param the request object
@@ -222,21 +244,12 @@ export class ObjectUsersApi {
     }
 
     /**
-     * Retrieves a list of users from an account
-     * Retrieves a list of users from an account
+     * Modifies a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
+     * Modifies a user
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: UsersApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicUserForwardPaging>> {
-        return this.api.getPageWithHttpInfo(param.limit, param.after,  options).toPromise();
-    }
-
-    /**
-     * Retrieves a list of users from an account
-     * Retrieves a list of users from an account
-     * @param param the request object
-     */
-    public getPage(param: UsersApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponsePublicUserForwardPaging> {
-        return this.api.getPage(param.limit, param.after,  options).toPromise();
+    public updateWithHttpInfo(param: UsersApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicUser>> {
+        return this.api.updateWithHttpInfo(param.userId, param.publicUserUpdate, param.idProperty,  options).toPromise();
     }
 
     /**
@@ -244,17 +257,8 @@ export class ObjectUsersApi {
      * Modifies a user
      * @param param the request object
      */
-    public replaceWithHttpInfo(param: UsersApiReplaceRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicUser>> {
-        return this.api.replaceWithHttpInfo(param.userId, param.publicUserUpdate, param.idProperty,  options).toPromise();
-    }
-
-    /**
-     * Modifies a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
-     * Modifies a user
-     * @param param the request object
-     */
-    public replace(param: UsersApiReplaceRequest, options?: ConfigurationOptions): Promise<PublicUser> {
-        return this.api.replace(param.userId, param.publicUserUpdate, param.idProperty,  options).toPromise();
+    public update(param: UsersApiUpdateRequest, options?: ConfigurationOptions): Promise<PublicUser> {
+        return this.api.update(param.userId, param.publicUserUpdate, param.idProperty,  options).toPromise();
     }
 
 }

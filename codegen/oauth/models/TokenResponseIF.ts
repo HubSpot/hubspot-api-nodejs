@@ -10,69 +10,23 @@
  * Do not edit the class manually.
  */
 
+import { AccessTokenResponse } from '../models/AccessTokenResponse';
+import { ClientCredentialsTokenResponse } from '../models/ClientCredentialsTokenResponse';
 
-export class TokenResponseIF {
-    /**
-    * 
-    */
-    'accessToken': string;
-    /**
-    * 
-    */
-    'refreshToken': string;
-    /**
-    * 
-    */
-    'idToken'?: string;
-    /**
-    * 
-    */
-    'tokenType': string;
-    /**
-    * 
-    */
-    'expiresIn': number;
+/**
+ * @type TokenResponseIF
+ * Type
+ * @export
+ */
+export type TokenResponseIF = AccessTokenResponse | ClientCredentialsTokenResponse;
 
+/**
+* @type TokenResponseIFClass
+* @export
+*/
+export class TokenResponseIFClass {
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
-
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "accessToken",
-            "baseName": "access_token",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "refreshToken",
-            "baseName": "refresh_token",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "idToken",
-            "baseName": "id_token",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tokenType",
-            "baseName": "token_type",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "expiresIn",
-            "baseName": "expires_in",
-            "type": "number",
-            "format": "int32"
-        }    ];
-
-    static getAttributeTypeMap() {
-        return TokenResponseIF.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
 }
+

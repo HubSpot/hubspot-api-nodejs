@@ -12,38 +12,17 @@
 
 
 export class PublicWebversionDetails {
-    /**
-    * 
-    */
     'domain'?: string;
-    /**
-    * 
-    */
-    'redirectToPageId'?: string;
+    'enabled'?: boolean;
+    'expiresAt'?: Date;
     'isPageRedirected'?: boolean;
-    /**
-    * 
-    */
-    'redirectToUrl'?: string;
-    /**
-    * 
-    */
-    'title'?: string;
-    /**
-    * 
-    */
     'metaDescription'?: string;
     'pageExpiryEnabled'?: boolean;
-    'enabled'?: boolean;
-    /**
-    * 
-    */
+    'redirectToPageId'?: string;
+    'redirectToUrl'?: string;
     'slug'?: string;
+    'title'?: string;
     'url'?: string;
-    /**
-    * 
-    */
-    'expiresAt'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -57,27 +36,21 @@ export class PublicWebversionDetails {
             "format": ""
         },
         {
-            "name": "redirectToPageId",
-            "baseName": "redirectToPageId",
-            "type": "string",
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "expiresAt",
+            "baseName": "expiresAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "isPageRedirected",
             "baseName": "isPageRedirected",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "redirectToUrl",
-            "baseName": "redirectToUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "title",
-            "baseName": "title",
-            "type": "string",
             "format": ""
         },
         {
@@ -93,9 +66,15 @@ export class PublicWebversionDetails {
             "format": ""
         },
         {
-            "name": "enabled",
-            "baseName": "enabled",
-            "type": "boolean",
+            "name": "redirectToPageId",
+            "baseName": "redirectToPageId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "redirectToUrl",
+            "baseName": "redirectToUrl",
+            "type": "string",
             "format": ""
         },
         {
@@ -105,16 +84,16 @@ export class PublicWebversionDetails {
             "format": ""
         },
         {
-            "name": "url",
-            "baseName": "url",
+            "name": "title",
+            "baseName": "title",
             "type": "string",
             "format": ""
         },
         {
-            "name": "expiresAt",
-            "baseName": "expiresAt",
-            "type": "Date",
-            "format": "date-time"
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

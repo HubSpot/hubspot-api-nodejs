@@ -13,26 +13,29 @@
 
 export class HubDbTableRowV3BatchUpdateRequest {
     /**
-    * Specifies the value for `hs_path` column, which will be used as slug in the dynamic pages
-    */
-    'path'?: string;
-    /**
     * Specifies the value for the column child table id
     */
-    'childTableId'?: number;
+    'childTableId': number;
     /**
-    * List of key value pairs with the column name and column value
+    * The index position for displaying the row within the table.
     */
-    'values': { [key: string]: any; };
+    'displayIndex': number;
+    /**
+    * The id of the table row
+    */
+    'id'?: string;
     /**
     * Specifies the value for `hs_name` column, which will be used as title in the dynamic pages
     */
     'name'?: string;
     /**
-    * The id of the table row
+    * Specifies the value for `hs_path` column, which will be used as slug in the dynamic pages
     */
-    'id': string;
-    'displayIndex'?: number;
+    'path'?: string;
+    /**
+    * List of key value pairs with the column name and column value
+    */
+    'values': { [key: string]: any; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -40,21 +43,21 @@ export class HubDbTableRowV3BatchUpdateRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "path",
-            "baseName": "path",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "childTableId",
             "baseName": "childTableId",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "displayIndex",
+            "baseName": "displayIndex",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "values",
-            "baseName": "values",
-            "type": "{ [key: string]: any; }",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         },
         {
@@ -64,16 +67,16 @@ export class HubDbTableRowV3BatchUpdateRequest {
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "path",
+            "baseName": "path",
             "type": "string",
             "format": ""
         },
         {
-            "name": "displayIndex",
-            "baseName": "displayIndex",
-            "type": "number",
-            "format": "int32"
+            "name": "values",
+            "baseName": "values",
+            "type": "{ [key: string]: any; }",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

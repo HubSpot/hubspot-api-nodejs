@@ -16,7 +16,7 @@ export * from '../models/Tag';
 export * from '../models/TagCloneRequestVNext';
 export * from '../models/UpdateLanguagesRequestVNext';
 
-import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
+import { AttachToLangPrimaryRequestVNext    } from '../models/AttachToLangPrimaryRequestVNext';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchInputTag } from '../models/BatchInputTag';
@@ -30,9 +30,9 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
 import { StandardError } from '../models/StandardError';
-import { Tag         } from '../models/Tag';
+import { Tag          } from '../models/Tag';
 import { TagCloneRequestVNext } from '../models/TagCloneRequestVNext';
-import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';
+import { UpdateLanguagesRequestVNext    } from '../models/UpdateLanguagesRequestVNext';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -47,9 +47,12 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
+    "AttachToLangPrimaryRequestVNextLanguageEnum",
+    "AttachToLangPrimaryRequestVNextPrimaryLanguageEnum",
     "BatchResponseTagStatusEnum",
     "BatchResponseTagWithErrorsStatusEnum",
     "TagLanguageEnum",
+    "UpdateLanguagesRequestVNextLanguagesEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {

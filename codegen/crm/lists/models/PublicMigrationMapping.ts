@@ -13,13 +13,13 @@
 
 export class PublicMigrationMapping {
     /**
-    * The V3 list id for the list
-    */
-    'listId': string;
-    /**
     * The legacy list id for the list
     */
     'legacyListId': string;
+    /**
+    * The V3 list id for the list
+    */
+    'listId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -27,14 +27,14 @@ export class PublicMigrationMapping {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "listId",
-            "baseName": "listId",
+            "name": "legacyListId",
+            "baseName": "legacyListId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "legacyListId",
-            "baseName": "legacyListId",
+            "name": "listId",
+            "baseName": "listId",
             "type": "string",
             "format": ""
         }    ];

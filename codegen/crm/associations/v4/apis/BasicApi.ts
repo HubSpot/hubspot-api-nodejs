@@ -20,7 +20,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * deletes all associations between two records.
-     * Delete
+     * Delete associations between two records
      * @param objectType 
      * @param objectId 
      * @param toObjectType 
@@ -82,7 +82,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Set association labels between two records.
-     * Create
+     * Associate records (labelled)
      * @param objectType 
      * @param objectId 
      * @param toObjectType 
@@ -162,7 +162,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Create the default (most generic) association type between two object types
-     * Create Default
+     * Associate records (default)
      * @param fromObjectType 
      * @param fromObjectId 
      * @param toObjectType 
@@ -223,8 +223,8 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * List all associations of an object by object type. Limit 500 per call.
-     * List
+     * Retrieve all associations between a specific record and an object type. Limit 500 per call.
+     * Retrieve all associations by object type
      * @param objectType 
      * @param objectId 
      * @param toObjectType 

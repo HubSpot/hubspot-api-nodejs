@@ -12,12 +12,27 @@
 
 
 export class PublicAdsSearchFilter {
-    'searchTerms': Array<string>;
-    'entityType': string;
+    /**
+    * Ad network  (ADWORDS, FACEBOOK, LINKEDIN, ALL)
+    */
     'adNetwork': string;
-    'searchTermType': string;
+    /**
+    * Type of ad entity (KEYWORD, ADGROUP, AD, CAMPAIGN)
+    */
+    'entityType': string;
+    /**
+    * Type of the filter (ADS_SEARCH)
+    */
     'filterType': PublicAdsSearchFilterFilterTypeEnum;
+    /**
+    * Operator to be applied (CONTAINS, IS_EQUAL_TO, ENDS_WITH, STARTS_WITH, IS_KNOWN)
+    */
     'operator': string;
+    /**
+    * Search term to match an ad
+    */
+    'searchTermType': string;
+    'searchTerms': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -25,26 +40,14 @@ export class PublicAdsSearchFilter {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "searchTerms",
-            "baseName": "searchTerms",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "entityType",
-            "baseName": "entityType",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "adNetwork",
             "baseName": "adNetwork",
             "type": "string",
             "format": ""
         },
         {
-            "name": "searchTermType",
-            "baseName": "searchTermType",
+            "name": "entityType",
+            "baseName": "entityType",
             "type": "string",
             "format": ""
         },
@@ -58,6 +61,18 @@ export class PublicAdsSearchFilter {
             "name": "operator",
             "baseName": "operator",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "searchTermType",
+            "baseName": "searchTermType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "searchTerms",
+            "baseName": "searchTerms",
+            "type": "Array<string>",
             "format": ""
         }    ];
 

@@ -16,26 +16,32 @@
 */
 export class ContentFolder {
     /**
+    * The type of object this folder applies to. Should always be LANDING_PAGE.
+    */
+    'category': number;
+    /**
+    * The timestamp indicating when the content folder was created.
+    */
+    'created': Date;
+    /**
     * The timestamp (ISO8601 format) when this content folder was deleted.
     */
     'deletedAt': Date;
-    /**
-    * The ID of the content folder this folder is nested under
-    */
-    'parentFolderId': number;
-    'created': Date;
-    /**
-    * The name of the folder which will show up in the app dashboard
-    */
-    'name': string;
     /**
     * The unique ID of the content folder.
     */
     'id': string;
     /**
-    * The type of object this folder applies to. Should always be LANDING_PAGE.
+    * The name of the folder which will show up in the app dashboard
     */
-    'category': number;
+    'name': string;
+    /**
+    * The ID of the content folder this folder is nested under
+    */
+    'parentFolderId': number;
+    /**
+    * The timestamp indicating when the content folder was last updated.
+    */
     'updated': Date;
 
     static readonly discriminator: string | undefined = undefined;
@@ -44,16 +50,10 @@ export class ContentFolder {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "deletedAt",
-            "baseName": "deletedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "parentFolderId",
-            "baseName": "parentFolderId",
+            "name": "category",
+            "baseName": "category",
             "type": "number",
-            "format": "int64"
+            "format": "int32"
         },
         {
             "name": "created",
@@ -62,10 +62,10 @@ export class ContentFolder {
             "format": "date-time"
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
+            "name": "deletedAt",
+            "baseName": "deletedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "id",
@@ -74,10 +74,16 @@ export class ContentFolder {
             "format": ""
         },
         {
-            "name": "category",
-            "baseName": "category",
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "parentFolderId",
+            "baseName": "parentFolderId",
             "type": "number",
-            "format": "int32"
+            "format": "int64"
         },
         {
             "name": "updated",

@@ -5,7 +5,7 @@ import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimp
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObject } from '../models/CollectionResponseWithTotalSimplePublicObject';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 
@@ -21,6 +21,27 @@ export interface BasicApiGetByIdRequest {
      */
     feedbackSubmissionId: string
     /**
+     * Whether to return only results that have been archived.
+     * Defaults to: false
+     * @type boolean
+     * @memberof BasicApigetById
+     */
+    archived?: boolean
+    /**
+     * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetById
+     */
+    associations?: Array<string>
+    /**
+     * The name of a property whose values are unique for this object type
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApigetById
+     */
+    idProperty?: string
+    /**
      * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * Defaults to: undefined
      * @type Array&lt;string&gt;
@@ -34,37 +55,9 @@ export interface BasicApiGetByIdRequest {
      * @memberof BasicApigetById
      */
     propertiesWithHistory?: Array<string>
-    /**
-     * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetById
-     */
-    associations?: Array<string>
-    /**
-     * Whether to return only results that have been archived.
-     * Defaults to: false
-     * @type boolean
-     * @memberof BasicApigetById
-     */
-    archived?: boolean
-    /**
-     * The name of a property whose values are unique for this object
-     * Defaults to: undefined
-     * @type string
-     * @memberof BasicApigetById
-     */
-    idProperty?: string
 }
 
 export interface BasicApiGetPageRequest {
-    /**
-     * The maximum number of results to display per page.
-     * Defaults to: 10
-     * @type number
-     * @memberof BasicApigetPage
-     */
-    limit?: number
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * Defaults to: undefined
@@ -73,19 +66,12 @@ export interface BasicApiGetPageRequest {
      */
     after?: string
     /**
-     * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
+     * Whether to return only results that have been archived.
+     * Defaults to: false
+     * @type boolean
      * @memberof BasicApigetPage
      */
-    properties?: Array<string>
-    /**
-     * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
-     * Defaults to: undefined
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetPage
-     */
-    propertiesWithHistory?: Array<string>
+    archived?: boolean
     /**
      * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * Defaults to: undefined
@@ -94,12 +80,26 @@ export interface BasicApiGetPageRequest {
      */
     associations?: Array<string>
     /**
-     * Whether to return only results that have been archived.
-     * Defaults to: false
-     * @type boolean
+     * The maximum number of results to display per page.
+     * Defaults to: 10
+     * @type number
      * @memberof BasicApigetPage
      */
-    archived?: boolean
+    limit?: number
+    /**
+     * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetPage
+     */
+    properties?: Array<string>
+    /**
+     * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of feedback submissions that can be read by a single request.
+     * Defaults to: undefined
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetPage
+     */
+    propertiesWithHistory?: Array<string>
 }
 
 export class ObjectBasicApi {
@@ -115,7 +115,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
-        return this.api.getByIdWithHttpInfo(param.feedbackSubmissionId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
+        return this.api.getByIdWithHttpInfo(param.feedbackSubmissionId, param.archived, param.associations, param.idProperty, param.properties, param.propertiesWithHistory,  options).toPromise();
     }
 
     /**
@@ -124,7 +124,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<SimplePublicObjectWithAssociations> {
-        return this.api.getById(param.feedbackSubmissionId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
+        return this.api.getById(param.feedbackSubmissionId, param.archived, param.associations, param.idProperty, param.properties, param.propertiesWithHistory,  options).toPromise();
     }
 
     /**
@@ -133,7 +133,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getPageWithHttpInfo(param: BasicApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>> {
-        return this.api.getPageWithHttpInfo(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+        return this.api.getPageWithHttpInfo(param.after, param.archived, param.associations, param.limit, param.properties, param.propertiesWithHistory,  options).toPromise();
     }
 
     /**
@@ -142,7 +142,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getPage(param: BasicApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
-        return this.api.getPage(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+        return this.api.getPage(param.after, param.archived, param.associations, param.limit, param.properties, param.propertiesWithHistory,  options).toPromise();
     }
 
 }
@@ -213,16 +213,20 @@ export class ObjectSearchApi {
     }
 
     /**
+     * Execute a search to retrieve feedback submissions based on defined filters, properties, and sorting options.
+     * Search for feedback submissions using specified criteria.
      * @param param the request object
      */
-    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>> {
+    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObject>> {
         return this.api.doSearchWithHttpInfo(param.publicObjectSearchRequest,  options).toPromise();
     }
 
     /**
+     * Execute a search to retrieve feedback submissions based on defined filters, properties, and sorting options.
+     * Search for feedback submissions using specified criteria.
      * @param param the request object
      */
-    public doSearch(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
+    public doSearch(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObject> {
         return this.api.doSearch(param.publicObjectSearchRequest,  options).toPromise();
     }
 

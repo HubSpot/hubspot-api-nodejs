@@ -20,9 +20,7 @@ export class PromiseAccessTokensApi {
     }
 
     /**
-     * Retrieve a token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Retrieve OAuth token metadata
-     * @param token The access token that you want to retrieve information about.
+     * @param token
      */
     public getWithHttpInfo(token: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<AccessTokenInfoResponse>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -42,9 +40,7 @@ export class PromiseAccessTokensApi {
     }
 
     /**
-     * Retrieve a token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Retrieve OAuth token metadata
-     * @param token The access token that you want to retrieve information about.
+     * @param token
      */
     public get(token: string, _options?: PromiseConfigurationOptions): Promise<AccessTokenInfoResponse> {
         let observableOptions: undefined | ConfigurationOptions
@@ -83,9 +79,7 @@ export class PromiseRefreshTokensApi {
     }
 
     /**
-     * Delete a refresh token, typically after a user uninstalls your app. Access tokens generated with the refresh token will not be affected.  This will not uninstall the application from HubSpot or inhibit data syncing between an account and the app.
-     * Delete a refresh token
-     * @param token The refresh token to delete.
+     * @param token
      */
     public archiveWithHttpInfo(token: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -105,9 +99,7 @@ export class PromiseRefreshTokensApi {
     }
 
     /**
-     * Delete a refresh token, typically after a user uninstalls your app. Access tokens generated with the refresh token will not be affected.  This will not uninstall the application from HubSpot or inhibit data syncing between an account and the app.
-     * Delete a refresh token
-     * @param token The refresh token to delete.
+     * @param token
      */
     public archive(token: string, _options?: PromiseConfigurationOptions): Promise<void> {
         let observableOptions: undefined | ConfigurationOptions
@@ -127,9 +119,7 @@ export class PromiseRefreshTokensApi {
     }
 
     /**
-     * Retrieve a refresh token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with. Learn more about [refresh tokens](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#generate-initial-access-and-refresh-tokens).
-     * Retrieve refresh token metadata
-     * @param token The refresh token to retrieve information about.
+     * @param token
      */
     public getWithHttpInfo(token: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<RefreshTokenInfoResponse>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -149,9 +139,7 @@ export class PromiseRefreshTokensApi {
     }
 
     /**
-     * Retrieve a refresh token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with. Learn more about [refresh tokens](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#generate-initial-access-and-refresh-tokens).
-     * Retrieve refresh token metadata
-     * @param token The refresh token to retrieve information about.
+     * @param token
      */
     public get(token: string, _options?: PromiseConfigurationOptions): Promise<RefreshTokenInfoResponse> {
         let observableOptions: undefined | ConfigurationOptions
@@ -190,16 +178,18 @@ export class PromiseTokensApi {
     }
 
     /**
-     * Use a [previously obtained refresh token](#get-oauth-2.0-access-and-refresh-tokens) to generate a new access token.   Access tokens are short lived. You can check the `expires_in` parameter when generating an access token to determine its lifetime (in seconds). If you need offline access to HubSpot data, store the refresh token you get when [initiating your OAuth integration](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#initiating-oauth-access) and use it to generate a new access token once the initial one expires.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Refresh an access token
+     * Authenticates a client and returns access and refresh tokens.
+     * OAuth token endpoint
      * @param [grantType]
      * @param [code]
      * @param [redirectUri]
      * @param [clientId]
      * @param [clientSecret]
      * @param [refreshToken]
+     * @param [codeVerifier]
+     * @param [scope]
      */
-    public createWithHttpInfo(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<TokenResponseIF>> {
+    public createWithHttpInfo(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, codeVerifier?: string, scope?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<TokenResponseIF>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -212,21 +202,23 @@ export class PromiseTokensApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.createWithHttpInfo(grantType, code, redirectUri, clientId, clientSecret, refreshToken, observableOptions);
+        const result = this.api.createWithHttpInfo(grantType, code, redirectUri, clientId, clientSecret, refreshToken, codeVerifier, scope, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Use a [previously obtained refresh token](#get-oauth-2.0-access-and-refresh-tokens) to generate a new access token.   Access tokens are short lived. You can check the `expires_in` parameter when generating an access token to determine its lifetime (in seconds). If you need offline access to HubSpot data, store the refresh token you get when [initiating your OAuth integration](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#initiating-oauth-access) and use it to generate a new access token once the initial one expires.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Refresh an access token
+     * Authenticates a client and returns access and refresh tokens.
+     * OAuth token endpoint
      * @param [grantType]
      * @param [code]
      * @param [redirectUri]
      * @param [clientId]
      * @param [clientSecret]
      * @param [refreshToken]
+     * @param [codeVerifier]
+     * @param [scope]
      */
-    public create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: PromiseConfigurationOptions): Promise<TokenResponseIF> {
+    public create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, codeVerifier?: string, scope?: string, _options?: PromiseConfigurationOptions): Promise<TokenResponseIF> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -239,7 +231,7 @@ export class PromiseTokensApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, observableOptions);
+        const result = this.api.create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, codeVerifier, scope, observableOptions);
         return result.toPromise();
     }
 

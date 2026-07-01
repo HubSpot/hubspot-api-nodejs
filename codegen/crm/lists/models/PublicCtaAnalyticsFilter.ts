@@ -10,14 +10,24 @@
  * Do not edit the class manually.
  */
 
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
+import { PublicCtaAnalyticsFilterCoalescingRefineBy } from '../models/PublicCtaAnalyticsFilterCoalescingRefineBy';
+import { PublicCtaAnalyticsFilterPruningRefineBy } from '../models/PublicCtaAnalyticsFilterPruningRefineBy';
 
 export class PublicCtaAnalyticsFilter {
-    'coalescingRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
-    'pruningRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
-    'filterType': PublicCtaAnalyticsFilterFilterTypeEnum;
+    'coalescingRefineBy'?: PublicCtaAnalyticsFilterCoalescingRefineBy;
+    /**
+    * The name of the Call-to-Action (CTA) to be used in the filter.
+    */
     'ctaName': string;
+    /**
+    * Indicates the type of filter being applied, which is (CTA).
+    */
+    'filterType': PublicCtaAnalyticsFilterFilterTypeEnum;
+    /**
+    * Defines the operation to be applied within the filter (HAS_CLICKED_CTA, HAS_NOT_CLICKED_CTA, HAS_OPENED_CTA, HAS_NOT_OPENED_CTA, HAS_CLICKED_CTA_PLACEMENT, HAS_NOT_CLICKED_CTA_PLACEMENT, HAS_OPENED_CTA_PLACEMENT, HAS_NOT_OPENED_CTA_PLACEMENT).
+    */
     'operator': string;
+    'pruningRefineBy'?: PublicCtaAnalyticsFilterPruningRefineBy;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -27,19 +37,7 @@ export class PublicCtaAnalyticsFilter {
         {
             "name": "coalescingRefineBy",
             "baseName": "coalescingRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
-            "name": "pruningRefineBy",
-            "baseName": "pruningRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
-            "name": "filterType",
-            "baseName": "filterType",
-            "type": "PublicCtaAnalyticsFilterFilterTypeEnum",
+            "type": "PublicCtaAnalyticsFilterCoalescingRefineBy",
             "format": ""
         },
         {
@@ -49,9 +47,21 @@ export class PublicCtaAnalyticsFilter {
             "format": ""
         },
         {
+            "name": "filterType",
+            "baseName": "filterType",
+            "type": "PublicCtaAnalyticsFilterFilterTypeEnum",
+            "format": ""
+        },
+        {
             "name": "operator",
             "baseName": "operator",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pruningRefineBy",
+            "baseName": "pruningRefineBy",
+            "type": "PublicCtaAnalyticsFilterPruningRefineBy",
             "format": ""
         }    ];
 

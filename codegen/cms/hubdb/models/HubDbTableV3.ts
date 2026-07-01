@@ -15,67 +15,79 @@ import { SimpleUser } from '../models/SimpleUser';
 
 export class HubDbTableV3 {
     /**
-    * Specifies the key value pairs of the [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages) with the associated column IDs.
+    * Specifies whether child tables can be created
     */
-    'dynamicMetaTags'?: { [key: string]: number; };
-    'updatedBy'?: SimpleUser;
+    'allowChildTables': boolean;
     /**
     * Specifies whether the table can be read by public without authorization
     */
-    'allowPublicApiAccess'?: boolean;
+    'allowPublicApiAccess': boolean;
     /**
-    * Specifies whether the table can be used for creation of dynamic pages
+    * Number of columns including deleted
     */
-    'useForPages'?: boolean;
-    /**
-    * Timestamp at which the table is published recently
-    */
-    'publishedAt'?: Date;
+    'columnCount': number;
     /**
     * List of columns in the table
     */
-    'columns'?: Array<Column>;
+    'columns': Array<Column>;
+    /**
+    * Timestamp at which the table is created
+    */
+    'createdAt': Date;
+    'createdBy'?: SimpleUser;
+    /**
+    * Specifies whether the table is marked as deleted.
+    */
+    'deleted': boolean;
+    /**
+    * The timestamp indicating when the table was deleted.
+    */
+    'deletedAt': Date;
+    /**
+    * Specifies the key value pairs of the [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages) with the associated column IDs.
+    */
+    'dynamicMetaTags': { [key: string]: number; };
+    /**
+    * Specifies creation of multi-level dynamic pages using child tables
+    */
+    'enableChildTablePages': boolean;
+    /**
+    * Id of the table
+    */
+    'id': string;
+    /**
+    * Indicates whether the table rows are ordered manually.
+    */
+    'isOrderedManually'?: boolean;
     /**
     * Label of the table
     */
     'label': string;
-    'published'?: boolean;
-    /**
-    * Number of columns including deleted
-    */
-    'columnCount'?: number;
-    /**
-    * Specifies whether child tables can be created
-    */
-    'allowChildTables'?: boolean;
-    /**
-    * Timestamp at which the table is created
-    */
-    'createdAt'?: Date;
-    'deletedAt': Date;
-    'deleted'?: boolean;
-    'createdBy'?: SimpleUser;
     /**
     * Name of the table
     */
     'name': string;
     /**
-    * Specifies creation of multi-level dynamic pages using child tables
+    * Indicates whether the table is currently published.
     */
-    'enableChildTablePages'?: boolean;
+    'published': boolean;
     /**
-    * Id of the table
+    * Timestamp at which the table is published recently
     */
-    'id'?: string;
+    'publishedAt': Date;
     /**
     * Number of rows in the table
     */
-    'rowCount'?: number;
-    'isOrderedManually'?: boolean;
+    'rowCount': number;
     /**
     * Timestamp at which the table is updated recently
     */
-    'updatedAt'?: Date;
+    'updatedAt': Date;
+    'updatedBy'?: SimpleUser;
+    /**
+    * Specifies whether the table can be used for creation of dynamic pages
+    */
+    'useForPages': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -83,15 +95,9 @@ export class HubDbTableV3 {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "dynamicMetaTags",
-            "baseName": "dynamicMetaTags",
-            "type": "{ [key: string]: number; }",
-            "format": "int32"
-        },
-        {
-            "name": "updatedBy",
-            "baseName": "updatedBy",
-            "type": "SimpleUser",
+            "name": "allowChildTables",
+            "baseName": "allowChildTables",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -101,45 +107,15 @@ export class HubDbTableV3 {
             "format": ""
         },
         {
-            "name": "useForPages",
-            "baseName": "useForPages",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "publishedAt",
-            "baseName": "publishedAt",
-            "type": "Date",
-            "format": "date-time"
+            "name": "columnCount",
+            "baseName": "columnCount",
+            "type": "number",
+            "format": "int64"
         },
         {
             "name": "columns",
             "baseName": "columns",
             "type": "Array<Column>",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "published",
-            "baseName": "published",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "columnCount",
-            "baseName": "columnCount",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "allowChildTables",
-            "baseName": "allowChildTables",
-            "type": "boolean",
             "format": ""
         },
         {
@@ -149,10 +125,10 @@ export class HubDbTableV3 {
             "format": "date-time"
         },
         {
-            "name": "deletedAt",
-            "baseName": "deletedAt",
-            "type": "Date",
-            "format": "date-time"
+            "name": "createdBy",
+            "baseName": "createdBy",
+            "type": "SimpleUser",
+            "format": ""
         },
         {
             "name": "deleted",
@@ -161,16 +137,16 @@ export class HubDbTableV3 {
             "format": ""
         },
         {
-            "name": "createdBy",
-            "baseName": "createdBy",
-            "type": "SimpleUser",
-            "format": ""
+            "name": "deletedAt",
+            "baseName": "deletedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
+            "name": "dynamicMetaTags",
+            "baseName": "dynamicMetaTags",
+            "type": "{ [key: string]: number; }",
+            "format": "int32"
         },
         {
             "name": "enableChildTablePages",
@@ -185,22 +161,58 @@ export class HubDbTableV3 {
             "format": ""
         },
         {
-            "name": "rowCount",
-            "baseName": "rowCount",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "isOrderedManually",
             "baseName": "isOrderedManually",
             "type": "boolean",
             "format": ""
         },
         {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "published",
+            "baseName": "published",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "publishedAt",
+            "baseName": "publishedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "rowCount",
+            "baseName": "rowCount",
+            "type": "number",
+            "format": "int32"
+        },
+        {
             "name": "updatedAt",
             "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "updatedBy",
+            "baseName": "updatedBy",
+            "type": "SimpleUser",
+            "format": ""
+        },
+        {
+            "name": "useForPages",
+            "baseName": "useForPages",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

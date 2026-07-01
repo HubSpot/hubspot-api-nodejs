@@ -24,6 +24,7 @@ import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/Batch
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive a batch of emails identified by their IDs.
      * Archive a batch of emails by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -71,6 +72,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Create a batch of emails with specified properties and return the created objects.
      * Create a batch of emails
      * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
@@ -173,6 +175,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Update a batch of emails using their internal IDs or unique property values.
      * Update a batch of emails by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */

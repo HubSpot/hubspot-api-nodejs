@@ -1,14 +1,20 @@
 export * from '../models/AccessTokenInfoResponse';
+export * from '../models/AccessTokenResponse';
+export * from '../models/ClientCredentialsTokenResponse';
 export * from '../models/ErrorDetail';
 export * from '../models/ModelError';
 export * from '../models/RefreshTokenInfoResponse';
+export * from '../models/SignedAccessToken';
 export * from '../models/TokenResponseIF';
 
 import { AccessTokenInfoResponse } from '../models/AccessTokenInfoResponse';
+import { AccessTokenResponse           } from '../models/AccessTokenResponse';
+import { ClientCredentialsTokenResponse          } from '../models/ClientCredentialsTokenResponse';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { RefreshTokenInfoResponse } from '../models/RefreshTokenInfoResponse';
-import { TokenResponseIF } from '../models/TokenResponseIF';
+import { SignedAccessToken } from '../models/SignedAccessToken';
+import { TokenResponseIFClass } from '../models/TokenResponseIF';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -23,14 +29,20 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
+    "AccessTokenResponseTokenUseEnum",
+    "ClientCredentialsTokenResponseTokenUseEnum",
+    "TokenResponseIFTokenUseEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
     "AccessTokenInfoResponse": AccessTokenInfoResponse,
+    "AccessTokenResponse": AccessTokenResponse,
+    "ClientCredentialsTokenResponse": ClientCredentialsTokenResponse,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
     "RefreshTokenInfoResponse": RefreshTokenInfoResponse,
-    "TokenResponseIF": TokenResponseIF,
+    "SignedAccessToken": SignedAccessToken,
+    "TokenResponseIF": TokenResponseIFClass,
 }
 
 type MimeTypeDescriptor = {

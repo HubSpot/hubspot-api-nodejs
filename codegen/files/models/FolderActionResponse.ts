@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -14,11 +14,18 @@ import { Folder } from '../models/Folder';
 import { StandardError } from '../models/StandardError';
 
 export class FolderActionResponse {
-    'result'?: Folder;
     /**
     * When the requested changes have been completed.
     */
     'completedAt': Date;
+    /**
+    * Detailed errors resulting from the task.
+    */
+    'errors'?: Array<StandardError>;
+    /**
+    * Link to check the status of the task.
+    */
+    'links'?: { [key: string]: string; };
     /**
     * Number of errors resulting from the requested changes.
     */
@@ -27,26 +34,19 @@ export class FolderActionResponse {
     * Timestamp representing when the task was requested.
     */
     'requestedAt'?: Date;
+    'result'?: Folder;
     /**
     * Timestamp representing when the task was started at.
     */
     'startedAt': Date;
     /**
-    * Link to check the status of the task.
+    * Current status of the task.
     */
-    'links'?: { [key: string]: string; };
-    /**
-    * Detailed errors resulting from the task.
-    */
-    'errors'?: Array<StandardError>;
+    'status': FolderActionResponseStatusEnum;
     /**
     * ID of the task.
     */
     'taskId': string;
-    /**
-    * Current status of the task.
-    */
-    'status': FolderActionResponseStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -54,16 +54,22 @@ export class FolderActionResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "result",
-            "baseName": "result",
-            "type": "Folder",
-            "format": ""
-        },
-        {
             "name": "completedAt",
             "baseName": "completedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
+            "format": ""
         },
         {
             "name": "numErrors",
@@ -78,33 +84,27 @@ export class FolderActionResponse {
             "format": "date-time"
         },
         {
+            "name": "result",
+            "baseName": "result",
+            "type": "Folder",
+            "format": ""
+        },
+        {
             "name": "startedAt",
             "baseName": "startedAt",
             "type": "Date",
             "format": "date-time"
         },
         {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
+            "name": "status",
+            "baseName": "status",
+            "type": "FolderActionResponseStatusEnum",
             "format": ""
         },
         {
             "name": "taskId",
             "baseName": "taskId",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "status",
-            "baseName": "status",
-            "type": "FolderActionResponseStatusEnum",
             "format": ""
         }    ];
 
@@ -117,9 +117,9 @@ export class FolderActionResponse {
 }
 
 export enum FolderActionResponseStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

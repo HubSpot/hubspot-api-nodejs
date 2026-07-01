@@ -13,11 +13,11 @@
 
 export class Angle {
     /**
-    * 
+    * The unit of measurement for the angle.
     */
-    'units': string;
+    'units': AngleUnitsEnum;
     /**
-    * 
+    * The numerical representation of the angle.
     */
     'value': number;
 
@@ -29,7 +29,7 @@ export class Angle {
         {
             "name": "units",
             "baseName": "units",
-            "type": "string",
+            "type": "AngleUnitsEnum",
             "format": ""
         },
         {
@@ -46,3 +46,11 @@ export class Angle {
     public constructor() {
     }
 }
+
+export enum AngleUnitsEnum {
+    Degrees = 'DEGREES',
+    Gradians = 'GRADIANS',
+    Radians = 'RADIANS',
+    Turns = 'TURNS'
+}
+

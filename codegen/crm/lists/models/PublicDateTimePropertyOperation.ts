@@ -12,10 +12,25 @@
 
 
 export class PublicDateTimePropertyOperation {
+    /**
+    * Specifies whether objects without a set value should be included in the operation.
+    */
     'includeObjectsWithNoValueSet': boolean;
-    'requiresTimeZoneConversion': boolean;
+    /**
+    * The type of operation (DATETIME).
+    */
     'operationType': PublicDateTimePropertyOperationOperationTypeEnum;
+    /**
+    * Defines the operation to be applied, such as comparison operators (IS_BEFORE, IS_AFTER).
+    */
     'operator': string;
+    /**
+    * Indicates whether the timestamp requires conversion to a different time zone.
+    */
+    'requiresTimeZoneConversion': boolean;
+    /**
+    * The specific point in time used in the operation.
+    */
     'timestamp': number;
 
     static readonly discriminator: string | undefined = undefined;
@@ -26,12 +41,6 @@ export class PublicDateTimePropertyOperation {
         {
             "name": "includeObjectsWithNoValueSet",
             "baseName": "includeObjectsWithNoValueSet",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "requiresTimeZoneConversion",
-            "baseName": "requiresTimeZoneConversion",
             "type": "boolean",
             "format": ""
         },
@@ -48,10 +57,16 @@ export class PublicDateTimePropertyOperation {
             "format": ""
         },
         {
+            "name": "requiresTimeZoneConversion",
+            "baseName": "requiresTimeZoneConversion",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "timestamp",
             "baseName": "timestamp",
             "type": "number",
-            "format": "int32"
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {

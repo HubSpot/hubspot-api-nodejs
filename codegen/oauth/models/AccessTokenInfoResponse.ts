@@ -10,44 +10,20 @@
  * Do not edit the class manually.
  */
 
+import { SignedAccessToken } from '../models/SignedAccessToken';
 
 export class AccessTokenInfoResponse {
-    /**
-    * 
-    */
-    'hubId': number;
-    /**
-    * 
-    */
-    'userId': number;
-    /**
-    * 
-    */
-    'scopes': Array<string>;
-    /**
-    * 
-    */
-    'tokenType': string;
-    /**
-    * 
-    */
-    'user'?: string;
-    /**
-    * 
-    */
-    'hubDomain'?: string;
-    /**
-    * 
-    */
     'appId': number;
-    /**
-    * 
-    */
     'expiresIn': number;
-    /**
-    * 
-    */
+    'hubDomain'?: string;
+    'hubId': number;
+    'isPrivateDistribution'?: boolean;
+    'scopes': Array<string>;
+    'signedAccessToken'?: SignedAccessToken;
     'token': string;
+    'tokenType': string;
+    'user'?: string;
+    'userId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -55,21 +31,51 @@ export class AccessTokenInfoResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "appId",
+            "baseName": "app_id",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "expiresIn",
+            "baseName": "expires_in",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "hubDomain",
+            "baseName": "hub_domain",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "hubId",
             "baseName": "hub_id",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "userId",
-            "baseName": "user_id",
-            "type": "number",
-            "format": "int32"
+            "name": "isPrivateDistribution",
+            "baseName": "is_private_distribution",
+            "type": "boolean",
+            "format": ""
         },
         {
             "name": "scopes",
             "baseName": "scopes",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "signedAccessToken",
+            "baseName": "signed_access_token",
+            "type": "SignedAccessToken",
+            "format": ""
+        },
+        {
+            "name": "token",
+            "baseName": "token",
+            "type": "string",
             "format": ""
         },
         {
@@ -85,28 +91,10 @@ export class AccessTokenInfoResponse {
             "format": ""
         },
         {
-            "name": "hubDomain",
-            "baseName": "hub_domain",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "appId",
-            "baseName": "app_id",
+            "name": "userId",
+            "baseName": "user_id",
             "type": "number",
             "format": "int32"
-        },
-        {
-            "name": "expiresIn",
-            "baseName": "expires_in",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "token",
-            "baseName": "token",
-            "type": "string",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

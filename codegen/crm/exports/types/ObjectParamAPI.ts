@@ -3,35 +3,36 @@ import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { ActionResponseWithSingleResultURI } from '../models/ActionResponseWithSingleResultURI';
 import { PublicExportRequest } from '../models/PublicExportRequest';
+import { PublicExportResponse } from '../models/PublicExportResponse';
 import { TaskLocator } from '../models/TaskLocator';
 
-import { ObservablePublicExportsApi } from "./ObservableAPI";
-import { PublicExportsApiRequestFactory, PublicExportsApiResponseProcessor} from "../apis/PublicExportsApi";
+import { ObservableAdvancedApi } from "./ObservableAPI";
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
 
-export interface PublicExportsApiGetStatusRequest {
+export interface AdvancedApiGetStatusRequest {
     /**
      * 
      * Defaults to: undefined
      * @type number
-     * @memberof PublicExportsApigetStatus
+     * @memberof AdvancedApigetStatus
      */
     taskId: number
 }
 
-export interface PublicExportsApiStartRequest {
+export interface AdvancedApiStartRequest {
     /**
      * 
      * @type PublicExportRequest
-     * @memberof PublicExportsApistart
+     * @memberof AdvancedApistart
      */
     publicExportRequest: PublicExportRequest
 }
 
-export class ObjectPublicExportsApi {
-    private api: ObservablePublicExportsApi
+export class ObjectAdvancedApi {
+    private api: ObservableAdvancedApi
 
-    public constructor(configuration: Configuration, requestFactory?: PublicExportsApiRequestFactory, responseProcessor?: PublicExportsApiResponseProcessor) {
-        this.api = new ObservablePublicExportsApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: AdvancedApiRequestFactory, responseProcessor?: AdvancedApiResponseProcessor) {
+        this.api = new ObservableAdvancedApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -39,7 +40,7 @@ export class ObjectPublicExportsApi {
      * Get the status of the export including the URL to download the file
      * @param param the request object
      */
-    public getStatusWithHttpInfo(param: PublicExportsApiGetStatusRequest, options?: ConfigurationOptions): Promise<HttpInfo<ActionResponseWithSingleResultURI>> {
+    public getStatusWithHttpInfo(param: AdvancedApiGetStatusRequest, options?: ConfigurationOptions): Promise<HttpInfo<ActionResponseWithSingleResultURI>> {
         return this.api.getStatusWithHttpInfo(param.taskId,  options).toPromise();
     }
 
@@ -48,7 +49,7 @@ export class ObjectPublicExportsApi {
      * Get the status of the export including the URL to download the file
      * @param param the request object
      */
-    public getStatus(param: PublicExportsApiGetStatusRequest, options?: ConfigurationOptions): Promise<ActionResponseWithSingleResultURI> {
+    public getStatus(param: AdvancedApiGetStatusRequest, options?: ConfigurationOptions): Promise<ActionResponseWithSingleResultURI> {
         return this.api.getStatus(param.taskId,  options).toPromise();
     }
 
@@ -57,7 +58,7 @@ export class ObjectPublicExportsApi {
      * Start an export
      * @param param the request object
      */
-    public startWithHttpInfo(param: PublicExportsApiStartRequest, options?: ConfigurationOptions): Promise<HttpInfo<TaskLocator>> {
+    public startWithHttpInfo(param: AdvancedApiStartRequest, options?: ConfigurationOptions): Promise<HttpInfo<TaskLocator>> {
         return this.api.startWithHttpInfo(param.publicExportRequest,  options).toPromise();
     }
 
@@ -66,8 +67,48 @@ export class ObjectPublicExportsApi {
      * Start an export
      * @param param the request object
      */
-    public start(param: PublicExportsApiStartRequest, options?: ConfigurationOptions): Promise<TaskLocator> {
+    public start(param: AdvancedApiStartRequest, options?: ConfigurationOptions): Promise<TaskLocator> {
         return this.api.start(param.publicExportRequest,  options).toPromise();
+    }
+
+}
+
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+
+export interface BasicApiGetByIdRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApigetById
+     */
+    exportId: number
+}
+
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
+
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Retrieve detailed information about a specific CRM export, including its current state and properties.
+     * Retrieve details of a specific export by its unique ID.
+     * @param param the request object
+     */
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicExportResponse>> {
+        return this.api.getByIdWithHttpInfo(param.exportId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve detailed information about a specific CRM export, including its current state and properties.
+     * Retrieve details of a specific export by its unique ID.
+     * @param param the request object
+     */
+    public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<PublicExportResponse> {
+        return this.api.getById(param.exportId,  options).toPromise();
     }
 
 }

@@ -1,6 +1,6 @@
 /**
  * User Provisioning
- * Add, manage, and remove users from your account
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -11,22 +11,19 @@
  */
 
 
-/**
-* A role that can be assigned to a user
-*/
 export class PublicPermissionSet {
     /**
-    * Whether this role has a paid seat and requires the billing-write scope to assign/unassign to users
+    * The role\'s unique ID
     */
-    'requiresBillingWrite': boolean;
+    'id': string;
     /**
     * The role\'s name
     */
     'name': string;
     /**
-    * The role\'s unique ID
+    * Whether this role has a paid seat and requires the billing-write scope to assign/unassign to users
     */
-    'id': string;
+    'requiresBillingWrite': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -34,9 +31,9 @@ export class PublicPermissionSet {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "requiresBillingWrite",
-            "baseName": "requiresBillingWrite",
-            "type": "boolean",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         },
         {
@@ -46,9 +43,9 @@ export class PublicPermissionSet {
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "requiresBillingWrite",
+            "baseName": "requiresBillingWrite",
+            "type": "boolean",
             "format": ""
         }    ];
 

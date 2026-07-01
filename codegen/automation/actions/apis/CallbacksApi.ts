@@ -19,7 +19,7 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Complete a specific blocked action execution by ID.
      * Completes a callback
-     * @param callbackId The ID of the action execution.
+     * @param callbackId The unique identifier for the specific callback to complete.
      * @param callbackCompletionRequest 
      */
     public async complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<RequestContext> {

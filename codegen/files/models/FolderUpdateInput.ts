@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -16,13 +16,13 @@
 */
 export class FolderUpdateInput {
     /**
-    * New parent folderId. If changed, the folder and all it\'s children will be moved into the specified folder. parentFolderId and parentFolderPath cannot be specified at the same time.
-    */
-    'parentFolderId'?: number;
-    /**
     * New name. If specified the folder\'s name and fullPath will change. All children of the folder will be updated accordingly.
     */
     'name'?: string;
+    /**
+    * New parent folderId. If changed, the folder and all it\'s children will be moved into the specified folder. parentFolderId and parentFolderPath cannot be specified at the same time.
+    */
+    'parentFolderId'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,16 +30,16 @@ export class FolderUpdateInput {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "parentFolderId",
-            "baseName": "parentFolderId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
             "name": "name",
             "baseName": "name",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "parentFolderId",
+            "baseName": "parentFolderId",
+            "type": "number",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {

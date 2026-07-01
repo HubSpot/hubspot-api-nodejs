@@ -14,10 +14,19 @@ import { PublicIndexOffset } from '../models/PublicIndexOffset';
 import { PublicIndexedTimePointIndexReference } from '../models/PublicIndexedTimePointIndexReference';
 
 export class PublicIndexedTimePoint {
-    'offset'?: PublicIndexOffset;
-    'timezoneSource'?: string;
     'indexReference': PublicIndexedTimePointIndexReference;
+    'offset'?: PublicIndexOffset;
+    /**
+    * Defines the type of time (INDEXED).
+    */
     'timeType': PublicIndexedTimePointTimeTypeEnum;
+    /**
+    * Specifies the source of the time zone information for the indexed time point (CUSTOM, USER, PORTAL).
+    */
+    'timezoneSource'?: string;
+    /**
+    * Indicates the identifier for the time zone associated with the indexed time point.
+    */
     'zoneId': string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -26,27 +35,27 @@ export class PublicIndexedTimePoint {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "offset",
-            "baseName": "offset",
-            "type": "PublicIndexOffset",
-            "format": ""
-        },
-        {
-            "name": "timezoneSource",
-            "baseName": "timezoneSource",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "indexReference",
             "baseName": "indexReference",
             "type": "PublicIndexedTimePointIndexReference",
             "format": ""
         },
         {
+            "name": "offset",
+            "baseName": "offset",
+            "type": "PublicIndexOffset",
+            "format": ""
+        },
+        {
             "name": "timeType",
             "baseName": "timeType",
             "type": "PublicIndexedTimePointTimeTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "timezoneSource",
+            "baseName": "timezoneSource",
+            "type": "string",
             "format": ""
         },
         {

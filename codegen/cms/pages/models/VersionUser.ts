@@ -16,6 +16,10 @@
 */
 export class VersionUser {
     /**
+    * Email address of the user.
+    */
+    'email': string;
+    /**
     * First and last name of the user.
     */
     'fullName': string;
@@ -23,16 +27,18 @@ export class VersionUser {
     * ID of the user.
     */
     'id': string;
-    /**
-    * Email address of the user.
-    */
-    'email': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "fullName",
             "baseName": "fullName",
@@ -42,12 +48,6 @@ export class VersionUser {
         {
             "name": "id",
             "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
             "type": "string",
             "format": ""
         }    ];

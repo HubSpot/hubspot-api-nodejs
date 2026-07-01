@@ -12,12 +12,12 @@
 
 
 export class PublicFontStyle {
-    'size'?: number;
-    'color'?: string;
-    'underline'?: boolean;
     'bold'?: boolean;
-    'italic'?: boolean;
+    'color'?: string;
     'font'?: string;
+    'italic'?: boolean;
+    'size'?: number;
+    'underline'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -25,10 +25,10 @@ export class PublicFontStyle {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "size",
-            "baseName": "size",
-            "type": "number",
-            "format": "int32"
+            "name": "bold",
+            "baseName": "bold",
+            "type": "boolean",
+            "format": ""
         },
         {
             "name": "color",
@@ -37,15 +37,9 @@ export class PublicFontStyle {
             "format": ""
         },
         {
-            "name": "underline",
-            "baseName": "underline",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "bold",
-            "baseName": "bold",
-            "type": "boolean",
+            "name": "font",
+            "baseName": "font",
+            "type": "string",
             "format": ""
         },
         {
@@ -55,9 +49,15 @@ export class PublicFontStyle {
             "format": ""
         },
         {
-            "name": "font",
-            "baseName": "font",
-            "type": "string",
+            "name": "size",
+            "baseName": "size",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "underline",
+            "baseName": "underline",
+            "type": "boolean",
             "format": ""
         }    ];
 

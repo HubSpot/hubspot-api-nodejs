@@ -1,16 +1,18 @@
-export * from '../models/CollectionResponseWithTotalDomainForwardPaging';
+export * from '../models/CollectionResponseWithTotalDomain';
 export * from '../models/Domain';
 export * from '../models/ErrorDetail';
-export * from '../models/ForwardPaging';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
+export * from '../models/Paging';
+export * from '../models/PreviousPage';
 
-import { CollectionResponseWithTotalDomainForwardPaging } from '../models/CollectionResponseWithTotalDomainForwardPaging';
+import { CollectionResponseWithTotalDomain } from '../models/CollectionResponseWithTotalDomain';
 import { Domain } from '../models/Domain';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { ForwardPaging } from '../models/ForwardPaging';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
+import { Paging } from '../models/Paging';
+import { PreviousPage } from '../models/PreviousPage';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -28,12 +30,13 @@ let enumsMap: Set<string> = new Set<string>([
 ]);
 
 let typeMap: {[index: string]: any} = {
-    "CollectionResponseWithTotalDomainForwardPaging": CollectionResponseWithTotalDomainForwardPaging,
+    "CollectionResponseWithTotalDomain": CollectionResponseWithTotalDomain,
     "Domain": Domain,
     "ErrorDetail": ErrorDetail,
-    "ForwardPaging": ForwardPaging,
     "ModelError": ModelError,
     "NextPage": NextPage,
+    "Paging": Paging,
+    "PreviousPage": PreviousPage,
 }
 
 type MimeTypeDescriptor = {

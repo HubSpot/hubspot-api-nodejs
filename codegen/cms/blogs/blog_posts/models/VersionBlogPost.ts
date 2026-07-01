@@ -21,9 +21,12 @@ export class VersionBlogPost {
     * The id of the version.
     */
     'id': string;
-    'user': VersionUser;
     'object': BlogPost;
+    /**
+    * The timestamp (ISO8601 format) when this version of the Blog Post was updated.
+    */
     'updatedAt': Date;
+    'user': VersionUser;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -37,12 +40,6 @@ export class VersionBlogPost {
             "format": ""
         },
         {
-            "name": "user",
-            "baseName": "user",
-            "type": "VersionUser",
-            "format": ""
-        },
-        {
             "name": "object",
             "baseName": "object",
             "type": "BlogPost",
@@ -53,6 +50,12 @@ export class VersionBlogPost {
             "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "user",
+            "baseName": "user",
+            "type": "VersionUser",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

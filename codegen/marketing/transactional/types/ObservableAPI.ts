@@ -9,20 +9,20 @@ import { PublicSingleSendRequestEgg } from '../models/PublicSingleSendRequestEgg
 import { SmtpApiTokenRequestEgg } from '../models/SmtpApiTokenRequestEgg';
 import { SmtpApiTokenView } from '../models/SmtpApiTokenView';
 
-import { PublicSMTPTokensApiRequestFactory, PublicSMTPTokensApiResponseProcessor} from "../apis/PublicSMTPTokensApi";
-export class ObservablePublicSMTPTokensApi {
-    private requestFactory: PublicSMTPTokensApiRequestFactory;
-    private responseProcessor: PublicSMTPTokensApiResponseProcessor;
+import { SMTPTokensApiRequestFactory, SMTPTokensApiResponseProcessor} from "../apis/SMTPTokensApi";
+export class ObservableSMTPTokensApi {
+    private requestFactory: SMTPTokensApiRequestFactory;
+    private responseProcessor: SMTPTokensApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicSMTPTokensApiRequestFactory,
-        responseProcessor?: PublicSMTPTokensApiResponseProcessor
+        requestFactory?: SMTPTokensApiRequestFactory,
+        responseProcessor?: SMTPTokensApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new PublicSMTPTokensApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PublicSMTPTokensApiResponseProcessor();
+        this.requestFactory = requestFactory || new SMTPTokensApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new SMTPTokensApiResponseProcessor();
     }
 
     /**
@@ -32,7 +32,7 @@ export class ObservablePublicSMTPTokensApi {
      */
     public archiveTokenWithHttpInfo(tokenId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -46,7 +46,7 @@ export class ObservablePublicSMTPTokensApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -57,7 +57,7 @@ export class ObservablePublicSMTPTokensApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -90,11 +90,11 @@ export class ObservablePublicSMTPTokensApi {
     /**
      * Create a SMTP API token.
      * Create a SMTP API token.
-     * @param smtpApiTokenRequestEgg A request object that includes the campaign name tied to the token and whether contacts should be created for email recipients.
+     * @param smtpApiTokenRequestEgg
      */
     public createTokenWithHttpInfo(smtpApiTokenRequestEgg: SmtpApiTokenRequestEgg, _options?: ConfigurationOptions): Observable<HttpInfo<SmtpApiTokenView>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -108,7 +108,7 @@ export class ObservablePublicSMTPTokensApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -119,7 +119,7 @@ export class ObservablePublicSMTPTokensApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -143,7 +143,7 @@ export class ObservablePublicSMTPTokensApi {
     /**
      * Create a SMTP API token.
      * Create a SMTP API token.
-     * @param smtpApiTokenRequestEgg A request object that includes the campaign name tied to the token and whether contacts should be created for email recipients.
+     * @param smtpApiTokenRequestEgg
      */
     public createToken(smtpApiTokenRequestEgg: SmtpApiTokenRequestEgg, _options?: ConfigurationOptions): Observable<SmtpApiTokenView> {
         return this.createTokenWithHttpInfo(smtpApiTokenRequestEgg, _options).pipe(map((apiResponse: HttpInfo<SmtpApiTokenView>) => apiResponse.data));
@@ -156,7 +156,7 @@ export class ObservablePublicSMTPTokensApi {
      */
     public getTokenByIdWithHttpInfo(tokenId: string, _options?: ConfigurationOptions): Observable<HttpInfo<SmtpApiTokenView>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -170,7 +170,7 @@ export class ObservablePublicSMTPTokensApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -181,7 +181,7 @@ export class ObservablePublicSMTPTokensApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -214,14 +214,14 @@ export class ObservablePublicSMTPTokensApi {
     /**
      * Query multiple SMTP API tokens by campaign name or a single token by emailCampaignId.
      * Query SMTP API tokens by campaign name or an emailCampaignId.
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param [campaignName] A name for the campaign tied to the SMTP API token.
      * @param [emailCampaignId] Identifier assigned to the campaign provided during the token creation.
-     * @param [after] Starting point to get the next set of results.
-     * @param [limit] Maximum number of tokens to return.
+     * @param [limit] The maximum number of results to display per page.
      */
-    public getTokensPageWithHttpInfo(campaignName?: string, emailCampaignId?: string, after?: string, limit?: number, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseSmtpApiTokenViewForwardPaging>> {
+    public getTokensPageWithHttpInfo(after?: string, campaignName?: string, emailCampaignId?: string, limit?: number, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseSmtpApiTokenViewForwardPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -235,7 +235,7 @@ export class ObservablePublicSMTPTokensApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -246,11 +246,11 @@ export class ObservablePublicSMTPTokensApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.getTokensPage(campaignName, emailCampaignId, after, limit, _config);
+        const requestContextPromise = this.requestFactory.getTokensPage(after, campaignName, emailCampaignId, limit, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -270,13 +270,13 @@ export class ObservablePublicSMTPTokensApi {
     /**
      * Query multiple SMTP API tokens by campaign name or a single token by emailCampaignId.
      * Query SMTP API tokens by campaign name or an emailCampaignId.
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param [campaignName] A name for the campaign tied to the SMTP API token.
      * @param [emailCampaignId] Identifier assigned to the campaign provided during the token creation.
-     * @param [after] Starting point to get the next set of results.
-     * @param [limit] Maximum number of tokens to return.
+     * @param [limit] The maximum number of results to display per page.
      */
-    public getTokensPage(campaignName?: string, emailCampaignId?: string, after?: string, limit?: number, _options?: ConfigurationOptions): Observable<CollectionResponseSmtpApiTokenViewForwardPaging> {
-        return this.getTokensPageWithHttpInfo(campaignName, emailCampaignId, after, limit, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseSmtpApiTokenViewForwardPaging>) => apiResponse.data));
+    public getTokensPage(after?: string, campaignName?: string, emailCampaignId?: string, limit?: number, _options?: ConfigurationOptions): Observable<CollectionResponseSmtpApiTokenViewForwardPaging> {
+        return this.getTokensPageWithHttpInfo(after, campaignName, emailCampaignId, limit, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseSmtpApiTokenViewForwardPaging>) => apiResponse.data));
     }
 
     /**
@@ -286,7 +286,7 @@ export class ObservablePublicSMTPTokensApi {
      */
     public resetPasswordWithHttpInfo(tokenId: string, _options?: ConfigurationOptions): Observable<HttpInfo<SmtpApiTokenView>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -300,7 +300,7 @@ export class ObservablePublicSMTPTokensApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -311,7 +311,7 @@ export class ObservablePublicSMTPTokensApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -343,30 +343,30 @@ export class ObservablePublicSMTPTokensApi {
 
 }
 
-import { SingleSendApiRequestFactory, SingleSendApiResponseProcessor} from "../apis/SingleSendApi";
-export class ObservableSingleSendApi {
-    private requestFactory: SingleSendApiRequestFactory;
-    private responseProcessor: SingleSendApiResponseProcessor;
+import { SendTransactionalEmailApiRequestFactory, SendTransactionalEmailApiResponseProcessor} from "../apis/SendTransactionalEmailApi";
+export class ObservableSendTransactionalEmailApi {
+    private requestFactory: SendTransactionalEmailApiRequestFactory;
+    private responseProcessor: SendTransactionalEmailApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: SingleSendApiRequestFactory,
-        responseProcessor?: SingleSendApiResponseProcessor
+        requestFactory?: SendTransactionalEmailApiRequestFactory,
+        responseProcessor?: SendTransactionalEmailApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new SingleSendApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new SingleSendApiResponseProcessor();
+        this.requestFactory = requestFactory || new SendTransactionalEmailApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new SendTransactionalEmailApiResponseProcessor();
     }
 
     /**
      * Asynchronously send a transactional email. Returns the status of the email send with a statusId that can be used to continuously query for the status using the Email Send Status API.
-     * Send a single transactional email asynchronously.
-     * @param publicSingleSendRequestEgg A request object describing the email to send.
+     * Send a single send transactional email asynchronously.
+     * @param publicSingleSendRequestEgg
      */
     public sendEmailWithHttpInfo(publicSingleSendRequestEgg: PublicSingleSendRequestEgg, _options?: ConfigurationOptions): Observable<HttpInfo<EmailSendStatusView>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -380,7 +380,7 @@ export class ObservableSingleSendApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -391,7 +391,7 @@ export class ObservableSingleSendApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -414,8 +414,8 @@ export class ObservableSingleSendApi {
 
     /**
      * Asynchronously send a transactional email. Returns the status of the email send with a statusId that can be used to continuously query for the status using the Email Send Status API.
-     * Send a single transactional email asynchronously.
-     * @param publicSingleSendRequestEgg A request object describing the email to send.
+     * Send a single send transactional email asynchronously.
+     * @param publicSingleSendRequestEgg
      */
     public sendEmail(publicSingleSendRequestEgg: PublicSingleSendRequestEgg, _options?: ConfigurationOptions): Observable<EmailSendStatusView> {
         return this.sendEmailWithHttpInfo(publicSingleSendRequestEgg, _options).pipe(map((apiResponse: HttpInfo<EmailSendStatusView>) => apiResponse.data));

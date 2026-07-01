@@ -12,8 +12,17 @@
 
 
 export class PublicTimeOffset {
+    /**
+    * The numerical value representing the quantity of the time offset.
+    */
     'amount': number;
+    /**
+    * Indicates the direction of the time offset, such as forward or backward.
+    */
     'offsetDirection': string;
+    /**
+    * Specifies the unit of time for the offset, such as days, hours, or minutes.
+    */
     'timeUnit': string;
 
     static readonly discriminator: string | undefined = undefined;

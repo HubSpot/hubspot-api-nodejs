@@ -1,6 +1,6 @@
 /**
  * User Provisioning
- * Add, manage, and remove users from your account
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -11,35 +11,47 @@
  */
 
 
-/**
-* A user
-*/
 export class PublicUser {
+    /**
+    * The user\'s email.
+    */
+    'email': string;
+    /**
+    * The user\'s first name.
+    */
     'firstName'?: string;
+    /**
+    * The user\'s unique ID.
+    */
+    'id': string;
+    /**
+    * The user\'s last name.
+    */
     'lastName'?: string;
     /**
     * The user\'s primary team
     */
     'primaryTeamId'?: string;
-    'roleIds'?: Array<string>;
-    'sendWelcomeEmail'?: boolean;
     /**
-    * The user\'s role
+    * The user\'s role.
     */
     'roleId'?: string;
     /**
-    * The user\'s additional teams
+    * A list of role IDs assigned to the user.
+    */
+    'roleIds': Array<string>;
+    /**
+    * The user\'s additional teams.
     */
     'secondaryTeamIds'?: Array<string>;
     /**
-    * The user\'s unique ID
+    * Whether a welcome email was sent to the user. This value will only be populated in response to a provisioning request. Subsequent queries will be false.
     */
-    'id': string;
-    'superAdmin'?: boolean;
+    'sendWelcomeEmail'?: boolean;
     /**
-    * The user\'s email
+    * Whether the user has super admin privileges.
     */
-    'email': string;
+    'superAdmin': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -47,8 +59,20 @@ export class PublicUser {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "firstName",
             "baseName": "firstName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
@@ -65,8 +89,20 @@ export class PublicUser {
             "format": ""
         },
         {
+            "name": "roleId",
+            "baseName": "roleId",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "roleIds",
             "baseName": "roleIds",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "secondaryTeamIds",
+            "baseName": "secondaryTeamIds",
             "type": "Array<string>",
             "format": ""
         },
@@ -77,33 +113,9 @@ export class PublicUser {
             "format": ""
         },
         {
-            "name": "roleId",
-            "baseName": "roleId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "secondaryTeamIds",
-            "baseName": "secondaryTeamIds",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "superAdmin",
             "baseName": "superAdmin",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
             "format": ""
         }    ];
 

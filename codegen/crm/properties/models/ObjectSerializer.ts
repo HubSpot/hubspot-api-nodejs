@@ -21,7 +21,7 @@ export * from '../models/StandardError';
 
 import { BatchInputPropertyCreate } from '../models/BatchInputPropertyCreate';
 import { BatchInputPropertyName } from '../models/BatchInputPropertyName';
-import { BatchReadInputPropertyName } from '../models/BatchReadInputPropertyName';
+import { BatchReadInputPropertyName     } from '../models/BatchReadInputPropertyName';
 import { BatchResponseProperty        } from '../models/BatchResponseProperty';
 import { BatchResponsePropertyWithErrors          } from '../models/BatchResponsePropertyWithErrors';
 import { CollectionResponsePropertyGroupNoPaging } from '../models/CollectionResponsePropertyGroupNoPaging';
@@ -30,14 +30,14 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { Option } from '../models/Option';
 import { OptionInput } from '../models/OptionInput';
-import { Property } from '../models/Property';
-import { PropertyCreate        } from '../models/PropertyCreate';
+import { Property             } from '../models/Property';
+import { PropertyCreate       } from '../models/PropertyCreate';
 import { PropertyGroup } from '../models/PropertyGroup';
 import { PropertyGroupCreate } from '../models/PropertyGroupCreate';
 import { PropertyGroupUpdate } from '../models/PropertyGroupUpdate';
 import { PropertyModificationMetadata } from '../models/PropertyModificationMetadata';
 import { PropertyName } from '../models/PropertyName';
-import { PropertyUpdate           } from '../models/PropertyUpdate';
+import { PropertyUpdate       } from '../models/PropertyUpdate';
 import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */
@@ -53,12 +53,22 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
+    "BatchReadInputPropertyNameDataSensitivityEnum",
     "BatchResponsePropertyStatusEnum",
     "BatchResponsePropertyWithErrorsStatusEnum",
-    "PropertyCreateTypeEnum",
+    "PropertyDataSensitivityEnum",
+    "PropertyDateDisplayHintEnum",
+    "PropertyNumberDisplayHintEnum",
+    "PropertyTextDisplayHintEnum",
+    "PropertyCreateDataSensitivityEnum",
     "PropertyCreateFieldTypeEnum",
-    "PropertyUpdateTypeEnum",
+    "PropertyCreateNumberDisplayHintEnum",
+    "PropertyCreateTextDisplayHintEnum",
+    "PropertyCreateTypeEnum",
     "PropertyUpdateFieldTypeEnum",
+    "PropertyUpdateNumberDisplayHintEnum",
+    "PropertyUpdateTextDisplayHintEnum",
+    "PropertyUpdateTypeEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {

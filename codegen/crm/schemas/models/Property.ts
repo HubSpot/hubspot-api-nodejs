@@ -14,94 +14,122 @@ import { Option } from '../models/Option';
 import { PropertyModificationMetadata } from '../models/PropertyModificationMetadata';
 
 /**
-* Defines a property
+* A HubSpot property
 */
 export class Property {
-    'hidden'?: boolean;
-    /**
-    * The order that this property should be displayed in the HubSpot UI relative to other properties for this object type. Properties are displayed in order starting with the lowest positive integer value. A value of -1 will cause the property to be displayed **after** any positive values.
-    */
-    'displayOrder'?: number;
-    /**
-    * A description of the property that will be shown as help text in HubSpot.
-    */
-    'description': string;
-    /**
-    * Whether the property will display the currency symbol set in the account settings.
-    */
-    'showCurrencySymbol'?: boolean;
-    /**
-    * The property data type.
-    */
-    'type': string;
-    /**
-    * This will be true for default object properties built into HubSpot.
-    */
-    'hubspotDefined'?: boolean;
-    /**
-    * When the property was created
-    */
-    'createdAt'?: Date;
     /**
     * Whether or not the property is archived.
     */
     'archived'?: boolean;
     /**
-    * A list of valid options for the property. This field is required for enumerated properties, but will be empty for other property types.
+    * When the property was archived.
     */
-    'options': Array<Option>;
-    /**
-    * Whether or not the property\'s value must be unique. Once set, this can\'t be changed.
-    */
-    'hasUniqueValue'?: boolean;
+    'archivedAt'?: Date;
     /**
     * For default properties, true indicates that the property is calculated by a HubSpot process. It has no effect for custom properties.
     */
     'calculated'?: boolean;
     /**
-    * For default properties, true indicates that the options are stored externally to the property settings.
+    * The formula used for calculated properties.
     */
-    'externalOptions'?: boolean;
+    'calculationFormula'?: string;
     /**
-    * 
+    * When the property was created
     */
-    'updatedAt'?: Date;
+    'createdAt'?: Date;
     /**
     * The internal ID of the user who created the property in HubSpot. This field may not exist if the property was created outside of HubSpot.
     */
     'createdUserId'?: string;
-    'modificationMetadata'?: PropertyModificationMetadata;
-    'sensitiveDataCategories'?: Array<string>;
     /**
-    * A human-readable property label that will be shown in HubSpot.
+    * The name of the related currency property.
     */
-    'label': string;
+    'currencyPropertyName'?: string;
+    /**
+    * Indicates the sensitivity level of the property, such as \"non_sensitive\", \"sensitive\", or \"highly_sensitive\".
+    */
+    'dataSensitivity'?: PropertyDataSensitivityEnum;
+    /**
+    * Controls how date properties are displayed in the HubSpot UI, with options such as \'absolute\', \'absolute_with_relative\', \'time_since\', and \'time_until\'.
+    */
+    'dateDisplayHint'?: PropertyDateDisplayHintEnum;
+    /**
+    * A description of the property that will be shown as help text in HubSpot.
+    */
+    'description': string;
+    /**
+    * The order that this property should be displayed in the HubSpot UI relative to other properties for this object type. Properties are displayed in order starting with the lowest positive integer value. A value of -1 will cause the property to be displayed **after** any positive values.
+    */
+    'displayOrder'?: number;
+    /**
+    * For default properties, true indicates that the options are stored externally to the property settings.
+    */
+    'externalOptions'?: boolean;
+    /**
+    * Controls how the property appears in HubSpot.
+    */
+    'fieldType': string;
     /**
     * Whether or not the property can be used in a HubSpot form.
     */
     'formField'?: boolean;
-    'dataSensitivity'?: PropertyDataSensitivityEnum;
-    /**
-    * When the property was archived.
-    */
-    'archivedAt'?: Date;
     /**
     * The name of the property group the property belongs to.
     */
     'groupName': string;
     /**
-    * If this property is related to other object(s), they\'ll be listed here.
+    * Whether or not the property\'s value must be unique. Once set, this can\'t be changed.
     */
-    'referencedObjectType'?: string;
+    'hasUniqueValue'?: boolean;
+    /**
+    * Hidden options won\'t be shown in HubSpot.
+    */
+    'hidden'?: boolean;
+    /**
+    * This will be true for default object properties built into HubSpot.
+    */
+    'hubspotDefined'?: boolean;
+    /**
+    * A human-readable property label that will be shown in HubSpot.
+    */
+    'label': string;
+    'modificationMetadata'?: PropertyModificationMetadata;
     /**
     * The internal property name, which must be used when referencing the property via the API.
     */
     'name': string;
-    'calculationFormula'?: string;
     /**
-    * Controls how the property appears in HubSpot.
+    * Hint for how a number property is displayed and validated in HubSpot\'s UI. Can be: \"unformatted\", \"formatted\", \"currency\", \"percentage\", \"duration\", or \"probability\".
     */
-    'fieldType': string;
+    'numberDisplayHint'?: PropertyNumberDisplayHintEnum;
+    /**
+    * A list of valid options for the property. This field is required for enumerated properties, but will be empty for other property types.
+    */
+    'options': Array<Option>;
+    /**
+    * If this property is related to other object(s), they\'ll be listed here.
+    */
+    'referencedObjectType'?: string;
+    /**
+    * When sensitiveData is true, lists the type of sensitive data contained in the property (e.g., \"HIPAA\").
+    */
+    'sensitiveDataCategories'?: Array<string>;
+    /**
+    * Whether the property will display the currency symbol set in the account settings.
+    */
+    'showCurrencySymbol'?: boolean;
+    /**
+    * Hint for how the text is displayed and validated in HubSpot\'s UI. Can be: \"unformatted_single_line\", \"multi_line\", \"email\", \"phone_number\", \"domain_name\", \"ip_address\", \"physical_address\", or \"postal_code\".
+    */
+    'textDisplayHint'?: PropertyTextDisplayHintEnum;
+    /**
+    * The property data type.
+    */
+    'type': string;
+    /**
+    * When the object type was last updated.
+    */
+    'updatedAt'?: Date;
     /**
     * The internal user ID of the user who updated the property in HubSpot. This field may not exist if the property was updated outside of HubSpot.
     */
@@ -113,64 +141,16 @@ export class Property {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "hidden",
-            "baseName": "hidden",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "displayOrder",
-            "baseName": "displayOrder",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "showCurrencySymbol",
-            "baseName": "showCurrencySymbol",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "hubspotDefined",
-            "baseName": "hubspotDefined",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "archived",
             "baseName": "archived",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<Option>",
-            "format": ""
-        },
-        {
-            "name": "hasUniqueValue",
-            "baseName": "hasUniqueValue",
-            "type": "boolean",
-            "format": ""
+            "name": "archivedAt",
+            "baseName": "archivedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "calculated",
@@ -179,14 +159,14 @@ export class Property {
             "format": ""
         },
         {
-            "name": "externalOptions",
-            "baseName": "externalOptions",
-            "type": "boolean",
+            "name": "calculationFormula",
+            "baseName": "calculationFormula",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
+            "name": "createdAt",
+            "baseName": "createdAt",
             "type": "Date",
             "format": "date-time"
         },
@@ -197,20 +177,44 @@ export class Property {
             "format": ""
         },
         {
-            "name": "modificationMetadata",
-            "baseName": "modificationMetadata",
-            "type": "PropertyModificationMetadata",
+            "name": "currencyPropertyName",
+            "baseName": "currencyPropertyName",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "sensitiveDataCategories",
-            "baseName": "sensitiveDataCategories",
-            "type": "Array<string>",
+            "name": "dataSensitivity",
+            "baseName": "dataSensitivity",
+            "type": "PropertyDataSensitivityEnum",
             "format": ""
         },
         {
-            "name": "label",
-            "baseName": "label",
+            "name": "dateDisplayHint",
+            "baseName": "dateDisplayHint",
+            "type": "PropertyDateDisplayHintEnum",
+            "format": ""
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "displayOrder",
+            "baseName": "displayOrder",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "externalOptions",
+            "baseName": "externalOptions",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "fieldType",
+            "baseName": "fieldType",
             "type": "string",
             "format": ""
         },
@@ -221,27 +225,39 @@ export class Property {
             "format": ""
         },
         {
-            "name": "dataSensitivity",
-            "baseName": "dataSensitivity",
-            "type": "PropertyDataSensitivityEnum",
-            "format": ""
-        },
-        {
-            "name": "archivedAt",
-            "baseName": "archivedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "groupName",
             "baseName": "groupName",
             "type": "string",
             "format": ""
         },
         {
-            "name": "referencedObjectType",
-            "baseName": "referencedObjectType",
+            "name": "hasUniqueValue",
+            "baseName": "hasUniqueValue",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "hidden",
+            "baseName": "hidden",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "hubspotDefined",
+            "baseName": "hubspotDefined",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "label",
+            "baseName": "label",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "modificationMetadata",
+            "baseName": "modificationMetadata",
+            "type": "PropertyModificationMetadata",
             "format": ""
         },
         {
@@ -251,16 +267,52 @@ export class Property {
             "format": ""
         },
         {
-            "name": "calculationFormula",
-            "baseName": "calculationFormula",
+            "name": "numberDisplayHint",
+            "baseName": "numberDisplayHint",
+            "type": "PropertyNumberDisplayHintEnum",
+            "format": ""
+        },
+        {
+            "name": "options",
+            "baseName": "options",
+            "type": "Array<Option>",
+            "format": ""
+        },
+        {
+            "name": "referencedObjectType",
+            "baseName": "referencedObjectType",
             "type": "string",
             "format": ""
         },
         {
-            "name": "fieldType",
-            "baseName": "fieldType",
+            "name": "sensitiveDataCategories",
+            "baseName": "sensitiveDataCategories",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "showCurrencySymbol",
+            "baseName": "showCurrencySymbol",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "textDisplayHint",
+            "baseName": "textDisplayHint",
+            "type": "PropertyTextDisplayHintEnum",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "updatedUserId",
@@ -278,8 +330,32 @@ export class Property {
 }
 
 export enum PropertyDataSensitivityEnum {
+    HighlySensitive = 'highly_sensitive',
     NonSensitive = 'non_sensitive',
-    Sensitive = 'sensitive',
-    HighlySensitive = 'highly_sensitive'
+    Sensitive = 'sensitive'
+}
+export enum PropertyDateDisplayHintEnum {
+    Absolute = 'absolute',
+    AbsoluteWithRelative = 'absolute_with_relative',
+    TimeSince = 'time_since',
+    TimeUntil = 'time_until'
+}
+export enum PropertyNumberDisplayHintEnum {
+    Currency = 'currency',
+    Duration = 'duration',
+    Formatted = 'formatted',
+    Percentage = 'percentage',
+    Probability = 'probability',
+    Unformatted = 'unformatted'
+}
+export enum PropertyTextDisplayHintEnum {
+    DomainName = 'domain_name',
+    Email = 'email',
+    IpAddress = 'ip_address',
+    MultiLine = 'multi_line',
+    PhoneNumber = 'phone_number',
+    PhysicalAddress = 'physical_address',
+    PostalCode = 'postal_code',
+    UnformattedSingleLine = 'unformatted_single_line'
 }
 

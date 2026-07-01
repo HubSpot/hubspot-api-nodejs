@@ -21,8 +21,8 @@ import { BatchResponsePublicAssociationWithErrors } from '../models/BatchRespons
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Remove the associations between all pairs of objects identified in the request body.
-     * Archive a batch of associations
+     * Batch delete associations for objects
+     * Remove associations
      * @param fromObjectType 
      * @param toObjectType 
      * @param batchInputPublicAssociation 
@@ -85,8 +85,8 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Associate all pairs of objects identified in the request body.
-     * Create a batch of associations
+     * Batch create associations for objects
+     * Associate records (labelled)
      * @param fromObjectType 
      * @param toObjectType 
      * @param batchInputPublicAssociation 
@@ -149,8 +149,8 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get the IDs of all `{toObjectType}` objects associated with those specified in the request body.
-     * Read a batch of associations
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
+     * Retrieve associations
      * @param fromObjectType 
      * @param toObjectType 
      * @param batchInputPublicObjectId 

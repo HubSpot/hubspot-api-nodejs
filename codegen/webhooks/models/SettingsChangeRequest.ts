@@ -16,11 +16,11 @@ import { ThrottlingSettings } from '../models/ThrottlingSettings';
 * New or updated webhook settings for an app.
 */
 export class SettingsChangeRequest {
-    'throttling': ThrottlingSettings;
     /**
-    * A publicly available URL for HubSpot to call where event payloads will be delivered.
+    * A publicly available URL for HubSpot to call where event payloads will be delivered. This URL must be accessible to receive event notifications.
     */
     'targetUrl': string;
+    'throttling': ThrottlingSettings;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,15 +28,15 @@ export class SettingsChangeRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "throttling",
-            "baseName": "throttling",
-            "type": "ThrottlingSettings",
-            "format": ""
-        },
-        {
             "name": "targetUrl",
             "baseName": "targetUrl",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "throttling",
+            "baseName": "throttling",
+            "type": "ThrottlingSettings",
             "format": ""
         }    ];
 

@@ -11,9 +11,6 @@
  */
 
 
-/**
-* The ID of a send event.
-*/
 export class EventIdView {
     /**
     * Time of event creation.

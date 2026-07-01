@@ -17,13 +17,28 @@ import { RGBAColor } from '../models/RGBAColor';
 
 export class Styles {
     'backgroundColor': RGBAColor;
-    'flexboxPositioning': string;
-    'backgroundImage': BackgroundImage;
-    'forceFullWidthSection': boolean;
-    'breakpointStyles'?: { [key: string]: BreakpointStyles; };
-    'verticalAlignment': string;
-    'maxWidthSectionCentering': number;
     'backgroundGradient': Gradient;
+    'backgroundImage': BackgroundImage;
+    /**
+    * Breakpoint CSS styles for margin, padding, etc...
+    */
+    'breakpointStyles'?: { [key: string]: BreakpointStyles; };
+    /**
+    * Indicates whether flexbox positioning is enabled for the section.
+    */
+    'flexboxPositioning': StylesFlexboxPositioningEnum;
+    /**
+    * Determines if the section should be forced to full width.
+    */
+    'forceFullWidthSection': boolean;
+    /**
+    * Defines the maximum width for centering the section.
+    */
+    'maxWidthSectionCentering': number;
+    /**
+    * Specifies the vertical alignment of elements within the section.
+    */
+    'verticalAlignment': StylesVerticalAlignmentEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -37,9 +52,9 @@ export class Styles {
             "format": ""
         },
         {
-            "name": "flexboxPositioning",
-            "baseName": "flexboxPositioning",
-            "type": "string",
+            "name": "backgroundGradient",
+            "baseName": "backgroundGradient",
+            "type": "Gradient",
             "format": ""
         },
         {
@@ -49,21 +64,21 @@ export class Styles {
             "format": ""
         },
         {
-            "name": "forceFullWidthSection",
-            "baseName": "forceFullWidthSection",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "breakpointStyles",
             "baseName": "breakpointStyles",
             "type": "{ [key: string]: BreakpointStyles; }",
             "format": ""
         },
         {
-            "name": "verticalAlignment",
-            "baseName": "verticalAlignment",
-            "type": "string",
+            "name": "flexboxPositioning",
+            "baseName": "flexboxPositioning",
+            "type": "StylesFlexboxPositioningEnum",
+            "format": ""
+        },
+        {
+            "name": "forceFullWidthSection",
+            "baseName": "forceFullWidthSection",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -73,9 +88,9 @@ export class Styles {
             "format": "int32"
         },
         {
-            "name": "backgroundGradient",
-            "baseName": "backgroundGradient",
-            "type": "Gradient",
+            "name": "verticalAlignment",
+            "baseName": "verticalAlignment",
+            "type": "StylesVerticalAlignmentEnum",
             "format": ""
         }    ];
 
@@ -86,3 +101,21 @@ export class Styles {
     public constructor() {
     }
 }
+
+export enum StylesFlexboxPositioningEnum {
+    BottomCenter = 'BOTTOM_CENTER',
+    BottomLeft = 'BOTTOM_LEFT',
+    BottomRight = 'BOTTOM_RIGHT',
+    MiddleCenter = 'MIDDLE_CENTER',
+    MiddleLeft = 'MIDDLE_LEFT',
+    MiddleRight = 'MIDDLE_RIGHT',
+    TopCenter = 'TOP_CENTER',
+    TopLeft = 'TOP_LEFT',
+    TopRight = 'TOP_RIGHT'
+}
+export enum StylesVerticalAlignmentEnum {
+    Bottom = 'BOTTOM',
+    Middle = 'MIDDLE',
+    Top = 'TOP'
+}
+

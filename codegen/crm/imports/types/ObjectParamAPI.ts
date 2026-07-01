@@ -3,78 +3,58 @@ import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { ActionResponse } from '../models/ActionResponse';
 import { CollectionResponsePublicImportErrorForwardPaging } from '../models/CollectionResponsePublicImportErrorForwardPaging';
-import { CollectionResponsePublicImportResponse } from '../models/CollectionResponsePublicImportResponse';
+import { CollectionResponsePublicImportResponseForwardPaging } from '../models/CollectionResponsePublicImportResponseForwardPaging';
 import { PublicImportResponse } from '../models/PublicImportResponse';
 
-import { ObservableCoreApi } from "./ObservableAPI";
-import { CoreApiRequestFactory, CoreApiResponseProcessor} from "../apis/CoreApi";
+import { ObservableAdvancedApi } from "./ObservableAPI";
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
 
-export interface CoreApiCancelRequest {
-    /**
-     * 
-     * Defaults to: undefined
-     * @type number
-     * @memberof CoreApicancel
-     */
-    importId: number
-}
-
-export interface CoreApiCreateRequest {
+export interface AdvancedApiCrmV3ImportsRequest {
     /**
      * 
      * Defaults to: undefined
      * @type HttpFile
-     * @memberof CoreApicreate
+     * @memberof AdvancedApicrmV3Imports
      */
     files?: HttpFile
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof CoreApicreate
+     * @memberof AdvancedApicrmV3Imports
      */
     importRequest?: string
 }
 
-export interface CoreApiGetByIdRequest {
+export interface AdvancedApiCrmV3ImportsImportIdCancelRequest {
     /**
      * 
      * Defaults to: undefined
      * @type number
-     * @memberof CoreApigetById
+     * @memberof AdvancedApicrmV3ImportsImportIdCancel
      */
     importId: number
 }
 
-export interface CoreApiGetPageRequest {
-    /**
-     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * Defaults to: undefined
-     * @type string
-     * @memberof CoreApigetPage
-     */
-    after?: string
-    /**
-     * 
-     * Defaults to: undefined
-     * @type string
-     * @memberof CoreApigetPage
-     */
-    before?: string
-    /**
-     * The maximum number of results to display per page.
-     * Defaults to: undefined
-     * @type number
-     * @memberof CoreApigetPage
-     */
-    limit?: number
-}
+export class ObjectAdvancedApi {
+    private api: ObservableAdvancedApi
 
-export class ObjectCoreApi {
-    private api: ObservableCoreApi
+    public constructor(configuration: Configuration, requestFactory?: AdvancedApiRequestFactory, responseProcessor?: AdvancedApiResponseProcessor) {
+        this.api = new ObservableAdvancedApi(configuration, requestFactory, responseProcessor);
+    }
 
-    public constructor(configuration: Configuration, requestFactory?: CoreApiRequestFactory, responseProcessor?: CoreApiResponseProcessor) {
-        this.api = new ObservableCoreApi(configuration, requestFactory, responseProcessor);
+    /**
+     * @param param the request object
+     */
+    public crmV3ImportsWithHttpInfo(param: AdvancedApiCrmV3ImportsRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<PublicImportResponse>> {
+        return this.api.crmV3ImportsWithHttpInfo(param.files, param.importRequest,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public crmV3Imports(param: AdvancedApiCrmV3ImportsRequest = {}, options?: ConfigurationOptions): Promise<PublicImportResponse> {
+        return this.api.crmV3Imports(param.files, param.importRequest,  options).toPromise();
     }
 
     /**
@@ -82,8 +62,8 @@ export class ObjectCoreApi {
      * Cancel an active import
      * @param param the request object
      */
-    public cancelWithHttpInfo(param: CoreApiCancelRequest, options?: ConfigurationOptions): Promise<HttpInfo<ActionResponse>> {
-        return this.api.cancelWithHttpInfo(param.importId,  options).toPromise();
+    public crmV3ImportsImportIdCancelWithHttpInfo(param: AdvancedApiCrmV3ImportsImportIdCancelRequest, options?: ConfigurationOptions): Promise<HttpInfo<ActionResponse>> {
+        return this.api.crmV3ImportsImportIdCancelWithHttpInfo(param.importId,  options).toPromise();
     }
 
     /**
@@ -91,126 +71,135 @@ export class ObjectCoreApi {
      * Cancel an active import
      * @param param the request object
      */
-    public cancel(param: CoreApiCancelRequest, options?: ConfigurationOptions): Promise<ActionResponse> {
-        return this.api.cancel(param.importId,  options).toPromise();
-    }
-
-    /**
-     * Begins importing data from the specified file resources. This uploads the corresponding file and uses the import request object to convert rows in the files to objects.
-     * Start a new import
-     * @param param the request object
-     */
-    public createWithHttpInfo(param: CoreApiCreateRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<PublicImportResponse>> {
-        return this.api.createWithHttpInfo(param.files, param.importRequest,  options).toPromise();
-    }
-
-    /**
-     * Begins importing data from the specified file resources. This uploads the corresponding file and uses the import request object to convert rows in the files to objects.
-     * Start a new import
-     * @param param the request object
-     */
-    public create(param: CoreApiCreateRequest = {}, options?: ConfigurationOptions): Promise<PublicImportResponse> {
-        return this.api.create(param.files, param.importRequest,  options).toPromise();
-    }
-
-    /**
-     * A complete summary of an import record, including any updates.
-     * Get the information on any import
-     * @param param the request object
-     */
-    public getByIdWithHttpInfo(param: CoreApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicImportResponse>> {
-        return this.api.getByIdWithHttpInfo(param.importId,  options).toPromise();
-    }
-
-    /**
-     * A complete summary of an import record, including any updates.
-     * Get the information on any import
-     * @param param the request object
-     */
-    public getById(param: CoreApiGetByIdRequest, options?: ConfigurationOptions): Promise<PublicImportResponse> {
-        return this.api.getById(param.importId,  options).toPromise();
-    }
-
-    /**
-     * Returns a paged list of active imports for this account.
-     * Get active imports
-     * @param param the request object
-     */
-    public getPageWithHttpInfo(param: CoreApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicImportResponse>> {
-        return this.api.getPageWithHttpInfo(param.after, param.before, param.limit,  options).toPromise();
-    }
-
-    /**
-     * Returns a paged list of active imports for this account.
-     * Get active imports
-     * @param param the request object
-     */
-    public getPage(param: CoreApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponsePublicImportResponse> {
-        return this.api.getPage(param.after, param.before, param.limit,  options).toPromise();
+    public crmV3ImportsImportIdCancel(param: AdvancedApiCrmV3ImportsImportIdCancelRequest, options?: ConfigurationOptions): Promise<ActionResponse> {
+        return this.api.crmV3ImportsImportIdCancel(param.importId,  options).toPromise();
     }
 
 }
 
-import { ObservablePublicImportsApi } from "./ObservableAPI";
-import { PublicImportsApiRequestFactory, PublicImportsApiResponseProcessor} from "../apis/PublicImportsApi";
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
-export interface PublicImportsApiGetErrorsRequest {
+export interface BasicApiCrmV3ImportsRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApicrmV3Imports
+     */
+    after?: string
     /**
      * 
      * Defaults to: undefined
      * @type number
-     * @memberof PublicImportsApigetErrors
+     * @memberof BasicApicrmV3Imports
+     */
+    limit?: number
+}
+
+export interface BasicApiCrmV3ImportsImportIdRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApicrmV3ImportsImportId
+     */
+    importId: number
+}
+
+export interface BasicApiCrmV3ImportsImportIdErrorsRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApicrmV3ImportsImportIdErrors
      */
     importId: number
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * Defaults to: undefined
      * @type string
-     * @memberof PublicImportsApigetErrors
+     * @memberof BasicApicrmV3ImportsImportIdErrors
      */
     after?: string
     /**
-     * The maximum number of results to display per page.
-     * Defaults to: undefined
-     * @type number
-     * @memberof PublicImportsApigetErrors
-     */
-    limit?: number
-    /**
-     * Set to True to receive a message explaining the error.
+     * 
      * Defaults to: undefined
      * @type boolean
-     * @memberof PublicImportsApigetErrors
+     * @memberof BasicApicrmV3ImportsImportIdErrors
      */
     includeErrorMessage?: boolean
     /**
-     * Set to True to receive the data values for the errored row.
+     * 
      * Defaults to: undefined
      * @type boolean
-     * @memberof PublicImportsApigetErrors
+     * @memberof BasicApicrmV3ImportsImportIdErrors
      */
     includeRowData?: boolean
+    /**
+     * The maximum number of results to display per page.
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApicrmV3ImportsImportIdErrors
+     */
+    limit?: number
 }
 
-export class ObjectPublicImportsApi {
-    private api: ObservablePublicImportsApi
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
 
-    public constructor(configuration: Configuration, requestFactory?: PublicImportsApiRequestFactory, responseProcessor?: PublicImportsApiResponseProcessor) {
-        this.api = new ObservablePublicImportsApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
      * @param param the request object
      */
-    public getErrorsWithHttpInfo(param: PublicImportsApiGetErrorsRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicImportErrorForwardPaging>> {
-        return this.api.getErrorsWithHttpInfo(param.importId, param.after, param.limit, param.includeErrorMessage, param.includeRowData,  options).toPromise();
+    public crmV3ImportsWithHttpInfo(param: BasicApiCrmV3ImportsRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicImportResponseForwardPaging>> {
+        return this.api.crmV3ImportsWithHttpInfo(param.after, param.limit,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
-    public getErrors(param: PublicImportsApiGetErrorsRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicImportErrorForwardPaging> {
-        return this.api.getErrors(param.importId, param.after, param.limit, param.includeErrorMessage, param.includeRowData,  options).toPromise();
+    public crmV3Imports(param: BasicApiCrmV3ImportsRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponsePublicImportResponseForwardPaging> {
+        return this.api.crmV3Imports(param.after, param.limit,  options).toPromise();
+    }
+
+    /**
+     * A complete summary of an import record, including any updates.
+     * Get the information on any import
+     * @param param the request object
+     */
+    public crmV3ImportsImportIdWithHttpInfo(param: BasicApiCrmV3ImportsImportIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicImportResponse>> {
+        return this.api.crmV3ImportsImportIdWithHttpInfo(param.importId,  options).toPromise();
+    }
+
+    /**
+     * A complete summary of an import record, including any updates.
+     * Get the information on any import
+     * @param param the request object
+     */
+    public crmV3ImportsImportId(param: BasicApiCrmV3ImportsImportIdRequest, options?: ConfigurationOptions): Promise<PublicImportResponse> {
+        return this.api.crmV3ImportsImportId(param.importId,  options).toPromise();
+    }
+
+    /**
+     * Retrieves detailed error records for a specific import operation, enabling you to identify and troubleshoot records that failed during processing.
+     * Retrieve errors for a specific import
+     * @param param the request object
+     */
+    public crmV3ImportsImportIdErrorsWithHttpInfo(param: BasicApiCrmV3ImportsImportIdErrorsRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicImportErrorForwardPaging>> {
+        return this.api.crmV3ImportsImportIdErrorsWithHttpInfo(param.importId, param.after, param.includeErrorMessage, param.includeRowData, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Retrieves detailed error records for a specific import operation, enabling you to identify and troubleshoot records that failed during processing.
+     * Retrieve errors for a specific import
+     * @param param the request object
+     */
+    public crmV3ImportsImportIdErrors(param: BasicApiCrmV3ImportsImportIdErrorsRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicImportErrorForwardPaging> {
+        return this.api.crmV3ImportsImportIdErrors(param.importId, param.after, param.includeErrorMessage, param.includeRowData, param.limit,  options).toPromise();
     }
 
 }

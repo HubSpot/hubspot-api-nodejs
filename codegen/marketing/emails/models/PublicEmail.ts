@@ -24,98 +24,135 @@ import { PublicWebversionDetails } from '../models/PublicWebversionDetails';
 */
 export class PublicEmail {
     /**
-    * The ID of the feedback survey linked to the email.
+    * The active domain of the email.
     */
-    'feedbackSurveyId'?: string;
+    'activeDomain'?: string;
     /**
-    * The subject of the email.
+    * List of emailCampaignIds.
     */
-    'subject': string;
-    /**
-    * The date and time the email is scheduled for, in ISO8601 representation. This is only used in local time or scheduled emails.
-    */
-    'publishDate'?: Date;
-    /**
-    * Returns whether the email is a transactional email or not. This is read only.
-    */
-    'isTransactional'?: boolean;
-    'language'?: PublicEmailLanguageEnum;
-    /**
-    * The email type, this is derived from other properties on the email such as subcategory.
-    */
-    'type'?: PublicEmailTypeEnum;
-    'content': PublicEmailContent;
-    'businessUnitId'?: string;
-    'webversion'?: PublicWebversionDetails;
-    'workflowNames'?: Array<string>;
+    'allEmailCampaignIds'?: Array<string>;
     /**
     * Determines if the email is archived or not.
     */
     'archived'?: boolean;
+    'businessUnitId'?: string;
+    /**
+    * The ID of the campaign this email is associated to.
+    */
+    'campaign'?: string;
+    /**
+    * The name of the campaign.
+    */
+    'campaignName'?: string;
+    'campaignUtm'?: string;
+    /**
+    * The ID of the email this email was cloned from.
+    */
+    'clonedFrom'?: string;
+    'content'?: PublicEmailContent;
     /**
     * The date and time of the email\'s creation, in ISO8601 representation.
     */
     'createdAt'?: Date;
-    'stats'?: EmailStatisticsData;
-    'jitterSendTime'?: boolean;
-    '_from': PublicEmailFromDetails;
-    /**
-    * The email ID.
-    */
-    'id': string;
-    /**
-    * The email state.
-    */
-    'state': PublicEmailStateEnum;
     /**
     * The id of the user who created the email.
     */
     'createdById'?: string;
     /**
-    * The date and time of the last update to the email, in ISO8601 representation.
+    * The date and time the email was deleted at, in ISO8601 representation.
     */
-    'updatedAt'?: Date;
-    'clonedFrom'?: string;
-    'rssData'?: PublicRssEmailDetails;
+    'deletedAt'?: Date;
+    'emailCampaignGroupId'?: string;
+    'emailTemplateMode'?: PublicEmailEmailTemplateModeEnum;
     /**
-    * The date and time the email was published at, in ISO8601 representation.
+    * The ID of the feedback survey linked to the email.
     */
-    'publishedAt'?: Date;
-    'publishedById'?: string;
+    'feedbackSurveyId'?: string;
+    'folderId'?: number;
+    'folderIdV2'?: number;
+    '_from'?: PublicEmailFromDetails;
+    /**
+    * The email ID.
+    */
+    'id'?: string;
+    'isAb': boolean;
     /**
     * Returns the published status of the email. This is read only.
     */
     'isPublished'?: boolean;
+    /**
+    * Returns whether the email is a transactional email or not. This is read only.
+    */
+    'isTransactional'?: boolean;
+    'jitterSendTime'?: boolean;
+    'language'?: PublicEmailLanguageEnum;
+    /**
+    * The name of the email, as displayed on the email dashboard.
+    */
+    'name'?: string;
+    'previewKey'?: string;
+    'primaryEmailCampaignId'?: string;
+    /**
+    * The date and time the email is scheduled for, in ISO8601 representation. This is only used in local time or scheduled emails.
+    */
+    'publishDate'?: Date;
+    /**
+    * The date and time the email was published at, in ISO8601 representation.
+    */
+    'publishedAt'?: Date;
+    /**
+    * Email of the user who published/sent the email.
+    */
+    'publishedByEmail'?: string;
+    /**
+    * The ID of the user who published the email.
+    */
+    'publishedById'?: string;
+    /**
+    * Name of the user who published the email.
+    */
+    'publishedByName'?: string;
+    'rssData'?: PublicRssEmailDetails;
+    /**
+    * Determines whether the email will be sent immediately on publish.
+    */
+    'sendOnPublish'?: boolean;
+    /**
+    * The email state.
+    */
+    'state'?: PublicEmailStateEnum;
+    'stats'?: EmailStatisticsData;
+    /**
+    * The email subcategory.
+    */
+    'subcategory'?: string;
+    /**
+    * The subject of the email.
+    */
+    'subject'?: string;
+    'subscriptionDetails'?: PublicEmailSubscriptionDetails;
+    'teamsWithAccess'?: Array<string>;
     'testing'?: PublicEmailTestingDetails;
+    'to'?: PublicEmailToDetails;
+    /**
+    * The email type, this is derived from other properties on the email such as subcategory.
+    */
+    'type'?: PublicEmailTypeEnum;
+    'unpublishedAt'?: Date;
+    /**
+    * The date and time of the last update to the email, in ISO8601 representation.
+    */
+    'updatedAt'?: Date;
     /**
     * The id of the user who last updated the email.
     */
     'updatedById'?: string;
-    'folderId'?: number;
-    'subscriptionDetails'?: PublicEmailSubscriptionDetails;
-    'deletedAt'?: Date;
+    'usersWithAccess'?: Array<string>;
+    'webversion'?: PublicWebversionDetails;
     /**
-    * The name of the email, as displayed on the email dashboard.
+    * Names of workflows in which the email is used within a \"send email\" action.
     */
-    'name': string;
-    /**
-    * The active domain of the email.
-    */
-    'activeDomain'?: string;
-    /**
-    * The campaign id on the email.
-    */
-    'campaign'?: string;
-    'to': PublicEmailToDetails;
-    /**
-    * The email subcategory.
-    */
-    'subcategory': string;
-    'campaignName'?: string;
-    /**
-    * Determines whether the email will be sent immediately on publish.
-    */
-    'sendOnPublish': boolean;
+    'workflowNames'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -123,62 +160,14 @@ export class PublicEmail {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "feedbackSurveyId",
-            "baseName": "feedbackSurveyId",
+            "name": "activeDomain",
+            "baseName": "activeDomain",
             "type": "string",
             "format": ""
         },
         {
-            "name": "subject",
-            "baseName": "subject",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "publishDate",
-            "baseName": "publishDate",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "isTransactional",
-            "baseName": "isTransactional",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "language",
-            "baseName": "language",
-            "type": "PublicEmailLanguageEnum",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "PublicEmailTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "content",
-            "baseName": "content",
-            "type": "PublicEmailContent",
-            "format": ""
-        },
-        {
-            "name": "businessUnitId",
-            "baseName": "businessUnitId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "webversion",
-            "baseName": "webversion",
-            "type": "PublicWebversionDetails",
-            "format": ""
-        },
-        {
-            "name": "workflowNames",
-            "baseName": "workflowNames",
+            "name": "allEmailCampaignIds",
+            "baseName": "allEmailCampaignIds",
             "type": "Array<string>",
             "format": ""
         },
@@ -189,22 +178,88 @@ export class PublicEmail {
             "format": ""
         },
         {
+            "name": "businessUnitId",
+            "baseName": "businessUnitId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "campaign",
+            "baseName": "campaign",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "campaignName",
+            "baseName": "campaignName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "campaignUtm",
+            "baseName": "campaignUtm",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "clonedFrom",
+            "baseName": "clonedFrom",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "content",
+            "baseName": "content",
+            "type": "PublicEmailContent",
+            "format": ""
+        },
+        {
             "name": "createdAt",
             "baseName": "createdAt",
             "type": "Date",
             "format": "date-time"
         },
         {
-            "name": "stats",
-            "baseName": "stats",
-            "type": "EmailStatisticsData",
+            "name": "createdById",
+            "baseName": "createdById",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "jitterSendTime",
-            "baseName": "jitterSendTime",
-            "type": "boolean",
+            "name": "deletedAt",
+            "baseName": "deletedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "emailCampaignGroupId",
+            "baseName": "emailCampaignGroupId",
+            "type": "string",
             "format": ""
+        },
+        {
+            "name": "emailTemplateMode",
+            "baseName": "emailTemplateMode",
+            "type": "PublicEmailEmailTemplateModeEnum",
+            "format": ""
+        },
+        {
+            "name": "feedbackSurveyId",
+            "baseName": "feedbackSurveyId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "folderId",
+            "baseName": "folderId",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "folderIdV2",
+            "baseName": "folderIdV2",
+            "type": "number",
+            "format": "int64"
         },
         {
             "name": "_from",
@@ -219,26 +274,80 @@ export class PublicEmail {
             "format": ""
         },
         {
-            "name": "state",
-            "baseName": "state",
-            "type": "PublicEmailStateEnum",
+            "name": "isAb",
+            "baseName": "isAb",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "createdById",
-            "baseName": "createdById",
+            "name": "isPublished",
+            "baseName": "isPublished",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "isTransactional",
+            "baseName": "isTransactional",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "jitterSendTime",
+            "baseName": "jitterSendTime",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "language",
+            "baseName": "language",
+            "type": "PublicEmailLanguageEnum",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
+            "name": "previewKey",
+            "baseName": "previewKey",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "primaryEmailCampaignId",
+            "baseName": "primaryEmailCampaignId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "publishDate",
+            "baseName": "publishDate",
             "type": "Date",
             "format": "date-time"
         },
         {
-            "name": "clonedFrom",
-            "baseName": "clonedFrom",
+            "name": "publishedAt",
+            "baseName": "publishedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "publishedByEmail",
+            "baseName": "publishedByEmail",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "publishedById",
+            "baseName": "publishedById",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "publishedByName",
+            "baseName": "publishedByName",
             "type": "string",
             "format": ""
         },
@@ -249,75 +358,21 @@ export class PublicEmail {
             "format": ""
         },
         {
-            "name": "publishedAt",
-            "baseName": "publishedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "publishedById",
-            "baseName": "publishedById",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "isPublished",
-            "baseName": "isPublished",
+            "name": "sendOnPublish",
+            "baseName": "sendOnPublish",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "testing",
-            "baseName": "testing",
-            "type": "PublicEmailTestingDetails",
+            "name": "state",
+            "baseName": "state",
+            "type": "PublicEmailStateEnum",
             "format": ""
         },
         {
-            "name": "updatedById",
-            "baseName": "updatedById",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "folderId",
-            "baseName": "folderId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "subscriptionDetails",
-            "baseName": "subscriptionDetails",
-            "type": "PublicEmailSubscriptionDetails",
-            "format": ""
-        },
-        {
-            "name": "deletedAt",
-            "baseName": "deletedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "activeDomain",
-            "baseName": "activeDomain",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "campaign",
-            "baseName": "campaign",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "to",
-            "baseName": "to",
-            "type": "PublicEmailToDetails",
+            "name": "stats",
+            "baseName": "stats",
+            "type": "EmailStatisticsData",
             "format": ""
         },
         {
@@ -327,15 +382,75 @@ export class PublicEmail {
             "format": ""
         },
         {
-            "name": "campaignName",
-            "baseName": "campaignName",
+            "name": "subject",
+            "baseName": "subject",
             "type": "string",
             "format": ""
         },
         {
-            "name": "sendOnPublish",
-            "baseName": "sendOnPublish",
-            "type": "boolean",
+            "name": "subscriptionDetails",
+            "baseName": "subscriptionDetails",
+            "type": "PublicEmailSubscriptionDetails",
+            "format": ""
+        },
+        {
+            "name": "teamsWithAccess",
+            "baseName": "teamsWithAccess",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "testing",
+            "baseName": "testing",
+            "type": "PublicEmailTestingDetails",
+            "format": ""
+        },
+        {
+            "name": "to",
+            "baseName": "to",
+            "type": "PublicEmailToDetails",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "PublicEmailTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "unpublishedAt",
+            "baseName": "unpublishedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "updatedById",
+            "baseName": "updatedById",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "usersWithAccess",
+            "baseName": "usersWithAccess",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "webversion",
+            "baseName": "webversion",
+            "type": "PublicWebversionDetails",
+            "format": ""
+        },
+        {
+            "name": "workflowNames",
+            "baseName": "workflowNames",
+            "type": "Array<string>",
             "format": ""
         }    ];
 
@@ -347,7 +462,14 @@ export class PublicEmail {
     }
 }
 
+export enum PublicEmailEmailTemplateModeEnum {
+    DesignManager = 'DESIGN_MANAGER',
+    DragAndDrop = 'DRAG_AND_DROP'
+}
 export enum PublicEmailLanguageEnum {
+    Aa = 'aa',
+    Ab = 'ab',
+    Ae = 'ae',
     Af = 'af',
     AfNa = 'af-na',
     AfZa = 'af-za',
@@ -357,6 +479,7 @@ export enum PublicEmailLanguageEnum {
     AkGh = 'ak-gh',
     Am = 'am',
     AmEt = 'am-et',
+    An = 'an',
     Ann = 'ann',
     AnnNg = 'ann-ng',
     Ar = 'ar',
@@ -389,27 +512,35 @@ export enum PublicEmailLanguageEnum {
     ArTn = 'ar-tn',
     ArYe = 'ar-ye',
     As = 'as',
+    AsIn = 'as-in',
     Asa = 'asa',
     AsaTz = 'asa-tz',
     Ast = 'ast',
     AstEs = 'ast-es',
-    AsIn = 'as-in',
+    Av = 'av',
+    Ay = 'ay',
     Az = 'az',
     AzAz = 'az-az',
+    Ba = 'ba',
+    Bal = 'bal',
+    BalPk = 'bal-pk',
     Bas = 'bas',
     BasCm = 'bas-cm',
     Be = 'be',
+    BeBy = 'be-by',
     Bem = 'bem',
     BemZm = 'bem-zm',
     Bez = 'bez',
     BezTz = 'bez-tz',
-    BeBy = 'be-by',
     Bg = 'bg',
+    BgBg = 'bg-bg',
     Bgc = 'bgc',
     BgcIn = 'bgc-in',
-    BgBg = 'bg-bg',
     Bho = 'bho',
     BhoIn = 'bho-in',
+    Bi = 'bi',
+    Blo = 'blo',
+    BloBj = 'blo-bj',
     Bm = 'bm',
     BmMl = 'bm-ml',
     Bn = 'bn',
@@ -419,9 +550,9 @@ export enum PublicEmailLanguageEnum {
     BoCn = 'bo-cn',
     BoIn = 'bo-in',
     Br = 'br',
+    BrFr = 'br-fr',
     Brx = 'brx',
     BrxIn = 'brx-in',
-    BrFr = 'br-fr',
     Bs = 'bs',
     BsBa = 'bs-ba',
     Ca = 'ca',
@@ -433,18 +564,23 @@ export enum PublicEmailLanguageEnum {
     CcpBd = 'ccp-bd',
     CcpIn = 'ccp-in',
     Ce = 'ce',
+    CeRu = 'ce-ru',
     Ceb = 'ceb',
     CebPh = 'ceb-ph',
-    CeRu = 'ce-ru',
     Cgg = 'cgg',
     CggUg = 'cgg-ug',
+    Ch = 'ch',
     Chr = 'chr',
     ChrUs = 'chr-us',
     Ckb = 'ckb',
     CkbIq = 'ckb-iq',
     CkbIr = 'ckb-ir',
+    Co = 'co',
+    Cr = 'cr',
     Cs = 'cs',
     CsCz = 'cs-cz',
+    Csw = 'csw',
+    CswCa = 'csw-ca',
     Cu = 'cu',
     CuRu = 'cu-ru',
     Cv = 'cv',
@@ -452,10 +588,10 @@ export enum PublicEmailLanguageEnum {
     Cy = 'cy',
     CyGb = 'cy-gb',
     Da = 'da',
-    Dav = 'dav',
-    DavKe = 'dav-ke',
     DaDk = 'da-dk',
     DaGl = 'da-gl',
+    Dav = 'dav',
+    DavKe = 'dav-ke',
     De = 'de',
     DeAt = 'de-at',
     DeBe = 'de-be',
@@ -473,6 +609,7 @@ export enum PublicEmailLanguageEnum {
     DsbDe = 'dsb-de',
     Dua = 'dua',
     DuaCm = 'dua-cm',
+    Dv = 'dv',
     Dyo = 'dyo',
     DyoSn = 'dyo-sn',
     Dz = 'dz',
@@ -509,11 +646,13 @@ export enum PublicEmailLanguageEnum {
     EnCn = 'en-cn',
     EnCx = 'en-cx',
     EnCy = 'en-cy',
+    EnCz = 'en-cz',
     EnDe = 'en-de',
     EnDg = 'en-dg',
     EnDk = 'en-dk',
     EnDm = 'en-dm',
     EnEe = 'en-ee',
+    EnEg = 'en-eg',
     EnEr = 'en-er',
     EnEs = 'en-es',
     EnFi = 'en-fi',
@@ -527,14 +666,18 @@ export enum PublicEmailLanguageEnum {
     EnGh = 'en-gh',
     EnGi = 'en-gi',
     EnGm = 'en-gm',
+    EnGs = 'en-gs',
     EnGu = 'en-gu',
     EnGy = 'en-gy',
     EnHk = 'en-hk',
+    EnHu = 'en-hu',
+    EnId = 'en-id',
     EnIe = 'en-ie',
     EnIl = 'en-il',
     EnIm = 'en-im',
     EnIn = 'en-in',
     EnIo = 'en-io',
+    EnIt = 'en-it',
     EnJe = 'en-je',
     EnJm = 'en-jm',
     EnKe = 'en-ke',
@@ -560,15 +703,19 @@ export enum PublicEmailLanguageEnum {
     EnNf = 'en-nf',
     EnNg = 'en-ng',
     EnNl = 'en-nl',
+    EnNo = 'en-no',
     EnNr = 'en-nr',
     EnNu = 'en-nu',
     EnNz = 'en-nz',
     EnPg = 'en-pg',
     EnPh = 'en-ph',
     EnPk = 'en-pk',
+    EnPl = 'en-pl',
     EnPn = 'en-pn',
     EnPr = 'en-pr',
+    EnPt = 'en-pt',
     EnPw = 'en-pw',
+    EnRo = 'en-ro',
     EnRw = 'en-rw',
     EnSb = 'en-sb',
     EnSc = 'en-sc',
@@ -577,11 +724,13 @@ export enum PublicEmailLanguageEnum {
     EnSg = 'en-sg',
     EnSh = 'en-sh',
     EnSi = 'en-si',
+    EnSk = 'en-sk',
     EnSl = 'en-sl',
     EnSs = 'en-ss',
     EnSx = 'en-sx',
     EnSz = 'en-sz',
     EnTc = 'en-tc',
+    EnTh = 'en-th',
     EnTk = 'en-tk',
     EnTn = 'en-tn',
     EnTo = 'en-to',
@@ -594,6 +743,7 @@ export enum PublicEmailLanguageEnum {
     EnVc = 'en-vc',
     EnVg = 'en-vg',
     EnVi = 'en-vi',
+    EnVn = 'en-vn',
     EnVu = 'en-vu',
     EnWs = 'en-ws',
     EnZa = 'en-za',
@@ -653,15 +803,14 @@ export enum PublicEmailLanguageEnum {
     FfSl = 'ff-sl',
     FfSn = 'ff-sn',
     Fi = 'fi',
+    FiFi = 'fi-fi',
     Fil = 'fil',
     FilPh = 'fil-ph',
-    FiFi = 'fi-fi',
+    Fj = 'fj',
     Fo = 'fo',
     FoDk = 'fo-dk',
     FoFo = 'fo-fo',
     Fr = 'fr',
-    Frr = 'frr',
-    FrrDe = 'frr-de',
     FrBe = 'fr-be',
     FrBf = 'fr-bf',
     FrBi = 'fr-bi',
@@ -708,6 +857,8 @@ export enum PublicEmailLanguageEnum {
     FrVu = 'fr-vu',
     FrWf = 'fr-wf',
     FrYt = 'fr-yt',
+    Frr = 'frr',
+    FrrDe = 'frr-de',
     Fur = 'fur',
     FurIt = 'fur-it',
     Fy = 'fy',
@@ -715,47 +866,59 @@ export enum PublicEmailLanguageEnum {
     Ga = 'ga',
     GaGb = 'ga-gb',
     GaIe = 'ga-ie',
+    Gaa = 'gaa',
+    GaaGh = 'gaa-gh',
     Gd = 'gd',
     GdGb = 'gd-gb',
     Gl = 'gl',
     GlEs = 'gl-es',
+    Gn = 'gn',
     Gsw = 'gsw',
     GswCh = 'gsw-ch',
     GswFr = 'gsw-fr',
     GswLi = 'gsw-li',
     Gu = 'gu',
+    GuIn = 'gu-in',
     Guz = 'guz',
     GuzKe = 'guz-ke',
-    GuIn = 'gu-in',
     Gv = 'gv',
     GvIm = 'gv-im',
     Ha = 'ha',
-    Haw = 'haw',
-    HawUs = 'haw-us',
     HaGh = 'ha-gh',
     HaNe = 'ha-ne',
     HaNg = 'ha-ng',
+    Haw = 'haw',
+    HawUs = 'haw-us',
     He = 'he',
     HeIl = 'he-il',
     Hi = 'hi',
     HiIn = 'hi-in',
+    Hmn = 'hmn',
+    Ho = 'ho',
     Hr = 'hr',
     HrBa = 'hr-ba',
     HrHr = 'hr-hr',
     Hsb = 'hsb',
     HsbDe = 'hsb-de',
+    Ht = 'ht',
+    HtHt = 'ht-ht',
     Hu = 'hu',
     HuHu = 'hu-hu',
     Hy = 'hy',
     HyAm = 'hy-am',
+    Hz = 'hz',
     Ia = 'ia',
     Ia001 = 'ia-001',
     Id = 'id',
+    IdId = 'id-id',
+    Ie = 'ie',
+    IeEe = 'ie-ee',
     Ig = 'ig',
     IgNg = 'ig-ng',
     Ii = 'ii',
     IiCn = 'ii-cn',
-    IdId = 'id-id',
+    Ik = 'ik',
+    Io = 'io',
     Is = 'is',
     IsIs = 'is-is',
     It = 'it',
@@ -763,71 +926,85 @@ export enum PublicEmailLanguageEnum {
     ItIt = 'it-it',
     ItSm = 'it-sm',
     ItVa = 'it-va',
+    Iu = 'iu',
     Ja = 'ja',
     JaJp = 'ja-jp',
     Jgo = 'jgo',
     JgoCm = 'jgo-cm',
-    Yi = 'yi',
-    Yi001 = 'yi-001',
     Jmc = 'jmc',
     JmcTz = 'jmc-tz',
     Jv = 'jv',
     JvId = 'jv-id',
     Ka = 'ka',
+    KaGe = 'ka-ge',
     Kab = 'kab',
     KabDz = 'kab-dz',
     Kam = 'kam',
     KamKe = 'kam-ke',
-    KaGe = 'ka-ge',
+    Kar = 'kar',
     Kde = 'kde',
     KdeTz = 'kde-tz',
     Kea = 'kea',
     KeaCv = 'kea-cv',
+    Kg = 'kg',
     Kgp = 'kgp',
     KgpBr = 'kgp-br',
+    Kh = 'kh',
     Khq = 'khq',
     KhqMl = 'khq-ml',
     Ki = 'ki',
     KiKe = 'ki-ke',
+    Kj = 'kj',
     Kk = 'kk',
+    KkKz = 'kk-kz',
     Kkj = 'kkj',
     KkjCm = 'kkj-cm',
-    KkKz = 'kk-kz',
     Kl = 'kl',
+    KlGl = 'kl-gl',
     Kln = 'kln',
     KlnKe = 'kln-ke',
-    KlGl = 'kl-gl',
     Km = 'km',
     KmKh = 'km-kh',
     Kn = 'kn',
     KnIn = 'kn-in',
     Ko = 'ko',
-    Kok = 'kok',
-    KokIn = 'kok-in',
+    KoCn = 'ko-cn',
     KoKp = 'ko-kp',
     KoKr = 'ko-kr',
+    Kok = 'kok',
+    KokIn = 'kok-in',
+    Kr = 'kr',
     Ks = 'ks',
+    KsIn = 'ks-in',
     Ksb = 'ksb',
     KsbTz = 'ksb-tz',
     Ksf = 'ksf',
     KsfCm = 'ksf-cm',
     Ksh = 'ksh',
     KshDe = 'ksh-de',
-    KsIn = 'ks-in',
     Ku = 'ku',
     KuTr = 'ku-tr',
+    Kv = 'kv',
     Kw = 'kw',
     KwGb = 'kw-gb',
+    Kxv = 'kxv',
+    KxvIn = 'kxv-in',
     Ky = 'ky',
     KyKg = 'ky-kg',
+    La = 'la',
     Lag = 'lag',
     LagTz = 'lag-tz',
     Lb = 'lb',
     LbLu = 'lb-lu',
     Lg = 'lg',
     LgUg = 'lg-ug',
+    Li = 'li',
+    Lij = 'lij',
+    LijIt = 'lij-it',
     Lkt = 'lkt',
     LktUs = 'lkt-us',
+    Lmo = 'lmo',
+    LmoIt = 'lmo-it',
     Ln = 'ln',
     LnAo = 'ln-ao',
     LnCd = 'ln-cd',
@@ -841,11 +1018,11 @@ export enum PublicEmailLanguageEnum {
     Lt = 'lt',
     LtLt = 'lt-lt',
     Lu = 'lu',
+    LuCd = 'lu-cd',
     Luo = 'luo',
     LuoKe = 'luo-ke',
     Luy = 'luy',
     LuyKe = 'luy-ke',
-    LuCd = 'lu-cd',
     Lv = 'lv',
     LvLv = 'lv-lv',
     Mai = 'mai',
@@ -860,11 +1037,12 @@ export enum PublicEmailLanguageEnum {
     Mfe = 'mfe',
     MfeMu = 'mfe-mu',
     Mg = 'mg',
+    MgMg = 'mg-mg',
     Mgh = 'mgh',
     MghMz = 'mgh-mz',
     Mgo = 'mgo',
     MgoCm = 'mgo-cm',
-    MgMg = 'mg-mg',
+    Mh = 'mh',
     Mi = 'mi',
     MiNz = 'mi-nz',
     Mk = 'mk',
@@ -872,9 +1050,9 @@ export enum PublicEmailLanguageEnum {
     Ml = 'ml',
     MlIn = 'ml-in',
     Mn = 'mn',
+    MnMn = 'mn-mn',
     Mni = 'mni',
     MniIn = 'mni-in',
-    MnMn = 'mn-mn',
     Mr = 'mr',
     MrIn = 'mr-in',
     Ms = 'ms',
@@ -890,19 +1068,21 @@ export enum PublicEmailLanguageEnum {
     MyMm = 'my-mm',
     Mzn = 'mzn',
     MznIr = 'mzn-ir',
+    Na = 'na',
     Naq = 'naq',
     NaqNa = 'naq-na',
     Nb = 'nb',
     NbNo = 'nb-no',
     NbSj = 'nb-sj',
     Nd = 'nd',
+    NdZw = 'nd-zw',
     Nds = 'nds',
     NdsDe = 'nds-de',
     NdsNl = 'nds-nl',
-    NdZw = 'nd-zw',
     Ne = 'ne',
     NeIn = 'ne-in',
     NeNp = 'ne-np',
+    Ng = 'ng',
     Nl = 'nl',
     NlAw = 'nl-aw',
     NlBe = 'nl-be',
@@ -916,18 +1096,26 @@ export enum PublicEmailLanguageEnum {
     Nmg = 'nmg',
     NmgCm = 'nmg-cm',
     Nn = 'nn',
+    NnNo = 'nn-no',
     Nnh = 'nnh',
     NnhCm = 'nnh-cm',
-    NnNo = 'nn-no',
     No = 'no',
     NoNo = 'no-no',
+    Nqo = 'nqo',
+    NqoGn = 'nqo-gn',
+    Nr = 'nr',
+    Nso = 'nso',
+    NsoZa = 'nso-za',
     Nus = 'nus',
     NusSs = 'nus-ss',
+    Nv = 'nv',
+    Ny = 'ny',
     Nyn = 'nyn',
     NynUg = 'nyn-ug',
     Oc = 'oc',
     OcEs = 'oc-es',
     OcFr = 'oc-fr',
+    Oj = 'oj',
     Om = 'om',
     OmEt = 'om-et',
     OmKe = 'om-ke',
@@ -941,6 +1129,7 @@ export enum PublicEmailLanguageEnum {
     PaPk = 'pa-pk',
     Pcm = 'pcm',
     PcmNg = 'pcm-ng',
+    Pi = 'pi',
     Pis = 'pis',
     PisSb = 'pis-sb',
     Pl = 'pl',
@@ -974,10 +1163,10 @@ export enum PublicEmailLanguageEnum {
     Rn = 'rn',
     RnBi = 'rn-bi',
     Ro = 'ro',
-    Rof = 'rof',
-    RofTz = 'rof-tz',
     RoMd = 'ro-md',
     RoRo = 'ro-ro',
+    Rof = 'rof',
+    RofTz = 'rof-tz',
     Ru = 'ru',
     RuBy = 'ru-by',
     RuKg = 'ru-kg',
@@ -986,17 +1175,17 @@ export enum PublicEmailLanguageEnum {
     RuRu = 'ru-ru',
     RuUa = 'ru-ua',
     Rw = 'rw',
+    RwRw = 'rw-rw',
     Rwk = 'rwk',
     RwkTz = 'rwk-tz',
-    RwRw = 'rw-rw',
     Sa = 'sa',
+    SaIn = 'sa-in',
     Sah = 'sah',
     SahRu = 'sah-ru',
     Saq = 'saq',
     SaqKe = 'saq-ke',
     Sat = 'sat',
     SatIn = 'sat-in',
-    SaIn = 'sa-in',
     Sbp = 'sbp',
     SbpTz = 'sbp-tz',
     Sc = 'sc',
@@ -1005,13 +1194,13 @@ export enum PublicEmailLanguageEnum {
     SdIn = 'sd-in',
     SdPk = 'sd-pk',
     Se = 'se',
+    SeFi = 'se-fi',
+    SeNo = 'se-no',
+    SeSe = 'se-se',
     Seh = 'seh',
     SehMz = 'seh-mz',
     Ses = 'ses',
     SesMl = 'ses-ml',
-    SeFi = 'se-fi',
-    SeNo = 'se-no',
-    SeSe = 'se-se',
     Sg = 'sg',
     SgCf = 'sg-cf',
     Shi = 'shi',
@@ -1022,6 +1211,7 @@ export enum PublicEmailLanguageEnum {
     SkSk = 'sk-sk',
     Sl = 'sl',
     SlSi = 'sl-si',
+    Sm = 'sm',
     Smn = 'smn',
     SmnFi = 'smn-fi',
     Sms = 'sms',
@@ -1043,6 +1233,10 @@ export enum PublicEmailLanguageEnum {
     SrMe = 'sr-me',
     SrRs = 'sr-rs',
     SrXk = 'sr-xk',
+    Ss = 'ss',
+    St = 'st',
+    StLs = 'st-ls',
+    StZa = 'st-za',
     Su = 'su',
     SuId = 'su-id',
     Sv = 'sv',
@@ -1055,16 +1249,21 @@ export enum PublicEmailLanguageEnum {
     SwTz = 'sw-tz',
     SwUg = 'sw-ug',
     Sy = 'sy',
+    Syr = 'syr',
+    SyrIq = 'syr-iq',
+    SyrSy = 'syr-sy',
+    Szl = 'szl',
+    SzlPl = 'szl-pl',
     Ta = 'ta',
     TaIn = 'ta-in',
     TaLk = 'ta-lk',
     TaMy = 'ta-my',
     TaSg = 'ta-sg',
     Te = 'te',
+    TeIn = 'te-in',
     Teo = 'teo',
     TeoKe = 'teo-ke',
     TeoUg = 'teo-ug',
-    TeIn = 'te-in',
     Tg = 'tg',
     TgTj = 'tg-tj',
     Th = 'th',
@@ -1075,17 +1274,23 @@ export enum PublicEmailLanguageEnum {
     Tk = 'tk',
     TkTm = 'tk-tm',
     Tl = 'tl',
+    Tn = 'tn',
+    TnBw = 'tn-bw',
+    TnZa = 'tn-za',
     To = 'to',
+    ToTo = 'to-to',
     Tok = 'tok',
     Tok001 = 'tok-001',
-    ToTo = 'to-to',
     Tr = 'tr',
     TrCy = 'tr-cy',
     TrTr = 'tr-tr',
+    Ts = 'ts',
     Tt = 'tt',
     TtRu = 'tt-ru',
+    Tw = 'tw',
     Twq = 'twq',
     TwqNe = 'twq-ne',
+    Ty = 'ty',
     Tzm = 'tzm',
     TzmMa = 'tzm-ma',
     Ug = 'ug',
@@ -1100,22 +1305,33 @@ export enum PublicEmailLanguageEnum {
     UzUz = 'uz-uz',
     Vai = 'vai',
     VaiLr = 'vai-lr',
+    Ve = 've',
+    Vec = 'vec',
+    VecIt = 'vec-it',
     Vi = 'vi',
     ViVn = 'vi-vn',
+    Vmw = 'vmw',
+    VmwMz = 'vmw-mz',
     Vo = 'vo',
     Vo001 = 'vo-001',
     Vun = 'vun',
     VunTz = 'vun-tz',
+    Wa = 'wa',
     Wae = 'wae',
     WaeCh = 'wae-ch',
     Wo = 'wo',
     WoSn = 'wo-sn',
     Xh = 'xh',
     XhZa = 'xh-za',
+    Xnr = 'xnr',
+    XnrIn = 'xnr-in',
     Xog = 'xog',
     XogUg = 'xog-ug',
     Yav = 'yav',
     YavCm = 'yav-cm',
+    Yi = 'yi',
+    Yi001 = 'yi-001',
+    YiUa = 'yi-ua',
     Yo = 'yo',
     YoBj = 'yo-bj',
     YoNg = 'yo-ng',
@@ -1126,6 +1342,9 @@ export enum PublicEmailLanguageEnum {
     Yue = 'yue',
     YueCn = 'yue-cn',
     YueHk = 'yue-hk',
+    YueMo = 'yue-mo',
+    Za = 'za',
+    ZaCn = 'za-cn',
     Zgh = 'zgh',
     ZghMa = 'zgh-ma',
     Zh = 'zh',
@@ -1134,52 +1353,26 @@ export enum PublicEmailLanguageEnum {
     ZhHant = 'zh-hant',
     ZhHk = 'zh-hk',
     ZhMo = 'zh-mo',
+    ZhMy = 'zh-my',
     ZhSg = 'zh-sg',
     ZhTw = 'zh-tw',
     Zu = 'zu',
     ZuZa = 'zu-za'
 }
-export enum PublicEmailTypeEnum {
-    AbEmail = 'AB_EMAIL',
-    BatchEmail = 'BATCH_EMAIL',
-    LocaltimeEmail = 'LOCALTIME_EMAIL',
-    AutomatedAbEmail = 'AUTOMATED_AB_EMAIL',
-    BlogEmail = 'BLOG_EMAIL',
-    BlogEmailChild = 'BLOG_EMAIL_CHILD',
-    RssEmail = 'RSS_EMAIL',
-    RssEmailChild = 'RSS_EMAIL_CHILD',
-    ResubscribeEmail = 'RESUBSCRIBE_EMAIL',
-    OptinEmail = 'OPTIN_EMAIL',
-    OptinFollowupEmail = 'OPTIN_FOLLOWUP_EMAIL',
-    AutomatedEmail = 'AUTOMATED_EMAIL',
-    FeedbackCesEmail = 'FEEDBACK_CES_EMAIL',
-    FeedbackCustomEmail = 'FEEDBACK_CUSTOM_EMAIL',
-    FeedbackCustomSurveyEmail = 'FEEDBACK_CUSTOM_SURVEY_EMAIL',
-    FeedbackNpsEmail = 'FEEDBACK_NPS_EMAIL',
-    FollowupEmail = 'FOLLOWUP_EMAIL',
-    LeadflowEmail = 'LEADFLOW_EMAIL',
-    SingleSendApi = 'SINGLE_SEND_API',
-    MarketingSingleSendApi = 'MARKETING_SINGLE_SEND_API',
-    SmtpToken = 'SMTP_TOKEN',
-    TicketEmail = 'TICKET_EMAIL',
-    MembershipRegistrationEmail = 'MEMBERSHIP_REGISTRATION_EMAIL',
-    MembershipPasswordSavedEmail = 'MEMBERSHIP_PASSWORD_SAVED_EMAIL',
-    MembershipPasswordResetEmail = 'MEMBERSHIP_PASSWORD_RESET_EMAIL',
-    MembershipEmailVerificationEmail = 'MEMBERSHIP_EMAIL_VERIFICATION_EMAIL',
-    MembershipPasswordlessAuthEmail = 'MEMBERSHIP_PASSWORDLESS_AUTH_EMAIL',
-    MembershipRegistrationFollowUpEmail = 'MEMBERSHIP_REGISTRATION_FOLLOW_UP_EMAIL',
-    MembershipOtpLoginEmail = 'MEMBERSHIP_OTP_LOGIN_EMAIL',
-    MembershipFollowUpEmail = 'MEMBERSHIP_FOLLOW_UP_EMAIL',
-    MembershipVerificationEmail = 'MEMBERSHIP_VERIFICATION_EMAIL'
-}
 export enum PublicEmailStateEnum {
+    AgentGenerated = 'AGENT_GENERATED',
     Automated = 'AUTOMATED',
+    AutomatedAb = 'AUTOMATED_AB',
+    AutomatedAbVariant = 'AUTOMATED_AB_VARIANT',
     AutomatedDraft = 'AUTOMATED_DRAFT',
-    AutomatedSending = 'AUTOMATED_SENDING',
+    AutomatedDraftAb = 'AUTOMATED_DRAFT_AB',
+    AutomatedDraftAbvariant = 'AUTOMATED_DRAFT_ABVARIANT',
     AutomatedForForm = 'AUTOMATED_FOR_FORM',
     AutomatedForFormBuffer = 'AUTOMATED_FOR_FORM_BUFFER',
     AutomatedForFormDraft = 'AUTOMATED_FOR_FORM_DRAFT',
     AutomatedForFormLegacy = 'AUTOMATED_FOR_FORM_LEGACY',
+    AutomatedLoserAbvariant = 'AUTOMATED_LOSER_ABVARIANT',
+    AutomatedSending = 'AUTOMATED_SENDING',
     BlogEmailDraft = 'BLOG_EMAIL_DRAFT',
     BlogEmailPublished = 'BLOG_EMAIL_PUBLISHED',
     Draft = 'DRAFT',
@@ -1198,11 +1391,40 @@ export enum PublicEmailStateEnum {
     RssToEmailPublished = 'RSS_TO_EMAIL_PUBLISHED',
     Scheduled = 'SCHEDULED',
     ScheduledAb = 'SCHEDULED_AB',
-    ScheduledOrPublished = 'SCHEDULED_OR_PUBLISHED',
-    AutomatedAb = 'AUTOMATED_AB',
-    AutomatedAbVariant = 'AUTOMATED_AB_VARIANT',
-    AutomatedDraftAb = 'AUTOMATED_DRAFT_AB',
-    AutomatedDraftAbvariant = 'AUTOMATED_DRAFT_ABVARIANT',
-    AutomatedLoserAbvariant = 'AUTOMATED_LOSER_ABVARIANT'
+    ScheduledOrPublished = 'SCHEDULED_OR_PUBLISHED'
+}
+export enum PublicEmailTypeEnum {
+    AbEmail = 'AB_EMAIL',
+    AutomatedAbEmail = 'AUTOMATED_AB_EMAIL',
+    AutomatedEmail = 'AUTOMATED_EMAIL',
+    BatchEmail = 'BATCH_EMAIL',
+    BlogEmail = 'BLOG_EMAIL',
+    BlogEmailChild = 'BLOG_EMAIL_CHILD',
+    FeedbackCesEmail = 'FEEDBACK_CES_EMAIL',
+    FeedbackCustomEmail = 'FEEDBACK_CUSTOM_EMAIL',
+    FeedbackCustomSurveyEmail = 'FEEDBACK_CUSTOM_SURVEY_EMAIL',
+    FeedbackNpsEmail = 'FEEDBACK_NPS_EMAIL',
+    FollowupEmail = 'FOLLOWUP_EMAIL',
+    LeadflowEmail = 'LEADFLOW_EMAIL',
+    LocaltimeEmail = 'LOCALTIME_EMAIL',
+    ManagePreferencesEmail = 'MANAGE_PREFERENCES_EMAIL',
+    MarketingSingleSendApi = 'MARKETING_SINGLE_SEND_API',
+    MembershipEmailVerificationEmail = 'MEMBERSHIP_EMAIL_VERIFICATION_EMAIL',
+    MembershipFollowUpEmail = 'MEMBERSHIP_FOLLOW_UP_EMAIL',
+    MembershipOtpLoginEmail = 'MEMBERSHIP_OTP_LOGIN_EMAIL',
+    MembershipPasswordResetEmail = 'MEMBERSHIP_PASSWORD_RESET_EMAIL',
+    MembershipPasswordSavedEmail = 'MEMBERSHIP_PASSWORD_SAVED_EMAIL',
+    MembershipPasswordlessAuthEmail = 'MEMBERSHIP_PASSWORDLESS_AUTH_EMAIL',
+    MembershipRegistrationEmail = 'MEMBERSHIP_REGISTRATION_EMAIL',
+    MembershipRegistrationFollowUpEmail = 'MEMBERSHIP_REGISTRATION_FOLLOW_UP_EMAIL',
+    MembershipVerificationEmail = 'MEMBERSHIP_VERIFICATION_EMAIL',
+    OptinEmail = 'OPTIN_EMAIL',
+    OptinFollowupEmail = 'OPTIN_FOLLOWUP_EMAIL',
+    ResubscribeEmail = 'RESUBSCRIBE_EMAIL',
+    RssEmail = 'RSS_EMAIL',
+    RssEmailChild = 'RSS_EMAIL_CHILD',
+    SingleSendApi = 'SINGLE_SEND_API',
+    SmtpToken = 'SMTP_TOKEN',
+    TicketEmail = 'TICKET_EMAIL'
 }
 

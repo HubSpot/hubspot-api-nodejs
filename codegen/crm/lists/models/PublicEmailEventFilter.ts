@@ -10,16 +10,34 @@
  * Do not edit the class manually.
  */
 
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
+import { PublicCtaAnalyticsFilterPruningRefineBy } from '../models/PublicCtaAnalyticsFilterPruningRefineBy';
 
 export class PublicEmailEventFilter {
-    'clickUrl'?: string;
-    'level': string;
-    'pruningRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
+    /**
+    * The ID of the application associated with the email event filter.
+    */
     'appId': string;
+    /**
+    * The URL that was clicked in the email event.
+    */
+    'clickUrl'?: string;
+    /**
+    * The ID of the email associated with the event filter.
+    */
     'emailId': string;
+    /**
+    * Indicates the type of filter (EMAIL_EVENT).
+    */
     'filterType': PublicEmailEventFilterFilterTypeEnum;
+    /**
+    * Specifies the level of the email event, such as EMAIL_API_CAMPAIGN_GROUP.
+    */
+    'level': string;
+    /**
+    * Defines the operation to be applied within the filter (BOUNCED, LINK_CLICKED, MARKED_SPAM, OPENED, OPENED_BUT_LINK_NOT_CLICKED, OPENED_BUT_NOT_REPLIED, RECEIVED, RECEIVED_BUT_NOT_OPENED, REPLIED, SENT, SENT_BUT_LINK_NOT_CLICKED, SENT_BUT_NOT_RECEIVED, UNSUBSCRIBED).
+    */
     'operator': PublicEmailEventFilterOperatorEnum;
+    'pruningRefineBy'?: PublicCtaAnalyticsFilterPruningRefineBy;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -27,26 +45,14 @@ export class PublicEmailEventFilter {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "clickUrl",
-            "baseName": "clickUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "level",
-            "baseName": "level",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "pruningRefineBy",
-            "baseName": "pruningRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
             "name": "appId",
             "baseName": "appId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "clickUrl",
+            "baseName": "clickUrl",
             "type": "string",
             "format": ""
         },
@@ -63,9 +69,21 @@ export class PublicEmailEventFilter {
             "format": ""
         },
         {
+            "name": "level",
+            "baseName": "level",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "operator",
             "baseName": "operator",
             "type": "PublicEmailEventFilterOperatorEnum",
+            "format": ""
+        },
+        {
+            "name": "pruningRefineBy",
+            "baseName": "pruningRefineBy",
+            "type": "PublicCtaAnalyticsFilterPruningRefineBy",
             "format": ""
         }    ];
 
@@ -81,18 +99,18 @@ export enum PublicEmailEventFilterFilterTypeEnum {
     EmailEvent = 'EMAIL_EVENT'
 }
 export enum PublicEmailEventFilterOperatorEnum {
+    Bounced = 'BOUNCED',
     LinkClicked = 'LINK_CLICKED',
     MarkedSpam = 'MARKED_SPAM',
     Opened = 'OPENED',
     OpenedButLinkNotClicked = 'OPENED_BUT_LINK_NOT_CLICKED',
     OpenedButNotReplied = 'OPENED_BUT_NOT_REPLIED',
-    Replied = 'REPLIED',
-    Unsubscribed = 'UNSUBSCRIBED',
-    Bounced = 'BOUNCED',
     Received = 'RECEIVED',
     ReceivedButNotOpened = 'RECEIVED_BUT_NOT_OPENED',
+    Replied = 'REPLIED',
     Sent = 'SENT',
     SentButLinkNotClicked = 'SENT_BUT_LINK_NOT_CLICKED',
-    SentButNotReceived = 'SENT_BUT_NOT_RECEIVED'
+    SentButNotReceived = 'SENT_BUT_NOT_RECEIVED',
+    Unsubscribed = 'UNSUBSCRIBED'
 }
 

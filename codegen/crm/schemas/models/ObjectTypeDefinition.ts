@@ -17,26 +17,38 @@ import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels
 */
 export class ObjectTypeDefinition {
     /**
-    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+    * Indicates whether the object type allows properties that contain sensitive data.
     */
-    'secondaryDisplayProperties'?: Array<string>;
-    'objectTypeId'?: string;
-    'description'?: string;
-    'fullyQualifiedName'?: string;
-    'labels': ObjectTypeDefinitionLabels;
+    'allowsSensitiveProperties'?: boolean;
+    /**
+    * Indicates whether the object type is archived.
+    */
     'archived'?: boolean;
     /**
     * When the object type was created.
     */
     'createdAt'?: Date;
     /**
-    * The names of properties that should be **required** when creating an object of this type.
+    * A description of the object type.
     */
-    'requiredProperties': Array<string>;
+    'description'?: string;
     /**
-    * Names of properties that will be indexed for this object type in by HubSpot\'s product search.
+    * An assigned unique ID for the object, including portal ID and object name.
     */
-    'searchableProperties'?: Array<string>;
+    'fullyQualifiedName'?: string;
+    /**
+    * A unique ID for this object type. Will be defined as {meta-type}-{unique ID}.
+    */
+    'id': string;
+    'labels': ObjectTypeDefinitionLabels;
+    /**
+    * A unique name for this object. For internal use only.
+    */
+    'name': string;
+    /**
+    * A unique identifier for the object type.
+    */
+    'objectTypeId'?: string;
     /**
     * The ID of the account that this object type is specific to.
     */
@@ -46,13 +58,17 @@ export class ObjectTypeDefinition {
     */
     'primaryDisplayProperty'?: string;
     /**
-    * A unique name for this object. For internal use only.
+    * The names of properties that should be **required** when creating an object of this type.
     */
-    'name': string;
+    'requiredProperties': Array<string>;
     /**
-    * A unique ID for this object type. Will be defined as {meta-type}-{unique ID}.
+    * Names of properties that will be indexed for this object type in by HubSpot\'s product search.
     */
-    'id': string;
+    'searchableProperties'?: Array<string>;
+    /**
+    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+    */
+    'secondaryDisplayProperties'?: Array<string>;
     /**
     * When the object type was last updated.
     */
@@ -64,33 +80,9 @@ export class ObjectTypeDefinition {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "secondaryDisplayProperties",
-            "baseName": "secondaryDisplayProperties",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "objectTypeId",
-            "baseName": "objectTypeId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "fullyQualifiedName",
-            "baseName": "fullyQualifiedName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "labels",
-            "baseName": "labels",
-            "type": "ObjectTypeDefinitionLabels",
+            "name": "allowsSensitiveProperties",
+            "baseName": "allowsSensitiveProperties",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -106,15 +98,39 @@ export class ObjectTypeDefinition {
             "format": "date-time"
         },
         {
-            "name": "requiredProperties",
-            "baseName": "requiredProperties",
-            "type": "Array<string>",
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "searchableProperties",
-            "baseName": "searchableProperties",
-            "type": "Array<string>",
+            "name": "fullyQualifiedName",
+            "baseName": "fullyQualifiedName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "labels",
+            "baseName": "labels",
+            "type": "ObjectTypeDefinitionLabels",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
+            "type": "string",
             "format": ""
         },
         {
@@ -130,15 +146,21 @@ export class ObjectTypeDefinition {
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
+            "name": "requiredProperties",
+            "baseName": "requiredProperties",
+            "type": "Array<string>",
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "searchableProperties",
+            "baseName": "searchableProperties",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "secondaryDisplayProperties",
+            "baseName": "secondaryDisplayProperties",
+            "type": "Array<string>",
             "format": ""
         },
         {

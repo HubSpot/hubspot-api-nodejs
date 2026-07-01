@@ -23,7 +23,7 @@ export class MultiLanguageApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Attach a blog post to a [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content).
      * Attach post to a multi-language group
-     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
+     * @param attachToLangPrimaryRequestVNext 
      */
     public async attachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -71,7 +71,7 @@ export class MultiLanguageApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Create a new language variation from an existing blog post
      * Create a language variation
-     * @param blogPostLanguageCloneRequestVNext The JSON representation of the BlogPostLanguageCloneRequestVNext object.
+     * @param blogPostLanguageCloneRequestVNext 
      */
     public async createLangVariation(blogPostLanguageCloneRequestVNext: BlogPostLanguageCloneRequestVNext, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -119,7 +119,7 @@ export class MultiLanguageApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Detach a blog post from a [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content).
      * Detach post from a multi-language group
-     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
+     * @param detachFromLangGroupRequestVNext 
      */
     public async detachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -167,7 +167,7 @@ export class MultiLanguageApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Set the primary language of a [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content) to the language of the provided post (specified as an ID in the request body)
      * Set a new primary language
-     * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     * @param setNewLanguagePrimaryRequestVNext 
      */
     public async setLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -215,7 +215,7 @@ export class MultiLanguageApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Explicitly set new languages for each post in a [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content).
      * Update languages of multi-language group
-     * @param updateLanguagesRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     * @param updateLanguagesRequestVNext 
      */
     public async updateLangs(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -271,11 +271,8 @@ export class MultiLanguageApiResponseProcessor {
      * @params response Response returned by the server for a request to attachToLangGroup
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async attachToLangGroupWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
+     public async attachToLangGroupWithHttpInfo(response: ResponseContext): Promise<HttpInfo< void>> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
-        }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -286,11 +283,7 @@ export class MultiLanguageApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: void = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "void", ""
-            ) as void;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -339,11 +332,8 @@ export class MultiLanguageApiResponseProcessor {
      * @params response Response returned by the server for a request to detachFromLangGroup
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async detachFromLangGroupWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
+     public async detachFromLangGroupWithHttpInfo(response: ResponseContext): Promise<HttpInfo< void>> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
-        }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -354,11 +344,7 @@ export class MultiLanguageApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: void = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "void", ""
-            ) as void;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -403,11 +389,8 @@ export class MultiLanguageApiResponseProcessor {
      * @params response Response returned by the server for a request to updateLangs
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateLangsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
+     public async updateLangsWithHttpInfo(response: ResponseContext): Promise<HttpInfo< void>> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
-        }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -418,11 +401,7 @@ export class MultiLanguageApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: void = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "void", ""
-            ) as void;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

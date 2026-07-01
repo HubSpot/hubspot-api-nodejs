@@ -12,7 +12,13 @@
 
 
 export class PublicInListFilterMetadata {
+    /**
+    * The identifier for the filter metadata.
+    */
     'id': string;
+    /**
+    * Specifies the type of list for the filter (WORKFLOWS_ENROLLMENT, WORKFLOWS_ACTIVE, WORKFLOWS_GOAL, WORKFLOWS_COMPLETED, IMPORT, DATASET, DATASETS).
+    */
     'inListType': string;
 
     static readonly discriminator: string | undefined = undefined;

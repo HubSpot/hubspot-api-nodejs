@@ -12,8 +12,14 @@
 
 
 export class PublicMembershipSettings {
-    'membershipTeamId'?: number;
+    /**
+    * Indicates whether unassigned memberships should be included.
+    */
     'includeUnassigned'?: boolean;
+    /**
+    * The ID of the team associated with the membership.
+    */
+    'membershipTeamId'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,16 +27,16 @@ export class PublicMembershipSettings {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "membershipTeamId",
-            "baseName": "membershipTeamId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "includeUnassigned",
             "baseName": "includeUnassigned",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "membershipTeamId",
+            "baseName": "membershipTeamId",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

@@ -3,23 +3,21 @@ import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from
 import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
-import { ObservableTypesApi } from './ObservableAPI';
+import { ObservableBasicApi } from './ObservableAPI';
 
-import { TypesApiRequestFactory, TypesApiResponseProcessor} from "../apis/TypesApi";
-export class PromiseTypesApi {
-    private api: ObservableTypesApi
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class PromiseBasicApi {
+    private api: ObservableBasicApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: TypesApiRequestFactory,
-        responseProcessor?: TypesApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
-        this.api = new ObservableTypesApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * List all the valid association types available between two object types
-     * List association types
      * @param fromObjectType
      * @param toObjectType
      */
@@ -41,8 +39,6 @@ export class PromiseTypesApi {
     }
 
     /**
-     * List all the valid association types available between two object types
-     * List association types
      * @param fromObjectType
      * @param toObjectType
      */

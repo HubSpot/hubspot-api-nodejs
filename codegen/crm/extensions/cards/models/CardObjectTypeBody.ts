@@ -48,10 +48,10 @@ export class CardObjectTypeBody {
 }
 
 export enum CardObjectTypeBodyNameEnum {
+    Companies = 'companies',
     Contacts = 'contacts',
     Deals = 'deals',
-    Companies = 'companies',
-    Tickets = 'tickets',
-    MarketingEvents = 'marketing_events'
+    MarketingEvents = 'marketing_events',
+    Tickets = 'tickets'
 }
 

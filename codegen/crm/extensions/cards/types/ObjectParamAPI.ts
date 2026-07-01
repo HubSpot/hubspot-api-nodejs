@@ -2,102 +2,153 @@ import { HttpInfo } from '../http/http';
 import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { CardCreateRequest } from '../models/CardCreateRequest';
+import { CardMigrateViewsRequest } from '../models/CardMigrateViewsRequest';
+import { CardMigrateViewsResponse } from '../models/CardMigrateViewsResponse';
 import { CardPatchRequest } from '../models/CardPatchRequest';
 import { IntegratorCardPayloadResponse } from '../models/IntegratorCardPayloadResponse';
 import { PublicCardListResponse } from '../models/PublicCardListResponse';
 import { PublicCardResponse } from '../models/PublicCardResponse';
 
-import { ObservableCardsApi } from "./ObservableAPI";
-import { CardsApiRequestFactory, CardsApiResponseProcessor} from "../apis/CardsApi";
+import { ObservableAdvancedApi } from "./ObservableAPI";
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
 
-export interface CardsApiArchiveRequest {
+export interface AdvancedApiCrmV3ExtensionsCardsDevAppIdViewsMigrateRequest {
+    /**
+     * The id of the app containing the Legacy CRM Card
+     * Defaults to: undefined
+     * @type number
+     * @memberof AdvancedApicrmV3ExtensionsCardsDevAppIdViewsMigrate
+     */
+    appId: number
+    /**
+     * 
+     * @type CardMigrateViewsRequest
+     * @memberof AdvancedApicrmV3ExtensionsCardsDevAppIdViewsMigrate
+     */
+    cardMigrateViewsRequest: CardMigrateViewsRequest
+}
+
+export class ObjectAdvancedApi {
+    private api: ObservableAdvancedApi
+
+    public constructor(configuration: Configuration, requestFactory?: AdvancedApiRequestFactory, responseProcessor?: AdvancedApiResponseProcessor) {
+        this.api = new ObservableAdvancedApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Swaps a Legacy CRM Card with an App Card in views. Reference the \"Migrate a legacy CRM card to an app card\" docs for more information
+     * Migrate Card In Views
+     * @param param the request object
+     */
+    public crmV3ExtensionsCardsDevAppIdViewsMigrateWithHttpInfo(param: AdvancedApiCrmV3ExtensionsCardsDevAppIdViewsMigrateRequest, options?: ConfigurationOptions): Promise<HttpInfo<CardMigrateViewsResponse>> {
+        return this.api.crmV3ExtensionsCardsDevAppIdViewsMigrateWithHttpInfo(param.appId, param.cardMigrateViewsRequest,  options).toPromise();
+    }
+
+    /**
+     * Swaps a Legacy CRM Card with an App Card in views. Reference the \"Migrate a legacy CRM card to an app card\" docs for more information
+     * Migrate Card In Views
+     * @param param the request object
+     */
+    public crmV3ExtensionsCardsDevAppIdViewsMigrate(param: AdvancedApiCrmV3ExtensionsCardsDevAppIdViewsMigrateRequest, options?: ConfigurationOptions): Promise<CardMigrateViewsResponse> {
+        return this.api.crmV3ExtensionsCardsDevAppIdViewsMigrate(param.appId, param.cardMigrateViewsRequest,  options).toPromise();
+    }
+
+}
+
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+
+export interface BasicApiArchiveRequest {
+    /**
+     * The id of the app containing the Legacy CRM Card
+     * Defaults to: undefined
+     * @type number
+     * @memberof BasicApiarchive
+     */
+    appId: number
     /**
      * The ID of the card to delete.
      * Defaults to: undefined
      * @type string
-     * @memberof CardsApiarchive
+     * @memberof BasicApiarchive
      */
     cardId: string
-    /**
-     * The ID of the target app.
-     * Defaults to: undefined
-     * @type number
-     * @memberof CardsApiarchive
-     */
-    appId: number
 }
 
-export interface CardsApiCreateRequest {
+export interface BasicApiCreateRequest {
     /**
-     * The ID of the target app.
+     * The id of the app to contain the Legacy CRM Card
      * Defaults to: undefined
      * @type number
-     * @memberof CardsApicreate
+     * @memberof BasicApicreate
      */
     appId: number
     /**
-     * The new card definition.
+     * 
      * @type CardCreateRequest
-     * @memberof CardsApicreate
+     * @memberof BasicApicreate
      */
     cardCreateRequest: CardCreateRequest
 }
 
-export interface CardsApiGetAllRequest {
+export interface BasicApiGetAllRequest {
     /**
-     * The ID of the target app.
+     * The id of the app containing the Legacy CRM Card(s)
      * Defaults to: undefined
      * @type number
-     * @memberof CardsApigetAll
+     * @memberof BasicApigetAll
      */
     appId: number
 }
 
-export interface CardsApiGetByIdRequest {
+export interface BasicApiGetByIdRequest {
     /**
-     * The ID of the target card.
-     * Defaults to: undefined
-     * @type string
-     * @memberof CardsApigetById
-     */
-    cardId: string
-    /**
-     * The ID of the target app.
+     * The id of the app containing the Legacy CRM Card.
      * Defaults to: undefined
      * @type number
-     * @memberof CardsApigetById
+     * @memberof BasicApigetById
      */
     appId: number
+    /**
+     * The id of the Legacy CRM Card
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApigetById
+     */
+    cardId: string
 }
 
-export interface CardsApiUpdateRequest {
+export interface BasicApiGetCardsSampleResponseRequest {
+}
+
+export interface BasicApiUpdateRequest {
     /**
-     * The ID of the card to update.
-     * Defaults to: undefined
-     * @type string
-     * @memberof CardsApiupdate
-     */
-    cardId: string
-    /**
-     * The ID of the target app.
+     * The id of the app containing the Legacy CRM Card.
      * Defaults to: undefined
      * @type number
-     * @memberof CardsApiupdate
+     * @memberof BasicApiupdate
      */
     appId: number
     /**
-     * Card definition fields to be updated.
+     * The id of the app containing the Legacy CRM Card
+     * Defaults to: undefined
+     * @type string
+     * @memberof BasicApiupdate
+     */
+    cardId: string
+    /**
+     * 
      * @type CardPatchRequest
-     * @memberof CardsApiupdate
+     * @memberof BasicApiupdate
      */
     cardPatchRequest: CardPatchRequest
 }
 
-export class ObjectCardsApi {
-    private api: ObservableCardsApi
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
 
-    public constructor(configuration: Configuration, requestFactory?: CardsApiRequestFactory, responseProcessor?: CardsApiResponseProcessor) {
-        this.api = new ObservableCardsApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -105,8 +156,8 @@ export class ObjectCardsApi {
      * Delete a card
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: CardsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
-        return this.api.archiveWithHttpInfo(param.cardId, param.appId,  options).toPromise();
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.appId, param.cardId,  options).toPromise();
     }
 
     /**
@@ -114,8 +165,8 @@ export class ObjectCardsApi {
      * Delete a card
      * @param param the request object
      */
-    public archive(param: CardsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
-        return this.api.archive(param.cardId, param.appId,  options).toPromise();
+    public archive(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.archive(param.appId, param.cardId,  options).toPromise();
     }
 
     /**
@@ -123,7 +174,7 @@ export class ObjectCardsApi {
      * Create a new card
      * @param param the request object
      */
-    public createWithHttpInfo(param: CardsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicCardResponse>> {
+    public createWithHttpInfo(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicCardResponse>> {
         return this.api.createWithHttpInfo(param.appId, param.cardCreateRequest,  options).toPromise();
     }
 
@@ -132,7 +183,7 @@ export class ObjectCardsApi {
      * Create a new card
      * @param param the request object
      */
-    public create(param: CardsApiCreateRequest, options?: ConfigurationOptions): Promise<PublicCardResponse> {
+    public create(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<PublicCardResponse> {
         return this.api.create(param.appId, param.cardCreateRequest,  options).toPromise();
     }
 
@@ -141,7 +192,7 @@ export class ObjectCardsApi {
      * Get all cards
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: CardsApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicCardListResponse>> {
+    public getAllWithHttpInfo(param: BasicApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicCardListResponse>> {
         return this.api.getAllWithHttpInfo(param.appId,  options).toPromise();
     }
 
@@ -150,7 +201,7 @@ export class ObjectCardsApi {
      * Get all cards
      * @param param the request object
      */
-    public getAll(param: CardsApiGetAllRequest, options?: ConfigurationOptions): Promise<PublicCardListResponse> {
+    public getAll(param: BasicApiGetAllRequest, options?: ConfigurationOptions): Promise<PublicCardListResponse> {
         return this.api.getAll(param.appId,  options).toPromise();
     }
 
@@ -159,8 +210,8 @@ export class ObjectCardsApi {
      * Get a card.
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: CardsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicCardResponse>> {
-        return this.api.getByIdWithHttpInfo(param.cardId, param.appId,  options).toPromise();
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicCardResponse>> {
+        return this.api.getByIdWithHttpInfo(param.appId, param.cardId,  options).toPromise();
     }
 
     /**
@@ -168,41 +219,8 @@ export class ObjectCardsApi {
      * Get a card.
      * @param param the request object
      */
-    public getById(param: CardsApiGetByIdRequest, options?: ConfigurationOptions): Promise<PublicCardResponse> {
-        return this.api.getById(param.cardId, param.appId,  options).toPromise();
-    }
-
-    /**
-     * Update a card definition with new details.
-     * Update a card
-     * @param param the request object
-     */
-    public updateWithHttpInfo(param: CardsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicCardResponse>> {
-        return this.api.updateWithHttpInfo(param.cardId, param.appId, param.cardPatchRequest,  options).toPromise();
-    }
-
-    /**
-     * Update a card definition with new details.
-     * Update a card
-     * @param param the request object
-     */
-    public update(param: CardsApiUpdateRequest, options?: ConfigurationOptions): Promise<PublicCardResponse> {
-        return this.api.update(param.cardId, param.appId, param.cardPatchRequest,  options).toPromise();
-    }
-
-}
-
-import { ObservableSampleResponseApi } from "./ObservableAPI";
-import { SampleResponseApiRequestFactory, SampleResponseApiResponseProcessor} from "../apis/SampleResponseApi";
-
-export interface SampleResponseApiGetCardsSampleResponseRequest {
-}
-
-export class ObjectSampleResponseApi {
-    private api: ObservableSampleResponseApi
-
-    public constructor(configuration: Configuration, requestFactory?: SampleResponseApiRequestFactory, responseProcessor?: SampleResponseApiResponseProcessor) {
-        this.api = new ObservableSampleResponseApi(configuration, requestFactory, responseProcessor);
+    public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<PublicCardResponse> {
+        return this.api.getById(param.appId, param.cardId,  options).toPromise();
     }
 
     /**
@@ -210,7 +228,7 @@ export class ObjectSampleResponseApi {
      * Get sample card detail response
      * @param param the request object
      */
-    public getCardsSampleResponseWithHttpInfo(param: SampleResponseApiGetCardsSampleResponseRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<IntegratorCardPayloadResponse>> {
+    public getCardsSampleResponseWithHttpInfo(param: BasicApiGetCardsSampleResponseRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<IntegratorCardPayloadResponse>> {
         return this.api.getCardsSampleResponseWithHttpInfo( options).toPromise();
     }
 
@@ -219,8 +237,26 @@ export class ObjectSampleResponseApi {
      * Get sample card detail response
      * @param param the request object
      */
-    public getCardsSampleResponse(param: SampleResponseApiGetCardsSampleResponseRequest = {}, options?: ConfigurationOptions): Promise<IntegratorCardPayloadResponse> {
+    public getCardsSampleResponse(param: BasicApiGetCardsSampleResponseRequest = {}, options?: ConfigurationOptions): Promise<IntegratorCardPayloadResponse> {
         return this.api.getCardsSampleResponse( options).toPromise();
+    }
+
+    /**
+     * Update a card definition with new details.
+     * Update a card
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicCardResponse>> {
+        return this.api.updateWithHttpInfo(param.appId, param.cardId, param.cardPatchRequest,  options).toPromise();
+    }
+
+    /**
+     * Update a card definition with new details.
+     * Update a card
+     * @param param the request object
+     */
+    public update(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<PublicCardResponse> {
+        return this.api.update(param.appId, param.cardId, param.cardPatchRequest,  options).toPromise();
     }
 
 }

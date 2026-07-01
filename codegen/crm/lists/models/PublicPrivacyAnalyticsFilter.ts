@@ -12,21 +12,24 @@
 
 
 export class PublicPrivacyAnalyticsFilter {
-    'privacyName': string;
+    /**
+    * Specifies the type of filter (PRIVACY).
+    */
     'filterType': PublicPrivacyAnalyticsFilterFilterTypeEnum;
+    /**
+    * Defines the operation to be applied within the filter (PRIVACY_CONSENT_GRANTED, PRIVACY_CONSENT_NOT_GRANTED).
+    */
     'operator': string;
+    /**
+    * The name of the privacy setting used in the filter.
+    */
+    'privacyName': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "privacyName",
-            "baseName": "privacyName",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "filterType",
             "baseName": "filterType",
@@ -36,6 +39,12 @@ export class PublicPrivacyAnalyticsFilter {
         {
             "name": "operator",
             "baseName": "operator",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "privacyName",
+            "baseName": "privacyName",
             "type": "string",
             "format": ""
         }    ];

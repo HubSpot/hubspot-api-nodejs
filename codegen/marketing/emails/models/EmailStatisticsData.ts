@@ -13,6 +13,10 @@
 
 export class EmailStatisticsData {
     /**
+    * Counters like number of `sent`, `open` or `delivered`.
+    */
+    'counters': { [key: string]: number; };
+    /**
     * Statistics by device.
     */
     'deviceBreakdown': { [key: string]: { [key: string]: number; }; };
@@ -20,10 +24,6 @@ export class EmailStatisticsData {
     * Number of emails that were dropped and bounced.
     */
     'qualifierStats': { [key: string]: { [key: string]: number; }; };
-    /**
-    * Counters like number of `sent`, `open` or `delivered`.
-    */
-    'counters': { [key: string]: number; };
     /**
     * Ratios like `openratio` or `clickratio`
     */
@@ -35,6 +35,12 @@ export class EmailStatisticsData {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "counters",
+            "baseName": "counters",
+            "type": "{ [key: string]: number; }",
+            "format": "int64"
+        },
+        {
             "name": "deviceBreakdown",
             "baseName": "deviceBreakdown",
             "type": "{ [key: string]: { [key: string]: number; }; }",
@@ -44,12 +50,6 @@ export class EmailStatisticsData {
             "name": "qualifierStats",
             "baseName": "qualifierStats",
             "type": "{ [key: string]: { [key: string]: number; }; }",
-            "format": "int64"
-        },
-        {
-            "name": "counters",
-            "baseName": "counters",
-            "type": "{ [key: string]: number; }",
             "format": "int64"
         },
         {

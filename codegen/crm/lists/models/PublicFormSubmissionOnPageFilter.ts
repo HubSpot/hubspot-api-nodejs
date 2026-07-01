@@ -10,15 +10,28 @@
  * Do not edit the class manually.
  */
 
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
+import { PublicCtaAnalyticsFilterPruningRefineBy } from '../models/PublicCtaAnalyticsFilterPruningRefineBy';
+import { PublicFormSubmissionOnPageFilterCoalescingRefineBy } from '../models/PublicFormSubmissionOnPageFilterCoalescingRefineBy';
 
 export class PublicFormSubmissionOnPageFilter {
-    'formId'?: string;
-    'coalescingRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
-    'pruningRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
+    'coalescingRefineBy'?: PublicFormSubmissionOnPageFilterCoalescingRefineBy;
+    /**
+    * Indicates the type of filter (FORM_SUBMISSION_ON_PAGE).
+    */
     'filterType': PublicFormSubmissionOnPageFilterFilterTypeEnum;
-    'pageId': string;
+    /**
+    * The ID of the form associated with the submission filter.
+    */
+    'formId'?: string;
+    /**
+    * Specifies the operation to be applied (FILLED_OUT, NOT_FILLED_OUT).
+    */
     'operator': PublicFormSubmissionOnPageFilterOperatorEnum;
+    /**
+    * The ID of the page where the form submission occurred.
+    */
+    'pageId': string;
+    'pruningRefineBy'?: PublicCtaAnalyticsFilterPruningRefineBy;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -26,21 +39,9 @@ export class PublicFormSubmissionOnPageFilter {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "formId",
-            "baseName": "formId",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "coalescingRefineBy",
             "baseName": "coalescingRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
-            "name": "pruningRefineBy",
-            "baseName": "pruningRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
+            "type": "PublicFormSubmissionOnPageFilterCoalescingRefineBy",
             "format": ""
         },
         {
@@ -50,8 +51,8 @@ export class PublicFormSubmissionOnPageFilter {
             "format": ""
         },
         {
-            "name": "pageId",
-            "baseName": "pageId",
+            "name": "formId",
+            "baseName": "formId",
             "type": "string",
             "format": ""
         },
@@ -59,6 +60,18 @@ export class PublicFormSubmissionOnPageFilter {
             "name": "operator",
             "baseName": "operator",
             "type": "PublicFormSubmissionOnPageFilterOperatorEnum",
+            "format": ""
+        },
+        {
+            "name": "pageId",
+            "baseName": "pageId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pruningRefineBy",
+            "baseName": "pruningRefineBy",
+            "type": "PublicCtaAnalyticsFilterPruningRefineBy",
             "format": ""
         }    ];
 

@@ -12,6 +12,9 @@
 
 
 export class FileExtractRequest {
+    /**
+    * The file system location where the zip file is to be extracted.
+    */
     'path': string;
 
     static readonly discriminator: string | undefined = undefined;

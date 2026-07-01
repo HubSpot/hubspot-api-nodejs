@@ -6,12 +6,11 @@ export * from '../models/BatchResponseHubDbTableRowV3';
 export * from '../models/BatchResponseHubDbTableRowV3WithErrors';
 export * from '../models/BoundedNextPage';
 export * from '../models/BoundedPaging';
-export * from '../models/CollectionResponseWithTotalHubDbTableV3ForwardPaging';
+export * from '../models/CollectionResponseWithTotalHubDbTableV3';
 export * from '../models/Column';
 export * from '../models/ColumnRequest';
 export * from '../models/ErrorDetail';
 export * from '../models/ForeignId';
-export * from '../models/ForwardPaging';
 export * from '../models/HubDbTableCloneRequest';
 export * from '../models/HubDbTableRowBatchCloneRequest';
 export * from '../models/HubDbTableRowV3';
@@ -39,12 +38,11 @@ import { BatchResponseHubDbTableRowV3        } from '../models/BatchResponseHubD
 import { BatchResponseHubDbTableRowV3WithErrors          } from '../models/BatchResponseHubDbTableRowV3WithErrors';
 import { BoundedNextPage } from '../models/BoundedNextPage';
 import { BoundedPaging } from '../models/BoundedPaging';
-import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableV3ForwardPaging';
+import { CollectionResponseWithTotalHubDbTableV3 } from '../models/CollectionResponseWithTotalHubDbTableV3';
 import { Column                      } from '../models/Column';
-import { ColumnRequest         } from '../models/ColumnRequest';
+import { ColumnRequest           } from '../models/ColumnRequest';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForeignId } from '../models/ForeignId';
-import { ForwardPaging } from '../models/ForwardPaging';
 import { HubDbTableCloneRequest } from '../models/HubDbTableCloneRequest';
 import { HubDbTableRowBatchCloneRequest } from '../models/HubDbTableRowBatchCloneRequest';
 import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
@@ -95,12 +93,11 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseHubDbTableRowV3WithErrors": BatchResponseHubDbTableRowV3WithErrors,
     "BoundedNextPage": BoundedNextPage,
     "BoundedPaging": BoundedPaging,
-    "CollectionResponseWithTotalHubDbTableV3ForwardPaging": CollectionResponseWithTotalHubDbTableV3ForwardPaging,
+    "CollectionResponseWithTotalHubDbTableV3": CollectionResponseWithTotalHubDbTableV3,
     "Column": Column,
     "ColumnRequest": ColumnRequest,
     "ErrorDetail": ErrorDetail,
     "ForeignId": ForeignId,
-    "ForwardPaging": ForwardPaging,
     "HubDbTableCloneRequest": HubDbTableCloneRequest,
     "HubDbTableRowBatchCloneRequest": HubDbTableRowBatchCloneRequest,
     "HubDbTableRowV3": HubDbTableRowV3,

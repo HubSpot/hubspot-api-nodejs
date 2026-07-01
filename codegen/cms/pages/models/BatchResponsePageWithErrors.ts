@@ -22,6 +22,14 @@ export class BatchResponsePageWithErrors {
     */
     'completedAt': Date;
     /**
+    * Errors in batch operation.
+    */
+    'errors'?: Array<StandardError>;
+    /**
+    * Links associated with batch operation.
+    */
+    'links'?: { [key: string]: string; };
+    /**
     * Number of errors.
     */
     'numErrors'?: number;
@@ -30,21 +38,13 @@ export class BatchResponsePageWithErrors {
     */
     'requestedAt'?: Date;
     /**
-    * Time of batch operation start.
-    */
-    'startedAt': Date;
-    /**
-    * Links associated with batch operation.
-    */
-    'links'?: { [key: string]: string; };
-    /**
     * Results of batch operation.
     */
     'results': Array<Page>;
     /**
-    * Errors in batch operation.
+    * Time of batch operation start.
     */
-    'errors'?: Array<StandardError>;
+    'startedAt': Date;
     /**
     * Status of batch operation.
     */
@@ -62,6 +62,18 @@ export class BatchResponsePageWithErrors {
             "format": "date-time"
         },
         {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
             "name": "numErrors",
             "baseName": "numErrors",
             "type": "number",
@@ -74,28 +86,16 @@ export class BatchResponsePageWithErrors {
             "format": "date-time"
         },
         {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
             "name": "results",
             "baseName": "results",
             "type": "Array<Page>",
             "format": ""
         },
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -113,9 +113,9 @@ export class BatchResponsePageWithErrors {
 }
 
 export enum BatchResponsePageWithErrorsStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

@@ -12,11 +12,26 @@
 
 
 export class PublicPropertyReferencedTime {
-    'timezoneSource'?: string;
+    /**
+    * Specifies the name of the property that the time reference is applied to.
+    */
     'property': string;
-    'timeType': PublicPropertyReferencedTimeTimeTypeEnum;
-    'zoneId': string;
+    /**
+    * Specifies the type of reference for the property (VALUE, UPDATED_AT, ANNIVERSARY, VALUE_WITH_ZONE_SAME_LOCAL_CONVERSION, ANNIVERSARY_WITH_ZONE_SAME_LOCAL_CONVERSION).
+    */
     'referenceType': string;
+    /**
+    * Defines the type of time (PROPERTY_REFERENCED).
+    */
+    'timeType': PublicPropertyReferencedTimeTimeTypeEnum;
+    /**
+    * Specifies the source of the time zone information for the property (CUSTOM, USER, PORTAL).
+    */
+    'timezoneSource'?: string;
+    /**
+    * Indicates the identifier for the time zone associated with the property.
+    */
+    'zoneId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,14 +39,14 @@ export class PublicPropertyReferencedTime {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "timezoneSource",
-            "baseName": "timezoneSource",
+            "name": "property",
+            "baseName": "property",
             "type": "string",
             "format": ""
         },
         {
-            "name": "property",
-            "baseName": "property",
+            "name": "referenceType",
+            "baseName": "referenceType",
             "type": "string",
             "format": ""
         },
@@ -42,14 +57,14 @@ export class PublicPropertyReferencedTime {
             "format": ""
         },
         {
-            "name": "zoneId",
-            "baseName": "zoneId",
+            "name": "timezoneSource",
+            "baseName": "timezoneSource",
             "type": "string",
             "format": ""
         },
         {
-            "name": "referenceType",
-            "baseName": "referenceType",
+            "name": "zoneId",
+            "baseName": "zoneId",
             "type": "string",
             "format": ""
         }    ];

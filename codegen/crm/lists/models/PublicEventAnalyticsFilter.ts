@@ -10,14 +10,24 @@
  * Do not edit the class manually.
  */
 
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
+import { PublicEventAnalyticsFilterCoalescingRefineBy } from '../models/PublicEventAnalyticsFilterCoalescingRefineBy';
+import { PublicEventAnalyticsFilterPruningRefineBy } from '../models/PublicEventAnalyticsFilterPruningRefineBy';
 
 export class PublicEventAnalyticsFilter {
+    'coalescingRefineBy'?: PublicEventAnalyticsFilterCoalescingRefineBy;
+    /**
+    * The ID of the event to be used in the filter.
+    */
     'eventId': string;
-    'coalescingRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
-    'pruningRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
+    /**
+    * Indicates the type of filter being applied (EVENT).
+    */
     'filterType': PublicEventAnalyticsFilterFilterTypeEnum;
+    /**
+    * Defines the operation to be applied within the event filter (HAS_EVENT, NOT_HAS_EVENT).
+    */
     'operator': string;
+    'pruningRefineBy'?: PublicEventAnalyticsFilterPruningRefineBy;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -25,21 +35,15 @@ export class PublicEventAnalyticsFilter {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "coalescingRefineBy",
+            "baseName": "coalescingRefineBy",
+            "type": "PublicEventAnalyticsFilterCoalescingRefineBy",
+            "format": ""
+        },
+        {
             "name": "eventId",
             "baseName": "eventId",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "coalescingRefineBy",
-            "baseName": "coalescingRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
-            "name": "pruningRefineBy",
-            "baseName": "pruningRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
             "format": ""
         },
         {
@@ -52,6 +56,12 @@ export class PublicEventAnalyticsFilter {
             "name": "operator",
             "baseName": "operator",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pruningRefineBy",
+            "baseName": "pruningRefineBy",
+            "type": "PublicEventAnalyticsFilterPruningRefineBy",
             "format": ""
         }    ];
 

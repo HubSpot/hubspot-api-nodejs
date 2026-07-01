@@ -12,7 +12,7 @@
 
 
 /**
-* The cursor for the previous page of records.
+* specifies the paging information needed to retrieve the previous set of results in a paginated API response
 */
 export class PreviousPage {
     /**

@@ -16,13 +16,28 @@ import { CardDisplayBody } from '../models/CardDisplayBody';
 import { PublicCardFetchBody } from '../models/PublicCardFetchBody';
 
 export class PublicCardResponse {
-    'createdAt'?: Date;
-    'fetch': PublicCardFetchBody;
-    'display': CardDisplayBody;
-    'id': string;
-    'title': string;
     'actions': CardActions;
+    /**
+    * A list of actions performed on the card, including creation, deletion, and updates.
+    */
     'auditHistory': Array<CardAuditResponse>;
+    /**
+    * The date and time when the card was created.
+    */
+    'createdAt'?: Date;
+    'display': CardDisplayBody;
+    'fetch': PublicCardFetchBody;
+    /**
+    * The unique id of the card.
+    */
+    'id': string;
+    /**
+    * The top-level title for this card. Displayed to users in the CRM UI.
+    */
+    'title': string;
+    /**
+    * The date and time when the card was last updated.
+    */
     'updatedAt'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
@@ -31,21 +46,33 @@ export class PublicCardResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "actions",
+            "baseName": "actions",
+            "type": "CardActions",
+            "format": ""
+        },
+        {
+            "name": "auditHistory",
+            "baseName": "auditHistory",
+            "type": "Array<CardAuditResponse>",
+            "format": ""
+        },
+        {
             "name": "createdAt",
             "baseName": "createdAt",
             "type": "Date",
             "format": "date-time"
         },
         {
-            "name": "fetch",
-            "baseName": "fetch",
-            "type": "PublicCardFetchBody",
-            "format": ""
-        },
-        {
             "name": "display",
             "baseName": "display",
             "type": "CardDisplayBody",
+            "format": ""
+        },
+        {
+            "name": "fetch",
+            "baseName": "fetch",
+            "type": "PublicCardFetchBody",
             "format": ""
         },
         {
@@ -58,18 +85,6 @@ export class PublicCardResponse {
             "name": "title",
             "baseName": "title",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "actions",
-            "baseName": "actions",
-            "type": "CardActions",
-            "format": ""
-        },
-        {
-            "name": "auditHistory",
-            "baseName": "auditHistory",
-            "type": "Array<CardAuditResponse>",
             "format": ""
         },
         {

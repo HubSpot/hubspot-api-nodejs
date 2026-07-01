@@ -164,7 +164,7 @@ export class ObjectBasicApi {
 
     /**
      * deletes all associations between two records.
-     * Delete
+     * Delete associations between two records
      * @param param the request object
      */
     public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
@@ -173,7 +173,7 @@ export class ObjectBasicApi {
 
     /**
      * deletes all associations between two records.
-     * Delete
+     * Delete associations between two records
      * @param param the request object
      */
     public archive(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
@@ -182,7 +182,7 @@ export class ObjectBasicApi {
 
     /**
      * Set association labels between two records.
-     * Create
+     * Associate records (labelled)
      * @param param the request object
      */
     public createWithHttpInfo(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<LabelsBetweenObjectPair>> {
@@ -191,7 +191,7 @@ export class ObjectBasicApi {
 
     /**
      * Set association labels between two records.
-     * Create
+     * Associate records (labelled)
      * @param param the request object
      */
     public create(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<LabelsBetweenObjectPair> {
@@ -200,7 +200,7 @@ export class ObjectBasicApi {
 
     /**
      * Create the default (most generic) association type between two object types
-     * Create Default
+     * Associate records (default)
      * @param param the request object
      */
     public createDefaultWithHttpInfo(param: BasicApiCreateDefaultRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
@@ -209,7 +209,7 @@ export class ObjectBasicApi {
 
     /**
      * Create the default (most generic) association type between two object types
-     * Create Default
+     * Associate records (default)
      * @param param the request object
      */
     public createDefault(param: BasicApiCreateDefaultRequest, options?: ConfigurationOptions): Promise<BatchResponsePublicDefaultAssociation> {
@@ -217,8 +217,8 @@ export class ObjectBasicApi {
     }
 
     /**
-     * List all associations of an object by object type. Limit 500 per call.
-     * List
+     * Retrieve all associations between a specific record and an object type. Limit 500 per call.
+     * Retrieve all associations by object type
      * @param param the request object
      */
     public getPageWithHttpInfo(param: BasicApiGetPageRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
@@ -226,8 +226,8 @@ export class ObjectBasicApi {
     }
 
     /**
-     * List all associations of an object by object type. Limit 500 per call.
-     * List
+     * Retrieve all associations between a specific record and an object type. Limit 500 per call.
+     * Retrieve all associations by object type
      * @param param the request object
      */
     public getPage(param: BasicApiGetPageRequest, options?: ConfigurationOptions): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
@@ -363,7 +363,7 @@ export class ObjectBatchApi {
 
     /**
      * Batch delete associations for objects
-     * Delete
+     * Remove associations
      * @param param the request object
      */
     public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
@@ -372,7 +372,7 @@ export class ObjectBatchApi {
 
     /**
      * Batch delete associations for objects
-     * Delete
+     * Remove associations
      * @param param the request object
      */
     public archive(param: BatchApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
@@ -399,7 +399,7 @@ export class ObjectBatchApi {
 
     /**
      * Batch create associations for objects
-     * Create
+     * Associate records (labelled)
      * @param param the request object
      */
     public createWithHttpInfo(param: BatchApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair>> {
@@ -408,7 +408,7 @@ export class ObjectBatchApi {
 
     /**
      * Batch create associations for objects
-     * Create
+     * Associate records (labelled)
      * @param param the request object
      */
     public create(param: BatchApiCreateRequest, options?: ConfigurationOptions): Promise<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair> {
@@ -435,7 +435,7 @@ export class ObjectBatchApi {
 
     /**
      * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
-     * Read
+     * Retrieve associations
      * @param param the request object
      */
     public getPageWithHttpInfo(param: BatchApiGetPageRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors>> {
@@ -444,7 +444,7 @@ export class ObjectBatchApi {
 
     /**
      * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
-     * Read
+     * Retrieve associations
      * @param param the request object
      */
     public getPage(param: BatchApiGetPageRequest, options?: ConfigurationOptions): Promise<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
@@ -475,7 +475,7 @@ export class ObjectReportApi {
 
     /**
      * Requests a report of all objects in the portal which have a high usage of associations
-     * Report
+     * Report high usage
      * @param param the request object
      */
     public requestWithHttpInfo(param: ReportApiRequestRequest, options?: ConfigurationOptions): Promise<HttpInfo<ReportCreationResponse>> {
@@ -484,7 +484,7 @@ export class ObjectReportApi {
 
     /**
      * Requests a report of all objects in the portal which have a high usage of associations
-     * Report
+     * Report high usage
      * @param param the request object
      */
     public request(param: ReportApiRequestRequest, options?: ConfigurationOptions): Promise<ReportCreationResponse> {

@@ -13,10 +13,6 @@
 
 export class PropertyGroupCreate {
     /**
-    * The internal property group name, which must be used when referencing the property group via the API.
-    */
-    'name': string;
-    /**
     * Property groups are displayed in order starting with the lowest positive integer value. Values of -1 will cause the property group to be displayed after any positive values.
     */
     'displayOrder'?: number;
@@ -24,18 +20,16 @@ export class PropertyGroupCreate {
     * A human-readable label that will be shown in HubSpot.
     */
     'label': string;
+    /**
+    * The internal property group name, which must be used when referencing the property group via the API.
+    */
+    'name': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "displayOrder",
             "baseName": "displayOrder",
@@ -45,6 +39,12 @@ export class PropertyGroupCreate {
         {
             "name": "label",
             "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         }    ];

@@ -9,7 +9,7 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { CollectionResponseSearchPublicResponseWrapperNoPaging } from '../models/CollectionResponseSearchPublicResponseWrapperNoPaging';
-import { CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging } from '../models/CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging';
+import { CollectionResponseWithTotalMarketingEventIdentifiersResponse } from '../models/CollectionResponseWithTotalMarketingEventIdentifiersResponse';
 
 /**
  * no description
@@ -143,13 +143,13 @@ export class IdentifiersApiResponseProcessor {
      * @params response Response returned by the server for a request to searchPortalEvents
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async searchPortalEventsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging >> {
+     public async searchPortalEventsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalMarketingEventIdentifiersResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponseWithTotalMarketingEventIdentifiersResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging", ""
-            ) as CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging;
+                "CollectionResponseWithTotalMarketingEventIdentifiersResponse", ""
+            ) as CollectionResponseWithTotalMarketingEventIdentifiersResponse;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -162,10 +162,10 @@ export class IdentifiersApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponseWithTotalMarketingEventIdentifiersResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging", ""
-            ) as CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging;
+                "CollectionResponseWithTotalMarketingEventIdentifiersResponse", ""
+            ) as CollectionResponseWithTotalMarketingEventIdentifiersResponse;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

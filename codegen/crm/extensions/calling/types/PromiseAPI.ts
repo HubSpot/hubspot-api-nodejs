@@ -5,6 +5,8 @@ import { PromiseMiddlewareWrapper } from '../middleware';
 import { ChannelConnectionSettingsPatchRequest } from '../models/ChannelConnectionSettingsPatchRequest';
 import { ChannelConnectionSettingsRequest } from '../models/ChannelConnectionSettingsRequest';
 import { ChannelConnectionSettingsResponse } from '../models/ChannelConnectionSettingsResponse';
+import { CompletedThirdPartyCallRequest } from '../models/CompletedThirdPartyCallRequest';
+import { CompletedThirdPartyCallResponse } from '../models/CompletedThirdPartyCallResponse';
 import { MarkRecordingAsReadyRequest } from '../models/MarkRecordingAsReadyRequest';
 import { RecordingSettingsPatchRequest } from '../models/RecordingSettingsPatchRequest';
 import { RecordingSettingsRequest } from '../models/RecordingSettingsRequest';
@@ -12,225 +14,26 @@ import { RecordingSettingsResponse } from '../models/RecordingSettingsResponse';
 import { SettingsPatchRequest } from '../models/SettingsPatchRequest';
 import { SettingsRequest } from '../models/SettingsRequest';
 import { SettingsResponse } from '../models/SettingsResponse';
-import { ObservableChannelConnectionSettingsApi } from './ObservableAPI';
+import { ObservableAdvancedApi } from './ObservableAPI';
 
-import { ChannelConnectionSettingsApiRequestFactory, ChannelConnectionSettingsApiResponseProcessor} from "../apis/ChannelConnectionSettingsApi";
-export class PromiseChannelConnectionSettingsApi {
-    private api: ObservableChannelConnectionSettingsApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: ChannelConnectionSettingsApiRequestFactory,
-        responseProcessor?: ChannelConnectionSettingsApiResponseProcessor
-    ) {
-        this.api = new ObservableChannelConnectionSettingsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Delete the [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#delete-existing-channel-connection-settings) for the app.
-     * Delete channel connection settings
-     * @param appId The ID of the app.
-     */
-    public archiveWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.archiveWithHttpInfo(appId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Delete the [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#delete-existing-channel-connection-settings) for the app.
-     * Delete channel connection settings
-     * @param appId The ID of the app.
-     */
-    public archive(appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.archive(appId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Configure [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#create-channel-connection-settings) for the app. 
-     * Configure channel connection settings
-     * @param appId The ID of the app.
-     * @param channelConnectionSettingsRequest
-     */
-    public createWithHttpInfo(appId: number, channelConnectionSettingsRequest: ChannelConnectionSettingsRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ChannelConnectionSettingsResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.createWithHttpInfo(appId, channelConnectionSettingsRequest, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Configure [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#create-channel-connection-settings) for the app. 
-     * Configure channel connection settings
-     * @param appId The ID of the app.
-     * @param channelConnectionSettingsRequest
-     */
-    public create(appId: number, channelConnectionSettingsRequest: ChannelConnectionSettingsRequest, _options?: PromiseConfigurationOptions): Promise<ChannelConnectionSettingsResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.create(appId, channelConnectionSettingsRequest, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Retrieve the settings related to the app\'s [channel connection](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#fetch-existing-channel-connection-settings).
-     * Retrieve channel connection settings
-     * @param appId The ID of the app.
-     */
-    public getByIdWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ChannelConnectionSettingsResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getByIdWithHttpInfo(appId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Retrieve the settings related to the app\'s [channel connection](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#fetch-existing-channel-connection-settings).
-     * Retrieve channel connection settings
-     * @param appId The ID of the app.
-     */
-    public getById(appId: number, _options?: PromiseConfigurationOptions): Promise<ChannelConnectionSettingsResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.getById(appId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Update existing [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#manage-the-webhook-settings-for-channel-connection) for your app.
-     * Update channel connection settings
-     * @param appId The ID of the app.
-     * @param channelConnectionSettingsPatchRequest
-     */
-    public updateWithHttpInfo(appId: number, channelConnectionSettingsPatchRequest: ChannelConnectionSettingsPatchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ChannelConnectionSettingsResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.updateWithHttpInfo(appId, channelConnectionSettingsPatchRequest, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Update existing [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#manage-the-webhook-settings-for-channel-connection) for your app.
-     * Update channel connection settings
-     * @param appId The ID of the app.
-     * @param channelConnectionSettingsPatchRequest
-     */
-    public update(appId: number, channelConnectionSettingsPatchRequest: ChannelConnectionSettingsPatchRequest, _options?: PromiseConfigurationOptions): Promise<ChannelConnectionSettingsResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.update(appId, channelConnectionSettingsPatchRequest, observableOptions);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservableRecordingSettingsApi } from './ObservableAPI';
-
-import { RecordingSettingsApiRequestFactory, RecordingSettingsApiResponseProcessor} from "../apis/RecordingSettingsApi";
-export class PromiseRecordingSettingsApi {
-    private api: ObservableRecordingSettingsApi
+import { AdvancedApiRequestFactory, AdvancedApiResponseProcessor} from "../apis/AdvancedApi";
+export class PromiseAdvancedApi {
+    private api: ObservableAdvancedApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: RecordingSettingsApiRequestFactory,
-        responseProcessor?: RecordingSettingsApiResponseProcessor
+        requestFactory?: AdvancedApiRequestFactory,
+        responseProcessor?: AdvancedApiResponseProcessor
     ) {
-        this.api = new ObservableRecordingSettingsApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableAdvancedApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Retrieve the URL that is registered for [call recording](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Retrieve recording settings
-     * @param appId The ID of the app.
+     * This endpoint allows you to submit information about an inbound call to the CRM system. The request must include details such as the external call ID, call status, and involved phone numbers. This operation helps in logging and managing inbound call data within the CRM.
+     * Submit details of an inbound call to the CRM.
+     * @param completedThirdPartyCallRequest
      */
-    public getUrlFormatWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<RecordingSettingsResponse>> {
+    public crmV3ExtensionsCallingInboundCallWithHttpInfo(completedThirdPartyCallRequest: CompletedThirdPartyCallRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CompletedThirdPartyCallResponse>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -243,16 +46,16 @@ export class PromiseRecordingSettingsApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getUrlFormatWithHttpInfo(appId, observableOptions);
+        const result = this.api.crmV3ExtensionsCallingInboundCallWithHttpInfo(completedThirdPartyCallRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Retrieve the URL that is registered for [call recording](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Retrieve recording settings
-     * @param appId The ID of the app.
+     * This endpoint allows you to submit information about an inbound call to the CRM system. The request must include details such as the external call ID, call status, and involved phone numbers. This operation helps in logging and managing inbound call data within the CRM.
+     * Submit details of an inbound call to the CRM.
+     * @param completedThirdPartyCallRequest
      */
-    public getUrlFormat(appId: number, _options?: PromiseConfigurationOptions): Promise<RecordingSettingsResponse> {
+    public crmV3ExtensionsCallingInboundCall(completedThirdPartyCallRequest: CompletedThirdPartyCallRequest, _options?: PromiseConfigurationOptions): Promise<CompletedThirdPartyCallResponse> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -265,13 +68,13 @@ export class PromiseRecordingSettingsApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getUrlFormat(appId, observableOptions);
+        const result = this.api.crmV3ExtensionsCallingInboundCall(completedThirdPartyCallRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Mark a call recording as ready for transcription, specifying the call by its ID (`engagementid`).
-     * Mark recording as ready for transcription
+     * This endpoint is used to mark a call recording as ready. It requires the engagementId to identify the specific recording.
+     * Mark a call recording as ready for retrieval.
      * @param markRecordingAsReadyRequest
      */
     public markAsReadyWithHttpInfo(markRecordingAsReadyRequest: MarkRecordingAsReadyRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
@@ -292,8 +95,8 @@ export class PromiseRecordingSettingsApi {
     }
 
     /**
-     * Mark a call recording as ready for transcription, specifying the call by its ID (`engagementid`).
-     * Mark recording as ready for transcription
+     * This endpoint is used to mark a call recording as ready. It requires the engagementId to identify the specific recording.
+     * Mark a call recording as ready for retrieval.
      * @param markRecordingAsReadyRequest
      */
     public markAsReady(markRecordingAsReadyRequest: MarkRecordingAsReadyRequest, _options?: PromiseConfigurationOptions): Promise<void> {
@@ -313,165 +116,29 @@ export class PromiseRecordingSettingsApi {
         return result.toPromise();
     }
 
-    /**
-     * Register an external URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Enable the app for call recording
-     * @param appId The ID of the app.
-     * @param recordingSettingsRequest
-     */
-    public registerUrlFormatWithHttpInfo(appId: number, recordingSettingsRequest: RecordingSettingsRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<RecordingSettingsResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.registerUrlFormatWithHttpInfo(appId, recordingSettingsRequest, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Register an external URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Enable the app for call recording
-     * @param appId The ID of the app.
-     * @param recordingSettingsRequest
-     */
-    public registerUrlFormat(appId: number, recordingSettingsRequest: RecordingSettingsRequest, _options?: PromiseConfigurationOptions): Promise<RecordingSettingsResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.registerUrlFormat(appId, recordingSettingsRequest, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Update the URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Update recording settings
-     * @param appId The ID of the app.
-     * @param recordingSettingsPatchRequest
-     */
-    public updateUrlFormatWithHttpInfo(appId: number, recordingSettingsPatchRequest: RecordingSettingsPatchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<RecordingSettingsResponse>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.updateUrlFormatWithHttpInfo(appId, recordingSettingsPatchRequest, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Update the URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-     * Update recording settings
-     * @param appId The ID of the app.
-     * @param recordingSettingsPatchRequest
-     */
-    public updateUrlFormat(appId: number, recordingSettingsPatchRequest: RecordingSettingsPatchRequest, _options?: PromiseConfigurationOptions): Promise<RecordingSettingsResponse> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.updateUrlFormat(appId, recordingSettingsPatchRequest, observableOptions);
-        return result.toPromise();
-    }
-
 
 }
 
 
 
-import { ObservableSettingsApi } from './ObservableAPI';
+import { ObservableBasicApi } from './ObservableAPI';
 
-import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/SettingsApi";
-export class PromiseSettingsApi {
-    private api: ObservableSettingsApi
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class PromiseBasicApi {
+    private api: ObservableBasicApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: SettingsApiRequestFactory,
-        responseProcessor?: SettingsApiResponseProcessor
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
     ) {
-        this.api = new ObservableSettingsApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Delete a calling extension. This will remove your service as an option for all connected accounts.
-     * Delete calling settings
-     * @param appId The ID of the app.
-     */
-    public archiveWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.archiveWithHttpInfo(appId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Delete a calling extension. This will remove your service as an option for all connected accounts.
-     * Delete calling settings
-     * @param appId The ID of the app.
-     */
-    public archive(appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
-        const result = this.api.archive(appId, observableOptions);
-        return result.toPromise();
-    }
-
-    /**
-     * Set the menu label, target iframe URL, and dimensions for your calling extension.
-     * Configure a calling extension
-     * @param appId The ID of the app.
+     * Create new settings for the calling extension associated with the specified appId.
+     * Create new calling extension settings for a specific app.
+     * @param appId The unique identifier for the app for which new calling extension settings are being created.
      * @param settingsRequest
      */
     public createWithHttpInfo(appId: number, settingsRequest: SettingsRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
@@ -492,9 +159,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Set the menu label, target iframe URL, and dimensions for your calling extension.
-     * Configure a calling extension
-     * @param appId The ID of the app.
+     * Create new settings for the calling extension associated with the specified appId.
+     * Create new calling extension settings for a specific app.
+     * @param appId The unique identifier for the app for which new calling extension settings are being created.
      * @param settingsRequest
      */
     public create(appId: number, settingsRequest: SettingsRequest, _options?: PromiseConfigurationOptions): Promise<SettingsResponse> {
@@ -515,11 +182,12 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Retrieve the settings configured for the app.
-     * Retrieve settings
-     * @param appId The ID of the app.
+     * Establish new channel connection settings for the specified app.
+     * Create new channel connection settings for a specific app.
+     * @param appId The unique identifier for the app for which new channel connection settings are to be created.
+     * @param channelConnectionSettingsRequest
      */
-    public getByIdWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
+    public create_1WithHttpInfo(appId: number, channelConnectionSettingsRequest: ChannelConnectionSettingsRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ChannelConnectionSettingsResponse>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -532,16 +200,17 @@ export class PromiseSettingsApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getByIdWithHttpInfo(appId, observableOptions);
+        const result = this.api.create_1WithHttpInfo(appId, channelConnectionSettingsRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Retrieve the settings configured for the app.
-     * Retrieve settings
-     * @param appId The ID of the app.
+     * Establish new channel connection settings for the specified app.
+     * Create new channel connection settings for a specific app.
+     * @param appId The unique identifier for the app for which new channel connection settings are to be created.
+     * @param channelConnectionSettingsRequest
      */
-    public getById(appId: number, _options?: PromiseConfigurationOptions): Promise<SettingsResponse> {
+    public create_1(appId: number, channelConnectionSettingsRequest: ChannelConnectionSettingsRequest, _options?: PromiseConfigurationOptions): Promise<ChannelConnectionSettingsResponse> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -554,14 +223,280 @@ export class PromiseSettingsApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getById(appId, observableOptions);
+        const result = this.api.create_1(appId, channelConnectionSettingsRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Update existing calling extension settings.
-     * Update settings
-     * @param appId The ID of the app.
+     * Create new recording settings for a specific app using the provided app ID.
+     * Create recording settings for an app.
+     * @param appId The unique identifier for the app for which new recording settings are being created.
+     * @param recordingSettingsRequest
+     */
+    public create_2WithHttpInfo(appId: number, recordingSettingsRequest: RecordingSettingsRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<RecordingSettingsResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create_2WithHttpInfo(appId, recordingSettingsRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Create new recording settings for a specific app using the provided app ID.
+     * Create recording settings for an app.
+     * @param appId The unique identifier for the app for which new recording settings are being created.
+     * @param recordingSettingsRequest
+     */
+    public create_2(appId: number, recordingSettingsRequest: RecordingSettingsRequest, _options?: PromiseConfigurationOptions): Promise<RecordingSettingsResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create_2(appId, recordingSettingsRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieve the current settings of the calling extension for the specified appId. 
+     * Retrieve the calling extension settings for a specific app.
+     * @param appId The unique identifier for the app whose calling extension settings are being retrieved.
+     */
+    public getWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getWithHttpInfo(appId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieve the current settings of the calling extension for the specified appId. 
+     * Retrieve the calling extension settings for a specific app.
+     * @param appId The unique identifier for the app whose calling extension settings are being retrieved.
+     */
+    public get(appId: number, _options?: PromiseConfigurationOptions): Promise<SettingsResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.get(appId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Access the current channel connection settings for the specified app.
+     * Retrieve the channel connection settings for a specific app.
+     * @param appId The unique identifier for the app whose channel connection settings are to be retrieved.
+     */
+    public get_3WithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ChannelConnectionSettingsResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.get_3WithHttpInfo(appId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Access the current channel connection settings for the specified app.
+     * Retrieve the channel connection settings for a specific app.
+     * @param appId The unique identifier for the app whose channel connection settings are to be retrieved.
+     */
+    public get_3(appId: number, _options?: PromiseConfigurationOptions): Promise<ChannelConnectionSettingsResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.get_3(appId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieve the current recording settings for a specific app using the provided app ID.
+     * Retrieve recording settings for an app.
+     * @param appId The unique identifier for the app whose recording settings are being retrieved.
+     */
+    public get_4WithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<RecordingSettingsResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.get_4WithHttpInfo(appId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieve the current recording settings for a specific app using the provided app ID.
+     * Retrieve recording settings for an app.
+     * @param appId The unique identifier for the app whose recording settings are being retrieved.
+     */
+    public get_4(appId: number, _options?: PromiseConfigurationOptions): Promise<RecordingSettingsResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.get_4(appId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Remove the calling extension settings associated with the specified appId. This action cannot be undone.
+     * Delete the calling extension settings for a specific app.
+     * @param appId The unique identifier for the app whose calling extension settings are being deleted.
+     */
+    public removeWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.removeWithHttpInfo(appId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Remove the calling extension settings associated with the specified appId. This action cannot be undone.
+     * Delete the calling extension settings for a specific app.
+     * @param appId The unique identifier for the app whose calling extension settings are being deleted.
+     */
+    public remove(appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.remove(appId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Delete the channel connection settings associated with the specified app.
+     * Remove the channel connection settings for a specific app.
+     * @param appId The unique identifier for the app whose channel connection settings are to be deleted.
+     */
+    public remove_5WithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.remove_5WithHttpInfo(appId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Delete the channel connection settings associated with the specified app.
+     * Remove the channel connection settings for a specific app.
+     * @param appId The unique identifier for the app whose channel connection settings are to be deleted.
+     */
+    public remove_5(appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.remove_5(appId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Modify existing calling extension settings for the specified appId. Only the fields provided in the request will be updated.
+     * Update the calling extension settings for a specific app.
+     * @param appId The unique identifier for the app whose calling extension settings are being updated.
      * @param settingsPatchRequest
      */
     public updateWithHttpInfo(appId: number, settingsPatchRequest: SettingsPatchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
@@ -582,9 +517,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Update existing calling extension settings.
-     * Update settings
-     * @param appId The ID of the app.
+     * Modify existing calling extension settings for the specified appId. Only the fields provided in the request will be updated.
+     * Update the calling extension settings for a specific app.
+     * @param appId The unique identifier for the app whose calling extension settings are being updated.
      * @param settingsPatchRequest
      */
     public update(appId: number, settingsPatchRequest: SettingsPatchRequest, _options?: PromiseConfigurationOptions): Promise<SettingsResponse> {
@@ -601,6 +536,98 @@ export class PromiseSettingsApi {
 	    }
 	}
         const result = this.api.update(appId, settingsPatchRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Modify the existing channel connection settings for the specified app.
+     * Update the channel connection settings for a specific app.
+     * @param appId The unique identifier for the app whose channel connection settings are to be updated.
+     * @param channelConnectionSettingsPatchRequest
+     */
+    public update_6WithHttpInfo(appId: number, channelConnectionSettingsPatchRequest: ChannelConnectionSettingsPatchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ChannelConnectionSettingsResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update_6WithHttpInfo(appId, channelConnectionSettingsPatchRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Modify the existing channel connection settings for the specified app.
+     * Update the channel connection settings for a specific app.
+     * @param appId The unique identifier for the app whose channel connection settings are to be updated.
+     * @param channelConnectionSettingsPatchRequest
+     */
+    public update_6(appId: number, channelConnectionSettingsPatchRequest: ChannelConnectionSettingsPatchRequest, _options?: PromiseConfigurationOptions): Promise<ChannelConnectionSettingsResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update_6(appId, channelConnectionSettingsPatchRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Update the recording settings for a specific app using the provided app ID.
+     * Update recording settings for an app.
+     * @param appId The unique identifier for the app whose recording settings are being updated.
+     * @param recordingSettingsPatchRequest
+     */
+    public update_7WithHttpInfo(appId: number, recordingSettingsPatchRequest: RecordingSettingsPatchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<RecordingSettingsResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update_7WithHttpInfo(appId, recordingSettingsPatchRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Update the recording settings for a specific app using the provided app ID.
+     * Update recording settings for an app.
+     * @param appId The unique identifier for the app whose recording settings are being updated.
+     * @param recordingSettingsPatchRequest
+     */
+    public update_7(appId: number, recordingSettingsPatchRequest: RecordingSettingsPatchRequest, _options?: PromiseConfigurationOptions): Promise<RecordingSettingsResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update_7(appId, recordingSettingsPatchRequest, observableOptions);
         return result.toPromise();
     }
 

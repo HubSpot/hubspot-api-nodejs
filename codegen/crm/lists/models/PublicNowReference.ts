@@ -12,10 +12,25 @@
 
 
 export class PublicNowReference {
+    /**
+    * The hour component of the current time reference.
+    */
     'hour'?: number;
+    /**
+    * The millisecond component of the current time reference.
+    */
     'millisecond'?: number;
-    'referenceType': PublicNowReferenceReferenceTypeEnum;
+    /**
+    * The minute component of the current time reference.
+    */
     'minute'?: number;
+    /**
+    * Indicates the type of reference (NOW).
+    */
+    'referenceType': PublicNowReferenceReferenceTypeEnum;
+    /**
+    * The second component of the current time reference.
+    */
     'second'?: number;
 
     static readonly discriminator: string | undefined = undefined;
@@ -36,16 +51,16 @@ export class PublicNowReference {
             "format": "int32"
         },
         {
-            "name": "referenceType",
-            "baseName": "referenceType",
-            "type": "PublicNowReferenceReferenceTypeEnum",
-            "format": ""
-        },
-        {
             "name": "minute",
             "baseName": "minute",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "referenceType",
+            "baseName": "referenceType",
+            "type": "PublicNowReferenceReferenceTypeEnum",
+            "format": ""
         },
         {
             "name": "second",

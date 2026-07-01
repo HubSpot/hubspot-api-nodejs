@@ -1,6 +1,6 @@
 /**
  * Timeline
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * Basepom for all HubSpot Projects
  *
  * OpenAPI spec version: v3
  * 
@@ -14,13 +14,31 @@ import { StandardError } from '../models/StandardError';
 import { TimelineEventResponse } from '../models/TimelineEventResponse';
 
 export class BatchResponseTimelineEventResponseWithErrors {
+    /**
+    * When the request completed.
+    */
     'completedAt': Date;
-    'numErrors'?: number;
-    'requestedAt'?: Date;
-    'startedAt': Date;
-    'links'?: { [key: string]: string; };
-    'results': Array<TimelineEventResponse>;
     'errors'?: Array<StandardError>;
+    /**
+    * Links to any helpful documentation.
+    */
+    'links'?: { [key: string]: string; };
+    /**
+    * The number of errors encountered, if any.
+    */
+    'numErrors'?: number;
+    /**
+    * When the request originated, if any.
+    */
+    'requestedAt'?: Date;
+    'results': Array<TimelineEventResponse>;
+    /**
+    * When the request began.
+    */
+    'startedAt': Date;
+    /**
+    * The resulting status of the batch operation.
+    */
     'status': BatchResponseTimelineEventResponseWithErrorsStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -35,6 +53,18 @@ export class BatchResponseTimelineEventResponseWithErrors {
             "format": "date-time"
         },
         {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
             "name": "numErrors",
             "baseName": "numErrors",
             "type": "number",
@@ -47,28 +77,16 @@ export class BatchResponseTimelineEventResponseWithErrors {
             "format": "date-time"
         },
         {
-            "name": "startedAt",
-            "baseName": "startedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
             "name": "results",
             "baseName": "results",
             "type": "Array<TimelineEventResponse>",
             "format": ""
         },
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "status",
@@ -86,9 +104,9 @@ export class BatchResponseTimelineEventResponseWithErrors {
 }
 
 export enum BatchResponseTimelineEventResponseWithErrorsStatusEnum {
-    Pending = 'PENDING',
-    Processing = 'PROCESSING',
     Canceled = 'CANCELED',
-    Complete = 'COMPLETE'
+    Complete = 'COMPLETE',
+    Pending = 'PENDING',
+    Processing = 'PROCESSING'
 }
 

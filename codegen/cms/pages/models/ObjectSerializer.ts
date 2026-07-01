@@ -12,13 +12,15 @@ export * from '../models/BatchResponseContentFolder';
 export * from '../models/BatchResponseContentFolderWithErrors';
 export * from '../models/BatchResponsePage';
 export * from '../models/BatchResponsePageWithErrors';
+export * from '../models/BreakpointStyles';
 export * from '../models/CollectionResponseWithTotalContentFolderForwardPaging';
+export * from '../models/CollectionResponseWithTotalContentFolderVersion';
 export * from '../models/CollectionResponseWithTotalPageForwardPaging';
-export * from '../models/CollectionResponseWithTotalVersionContentFolder';
-export * from '../models/CollectionResponseWithTotalVersionPage';
+export * from '../models/CollectionResponseWithTotalPageVersion';
 export * from '../models/ColorStop';
 export * from '../models/ContentCloneRequestVNext';
 export * from '../models/ContentFolder';
+export * from '../models/ContentFolderVersion';
 export * from '../models/ContentLanguageCloneRequestVNext';
 export * from '../models/ContentLanguageVariation';
 export * from '../models/ContentScheduleRequestVNext';
@@ -27,27 +29,29 @@ export * from '../models/ErrorDetail';
 export * from '../models/ForwardPaging';
 export * from '../models/Gradient';
 export * from '../models/LayoutSection';
+export * from '../models/Margin';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
+export * from '../models/Padding';
 export * from '../models/Page';
+export * from '../models/PageVersion';
 export * from '../models/Paging';
 export * from '../models/PreviousPage';
 export * from '../models/RGBAColor';
 export * from '../models/RowMetaData';
 export * from '../models/SetNewLanguagePrimaryRequestVNext';
 export * from '../models/SideOrCorner';
+export * from '../models/Size';
 export * from '../models/StandardError';
 export * from '../models/Styles';
 export * from '../models/UpdateLanguagesRequestVNext';
-export * from '../models/VersionContentFolder';
-export * from '../models/VersionPage';
 export * from '../models/VersionUser';
 
 import { AbTestCreateRequestVNext } from '../models/AbTestCreateRequestVNext';
 import { AbTestEndRequestVNext } from '../models/AbTestEndRequestVNext';
 import { AbTestRerunRequestVNext } from '../models/AbTestRerunRequestVNext';
-import { Angle } from '../models/Angle';
-import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
+import { Angle    } from '../models/Angle';
+import { AttachToLangPrimaryRequestVNext    } from '../models/AttachToLangPrimaryRequestVNext';
 import { BackgroundImage } from '../models/BackgroundImage';
 import { BatchInputContentFolder } from '../models/BatchInputContentFolder';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
@@ -57,13 +61,15 @@ import { BatchResponseContentFolder        } from '../models/BatchResponseConten
 import { BatchResponseContentFolderWithErrors          } from '../models/BatchResponseContentFolderWithErrors';
 import { BatchResponsePage        } from '../models/BatchResponsePage';
 import { BatchResponsePageWithErrors          } from '../models/BatchResponsePageWithErrors';
+import { BreakpointStyles } from '../models/BreakpointStyles';
 import { CollectionResponseWithTotalContentFolderForwardPaging } from '../models/CollectionResponseWithTotalContentFolderForwardPaging';
+import { CollectionResponseWithTotalContentFolderVersion } from '../models/CollectionResponseWithTotalContentFolderVersion';
 import { CollectionResponseWithTotalPageForwardPaging } from '../models/CollectionResponseWithTotalPageForwardPaging';
-import { CollectionResponseWithTotalVersionContentFolder } from '../models/CollectionResponseWithTotalVersionContentFolder';
-import { CollectionResponseWithTotalVersionPage } from '../models/CollectionResponseWithTotalVersionPage';
+import { CollectionResponseWithTotalPageVersion } from '../models/CollectionResponseWithTotalPageVersion';
 import { ColorStop } from '../models/ColorStop';
 import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
 import { ContentFolder } from '../models/ContentFolder';
+import { ContentFolderVersion } from '../models/ContentFolderVersion';
 import { ContentLanguageCloneRequestVNext } from '../models/ContentLanguageCloneRequestVNext';
 import { ContentLanguageVariation } from '../models/ContentLanguageVariation';
 import { ContentScheduleRequestVNext } from '../models/ContentScheduleRequestVNext';
@@ -72,20 +78,22 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { Gradient } from '../models/Gradient';
 import { LayoutSection } from '../models/LayoutSection';
+import { Margin } from '../models/Margin';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
-import { Page      } from '../models/Page';
+import { Padding } from '../models/Padding';
+import { Page                               } from '../models/Page';
+import { PageVersion } from '../models/PageVersion';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
 import { RGBAColor } from '../models/RGBAColor';
 import { RowMetaData } from '../models/RowMetaData';
 import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
-import { SideOrCorner } from '../models/SideOrCorner';
+import { SideOrCorner   } from '../models/SideOrCorner';
+import { Size    } from '../models/Size';
 import { StandardError } from '../models/StandardError';
-import { Styles } from '../models/Styles';
-import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';
-import { VersionContentFolder } from '../models/VersionContentFolder';
-import { VersionPage } from '../models/VersionPage';
+import { Styles       } from '../models/Styles';
+import { UpdateLanguagesRequestVNext    } from '../models/UpdateLanguagesRequestVNext';
 import { VersionUser } from '../models/VersionUser';
 
 /* tslint:disable:no-unused-variable */
@@ -101,14 +109,23 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
+    "AngleUnitsEnum",
+    "AttachToLangPrimaryRequestVNextLanguageEnum",
+    "AttachToLangPrimaryRequestVNextPrimaryLanguageEnum",
     "BatchResponseContentFolderStatusEnum",
     "BatchResponseContentFolderWithErrorsStatusEnum",
     "BatchResponsePageStatusEnum",
     "BatchResponsePageWithErrorsStatusEnum",
-    "PageLanguageEnum",
-    "PageContentTypeCategoryEnum",
     "PageAbStatusEnum",
+    "PageContentTypeCategoryEnum",
     "PageCurrentStateEnum",
+    "PageLanguageEnum",
+    "SideOrCornerHorizontalSideEnum",
+    "SideOrCornerVerticalSideEnum",
+    "SizeUnitsEnum",
+    "StylesFlexboxPositioningEnum",
+    "StylesVerticalAlignmentEnum",
+    "UpdateLanguagesRequestVNextLanguagesEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -126,13 +143,15 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseContentFolderWithErrors": BatchResponseContentFolderWithErrors,
     "BatchResponsePage": BatchResponsePage,
     "BatchResponsePageWithErrors": BatchResponsePageWithErrors,
+    "BreakpointStyles": BreakpointStyles,
     "CollectionResponseWithTotalContentFolderForwardPaging": CollectionResponseWithTotalContentFolderForwardPaging,
+    "CollectionResponseWithTotalContentFolderVersion": CollectionResponseWithTotalContentFolderVersion,
     "CollectionResponseWithTotalPageForwardPaging": CollectionResponseWithTotalPageForwardPaging,
-    "CollectionResponseWithTotalVersionContentFolder": CollectionResponseWithTotalVersionContentFolder,
-    "CollectionResponseWithTotalVersionPage": CollectionResponseWithTotalVersionPage,
+    "CollectionResponseWithTotalPageVersion": CollectionResponseWithTotalPageVersion,
     "ColorStop": ColorStop,
     "ContentCloneRequestVNext": ContentCloneRequestVNext,
     "ContentFolder": ContentFolder,
+    "ContentFolderVersion": ContentFolderVersion,
     "ContentLanguageCloneRequestVNext": ContentLanguageCloneRequestVNext,
     "ContentLanguageVariation": ContentLanguageVariation,
     "ContentScheduleRequestVNext": ContentScheduleRequestVNext,
@@ -141,20 +160,22 @@ let typeMap: {[index: string]: any} = {
     "ForwardPaging": ForwardPaging,
     "Gradient": Gradient,
     "LayoutSection": LayoutSection,
+    "Margin": Margin,
     "ModelError": ModelError,
     "NextPage": NextPage,
+    "Padding": Padding,
     "Page": Page,
+    "PageVersion": PageVersion,
     "Paging": Paging,
     "PreviousPage": PreviousPage,
     "RGBAColor": RGBAColor,
     "RowMetaData": RowMetaData,
     "SetNewLanguagePrimaryRequestVNext": SetNewLanguagePrimaryRequestVNext,
     "SideOrCorner": SideOrCorner,
+    "Size": Size,
     "StandardError": StandardError,
     "Styles": Styles,
     "UpdateLanguagesRequestVNext": UpdateLanguagesRequestVNext,
-    "VersionContentFolder": VersionContentFolder,
-    "VersionPage": VersionPage,
     "VersionUser": VersionUser,
 }
 

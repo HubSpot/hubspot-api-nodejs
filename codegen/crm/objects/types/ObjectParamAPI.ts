@@ -11,7 +11,7 @@ import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchRespon
 import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
 import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObject } from '../models/CollectionResponseWithTotalSimplePublicObject';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
@@ -98,7 +98,7 @@ export interface BasicApiGetByIdRequest {
      */
     archived?: boolean
     /**
-     * The name of a property whose values are unique for this object
+     * The name of a property whose values are unique for this object type
      * Defaults to: undefined
      * @type string
      * @memberof BasicApigetById
@@ -165,14 +165,14 @@ export interface BasicApiUpdateRequest {
      * @type string
      * @memberof BasicApiupdate
      */
-    objectType: string
+    objectId: string
     /**
      * 
      * Defaults to: undefined
      * @type string
      * @memberof BasicApiupdate
      */
-    objectId: string
+    objectType: string
     /**
      * 
      * @type SimplePublicObjectInput
@@ -180,7 +180,7 @@ export interface BasicApiUpdateRequest {
      */
     simplePublicObjectInput: SimplePublicObjectInput
     /**
-     * The name of a property whose values are unique for this object
+     * The name of a property whose values are unique for this object type
      * Defaults to: undefined
      * @type string
      * @memberof BasicApiupdate
@@ -273,7 +273,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<SimplePublicObject>> {
-        return this.api.updateWithHttpInfo(param.objectType, param.objectId, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
+        return this.api.updateWithHttpInfo(param.objectId, param.objectType, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
     }
 
     /**
@@ -282,7 +282,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public update(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<SimplePublicObject> {
-        return this.api.update(param.objectType, param.objectId, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
+        return this.api.update(param.objectId, param.objectType, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
     }
 
 }
@@ -499,14 +499,14 @@ export class ObjectSearchApi {
     /**
      * @param param the request object
      */
-    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>> {
+    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObject>> {
         return this.api.doSearchWithHttpInfo(param.objectType, param.publicObjectSearchRequest,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
-    public doSearch(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
+    public doSearch(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObject> {
         return this.api.doSearch(param.objectType, param.publicObjectSearchRequest,  options).toPromise();
     }
 

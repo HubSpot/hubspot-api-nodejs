@@ -16,17 +16,21 @@
 */
 export class PublicEmailTestingDetails {
     /**
-    * Version of the email that should be sent if the results are inconclusive after the test period, master or variant.
-    */
-    'abSamplingDefault'?: PublicEmailTestingDetailsAbSamplingDefaultEnum;
-    /**
     * Version of the email that should be sent if there are too few recipients to conduct an AB test.
     */
     'abSampleSizeDefault'?: PublicEmailTestingDetailsAbSampleSizeDefaultEnum;
     /**
+    * Version of the email that should be sent if the results are inconclusive after the test period, master or variant.
+    */
+    'abSamplingDefault'?: PublicEmailTestingDetailsAbSamplingDefaultEnum;
+    /**
     * Status of the AB test.
     */
     'abStatus'?: PublicEmailTestingDetailsAbStatusEnum;
+    /**
+    * Metric to determine the version that will be sent to the remaining contacts.
+    */
+    'abSuccessMetric'?: PublicEmailTestingDetailsAbSuccessMetricEnum;
     /**
     * The size of your test group.
     */
@@ -35,14 +39,11 @@ export class PublicEmailTestingDetails {
     * Time limit on gathering test results. After this time is up, the winning version will be sent to the remaining contacts.
     */
     'hoursToWait'?: number;
+    'isAbVariation'?: boolean;
     /**
     * The ID of the AB test.
     */
     'testId'?: string;
-    /**
-    * Metric to determine the version that will be sent to the remaining contacts.
-    */
-    'abSuccessMetric'?: PublicEmailTestingDetailsAbSuccessMetricEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -50,21 +51,27 @@ export class PublicEmailTestingDetails {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "abSamplingDefault",
-            "baseName": "abSamplingDefault",
-            "type": "PublicEmailTestingDetailsAbSamplingDefaultEnum",
-            "format": ""
-        },
-        {
             "name": "abSampleSizeDefault",
             "baseName": "abSampleSizeDefault",
             "type": "PublicEmailTestingDetailsAbSampleSizeDefaultEnum",
             "format": ""
         },
         {
+            "name": "abSamplingDefault",
+            "baseName": "abSamplingDefault",
+            "type": "PublicEmailTestingDetailsAbSamplingDefaultEnum",
+            "format": ""
+        },
+        {
             "name": "abStatus",
             "baseName": "abStatus",
             "type": "PublicEmailTestingDetailsAbStatusEnum",
+            "format": ""
+        },
+        {
+            "name": "abSuccessMetric",
+            "baseName": "abSuccessMetric",
+            "type": "PublicEmailTestingDetailsAbSuccessMetricEnum",
             "format": ""
         },
         {
@@ -80,15 +87,15 @@ export class PublicEmailTestingDetails {
             "format": "int32"
         },
         {
-            "name": "testId",
-            "baseName": "testId",
-            "type": "string",
+            "name": "isAbVariation",
+            "baseName": "isAbVariation",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "abSuccessMetric",
-            "baseName": "abSuccessMetric",
-            "type": "PublicEmailTestingDetailsAbSuccessMetricEnum",
+            "name": "testId",
+            "baseName": "testId",
+            "type": "string",
             "format": ""
         }    ];
 
@@ -100,39 +107,39 @@ export class PublicEmailTestingDetails {
     }
 }
 
-export enum PublicEmailTestingDetailsAbSamplingDefaultEnum {
-    Master = 'master',
-    Variant = 'variant',
-    LoserVariant = 'loser_variant',
-    MabMaster = 'mab_master',
-    MabVariant = 'mab_variant',
-    AutomatedMaster = 'automated_master',
-    AutomatedVariant = 'automated_variant',
-    AutomatedLoserVariant = 'automated_loser_variant'
-}
 export enum PublicEmailTestingDetailsAbSampleSizeDefaultEnum {
-    Master = 'master',
-    Variant = 'variant',
+    AutomatedLoserVariant = 'automated_loser_variant',
+    AutomatedMaster = 'automated_master',
+    AutomatedVariant = 'automated_variant',
     LoserVariant = 'loser_variant',
     MabMaster = 'mab_master',
     MabVariant = 'mab_variant',
+    Master = 'master',
+    Variant = 'variant'
+}
+export enum PublicEmailTestingDetailsAbSamplingDefaultEnum {
+    AutomatedLoserVariant = 'automated_loser_variant',
     AutomatedMaster = 'automated_master',
     AutomatedVariant = 'automated_variant',
-    AutomatedLoserVariant = 'automated_loser_variant'
+    LoserVariant = 'loser_variant',
+    MabMaster = 'mab_master',
+    MabVariant = 'mab_variant',
+    Master = 'master',
+    Variant = 'variant'
 }
 export enum PublicEmailTestingDetailsAbStatusEnum {
-    Master = 'master',
-    Variant = 'variant',
+    AutomatedLoserVariant = 'automated_loser_variant',
+    AutomatedMaster = 'automated_master',
+    AutomatedVariant = 'automated_variant',
     LoserVariant = 'loser_variant',
     MabMaster = 'mab_master',
     MabVariant = 'mab_variant',
-    AutomatedMaster = 'automated_master',
-    AutomatedVariant = 'automated_variant',
-    AutomatedLoserVariant = 'automated_loser_variant'
+    Master = 'master',
+    Variant = 'variant'
 }
 export enum PublicEmailTestingDetailsAbSuccessMetricEnum {
-    ClicksByOpens = 'CLICKS_BY_OPENS',
     ClicksByDelivered = 'CLICKS_BY_DELIVERED',
+    ClicksByOpens = 'CLICKS_BY_OPENS',
     OpensByDelivered = 'OPENS_BY_DELIVERED'
 }
 

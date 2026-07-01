@@ -13,6 +13,9 @@
 import { PublicCardResponse } from '../models/PublicCardResponse';
 
 export class PublicCardListResponse {
+    /**
+    * A list of card responses
+    */
     'results': Array<PublicCardResponse>;
 
     static readonly discriminator: string | undefined = undefined;

@@ -10,7 +10,7 @@ import { AccessTokensApiRequestFactory, AccessTokensApiResponseProcessor} from "
 
 export interface AccessTokensApiGetRequest {
     /**
-     * The access token that you want to retrieve information about.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof AccessTokensApiget
@@ -26,8 +26,6 @@ export class ObjectAccessTokensApi {
     }
 
     /**
-     * Retrieve a token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Retrieve OAuth token metadata
      * @param param the request object
      */
     public getWithHttpInfo(param: AccessTokensApiGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<AccessTokenInfoResponse>> {
@@ -35,8 +33,6 @@ export class ObjectAccessTokensApi {
     }
 
     /**
-     * Retrieve a token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Retrieve OAuth token metadata
      * @param param the request object
      */
     public get(param: AccessTokensApiGetRequest, options?: ConfigurationOptions): Promise<AccessTokenInfoResponse> {
@@ -50,7 +46,7 @@ import { RefreshTokensApiRequestFactory, RefreshTokensApiResponseProcessor} from
 
 export interface RefreshTokensApiArchiveRequest {
     /**
-     * The refresh token to delete.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RefreshTokensApiarchive
@@ -60,7 +56,7 @@ export interface RefreshTokensApiArchiveRequest {
 
 export interface RefreshTokensApiGetRequest {
     /**
-     * The refresh token to retrieve information about.
+     * 
      * Defaults to: undefined
      * @type string
      * @memberof RefreshTokensApiget
@@ -76,8 +72,6 @@ export class ObjectRefreshTokensApi {
     }
 
     /**
-     * Delete a refresh token, typically after a user uninstalls your app. Access tokens generated with the refresh token will not be affected.  This will not uninstall the application from HubSpot or inhibit data syncing between an account and the app.
-     * Delete a refresh token
      * @param param the request object
      */
     public archiveWithHttpInfo(param: RefreshTokensApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
@@ -85,8 +79,6 @@ export class ObjectRefreshTokensApi {
     }
 
     /**
-     * Delete a refresh token, typically after a user uninstalls your app. Access tokens generated with the refresh token will not be affected.  This will not uninstall the application from HubSpot or inhibit data syncing between an account and the app.
-     * Delete a refresh token
      * @param param the request object
      */
     public archive(param: RefreshTokensApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
@@ -94,8 +86,6 @@ export class ObjectRefreshTokensApi {
     }
 
     /**
-     * Retrieve a refresh token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with. Learn more about [refresh tokens](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#generate-initial-access-and-refresh-tokens).
-     * Retrieve refresh token metadata
      * @param param the request object
      */
     public getWithHttpInfo(param: RefreshTokensApiGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<RefreshTokenInfoResponse>> {
@@ -103,8 +93,6 @@ export class ObjectRefreshTokensApi {
     }
 
     /**
-     * Retrieve a refresh token\'s metadata, including the email address of the user that the token was created for and the ID of the account it\'s associated with. Learn more about [refresh tokens](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#generate-initial-access-and-refresh-tokens).
-     * Retrieve refresh token metadata
      * @param param the request object
      */
     public get(param: RefreshTokensApiGetRequest, options?: ConfigurationOptions): Promise<RefreshTokenInfoResponse> {
@@ -159,6 +147,20 @@ export interface TokensApiCreateRequest {
      * @memberof TokensApicreate
      */
     refreshToken?: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof TokensApicreate
+     */
+    codeVerifier?: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof TokensApicreate
+     */
+    scope?: string
 }
 
 export class ObjectTokensApi {
@@ -169,21 +171,21 @@ export class ObjectTokensApi {
     }
 
     /**
-     * Use a [previously obtained refresh token](#get-oauth-2.0-access-and-refresh-tokens) to generate a new access token.   Access tokens are short lived. You can check the `expires_in` parameter when generating an access token to determine its lifetime (in seconds). If you need offline access to HubSpot data, store the refresh token you get when [initiating your OAuth integration](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#initiating-oauth-access) and use it to generate a new access token once the initial one expires.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Refresh an access token
+     * Authenticates a client and returns access and refresh tokens.
+     * OAuth token endpoint
      * @param param the request object
      */
     public createWithHttpInfo(param: TokensApiCreateRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<TokenResponseIF>> {
-        return this.api.createWithHttpInfo(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken,  options).toPromise();
+        return this.api.createWithHttpInfo(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken, param.codeVerifier, param.scope,  options).toPromise();
     }
 
     /**
-     * Use a [previously obtained refresh token](#get-oauth-2.0-access-and-refresh-tokens) to generate a new access token.   Access tokens are short lived. You can check the `expires_in` parameter when generating an access token to determine its lifetime (in seconds). If you need offline access to HubSpot data, store the refresh token you get when [initiating your OAuth integration](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#initiating-oauth-access) and use it to generate a new access token once the initial one expires.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
-     * Refresh an access token
+     * Authenticates a client and returns access and refresh tokens.
+     * OAuth token endpoint
      * @param param the request object
      */
     public create(param: TokensApiCreateRequest = {}, options?: ConfigurationOptions): Promise<TokenResponseIF> {
-        return this.api.create(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken,  options).toPromise();
+        return this.api.create(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken, param.codeVerifier, param.scope,  options).toPromise();
     }
 
 }
