@@ -44,7 +44,7 @@ export class ObservableBasicApi {
      */
     public archiveWithHttpInfo(objectId: string, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -58,7 +58,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -69,7 +69,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -107,7 +107,7 @@ export class ObservableBasicApi {
      */
     public cloneWithHttpInfo(contentCloneRequestVNext: ContentCloneRequestVNext, _options?: ConfigurationOptions): Observable<HttpInfo<BlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -121,7 +121,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -132,7 +132,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -169,7 +169,7 @@ export class ObservableBasicApi {
      */
     public createWithHttpInfo(blogPost: BlogPost, _options?: ConfigurationOptions): Observable<HttpInfo<BlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -183,7 +183,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -194,7 +194,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -233,7 +233,7 @@ export class ObservableBasicApi {
      */
     public getByIdWithHttpInfo(objectId: string, archived?: boolean, property?: string, _options?: ConfigurationOptions): Observable<HttpInfo<BlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -247,7 +247,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -258,7 +258,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -297,7 +297,7 @@ export class ObservableBasicApi {
      */
     public getDraftByIdWithHttpInfo(objectId: string, _options?: ConfigurationOptions): Observable<HttpInfo<BlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -311,7 +311,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -322,7 +322,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -369,7 +369,7 @@ export class ObservableBasicApi {
      */
     public getPageWithHttpInfo(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalBlogPostForwardPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -383,7 +383,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -394,7 +394,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -442,7 +442,7 @@ export class ObservableBasicApi {
      */
     public getPreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: ConfigurationOptions): Observable<HttpInfo<VersionBlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -456,7 +456,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -467,7 +467,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -508,7 +508,7 @@ export class ObservableBasicApi {
      */
     public getPreviousVersionsWithHttpInfo(objectId: string, after?: string, before?: string, limit?: number, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalVersionBlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -522,7 +522,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -533,7 +533,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -573,7 +573,7 @@ export class ObservableBasicApi {
      */
     public pushLiveWithHttpInfo(objectId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -587,7 +587,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -598,7 +598,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -635,7 +635,7 @@ export class ObservableBasicApi {
      */
     public resetDraftWithHttpInfo(objectId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -649,7 +649,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -660,7 +660,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -698,7 +698,7 @@ export class ObservableBasicApi {
      */
     public restorePreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: ConfigurationOptions): Observable<HttpInfo<BlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -712,7 +712,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -723,7 +723,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -762,7 +762,7 @@ export class ObservableBasicApi {
      */
     public restorePreviousVersionToDraftWithHttpInfo(objectId: string, revisionId: number, _options?: ConfigurationOptions): Observable<HttpInfo<BlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -776,7 +776,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -787,7 +787,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -825,7 +825,7 @@ export class ObservableBasicApi {
      */
     public scheduleWithHttpInfo(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -839,7 +839,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -850,7 +850,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -889,7 +889,7 @@ export class ObservableBasicApi {
      */
     public updateWithHttpInfo(objectId: string, blogPost: BlogPost, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<BlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -903,7 +903,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -914,7 +914,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -954,7 +954,7 @@ export class ObservableBasicApi {
      */
     public updateDraftWithHttpInfo(objectId: string, blogPost: BlogPost, _options?: ConfigurationOptions): Observable<HttpInfo<BlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -968,7 +968,7 @@ export class ObservableBasicApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -979,7 +979,7 @@ export class ObservableBasicApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1035,7 +1035,7 @@ export class ObservableBatchApi {
      */
     public archiveWithHttpInfo(batchInputString: BatchInputString, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1049,7 +1049,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1060,7 +1060,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1097,7 +1097,7 @@ export class ObservableBatchApi {
      */
     public createWithHttpInfo(batchInputBlogPost: BatchInputBlogPost, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseBlogPostWithErrors | BatchResponseBlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1111,7 +1111,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1122,7 +1122,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1160,7 +1160,7 @@ export class ObservableBatchApi {
      */
     public readWithHttpInfo(batchInputString: BatchInputString, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseBlogPostWithErrors | BatchResponseBlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1174,7 +1174,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1185,7 +1185,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1224,7 +1224,7 @@ export class ObservableBatchApi {
      */
     public updateWithHttpInfo(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseBlogPostWithErrors | BatchResponseBlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1238,7 +1238,7 @@ export class ObservableBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1249,7 +1249,7 @@ export class ObservableBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1305,7 +1305,7 @@ export class ObservableMultiLanguageApi {
      */
     public attachToLangGroupWithHttpInfo(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1319,7 +1319,7 @@ export class ObservableMultiLanguageApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1330,7 +1330,7 @@ export class ObservableMultiLanguageApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1367,7 +1367,7 @@ export class ObservableMultiLanguageApi {
      */
     public createLangVariationWithHttpInfo(blogPostLanguageCloneRequestVNext: BlogPostLanguageCloneRequestVNext, _options?: ConfigurationOptions): Observable<HttpInfo<BlogPost>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1381,7 +1381,7 @@ export class ObservableMultiLanguageApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1392,7 +1392,7 @@ export class ObservableMultiLanguageApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1429,7 +1429,7 @@ export class ObservableMultiLanguageApi {
      */
     public detachFromLangGroupWithHttpInfo(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1443,7 +1443,7 @@ export class ObservableMultiLanguageApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1454,7 +1454,7 @@ export class ObservableMultiLanguageApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1491,7 +1491,7 @@ export class ObservableMultiLanguageApi {
      */
     public setLangPrimaryWithHttpInfo(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1505,7 +1505,7 @@ export class ObservableMultiLanguageApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1516,7 +1516,7 @@ export class ObservableMultiLanguageApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1553,7 +1553,7 @@ export class ObservableMultiLanguageApi {
      */
     public updateLangsWithHttpInfo(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1567,7 +1567,7 @@ export class ObservableMultiLanguageApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1578,7 +1578,7 @@ export class ObservableMultiLanguageApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 

@@ -30,7 +30,7 @@ export class ObservableOwnersApi {
      */
     public getByIdWithHttpInfo(ownerId: number, idProperty?: 'id' | 'userId', archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<PublicOwner>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -44,7 +44,7 @@ export class ObservableOwnersApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -55,7 +55,7 @@ export class ObservableOwnersApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -95,7 +95,7 @@ export class ObservableOwnersApi {
      */
     public getPageWithHttpInfo(email?: string, after?: string, limit?: number, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePublicOwnerForwardPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -109,7 +109,7 @@ export class ObservableOwnersApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -120,7 +120,7 @@ export class ObservableOwnersApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 

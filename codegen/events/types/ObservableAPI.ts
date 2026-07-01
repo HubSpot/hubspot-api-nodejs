@@ -40,7 +40,7 @@ export class ObservableEventsApi {
      */
     public getPageWithHttpInfo(objectType?: string, eventType?: string, after?: string, before?: string, limit?: number, sort?: Array<string>, occurredAfter?: Date, occurredBefore?: Date, objectId?: number, objectPropertyPropname?: any, propertyPropname?: any, id?: Array<string>, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseExternalUnifiedEvent>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -54,7 +54,7 @@ export class ObservableEventsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -65,7 +65,7 @@ export class ObservableEventsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -112,7 +112,7 @@ export class ObservableEventsApi {
      */
     public getTypesWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<VisibleExternalEventTypeNames>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -126,7 +126,7 @@ export class ObservableEventsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default: 
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -137,7 +137,7 @@ export class ObservableEventsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 

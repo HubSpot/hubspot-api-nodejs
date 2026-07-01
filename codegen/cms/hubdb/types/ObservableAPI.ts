@@ -43,7 +43,7 @@ export class ObservableRowsApi {
      */
     public cloneDraftTableRowWithHttpInfo(tableIdOrName: string, rowId: string, name?: string, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableRowV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -57,7 +57,7 @@ export class ObservableRowsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -68,7 +68,7 @@ export class ObservableRowsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -108,7 +108,7 @@ export class ObservableRowsApi {
      */
     public createTableRowWithHttpInfo(tableIdOrName: string, hubDbTableRowV3Request: HubDbTableRowV3Request, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableRowV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -122,7 +122,7 @@ export class ObservableRowsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -133,7 +133,7 @@ export class ObservableRowsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -173,7 +173,7 @@ export class ObservableRowsApi {
      */
     public getDraftTableRowByIdWithHttpInfo(tableIdOrName: string, rowId: string, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableRowV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -187,7 +187,7 @@ export class ObservableRowsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -198,7 +198,7 @@ export class ObservableRowsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -239,7 +239,7 @@ export class ObservableRowsApi {
      */
     public getTableRowWithHttpInfo(tableIdOrName: string, rowId: string, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableRowV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -253,7 +253,7 @@ export class ObservableRowsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -264,7 +264,7 @@ export class ObservableRowsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -309,7 +309,7 @@ export class ObservableRowsApi {
      */
     public getTableRowsWithHttpInfo(tableIdOrName: string, sort?: Array<string>, after?: string, limit?: number, properties?: Array<string>, offset?: number, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -323,7 +323,7 @@ export class ObservableRowsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -334,7 +334,7 @@ export class ObservableRowsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -378,7 +378,7 @@ export class ObservableRowsApi {
      */
     public purgeDraftTableRowWithHttpInfo(tableIdOrName: string, rowId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -392,7 +392,7 @@ export class ObservableRowsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -403,7 +403,7 @@ export class ObservableRowsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -447,7 +447,7 @@ export class ObservableRowsApi {
      */
     public readDraftTableRowsWithHttpInfo(tableIdOrName: string, sort?: Array<string>, after?: string, limit?: number, properties?: Array<string>, offset?: number, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -461,7 +461,7 @@ export class ObservableRowsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -472,7 +472,7 @@ export class ObservableRowsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -517,7 +517,7 @@ export class ObservableRowsApi {
      */
     public replaceDraftTableRowWithHttpInfo(tableIdOrName: string, rowId: string, hubDbTableRowV3Request: HubDbTableRowV3Request, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableRowV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -531,7 +531,7 @@ export class ObservableRowsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -542,7 +542,7 @@ export class ObservableRowsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -583,7 +583,7 @@ export class ObservableRowsApi {
      */
     public updateDraftTableRowWithHttpInfo(tableIdOrName: string, rowId: string, hubDbTableRowV3Request: HubDbTableRowV3Request, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableRowV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -597,7 +597,7 @@ export class ObservableRowsApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -608,7 +608,7 @@ export class ObservableRowsApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -666,7 +666,7 @@ export class ObservableRowsBatchApi {
      */
     public cloneDraftTableRowsWithHttpInfo(tableIdOrName: string, batchInputHubDbTableRowBatchCloneRequest: BatchInputHubDbTableRowBatchCloneRequest, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseHubDbTableRowV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -680,7 +680,7 @@ export class ObservableRowsBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -691,7 +691,7 @@ export class ObservableRowsBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -730,7 +730,7 @@ export class ObservableRowsBatchApi {
      */
     public createDraftTableRowsWithHttpInfo(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -744,7 +744,7 @@ export class ObservableRowsBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -755,7 +755,7 @@ export class ObservableRowsBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -794,7 +794,7 @@ export class ObservableRowsBatchApi {
      */
     public purgeDraftTableRowsWithHttpInfo(tableIdOrName: string, batchInputString: BatchInputString, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -808,7 +808,7 @@ export class ObservableRowsBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -819,7 +819,7 @@ export class ObservableRowsBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -858,7 +858,7 @@ export class ObservableRowsBatchApi {
      */
     public readDraftTableRowsWithHttpInfo(tableIdOrName: string, batchInputString: BatchInputString, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -872,7 +872,7 @@ export class ObservableRowsBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -883,7 +883,7 @@ export class ObservableRowsBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -922,7 +922,7 @@ export class ObservableRowsBatchApi {
      */
     public readTableRowsWithHttpInfo(tableIdOrName: string, batchInputString: BatchInputString, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -936,7 +936,7 @@ export class ObservableRowsBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -947,7 +947,7 @@ export class ObservableRowsBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -986,7 +986,7 @@ export class ObservableRowsBatchApi {
      */
     public replaceDraftTableRowsWithHttpInfo(tableIdOrName: string, batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1000,7 +1000,7 @@ export class ObservableRowsBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1011,7 +1011,7 @@ export class ObservableRowsBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1050,7 +1050,7 @@ export class ObservableRowsBatchApi {
      */
     public updateDraftTableRowsWithHttpInfo(tableIdOrName: string, batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1064,7 +1064,7 @@ export class ObservableRowsBatchApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1075,7 +1075,7 @@ export class ObservableRowsBatchApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1131,7 +1131,7 @@ export class ObservableTablesApi {
      */
     public archiveTableWithHttpInfo(tableIdOrName: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1145,7 +1145,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1156,7 +1156,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1194,7 +1194,7 @@ export class ObservableTablesApi {
      */
     public cloneDraftTableWithHttpInfo(tableIdOrName: string, hubDbTableCloneRequest: HubDbTableCloneRequest, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1208,7 +1208,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1219,7 +1219,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1257,7 +1257,7 @@ export class ObservableTablesApi {
      */
     public createTableWithHttpInfo(hubDbTableV3Request: HubDbTableV3Request, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1271,7 +1271,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1282,7 +1282,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1320,7 +1320,7 @@ export class ObservableTablesApi {
      */
     public exportDraftTableWithHttpInfo(tableIdOrName: string, format?: string, _options?: ConfigurationOptions): Observable<HttpInfo<HttpFile>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1334,7 +1334,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1345,7 +1345,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1384,7 +1384,7 @@ export class ObservableTablesApi {
      */
     public exportTableWithHttpInfo(tableIdOrName: string, format?: string, _options?: ConfigurationOptions): Observable<HttpInfo<HttpFile>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1398,7 +1398,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1409,7 +1409,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1458,7 +1458,7 @@ export class ObservableTablesApi {
      */
     public getAllDraftTablesWithHttpInfo(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, isGetLocalizedSchema?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalHubDbTableV3ForwardPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1472,7 +1472,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1483,7 +1483,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1542,7 +1542,7 @@ export class ObservableTablesApi {
      */
     public getAllTablesWithHttpInfo(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, isGetLocalizedSchema?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalHubDbTableV3ForwardPaging>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1556,7 +1556,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1567,7 +1567,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1618,7 +1618,7 @@ export class ObservableTablesApi {
      */
     public getDraftTableDetailsByIdWithHttpInfo(tableIdOrName: string, isGetLocalizedSchema?: boolean, archived?: boolean, includeForeignIds?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1632,7 +1632,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1643,7 +1643,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1686,7 +1686,7 @@ export class ObservableTablesApi {
      */
     public getTableDetailsWithHttpInfo(tableIdOrName: string, isGetLocalizedSchema?: boolean, archived?: boolean, includeForeignIds?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1700,7 +1700,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1711,7 +1711,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1753,7 +1753,7 @@ export class ObservableTablesApi {
      */
     public importDraftTableWithHttpInfo(tableIdOrName: string, config?: string, file?: HttpFile, _options?: ConfigurationOptions): Observable<HttpInfo<ImportResult>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1767,7 +1767,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1778,7 +1778,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1818,7 +1818,7 @@ export class ObservableTablesApi {
      */
     public publishDraftTableWithHttpInfo(tableIdOrName: string, includeForeignIds?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1832,7 +1832,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1843,7 +1843,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1882,7 +1882,7 @@ export class ObservableTablesApi {
      */
     public removeTableVersionWithHttpInfo(tableIdOrName: string, versionId: number, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1896,7 +1896,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1907,7 +1907,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -1946,7 +1946,7 @@ export class ObservableTablesApi {
      */
     public resetDraftTableWithHttpInfo(tableIdOrName: string, includeForeignIds?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -1960,7 +1960,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -1971,7 +1971,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -2010,7 +2010,7 @@ export class ObservableTablesApi {
      */
     public unpublishTableWithHttpInfo(tableIdOrName: string, includeForeignIds?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -2024,7 +2024,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -2035,7 +2035,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
@@ -2077,7 +2077,7 @@ export class ObservableTablesApi {
      */
     public updateDraftTableWithHttpInfo(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, isGetLocalizedSchema?: boolean, archived?: boolean, includeForeignIds?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<HubDbTableV3>> {
     let _config = this.configuration;
-    let allMiddleware: Middleware[] = [];
+    let allMiddleware: Middleware[] = [...this.configuration.middleware];
     if (_options && _options.middleware){
       const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
       // call-time middleware provided
@@ -2091,7 +2091,7 @@ export class ObservableTablesApi {
         allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
         break;
       case 'replace':
-        allMiddleware = calltimeMiddleware
+        allMiddleware = [...calltimeMiddleware]
         break;
       default:
         throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
@@ -2102,7 +2102,7 @@ export class ObservableTablesApi {
       baseServer: _options.baseServer || this.configuration.baseServer,
       httpApi: _options.httpApi || this.configuration.httpApi,
       authMethods: _options.authMethods || this.configuration.authMethods,
-      middleware: allMiddleware || this.configuration.middleware
+      middleware: allMiddleware
 		};
 	}
 
