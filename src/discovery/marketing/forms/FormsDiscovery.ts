@@ -1,5 +1,5 @@
 import {
-  FormsApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +11,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/marketing/forms/rxjsStub'
 
 export default class FormsDiscovery {
-  public formsApi: FormsApi
+  public formsApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,6 +24,7 @@ export default class FormsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.formsApi = ApiDecoratorService.getInstance().apply<FormsApi>(new FormsApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.formsApi = api
   }
 }

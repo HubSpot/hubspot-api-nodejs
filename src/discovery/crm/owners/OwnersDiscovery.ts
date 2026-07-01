@@ -1,5 +1,5 @@
 import {
-  OwnersApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +11,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/crm/owners/rxjsStub'
 
 export default class OwnersDiscovery {
-  public ownersApi: OwnersApi
+  public ownersApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,6 +24,7 @@ export default class OwnersDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.ownersApi = ApiDecoratorService.getInstance().apply<OwnersApi>(new OwnersApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.ownersApi = api
   }
 }

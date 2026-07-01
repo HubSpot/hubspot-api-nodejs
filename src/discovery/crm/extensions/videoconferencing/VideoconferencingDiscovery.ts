@@ -1,8 +1,8 @@
 import {
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
-  SettingsApi,
   createConfiguration,
 } from '../../../../../codegen/crm/extensions/videoconferencing/index'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
@@ -11,7 +11,7 @@ import IConfiguration from '../../../../configuration/IConfiguration'
 import { Observable } from '../../../../../codegen/crm/extensions/videoconferencing/rxjsStub'
 
 export default class VideoconferencingDiscovery {
-  public settingsApi: SettingsApi
+  public settingsApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,6 +24,7 @@ export default class VideoconferencingDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi>(new SettingsApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.settingsApi = api
   }
 }

@@ -1,5 +1,5 @@
 import {
-  PublicExportsApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +11,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/crm/exports/rxjsStub'
 
 export default class ExportsDiscovery {
-  public publicExportsApi: PublicExportsApi
+  public publicExportsApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,8 +24,7 @@ export default class ExportsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.publicExportsApi = ApiDecoratorService.getInstance().apply<PublicExportsApi>(
-      new PublicExportsApi(configuration),
-    )
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.publicExportsApi = api
   }
 }

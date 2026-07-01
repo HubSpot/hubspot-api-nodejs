@@ -44,8 +44,12 @@ export default class LineItemsDiscovery {
     associations?: string[],
     archived?: boolean,
   ): Promise<SimplePublicObjectWithAssociations[]> {
+    const adapter = {
+      getPage: (limit?: number, after?: string, properties?: string[], propertiesWithHistory?: string[], associations?: string[], archived?: boolean, _options?: PromiseConfigurationOptions) =>
+        this.basicApi.getPage(after, archived, associations, limit, properties, propertiesWithHistory, _options)
+    }
     return await getAll<SimplePublicObjectWithAssociations, PromiseConfigurationOptions>(
-      this.basicApi,
+      adapter,
       limit,
       after,
       properties,

@@ -1,9 +1,9 @@
 import {
+  BasicApi,
   LandingPagesApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
-  SitePagesApi,
   createConfiguration,
 } from '../../../../codegen/cms/pages/index'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
@@ -13,7 +13,7 @@ import { Observable } from '../../../../codegen/cms/pages/rxjsStub'
 
 export default class PagesDiscovery {
   public landingPagesApi: LandingPagesApi
-  public sitePagesApi: SitePagesApi
+  public sitePagesApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -27,6 +27,6 @@ export default class PagesDiscovery {
     )
 
     this.landingPagesApi = ApiDecoratorService.getInstance().apply<LandingPagesApi>(new LandingPagesApi(configuration))
-    this.sitePagesApi = ApiDecoratorService.getInstance().apply<SitePagesApi>(new SitePagesApi(configuration))
+    this.sitePagesApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
   }
 }

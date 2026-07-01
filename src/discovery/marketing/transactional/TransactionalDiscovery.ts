@@ -1,9 +1,9 @@
 import {
-  PublicSMTPTokensApi,
   RequestContext,
   ResponseContext,
+  SMTPTokensApi,
+  SendTransactionalEmailApi,
   ServerConfiguration,
-  SingleSendApi,
   createConfiguration,
 } from '../../../../codegen/marketing/transactional/index'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
@@ -12,8 +12,8 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/marketing/transactional/rxjsStub'
 
 export default class TransactionalDiscovery {
-  public publicSMTPTokensApi: PublicSMTPTokensApi
-  public singleSendApi: SingleSendApi
+  public publicSMTPTokensApi: SMTPTokensApi
+  public singleSendApi: SendTransactionalEmailApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -26,9 +26,11 @@ export default class TransactionalDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.publicSMTPTokensApi = ApiDecoratorService.getInstance().apply<PublicSMTPTokensApi>(
-      new PublicSMTPTokensApi(configuration),
+    this.publicSMTPTokensApi = ApiDecoratorService.getInstance().apply<SMTPTokensApi>(
+      new SMTPTokensApi(configuration),
     )
-    this.singleSendApi = ApiDecoratorService.getInstance().apply<SingleSendApi>(new SingleSendApi(configuration))
+    this.singleSendApi = ApiDecoratorService.getInstance().apply<SendTransactionalEmailApi>(
+      new SendTransactionalEmailApi(configuration),
+    )
   }
 }

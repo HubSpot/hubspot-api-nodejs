@@ -1,5 +1,5 @@
 import {
-  DomainsApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +11,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/cms/domains/rxjsStub'
 
 export default class DomainsDiscovery {
-  public domainsApi: DomainsApi
+  public domainsApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,6 +24,7 @@ export default class DomainsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.domainsApi = ApiDecoratorService.getInstance().apply<DomainsApi>(new DomainsApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.domainsApi = api
   }
 }

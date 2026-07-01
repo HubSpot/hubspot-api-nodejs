@@ -1,5 +1,5 @@
 import {
-  BlogTagsApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +11,7 @@ import IConfiguration from '../../../../configuration/IConfiguration'
 import { Observable } from '../../../../../codegen/cms/blogs/tags/rxjsStub'
 
 export default class TagsDiscovery {
-  public blogTagsApi: BlogTagsApi
+  public blogTagsApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,6 +24,7 @@ export default class TagsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.blogTagsApi = ApiDecoratorService.getInstance().apply<BlogTagsApi>(new BlogTagsApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.blogTagsApi = api
   }
 }

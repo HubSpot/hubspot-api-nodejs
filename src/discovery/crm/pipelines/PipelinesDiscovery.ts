@@ -1,8 +1,5 @@
 import {
-  PipelineAuditsApi,
-  PipelineStageAuditsApi,
-  PipelineStagesApi,
-  PipelinesApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -14,10 +11,10 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/crm/pipelines/rxjsStub'
 
 export default class PipelinesDiscovery {
-  public pipelineAuditsApi: PipelineAuditsApi
-  public pipelineStageAuditsApi: PipelineStageAuditsApi
-  public pipelineStagesApi: PipelineStagesApi
-  public pipelinesApi: PipelinesApi
+  public pipelineAuditsApi: BasicApi
+  public pipelineStageAuditsApi: BasicApi
+  public pipelineStagesApi: BasicApi
+  public pipelinesApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -30,15 +27,10 @@ export default class PipelinesDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.pipelineAuditsApi = ApiDecoratorService.getInstance().apply<PipelineAuditsApi>(
-      new PipelineAuditsApi(configuration),
-    )
-    this.pipelineStageAuditsApi = ApiDecoratorService.getInstance().apply<PipelineStageAuditsApi>(
-      new PipelineStageAuditsApi(configuration),
-    )
-    this.pipelineStagesApi = ApiDecoratorService.getInstance().apply<PipelineStagesApi>(
-      new PipelineStagesApi(configuration),
-    )
-    this.pipelinesApi = ApiDecoratorService.getInstance().apply<PipelinesApi>(new PipelinesApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.pipelineAuditsApi = api
+    this.pipelineStageAuditsApi = api
+    this.pipelineStagesApi = api
+    this.pipelinesApi = api
   }
 }

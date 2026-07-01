@@ -1,8 +1,5 @@
 import {
-  FoldersApi,
-  ListsApi,
-  MappingApi,
-  MembershipsApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -14,10 +11,10 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/crm/lists/rxjsStub'
 
 export default class ListsDiscovery {
-  public foldersApi: FoldersApi
-  public listsApi: ListsApi
-  public mappingApi: MappingApi
-  public membershipsApi: MembershipsApi
+  public foldersApi: BasicApi
+  public listsApi: BasicApi
+  public mappingApi: BasicApi
+  public membershipsApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -30,9 +27,10 @@ export default class ListsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.foldersApi = ApiDecoratorService.getInstance().apply<FoldersApi>(new FoldersApi(configuration))
-    this.listsApi = ApiDecoratorService.getInstance().apply<ListsApi>(new ListsApi(configuration))
-    this.mappingApi = ApiDecoratorService.getInstance().apply<MappingApi>(new MappingApi(configuration))
-    this.membershipsApi = ApiDecoratorService.getInstance().apply<MembershipsApi>(new MembershipsApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.foldersApi = api
+    this.listsApi = api
+    this.mappingApi = api
+    this.membershipsApi = api
   }
 }

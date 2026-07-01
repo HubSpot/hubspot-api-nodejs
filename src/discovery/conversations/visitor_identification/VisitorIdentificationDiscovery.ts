@@ -1,5 +1,5 @@
 import {
-  GenerateApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +11,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/conversations/visitor_identification/rxjsStub'
 
 export default class VisitorIdentificationDiscovery {
-  public generateApi: GenerateApi
+  public generateApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,6 +24,7 @@ export default class VisitorIdentificationDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.generateApi = ApiDecoratorService.getInstance().apply<GenerateApi>(new GenerateApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.generateApi = api
   }
 }

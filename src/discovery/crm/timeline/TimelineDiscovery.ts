@@ -1,10 +1,8 @@
 import {
-  EventsApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
-  TemplatesApi,
-  TokensApi,
   createConfiguration,
 } from '../../../../codegen/crm/timeline/index'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
@@ -13,9 +11,9 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/crm/timeline/rxjsStub'
 
 export default class TimelineDiscovery {
-  public eventsApi: EventsApi
-  public templatesApi: TemplatesApi
-  public tokensApi: TokensApi
+  public eventsApi: BasicApi
+  public templatesApi: BasicApi
+  public tokensApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -28,8 +26,9 @@ export default class TimelineDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.eventsApi = ApiDecoratorService.getInstance().apply<EventsApi>(new EventsApi(configuration))
-    this.templatesApi = ApiDecoratorService.getInstance().apply<TemplatesApi>(new TemplatesApi(configuration))
-    this.tokensApi = ApiDecoratorService.getInstance().apply<TokensApi>(new TokensApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.eventsApi = api
+    this.templatesApi = api
+    this.tokensApi = api
   }
 }

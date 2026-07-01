@@ -1,5 +1,5 @@
 import {
-  BusinessUnitApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +11,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/settings/business_units/rxjsStub'
 
 export default class BusinessUnitsDiscovery {
-  public businessUnitApi: BusinessUnitApi
+  public businessUnitApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,6 +24,7 @@ export default class BusinessUnitsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.businessUnitApi = ApiDecoratorService.getInstance().apply<BusinessUnitApi>(new BusinessUnitApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.businessUnitApi = api
   }
 }

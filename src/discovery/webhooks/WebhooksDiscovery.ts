@@ -1,9 +1,8 @@
 import {
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
-  SettingsApi,
-  SubscriptionsApi,
   createConfiguration,
 } from '../../../codegen/webhooks/index'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
@@ -12,8 +11,8 @@ import IConfiguration from '../../configuration/IConfiguration'
 import { Observable } from '../../../codegen/webhooks/rxjsStub'
 
 export default class WebhooksDiscovery {
-  public settingsApi: SettingsApi
-  public subscriptionsApi: SubscriptionsApi
+  public settingsApi: BasicApi
+  public subscriptionsApi: BasicApi
 
   constructor(config: IConfiguration = {}) {
     const configuration = createConfiguration(
@@ -26,9 +25,8 @@ export default class WebhooksDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi>(new SettingsApi(configuration))
-    this.subscriptionsApi = ApiDecoratorService.getInstance().apply<SubscriptionsApi>(
-      new SubscriptionsApi(configuration),
-    )
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.settingsApi = api
+    this.subscriptionsApi = api
   }
 }

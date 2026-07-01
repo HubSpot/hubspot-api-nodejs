@@ -1,9 +1,8 @@
 import {
-  MarketingEmailsApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
-  StatisticsApi,
   createConfiguration,
 } from '../../../../codegen/marketing/emails/index'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
@@ -12,8 +11,8 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/marketing/emails/rxjsStub'
 
 export default class EmailsDiscovery {
-  public marketingEmailsApi: MarketingEmailsApi
-  public statisticsApi: StatisticsApi
+  public marketingEmailsApi: BasicApi
+  public statisticsApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -26,9 +25,8 @@ export default class EmailsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.marketingEmailsApi = ApiDecoratorService.getInstance().apply<MarketingEmailsApi>(
-      new MarketingEmailsApi(configuration),
-    )
-    this.statisticsApi = ApiDecoratorService.getInstance().apply<StatisticsApi>(new StatisticsApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.marketingEmailsApi = api
+    this.statisticsApi = api
   }
 }

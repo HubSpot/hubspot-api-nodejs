@@ -1,5 +1,5 @@
 import {
-  PublicApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +11,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/cms/site_search/rxjsStub'
 
 export default class SiteSearchDiscovery {
-  public publicApi: PublicApi
+  public publicApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,6 +24,7 @@ export default class SiteSearchDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.publicApi = ApiDecoratorService.getInstance().apply<PublicApi>(new PublicApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.publicApi = api
   }
 }

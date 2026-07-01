@@ -1,5 +1,5 @@
 import {
-  RedirectsApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +11,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/cms/url_redirects/rxjsStub'
 
 export default class UrlRedirectsDiscovery {
-  public redirectsApi: RedirectsApi
+  public redirectsApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,6 +24,7 @@ export default class UrlRedirectsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.redirectsApi = ApiDecoratorService.getInstance().apply<RedirectsApi>(new RedirectsApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.redirectsApi = api
   }
 }

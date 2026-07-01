@@ -1,8 +1,8 @@
 import {
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
-  TypesApi,
   createConfiguration,
 } from '../../../../../codegen/crm/associations/schema/index'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
@@ -12,7 +12,7 @@ import IConfiguration from '../../../../configuration/IConfiguration'
 import { Observable } from '../../../../../codegen/crm/associations/schema/rxjsStub'
 
 export default class SchemaDiscovery extends BaseDiscovery {
-  public typesApi: TypesApi
+  public typesApi: BasicApi
 
   constructor(config: IConfiguration) {
     super(config)
@@ -26,6 +26,7 @@ export default class SchemaDiscovery extends BaseDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.typesApi = ApiDecoratorService.getInstance().apply<TypesApi>(new TypesApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.typesApi = api
   }
 }

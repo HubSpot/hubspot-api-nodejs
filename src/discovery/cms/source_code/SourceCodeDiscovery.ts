@@ -1,11 +1,8 @@
 import {
-  ContentApi,
-  ExtractApi,
-  MetadataApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
-  ValidationApi,
   createConfiguration,
 } from '../../../../codegen/cms/source_code/index'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
@@ -14,10 +11,10 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/cms/source_code/rxjsStub'
 
 export default class SourceCodeDiscovery {
-  public contentApi: ContentApi
-  public extractApi: ExtractApi
-  public metadataApi: MetadataApi
-  public validationApi: ValidationApi
+  public contentApi: BasicApi
+  public extractApi: BasicApi
+  public metadataApi: BasicApi
+  public validationApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -30,9 +27,10 @@ export default class SourceCodeDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.contentApi = ApiDecoratorService.getInstance().apply<ContentApi>(new ContentApi(configuration))
-    this.extractApi = ApiDecoratorService.getInstance().apply<ExtractApi>(new ExtractApi(configuration))
-    this.metadataApi = ApiDecoratorService.getInstance().apply<MetadataApi>(new MetadataApi(configuration))
-    this.validationApi = ApiDecoratorService.getInstance().apply<ValidationApi>(new ValidationApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.contentApi = api
+    this.extractApi = api
+    this.metadataApi = api
+    this.validationApi = api
   }
 }

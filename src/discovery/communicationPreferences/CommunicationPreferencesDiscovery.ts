@@ -1,9 +1,8 @@
 import {
-  DefinitionApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
-  StatusApi,
   createConfiguration,
 } from '../../../codegen/communication_preferences/index'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
@@ -12,8 +11,8 @@ import IConfiguration from '../../configuration/IConfiguration'
 import { Observable } from '../../../codegen/communication_preferences/rxjsStub'
 
 export default class CommunicationPreferencesDiscovery {
-  public definitionApi: DefinitionApi
-  public statusApi: StatusApi
+  public definitionApi: BasicApi
+  public statusApi: BasicApi
 
   constructor(config: IConfiguration = {}) {
     const configuration = createConfiguration(
@@ -26,7 +25,8 @@ export default class CommunicationPreferencesDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.definitionApi = ApiDecoratorService.getInstance().apply<DefinitionApi>(new DefinitionApi(configuration))
-    this.statusApi = ApiDecoratorService.getInstance().apply<StatusApi>(new StatusApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.definitionApi = api
+    this.statusApi = api
   }
 }

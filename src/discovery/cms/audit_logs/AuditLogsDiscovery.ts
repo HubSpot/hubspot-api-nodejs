@@ -1,5 +1,5 @@
 import {
-  AuditLogsApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +11,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/cms/audit_logs/rxjsStub'
 
 export default class AuditLogsDiscovery {
-  public auditLogsApi: AuditLogsApi
+  public auditLogsApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,6 +24,7 @@ export default class AuditLogsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.auditLogsApi = ApiDecoratorService.getInstance().apply<AuditLogsApi>(new AuditLogsApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.auditLogsApi = api
   }
 }

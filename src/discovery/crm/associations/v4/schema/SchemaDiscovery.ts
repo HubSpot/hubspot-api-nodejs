@@ -1,5 +1,5 @@
 import {
-  DefinitionsApi,
+  LabelsApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +11,7 @@ import IConfiguration from '../../../../../configuration/IConfiguration'
 import { Observable } from '../../../../../../codegen/crm/associations/v4/schema/rxjsStub'
 
 export default class SchemaDiscovery {
-  public definitionsApi: DefinitionsApi
+  public definitionsApi: LabelsApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,6 +24,7 @@ export default class SchemaDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.definitionsApi = ApiDecoratorService.getInstance().apply<DefinitionsApi>(new DefinitionsApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<LabelsApi>(new LabelsApi(configuration))
+    this.definitionsApi = api
   }
 }

@@ -1,5 +1,5 @@
 import {
-  EventsApi,
+  BasicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -13,7 +13,7 @@ import { Observable } from '../../../codegen/events/rxjsStub'
 import type SendDiscovery from './send/SendDiscovery'
 
 export default class EventsDiscovery extends BaseDiscovery {
-  public eventsApi: EventsApi
+  public eventsApi: BasicApi
   protected _send: SendDiscovery | undefined
 
   constructor(config: IConfiguration = {}) {
@@ -28,7 +28,8 @@ export default class EventsDiscovery extends BaseDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.eventsApi = ApiDecoratorService.getInstance().apply<EventsApi>(new EventsApi(configuration))
+    const api = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.eventsApi = api
   }
 
   /**

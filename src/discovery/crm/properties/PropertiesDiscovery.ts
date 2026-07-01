@@ -1,7 +1,7 @@
 import {
+  BasicApi,
   BatchApi,
   CoreApi,
-  GroupsApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -15,7 +15,7 @@ import { Observable } from '../../../../codegen/crm/properties/rxjsStub'
 export default class PropertiesDiscovery {
   public batchApi: BatchApi
   public coreApi: CoreApi
-  public groupsApi: GroupsApi
+  public groupsApi: BasicApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -30,6 +30,6 @@ export default class PropertiesDiscovery {
 
     this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
     this.coreApi = ApiDecoratorService.getInstance().apply<CoreApi>(new CoreApi(configuration))
-    this.groupsApi = ApiDecoratorService.getInstance().apply<GroupsApi>(new GroupsApi(configuration))
+    this.groupsApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
   }
 }
