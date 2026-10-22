@@ -11,4 +11,10 @@ describe('api client', () => {
     expect(Object.prototype.hasOwnProperty.call(client, 'tokensApi')).toBeTruthy()
     expect(TokensApi.name).toBe(client.tokensApi.constructor.name)
   })
+
+  it('exposes v3 discovery', () => {
+    const client = new Client().oauth
+    expect(client.v3).toBeDefined()
+    expect(client.v3).toBe(client.v3)
+  })
 })

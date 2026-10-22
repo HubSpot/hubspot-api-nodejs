@@ -10,15 +10,19 @@ import {
 } from '../../../codegen/oauth/index'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import ApiDecoratorService from '../../services/ApiDecoratorService'
+import BaseDiscovery from '../BaseDiscovery'
 import IConfiguration from '../../configuration/IConfiguration'
 import { Observable } from '../../../codegen/oauth/rxjsStub'
+import type V3Discovery from './v3/V3Discovery'
 
-export default class OauthDiscovery {
+export default class OauthDiscovery extends BaseDiscovery {
   public accessTokensApi: AccessTokensApi
   public refreshTokensApi: RefreshTokensApi
   public tokensApi: TokensApi
+  protected _v3: V3Discovery | undefined
 
   constructor(config: IConfiguration = {}) {
+    super(config)
     const configuration = createConfiguration(
       ApiClientConfigurator.getParams<
         RequestContext,
@@ -34,6 +38,19 @@ export default class OauthDiscovery {
       new RefreshTokensApi(configuration),
     )
     this.tokensApi = ApiDecoratorService.getInstance().apply<TokensApi>(new TokensApi(configuration))
+  }
+
+  /**
+   * Getter
+   * @returns V3Discovery
+   */
+  get v3() {
+    if (!this._v3) {
+      const requiredClass = require('./v3/V3Discovery')
+      this._v3 = new requiredClass.default(this.config) as V3Discovery
+    }
+
+    return this._v3
   }
 
   public getAuthorizationUrl(
