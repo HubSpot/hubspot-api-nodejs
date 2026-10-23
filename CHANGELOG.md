@@ -5,7 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/14.0.1...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/14.1.0...HEAD)
+
+## [14.1.0] - 2026-10-26
+
+## Added
+
+- Added `oauth.v3` API client with `advancedApi` (`getToken`, `introspectToken`, `revokeToken`).
+
+## Deprecated
+
+- Deprecated `oauth.accessTokensApi`, `oauth.refreshTokensApi` and `oauth.tokensApi`. Use `oauth.v3.advancedApi` instead. `oauth.getAuthorizationUrl()` is not deprecated.
 
 ## [14.0.1] - 2026-07-01
 
@@ -1171,3 +1181,4 @@ export enum Enum {
 [13.5.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.5.0
 [14.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/14.0.0
 [14.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/14.0.1
+[14.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/14.1.0
