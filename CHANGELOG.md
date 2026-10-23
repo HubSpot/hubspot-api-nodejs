@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/14.1.0...HEAD)
 
-## [14.1.0] - 2026-10-22
+## [14.1.0] - 2026-10-26
 
 ## Added
 
