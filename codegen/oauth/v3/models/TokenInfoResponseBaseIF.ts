@@ -25,8 +25,11 @@ export type TokenInfoResponseBaseIF = PublicAccessTokenInfoResponse | PublicRefr
 * @export
 */
 export class TokenInfoResponseBaseIFClass {
-    static readonly discriminator: string | undefined = undefined;
+    static readonly discriminator: string | undefined = "tokenUse";
 
-    static readonly mapping: {[index: string]: string} | undefined = undefined;
+    static readonly mapping: {[index: string]: string} | undefined = {
+        "access_token": "PublicAccessTokenInfoResponse",
+        "refresh_token": "PublicRefreshTokenInfoResponse",
+    };
 }
 

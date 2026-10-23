@@ -25,8 +25,11 @@ export type TokenResponseIF = AccessTokenResponse | ClientCredentialsTokenRespon
 * @export
 */
 export class TokenResponseIFClass {
-    static readonly discriminator: string | undefined = undefined;
+    static readonly discriminator: string | undefined = "tokenUse";
 
-    static readonly mapping: {[index: string]: string} | undefined = undefined;
+    static readonly mapping: {[index: string]: string} | undefined = {
+        "access_token": "AccessTokenResponse",
+        "client_credentials": "ClientCredentialsTokenResponse",
+    };
 }
 

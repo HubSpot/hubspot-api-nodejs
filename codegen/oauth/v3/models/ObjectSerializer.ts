@@ -111,6 +111,17 @@ const mapPrefix = "{ [key: string]: ";
 const mapSuffix = "; }";
 
 export class ObjectSerializer {
+    private static getDiscriminatorBaseName(expectedType: string, discriminatorProperty: string): string {
+        const candidateTypes = [expectedType, ...Object.values<string>(typeMap[expectedType].mapping ?? {})];
+        for (const candidateType of candidateTypes) {
+            const attribute = typeMap[candidateType]?.getAttributeTypeMap?.().find((attribute: { name: string }) => attribute.name === discriminatorProperty);
+            if (attribute) {
+                return attribute.baseName;
+            }
+        }
+        return discriminatorProperty;
+    }
+
     public static findCorrectType(data: any, expectedType: string) {
         if (data == undefined) {
             return expectedType;
@@ -132,8 +143,8 @@ export class ObjectSerializer {
             if (discriminatorProperty == null) {
                 return expectedType; // the type does not have a discriminator. use it.
             } else {
-                if (data[discriminatorProperty]) {
-                    var discriminatorType = data[discriminatorProperty];
+                var discriminatorType = data[discriminatorProperty] ?? data[ObjectSerializer.getDiscriminatorBaseName(expectedType, discriminatorProperty)];
+                if (discriminatorType) {
                     let mapping = typeMap[expectedType].mapping;
                     if (mapping != undefined && mapping[discriminatorType]) {
                         return mapping[discriminatorType]; // use the type given in the discriminator
