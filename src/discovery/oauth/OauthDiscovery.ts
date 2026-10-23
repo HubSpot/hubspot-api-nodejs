@@ -16,8 +16,17 @@ import { Observable } from '../../../codegen/oauth/rxjsStub'
 import type V3Discovery from './v3/V3Discovery'
 
 export default class OauthDiscovery extends BaseDiscovery {
+  /**
+   * @deprecated Use `oauth.v3.advancedApi` instead
+   */
   public accessTokensApi: AccessTokensApi
+  /**
+   * @deprecated Use `oauth.v3.advancedApi` instead
+   */
   public refreshTokensApi: RefreshTokensApi
+  /**
+   * @deprecated Use `oauth.v3.advancedApi` instead
+   */
   public tokensApi: TokensApi
   protected _v3: V3Discovery | undefined
 
