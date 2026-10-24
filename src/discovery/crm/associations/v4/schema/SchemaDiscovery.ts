@@ -1,4 +1,5 @@
 import {
+  DefinitionConfigurationsApi,
   DefinitionsApi,
   RequestContext,
   ResponseContext,
@@ -11,6 +12,7 @@ import IConfiguration from '../../../../../configuration/IConfiguration'
 import { Observable } from '../../../../../../codegen/crm/associations/v4/schema/rxjsStub'
 
 export default class SchemaDiscovery {
+  public definitionConfigurationsApi: DefinitionConfigurationsApi
   public definitionsApi: DefinitionsApi
 
   constructor(config: IConfiguration) {
@@ -24,6 +26,9 @@ export default class SchemaDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
+    this.definitionConfigurationsApi = ApiDecoratorService.getInstance().apply<DefinitionConfigurationsApi>(
+      new DefinitionConfigurationsApi(configuration),
+    )
     this.definitionsApi = ApiDecoratorService.getInstance().apply<DefinitionsApi>(new DefinitionsApi(configuration))
   }
 }
