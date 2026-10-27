@@ -22,7 +22,7 @@
     "@types/node": "*",
     "bottleneck": "^2.19.5",
     "es6-promise": "^4.2.4",
-    "form-data": "^4.0.4",
+    "form-data": "^4.0.6",
     "lodash.merge": "^4.6.2"
   },
   "devDependencies": {
@@ -64,5 +64,10 @@
   "bugs": {
     "url": "https://github.com/HubSpot/hubspot-api-nodejs/issues"
   },
-  "homepage": "https://github.com/HubSpot/hubspot-api-nodejs#readme"
+  "homepage": "https://github.com/HubSpot/hubspot-api-nodejs#readme",
+  "overrides": {
+    "replace": {
+      "minimatch": "^3.1.5"
+    }
+  }
 }
