@@ -81,6 +81,46 @@ describe('HTTP transport', () => {
     }
   })
 
+  it('supports WHATWG FormData when form-data is provided by a runtime shim', async () => {
+    let capturedRequest: ICapturedRequest | undefined
+    const server = await createServer(async (request: ICapturedRequest, response: http.ServerResponse) => {
+      capturedRequest = request
+      response.statusCode = 204
+      response.end()
+    })
+    const nativeFormData = new globalThis.FormData()
+    nativeFormData.append('field', 'value')
+    const originalHasInstance = Object.getOwnPropertyDescriptor(FormData, Symbol.hasInstance)
+    Object.defineProperty(FormData, Symbol.hasInstance, {
+      configurable: true,
+      value: (body: unknown) => body instanceof globalThis.FormData,
+    })
+
+    try {
+      const client = new Client()
+      const response = await client.apiRequest({
+        method: 'POST',
+        overlapUrl: `${server.baseUrl}/upload`,
+        body: nativeFormData,
+        defaultJson: false,
+      })
+
+      expect(response.status).toBe(204)
+      expect(capturedRequest).toBeDefined()
+      const req = capturedRequest as ICapturedRequest
+      expect(String(req.headers['content-type'])).toContain('multipart/form-data; boundary=')
+      expect(req.body.toString()).toContain('name="field"')
+      expect(req.body.toString()).toContain('value')
+    } finally {
+      if (originalHasInstance) {
+        Object.defineProperty(FormData, Symbol.hasInstance, originalHasInstance)
+      } else {
+        Reflect.deleteProperty(FormData, Symbol.hasInstance)
+      }
+      await server.close()
+    }
+  })
+
   it('returns generated ResponseContext bodies through native fetch', async () => {
     let capturedRequest: ICapturedRequest | undefined
     const server = await createServer(async (request: ICapturedRequest, response: http.ServerResponse) => {

@@ -1,7 +1,6 @@
 import * as http from 'http'
 import * as https from 'https'
 import { URLSearchParams } from 'url'
-import FormData from 'form-data'
 
 type HeaderMap = Record<string, string>
 type RequestUrl = string | URL
@@ -9,6 +8,10 @@ type RequestUrl = string | URL
 interface PipeableBody {
   on(event: string, listener: (...args: unknown[]) => void): unknown
   pipe(destination: NodeJS.WritableStream): NodeJS.WritableStream
+}
+
+interface NodeFormDataBody extends PipeableBody {
+  getHeaders(): HeaderMap
 }
 
 export interface IHttpTransportOptions {
@@ -28,8 +31,9 @@ export interface IBufferedResponse {
 export async function sendFetchRequest(url: RequestUrl, options: IHttpTransportOptions): Promise<Response> {
   // Native fetch supports WHATWG FormData, but this SDK's public upload contract
   // uses the npm form-data stream; without this path, multipart uploads are
-  // stringified as "[object FormData]" and break existing callers.
-  if (isFormDataBody(options.body)) {
+  // stringified as "[object FormData]" and break existing callers. Detect the
+  // stream contract because edge runtimes may shim the FormData constructor.
+  if (isNodeFormDataBody(options.body)) {
     const response = await sendNodeRequest(url, options)
     const responseBody = shouldOmitResponseBody(response.status) ? null : await response.binary()
 
@@ -71,7 +75,7 @@ function buildRequestInit(options: IHttpTransportOptions): RequestInit & { duple
 }
 
 function normalizeHeaders(headers: HeaderMap | undefined, body: unknown): HeaderMap | undefined {
-  if (isFormDataBody(body)) {
+  if (isNodeFormDataBody(body)) {
     return mergeHeaders(headers, body.getHeaders())
   }
 
@@ -100,8 +104,10 @@ function mergeHeaders(headers: HeaderMap | undefined, nextHeaders: HeaderMap): H
   return mergedHeaders
 }
 
-function isFormDataBody(body: unknown): body is FormData {
-  return body instanceof FormData
+function isNodeFormDataBody(body: unknown): body is NodeFormDataBody {
+  return (
+    isPipeableBody(body) && 'getHeaders' in body && typeof (body as { getHeaders?: unknown }).getHeaders === 'function'
+  )
 }
 
 function isPipeableBody(body: unknown): body is PipeableBody {
