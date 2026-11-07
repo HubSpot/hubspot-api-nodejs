@@ -77,10 +77,7 @@ export default class RetryDecorator implements IDecorator {
     }
   }
 
-  protected _waitAfterRequestFailure(statusCode: number, retryNumber: number, retryTimeout: number) {
-    console.error(
-      `Request failed with status code [${statusCode}], will retry [${retryNumber}] time in [${retryTimeout}] ms`,
-    )
+  protected _waitAfterRequestFailure(_statusCode: number, retryNumber: number, retryTimeout: number) {
     return new Promise((resolve) => setTimeout(resolve, retryTimeout * retryNumber))
   }
 }
