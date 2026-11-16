@@ -6,6 +6,7 @@ import { IHttpOptions } from './services/http/IHttpOptions'
 import LimiterDecorator from './services/decorators/LimiterDecorator'
 import { Request } from './services/http/Request'
 import RetryDecorator from './services/decorators/RetryDecorator'
+import type Bottleneck from 'bottleneck'
 import type AutomationDiscovery from './discovery/automation/AutomationDiscovery'
 import type CmsDiscovery from './discovery/cms/CmsDiscovery'
 import type CommunicationPreferencesDiscovery from './discovery/communicationPreferences/CommunicationPreferencesDiscovery'
@@ -31,6 +32,13 @@ export class Client {
   protected _oauth: OauthDiscovery | undefined
   protected _settings: SettingsDiscovery | undefined
   protected _webhooks: WebhooksDiscovery | undefined
+  protected _limiter:
+    | {
+        options: Bottleneck.ConstructorOptions
+        jobOptions: Bottleneck.JobOptions | undefined
+        decorator: LimiterDecorator
+      }
+    | undefined
 
   constructor(config: IConfiguration = {}) {
     this.config = config
@@ -216,8 +224,9 @@ export class Client {
   protected getDecorators(): IDecorator[] {
     const decorators = new Array<IDecorator>()
 
-    if (this.config.limiterOptions) {
-      decorators.push(new LimiterDecorator(this.config.limiterOptions, this.config.limiterJobOptions))
+    const limiterDecorator = this.getLimiterDecorator()
+    if (limiterDecorator) {
+      decorators.push(limiterDecorator)
     }
 
     if (this.config.numberOfApiCallRetries && this.config.numberOfApiCallRetries > 0) {
@@ -228,5 +237,25 @@ export class Client {
     }
 
     return decorators
+  }
+
+  // init() runs on every setAccessToken/setApiKey/setDeveloperApiKey call, so the limiter is reused
+  // instead of rebuilt: a Bottleneck with reservoir refresh options keeps an interval running forever.
+  // A replaced limiter is not stopped, because ApiDecoratorService may have applied it to another client's APIs.
+  protected getLimiterDecorator(): LimiterDecorator | undefined {
+    const { limiterOptions, limiterJobOptions } = this.config
+    if (!limiterOptions) {
+      return undefined
+    }
+
+    if (!this._limiter || this._limiter.options !== limiterOptions || this._limiter.jobOptions !== limiterJobOptions) {
+      this._limiter = {
+        options: limiterOptions,
+        jobOptions: limiterJobOptions,
+        decorator: new LimiterDecorator(limiterOptions, limiterJobOptions),
+      }
+    }
+
+    return this._limiter.decorator
   }
 }
