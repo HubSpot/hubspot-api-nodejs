@@ -33,6 +33,10 @@ export class Client {
   protected _webhooks: WebhooksDiscovery | undefined
 
   constructor(config: IConfiguration = {}) {
+    if (config.apiVersion !== undefined && !/^\d{4}-\d{2}(-beta)?$/.test(config.apiVersion)) {
+      throw new Error(`Invalid apiVersion "${config.apiVersion}". Expected YYYY-MM or YYYY-MM-beta, e.g. "2026-09".`)
+    }
+
     this.config = config
     this.init()
   }

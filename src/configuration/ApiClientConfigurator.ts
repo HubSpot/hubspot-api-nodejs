@@ -1,7 +1,15 @@
 import merge from 'lodash.merge'
 import { IRequestContext } from '../services/IRequestContext'
+import { toVersionedPath } from './apiVersionPaths'
+import { DEFAULT_API_VERSION } from './constants'
 import IConfiguration from './IConfiguration'
+import { DEFAULT_BASE_PATH } from './privateConstants'
 import { VERSION } from './version'
+
+// Each generated API module declares its own HttpMethod enum, so the method stays untyped here.
+interface IServerConfiguration {
+  makeRequestContext(endpoint: string, httpMethod: any): unknown
+}
 
 export class ApiClientConfigurator {
   public static getParams<
@@ -9,7 +17,7 @@ export class ApiClientConfigurator {
     ResponseContextType,
     ObservableRequestContextType,
     ObservableResponseContextType,
-    ServerConfiguration,
+    ServerConfiguration extends IServerConfiguration,
   >(
     config: IConfiguration,
     serverConfigurationClass: new (
@@ -69,17 +77,22 @@ export class ApiClientConfigurator {
     return authMethods
   }
 
-  protected static getBaseServer<ServerConfiguration>(
+  protected static getBaseServer<ServerConfiguration extends IServerConfiguration>(
     config: IConfiguration,
     serverConfigurationClass: new (
       url: string,
       variableConfiguration: { [key: string]: string },
     ) => ServerConfiguration,
   ) {
-    if (config.basePath) {
-      return { baseServer: new serverConfigurationClass(config.basePath, {}) }
+    const server = new serverConfigurationClass(config.basePath || DEFAULT_BASE_PATH, {})
+    const apiVersion = config.apiVersion ?? DEFAULT_API_VERSION
+
+    return {
+      baseServer: {
+        makeRequestContext: (endpoint: string, httpMethod: unknown) =>
+          server.makeRequestContext(toVersionedPath(endpoint, apiVersion), httpMethod),
+      },
     }
-    return {}
   }
 
   protected static getMiddleware<

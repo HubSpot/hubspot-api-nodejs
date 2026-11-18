@@ -1,5 +1,6 @@
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
+import { DEFAULT_BASE_PATH } from '../../configuration/privateConstants'
 import { Auth } from './Auth'
 import { AuthTypes } from './AuthTypes'
 import { IHttpOptions } from './IHttpOptions'
@@ -11,7 +12,7 @@ export interface IHeaders {
 export class Request {
   protected opts: IHttpOptions
   protected config: IConfiguration
-  protected baseUrl: string = 'https://api.hubapi.com'
+  protected baseUrl: string = DEFAULT_BASE_PATH
   protected url: URL
   protected method: string
   protected headers: IHeaders = {}

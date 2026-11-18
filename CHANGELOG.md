@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/14.1.3...HEAD)
 
+## Added
+
+- Added the optional `apiVersion` client setting and the `DEFAULT_API_VERSION` constant for HubSpot date-based API versions.
+
+## Changed
+
+- API clients now call date-based paths for version `2026-09` by default. CRM associations v3, communication preferences, CRM timeline, marketing forms and OAuth v1 keep their existing paths.
+
 ## [14.1.3] - 2026-11-02
 
 ## Fixed
