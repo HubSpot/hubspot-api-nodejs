@@ -7,6 +7,7 @@ export default interface IConfiguration {
   accessToken?: string
   developerApiKey?: string
   basePath?: string
+  apiVersion?: string
   defaultHeaders?: { [key: string]: string }
   numberOfApiCallRetries?: number
   limiterOptions?: Bottleneck.ConstructorOptions

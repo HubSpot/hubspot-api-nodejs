@@ -51,6 +51,16 @@ To change the base path:
 const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN, basePath: 'https://some-url' })
 ```
 
+To choose a [date-based API version](https://developers.hubspot.com/docs/api-reference/latest/overview):
+
+```javascript
+const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN, apiVersion: '2026-09' })
+```
+
+`apiVersion` is optional and defaults to the latest stable version, exported as `DEFAULT_API_VERSION`.
+
+These APIs have no compatible date-based version, so they keep their existing paths: CRM associations v3, communication preferences, CRM timeline, marketing forms and OAuth v1. Paths passed to `hubspotClient.apiRequest()` are sent exactly as written.
+
 To add custom headers to all request:
 
 ```javascript
